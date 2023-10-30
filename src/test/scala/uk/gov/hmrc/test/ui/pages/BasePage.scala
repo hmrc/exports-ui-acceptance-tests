@@ -1,28 +1,44 @@
 /*
  * Copyright 2023 HM Revenue & Customs
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
  */
 
 package uk.gov.hmrc.test.ui.pages
 
-import org.openqa.selenium.By
+import org.openqa.selenium.{By, WebDriver, WebElement}
 import org.scalatest.matchers.should.Matchers
 import uk.gov.hmrc.test.ui.driver.BrowserDriver
 
-trait BasePage extends BrowserDriver with Matchers {
-  val continueButton = "continue-button"
+import scala.collection.immutable.HashMap
 
-  def submitPage(): Unit =
-    driver.findElement(By.id(continueButton)).click()
+trait BasePage extends BrowserDriver with Matchers {
+
+  def submit(): Unit = findElement("id", "submit").click()
+
+  var declarationDetailsMap: Map[String, String] = HashMap[String, String]()
+  def onPage(pageTitle: String): Unit =
+    if (!driver.getTitle.contains(pageTitle))
+      throw PageNotFoundException(s"Expected '$pageTitle' page, but found '${driver.getTitle}' page.")
+
+  def getGovUKLinks(index: Int): WebElement =
+    driver.findElements(By.className("govuk-link")).get(index)
+
+  def changeLinkSelector(row: String): By = By.cssSelector(s".$row .govuk-link")
+
+  def changeLink(row: String)(implicit driver: WebDriver): WebElement = driver.findElement(changeLinkSelector(row))
+
+  def findElement(htmlAttribute: String, value: String): WebElement =
+    htmlAttribute match {
+      case "id"              => driver.findElement(By.id(value))
+      case "xpath"           => driver.findElement(By.xpath(value))
+      case "linkText"        => driver.findElement(By.linkText(value))
+      case "partialLinkText" => driver.findElement(By.partialLinkText(value))
+      case "cssSelector"     => driver.findElement(By.cssSelector(value))
+      case "className"       => driver.findElement(By.className(value))
+    }
+
+  def elementDoesNotExist(elementBy: By)(implicit driver: WebDriver): Boolean =
+    driver.findElements(elementBy).size() == 0
 }
+
+case class PageNotFoundException(s: String) extends Exception(s)
