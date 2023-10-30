@@ -1,0 +1,9 @@
+{
+  "apiContext": "customs/inventory-linking/exports",
+  "apiVersion": "1.0",
+  "clientId": "5c68d3b5-d8a7-4212-8688-6b67f18bbce7",
+  "fields": {
+    "callbackUrl": "http://localhost:6797/customs-declare-exports/notifyMovement",
+    "securityToken": "Basic qwerty12345qwerty12345"
+  }
+}
