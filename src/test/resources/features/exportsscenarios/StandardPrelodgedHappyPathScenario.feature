@@ -1,7 +1,7 @@
 
 Feature: StandardPrelodged Journey Happy Path With Procedure Code as 1040 and Additional Procedure Code as 000, Transport leaving the border as Sea Transport
          by selecting the Border
-  @Regression
+  @SmokeLocal
   Scenario: To successfully submit standard prelodged journey
     Given I navigate to login stub page and provide enrolment key, eori as GB757002374003 with exports redirect url to navigate to choice page
       And I select CreateDeclaration to create StandardDeclaration prelodged
