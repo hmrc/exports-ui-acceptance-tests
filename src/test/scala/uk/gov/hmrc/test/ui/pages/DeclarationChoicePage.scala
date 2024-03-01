@@ -28,7 +28,6 @@ object DeclarationChoicePage extends BasePage {
   def selectOptionToCreateWhatTypeOfDeclaration(selectOption: String): Unit = {
 
     selectOption match {
-      case "StandardDeclaration"   => findElement("id", standardDeclaration ).click()
       case "SimplifiedOccasional" => findElement("id", simplifiedOccasional).click()
       case "AuthorisedSimplifiedDeclaration" => findElement("id", authorisedSimplifiedDeclaration).click()
       case "ClearanceDeclaration" => findElement("id", clearanceDeclaration).click()

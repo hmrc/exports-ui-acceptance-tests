@@ -18,6 +18,8 @@ class StandardJourneyStepDefs extends BaseStepDef {
 
   And("""^I select (.*) to create (.*) prelodged$""") { (CreateDeclaration: String, StandardDeclaration: String) =>
     ExportsHomePage.selectOptionToMakeAndManageDeclaration(CreateDeclaration)
+    ExportsHomePage.selectOptionToProgressWith()
+    ExportsHomePage.selectOptionToMakeAndManageDeclaration()
     DeclarationChoicePage.selectOptionToCreateWhatTypeOfDeclaration(StandardDeclaration)
   }
 
