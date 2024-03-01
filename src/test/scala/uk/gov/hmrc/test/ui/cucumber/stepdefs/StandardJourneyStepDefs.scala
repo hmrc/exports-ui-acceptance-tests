@@ -1,6 +1,17 @@
 /*
  * Copyright 2023 HM Revenue & Customs
  *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package uk.gov.hmrc.test.ui.cucumber.stepdefs
@@ -18,9 +29,8 @@ class StandardJourneyStepDefs extends BaseStepDef {
 
   And("""^I select (.*) to create (.*) prelodged$""") { (CreateDeclaration: String, StandardDeclaration: String) =>
     ExportsHomePage.selectOptionToMakeAndManageDeclaration(CreateDeclaration)
-    ExportsHomePage.selectOptionToProgressWith()
-    ExportsHomePage.selectOptionToMakeAndManageDeclaration()
-    DeclarationChoicePage.selectOptionToCreateWhatTypeOfDeclaration(StandardDeclaration)
+    StandardOrOtherPage.selectOptionToProgressWith("StandardDeclaration")
+    //DeclarationChoicePage.selectOptionToCreateWhatTypeOfDeclaration(StandardDeclaration)
   }
 
   And("""^I select the option No for Arrived export declaration$""") { () =>
@@ -134,11 +144,9 @@ class StandardJourneyStepDefs extends BaseStepDef {
      CommodityCodeDetailsPage.checkPageTitle()
      CommodityCodeDetailsPage.enterCommodityCodeDetails()
   }
-  And("""I select No option for undangerous goods code and additional tarric code"""){()=>
+  And("""I select No option for undangerous goods code"""){()=>
      UnDangerousGoodsCodePage.checkPageTitle()
      UnDangerousGoodsCodePage.selectIsThereAUndangerousGoodsOption("No")
-     TaricCodePage.checkPageTitle()
-     TaricCodePage.selectIsThereAUndangerousGoodsOption("No")
   }
   And("""I select vat rating page option as Yes""") { () =>
     VatRatingPage.checkPageTitle()
@@ -198,7 +206,7 @@ class StandardJourneyStepDefs extends BaseStepDef {
   }
   And("""^I provide the transport country details$"""){()=>
     TransportCountryPage.checkPageTitle()
-    TransportCountryPage.selectDoYouKnowTheCountryWhereTheSeaTransportIsRegisteredOption("Yes")
+    TransportCountryPage.selectDoYouKnowTheCountryWhereTheSeaTransportIsRegisteredOption()
   }
   And("""^I select Yes for express consignment$""") { () =>
     ExpressConsignmentPage.checkPageTitle()
