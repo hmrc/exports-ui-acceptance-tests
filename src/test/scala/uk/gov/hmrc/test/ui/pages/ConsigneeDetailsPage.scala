@@ -34,7 +34,7 @@ object ConsigneeDetailsPage extends BasePage {
 
   def typeCountry(): String = {
     findElement("id", "details_address_country").clear()
-    findElement("id", "details_address_country").sendKeys(Keys.chord(superKey, "a"))
+    findElement("id", "details_address_country").sendKeys(Keys.chord(superKey, "a"),Keys.BACK_SPACE)
     val country: WebElement = findElement("id", "details_address_country")
     country.sendKeys("AD")
     findElement("id", "details_address_country").sendKeys(Keys.ARROW_DOWN)

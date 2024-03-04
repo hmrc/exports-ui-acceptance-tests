@@ -34,7 +34,7 @@ object AddAdditionalProcedureCodesPage extends BasePage {
 
   def typeAdditionalProcedureCode(procedureCode: String): Unit = {
     findElement("id", "additionalProcedureCode").clear()
-    findElement("id", "additionalProcedureCode").sendKeys(Keys.chord(superKey, "a"))
+    findElement("id", "additionalProcedureCode").sendKeys(Keys.chord(superKey, "a"),Keys.BACK_SPACE)
     findElement("id", "additionalProcedureCode").sendKeys(procedureCode)
     findElement("id", "additionalProcedureCode").sendKeys(Keys.ARROW_DOWN)
     driver.switchTo().activeElement().sendKeys(Keys.TAB)

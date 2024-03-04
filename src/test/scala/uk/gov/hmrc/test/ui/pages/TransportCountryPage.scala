@@ -18,6 +18,7 @@ package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.{Keys, WebElement}
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.CarrierOrHaulierDetailsPage.superKey
 
 import scala.collection.immutable.HashMap
 
@@ -33,7 +34,7 @@ object TransportCountryPage extends BasePage {
 
   def typeTransportCountryCode(currencyCode: String): String = {
     findElement("id", "transport-country").click()
-    findElement("id", "transport-country").sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE)
+    findElement("id", "transport-country").sendKeys(Keys.chord(superKey, "a"),Keys.BACK_SPACE)
     val enteredCurrencyCode: WebElement = findElement("id", "transport-country")
     enteredCurrencyCode.sendKeys(currencyCode)
     findElement("id", "transport-country").sendKeys(Keys.ARROW_DOWN)

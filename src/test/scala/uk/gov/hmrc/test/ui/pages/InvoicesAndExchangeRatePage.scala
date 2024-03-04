@@ -34,7 +34,7 @@ object InvoicesAndExchangeRatePage extends BasePage {
 
   def typeCurrencyCode(currencyCode:String): String = {
     findElement("id", "totalAmountInvoicedCurrency").clear()
-    findElement("id", "totalAmountInvoicedCurrency").sendKeys(Keys.chord(superKey, "a"))
+    findElement("id", "totalAmountInvoicedCurrency").sendKeys(Keys.chord(superKey, "a"),Keys.BACK_SPACE)
     val enteredCurrencyCode : WebElement = findElement("id", "totalAmountInvoicedCurrency")
       enteredCurrencyCode.sendKeys(currencyCode)
     findElement("id", "totalAmountInvoicedCurrency").sendKeys(Keys.ARROW_DOWN)

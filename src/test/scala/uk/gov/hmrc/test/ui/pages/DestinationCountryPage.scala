@@ -34,7 +34,7 @@ object DestinationCountryPage extends BasePage {
 
   def typeDestinationCountry(destinationCountry:String): String = {
     findElement("id", "countryCode").clear()
-    findElement("id", "countryCode").sendKeys(Keys.chord(superKey, "a"))
+    findElement("id", "countryCode").sendKeys(Keys.chord(superKey, "a"),Keys.BACK_SPACE)
     val destinationCountryEntered : WebElement = findElement("id", "countryCode")
     destinationCountryEntered.sendKeys(destinationCountry)
     findElement("id", "countryCode").sendKeys(Keys.ARROW_DOWN)
