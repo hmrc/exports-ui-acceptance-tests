@@ -1,0 +1,54 @@
+{
+  "client": "CDCM",
+  "id": "D-80542-20201120",
+  "status": "open",
+  "tags": {
+    "sourceId": "CDCM",
+    "caseId": "D-80542",
+    "queryId": "D-80542-20201120",
+    "mrn": "DMS7324874993",
+    "notificationType": "CDS-IMPORTS"
+  },
+  "subject": "MRN: 19GB4S24GC3PPFGVR7",
+  "language": "en",
+  "participants": [
+    {
+      "id": 1,
+      "participantType": "system",
+      "name": "CDS Exports Team",
+      "identifier": {
+        "name": "CDCM",
+        "value": "D-80542-20201120"
+      },
+      "parameters": {
+        "caseId": "D-80542",
+        "queryId": "D-80542-20201120"
+      }
+    },
+    {
+      "id": 2,
+      "participantType": "customer",
+      "name": "Joe Bloggs",
+      "email": "joebloggs@test.com",
+      "identifier": {
+        "enrolment": "HMRC-CUS-ORG",
+        "name": "EORINumber",
+        "value": "GB1234567890"
+      }
+    }
+  ],
+  "messages": [
+    {
+      "senderId": 1,
+      "created": "2020-11-10T15:00:01.000Z",
+      "content": "QmxhaCBibGFoIGJsYWg="
+    }
+  ],
+  "alert": {
+    "templateId": "emailTemplateId",
+    "parameters": {
+      "param1": "value1",
+      "param2": "value2"
+    }
+  }
+}

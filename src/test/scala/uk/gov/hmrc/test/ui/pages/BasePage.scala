@@ -16,13 +16,68 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import org.openqa.selenium.By
+import org.openqa.selenium.{By, WebElement}
 import org.scalatest.matchers.should.Matchers
 import uk.gov.hmrc.test.ui.driver.BrowserDriver
 
-trait BasePage extends BrowserDriver with Matchers {
-  val continueButton = "continue-button"
+import scala.collection.mutable
 
-  def submitPage(): Unit =
-    driver.findElement(By.id(continueButton)).click()
+trait BasePage extends BrowserDriver with Matchers {
+
+  val title: String
+  val url: String
+
+  def checkUrlAndTitle(): Unit =
+    checkUrlAndTitle(title, url)
+
+  def submit(): Unit = clickById("submit")
+
+  def continue(): Unit = clickByXpath("//*[@role='button']")
+
+  def checkUrlAndTitle(pageTitle: String, url: String): Unit = {
+
+    if (!driver.getCurrentUrl.contains(url))
+      throw PageNotFoundException(s"Expected '$url' page, but found '${driver.getCurrentUrl}' page.")
+
+    if (!driver.getTitle.contains(pageTitle))
+      throw PageNotFoundException(s"Expected '$pageTitle' page, but found '${driver.getTitle}' page.")
+  }
+
+  def getGovUKLinks(index: Int): WebElement =
+    driver.findElements(By.className("govuk-link")).get(index)
+
+  def changeLinkSelector(row: String): By = By.cssSelector(s".$row .govuk-link")
+
+  def changeLink(row: String): WebElement = driver.findElement(changeLinkSelector(row))
+
+  //Finding Elements
+  def findElementById(value: String): WebElement          = driver.findElement(By.id(value))
+  def findElementByXpath(value: String): WebElement       = driver.findElement(By.xpath(value))
+  def findElementByLinkText(value: String): WebElement    = driver.findElement(By.linkText(value))
+  def findElementByPartialLink(value: String): WebElement = driver.findElement(By.partialLinkText(value))
+  def findElementByCssSelector(value: String): WebElement = driver.findElement(By.cssSelector(value))
+  def findElementByClassName(value: String): WebElement   = driver.findElement(By.className(value))
+
+  //Click Elements
+  def clickById(value: String): Unit          = findElementById(value).click()
+  def clickByXpath(value: String): Unit       = findElementByXpath(value).click()
+  def clickByLinkText(value: String): Unit    = findElementByLinkText(value).click()
+  def clickByPartialLink(value: String): Unit = findElementByPartialLink(value).click()
+  def clickByCssSelector(value: String): Unit = findElementByCssSelector(value).click()
+  def clickByClassName(value: String): Unit   = findElementByClassName(value).click()
+
+  def elementDoesNotExist(elementBy: By): Boolean =
+    driver.findElements(elementBy).size() == 0
+
+  def fillRadioButton(idSelector: String, refSelector: String, refText: String): Unit = {
+    clickById(idSelector)
+    findElementById(refSelector).sendKeys(refText)
+  }
+}
+
+case class PageNotFoundException(s: String) extends Exception(s)
+
+object Sections {
+
+  val declarationDetails: mutable.Map[String, String] = mutable.Map.empty[String, String]
 }
