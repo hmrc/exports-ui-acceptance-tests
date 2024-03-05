@@ -30,7 +30,7 @@ object LoginStubPage extends BasePage {
 
   def loadPage: this.type = {
     driver.navigate().to(url)
-    onPage(loginStubPageTitle)
+    pageTitle(loginStubPageTitle)
     this
   }
 

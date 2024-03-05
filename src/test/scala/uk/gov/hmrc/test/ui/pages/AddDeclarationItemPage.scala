@@ -24,7 +24,7 @@ object AddDeclarationItemPage extends BasePage {
   val addDeclarationItemPageTitle = "Add declaration item"
 
   def checkPageTitle(): Unit = {
-    AreYouTheExporterPage.onPage(addDeclarationItemPageTitle)
+    AreYouTheExporterPage.pageTitle(addDeclarationItemPageTitle)
   }
 
   def clickToAddItem(): Unit = {

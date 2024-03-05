@@ -27,7 +27,7 @@ object DepartureTransportPage extends BasePage {
   var departureTransportPageTitleDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit =
-    DepartureTransportPage.onPage(departureTransportPageTitle)
+    pageTitle(departureTransportPageTitle)
 
   def selectBorderModeOfTransportOption(selectOption: String): Unit = {
     selectOption match {

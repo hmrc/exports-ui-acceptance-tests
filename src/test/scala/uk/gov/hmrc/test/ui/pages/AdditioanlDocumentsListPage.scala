@@ -27,7 +27,7 @@ object AdditioanlDocumentsListPage extends BasePage {
   var additioanlDocumentsListDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    AdditioanlDocumentsListPage.onPage(additioanlDocumentsListPageTitle)
+    AdditioanlDocumentsListPage.pageTitle(additioanlDocumentsListPageTitle)
   }
 
   def selectDoYouNeedToAddAnotherDocumentOption(selectOption: String): Unit = {

@@ -29,7 +29,7 @@ object AddProcedureCodesPage extends BasePage {
   val superKey: Keys = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
 
   def checkPageTitle(): Unit = {
-    AddProcedureCodesPage.onPage(AddProcedureCodesPageTitle)
+    AddProcedureCodesPage.pageTitle(AddProcedureCodesPageTitle)
   }
 
   def typeProcedureCode(procedureCode:String): Unit = {

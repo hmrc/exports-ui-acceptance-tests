@@ -33,7 +33,7 @@ object DeclarationChoicePage extends BasePage {
   var choicePageHashMap: Map[String, String] = HashMap[String, String]()
 
   def checkTitle(): Unit={
-    DeclarationChoicePage.onPage(homePageTitle)
+    DeclarationChoicePage.pageTitle(homePageTitle)
   }
 
   def selectOptionToCreateWhatTypeOfDeclaration(selectOption: String): Unit = {

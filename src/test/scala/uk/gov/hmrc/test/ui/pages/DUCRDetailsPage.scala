@@ -28,7 +28,7 @@ object DUCRDetailsPage extends BasePage {
   var ducrDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit =
-    DUCRDetailsPage.onPage(pageTitle)
+    DUCRDetailsPage.pageTitle(pageTitle)
 
   def generateAndEnterRanomDucrEntry(): Unit = {
     def generateRandomString(length: Int): String = {

@@ -30,7 +30,7 @@ object ExportsHomePage extends BasePage {
   val manageDocumentsByConnectingWithSFUS = "upload-documents"
 
   def checkTitle():Unit = {
-    ExportsHomePage.onPage(homePageTitle)
+    ExportsHomePage.pageTitle(homePageTitle)
   }
 
 

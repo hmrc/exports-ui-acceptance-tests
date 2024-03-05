@@ -20,12 +20,12 @@ import uk.gov.hmrc.test.ui.conf.TestConfiguration
 
 object StandardOrOtherPage extends BasePage {
 
-  val url: String                = TestConfiguration.url("exports-frontend") + "/choice"
+  val url: String                = TestConfiguration.url("exports-frontend") + "/standard-or-other"
   val homePageTitle              = "Make and manage export declarations - Make an export declaration online - GOV.UK"
 
 
   def checkTitle():Unit = {
-    ExportsHomePage.onPage(homePageTitle)
+    ExportsHomePage.pageTitle(homePageTitle)
   }
 
 

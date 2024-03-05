@@ -20,16 +20,13 @@ import org.openqa.selenium.{By, WebDriver, WebElement}
 import org.scalatest.matchers.should.Matchers
 import uk.gov.hmrc.test.ui.driver.BrowserDriver
 
-import scala.collection.immutable.HashMap
-
 trait BasePage extends BrowserDriver with Matchers {
 
-  def submit(): Unit = findElement("id", "submit").click()
+  def submit(): Unit = clickById("submit")
 
-  def continue(): Unit = findElement("xpath", "//*[@role='button']").click()
+  def continue(): Unit = clickByXpath("//*[@role='button']")
 
-  var declarationDetailsMap: Map[String, String] = HashMap[String, String]()
-  def onPage(pageTitle: String): Unit =
+  def pageTitle(pageTitle: String): Unit =
     if (!driver.getTitle.contains(pageTitle))
       throw PageNotFoundException(s"Expected '$pageTitle' page, but found '${driver.getTitle}' page.")
 
@@ -40,18 +37,28 @@ trait BasePage extends BrowserDriver with Matchers {
 
   def changeLink(row: String)(implicit driver: WebDriver): WebElement = driver.findElement(changeLinkSelector(row))
 
-  def findElement(htmlAttribute: String, value: String): WebElement =
-    htmlAttribute match {
-      case "id"              => driver.findElement(By.id(value))
-      case "xpath"           => driver.findElement(By.xpath(value))
-      case "linkText"        => driver.findElement(By.linkText(value))
-      case "partialLinkText" => driver.findElement(By.partialLinkText(value))
-      case "cssSelector"     => driver.findElement(By.cssSelector(value))
-      case "className"       => driver.findElement(By.className(value))
-    }
+  //Finding Elements
+  def findElementById(value: String): WebElement          = driver.findElement(By.id(value))
+  def findElementByXpath(value: String): WebElement       = driver.findElement(By.xpath(value))
+  def findElementByLinkText(value: String): WebElement    = driver.findElement(By.linkText(value))
+  def findElementByPartialLink(value: String): WebElement = driver.findElement(By.partialLinkText(value))
+  def findElementByCssSelector(value: String): WebElement = driver.findElement(By.cssSelector(value))
+  def findElementByClassName(value: String): WebElement   = driver.findElement(By.className(value))
+
+  //Click Elements
+  def clickById(value: String): Unit          = findElementById(value).click()
+  def clickByXpath(value: String): Unit       = findElementByXpath(value).click()
+  def clickByLinkText(value: String): Unit    = findElementByLinkText(value).click()
+  def clickByPartialLink(value: String): Unit = findElementByPartialLink(value).click()
+  def clickByCssSelector(value: String): Unit = findElementByCssSelector(value).click()
+  def clickByClassName(value: String): Unit   = findElementByClassName(value).click()
 
   def elementDoesNotExist(elementBy: By)(implicit driver: WebDriver): Boolean =
     driver.findElements(elementBy).size() == 0
 }
 
 case class PageNotFoundException(s: String) extends Exception(s)
+
+object Sections {
+  implicit val declarationDetails: Map[String, String] = Map.empty[String, String]
+}

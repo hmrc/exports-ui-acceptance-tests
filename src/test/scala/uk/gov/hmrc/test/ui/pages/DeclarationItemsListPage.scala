@@ -27,7 +27,7 @@ object DeclarationItemsListPage extends BasePage {
   var declarationItemsListPageDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    DeclarationItemsListPage.onPage(declarationItemsListPageTitle)
+    DeclarationItemsListPage.pageTitle(declarationItemsListPageTitle)
   }
 
   def selectDoYouNeedToAddAnotherItemOption(selectOption: String): Unit = {

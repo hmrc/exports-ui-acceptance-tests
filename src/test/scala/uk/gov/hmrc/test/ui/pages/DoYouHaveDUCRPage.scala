@@ -25,7 +25,7 @@ object DoYouHaveDUCRPage extends BasePage {
 
 
   def checkPageTitle(): Unit = {
-    DoYouHaveDUCRPage.onPage(homePageTitle)
+    DoYouHaveDUCRPage.pageTitle(homePageTitle)
   }
 
   def selectDoYouHaveADucr(selectOption: String): Unit = {

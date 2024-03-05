@@ -28,7 +28,7 @@ object OtherPartiesInvolvedPage extends BasePage {
   var otherPartiesInvolvedDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    OtherPartiesInvolvedPage.onPage(otherPartiesInvolvedPageTitle)
+    OtherPartiesInvolvedPage.pageTitle(otherPartiesInvolvedPageTitle)
   }
 
   def selectAreYouAnExporterOption(selectOption: String): Unit = {

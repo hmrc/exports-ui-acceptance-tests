@@ -28,7 +28,7 @@ object IsAuthorisationRequiredPage extends BasePage {
 
   def checkPageTitle(): Unit = {
     driver.getCurrentUrl should be (url)
-    IsAuthorisationRequiredPage.onPage(isAuthorisationRequiredPageTitle)
+    IsAuthorisationRequiredPage.pageTitle(isAuthorisationRequiredPageTitle)
   }
 
   def selectIsAuthorisationRequiredOption(selectOption: String): Unit = {

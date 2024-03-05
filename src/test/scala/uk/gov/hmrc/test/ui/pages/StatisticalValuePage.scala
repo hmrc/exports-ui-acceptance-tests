@@ -28,7 +28,7 @@ object StatisticalValuePage extends BasePage {
   var statisticalValueDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    AreYouTheExporterPage.onPage(statisticalValuePageTitle)
+    AreYouTheExporterPage.pageTitle(statisticalValuePageTitle)
   }
 
   def enterStatisticalValue(): Unit = {

@@ -27,7 +27,7 @@ object PreviousDocumentsListPage extends BasePage {
   var previousDocumentsListDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    AreYouTheExporterPage.onPage(previousDocumentsListPageTitle)
+    AreYouTheExporterPage.pageTitle(previousDocumentsListPageTitle)
   }
 
   def selectDoYouNeedToAddAnotherDocumentOption(selectOption: String): Unit = {

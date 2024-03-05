@@ -30,7 +30,7 @@ object ConsigneeDetailsPage extends BasePage {
   val superKey: Keys                                               = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
 
   def checkPageTitle(): Unit =
-    CarrierOrHaulierDetailsPage.onPage(consigneeDetailsPageTitle)
+    CarrierOrHaulierDetailsPage.pageTitle(consigneeDetailsPageTitle)
 
   def typeCountry(): String = {
     findElement("id", "details_address_country").clear()

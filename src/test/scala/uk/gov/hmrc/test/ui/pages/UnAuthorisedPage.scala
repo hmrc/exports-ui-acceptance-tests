@@ -22,5 +22,5 @@ object UnAuthorisedPage extends BasePage {
     "To continue, you need to get access to the Customs Declaration Service (CDS) - CDS document uploads and secure messages - GOV.UK"
 
   def validateUnAuthorisedPage(): Unit =
-    onPage(unAuthorisedPageTitle)
+    pageTitle(unAuthorisedPageTitle)
 }

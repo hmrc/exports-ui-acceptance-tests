@@ -27,7 +27,7 @@ object AddSecuritySealsOptionPage extends BasePage {
   var addSecuritySealsOptionDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    AddSecuritySealsOptionPage.onPage(addSecuritySealsOptionPageTitle)
+    AddSecuritySealsOptionPage.pageTitle(addSecuritySealsOptionPageTitle)
   }
 
   def selectDoesContainerHaveAnySecuritySealsOption(selectOption: String): Unit = {

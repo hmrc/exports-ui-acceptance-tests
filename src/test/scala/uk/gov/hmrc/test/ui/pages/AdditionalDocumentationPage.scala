@@ -28,7 +28,7 @@ object AdditionalDocumentationPage extends BasePage {
   var additionalDocumentationPageDetails: Map[String, String]= HashMap[String, String]()
 
   def checkPageTitle(): Unit =
-    AdditionalDocumentationPage.onPage(additionalDocumentationPage)
+    AdditionalDocumentationPage.pageTitle(additionalDocumentationPage)
 
 
   def enterLicenceDocumentDetails(): Unit = {

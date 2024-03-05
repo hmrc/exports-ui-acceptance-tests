@@ -27,7 +27,7 @@ object NationalAdditionalCodePage extends BasePage {
   var nationalAdditionalCodeDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    NationalAdditionalCodePage.onPage(nationalAdditionalCodePageTitle)
+    NationalAdditionalCodePage.pageTitle(nationalAdditionalCodePageTitle)
   }
 
   def selectDoYouNeedANationalAdditionalCodeOption(selectOption: String): Unit = {

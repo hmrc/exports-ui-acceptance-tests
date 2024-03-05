@@ -27,7 +27,7 @@ object IsAdditionalInformationReqiuredPage extends BasePage {
   var isAdditionalInformationReqiuredDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    IsAdditionalInformationReqiuredPage.onPage(isAdditionalInformationReqiuredPageTitle)
+    IsAdditionalInformationReqiuredPage.pageTitle(isAdditionalInformationReqiuredPageTitle)
   }
 
   def selectDoYouNeedToProvideAdditionalInformationStatementsOption(selectOption: String): Unit = {

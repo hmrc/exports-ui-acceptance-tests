@@ -27,7 +27,7 @@ object AddContainersPage extends BasePage {
   var addContainersDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    ContainerPage.onPage(addContainersPageTitle)
+    ContainerPage.pageTitle(addContainersPageTitle)
   }
 
   def selectDoYouWantToAddAnotherContainerOption(selectOption: String): Unit = {

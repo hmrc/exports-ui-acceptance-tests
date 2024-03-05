@@ -27,7 +27,7 @@ object VatRatingPage extends BasePage {
   var vatRatingDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    VatRatingPage.onPage(vatRatingPageTitle)
+    VatRatingPage.pageTitle(vatRatingPageTitle)
   }
 
   def selectAreTheseGoodsBeingZeroRatedOption(selectOption: String): Unit = {

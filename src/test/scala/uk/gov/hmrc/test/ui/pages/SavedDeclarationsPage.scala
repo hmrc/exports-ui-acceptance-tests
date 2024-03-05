@@ -32,7 +32,7 @@ object SavedDeclarationsPage extends BasePage {
 
 
   def clickDraftDeclarationByUsingDUCR(ducr: String): Unit = {
-    SavedDeclarationsPage.onPage(homePageTitle)
+    SavedDeclarationsPage.pageTitle(homePageTitle)
     val obtainedDucrLink = declarationLinks().find(_.getText.contains(ducr)).getOrElse(fail(s"Could not find declaration $ducr on list"))
     obtainedDucrLink.click()
     }

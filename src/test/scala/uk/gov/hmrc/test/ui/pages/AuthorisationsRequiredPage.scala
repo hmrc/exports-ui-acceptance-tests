@@ -27,7 +27,7 @@ object AuthorisationsRequiredPage extends BasePage {
   var authorisationsRequiredDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    AuthorisationsRequiredPage.onPage(authorisationsRequiredPageTitle)
+    AuthorisationsRequiredPage.pageTitle(authorisationsRequiredPageTitle)
   }
 
   def selectDoYouNeedToAddAnotherAuthorisation(addAnotherAuhorisationOption: String): Unit = {

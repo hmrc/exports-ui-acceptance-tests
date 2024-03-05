@@ -27,7 +27,7 @@ object TransportLeavingTheBorderPage extends BasePage {
   var transportLeavingTheBorderDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    TransportLeavingTheBorderPage.onPage(transportLeavingTheBorderPage)
+    TransportLeavingTheBorderPage.pageTitle(transportLeavingTheBorderPage)
   }
 
   def selectBorderModeOfTransportOption(selectOption: String): Unit = {

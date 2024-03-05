@@ -27,7 +27,7 @@ object LinkToMUCRPage extends BasePage {
   var linkToMUCRDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    LinkToMUCRPage.onPage(homePageTitle)
+    LinkToMUCRPage.pageTitle(homePageTitle)
   }
 
   def selectDoYouHaveADucr(selectOption: String): Unit = {

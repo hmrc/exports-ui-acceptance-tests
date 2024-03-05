@@ -29,7 +29,7 @@ object CommodityMeasurePage extends BasePage {
   val superKey: Keys = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
 
   def checkPageTitle(): Unit = {
-    CommodityMeasurePage.onPage(commodityMeasurePageTitle)
+    CommodityMeasurePage.pageTitle(commodityMeasurePageTitle)
   }
 
   def enterGoodsWeightDetails(): Unit = {

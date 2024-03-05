@@ -27,7 +27,7 @@ object SealsPage extends BasePage {
   var sealsPageTitleDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    ContainerPage.onPage(sealsPageTitle)
+    ContainerPage.pageTitle(sealsPageTitle)
   }
 
   def selectDoesTheContainerHaveAnySecuritySealsOption(selectOption: String): Unit = {

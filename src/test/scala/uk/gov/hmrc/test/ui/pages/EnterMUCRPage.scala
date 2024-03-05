@@ -28,7 +28,7 @@ object EnterMUCRPage extends BasePage {
   var mucrDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit =
-    DUCRDetailsPage.onPage(pageTitle)
+    DUCRDetailsPage.pageTitle(pageTitle)
 
   def generateAndEnterRanomMUCREntry(): Unit = {
     def generateRandomString(length: Int): String = {

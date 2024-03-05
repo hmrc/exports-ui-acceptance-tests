@@ -27,7 +27,7 @@ object DeclarationTypePage extends BasePage {
   val prelodegedDeclaration = "prelodged"
 
   def checkPageTitle():Unit= {
-    DeclarationTypePage.onPage(homePageTitle)
+    DeclarationTypePage.pageTitle(homePageTitle)
   }
 
   def selectDeclarationTypeOption(selectOption: String): Unit = {

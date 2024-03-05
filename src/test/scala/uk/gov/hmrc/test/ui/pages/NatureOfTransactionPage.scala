@@ -27,7 +27,7 @@ object NatureOfTransactionPage extends BasePage {
   var natureOfTransactionDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    NatureOfTransactionPage.onPage(natureOfTransactionPageTitle)
+    NatureOfTransactionPage.pageTitle(natureOfTransactionPageTitle)
   }
 
   def selectWhatSortOfExportOption(selectOption: String): Unit = {

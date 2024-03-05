@@ -27,7 +27,7 @@ object PackagesListPage extends BasePage {
   var packagesListPageDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    PackagesListPage.onPage(packagesListPageTitle)
+    PackagesListPage.pageTitle(packagesListPageTitle)
   }
 
   def selectDoYouNeedToAddAnotherPackageTypeOption(selectOption: String): Unit = {

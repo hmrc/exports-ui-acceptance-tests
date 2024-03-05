@@ -28,7 +28,7 @@ object TotalPackageQuantityPage extends BasePage {
   var totalPackageQuantityDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    AreYouTheExporterPage.onPage(totalPackageQuantityPageTitle)
+    AreYouTheExporterPage.pageTitle(totalPackageQuantityPageTitle)
   }
 
   def enterTotalPackageQuantity(totalPackageQty: String): Unit = {

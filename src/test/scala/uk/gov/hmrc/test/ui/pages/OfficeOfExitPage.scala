@@ -29,7 +29,7 @@ object OfficeOfExitPage extends BasePage {
   val superKey: Keys = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
 
   def checkPageTitle(): Unit = {
-    AddAuthorisationRequiredPage.onPage(officeOfExitPageTitle)
+    AddAuthorisationRequiredPage.pageTitle(officeOfExitPageTitle)
   }
 
   def typeOfficeOfExitCode(officeOfExitCode:String): String = {

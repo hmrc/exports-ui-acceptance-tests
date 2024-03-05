@@ -27,7 +27,7 @@ object TaricCodePage extends BasePage {
   var taricCodeDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    TaricCodePage.onPage(taricCodePagePageTitle)
+    TaricCodePage.pageTitle(taricCodePagePageTitle)
   }
 
   def selectIsThereAUndangerousGoodsOption(selectOption: String): Unit = {

@@ -28,7 +28,7 @@ object AddSecuritySealPage extends BasePage {
   var addSecuritySealDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    AddSecuritySealPage.onPage(addSecuritySealPageTitle)
+    AddSecuritySealPage.pageTitle(addSecuritySealPageTitle)
   }
 
   def addSecuritySealInformation(): Unit = {

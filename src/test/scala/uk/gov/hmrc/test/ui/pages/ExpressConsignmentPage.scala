@@ -27,7 +27,7 @@ object ExpressConsignmentPage extends BasePage {
   var expressConsignmentrDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    AreYouTheExporterPage.onPage(expressConsignmentPageTitle)
+    AreYouTheExporterPage.pageTitle(expressConsignmentPageTitle)
   }
 
   def selectIsThisExpressConsignmentOption(selectOption: String): Unit = {

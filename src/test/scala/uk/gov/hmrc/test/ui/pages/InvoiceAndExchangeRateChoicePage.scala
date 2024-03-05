@@ -27,7 +27,7 @@ object InvoiceAndExchangeRateChoicePage extends BasePage {
   var invoiceAndExchangeRateChoiceDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    InvoiceAndExchangeRateChoicePage.onPage(invoiceAndExchangeRateChoicePageTitle)
+    InvoiceAndExchangeRateChoicePage.pageTitle(invoiceAndExchangeRateChoicePageTitle)
   }
 
   def isTheTotalAmountInvoicedLessThan100000IValueOption(selectOption: String): Unit = {

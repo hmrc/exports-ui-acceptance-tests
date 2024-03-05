@@ -27,7 +27,7 @@ object InlandOrBorderPage extends BasePage {
   var inlandOrBorderDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    InlandOrBorderPage.onPage(inlandOrBorderPageTitle)
+    InlandOrBorderPage.pageTitle(inlandOrBorderPageTitle)
   }
 
   def selectInlandOrBorderOption(selectOption: String): Unit = {

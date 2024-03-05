@@ -27,7 +27,7 @@ object AuthorisationChoicePage extends BasePage {
   var authorisationChoiceDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    AuthorisationChoicePage.onPage(authorisationChoicePageTitle)
+    AuthorisationChoicePage.pageTitle(authorisationChoicePageTitle)
   }
 
   def selectAuthorisationChoiceOption(selectOption: String): Unit = {

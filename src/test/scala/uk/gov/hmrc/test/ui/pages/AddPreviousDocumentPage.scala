@@ -29,7 +29,7 @@ object AddPreviousDocumentPage extends BasePage {
   val superKey: Keys = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
 
   def checkPageTitle(): Unit = {
-    AddPreviousDocumentPage.onPage(addPreviousDocumentPageTitle)
+    AddPreviousDocumentPage.pageTitle(addPreviousDocumentPageTitle)
   }
 
   def typeDocumentCode(documentCode:String): String = {

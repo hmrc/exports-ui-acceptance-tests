@@ -27,7 +27,7 @@ object IsLicenseRequiredPage extends BasePage {
   var iisLicenseRequiredDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    IsLicenseRequiredPage.onPage(isLicenseRequiredPageTitle)
+    IsLicenseRequiredPage.pageTitle(isLicenseRequiredPageTitle)
   }
 
   def selectDoTheseGoodsRequireLicenseOption(selectOption: String): Unit = {

@@ -27,7 +27,7 @@ object UnDangerousGoodsCodePage extends BasePage {
   var unDangerousGoodsCodeDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    AreYouTheExporterPage.onPage(unDangerousGoodsCodePagePageTitle)
+    AreYouTheExporterPage.pageTitle(unDangerousGoodsCodePagePageTitle)
   }
 
   def selectIsThereAUndangerousGoodsOption(selectOption: String): Unit = {

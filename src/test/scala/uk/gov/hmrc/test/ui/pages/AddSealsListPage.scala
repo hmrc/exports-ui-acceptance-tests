@@ -27,7 +27,7 @@ object AddSealsListPage extends BasePage {
   var addSealsListDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    AddSealsListPage.onPage(addSealsListPageTitle)
+    AddSealsListPage.pageTitle(addSealsListPageTitle)
   }
 
   def selectDoYouWantToAddAnotherSealOption(selectOption: String): Unit = {

@@ -27,7 +27,7 @@ object SupplementaryUnitsPage extends BasePage {
   var supplementaryUnitsDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    SupplementaryUnitsPage.onPage(supplementaryUnitsPageTitle)
+    SupplementaryUnitsPage.pageTitle(supplementaryUnitsPageTitle)
   }
 
   def selectDoYouNeedToAddSupplementaryUnitsOption(selectOption: String): Unit = {

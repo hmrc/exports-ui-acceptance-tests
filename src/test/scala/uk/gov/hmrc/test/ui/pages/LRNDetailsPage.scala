@@ -28,7 +28,7 @@ object LRNDetailsPage extends BasePage {
   var lrnDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit =
-    LRNDetailsPage.onPage(pageTitle)
+    LRNDetailsPage.pageTitle(pageTitle)
 
   def generateAndEnterRanomLRNEntry(): Unit = {
     def generateRandomString(length: Int): String = {

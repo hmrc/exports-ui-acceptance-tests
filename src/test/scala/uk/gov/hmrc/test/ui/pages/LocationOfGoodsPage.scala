@@ -27,7 +27,7 @@ object LocationOfGoodsPage extends BasePage {
   var locationOfGoodsDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    LocationOfGoodsPage.onPage(locationOfGoodsPageTitle)
+    LocationOfGoodsPage.pageTitle(locationOfGoodsPageTitle)
   }
 
   def selectDoYouWantToSearchForAGoodsLocationCodeOption(selectOption: String , locationOfGoodsCode: String): Unit = {

@@ -28,7 +28,7 @@ object AreYouTheExporterPage extends BasePage {
   var areYouAnExporterDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    AreYouTheExporterPage.onPage(areYouTheExporterPageTitle)
+    AreYouTheExporterPage.pageTitle(areYouTheExporterPageTitle)
   }
 
   def selectAreYouAnExporterOption(selectOption: String): Unit = {

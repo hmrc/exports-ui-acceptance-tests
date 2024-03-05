@@ -27,7 +27,7 @@ object CountryOfRoutingPage extends BasePage {
   var countryOfRoutingDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    CountryOfRoutingPage.onPage(countryOfRoutingPageTitle)
+    CountryOfRoutingPage.pageTitle(countryOfRoutingPageTitle)
   }
 
   def selectCountryOfRoutingOption(selectOption: String): Unit = {

@@ -27,7 +27,7 @@ object TransportPaymentPage extends BasePage {
   var transportPaymentDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    TransportPaymentPage.onPage(transportPaymentPageTitle)
+    TransportPaymentPage.pageTitle(transportPaymentPageTitle)
   }
 
   def selectHowDoyouPayForTheExpressTransportOption(selectOption: String): Unit = {

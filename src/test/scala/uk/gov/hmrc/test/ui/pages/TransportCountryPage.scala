@@ -29,7 +29,7 @@ object TransportCountryPage extends BasePage {
   var transportCountryDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit = {
-    TransportCountryPage.onPage(transportCountryPageTitle)
+    TransportCountryPage.pageTitle(transportCountryPageTitle)
   }
 
   def typeTransportCountryCode(currencyCode: String): String = {
