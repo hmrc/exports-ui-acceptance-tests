@@ -16,26 +16,39 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import org.openqa.selenium.{By, WebDriver, WebElement}
+import org.openqa.selenium.{By, WebElement}
 import org.scalatest.matchers.should.Matchers
 import uk.gov.hmrc.test.ui.driver.BrowserDriver
 
+import scala.collection.mutable
+
 trait BasePage extends BrowserDriver with Matchers {
+
+  val title: String
+  val url: String
+
+  def checkUrlAndTitle(): Unit =
+    checkUrlAndTitle(title, url)
 
   def submit(): Unit = clickById("submit")
 
   def continue(): Unit = clickByXpath("//*[@role='button']")
 
-  def pageTitle(pageTitle: String): Unit =
+  def checkUrlAndTitle(pageTitle: String, url: String): Unit = {
+
+    if (!driver.getCurrentUrl.contains(url))
+      throw PageNotFoundException(s"Expected '$url' page, but found '${driver.getCurrentUrl}' page.")
+
     if (!driver.getTitle.contains(pageTitle))
       throw PageNotFoundException(s"Expected '$pageTitle' page, but found '${driver.getTitle}' page.")
+  }
 
   def getGovUKLinks(index: Int): WebElement =
     driver.findElements(By.className("govuk-link")).get(index)
 
   def changeLinkSelector(row: String): By = By.cssSelector(s".$row .govuk-link")
 
-  def changeLink(row: String)(implicit driver: WebDriver): WebElement = driver.findElement(changeLinkSelector(row))
+  def changeLink(row: String): WebElement = driver.findElement(changeLinkSelector(row))
 
   //Finding Elements
   def findElementById(value: String): WebElement          = driver.findElement(By.id(value))
@@ -53,12 +66,18 @@ trait BasePage extends BrowserDriver with Matchers {
   def clickByCssSelector(value: String): Unit = findElementByCssSelector(value).click()
   def clickByClassName(value: String): Unit   = findElementByClassName(value).click()
 
-  def elementDoesNotExist(elementBy: By)(implicit driver: WebDriver): Boolean =
+  def elementDoesNotExist(elementBy: By): Boolean =
     driver.findElements(elementBy).size() == 0
+
+  def fillRadioButton(idSelector: String, refSelector: String, refText: String): Unit = {
+    clickById(idSelector)
+    findElementById(refSelector).sendKeys(refText)
+  }
 }
 
 case class PageNotFoundException(s: String) extends Exception(s)
 
 object Sections {
-  implicit val declarationDetails: Map[String, String] = Map.empty[String, String]
+
+  val declarationDetails: mutable.Map[String, String] = mutable.Map.empty[String, String]
 }

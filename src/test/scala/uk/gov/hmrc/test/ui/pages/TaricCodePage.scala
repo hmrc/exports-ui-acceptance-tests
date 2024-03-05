@@ -22,18 +22,17 @@ import scala.collection.immutable.HashMap
 
 object TaricCodePage extends BasePage {
 
-  val url: String = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/additional-taric-code"
-  val taricCodePagePageTitle = "Is there a TARIC additional code?"
+  val url: String                              = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/additional-taric-code"
+  val taricCodePagePageTitle                   = "Is there a TARIC additional code?"
   var taricCodeDetailsMap: Map[String, String] = HashMap[String, String]()
 
-  def checkPageTitle(): Unit = {
-    TaricCodePage.pageTitle(taricCodePagePageTitle)
-  }
+  def checkPageTitle(): Unit =
+    TaricCodePage.checkUrlAndTitle(taricCodePagePageTitle)
 
   def selectIsThereAUndangerousGoodsOption(selectOption: String): Unit = {
     selectOption match {
       case "Yes" => findElement("id", "code_yes").click()
-      case "No" => findElement("id", "code_no").click()
+      case "No"  => findElement("id", "code_no").click()
     }
     taricCodeDetailsMap += ("taricCodeDetails" -> selectOption)
     submit()

@@ -23,16 +23,15 @@ import scala.collection.immutable.HashMap
 
 object AddAuthorisationRequiredPage extends BasePage {
 
-  val url: String = TestConfiguration.url("exports-frontend") + "/declaration/consignee-details"
-  val addAuthorisationRequiredPage = "Add any authorisations for this export"
+  val url: String                                          = TestConfiguration.url("exports-frontend") + "/declaration/consignee-details"
+  val addAuthorisationRequiredPage                         = "Add any authorisations for this export"
   var authorisationRequiredDetailsMap: Map[String, String] = HashMap[String, String]()
-  val superKey: Keys = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
+  val superKey: Keys                                       = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
 
-  def checkPageTitle(): Unit = {
-    AddAuthorisationRequiredPage.pageTitle(addAuthorisationRequiredPage)
-  }
+  def checkPageTitle(): Unit =
+    AddAuthorisationRequiredPage.checkUrlAndTitle(addAuthorisationRequiredPage)
 
-  def typeAuthorisationCode(authorisationCode:String): Unit = {
+  def typeAuthorisationCode(authorisationCode: String): Unit = {
     findElement("id", "authorisationTypeCode").clear()
     findElement("id", "authorisationTypeCode").sendKeys(Keys.chord(superKey, "a"))
     findElement("id", "authorisationTypeCode").sendKeys(authorisationCode)
@@ -40,15 +39,15 @@ object AddAuthorisationRequiredPage extends BasePage {
     driver.switchTo().activeElement().sendKeys(Keys.TAB)
   }
 
-  def enterAuthorisationCodeWithDetails(authorisationCode:String, whoHoldsThisAuthorisation:String): Unit = {
+  def enterAuthorisationCodeWithDetails(authorisationCode: String, whoHoldsThisAuthorisation: String): Unit = {
     whoHoldsThisAuthorisation match {
-      case "UserEori" => findElement("id","UserEori").click()
-      case "OtherEori" => findElement("id","OtherEori").click()
+      case "UserEori"  => findElement("id", "UserEori")
+      case "OtherEori" => findElement("id", "OtherEori")
     }
     val authorisationCodeEntered: String = typeAuthorisationCode(authorisationCode).toString
 
-    declarationDetailsMap+=("WhoHoldsAuthorisation" -> whoHoldsThisAuthorisation)
-    declarationDetailsMap+=("authorisationCode" -> authorisationCodeEntered)
+    declarationDetailsMap += ("WhoHoldsAuthorisation" -> whoHoldsThisAuthorisation)
+    declarationDetailsMap += ("authorisationCode"     -> authorisationCodeEntered)
     submit()
   }
 }

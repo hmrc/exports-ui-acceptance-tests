@@ -22,18 +22,17 @@ import scala.collection.immutable.HashMap
 
 object AddContainersPage extends BasePage {
 
-  val url: String = TestConfiguration.url("exports-frontend") + "/declaration/containers"
-  val addContainersPageTitle = "You have added"
+  val url: String                                  = TestConfiguration.url("exports-frontend") + "/declaration/containers"
+  val addContainersPageTitle                       = "You have added"
   var addContainersDetailsMap: Map[String, String] = HashMap[String, String]()
 
-  def checkPageTitle(): Unit = {
-    ContainerPage.pageTitle(addContainersPageTitle)
-  }
+  def checkPageTitle(): Unit =
+    ContainerPage.checkUrlAndTitle(addContainersPageTitle)
 
   def selectDoYouWantToAddAnotherContainerOption(selectOption: String): Unit = {
     selectOption match {
-      case "Yes" => findElement("id", "code_yes").click()
-      case "No" => findElement("id", "code_no").click()
+      case "Yes" => findElement("id", "code_yes")
+      case "No"  => findElement("id", "code_no")
     }
     declarationDetailsMap += ("addContainersDetails" -> selectOption)
     submit()

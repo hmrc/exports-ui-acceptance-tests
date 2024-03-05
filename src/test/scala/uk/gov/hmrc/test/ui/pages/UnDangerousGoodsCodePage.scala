@@ -22,18 +22,17 @@ import scala.collection.immutable.HashMap
 
 object UnDangerousGoodsCodePage extends BasePage {
 
-  val url: String = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/un-dangerous-goods-code"
-  val unDangerousGoodsCodePagePageTitle = "Is there a UN dangerous goods code for this item?"
+  val url: String                                         = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/un-dangerous-goods-code"
+  val unDangerousGoodsCodePagePageTitle                   = "Is there a UN dangerous goods code for this item?"
   var unDangerousGoodsCodeDetailsMap: Map[String, String] = HashMap[String, String]()
 
-  def checkPageTitle(): Unit = {
-    AreYouTheExporterPage.pageTitle(unDangerousGoodsCodePagePageTitle)
-  }
+  def checkPageTitle(): Unit =
+    AreYouTheExporterPage.checkUrlAndTitle(unDangerousGoodsCodePagePageTitle)
 
   def selectIsThereAUndangerousGoodsOption(selectOption: String): Unit = {
     selectOption match {
       case "Yes" => findElement("id", "code_yes").click()
-      case "No" => findElement("id", "code_no").click()
+      case "No"  => findElement("id", "code_no").click()
     }
     unDangerousGoodsCodeDetailsMap += ("UndangerousGoodsCode" -> selectOption)
     submit()

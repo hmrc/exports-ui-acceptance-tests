@@ -24,26 +24,22 @@ import scala.collection.immutable.HashMap
 
 object TransportCountryPage extends BasePage {
 
-  val url: String = TestConfiguration.url("exports-frontend") + "/are-you-the-exporter"
-  val transportCountryPageTitle = "Select the country where the sea transport is registered"
+  val url: String                                     = TestConfiguration.url("exports-frontend") + "/are-you-the-exporter"
+  val transportCountryPageTitle                       = "Select the country where the sea transport is registered"
   var transportCountryDetailsMap: Map[String, String] = HashMap[String, String]()
 
-  def checkPageTitle(): Unit = {
-    TransportCountryPage.pageTitle(transportCountryPageTitle)
-  }
+  def checkPageTitle(): Unit =
+    TransportCountryPage.checkUrlAndTitle(transportCountryPageTitle)
 
   def typeTransportCountryCode(currencyCode: String): String = {
     findElement("id", "transport-country").click()
-    findElement("id", "transport-country").sendKeys(Keys.chord(superKey, "a"),Keys.BACK_SPACE)
+    findElement("id", "transport-country").sendKeys(Keys.chord(superKey, "a"), Keys.BACK_SPACE)
     val enteredCurrencyCode: WebElement = findElement("id", "transport-country")
     enteredCurrencyCode.sendKeys(currencyCode)
     findElement("id", "transport-country").sendKeys(Keys.ARROW_DOWN)
     driver.switchTo().activeElement().sendKeys(Keys.TAB)
     enteredCurrencyCode.getText
   }
-
-
-
 
   def selectDoYouKnowTheCountryWhereTheSeaTransportIsRegisteredOption(): Unit = {
     typeTransportCountryCode("South Africa")

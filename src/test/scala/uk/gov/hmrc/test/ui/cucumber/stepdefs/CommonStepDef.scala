@@ -34,4 +34,15 @@ class CommonStepDef extends BaseStepDef {
   And("""I click continue on mini CYA page""") { () =>
     CommonPage.continue()
   }
+
+  And("""I click on Continue button""") { () =>
+    CommonPage.continue()
+  }
+
+  Then("""^I should be navigated to the (.*)$""") { (page: String) =>
+    page match {
+      case "Departure Transport Page" => DepartureTransportPage.checkUrlAndTitle()
+      case "Border Transport Page"    => DepartureTransportPage.checkUrlAndTitle()
+    }
+  }
 }

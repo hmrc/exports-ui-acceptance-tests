@@ -54,3 +54,13 @@ Feature: StandardPrelodged Journey Happy Path With Procedure Code as 1040 and Ad
 #      And I validate the details entered for declaration in summary page
 
 
+
+  @SmokeLocal
+  Scenario: To departure transport page
+
+    Then I should be navigated to the Departure Transport Page
+    And I select Ship IMO number radio option on Departure Transport Page
+    And I click on Continue button
+    Then I should be navigated to the Border Transport Page
+
+

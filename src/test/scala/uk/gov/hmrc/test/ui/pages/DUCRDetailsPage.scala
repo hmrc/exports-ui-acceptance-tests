@@ -23,17 +23,17 @@ import scala.util.Random
 
 object DUCRDetailsPage extends BasePage {
 
-  val url: String = TestConfiguration.url("exports-frontend") + "/declaration/ducr-entry"
-  val pageTitle   = "Enter your Declaration Unique Consignment Reference (DUCR)"
+  val url: String                         = TestConfiguration.url("exports-frontend") + "/declaration/ducr-entry"
+  val pageTitle                           = "Enter your Declaration Unique Consignment Reference (DUCR)"
   var ducrDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit =
-    DUCRDetailsPage.pageTitle(pageTitle)
+    DUCRDetailsPage.checkUrlAndTitle(pageTitle)
 
   def generateAndEnterRanomDucrEntry(): Unit = {
     def generateRandomString(length: Int): String = {
-      val dynamicNumber  = "0123456789"
-      val random = new Random
+      val dynamicNumber = "0123456789"
+      val random        = new Random
 
       val randomChars = (1 to length).map(_ => dynamicNumber(random.nextInt(dynamicNumber.length)))
       randomChars.mkString
@@ -48,7 +48,7 @@ object DUCRDetailsPage extends BasePage {
 
     //Enter the Ducr Value
     findElement("id", "ducr").sendKeys(generatedDucr)
-    ducrDetailsMap+= ("DucrDetailsEntered" -> generatedDucr)
+    ducrDetailsMap += ("DucrDetailsEntered" -> generatedDucr)
     submit()
   }
 }

@@ -23,14 +23,13 @@ import scala.collection.immutable.HashMap
 
 object PackageInformationPage extends BasePage {
 
-  val url: String = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/package-information"
-  val packageInformationPageTitle = "Enter the packing details for this item"
+  val url: String                                = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/package-information"
+  val packageInformationPageTitle                = "Enter the packing details for this item"
   var packageInformationMap: Map[String, String] = HashMap[String, String]()
-  val superKey: Keys = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
+  val superKey: Keys                             = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
 
-  def checkPageTitle(): Unit = {
-    PackageInformationPage.pageTitle(packageInformationPageTitle)
-  }
+  def checkPageTitle(): Unit =
+    PackageInformationPage.checkUrlAndTitle(packageInformationPageTitle)
 
   def typePackageDetailsCode(packageType: String): String = {
     findElement("id", "typesOfPackages").clear()
@@ -44,15 +43,15 @@ object PackageInformationPage extends BasePage {
 
   def enterPackageDetails(): Unit = {
 
-    val enteredPackageType = typePackageDetailsCode("AE")
+    val enteredPackageType           = typePackageDetailsCode("AE")
     val numberOfPackages: WebElement = findElement("id", "numberOfPackages")
     numberOfPackages.sendKeys("10")
-    val shippingMarks: WebElement = findElement("id", "shippingMarks")
+    val shippingMarks: WebElement    = findElement("id", "shippingMarks")
     shippingMarks.sendKeys("Test Shipping")
 
     packageInformationMap += ("packageInformationDetails" -> enteredPackageType)
-    packageInformationMap += ("numberOfPackagesDetails" -> numberOfPackages.getText)
-    packageInformationMap += ("shippingMarksDetails" -> shippingMarks.getText)
+    packageInformationMap += ("numberOfPackagesDetails"   -> numberOfPackages.getText)
+    packageInformationMap += ("shippingMarksDetails"      -> shippingMarks.getText)
     submit()
   }
 }

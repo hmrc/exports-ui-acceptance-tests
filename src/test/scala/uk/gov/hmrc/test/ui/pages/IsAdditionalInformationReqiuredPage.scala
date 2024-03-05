@@ -22,18 +22,17 @@ import scala.collection.immutable.HashMap
 
 object IsAdditionalInformationReqiuredPage extends BasePage {
 
-  val url: String = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/additional-taric-code"
-  val isAdditionalInformationReqiuredPageTitle = "Do you need to make any Additional Information statements?"
+  val url: String                                                    = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/additional-taric-code"
+  val isAdditionalInformationReqiuredPageTitle                       = "Do you need to make any Additional Information statements?"
   var isAdditionalInformationReqiuredDetailsMap: Map[String, String] = HashMap[String, String]()
 
-  def checkPageTitle(): Unit = {
-    IsAdditionalInformationReqiuredPage.pageTitle(isAdditionalInformationReqiuredPageTitle)
-  }
+  def checkPageTitle(): Unit =
+    IsAdditionalInformationReqiuredPage.checkUrlAndTitle(isAdditionalInformationReqiuredPageTitle)
 
   def selectDoYouNeedToProvideAdditionalInformationStatementsOption(selectOption: String): Unit = {
     selectOption match {
       case "Yes" => findElement("id", "code_yes").click()
-      case "No" => findElement("id", "code_no").click()
+      case "No"  => findElement("id", "code_no").click()
     }
     isAdditionalInformationReqiuredDetailsMap += ("additionalInformationStatements" -> selectOption)
     submit()

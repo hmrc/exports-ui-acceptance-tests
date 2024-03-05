@@ -38,5 +38,5 @@ object ReplyResultPage extends BasePage {
   def backButton(): WebElement = findElement("className", "govuk-button")
 
   def validateReplyResultPage(): Unit =
-    pageTitle(replyResultPage)
+    checkUrlAndTitle(replyResultPage)
 }

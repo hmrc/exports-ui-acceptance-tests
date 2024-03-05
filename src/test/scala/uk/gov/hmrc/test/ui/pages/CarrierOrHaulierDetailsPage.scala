@@ -29,11 +29,11 @@ object CarrierOrHaulierDetailsPage extends BasePage {
   var doYouKnowTheCarrierEORIDetailsMap: Map[String, Map[String, String]] = HashMap[String, Map[String, String]]()
   val superKey: Keys                                                      = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
   def checkPageTitle(): Unit                                              =
-    CarrierOrHaulierDetailsPage.pageTitle(carrierOrHaulierPageTitle)
+    CarrierOrHaulierDetailsPage.checkUrlAndTitle(carrierOrHaulierPageTitle)
 
   def typeCountry(): String = {
     findElement("id", "details_address_country").clear()
-    findElement("id", "details_address_country").sendKeys(Keys.chord(superKey, "a"),Keys.BACK_SPACE)
+    findElement("id", "details_address_country").sendKeys(Keys.chord(superKey, "a"), Keys.BACK_SPACE)
     val country: WebElement = findElement("id", "details_address_country")
     country.sendKeys("AD")
     findElement("id", "details_address_country").sendKeys(Keys.ARROW_DOWN)

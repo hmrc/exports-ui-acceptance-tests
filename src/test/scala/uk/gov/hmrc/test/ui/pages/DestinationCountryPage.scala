@@ -23,26 +23,25 @@ import scala.collection.immutable.HashMap
 
 object DestinationCountryPage extends BasePage {
 
-  val url: String = TestConfiguration.url("exports-frontend") + "/declaration/destination-country"
-  val destinationCountryPageTitle = "Where are the goods being exported to?"
+  val url: String                                       = TestConfiguration.url("exports-frontend") + "/declaration/destination-country"
+  val destinationCountryPageTitle                       = "Where are the goods being exported to?"
   var destinationCountryDetailsMap: Map[String, String] = HashMap[String, String]()
-  val superKey: Keys = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
+  val superKey: Keys                                    = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
 
-  def checkPageTitle(): Unit = {
-    DestinationCountryPage.pageTitle(destinationCountryPageTitle)
-  }
+  def checkPageTitle(): Unit =
+    DestinationCountryPage.checkUrlAndTitle(destinationCountryPageTitle)
 
-  def typeDestinationCountry(destinationCountry:String): String = {
+  def typeDestinationCountry(destinationCountry: String): String = {
     findElement("id", "countryCode").clear()
-    findElement("id", "countryCode").sendKeys(Keys.chord(superKey, "a"),Keys.BACK_SPACE)
-    val destinationCountryEntered : WebElement = findElement("id", "countryCode")
+    findElement("id", "countryCode").sendKeys(Keys.chord(superKey, "a"), Keys.BACK_SPACE)
+    val destinationCountryEntered: WebElement = findElement("id", "countryCode")
     destinationCountryEntered.sendKeys(destinationCountry)
     findElement("id", "countryCode").sendKeys(Keys.ARROW_DOWN)
     driver.switchTo().activeElement().sendKeys(Keys.TAB)
     destinationCountryEntered.getText
   }
 
-  def enterDestinationCountry(destinationCountry:String): Unit = {
+  def enterDestinationCountry(destinationCountry: String): Unit = {
     val countryEntered: String = typeDestinationCountry(destinationCountry)
     destinationCountryDetailsMap += ("DestinationCountryEntered" -> countryEntered)
     submit()

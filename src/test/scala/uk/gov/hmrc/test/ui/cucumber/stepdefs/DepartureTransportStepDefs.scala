@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.pages
+package uk.gov.hmrc.test.ui.cucumber.stepdefs
 
-object UnAuthorisedPage extends BasePage {
+import uk.gov.hmrc.test.ui.pages._
 
-  val unAuthorisedPageTitle =
-    "To continue, you need to get access to the Customs Declaration Service (CDS) - CDS document uploads and secure messages - GOV.UK"
+class DepartureTransportStepDefs extends BaseStepDef {
 
-  def validateUnAuthorisedPage(): Unit =
-    checkUrlAndTitle(unAuthorisedPageTitle)
+  And("""^I select (.*) radio option on Departure Transport Page$""") { (radio: String) =>
+    DepartureTransportPage.selectBorderModeOfTransportOption(radio)
+  }
 }

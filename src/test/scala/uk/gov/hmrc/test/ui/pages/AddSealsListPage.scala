@@ -22,18 +22,17 @@ import scala.collection.immutable.HashMap
 
 object AddSealsListPage extends BasePage {
 
-  val url: String = TestConfiguration.url("exports-frontend") + "/declaration/containers/([^/]+)/seals"
-  val addSealsListPageTitle = "You have added"
+  val url: String                                 = TestConfiguration.url("exports-frontend") + "/declaration/containers/([^/]+)/seals"
+  val addSealsListPageTitle                       = "You have added"
   var addSealsListDetailsMap: Map[String, String] = HashMap[String, String]()
 
-  def checkPageTitle(): Unit = {
-    AddSealsListPage.pageTitle(addSealsListPageTitle)
-  }
+  def checkPageTitle(): Unit =
+    AddSealsListPage.checkUrlAndTitle(addSealsListPageTitle)
 
   def selectDoYouWantToAddAnotherSealOption(selectOption: String): Unit = {
     selectOption match {
-      case "Yes" => findElement("id", "code_yes").click()
-      case "No" => findElement("id", "code_no").click()
+      case "Yes" => findElement("id", "code_yes")
+      case "No"  => findElement("id", "code_no")
     }
     declarationDetailsMap += ("sealsListDetails" -> selectOption)
     submit()

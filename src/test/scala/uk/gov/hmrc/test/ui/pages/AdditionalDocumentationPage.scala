@@ -23,13 +23,12 @@ import scala.collection.immutable.HashMap
 
 object AdditionalDocumentationPage extends BasePage {
 
-  val url: String = TestConfiguration.url("exports-frontend") + "/declaration/additional-documentation"
-  val additionalDocumentationPage = "Enter licence details, authorisation numbers and any other document details"
-  var additionalDocumentationPageDetails: Map[String, String]= HashMap[String, String]()
+  val url: String                                             = TestConfiguration.url("exports-frontend") + "/declaration/additional-documentation"
+  val additionalDocumentationPage                             = "Enter licence details, authorisation numbers and any other document details"
+  var additionalDocumentationPageDetails: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit =
-    AdditionalDocumentationPage.pageTitle(additionalDocumentationPage)
-
+    AdditionalDocumentationPage.checkUrlAndTitle(additionalDocumentationPage)
 
   def enterLicenceDocumentDetails(): Unit = {
 
@@ -40,7 +39,7 @@ object AdditionalDocumentationPage extends BasePage {
     documentIdentifier.sendKeys("GBAEOC717572504502801")
 
     declarationDetailsMap += ("documentCode"       -> documentCode.getText)
-    declarationDetailsMap += ("documentIdentifier"     -> documentIdentifier.getText)
+    declarationDetailsMap += ("documentIdentifier" -> documentIdentifier.getText)
 
     submit()
   }

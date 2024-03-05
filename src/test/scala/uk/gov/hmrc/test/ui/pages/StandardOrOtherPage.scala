@@ -20,20 +20,16 @@ import uk.gov.hmrc.test.ui.conf.TestConfiguration
 
 object StandardOrOtherPage extends BasePage {
 
-  val url: String                = TestConfiguration.url("exports-frontend") + "/standard-or-other"
-  val homePageTitle              = "Make and manage export declarations - Make an export declaration online - GOV.UK"
+  val url: String   = TestConfiguration.url("exports-frontend") + "/standard-or-other"
+  val homePageTitle = "Make and manage export declarations - Make an export declaration online - GOV.UK"
 
-
-  def checkTitle():Unit = {
-    ExportsHomePage.pageTitle(homePageTitle)
-  }
-
-
+  def checkTitle(): Unit =
+    ExportsHomePage.checkUrlAndTitle(homePageTitle)
 
   def selectOptionToProgressWith(selectOption: String): Unit = {
     selectOption match {
       case "StandardDeclaration" => findElement("id", "STANDARD").click()
-      case "OtherDeclaration" => findElement("id", "NonStandardDeclarationType").click()
+      case "OtherDeclaration"    => findElement("id", "NonStandardDeclarationType").click()
     }
     submit()
   }

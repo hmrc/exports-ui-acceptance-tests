@@ -22,13 +22,12 @@ import scala.collection.immutable.HashMap
 
 object InlandOrBorderPage extends BasePage {
 
-  val url: String = TestConfiguration.url("exports-frontend") + "/declaration/inland-or-border"
-  val inlandOrBorderPageTitle = "Where are you presenting your goods to customs?"
+  val url: String                                   = TestConfiguration.url("exports-frontend") + "/declaration/inland-or-border"
+  val inlandOrBorderPageTitle                       = "Where are you presenting your goods to customs?"
   var inlandOrBorderDetailsMap: Map[String, String] = HashMap[String, String]()
 
-  def checkPageTitle(): Unit = {
-    InlandOrBorderPage.pageTitle(inlandOrBorderPageTitle)
-  }
+  def checkPageTitle(): Unit =
+    InlandOrBorderPage.checkUrlAndTitle(inlandOrBorderPageTitle)
 
   def selectInlandOrBorderOption(selectOption: String): Unit = {
     selectOption match {

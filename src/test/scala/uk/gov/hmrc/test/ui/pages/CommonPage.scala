@@ -51,9 +51,9 @@ object CommonPage extends BasePage {
   def checkTitle(englishTitle: String, welshTitle: String): Unit = {
     val language = getLanguage.getText
     if (language.contains("English"))
-      pageTitle(englishTitle)
+      checkUrlAndTitle(englishTitle)
     else
-      pageTitle(welshTitle)
+      checkUrlAndTitle(welshTitle)
   }
 
   def backLink(): WebElement = findElement("cssSelector", ".govuk-back-link")

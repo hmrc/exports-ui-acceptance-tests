@@ -23,23 +23,22 @@ import scala.collection.immutable.HashMap
 
 object CommodityMeasurePage extends BasePage {
 
-  val url: String = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/commodity-measure"
-  val commodityMeasurePageTitle = "What is the weight of the goods?"
+  val url: String                                     = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/commodity-measure"
+  val commodityMeasurePageTitle                       = "What is the weight of the goods?"
   var commodityMeasureDetailsMap: Map[String, String] = HashMap[String, String]()
-  val superKey: Keys = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
+  val superKey: Keys                                  = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
 
-  def checkPageTitle(): Unit = {
-    CommodityMeasurePage.pageTitle(commodityMeasurePageTitle)
-  }
+  def checkPageTitle(): Unit =
+    CommodityMeasurePage.checkUrlAndTitle(commodityMeasurePageTitle)
 
   def enterGoodsWeightDetails(): Unit = {
     val grossWeight: WebElement = findElement("id", "grossMass")
     grossWeight.sendKeys("1000")
-    val netWeight: WebElement = findElement("id", "netMass")
+    val netWeight: WebElement   = findElement("id", "netMass")
     netWeight.sendKeys("1000")
 
     commodityMeasureDetailsMap += ("grossWeight" -> grossWeight.getText)
-    commodityMeasureDetailsMap += ("netWeight" -> netWeight.getText)
+    commodityMeasureDetailsMap += ("netWeight"   -> netWeight.getText)
     submit()
   }
 }

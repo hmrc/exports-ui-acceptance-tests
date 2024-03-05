@@ -30,7 +30,7 @@ class StandardJourneyStepDefs extends BaseStepDef {
   And("""^I select (.*) to create (.*) prelodged$""") { (CreateDeclaration: String, StandardDeclaration: String) =>
     ExportsHomePage.selectOptionToMakeAndManageDeclaration(CreateDeclaration)
     StandardOrOtherPage.selectOptionToProgressWith("StandardDeclaration")
-    //DeclarationChoicePage.selectOptionToCreateWhatTypeOfDeclaration(StandardDeclaration)
+  //DeclarationChoicePage.selectOptionToCreateWhatTypeOfDeclaration(StandardDeclaration)
   }
 
   And("""^I select the option No for Arrived export declaration$""") { () =>
@@ -91,68 +91,73 @@ class StandardJourneyStepDefs extends BaseStepDef {
       AddAuthorisationRequiredPage.enterAuthorisationCodeWithDetails(authorisationCode, userEori)
   }
   And("""^I select "(.*)" for adding another authorisation$""") { (addAnotherAuthorisation: String) =>
-     AuthorisationsRequiredPage.checkPageTitle()
-     AuthorisationsRequiredPage.selectDoYouNeedToAddAnotherAuthorisation(addAnotherAuthorisation)
+    AuthorisationsRequiredPage.checkPageTitle()
+    AuthorisationsRequiredPage.selectDoYouNeedToAddAnotherAuthorisation(addAnotherAuthorisation)
   }
   And("""^I select the destination country as (.*)$""") { (destinationCountry: String) =>
-     DestinationCountryPage.checkPageTitle()
-     DestinationCountryPage.enterDestinationCountry(destinationCountry)
+    DestinationCountryPage.checkPageTitle()
+    DestinationCountryPage.enterDestinationCountry(destinationCountry)
   }
-  And("""^I select No for country of routing$"""){() =>
-     CountryOfRoutingPage.checkPageTitle()
-     CountryOfRoutingPage.selectCountryOfRoutingOption("No")
+  And("""^I select No for country of routing$""") { () =>
+    CountryOfRoutingPage.checkPageTitle()
+    CountryOfRoutingPage.selectCountryOfRoutingOption("No")
   }
-  And("""^I select (.*) and enter location of goods as (.*)$""") {(selectOption:String, locationOfGoodsCode : String) =>
-     LocationOfGoodsPage.checkPageTitle()
-     LocationOfGoodsPage.selectDoYouWantToSearchForAGoodsLocationCodeOption(selectOption,locationOfGoodsCode)
+  And("""^I select (.*) and enter location of goods as (.*)$""") {
+    (selectOption: String, locationOfGoodsCode: String) =>
+      LocationOfGoodsPage.checkPageTitle()
+      LocationOfGoodsPage.selectDoYouWantToSearchForAGoodsLocationCodeOption(selectOption, locationOfGoodsCode)
   }
-  And("""^I select office of exit as (.*)$"""){(officeOfExitCode : String)=>
+  And("""^I select office of exit as (.*)$""") { (officeOfExitCode: String) =>
     OfficeOfExitPage.checkPageTitle()
     OfficeOfExitPage.enterOfficeOfExitCodeDetails(officeOfExitCode)
   }
-  And("""^I select No for invoice and exchange rate choice page$"""){()=>
+  And("""^I select No for invoice and exchange rate choice page$""") { () =>
     InvoiceAndExchangeRateChoicePage.checkPageTitle()
     InvoiceAndExchangeRateChoicePage.isTheTotalAmountInvoicedLessThan100000IValueOption("No")
   }
-  And("""^I entered currencycode as (.*) and Total amount invoiced as (.*) and opted (.*) with 1.25 for invoice or contract rate$""") { (currencyCode:String,totalAmountInvoice:String,Yes:String) =>
+  And(
+    """^I entered currencycode as (.*) and Total amount invoiced as (.*) and opted (.*) with 1.25 for invoice or contract rate$"""
+  ) { (currencyCode: String, totalAmountInvoice: String, Yes: String) =>
     InvoicesAndExchangeRatePage.checkPageTitle()
-    InvoicesAndExchangeRatePage.enterExchangeRateWithDetails(currencyCode,totalAmountInvoice,Yes)
+    InvoicesAndExchangeRatePage.enterExchangeRateWithDetails(currencyCode, totalAmountInvoice, Yes)
   }
-  And("""I entered the total number of packages as 10"""){()=>
+  And("""I entered the total number of packages as 10""") { () =>
     TotalPackageQuantityPage.checkPageTitle()
     TotalPackageQuantityPage.enterTotalPackageQuantity("10")
   }
-  And("""^I select nature of transaction option as (.*)$"""){ (selectOption:String) =>
+  And("""^I select nature of transaction option as (.*)$""") { (selectOption: String) =>
     NatureOfTransactionPage.checkPageTitle()
     NatureOfTransactionPage.selectWhatSortOfExportOption(selectOption)
   }
-  And("""I enter document code and document reference and No option for adding another document"""){()=>
+  And("""I enter document code and document reference and No option for adding another document""") { () =>
     AddPreviousDocumentPage.checkPageTitle()
     AddPreviousDocumentPage.enterDocumentCodeDetails("380")
     PreviousDocumentsListPage.checkPageTitle()
     PreviousDocumentsListPage.selectDoYouNeedToAddAnotherDocumentOption("No")
   }
-  And("""^I start adding the declaration item with the procedure code as (.*) and additional procedure code as (.*)$""") {(procedureCode:String, additionalProcedureCode : String)=>
-     AddDeclarationItemPage.checkPageTitle()
-     AddDeclarationItemPage.clickToAddItem()
-     AddProcedureCodesPage.checkPageTitle()
-     AddProcedureCodesPage.enterProcedureCode(procedureCode)
-     AddAdditionalProcedureCodesPage.checkPageTitle()
-     AddAdditionalProcedureCodesPage.enterAdditionalProcedureCodeDetails(additionalProcedureCode)
+  And(
+    """^I start adding the declaration item with the procedure code as (.*) and additional procedure code as (.*)$"""
+  ) { (procedureCode: String, additionalProcedureCode: String) =>
+    AddDeclarationItemPage.checkPageTitle()
+    AddDeclarationItemPage.clickToAddItem()
+    AddProcedureCodesPage.checkPageTitle()
+    AddProcedureCodesPage.enterProcedureCode(procedureCode)
+    AddAdditionalProcedureCodesPage.checkPageTitle()
+    AddAdditionalProcedureCodesPage.enterAdditionalProcedureCodeDetails(additionalProcedureCode)
   }
-  And("""I select the commodity code and enter the item details information"""){() =>
-     CommodityCodeDetailsPage.checkPageTitle()
-     CommodityCodeDetailsPage.enterCommodityCodeDetails()
+  And("""I select the commodity code and enter the item details information""") { () =>
+    CommodityCodeDetailsPage.checkPageTitle()
+    CommodityCodeDetailsPage.enterCommodityCodeDetails()
   }
-  And("""I select No option for undangerous goods code"""){()=>
-     UnDangerousGoodsCodePage.checkPageTitle()
-     UnDangerousGoodsCodePage.selectIsThereAUndangerousGoodsOption("No")
+  And("""I select No option for undangerous goods code""") { () =>
+    UnDangerousGoodsCodePage.checkPageTitle()
+    UnDangerousGoodsCodePage.selectIsThereAUndangerousGoodsOption("No")
   }
   And("""I select vat rating page option as Yes""") { () =>
     VatRatingPage.checkPageTitle()
     VatRatingPage.selectAreTheseGoodsBeingZeroRatedOption("VATZ")
   }
-  And("""I select No for national additional code"""){()=>
+  And("""I select No for national additional code""") { () =>
     NationalAdditionalCodePage.checkPageTitle()
     NationalAdditionalCodePage.selectDoYouNeedANationalAdditionalCodeOption("No")
   }
@@ -166,45 +171,45 @@ class StandardJourneyStepDefs extends BaseStepDef {
     PackagesListPage.checkPageTitle()
     PackagesListPage.selectDoYouNeedToAddAnotherPackageTypeOption("No")
   }
-  And("""I provide gross and net weight"""){()=>
+  And("""I provide gross and net weight""") { () =>
     CommodityMeasurePage.checkPageTitle()
     CommodityMeasurePage.enterGoodsWeightDetails()
   }
-  And("""I select Yes to add supplementary units"""){()=>
+  And("""I select Yes to add supplementary units""") { () =>
     SupplementaryUnitsPage.checkPageTitle()
     SupplementaryUnitsPage.selectDoYouNeedToAddSupplementaryUnitsOption("Yes")
   }
-  And("""I select No for Additional information statements"""){()=>
+  And("""I select No for Additional information statements""") { () =>
     IsAdditionalInformationReqiuredPage.checkPageTitle()
     IsAdditionalInformationReqiuredPage.selectDoYouNeedToProvideAdditionalInformationStatementsOption("No")
   }
-  And("""I select Yes for Do you require a licence and provide the license details"""){()=>
+  And("""I select Yes for Do you require a licence and provide the license details""") { () =>
     IsLicenseRequiredPage.checkPageTitle()
     IsLicenseRequiredPage.selectDoTheseGoodsRequireLicenseOption("Yes")
     AdditionalDocumentationPage.checkPageTitle()
     AdditionalDocumentationPage.enterLicenceDocumentDetails()
   }
-  And("""I select No for adding another document reference"""){()=>
-      AdditioanlDocumentsListPage.checkPageTitle()
-      AdditioanlDocumentsListPage.selectDoYouNeedToAddAnotherDocumentOption("No")
+  And("""I select No for adding another document reference""") { () =>
+    AdditioanlDocumentsListPage.checkPageTitle()
+    AdditioanlDocumentsListPage.selectDoYouNeedToAddAnotherDocumentOption("No")
   }
   And("""I select No for adding another item""") { () =>
     DeclarationItemsListPage.checkPageTitle()
     DeclarationItemsListPage.selectDoYouNeedToAddAnotherItemOption("No")
   }
-  And("""^I select (.*) as transport leaving the border$"""){(modeOfTransport:String)=>
+  And("""^I select (.*) as transport leaving the border$""") { (modeOfTransport: String) =>
     TransportLeavingTheBorderPage.checkPageTitle()
     TransportLeavingTheBorderPage.selectBorderModeOfTransportOption(modeOfTransport)
   }
-  And("""^I select (.*) option for inland or border page$"""){(inlandOrBorderOption:String)=>
+  And("""^I select (.*) option for inland or border page$""") { (inlandOrBorderOption: String) =>
     InlandOrBorderPage.checkPageTitle()
     InlandOrBorderPage.selectInlandOrBorderOption(inlandOrBorderOption)
   }
-  And("""^I provide (.*) details for departure transport$"""){(departureTransportOption:String)=>
-    DepartureTransportPage.checkPageTitle()
+  And("""^I provide (.*) details for departure transport$""") { (departureTransportOption: String) =>
+    DepartureTransportPage.checkUrlAndTitle()
     DepartureTransportPage.selectBorderModeOfTransportOption(departureTransportOption)
   }
-  And("""^I provide the transport country details$"""){()=>
+  And("""^I provide the transport country details$""") { () =>
     TransportCountryPage.checkPageTitle()
     TransportCountryPage.selectDoYouKnowTheCountryWhereTheSeaTransportIsRegisteredOption()
   }
@@ -212,7 +217,7 @@ class StandardJourneyStepDefs extends BaseStepDef {
     ExpressConsignmentPage.checkPageTitle()
     ExpressConsignmentPage.selectIsThisExpressConsignmentOption("Yes")
   }
-  And("""^I select (.*) option for transport payment$""") { (transportPaymentOption:String) =>
+  And("""^I select (.*) option for transport payment$""") { (transportPaymentOption: String) =>
     TransportPaymentPage.checkPageTitle()
     TransportPaymentPage.selectHowDoyouPayForTheExpressTransportOption(transportPaymentOption)
   }

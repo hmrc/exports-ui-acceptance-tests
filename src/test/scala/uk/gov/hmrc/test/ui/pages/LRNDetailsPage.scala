@@ -23,17 +23,17 @@ import scala.util.Random
 
 object LRNDetailsPage extends BasePage {
 
-  val url: String = TestConfiguration.url("exports-frontend") + "/declaration/local-reference-number"
-  val pageTitle = "Create a Local Reference Number (LRN)"
+  val url: String                        = TestConfiguration.url("exports-frontend") + "/declaration/local-reference-number"
+  val pageTitle                          = "Create a Local Reference Number (LRN)"
   var lrnDetailsMap: Map[String, String] = HashMap[String, String]()
 
   def checkPageTitle(): Unit =
-    LRNDetailsPage.pageTitle(pageTitle)
+    LRNDetailsPage.checkUrlAndTitle(pageTitle)
 
   def generateAndEnterRanomLRNEntry(): Unit = {
     def generateRandomString(length: Int): String = {
       val dynamicNumber = "0123456789"
-      val random = new Random
+      val random        = new Random
 
       val randomChars = (1 to length).map(_ => dynamicNumber(random.nextInt(dynamicNumber.length)))
       randomChars.mkString
