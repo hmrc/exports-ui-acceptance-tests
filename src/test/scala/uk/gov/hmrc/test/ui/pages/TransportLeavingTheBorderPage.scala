@@ -16,15 +16,19 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import uk.gov.hmrc.test.ui.conf.Constants._
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.DeclarationDetails._
 
 object TransportLeavingTheBorderPage extends BasePage {
 
-  val url: String   = TestConfiguration.url("exports-frontend") + "/declaration/transport-leaving-the-border"
-  val title: String = "What mode of transport will the goods leave the UK on?"
+  val url: String                   = TestConfiguration.url("exports-frontend") + "/declaration/transport-leaving-the-border"
+  val title: String                 = "What mode of transport will the goods leave the UK on?"
+  val backButtonHrefs: List[String] = List.empty
+  override val expanderHrefs        = List(
+    "group-7-transport-information-modes-means-and-equipment#de-74-mode-of-transport-at-the-border-box-25-mode-of-transport-at-the-border"
+  )
 
-  def selectBorderModeOfTransportOption(selectOption: String): Unit = {
+  def performActionsAndCache(selectOptions: String*): Unit = {
     val optionToIdMap: Map[String, String] = Map(
       "Sea transport"                     -> "Border_Sea",
       "Roll on roll off (RoRo) transport" -> "Border_Ferry",
@@ -37,9 +41,10 @@ object TransportLeavingTheBorderPage extends BasePage {
       "Own propulsion"                    -> "Border_Unknown"
     )
 
-    optionToIdMap.get(selectOption).foreach { id =>
-      clickById(id)
-      Sections.declarationDetails + (TransportLeavingBorderId -> "Transport at the border") + (TransportLeavingBorderValue -> selectOption)
-    }
+    for (selectOption <- selectOptions)
+      optionToIdMap.get(selectOption).foreach { id =>
+        clickById(id)
+        DeclarationDetails.cache += (TransportLeavingBorderId -> "Transport at the border", TransportLeavingBorderValue -> selectOption)
+      }
   }
 }

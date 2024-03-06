@@ -16,17 +16,20 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import uk.gov.hmrc.test.ui.conf.Constants._
-import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.DeclarationDetails._
 
 object SupervisingCustomsOfficePage extends BasePage {
 
-  val url: String   = TestConfiguration.url("exports-frontend") + "/declaration/supervising-customs-office"
-  val title: String = "Where is the HMRC supervising customs office (SPOFF)?"
+  val url: String                   = "/declaration/supervising-customs-office"
+  def title: String                 = "Where is the HMRC supervising customs office (SPOFF)?"
+  val backButtonHrefs: List[String] = List.empty
+  override val expanderHrefs        = List(
+    "group-5-dates-times-periods-places-countries-and-regions#de-527-supervising-customs-office-box-44"
+  )
 
-  def enterWareHouseDetails(wareHouseRef: String): Unit = {
-    fillTextBoxById("identificationNumber", wareHouseRef)
-
-    Sections.declarationDetails + (WareHouseId -> "Warehouse ID") + (WareHouseValue -> wareHouseRef)
-  }
+  def performActionsAndCache(wareHouseRefs: String*): Unit =
+    wareHouseRefs.headOption.foreach { wareHouseRef =>
+      fillAutoComplete(findElementByCssSelector("#supervisingCustomsOffice-container input"), wareHouseRef)
+      DeclarationDetails.cache += (SuperVisingCustomsOfficeId -> "Customs supervising office", SuperVisingCustomsOfficeValue -> wareHouseRef)
+    }
 }

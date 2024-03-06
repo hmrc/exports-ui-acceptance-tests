@@ -17,33 +17,28 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.DeclarationDetails.{DeclarationChoiceId, DeclarationChoiceValue, cache}
 
 import scala.collection.immutable.HashMap
 
 object DeclarationChoicePage extends BasePage {
 
   val url: String   = TestConfiguration.url("exports-frontend") + "/declaration/declaration-choice"
-  val homePageTitle = "Which type of declaration do you want to create? - Make an export declaration online - GOV.UK"
-
-  val standardDeclaration                    = "STANDARD"
+  val title = "Select a declaration type - Make an export declaration online - GOV.UK"
+  val backButtonHrefs: List[String] = List(DeclarationTypePage.url)
+  
   val simplifiedOccasional                   = "OCCASIONAL"
   val authorisedSimplifiedDeclaration        = "SIMPLIFIED"
   val clearanceDeclaration                   = "CLEARANCE"
   val supplementaryDeclaration               = "SUPPLEMENTARY"
-  var choicePageHashMap: Map[String, String] = HashMap[String, String]()
 
-  def checkTitle(): Unit =
-    DeclarationChoicePage.checkUrlAndTitle(homePageTitle)
-
-  def selectOptionToCreateWhatTypeOfDeclaration(selectOption: String): Unit = {
-
-    selectOption match {
-      case "SimplifiedOccasional"            => findElement("id", simplifiedOccasional).click()
-      case "AuthorisedSimplifiedDeclaration" => findElement("id", authorisedSimplifiedDeclaration).click()
-      case "ClearanceDeclaration"            => findElement("id", clearanceDeclaration).click()
-      case "SupplementaryDeclaration"        => findElement("id", supplementaryDeclaration).click()
+  override def performActionsAndCache(selectOption: String*): Unit = {
+    selectOption.head match {
+      case "SimplifiedOccasional"            => clickById(simplifiedOccasional)
+      case "AuthorisedSimplifiedDeclaration" => clickById(authorisedSimplifiedDeclaration)
+      case "ClearanceDeclaration"            => clickById(clearanceDeclaration)
+      case "SupplementaryDeclaration"        => clickById(supplementaryDeclaration)
     }
-    choicePageHashMap += ("choicePageSelectionDetails" -> selectOption)
-    submit()
+    cache + (DeclarationChoiceId -> DeclarationChoiceValue)
   }
 }

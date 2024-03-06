@@ -21,11 +21,11 @@ import uk.gov.hmrc.test.ui.conf.TestConfiguration
 object DoYouHaveDUCRPage extends BasePage {
 
   val url: String   = TestConfiguration.url("exports-frontend") + "/declaration/declarant-details"
-  val homePageTitle =
+  val title =
     "Do you have a Declaration Unique Consignment Reference Number (DUCR)? - Section 1 of 6: Declaration details - Make an export declaration online - GOV.UK"
 
   def checkPageTitle(): Unit =
-    DoYouHaveDUCRPage.checkUrlAndTitle(homePageTitle)
+    DoYouHaveDUCRPage.checkUrlAndTitle(title)
 
   def selectDoYouHaveADucr(selectOption: String): Unit = {
     selectOption match {

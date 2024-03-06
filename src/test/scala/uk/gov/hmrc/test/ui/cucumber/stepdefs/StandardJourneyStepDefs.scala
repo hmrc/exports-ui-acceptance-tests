@@ -28,13 +28,12 @@ class StandardJourneyStepDefs extends BaseStepDef {
   }
 
   And("""^I select (.*) to create (.*) prelodged$""") { (CreateDeclaration: String, StandardDeclaration: String) =>
-    ExportsHomePage.selectOptionToMakeAndManageDeclaration(CreateDeclaration)
-    StandardOrOtherPage.selectOptionToProgressWith("StandardDeclaration")
+    ChoicePage.selectOptionToMakeAndManageDeclaration(CreateDeclaration)
+    StandardOrOtherPage.selectOptionAndSubmit("StandardDeclaration")
   //DeclarationChoicePage.selectOptionToCreateWhatTypeOfDeclaration(StandardDeclaration)
   }
 
   And("""^I select the option No for Arrived export declaration$""") { () =>
-    DeclarationTypePage.checkPageTitle()
     DeclarationTypePage.selectDeclarationTypeOption("PreLodgedDeclaration")
   }
 

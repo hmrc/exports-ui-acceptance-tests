@@ -16,25 +16,24 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import uk.gov.hmrc.test.ui.conf.TestConfiguration
-
-import scala.collection.immutable.HashMap
+import uk.gov.hmrc.test.ui.pages.DeclarationDetails._
 
 object ExpressConsignmentPage extends BasePage {
 
-  val url: String                                        = TestConfiguration.url("exports-frontend") + "/declaration/express-consignment"
-  val expressConsignmentPageTitle                        = "Is this an express consignment?"
-  var expressConsignmentrDetailsMap: Map[String, String] = HashMap[String, String]()
+  val url: String                   = "/declaration/express-consignment"
+  def title                         = "Is this an express consignment?"
+  val backButtonHrefs: List[String] = List.empty
+  override val expanderHrefs        = List(
+    "group-1-message-information-including-procedure-codes#de-17-specific-circumstance-indicator"
+  )
 
-  def checkPageTitle(): Unit =
-    AreYouTheExporterPage.checkUrlAndTitle(expressConsignmentPageTitle)
+  override def checkBackButton(): Unit = {}
 
-  def selectIsThisExpressConsignmentOption(selectOption: String): Unit = {
+  def performActionsAndCache(selectOption: String*): Unit = {
     selectOption match {
-      case "Yes" => findElement("id", "code_yes").click()
-      case "No"  => findElement("id", "code_no").click()
+      case "Yes" => clickById("code_yes")
+      case "No"  => clickById("code_no")
     }
-    expressConsignmentrDetailsMap += ("IsThisExpressConsignmentDetails" -> selectOption)
-    submit()
+    DeclarationDetails.cache += (ExpressConsignmentId -> "Express consignment", ExpressConsignmentValue -> selectOption)
   }
 }

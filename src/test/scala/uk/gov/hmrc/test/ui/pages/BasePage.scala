@@ -17,33 +17,61 @@
 package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.interactions.Actions
-import org.openqa.selenium.{By, Keys, WebElement}
+import org.openqa.selenium.{By, WebElement}
+import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
+import org.openqa.selenium.Keys
 import org.scalatest.matchers.should.Matchers
 import uk.gov.hmrc.test.ui.driver.BrowserDriver
-import uk.gov.hmrc.test.ui.pages.CarrierOrHaulierDetailsPage.superKey
+import uk.gov.hmrc.test.ui.pages.DeclarationDetails.TransportLeavingBorderValue
+import uk.gov.hmrc.test.ui.pages.PageConstants.{feedbackBanner, govUkLogo, languageToggle, signOut, technicalIssue}
 
-import scala.collection.mutable
+import scala.jdk.CollectionConverters.ListHasAsScala
 
 trait BasePage extends BrowserDriver with Matchers {
 
   def title: String
   val url: String
+  val backButtonHrefs: List[String]
+  val pageLinkHrefs: List[String] = List(languageToggle, signOut, technicalIssue, govUkLogo, feedbackBanner)
+  val expanderHrefs: List[String] = List.empty
 
-  def checkUrlAndTitle(): Unit =
-    checkUrlAndTitle(title, url)
-
-  def submit(): Unit = clickById("submit")
-
-  def continue(): Unit = clickByXpath("//*[@role='button']")
-
-  def checkUrlAndTitle(pageTitle: String, url: String): Unit = {
-
+  def checkUrlAndTitle(): Unit = {
     if (!driver.getCurrentUrl.contains(url))
       throw PageNotFoundException(s"Expected '$url' page, but found '${driver.getCurrentUrl}' page.")
 
-    if (!driver.getTitle.contains(pageTitle))
-      throw PageNotFoundException(s"Expected '$pageTitle' page, but found '${driver.getTitle}' page.")
+    if (!driver.getTitle.contains(title))
+      throw PageNotFoundException(s"Expected '$title' page, but found '${driver.getTitle}' page.")
   }
+
+  def checkPage(values: String*): Unit = {
+    checkUrlAndTitle()
+    checkBackButton()
+    checkPageLinks()
+    checkExpanders()
+    performActionsAndCache(values: _*)
+  }
+
+  protected def performActionsAndCache(values: String*): Unit
+
+  protected def checkPageLinks(): Unit =
+    pageLinkHrefs.forall(href => findElementsByTag("a").exists(_.getAttribute("href").startsWith(href)))
+
+  protected def checkExpanders(): Unit = {
+    val baseUrl =
+      if (DeclarationDetails.cache.getOrElse(TransportLeavingBorderValue, "default value").contains("Clearance")) {
+        "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/"
+      } else {
+        "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/"
+      }
+    elementDoesNotExist(By.id("tariffReference")) mustBe false
+    expanderHrefs.forall(href => findElementsByTag("a").exists(_.getAttribute("href") == baseUrl + href))
+  }
+
+  def checkBackButton(): Unit = findElementById("back-link").getAttribute("href") must be(backButtonHrefs.head)
+
+  private def submit(): Unit = clickById("submit")
+
+  def continue(): Unit = clickByXpath("//*[@role='button']")
 
   def getGovUKLinks(index: Int): WebElement =
     driver.findElements(By.className("govuk-link")).get(index)
@@ -59,8 +87,8 @@ trait BasePage extends BrowserDriver with Matchers {
   def findElementByPartialLink(value: String): WebElement = driver.findElement(By.partialLinkText(value))
   def findElementByCssSelector(value: String): WebElement = driver.findElement(By.cssSelector(value))
   def findElementByClassName(value: String): WebElement   = driver.findElement(By.className(value))
+  def findElementsByTag(value: String): List[WebElement]  = driver.findElements(By.tagName(value)).asScala.toList
 
-  //Click Elements
   def clickById(value: String): Unit          = findElementById(value).click()
   def clickByXpath(value: String): Unit       = findElementByXpath(value).click()
   def clickByLinkText(value: String): Unit    = findElementByLinkText(value).click()
@@ -87,7 +115,7 @@ trait BasePage extends BrowserDriver with Matchers {
   def fillAutoComplete(element: WebElement, value: String): Unit = {
     element.clear()
     element.sendKeys(value)
-    element.sendKeys(Keys.chord(superKey, "a"), Keys.BACK_SPACE)
+    element.sendKeys(Keys.ARROW_DOWN)
     driver.switchTo().activeElement().sendKeys(Keys.TAB)
   }
 
@@ -95,7 +123,10 @@ trait BasePage extends BrowserDriver with Matchers {
 
 case class PageNotFoundException(s: String) extends Exception(s)
 
-object Sections {
-
-  val declarationDetails: mutable.Map[String, String] = mutable.Map.empty[String, String]
+object PageConstants {
+  val languageToggle = "/customs-declare-exports/hmrc-frontend/language/cy"
+  val feedbackBanner = "/contact/beta-feedback-unauthenticated?"
+  val technicalIssue = "/contact/report-technical-problem?"
+  val govUkLogo      = "https://www.gov.uk/"
+  val signOut        = "/customs-declare-exports/sign-out?"
 }

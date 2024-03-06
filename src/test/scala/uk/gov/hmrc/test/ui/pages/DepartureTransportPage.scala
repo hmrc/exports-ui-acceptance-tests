@@ -16,16 +16,21 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import uk.gov.hmrc.test.ui.conf.Constants._
-import uk.gov.hmrc.test.ui.conf.{Constants, TestConfiguration}
+import uk.gov.hmrc.test.ui.pages.DeclarationDetails._
 
 object DepartureTransportPage extends BasePage {
 
-  val url: String   = TestConfiguration.url("exports-frontend") + "/declaration/departure-transport"
-  def title: String =
-    s"What are the details for the ${Sections.declarationDetails.getOrElse(Constants.TransportLeavingBorderValue, "default value")} transport?"
+  val url: String                   = "/declaration/departure-transport"
+  def title: String                 =
+    s"What are the details for the ${DeclarationDetails.cache.getOrElse(TransportLeavingBorderValue, "default value").toLowerCase} transport?"
+  val backButtonHrefs: List[String] = List.empty
+  override val expanderHrefs        = List(
+    "group-7-transport-information-modes-means-and-equipment#de-77-identity-of-the-means-of-transport-at-departure"
+  )
 
-  def selectBorderModeOfTransportOption(selectOption: String): Unit = {
+  override def checkBackButton(): Unit = {}
+
+  def performActionsAndCache(selectOptions: String*): Unit = {
     val optionToRadioMap: Map[String, (String, String, String)] = Map(
       "Ship IMO number"                                 -> ("radio_ShipOrRoroImoNumber", "ShipOrRoroImoNumber", "123456"),
       "Ship name"                                       -> ("radio_NameOfVessel", "NameOfVessel", "Seraphim"),
@@ -37,9 +42,10 @@ object DepartureTransportPage extends BasePage {
       "Vehicle registration number"                     -> ("radio_VehicleRegistrationNumber", "NameOfVessel", "123456")
     )
 
-    optionToRadioMap.get(selectOption).foreach { case (radioId, radioName, radioValue) =>
-      fillRadioButton(radioId, radioName, radioValue)
-      Sections.declarationDetails += (DepartureTransportId -> "Transport details at the border", DepartureTransportValue -> selectOption)
-    }
+    for (selectOption <- selectOptions)
+      optionToRadioMap.get(selectOption).foreach { case (radioId, radioName, radioValue) =>
+        fillRadioButton(radioId, radioName, radioValue)
+        DeclarationDetails.cache += (DepartureTransportId -> "Transport details at the border", DepartureTransportValue -> selectOption, DepartureTransportRef -> radioValue)
+      }
   }
 }
