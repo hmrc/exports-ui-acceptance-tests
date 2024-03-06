@@ -27,13 +27,13 @@ trait BasePage extends BrowserDriver with Matchers {
   val title: String
   val url: String
 
-  def checkUrlAndTitle(): Unit =
+  def checkUrlAndTitle(): Unit = {
     if (!driver.getCurrentUrl.contains(url))
       throw PageNotFoundException(s"Expected '$url' page, but found '${driver.getCurrentUrl}' page.")
 
-  if (!driver.getTitle.contains(title))
-    throw PageNotFoundException(s"Expected '$title' page, but found '${driver.getTitle}' page.")
-}
+    if (!driver.getTitle.contains(title))
+      throw PageNotFoundException(s"Expected '$title' page, but found '${driver.getTitle}' page.")
+  }
 
   def submit(): Unit = clickById("submit")
 
