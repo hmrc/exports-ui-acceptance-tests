@@ -17,38 +17,30 @@
 package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.Keys
-import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-
-import scala.collection.immutable.HashMap
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.cache
 
 object AddAuthorisationRequiredPage extends BasePage {
 
-  val path: String                                          = TestConfiguration.url("exports-frontend") + "/declaration/consignee-details"
-  val addAuthorisationRequiredPage                         = "Add any authorisations for this export"
-  var authorisationRequiredDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                                          = "/declaration/consignee-details"
+  val title                        = "Add any authorisations for this export"
+  val backButtonHrefs: List[String] = ???
   val superKey: Keys                                       = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
 
-  def checkPageTitle(): Unit =
-    AddAuthorisationRequiredPage.checkUrlAndTitle(addAuthorisationRequiredPage)
-
   def typeAuthorisationCode(authorisationCode: String): Unit = {
-    findElement("id", "authorisationTypeCode").clear()
-    findElement("id", "authorisationTypeCode").sendKeys(Keys.chord(superKey, "a"))
-    findElement("id", "authorisationTypeCode").sendKeys(authorisationCode)
-    findElement("id", "authorisationTypeCode").sendKeys(Keys.ARROW_DOWN)
+    findElementById("authorisationTypeCode").clear()
+    findElementById("authorisationTypeCode").sendKeys(Keys.chord(superKey, "a"))
+    findElementById("authorisationTypeCode").sendKeys(authorisationCode)
+    findElementById("authorisationTypeCode").sendKeys(Keys.ARROW_DOWN)
     driver.switchTo().activeElement().sendKeys(Keys.TAB)
   }
 
-  def enterAuthorisationCodeWithDetails(authorisationCode: String, whoHoldsThisAuthorisation: String): Unit = {
-    whoHoldsThisAuthorisation match {
-      case "UserEori"  => findElement("id", "UserEori")
-      case "OtherEori" => findElement("id", "OtherEori")
+  override protected def performActionsAndCache(values: String*): Unit = {
+    values.head match {
+      case "UserEori"  => findElementById("UserEori")
+      case "OtherEori" => findElementById("OtherEori")
     }
-    val authorisationCodeEntered: String = typeAuthorisationCode(authorisationCode).toString
-
-    declarationDetailsMap += ("WhoHoldsAuthorisation" -> whoHoldsThisAuthorisation)
-    declarationDetailsMap += ("authorisationCode"     -> authorisationCodeEntered)
-    submit()
+    typeAuthorisationCode(values.head)
+    cache ++ Map("WhoHoldsAuthorisation" -> values.last, "authorisationCode"     -> values.head)
   }
 }

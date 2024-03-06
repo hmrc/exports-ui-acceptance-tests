@@ -24,20 +24,20 @@ import scala.collection.immutable.HashMap
 
 object InvoicesAndExchangeRatePage extends BasePage {
 
-  val path: String                                           = TestConfiguration.url("exports-frontend") + "/declaration/invoices-and-exchange-rate"
-  val invoiceAndExchangeRatePageTitle                       = "Total amount invoiced"
-  var invoiceAndExchangeRateDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                                           = "/declaration/invoices-and-exchange-rate"
+  val title                       = "Total amount invoiced"
+
   val superKey: Keys                                        = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
 
   def checkPageTitle(): Unit =
     InvoicesAndExchangeRatePage.checkUrlAndTitle(invoiceAndExchangeRatePageTitle)
 
   def typeCurrencyCode(currencyCode: String): String = {
-    findElement("id", "totalAmountInvoicedCurrency").clear()
-    findElement("id", "totalAmountInvoicedCurrency").sendKeys(Keys.chord(superKey, "a"), Keys.BACK_SPACE)
-    val enteredCurrencyCode: WebElement = findElement("id", "totalAmountInvoicedCurrency")
+    findElementById("totalAmountInvoicedCurrency").clear()
+    findElementById("totalAmountInvoicedCurrency").sendKeys(Keys.chord(superKey, "a"), Keys.BACK_SPACE)
+    val enteredCurrencyCode: WebElement = findElementById("totalAmountInvoicedCurrency")
     enteredCurrencyCode.sendKeys(currencyCode)
-    findElement("id", "totalAmountInvoicedCurrency").sendKeys(Keys.ARROW_DOWN)
+    findElementById("totalAmountInvoicedCurrency").sendKeys(Keys.ARROW_DOWN)
     driver.switchTo().activeElement().sendKeys(Keys.TAB)
     enteredCurrencyCode.getText
   }
@@ -45,17 +45,17 @@ object InvoicesAndExchangeRatePage extends BasePage {
   def enterExchangeRateWithDetails(currencyCode: String, totalAmountInvoiced: String, selectOption: String): Unit = {
     selectOption match {
       case "Yes" =>
-        findElement("id", "code_yes").click()
-        findElement("id", "exchangeRate").sendKeys("1.25")
-      case "No"  => findElement("id", "code_no").click()
+        findElementById("code_yes").click()
+        findElementById("exchangeRate").sendKeys("1.25")
+      case "No"  => findElementById("code_no").click()
     }
     val enteredCurrencyCodeEntered: String     = typeCurrencyCode(currencyCode)
-    val totalAmountInvoicedEntered: WebElement = findElement("id", "totalAmountInvoiced")
+    val totalAmountInvoicedEntered: WebElement = findElementById("totalAmountInvoiced")
     totalAmountInvoicedEntered.sendKeys(totalAmountInvoiced)
 
-    invoiceAndExchangeRateDetailsMap += ("CurrencyCode"               -> enteredCurrencyCodeEntered)
-    invoiceAndExchangeRateDetailsMap += ("ExchangeRateWithDetails"    -> selectOption)
-    invoiceAndExchangeRateDetailsMap += ("totalAmountInvoicedEntered" -> totalAmountInvoicedEntered.getText)
+cache += ("CurrencyCode"               -> enteredCurrencyCodeEntered)
+cache += ("ExchangeRateWithDetails"    -> selectOption)
+cache += ("totalAmountInvoicedEntered" -> totalAmountInvoicedEntered.getText)
     submit()
   }
 }

@@ -23,19 +23,19 @@ import scala.collection.immutable.HashMap
 
 object AuthorisationsRequiredPage extends BasePage {
 
-  val path: String                                           = TestConfiguration.url("exports-frontend") + "/declaration/authorisations-required"
-  val authorisationsRequiredPageTitle                       = "You have added"
-  var authorisationsRequiredDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                                           = "/declaration/authorisations-required"
+  val title                       = "You have added"
+
 
   def checkPageTitle(): Unit =
     AuthorisationsRequiredPage.checkUrlAndTitle(authorisationsRequiredPageTitle)
 
   def selectDoYouNeedToAddAnotherAuthorisation(addAnotherAuhorisationOption: String): Unit = {
     addAnotherAuhorisationOption match {
-      case "Yes" => findElement("id", "code_yes")
-      case "No"  => findElement("id", "code_no")
+      case "Yes" => findElementById("code_yes")
+      case "No"  => findElementById("code_no")
     }
-    declarationDetailsMap += ("AddAnotherAuthorisation" -> addAnotherAuhorisationOption)
+cache += ("AddAnotherAuthorisation" -> addAnotherAuhorisationOption)
     submit()
   }
 }

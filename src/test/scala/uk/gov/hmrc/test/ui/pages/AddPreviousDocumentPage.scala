@@ -24,31 +24,31 @@ import scala.collection.immutable.HashMap
 
 object AddPreviousDocumentPage extends BasePage {
 
-  val path: String                                        = TestConfiguration.url("exports-frontend") + "/declaration/add-previous-document"
-  val addPreviousDocumentPageTitle                       = "Details for each document that supports this declaration"
-  var addPreviousDocumentDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                                        = "/declaration/add-previous-document"
+  val title                       = "Details for each document that supports this declaration"
+
   val superKey: Keys                                     = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
 
   def checkPageTitle(): Unit =
     AddPreviousDocumentPage.checkUrlAndTitle(addPreviousDocumentPageTitle)
 
   def typeDocumentCode(documentCode: String): String = {
-    findElement("id", "documentType").clear()
-    findElement("id", "documentType").sendKeys(Keys.chord(superKey, "a"))
-    val enteredDocumentCode: WebElement = findElement("id", "documentType")
+    findElementById("documentType").clear()
+    findElementById("documentType").sendKeys(Keys.chord(superKey, "a"))
+    val enteredDocumentCode: WebElement = findElementById("documentType")
     enteredDocumentCode.sendKeys(documentCode)
-    findElement("id", "documentType").sendKeys(Keys.ARROW_DOWN)
+    findElementById("documentType").sendKeys(Keys.ARROW_DOWN)
     driver.switchTo().activeElement().sendKeys(Keys.TAB)
     enteredDocumentCode.getText
   }
 
   def enterDocumentCodeDetails(documentCode: String): Unit = {
     val documentCodeEntered: String       = typeDocumentCode(documentCode)
-    val documentCodeReference: WebElement = findElement("id", "documentReference")
+    val documentCodeReference: WebElement = findElementById("documentReference")
     documentCodeReference.sendKeys("SMITH")
 
-    declarationDetailsMap += ("DocumentCode"          -> documentCodeEntered)
-    declarationDetailsMap += ("DocumentCodeReference" -> documentCodeReference.getText)
+cache += ("DocumentCode"          -> documentCodeEntered)
+cache += ("DocumentCodeReference" -> documentCodeReference.getText)
     submit()
   }
 }

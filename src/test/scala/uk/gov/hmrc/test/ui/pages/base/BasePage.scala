@@ -52,7 +52,7 @@ trait BasePage extends BrowserDriver with Matchers {
   protected def checkPageLinks(): Unit = pageLinkHrefs.forall(href => findElementsByTag("a").exists(_.getAttribute("href").startsWith(href)))
 
   protected def checkExpanders(): Unit = {
-    val baseUrl = if (DeclarationDetails.cache.getOrElse(???, ???).contains("Clearance"))
+    val baseUrl = if (cache.getOrElse(???, ???).contains("Clearance"))
         "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/"
        else
         "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/"

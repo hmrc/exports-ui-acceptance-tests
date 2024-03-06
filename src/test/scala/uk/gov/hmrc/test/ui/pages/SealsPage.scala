@@ -23,19 +23,19 @@ import scala.collection.immutable.HashMap
 
 object SealsPage extends BasePage {
 
-  val path: String                                   = TestConfiguration.url("exports-frontend") + "/declaration/containers/([^/]+)/seals"
-  val sealsPageTitle                                = "Does container"
-  var sealsPageTitleDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                                   = "/declaration/containers/([^/]+)/seals"
+  val title                                = "Does container"
+
 
   def checkPageTitle(): Unit =
     ContainerPage.checkUrlAndTitle(sealsPageTitle)
 
   def selectDoesTheContainerHaveAnySecuritySealsOption(selectOption: String): Unit = {
     selectOption match {
-      case "Yes" => findElement("id", "code_yes").click()
-      case "No"  => findElement("id", "code_no").click()
+      case "Yes" => findElementById("code_yes").click()
+      case "No"  => findElementById("code_no").click()
     }
-    sealsPageTitleDetailsMap += ("securitySealsDetails" -> selectOption)
+cache += ("securitySealsDetails" -> selectOption)
     submit()
   }
 }

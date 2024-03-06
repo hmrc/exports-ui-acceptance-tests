@@ -24,20 +24,20 @@ import scala.collection.immutable.HashMap
 
 object PackageInformationPage extends BasePage {
 
-  val path: String                                = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/package-information"
-  val packageInformationPageTitle                = "Enter the packing details for this item"
-  var packageInformationMap: Map[String, String] = HashMap[String, String]()
+  val path: String                                = "/declaration/items/([^/]+)/package-information"
+  val title                = "Enter the packing details for this item"
+
   val superKey: Keys                             = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
 
   def checkPageTitle(): Unit =
     PackageInformationPage.checkUrlAndTitle(packageInformationPageTitle)
 
   def typePackageDetailsCode(packageType: String): String = {
-    findElement("id", "typesOfPackages").clear()
-    findElement("id", "typesOfPackages").sendKeys(Keys.chord(superKey, "a"))
-    val enteredCurrencyCode: WebElement = findElement("id", "typesOfPackages")
+    findElementById("typesOfPackages").clear()
+    findElementById("typesOfPackages").sendKeys(Keys.chord(superKey, "a"))
+    val enteredCurrencyCode: WebElement = findElementById("typesOfPackages")
     enteredCurrencyCode.sendKeys(packageType)
-    findElement("id", "typesOfPackages").sendKeys(Keys.ARROW_DOWN)
+    findElementById("typesOfPackages").sendKeys(Keys.ARROW_DOWN)
     driver.switchTo().activeElement().sendKeys(Keys.TAB)
     enteredCurrencyCode.getText
   }
@@ -45,14 +45,14 @@ object PackageInformationPage extends BasePage {
   def enterPackageDetails(): Unit = {
 
     val enteredPackageType           = typePackageDetailsCode("AE")
-    val numberOfPackages: WebElement = findElement("id", "numberOfPackages")
+    val numberOfPackages: WebElement = findElementById("numberOfPackages")
     numberOfPackages.sendKeys("10")
-    val shippingMarks: WebElement    = findElement("id", "shippingMarks")
+    val shippingMarks: WebElement    = findElementById("shippingMarks")
     shippingMarks.sendKeys("Test Shipping")
 
-    packageInformationMap += ("packageInformationDetails" -> enteredPackageType)
-    packageInformationMap += ("numberOfPackagesDetails"   -> numberOfPackages.getText)
-    packageInformationMap += ("shippingMarksDetails"      -> shippingMarks.getText)
+cache += ("packageInformationDetails" -> enteredPackageType)
+cache += ("numberOfPackagesDetails"   -> numberOfPackages.getText)
+cache += ("shippingMarksDetails"      -> shippingMarks.getText)
     submit()
   }
 }

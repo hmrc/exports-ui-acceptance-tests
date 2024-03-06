@@ -23,19 +23,19 @@ import scala.collection.immutable.HashMap
 
 object CountryOfRoutingPage extends BasePage {
 
-  val path: String                                     = TestConfiguration.url("exports-frontend") + "/declaration/country-of-routing"
-  val countryOfRoutingPageTitle                       = "Will the goods pass through any other countries before arriving in"
-  var countryOfRoutingDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                                     = "/declaration/country-of-routing"
+  val title                       = "Will the goods pass through any other countries before arriving in"
+
 
   def checkPageTitle(): Unit =
     CountryOfRoutingPage.checkUrlAndTitle(countryOfRoutingPageTitle)
 
   def selectCountryOfRoutingOption(selectOption: String): Unit = {
     selectOption match {
-      case "Yes" => findElement("id", "Yes").click()
-      case "No"  => findElement("id", "No").click()
+      case "Yes" => findElementById("Yes").click()
+      case "No"  => findElementById("No").click()
     }
-    countryOfRoutingDetailsMap += ("CountryOfRouting" -> selectOption)
+cache += ("CountryOfRouting" -> selectOption)
     submit()
   }
 }

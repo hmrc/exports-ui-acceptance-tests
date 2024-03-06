@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 object StandardOrOtherPage extends BasePage {
 
-  val path: String   = TestConfiguration.url("exports-frontend") + "/standard-or-other"
+  val path: String   = "/standard-or-other"
   val title = "Which type of declaration do you want to make? - Make an export declaration online - GOV.UK"
   val backButtonHrefs: List[String] = ???
 

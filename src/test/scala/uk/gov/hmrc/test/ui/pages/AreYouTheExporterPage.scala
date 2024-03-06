@@ -23,20 +23,20 @@ import scala.collection.immutable.HashMap
 
 object AreYouTheExporterPage extends BasePage {
 
-  val path: String                                     = TestConfiguration.url("exports-frontend") + "/are-you-the-exporter"
-  val areYouTheExporterPageTitle                      =
+  val path: String                                     = "/are-you-the-exporter"
+  val title                      =
     "Are you the exporter? - Section 2 of 6: Parties involved - Make an export declaration online - GOV.UK"
-  var areYouAnExporterDetailsMap: Map[String, String] = HashMap[String, String]()
+
 
   def checkPageTitle(): Unit =
     AreYouTheExporterPage.checkUrlAndTitle(areYouTheExporterPageTitle)
 
   def selectAreYouAnExporterOption(selectOption: String): Unit = {
     selectOption match {
-      case "Yes" => findElement("id", "code_yes").click()
-      case "No"  => findElement("id", "code_no").click()
+      case "Yes" => findElementById("code_yes").click()
+      case "No"  => findElementById("code_no").click()
     }
-    declarationDetailsMap += ("AreYouAnExporter" -> selectOption)
+cache += ("AreYouAnExporter" -> selectOption)
     submit()
   }
 }

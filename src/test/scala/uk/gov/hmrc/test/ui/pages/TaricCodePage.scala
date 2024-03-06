@@ -23,19 +23,19 @@ import scala.collection.immutable.HashMap
 
 object TaricCodePage extends BasePage {
 
-  val path: String                              = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/additional-taric-code"
-  val taricCodePagePageTitle                   = "Is there a TARIC additional code?"
-  var taricCodeDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                              = "/declaration/items/([^/]+)/additional-taric-code"
+  val title                   = "Is there a TARIC additional code?"
+
 
   def checkPageTitle(): Unit =
     TaricCodePage.checkUrlAndTitle(taricCodePagePageTitle)
 
   def selectIsThereAUndangerousGoodsOption(selectOption: String): Unit = {
     selectOption match {
-      case "Yes" => findElement("id", "code_yes").click()
-      case "No"  => findElement("id", "code_no").click()
+      case "Yes" => findElementById("code_yes").click()
+      case "No"  => findElementById("code_no").click()
     }
-    taricCodeDetailsMap += ("taricCodeDetails" -> selectOption)
+cache += ("taricCodeDetails" -> selectOption)
     submit()
   }
 }

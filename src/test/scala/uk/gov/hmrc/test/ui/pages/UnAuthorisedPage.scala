@@ -20,7 +20,7 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 object UnAuthorisedPage extends BasePage {
 
-  val unAuthorisedPageTitle =
+  val title =
     "To continue, you need to get access to the Customs Declaration Service (CDS) - CDS document uploads and secure messages - GOV.UK"
 
   def validateUnAuthorisedPage(): Unit =

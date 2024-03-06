@@ -24,7 +24,7 @@ import scala.jdk.CollectionConverters._
 
 object SavedDeclarationsPage extends BasePage {
 
-  val path: String   = TestConfiguration.url("exports-frontend") + "/saved-declarations"
+  val path: String   = "/saved-declarations"
   val title = "Your saved declarations - Make an export declaration online - GOV.UK"
 
   val backToSelectionPageNavigationLink = "back-link"

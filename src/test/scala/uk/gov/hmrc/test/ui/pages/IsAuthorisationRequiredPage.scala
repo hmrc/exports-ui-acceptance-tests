@@ -23,10 +23,10 @@ import scala.collection.immutable.HashMap
 
 object IsAuthorisationRequiredPage extends BasePage {
 
-  val path: String                                            = TestConfiguration.url("exports-frontend") + "/declaration/is-authorisation-required"
-  val isAuthorisationRequiredPageTitle                       =
+  val path: String                                            = "/declaration/is-authorisation-required"
+  val title                       =
     "Do you want to add any authorisations? - Section 2 of 6: Parties involved - Make an export declaration online - GOV.UK"
-  var isAuthorisationRequiredDetailsMap: Map[String, String] = HashMap[String, String]()
+
 
   def checkPageTitle(): Unit = {
     driver.getCurrentUrl should be(path)
@@ -35,10 +35,10 @@ object IsAuthorisationRequiredPage extends BasePage {
 
   def selectIsAuthorisationRequiredOption(selectOption: String): Unit = {
     selectOption match {
-      case "Yes" => findElement("id", "code_yes").click()
-      case "No"  => findElement("id", "code_no").click()
+      case "Yes" => findElementById("code_yes").click()
+      case "No"  => findElementById("code_no").click()
     }
-    isAuthorisationRequiredDetailsMap += ("IsAuthorisationRequired" -> selectOption)
+cache += ("IsAuthorisationRequired" -> selectOption)
     submit()
   }
 }

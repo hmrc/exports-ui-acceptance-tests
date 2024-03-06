@@ -27,7 +27,7 @@ object CommonPage extends BasePage {
   def messageInBox(selector: String): WebElement =
     findElement("xpath", s"//*[@href='#$selector']")
 
-  def errorMessage(selector: String): WebElement = findElement("id", s"$selector")
+  def errorMessage(selector: String): WebElement = findElementById(s"$selector")
 
   def fileUploadServiceLink(): WebElement =
     findElement("xpath", "//*[@href='/cds-file-upload-service']")
@@ -38,10 +38,10 @@ object CommonPage extends BasePage {
   }
 
   def clickExitAndCompleteLaterLink(): Unit =
-    findElement("id", "exit-and-complete-later").click()
+    findElementById("exit-and-complete-later").click()
 
   def viewDeclarationSummaryLink(): Unit =
-    findElement("id", "view_declaration_summary").click()
+    findElementById("view_declaration_summary").click()
 
   def getLanguage: WebElement =
     findElement("cssSelector", language)

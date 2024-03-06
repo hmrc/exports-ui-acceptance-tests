@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 object ChoicePage extends BasePage {
 
-  val path: String   = TestConfiguration.url("exports-frontend") + "/choice"
+  val path: String   = "/choice"
   val title = "Make and manage export declarations - Make an export declaration online - GOV.UK"
   val backButtonHrefs: List[String] = List.empty
 

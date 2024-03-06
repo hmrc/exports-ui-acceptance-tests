@@ -24,8 +24,8 @@ import scala.collection.immutable.HashMap
 
 object CarrierOrHaulierDetailsPage extends BasePage {
 
-  val path: String                                                         = TestConfiguration.url("exports-frontend") + "/declaration/carrier-address"
-  val carrierOrHaulierPageTitle                                           = "Carrier or haulier details"
+  val path: String                                                         = "/declaration/carrier-address"
+  val title                                           = "Carrier or haulier details"
   var registeredAddressEntry: Map[String, String]                         = HashMap[String, String]()
   var doYouKnowTheCarrierEORIDetailsMap: Map[String, Map[String, String]] = HashMap[String, Map[String, String]]()
   val superKey: Keys                                                      = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
@@ -33,24 +33,24 @@ object CarrierOrHaulierDetailsPage extends BasePage {
     CarrierOrHaulierDetailsPage.checkUrlAndTitle(carrierOrHaulierPageTitle)
 
   def typeCountry(): String = {
-    findElement("id", "details_address_country").clear()
-    findElement("id", "details_address_country").sendKeys(Keys.chord(superKey, "a"), Keys.BACK_SPACE)
-    val country: WebElement = findElement("id", "details_address_country")
+    findElementById("details_address_country").clear()
+    findElementById("details_address_country").sendKeys(Keys.chord(superKey, "a"), Keys.BACK_SPACE)
+    val country: WebElement = findElementById("details_address_country")
     country.sendKeys("AD")
-    findElement("id", "details_address_country").sendKeys(Keys.ARROW_DOWN)
+    findElementById("details_address_country").sendKeys(Keys.ARROW_DOWN)
     driver.switchTo().activeElement().sendKeys(Keys.TAB)
     country.getText
   }
 
   def enterDetailsForRegisteredBusiness(): Unit = {
 
-    val fullName: WebElement    = findElement("id", "details_address_fullName")
+    val fullName: WebElement    = findElementById("details_address_fullName")
     fullName.sendKeys("TEST Full Name")
-    val addressLine: WebElement = findElement("id", "details_address_addressLine")
+    val addressLine: WebElement = findElementById("details_address_addressLine")
     addressLine.sendKeys("TEST Address Line 1")
-    val town: WebElement        = findElement("id", "details_address_townOrCity")
+    val town: WebElement        = findElementById("details_address_townOrCity")
     town.sendKeys("TEST Town")
-    val postCode: WebElement    = findElement("id", "details_address_postCode")
+    val postCode: WebElement    = findElementById("details_address_postCode")
     postCode.sendKeys("SL6 0FF")
     val countryEntered: String  = typeCountry()
 

@@ -18,28 +18,25 @@ package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.cache
 
 import scala.collection.immutable.HashMap
 
 object LocationOfGoodsPage extends BasePage {
 
-  val path: String                                    = TestConfiguration.url("exports-frontend") + "/declaration/location-of-goods"
-  val locationOfGoodsPageTitle                       = "Where will the goods be presented to customs?"
-  var locationOfGoodsDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                                    = "/declaration/location-of-goods"
+  val title                       = "Where will the goods be presented to customs?"
+  val backButtonHrefs: List[String] = ???
 
-  def checkPageTitle(): Unit =
-    LocationOfGoodsPage.checkUrlAndTitle(locationOfGoodsPageTitle)
-
-  def selectDoYouWantToSearchForAGoodsLocationCodeOption(selectOption: String, locationOfGoodsCode: String): Unit = {
-    selectOption match {
-      case "Yes" => findElement("id", "code_yes").click()
+  def performActionsAndCache(values: String*): Unit = {
+    values.head match {
+      case "Yes" => findElementById("code_yes").click()
       case "No"  =>
-        findElement("id", "code_no").click()
-        findElement("id", "code").sendKeys(locationOfGoodsCode)
+        findElementById("code_no").click()
+        findElementById("code").sendKeys(values.last)
 
     }
-    locationOfGoodsDetailsMap += ("LocationOfGoodsSelectOption" -> selectOption)
-    locationOfGoodsDetailsMap += ("LocationOfGoodsCodeEntered"  -> locationOfGoodsCode)
-    submit()
+    cache += ("LocationOfGoodsSelectOption" -> values.head)
+    cache += ("LocationOfGoodsCodeEntered"  -> values.last)
   }
 }

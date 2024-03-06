@@ -24,17 +24,17 @@ import scala.collection.immutable.HashMap
 
 object AddSecuritySealPage extends BasePage {
 
-  val path: String                                    = TestConfiguration.url("exports-frontend") + "/declaration/containers/([^/]+)/add-seal"
-  val addSecuritySealPageTitle                       = "What is the security seal for container"
-  var addSecuritySealDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                                    = "/declaration/containers/([^/]+)/add-seal"
+  val title                       = "What is the security seal for container"
+
 
   def checkPageTitle(): Unit =
     AddSecuritySealPage.checkUrlAndTitle(addSecuritySealPageTitle)
 
   def addSecuritySealInformation(): Unit = {
-    val securitySealName: WebElement = findElement("id", "id")
+    val securitySealName: WebElement = findElementById("id")
     securitySealName.sendKeys("Seal1")
-    declarationDetailsMap += ("securitySealsOption" -> securitySealName.getText)
+cache += ("securitySealsOption" -> securitySealName.getText)
     submit()
   }
 }

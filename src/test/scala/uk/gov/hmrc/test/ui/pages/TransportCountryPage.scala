@@ -16,36 +16,24 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import org.openqa.selenium.{Keys, WebElement}
-import uk.gov.hmrc.test.ui.conf.TestConfiguration
-import uk.gov.hmrc.test.ui.pages.CarrierOrHaulierDetailsPage.superKey
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-
-import scala.collection.immutable.HashMap
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{TransportCountryId, TransportCountryValue, TransportLeavingBorderValue, cache}
 
 object TransportCountryPage extends BasePage {
 
-  val path: String                                     = TestConfiguration.url("exports-frontend") + "/are-you-the-exporter"
-  val transportCountryPageTitle                       = "Select the country where the sea transport is registered"
-  var transportCountryDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                   = "declaration/transport-country"
+  def title: String                 =
+    s"Select the country where the ${cache.getOrElse(TransportLeavingBorderValue, "default value").toLowerCase} is registered"
+  val backButtonHrefs: List[String] = List.empty
+  override val expanderHrefs: List[String] = List(
+    "group-7-transport-information-modes-means-and-equipment#de-715-nationality-of-active-means-of-transport-crossing-the-border-box-21---identity-and-nationality-of-the-active-means-of-transport-crossing-the-border-nationality"
+  )
 
-  def checkPageTitle(): Unit =
-    TransportCountryPage.checkUrlAndTitle(transportCountryPageTitle)
+  override def checkBackButton(): Unit = {}
 
-  def typeTransportCountryCode(currencyCode: String): String = {
-    findElement("id", "transport-country").click()
-    findElement("id", "transport-country").sendKeys(Keys.chord(superKey, "a"), Keys.BACK_SPACE)
-    val enteredCurrencyCode: WebElement = findElement("id", "transport-country")
-    enteredCurrencyCode.sendKeys(currencyCode)
-    findElement("id", "transport-country").sendKeys(Keys.ARROW_DOWN)
-    driver.switchTo().activeElement().sendKeys(Keys.TAB)
-    enteredCurrencyCode.getText
+  def performActionsAndCache(country: String*): Unit = {
+    fillAutoComplete(findElementById("transport-country"), country.head)
+    cache += (TransportCountryId -> "Country of registration for the transport leaving the UK border", TransportCountryValue -> country)
   }
 
-  def selectDoYouKnowTheCountryWhereTheSeaTransportIsRegisteredOption(): Unit = {
-    typeTransportCountryCode("South Africa")
-
-    transportCountryDetailsMap += ("TransportCountryDetails" -> "South Africa")
-    submit()
-  }
 }

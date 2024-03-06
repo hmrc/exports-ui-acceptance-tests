@@ -23,19 +23,19 @@ import scala.collection.immutable.HashMap
 
 object LinkToMUCRPage extends BasePage {
 
-  val path: String                               = TestConfiguration.url("exports-frontend") + "/declaration/link-to-mucr"
+  val path: String                               = "/declaration/link-to-mucr"
   val title                             = "Do you want to link this declaration’s DUCR to a Master Unique Consignment Reference (MUCR)?"
-  var linkToMUCRDetailsMap: Map[String, String] = HashMap[String, String]()
+
 
   def checkPageTitle(): Unit =
     LinkToMUCRPage.checkUrlAndTitle(title)
 
   def selectDoYouHaveADucr(selectOption: String): Unit = {
     selectOption match {
-      case "Yes" => findElement("id", "code_yes").click()
-      case "No"  => findElement("id", "code_no").click()
+      case "Yes" => findElementById("code_yes").click()
+      case "No"  => findElementById("code_no").click()
     }
-    linkToMUCRDetailsMap += ("LinkToMucrDetails" -> selectOption)
+cache += ("LinkToMucrDetails" -> selectOption)
     submit()
   }
 

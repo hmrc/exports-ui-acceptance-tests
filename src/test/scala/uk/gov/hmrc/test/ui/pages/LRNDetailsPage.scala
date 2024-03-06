@@ -24,9 +24,9 @@ import scala.util.Random
 
 object LRNDetailsPage extends BasePage {
 
-  val path: String                        = TestConfiguration.url("exports-frontend") + "/declaration/local-reference-number"
-  val pageTitle                          = "Create a Local Reference Number (LRN)"
-  var lrnDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                        = "/declaration/local-reference-number"
+  val title                          = "Create a Local Reference Number (LRN)"
+
 
   def checkPageTitle(): Unit =
     LRNDetailsPage.checkUrlAndTitle(pageTitle)
@@ -48,8 +48,8 @@ object LRNDetailsPage extends BasePage {
     val generatedLrn = generateRandomLRNString()
 
     //Enter the Lrn Value
-    findElement("id", "lrn").sendKeys(generatedLrn)
-    lrnDetailsMap += ("DucrDetailsEntered" -> generatedLrn)
+    findElementById("lrn").sendKeys(generatedLrn)
+cache += ("DucrDetailsEntered" -> generatedLrn)
     submit()
   }
 }

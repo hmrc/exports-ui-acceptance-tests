@@ -24,19 +24,19 @@ import scala.collection.immutable.HashMap
 object AdditioanlDocumentsListPage extends BasePage {
 
   val path: String                                            =
-    TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/additional-documentation-list"
-  val additioanlDocumentsListPageTitle                       = "You’ve added details for"
-  var additioanlDocumentsListDetailsMap: Map[String, String] = HashMap[String, String]()
+    "/declaration/items/([^/]+)/additional-documentation-list"
+  val title                       = "You’ve added details for"
+
 
   def checkPageTitle(): Unit =
     AdditioanlDocumentsListPage.checkUrlAndTitle(additioanlDocumentsListPageTitle)
 
   def selectDoYouNeedToAddAnotherDocumentOption(selectOption: String): Unit = {
     selectOption match {
-      case "Yes" => findElement("id", "code_yes")
-      case "No"  => findElement("id", "code_no")
+      case "Yes" => findElementById("code_yes")
+      case "No"  => findElementById("code_no")
     }
-    declarationDetailsMap += ("AdditionalDocumentList" -> selectOption)
+cache += ("AdditionalDocumentList" -> selectOption)
     submit()
   }
 }

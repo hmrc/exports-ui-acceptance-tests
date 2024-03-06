@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 object DeclarationTypePage extends BasePage {
 
-  val path: String = TestConfiguration.url("exports-frontend") + "/declaration/type"
+  val path: String = "/declaration/type"
   val title =
     "Do you have to make an arrived export declaration? - Section 1 of 6: Declaration details - Make an export declaration online - GOV.UK"
 

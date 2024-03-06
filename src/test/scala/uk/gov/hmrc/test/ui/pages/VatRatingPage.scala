@@ -23,21 +23,21 @@ import scala.collection.immutable.HashMap
 
 object VatRatingPage extends BasePage {
 
-  val path: String                              = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/vat-rating"
-  val vatRatingPageTitle                       = "Are these goods being zero-rated for VAT?"
-  var vatRatingDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                              = "/declaration/items/([^/]+)/vat-rating"
+  val title                       = "Are these goods being zero-rated for VAT?"
+
 
   def checkPageTitle(): Unit =
     VatRatingPage.checkUrlAndTitle(vatRatingPageTitle)
 
   def selectAreTheseGoodsBeingZeroRatedOption(selectOption: String): Unit = {
     selectOption match {
-      case "VATZ"   => findElement("id", "VATZ").click()
-      case "VATR"   => findElement("id", "VATR").click()
-      case "VATE"   => findElement("id", "VATE").click()
-      case "VAT_NO" => findElement("id", "VAT_NO").click()
+      case "VATZ"   => findElementById("VATZ").click()
+      case "VATR"   => findElementById("VATR").click()
+      case "VATE"   => findElementById("VATE").click()
+      case "VAT_NO" => findElementById("VAT_NO").click()
     }
-    vatRatingDetailsMap += ("vatRatingDetails" -> selectOption)
+cache += ("vatRatingDetails" -> selectOption)
     submit()
   }
 }

@@ -23,9 +23,9 @@ import scala.collection.immutable.HashMap
 
 object ContainerPage extends BasePage {
 
-  val path: String                                  = TestConfiguration.url("exports-frontend") + "/declaration/container"
-  val containerPageTitle                           = "Are the goods in a container or containers?"
-  var containerPageDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                                  = "/declaration/container"
+  val title                           = "Are the goods in a container or containers?"
+
 
   def checkPageTitle(): Unit =
     ContainerPage.checkUrlAndTitle(containerPageTitle)
@@ -33,11 +33,11 @@ object ContainerPage extends BasePage {
   def selectAreTheGoodsInAContainerOrContainersOption(selectOption: String): Unit = {
     selectOption match {
       case "Yes" =>
-        findElement("id", "code_yes").click()
-        findElement("id", "id").sendKeys("Container1")
-      case "No"  => findElement("id", "code_no").click()
+        findElementById("code_yes").click()
+        findElementById("id").sendKeys("Container1")
+      case "No"  => findElementById("code_no").click()
     }
-    containerPageDetailsMap += ("containerDetails" -> selectOption)
+cache += ("containerDetails" -> selectOption)
     submit()
   }
 }

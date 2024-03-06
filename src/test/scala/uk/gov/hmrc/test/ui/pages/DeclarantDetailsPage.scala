@@ -18,10 +18,11 @@ package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.base.cache
 
 object DeclarantDetailsPage extends BasePage {
 
-  val path: String   = TestConfiguration.url("exports-frontend") + "/declaration/declarant-details"
+  val path: String   = "/declaration/declarant-details"
   val title = "Is your EORI number"
 
   def checkPageTitle(): Unit =
@@ -29,13 +30,13 @@ object DeclarantDetailsPage extends BasePage {
 
   def selectOptionForISYourEori(
     selectOption: String
-  )(implicit declarantDetails: Map[String, String]): Map[String, String] = {
+  ): Map[String, String] = {
     selectOption match {
-      case "Yes" => findElement("id", "code_yes").click()
-      case "No"  => findElement("id", "code_no").click()
+      case "Yes" => findElementById("code_yes").click()
+      case "No"  => findElementById("code_no").click()
     }
 
     submit()
-    declarantDetails + ("DeclarantDetails" -> selectOption)
+    cache + ("DeclarantDetails" -> selectOption)
   }
 }

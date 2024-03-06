@@ -22,7 +22,7 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage
 object LoginStubPage extends BasePage {
   val path: String                = TestConfiguration.url("login-stub-frontend") + "/gg-sign-in"
   val redirectUrlToEnter: String = TestConfiguration.url("exports-frontend")
-  val loginStubPageTitle         = "Authority Wizard"
+  val title         = "Authority Wizard"
 
   val redirectUrlInput = "redirectionUrl"
   val enrolmentKey     = "enrolment[0].name"
@@ -38,19 +38,19 @@ object LoginStubPage extends BasePage {
   val rand = new scala.util.Random
 
   def provideLoginCredentialsForExports(eori: String): ChoicePage.type = {
-    findElement("id", redirectUrlInput).sendKeys(redirectUrlToEnter)
-    findElement("id", enrolmentKey).sendKeys("HMRC-CUS-ORG")
-    findElement("id", identifierName).sendKeys("EORINumber")
-    findElement("id", identifierValue).sendKeys(eori)
+    findElementById(redirectUrlInput).sendKeys(redirectUrlToEnter)
+    findElementById(enrolmentKey).sendKeys("HMRC-CUS-ORG")
+    findElementById(identifierName).sendKeys("EORINumber")
+    findElementById(identifierValue).sendKeys(eori)
     submit()
     ChoicePage
   }
 
   def provideKickOutPageCredentials(eori: String, enrolment: String, identifier: String): Unit = {
-    findElement("id", redirectUrlInput).sendKeys(redirectUrlToEnter)
-    findElement("id", enrolmentKey).sendKeys(enrolment)
-    findElement("id", identifierName).sendKeys(identifier)
-    findElement("id", identifierValue).sendKeys(eori)
+    findElementById(redirectUrlInput).sendKeys(redirectUrlToEnter)
+    findElementById(enrolmentKey).sendKeys(enrolment)
+    findElementById(identifierName).sendKeys(identifier)
+    findElementById(identifierValue).sendKeys(eori)
     submit()
   }
 }

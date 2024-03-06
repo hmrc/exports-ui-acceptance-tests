@@ -24,17 +24,17 @@ import scala.collection.immutable.HashMap
 
 object TotalPackageQuantityPage extends BasePage {
 
-  val path: String                                         = TestConfiguration.url("exports-frontend") + "/declaration/total-package-quantity"
-  val totalPackageQuantityPageTitle                       = "What is the total number of packages in this declaration?"
-  var totalPackageQuantityDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                                         = "/declaration/total-package-quantity"
+  val title                       = "What is the total number of packages in this declaration?"
+
 
   def checkPageTitle(): Unit =
     AreYouTheExporterPage.checkUrlAndTitle(totalPackageQuantityPageTitle)
 
   def enterTotalPackageQuantity(totalPackageQty: String): Unit = {
-    val totalPackageQuantity: WebElement = findElement("id", "totalPackage")
+    val totalPackageQuantity: WebElement = findElementById("totalPackage")
     totalPackageQuantity.sendKeys(totalPackageQty)
-    totalPackageQuantityDetailsMap += ("TotalPackageQuantityDetails" -> totalPackageQuantity.getText)
+cache += ("TotalPackageQuantityDetails" -> totalPackageQuantity.getText)
     submit()
   }
 }

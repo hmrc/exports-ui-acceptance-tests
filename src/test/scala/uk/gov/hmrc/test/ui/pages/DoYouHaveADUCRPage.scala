@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 object DoYouHaveADUCRPage extends BasePage {
 
-  val path: String   = TestConfiguration.url("exports-frontend") + "/declaration/declarant-details"
+  val path: String   = "/declaration/declarant-details"
   val title =
     "Do you have a Declaration Unique Consignment Reference Number (DUCR)? - Section 1 of 6: Declaration details - Make an export declaration online - GOV.UK"
 
@@ -30,8 +30,8 @@ object DoYouHaveADUCRPage extends BasePage {
 
   def selectDoYouHaveADucr(selectOption: String): Unit =
     selectOption match {
-      case "Yes" => findElement("id", "code_yes").click()
-      case "No"  => findElement("id", "code_no").click()
+      case "Yes" => findElementById("code_yes").click()
+      case "No"  => findElementById("code_no").click()
     }
 
 }
