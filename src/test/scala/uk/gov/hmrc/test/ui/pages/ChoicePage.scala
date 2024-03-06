@@ -18,10 +18,10 @@ package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 
-object ExportsHomePage extends BasePage {
+object ChoicePage extends BasePage {
 
   val url: String   = TestConfiguration.url("exports-frontend") + "/choice"
-  val homePageTitle = "Make and manage export declarations - Make an export declaration online - GOV.UK"
+  val title = "Make and manage export declarations - Make an export declaration online - GOV.UK"
 
   val createDeclaration                   = "create-declaration"
   val manageDraftDeclaration              = "manage-draft-declarations"
@@ -29,21 +29,14 @@ object ExportsHomePage extends BasePage {
   val manageMovementsDeclaration          = "movements"
   val manageDocumentsByConnectingWithSFUS = "upload-documents"
 
-  def checkTitle(): Unit =
-    ExportsHomePage.checkUrlAndTitle(homePageTitle)
-
-  def selectOptionToProgressWith(selectOption: String): Unit =
+  def selectOptionToMakeAndManageDeclaration(selectOption: String): Unit = {
+    checkUrlAndTitle()
     selectOption match {
-      case "StandardDeclaration"     => findElement("id", createDeclaration).click()
-      case "ManageDraftDeclaration"  => findElement("id", manageDraftDeclaration).click()
-      case "ManageSubmitDeclaration" => findElement("id", manageSubmitDeclaration).click()
+      case "CreateDeclaration"       => clickById(createDeclaration)
+      case "ManageDraftDeclaration"  => clickById(manageDraftDeclaration)
+      case "ManageSubmitDeclaration" => clickById(manageSubmitDeclaration)
+      case "ManageMovementsDeclaration" => clickById(manageMovementsDeclaration)
+      case "ManageDocumentsByConnectingWithSFUS" => clickById(manageDocumentsByConnectingWithSFUS)
     }
-
-  def selectOptionToMakeAndManageDeclaration(selectOption: String): Unit =
-    selectOption match {
-      case "CreateDeclaration"       => findElement("id", createDeclaration).click()
-      case "ManageDraftDeclaration"  => findElement("id", manageDraftDeclaration).click()
-      case "ManageSubmitDeclaration" => findElement("id", manageSubmitDeclaration).click()
-    }
-
+  }
 }

@@ -28,20 +28,16 @@ trait BasePage extends BrowserDriver with Matchers {
   val url: String
 
   def checkUrlAndTitle(): Unit =
-    checkUrlAndTitle(title, url)
+    if (!driver.getCurrentUrl.contains(url))
+      throw PageNotFoundException(s"Expected '$url' page, but found '${driver.getCurrentUrl}' page.")
+
+  if (!driver.getTitle.contains(title))
+    throw PageNotFoundException(s"Expected '$title' page, but found '${driver.getTitle}' page.")
+}
 
   def submit(): Unit = clickById("submit")
 
   def continue(): Unit = clickByXpath("//*[@role='button']")
-
-  def checkUrlAndTitle(pageTitle: String, url: String): Unit = {
-
-    if (!driver.getCurrentUrl.contains(url))
-      throw PageNotFoundException(s"Expected '$url' page, but found '${driver.getCurrentUrl}' page.")
-
-    if (!driver.getTitle.contains(pageTitle))
-      throw PageNotFoundException(s"Expected '$pageTitle' page, but found '${driver.getTitle}' page.")
-  }
 
   def getGovUKLinks(index: Int): WebElement =
     driver.findElements(By.className("govuk-link")).get(index)
@@ -58,7 +54,6 @@ trait BasePage extends BrowserDriver with Matchers {
   def findElementByCssSelector(value: String): WebElement = driver.findElement(By.cssSelector(value))
   def findElementByClassName(value: String): WebElement   = driver.findElement(By.className(value))
 
-  //Click Elements
   def clickById(value: String): Unit          = findElementById(value).click()
   def clickByXpath(value: String): Unit       = findElementByXpath(value).click()
   def clickByLinkText(value: String): Unit    = findElementByLinkText(value).click()

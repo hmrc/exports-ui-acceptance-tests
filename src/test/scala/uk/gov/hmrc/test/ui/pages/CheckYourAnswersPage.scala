@@ -23,7 +23,7 @@ import scala.collection.immutable.HashMap
 object CheckYourAnswersPage extends BasePage {
 
   val url: String = TestConfiguration.url("exports-frontend") + "/declaration/saved-summary"
-  val homePageTitle = "Check your answers - Make an export declaration online - GOV.UK"
+  val title = "Check your answers - Make an export declaration online - GOV.UK"
   var partiesSectionDataHashMap: Map[String, String] = HashMap[String, String]()
 
   val backToSelectionPageNavigationLink = "back-link"

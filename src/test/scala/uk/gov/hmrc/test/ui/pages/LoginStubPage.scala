@@ -36,13 +36,13 @@ object LoginStubPage extends BasePage {
 
   val rand = new scala.util.Random
 
-  def provideLoginCredentialsForExports(eori: String): ExportsHomePage.type = {
+  def provideLoginCredentialsForExports(eori: String): ChoicePage.type = {
     findElement("id", redirectUrlInput).sendKeys(redirectUrlToEnter)
     findElement("id", enrolmentKey).sendKeys("HMRC-CUS-ORG")
     findElement("id", identifierName).sendKeys("EORINumber")
     findElement("id", identifierValue).sendKeys(eori)
     submit()
-    ExportsHomePage
+    ChoicePage
   }
 
   def provideKickOutPageCredentials(eori: String, enrolment: String, identifier: String): Unit = {

@@ -23,7 +23,7 @@ import scala.collection.immutable.HashMap
 object DeclarationChoicePage extends BasePage {
 
   val url: String   = TestConfiguration.url("exports-frontend") + "/declaration/declaration-choice"
-  val homePageTitle = "Which type of declaration do you want to create? - Make an export declaration online - GOV.UK"
+  val title = "Which type of declaration do you want to create? - Make an export declaration online - GOV.UK"
 
   val standardDeclaration                    = "STANDARD"
   val simplifiedOccasional                   = "OCCASIONAL"
@@ -33,7 +33,7 @@ object DeclarationChoicePage extends BasePage {
   var choicePageHashMap: Map[String, String] = HashMap[String, String]()
 
   def checkTitle(): Unit =
-    DeclarationChoicePage.checkUrlAndTitle(homePageTitle)
+    DeclarationChoicePage.checkUrlAndTitle(title)
 
   def selectOptionToCreateWhatTypeOfDeclaration(selectOption: String): Unit = {
 

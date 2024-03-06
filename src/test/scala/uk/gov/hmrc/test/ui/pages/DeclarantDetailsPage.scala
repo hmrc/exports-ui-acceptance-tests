@@ -21,10 +21,10 @@ import uk.gov.hmrc.test.ui.conf.TestConfiguration
 object DeclarantDetailsPage extends BasePage {
 
   val url: String   = TestConfiguration.url("exports-frontend") + "/declaration/declarant-details"
-  val homePageTitle = "Is your EORI number"
+  val title = "Is your EORI number"
 
   def checkPageTitle(): Unit =
-    DeclarantDetailsPage.checkUrlAndTitle(homePageTitle)
+    DeclarantDetailsPage.checkUrlAndTitle(title)
 
   def selectOptionForISYourEori(
     selectOption: String
