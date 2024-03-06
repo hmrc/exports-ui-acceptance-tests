@@ -17,35 +17,29 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.Constants._
-import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.conf.{Constants, TestConfiguration}
 
 object DepartureTransportPage extends BasePage {
 
   val url: String   = TestConfiguration.url("exports-frontend") + "/declaration/departure-transport"
-  def title: String = s"What are the details for the ${Sections.declarationDetails.} transport?"
-
-
+  def title: String =
+    s"What are the details for the ${Sections.declarationDetails.getOrElse(Constants.TransportLeavingBorderValue, "default value")} transport?"
 
   def selectBorderModeOfTransportOption(selectOption: String): Unit = {
-    selectOption match {
-      case "Ship IMO number"                                 =>
-        fillRadioButton("radio_ShipOrRoroImoNumber", "ShipOrRoroImoNumber", "123456")
-      case "Ship name"                                       =>
-        fillRadioButton("radio_NameOfVessel", "NameOfVessel", "Seraphim")
-      case "Eurotunnel or other rail details"                =>
-        fillRadioButton("radio_WagonNumber", "WagonNumber", "EuroTunnel")
-      case "Flight number and date of flight"                =>
-        fillRadioButton("radio_FlightNumber", "FlightNumber", "123456")
-      case "Aircraft registration number and date of flight" =>
-        fillRadioButton("radio_AircraftRegistrationNumber", "AircraftRegistrationNumber", "123456")
-      case "European vessel identification (ENI) number"     =>
-        fillRadioButton("radio_EuropeanVesselIDNumber", "EuropeanVesselIDNumber", "123456")
-      case "Inland vessel’s name"                            =>
-        fillRadioButton("radio_NameOfInlandWaterwayVessel", "NameOfVessel", "123456")
-      case "Vehicle registration number"                     =>
-        fillRadioButton("radio_VehicleRegistrationNumber", "NameOfVessel", "123456")
-    }
+    val optionToRadioMap: Map[String, (String, String, String)] = Map(
+      "Ship IMO number"                                 -> ("radio_ShipOrRoroImoNumber", "ShipOrRoroImoNumber", "123456"),
+      "Ship name"                                       -> ("radio_NameOfVessel", "NameOfVessel", "Seraphim"),
+      "Eurotunnel or other rail details"                -> ("radio_WagonNumber", "WagonNumber", "EuroTunnel"),
+      "Flight number and date of flight"                -> ("radio_FlightNumber", "FlightNumber", "123456"),
+      "Aircraft registration number and date of flight" -> ("radio_AircraftRegistrationNumber", "AircraftRegistrationNumber", "123456"),
+      "European vessel identification (ENI) number"     -> ("radio_EuropeanVesselIDNumber", "EuropeanVesselIDNumber", "123456"),
+      "Inland vessel’s name"                            -> ("radio_NameOfInlandWaterwayVessel", "NameOfVessel", "123456"),
+      "Vehicle registration number"                     -> ("radio_VehicleRegistrationNumber", "NameOfVessel", "123456")
+    )
 
-    Sections.declarationDetails + (DepartureTransportId -> "Transport details at the border") + (DepartureTransportValue -> selectOption)
+    optionToRadioMap.get(selectOption).foreach { case (radioId, radioName, radioValue) =>
+      fillRadioButton(radioId, radioName, radioValue)
+      Sections.declarationDetails += (DepartureTransportId -> "Transport details at the border", DepartureTransportValue -> selectOption)
+    }
   }
 }

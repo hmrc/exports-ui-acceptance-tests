@@ -16,15 +16,17 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import org.openqa.selenium.{By, WebElement}
+import org.openqa.selenium.interactions.Actions
+import org.openqa.selenium.{By, Keys, WebElement}
 import org.scalatest.matchers.should.Matchers
 import uk.gov.hmrc.test.ui.driver.BrowserDriver
+import uk.gov.hmrc.test.ui.pages.CarrierOrHaulierDetailsPage.superKey
 
 import scala.collection.mutable
 
 trait BasePage extends BrowserDriver with Matchers {
 
-  val title: String
+  def title: String
   val url: String
 
   def checkUrlAndTitle(): Unit =
@@ -73,6 +75,22 @@ trait BasePage extends BrowserDriver with Matchers {
     clickById(idSelector)
     findElementById(refSelector).sendKeys(refText)
   }
+
+  def fillTextBoxById(idSelector: String, text: String): Unit =
+    findElementById(idSelector).sendKeys(text)
+
+  def selectRadioAndClick(element: WebElement): Unit = {
+    val actions = new Actions(driver)
+    actions.moveToElement(element).click().perform()
+  }
+
+  def fillAutoComplete(element: WebElement, value: String): Unit = {
+    element.clear()
+    element.sendKeys(value)
+    element.sendKeys(Keys.chord(superKey, "a"), Keys.BACK_SPACE)
+    driver.switchTo().activeElement().sendKeys(Keys.TAB)
+  }
+
 }
 
 case class PageNotFoundException(s: String) extends Exception(s)
