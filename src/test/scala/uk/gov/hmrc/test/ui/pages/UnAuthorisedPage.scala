@@ -16,6 +16,8 @@
 
 package uk.gov.hmrc.test.ui.pages
 
+import uk.gov.hmrc.test.ui.pages.base.BasePage
+
 object UnAuthorisedPage extends BasePage {
 
   val unAuthorisedPageTitle =

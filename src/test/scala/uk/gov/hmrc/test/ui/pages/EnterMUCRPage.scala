@@ -17,13 +17,14 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 import scala.util.Random
 
 object EnterMUCRPage extends BasePage {
 
-  val url: String                         = TestConfiguration.url("exports-frontend") + "/declaration/enter-a-mucr"
+  val path: String                         = TestConfiguration.url("exports-frontend") + "/declaration/enter-a-mucr"
   val pageTitle                           = "Enter the MUCR"
   var mucrDetailsMap: Map[String, String] = HashMap[String, String]()
 

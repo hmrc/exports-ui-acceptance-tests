@@ -17,12 +17,13 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object SavedSummaryPage extends BasePage {
 
-  val url: String = TestConfiguration.url("exports-frontend") + "/declaration/saved-summary"
+  val path: String = TestConfiguration.url("exports-frontend") + "/declaration/saved-summary"
   val title = "Check your answers - Make an export declaration online - GOV.UK"
   var partiesSectionDataHashMap: Map[String, String] = HashMap[String, String]()
 

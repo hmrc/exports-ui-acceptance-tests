@@ -17,12 +17,13 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object IsAdditionalInformationReqiuredPage extends BasePage {
 
-  val url: String                                                    = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/additional-taric-code"
+  val path: String                                                    = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/additional-taric-code"
   val isAdditionalInformationReqiuredPageTitle                       = "Do you need to make any Additional Information statements?"
   var isAdditionalInformationReqiuredDetailsMap: Map[String, String] = HashMap[String, String]()
 

@@ -18,12 +18,13 @@ package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.{Keys, WebElement}
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object OfficeOfExitPage extends BasePage {
 
-  val url: String                                     = TestConfiguration.url("exports-frontend") + "/declaration/office-of-exit"
+  val path: String                                     = TestConfiguration.url("exports-frontend") + "/declaration/office-of-exit"
   val officeOfExitPageTitle                           = "Where is the customs office of exit?"
   var officeOfExitCodeDetailsMap: Map[String, String] = HashMap[String, String]()
   val superKey: Keys                                  = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL

@@ -18,12 +18,13 @@ package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.Keys
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object AddAdditionalProcedureCodesPage extends BasePage {
 
-  val url: String                                                = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/additional-procedure-codes"
+  val path: String                                                = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/additional-procedure-codes"
   val addAdditionalProcedureCodesPageTitle                       = "Add any additional procedure codes to"
   var addAdditionalProcedureCodesDetailsMap: Map[String, String] = HashMap[String, String]()
   val superKey: Keys                                             = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL

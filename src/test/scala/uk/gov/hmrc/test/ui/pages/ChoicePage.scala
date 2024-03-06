@@ -17,11 +17,13 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 object ChoicePage extends BasePage {
 
-  val url: String   = TestConfiguration.url("exports-frontend") + "/choice"
+  val path: String   = TestConfiguration.url("exports-frontend") + "/choice"
   val title = "Make and manage export declarations - Make an export declaration online - GOV.UK"
+  val backButtonHrefs: List[String] = List.empty
 
   val createDeclaration                   = "create-declaration"
   val manageDraftDeclaration              = "manage-draft-declarations"
@@ -29,9 +31,8 @@ object ChoicePage extends BasePage {
   val manageMovementsDeclaration          = "movements"
   val manageDocumentsByConnectingWithSFUS = "upload-documents"
 
-  def selectOptionToMakeAndManageDeclaration(selectOption: String): Unit = {
-    checkUrlAndTitle()
-    selectOption match {
+  def performActionsAndCache(selectOption: String*): Unit = {
+    selectOption.head match {
       case "CreateDeclaration"       => clickById(createDeclaration)
       case "ManageDraftDeclaration"  => clickById(manageDraftDeclaration)
       case "ManageSubmitDeclaration" => clickById(manageSubmitDeclaration)
@@ -39,4 +40,6 @@ object ChoicePage extends BasePage {
       case "ManageDocumentsByConnectingWithSFUS" => clickById(manageDocumentsByConnectingWithSFUS)
     }
   }
+
+  override def checkBackButton(): Unit = ()
 }

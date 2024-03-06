@@ -17,13 +17,14 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 import scala.util.Random
 
 object LRNDetailsPage extends BasePage {
 
-  val url: String                        = TestConfiguration.url("exports-frontend") + "/declaration/local-reference-number"
+  val path: String                        = TestConfiguration.url("exports-frontend") + "/declaration/local-reference-number"
   val pageTitle                          = "Create a Local Reference Number (LRN)"
   var lrnDetailsMap: Map[String, String] = HashMap[String, String]()
 

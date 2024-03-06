@@ -18,6 +18,7 @@ package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.WebElement
 import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 object CommonPage extends BasePage {
 

@@ -17,23 +17,28 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 object DeclarationTypePage extends BasePage {
 
-  val url: String   = TestConfiguration.url("exports-frontend") + "/declaration/type"
+  val path: String = TestConfiguration.url("exports-frontend") + "/declaration/type"
   val title =
     "Do you have to make an arrived export declaration? - Section 1 of 6: Declaration details - Make an export declaration online - GOV.UK"
 
-  val arrivedDeclaration    = "arrived"
+  val arrivedDeclaration = "arrived"
   val prelodegedDeclaration = "prelodged"
 
   def selectDeclarationTypeOption(selectOption: String): Unit = {
     checkUrlAndTitle()
-    selectOption match {
-      case "ArrivedDeclaration"   => clickById("arrived")
+
+  }
+
+  override val backButtonHrefs: List[String] = ???
+
+  override protected def performActionsAndCache(selectOption: String*): Unit =
+    selectOption.head match {
+      case "ArrivedDeclaration" => clickById("arrived")
       case "PreLodgedDeclaration" => clickById("prelodged")
     }
-    submit()
-  }
 
 }

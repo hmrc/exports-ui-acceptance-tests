@@ -17,6 +17,7 @@
 package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.WebElement
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 object ReplyResultPage extends BasePage {
 

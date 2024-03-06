@@ -17,12 +17,13 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object AddContainersPage extends BasePage {
 
-  val url: String                                  = TestConfiguration.url("exports-frontend") + "/declaration/containers"
+  val path: String                                  = TestConfiguration.url("exports-frontend") + "/declaration/containers"
   val addContainersPageTitle                       = "You have added"
   var addContainersDetailsMap: Map[String, String] = HashMap[String, String]()
 

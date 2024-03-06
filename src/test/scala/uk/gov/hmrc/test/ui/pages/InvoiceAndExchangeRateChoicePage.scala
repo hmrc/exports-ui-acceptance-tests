@@ -17,12 +17,13 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object InvoiceAndExchangeRateChoicePage extends BasePage {
 
-  val url: String                                                 = TestConfiguration.url("exports-frontend") + "/declaration/invoices-and-exchange-rate-choice"
+  val path: String                                                 = TestConfiguration.url("exports-frontend") + "/declaration/invoices-and-exchange-rate-choice"
   val invoiceAndExchangeRateChoicePageTitle                       = "Is the total amount invoiced less than £100,000 in value? "
   var invoiceAndExchangeRateChoiceDetailsMap: Map[String, String] = HashMap[String, String]()
 

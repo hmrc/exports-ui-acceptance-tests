@@ -17,12 +17,13 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object PreviousDocumentsListPage extends BasePage {
 
-  val url: String                                          = TestConfiguration.url("exports-frontend") + "/declaration/previous-documents-list"
+  val path: String                                          = TestConfiguration.url("exports-frontend") + "/declaration/previous-documents-list"
   val previousDocumentsListPageTitle                       = "What documents are you using to make this declaration?"
   var previousDocumentsListDetailsMap: Map[String, String] = HashMap[String, String]()
 

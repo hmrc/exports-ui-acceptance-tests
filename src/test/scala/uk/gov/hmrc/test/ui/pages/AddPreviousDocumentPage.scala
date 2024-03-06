@@ -18,12 +18,13 @@ package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.{Keys, WebElement}
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object AddPreviousDocumentPage extends BasePage {
 
-  val url: String                                        = TestConfiguration.url("exports-frontend") + "/declaration/add-previous-document"
+  val path: String                                        = TestConfiguration.url("exports-frontend") + "/declaration/add-previous-document"
   val addPreviousDocumentPageTitle                       = "Details for each document that supports this declaration"
   var addPreviousDocumentDetailsMap: Map[String, String] = HashMap[String, String]()
   val superKey: Keys                                     = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL

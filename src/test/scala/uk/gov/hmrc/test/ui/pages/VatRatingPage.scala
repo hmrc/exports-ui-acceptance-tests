@@ -17,12 +17,13 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object VatRatingPage extends BasePage {
 
-  val url: String                              = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/vat-rating"
+  val path: String                              = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/vat-rating"
   val vatRatingPageTitle                       = "Are these goods being zero-rated for VAT?"
   var vatRatingDetailsMap: Map[String, String] = HashMap[String, String]()
 

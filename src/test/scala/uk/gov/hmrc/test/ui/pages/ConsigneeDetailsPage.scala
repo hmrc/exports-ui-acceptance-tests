@@ -18,12 +18,13 @@ package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.{Keys, WebElement}
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object ConsigneeDetailsPage extends BasePage {
 
-  val url: String                                                  = TestConfiguration.url("exports-frontend") + "/declaration/consignee-details"
+  val path: String                                                  = TestConfiguration.url("exports-frontend") + "/declaration/consignee-details"
   val consigneeDetailsPageTitle                                    = "Where will the goods be delivered?"
   var goodsDeliveredAddressDetails: Map[String, String]            = HashMap[String, String]()
   var consigneeDetailsAddressMap: Map[String, Map[String, String]] = HashMap[String, Map[String, String]]()

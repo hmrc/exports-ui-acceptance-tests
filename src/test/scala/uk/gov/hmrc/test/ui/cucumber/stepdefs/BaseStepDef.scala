@@ -16,12 +16,7 @@
 
 package uk.gov.hmrc.test.ui.cucumber.stepdefs
 
-import org.scalatest.matchers.should.Matchers
-import org.scalatest.concurrent.Eventually
-import uk.gov.hmrc.test.ui.driver.BrowserDriver
 import io.cucumber.scala.{EN, ScalaDsl}
-import uk.gov.hmrc.webdriver.SingletonDriver
-
-import scala.util.Try
+import org.scalatest.matchers.should.Matchers
 
 trait BaseStepDef extends ScalaDsl with EN with Matchers

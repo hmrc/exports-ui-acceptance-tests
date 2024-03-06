@@ -17,12 +17,13 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object CountryOfRoutingPage extends BasePage {
 
-  val url: String                                     = TestConfiguration.url("exports-frontend") + "/declaration/country-of-routing"
+  val path: String                                     = TestConfiguration.url("exports-frontend") + "/declaration/country-of-routing"
   val countryOfRoutingPageTitle                       = "Will the goods pass through any other countries before arriving in"
   var countryOfRoutingDetailsMap: Map[String, String] = HashMap[String, String]()
 

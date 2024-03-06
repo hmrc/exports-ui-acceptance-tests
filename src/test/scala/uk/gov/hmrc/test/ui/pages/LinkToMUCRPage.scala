@@ -17,12 +17,13 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object LinkToMUCRPage extends BasePage {
 
-  val url: String                               = TestConfiguration.url("exports-frontend") + "/declaration/link-to-mucr"
+  val path: String                               = TestConfiguration.url("exports-frontend") + "/declaration/link-to-mucr"
   val title                             = "Do you want to link this declaration’s DUCR to a Master Unique Consignment Reference (MUCR)?"
   var linkToMUCRDetailsMap: Map[String, String] = HashMap[String, String]()
 

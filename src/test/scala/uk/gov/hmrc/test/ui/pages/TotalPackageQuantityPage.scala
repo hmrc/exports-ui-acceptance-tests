@@ -18,12 +18,13 @@ package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.WebElement
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object TotalPackageQuantityPage extends BasePage {
 
-  val url: String                                         = TestConfiguration.url("exports-frontend") + "/declaration/total-package-quantity"
+  val path: String                                         = TestConfiguration.url("exports-frontend") + "/declaration/total-package-quantity"
   val totalPackageQuantityPageTitle                       = "What is the total number of packages in this declaration?"
   var totalPackageQuantityDetailsMap: Map[String, String] = HashMap[String, String]()
 

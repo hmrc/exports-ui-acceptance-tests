@@ -17,12 +17,13 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object IsLicenseRequiredPage extends BasePage {
 
-  val url: String                                       = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/is-licence-required"
+  val path: String                                       = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/is-licence-required"
   val isLicenseRequiredPageTitle                        = "Do these goods require a licence?"
   var iisLicenseRequiredDetailsMap: Map[String, String] = HashMap[String, String]()
 

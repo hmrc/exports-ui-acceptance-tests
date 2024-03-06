@@ -17,12 +17,13 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object OtherPartiesInvolvedPage extends BasePage {
 
-  val url: String                                         = TestConfiguration.url("exports-frontend") + "/declaration/other-parties-involved"
+  val path: String                                         = TestConfiguration.url("exports-frontend") + "/declaration/other-parties-involved"
   val otherPartiesInvolvedPageTitle                       =
     "What are the EORI numbers of others involved in this export?"
   var otherPartiesInvolvedDetailsMap: Map[String, String] = HashMap[String, String]()

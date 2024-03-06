@@ -18,12 +18,13 @@ package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.{Keys, WebElement}
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object PackageInformationPage extends BasePage {
 
-  val url: String                                = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/package-information"
+  val path: String                                = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/package-information"
   val packageInformationPageTitle                = "Enter the packing details for this item"
   var packageInformationMap: Map[String, String] = HashMap[String, String]()
   val superKey: Keys                             = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL

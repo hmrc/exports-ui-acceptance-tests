@@ -18,12 +18,13 @@ package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.WebElement
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object StatisticalValuePage extends BasePage {
 
-  val url: String                                     = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/statistical-value"
+  val path: String                                     = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/statistical-value"
   val statisticalValuePageTitle                       = "The statistical value of this item in pounds"
   var statisticalValueDetailsMap: Map[String, String] = HashMap[String, String]()
 

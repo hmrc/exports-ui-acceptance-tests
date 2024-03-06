@@ -17,9 +17,10 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 object LoginStubPage extends BasePage {
-  val url: String                = TestConfiguration.url("login-stub-frontend") + "/gg-sign-in"
+  val path: String                = TestConfiguration.url("login-stub-frontend") + "/gg-sign-in"
   val redirectUrlToEnter: String = TestConfiguration.url("exports-frontend")
   val loginStubPageTitle         = "Authority Wizard"
 
@@ -29,7 +30,7 @@ object LoginStubPage extends BasePage {
   val identifierValue  = "input-0-0-value"
 
   def loadPage: this.type = {
-    driver.navigate().to(url)
+    driver.navigate().to(path)
     checkUrlAndTitle(loginStubPageTitle)
     this
   }

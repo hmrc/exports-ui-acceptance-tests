@@ -16,18 +16,18 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import uk.gov.hmrc.test.ui.conf.Constants._
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{DepartureTransportId, DepartureTransportValue}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, DeclarationDetails}
 
 object DepartureTransportPage extends BasePage {
 
-  val url: String   = TestConfiguration.url("exports-frontend") + "/declaration/departure-transport"
-  def title: String = s"What are the details for the ${Sections.declarationDetails.} transport?"
+  val path: String   = TestConfiguration.url("exports-frontend") + "/declaration/departure-transport"
+  def title: String = s"What are the details for the ??? transport?"
+  val backButtonHrefs: List[String] = ???
 
-
-
-  def selectBorderModeOfTransportOption(selectOption: String): Unit = {
-    selectOption match {
+  override protected def performActionsAndCache(selectOption: String*): Unit =
+    selectOption.head match {
       case "Ship IMO number"                                 =>
         fillRadioButton("radio_ShipOrRoroImoNumber", "ShipOrRoroImoNumber", "123456")
       case "Ship name"                                       =>
@@ -46,6 +46,5 @@ object DepartureTransportPage extends BasePage {
         fillRadioButton("radio_VehicleRegistrationNumber", "NameOfVessel", "123456")
     }
 
-    Sections.declarationDetails + (DepartureTransportId -> "Transport details at the border") + (DepartureTransportValue -> selectOption)
-  }
+  DeclarationDetails.cache + (DepartureTransportId -> "Transport details at the border") + (DepartureTransportValue -> selectOption.head)
 }

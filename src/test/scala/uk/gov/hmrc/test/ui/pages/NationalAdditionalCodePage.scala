@@ -17,12 +17,13 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object NationalAdditionalCodePage extends BasePage {
 
-  val url: String                                           = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/national-additional-code"
+  val path: String                                           = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/national-additional-code"
   val nationalAdditionalCodePageTitle                       = "Do you need to add a national additional code?"
   var nationalAdditionalCodeDetailsMap: Map[String, String] = HashMap[String, String]()
 

@@ -17,13 +17,14 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 import scala.util.Random
 
 object DUCRDetailsPage extends BasePage {
 
-  val url: String                         = TestConfiguration.url("exports-frontend") + "/declaration/ducr-entry"
+  val path: String                         = TestConfiguration.url("exports-frontend") + "/declaration/ducr-entry"
   val pageTitle                           = "Enter your Declaration Unique Consignment Reference (DUCR)"
   var ducrDetailsMap: Map[String, String] = HashMap[String, String]()
 

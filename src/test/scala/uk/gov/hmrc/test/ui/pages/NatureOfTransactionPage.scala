@@ -17,12 +17,13 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object NatureOfTransactionPage extends BasePage {
 
-  val url: String                                        = TestConfiguration.url("exports-frontend") + "/declaration/nature-of-transaction"
+  val path: String                                        = TestConfiguration.url("exports-frontend") + "/declaration/nature-of-transaction"
   val natureOfTransactionPageTitle                       = "What sort of export is it?"
   var natureOfTransactionDetailsMap: Map[String, String] = HashMap[String, String]()
 
