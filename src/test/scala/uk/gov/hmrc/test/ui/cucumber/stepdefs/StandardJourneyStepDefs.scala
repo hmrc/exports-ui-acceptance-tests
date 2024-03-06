@@ -34,7 +34,6 @@ class StandardJourneyStepDefs extends BaseStepDef {
   }
 
   And("""^I select the option No for Arrived export declaration$""") { () =>
-    DeclarationTypePage.checkPageTitle()
     DeclarationTypePage.selectDeclarationTypeOption("PreLodgedDeclaration")
   }
 

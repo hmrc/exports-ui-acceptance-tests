@@ -16,13 +16,12 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import uk.gov.hmrc.test.ui.conf.Constants._
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 
 object DepartureTransportPage extends BasePage {
 
   val url: String   = TestConfiguration.url("exports-frontend") + "/declaration/departure-transport"
-  def title: String = s"What are the details for the ${Sections.declarationDetails.} transport?"
+  def title: String = s"What are the details for the ${DeclarationDetails.cache.} transport?"
 
 
 
@@ -46,6 +45,6 @@ object DepartureTransportPage extends BasePage {
         fillRadioButton("radio_VehicleRegistrationNumber", "NameOfVessel", "123456")
     }
 
-    Sections.declarationDetails + (DepartureTransportId -> "Transport details at the border") + (DepartureTransportValue -> selectOption)
+    DeclarationDetails.cache + (DepartureTransportId -> "Transport details at the border") + (DepartureTransportValue -> selectOption)
   }
 }
