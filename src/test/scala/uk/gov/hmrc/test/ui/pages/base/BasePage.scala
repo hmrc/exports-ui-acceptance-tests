@@ -16,32 +16,29 @@
 
 package uk.gov.hmrc.test.ui.pages.base
 
-import org.openqa.selenium.interactions.Actions
-import org.openqa.selenium.{By, Keys, WebElement}
+import org.openqa.selenium.By
 import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import org.scalatest.matchers.should.Matchers
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
-import uk.gov.hmrc.test.ui.driver.BrowserDriver
-import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.cache
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Clearance
-import uk.gov.hmrc.test.ui.pages.base.PageConstants._
+import uk.gov.hmrc.test.ui.pages.base.BasePage._
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
+import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Common
 
-import scala.jdk.CollectionConverters.ListHasAsScala
+trait BasePage extends CacheHelper with DriverHelper with Matchers {
 
-trait BasePage extends BrowserDriver with Matchers {
-
-  def title: String
+  def backButtonHref: String
   def path: String
-  val backButtonHrefs: List[String]
-  val pageLinkHrefs: List[String] = List(languageToggle, signOut, technicalIssue, govUkLogo, feedbackBanner)
-  val expanderHrefs: List[String] = List.empty
+  def title: String
+
+  val pageLinkHrefs: Seq[String] = List(languageToggle, signOut, technicalIssue, govUkLogo, feedbackBanner)
+  val expanderHrefs: Map[String, Seq[String]] = Map.empty
 
   def checkPage(values: String*): Unit = {
     checkUrlAndTitle()
     checkBackButton()
     checkPageLinks()
     checkExpanders()
-    performActionsAndCache(values: _*)
+    performActionsAndStore(values: _*)
   }
 
   protected def checkUrlAndTitle(): Unit = {
@@ -49,7 +46,8 @@ trait BasePage extends BrowserDriver with Matchers {
     driver.getTitle mustBe title +  " - Make an export declaration online - GOV.UK"
     findElementsByTag("h1").head.getText mustBe title
   }
-  protected def performActionsAndCache(values: String*): Unit
+
+  protected def checkBackButton(): Unit = findElementById("back-link").getAttribute("href") must be(backButtonHref)
 
   protected def checkPageLinks(): Unit = {
     val links = findElementsByTag("a")
@@ -57,75 +55,34 @@ trait BasePage extends BrowserDriver with Matchers {
   }
 
   protected def checkExpanders(): Unit = {
-    val baseUrl = if (cache.getOrElse(???, ???).contains(Clearance))
-        "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/"
-       else {
-        "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/"
-       }
     elementDoesNotExist(By.id("tariffReference")) mustBe false
-    val links = findElementsByTag("a")
-    expanderHrefs.forall(href => links.exists(_.getAttribute("href") == baseUrl + href))
-  }
 
-  protected def checkBackButton(): Unit = findElementById("back-link").getAttribute("href") must be(backButtonHrefs.head)
-
-  def submit(): Unit = clickById("submit")
-
-  def continue(): Unit = clickByXpath("//*[@role='button']")
-
-  private def changeLinkSelector(row: String): By = By.cssSelector(s".$row .govuk-link")
-
-  def changeLink(row: String): WebElement = driver.findElement(changeLinkSelector(row))
-
-  //Finding Elements
-  def findElementById(value: String): WebElement          = driver.findElement(By.id(value))
-  def findElementByXpath(value: String): WebElement       = driver.findElement(By.xpath(value))
-  def findElementByLinkText(value: String): WebElement    = driver.findElement(By.linkText(value))
-  def findElementByPartialLink(value: String): WebElement = driver.findElement(By.partialLinkText(value))
-  def findElementByCssSelector(value: String): WebElement = driver.findElement(By.cssSelector(value))
-  def findElementByClassName(value: String): WebElement   = driver.findElement(By.className(value))
-  def findElementsByTag(value: String): List[WebElement]   = driver.findElements(By.tagName(value)).asScala.toList
-
-  def clickById(value: String): Unit          = findElementById(value).click()
-  def clickByXpath(value: String): Unit       = findElementByXpath(value).click()
-  def clickByLinkText(value: String): Unit    = findElementByLinkText(value).click()
-  def clickByPartialLink(value: String): Unit = findElementByPartialLink(value).click()
-  def clickByCssSelector(value: String): Unit = findElementByCssSelector(value).click()
-  def clickByClassName(value: String): Unit   = findElementByClassName(value).click()
-
-  def elementDoesNotExist(elementBy: By): Boolean =
-    driver.findElements(elementBy).size() == 0
-
-  def fillRadioButton(idSelector: String, refSelector: String, refText: String): Unit = {
-    clickById(idSelector)
-    findElementById(refSelector).sendKeys(refText)
-  }
-
-  def fillTextBoxById(idSelector: String, text: String): Unit =
-    findElementById(idSelector).sendKeys(text)
-
-  def selectRadioAndClick(element: WebElement): Unit = {
-    val actions = new Actions(driver)
-    actions.moveToElement(element).click().perform()
-  }
-
-  def selectYesOrNoRadio(option: String): Unit =
-    option match {
-      case "Yes" => clickById("code_yes")
-      case "No"  => clickById("code_no")
+    maybeDetail(DeclarationType).map { case detail =>
+      val declarationType = detail.value
+      // We could have link sets for a specific declaration type (e.g. Clearance or Supplementary)
+      // as well as link sets "Common" to multiple declaration types
+      val maybeHrefs = expanderHrefs.get(declarationType).fold(expanderHrefs.get(Common))(Some(_))
+      maybeHrefs.map { hrefs =>
+        val links = findElementsByTag("a")
+        hrefs.forall(href => links.exists(_.getAttribute("href") == href))
+      }
     }
-
-  def fillAutoComplete(element: WebElement, value: String): Unit = {
-    element.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE)
-    element.sendKeys(value)
-    element.sendKeys(Keys.ARROW_DOWN)
-    element.sendKeys(Keys.ENTER)
   }
+
+  protected def performActionsAndStore(values: String*): Unit
+
+  val itemsPathBase: String = "/declaration/items"
+  val itemPathBase: String = itemsPathBase + "/([\\w]+)"
+  private val itemPathBasePattern = (itemPathBase + "/.+").r
+
+  protected def itemId: String = (Option(driver.getCurrentUrl) collect { case itemPathBasePattern(group) => group }).head
+  protected def itemUrl(page: String) =  s"$itemsPathBase/$itemId/$page"
 }
 
 case class PageNotFoundException(s: String) extends Exception(s)
 
-object PageConstants {
+object BasePage {
+
   val languageToggle = "/customs-declare-exports/hmrc-frontend/language/cy"
   val feedbackBanner = "/contact/beta-feedback-unauthenticated?"
   val technicalIssue = "/contact/report-technical-problem?"

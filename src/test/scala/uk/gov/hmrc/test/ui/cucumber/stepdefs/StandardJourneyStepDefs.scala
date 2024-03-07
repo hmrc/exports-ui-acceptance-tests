@@ -17,6 +17,7 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs
 
 import uk.gov.hmrc.test.ui.pages._
+import uk.gov.hmrc.test.ui.pages.section5.{DeclarationItemsListPage, ProcedureCodesPage}
 
 class StandardJourneyStepDefs extends BaseStepDef {
 
@@ -139,7 +140,7 @@ class StandardJourneyStepDefs extends BaseStepDef {
     AddDeclarationItemPage.clickToAddItem()
     AddProcedureCodesPage.checkPageTitle()
     AddProcedureCodesPage.enterProcedureCode(procedureCode)
-    AddAdditionalProcedureCodesPage.checkPage(additionalProcedureCode)
+    ProcedureCodesPage.checkPage(additionalProcedureCode)
   }
   And("""I select the commodity code and enter the item details information""") { () =>
     CommodityCodeDetailsPage.checkPageTitle()
