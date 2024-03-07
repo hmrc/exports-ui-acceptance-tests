@@ -16,11 +16,8 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import uk.gov.hmrc.test.ui.conf.TestConfiguration
-import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.cache
-
-import scala.collection.immutable.HashMap
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 object LocationOfGoodsPage extends BasePage {
 
@@ -28,15 +25,16 @@ object LocationOfGoodsPage extends BasePage {
   val title                       = "Where will the goods be presented to customs?"
   val backButtonHrefs: List[String] = ???
 
-  def performActionsAndCache(values: String*): Unit = {
-    values.head match {
-      case "Yes" => findElementById("code_yes").click()
-      case "No"  =>
-        findElementById("code_no").click()
-        findElementById("code").sendKeys(values.last)
+  private val selectOption = 0
+  private val locationOfGoodsCode = 1
 
+  def performActionsAndCache(locationOfGoods: String*): Unit = {
+    locationOfGoods(selectOption) match {
+      case "Yes" => clickById("code_yes")
+        findElementById("code").sendKeys(locationOfGoods(locationOfGoodsCode))
+      case "No"  => clickById("code_no")
     }
-    cache += ("LocationOfGoodsSelectOption" -> values.head)
-    cache += ("LocationOfGoodsCodeEntered"  -> values.last)
+    cache += ("LocationOfGoodsSelectOption" -> locationOfGoods(selectOption))
+    cache += ("LocationOfGoodsCodeEntered"  -> locationOfGoods(locationOfGoodsCode))
   }
 }

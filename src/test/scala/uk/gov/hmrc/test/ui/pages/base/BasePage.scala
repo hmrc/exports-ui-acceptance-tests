@@ -17,11 +17,13 @@
 package uk.gov.hmrc.test.ui.pages.base
 
 import org.openqa.selenium.interactions.Actions
-import org.openqa.selenium.{By, WebElement}
+import org.openqa.selenium.{By, Keys, WebElement}
 import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import org.scalatest.matchers.should.Matchers
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.driver.BrowserDriver
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.cache
+import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Clearance
 import uk.gov.hmrc.test.ui.pages.base.PageConstants._
 
 import scala.jdk.CollectionConverters.ListHasAsScala
@@ -49,15 +51,20 @@ trait BasePage extends BrowserDriver with Matchers {
   }
   protected def performActionsAndCache(values: String*): Unit
 
-  protected def checkPageLinks(): Unit = pageLinkHrefs.forall(href => findElementsByTag("a").exists(_.getAttribute("href").startsWith(href)))
+  protected def checkPageLinks(): Unit = {
+    val links = findElementsByTag("a")
+    pageLinkHrefs.forall(href => links.exists(_.getAttribute("href").startsWith(href)))
+  }
 
   protected def checkExpanders(): Unit = {
-    val baseUrl = if (cache.getOrElse(???, ???).contains("Clearance"))
+    val baseUrl = if (cache.getOrElse(???, ???).contains(Clearance))
         "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/"
-       else
+       else {
         "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/"
+       }
     elementDoesNotExist(By.id("tariffReference")) mustBe false
-    expanderHrefs.forall(href => findElementsByTag("a").exists(_.getAttribute("href") == baseUrl + href))
+    val links = findElementsByTag("a")
+    expanderHrefs.forall(href => links.exists(_.getAttribute("href") == baseUrl + href))
   }
 
   protected def checkBackButton(): Unit = findElementById("back-link").getAttribute("href") must be(backButtonHrefs.head)
@@ -100,6 +107,19 @@ trait BasePage extends BrowserDriver with Matchers {
   def selectRadioAndClick(element: WebElement): Unit = {
     val actions = new Actions(driver)
     actions.moveToElement(element).click().perform()
+  }
+
+  def selectYesOrNoRadio(option: String): Unit =
+    option match {
+      case "Yes" => clickById("code_yes")
+      case "No"  => clickById("code_no")
+    }
+
+  def fillAutoComplete(element: WebElement, value: String): Unit = {
+    element.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE)
+    element.sendKeys(value)
+    element.sendKeys(Keys.ARROW_DOWN)
+    element.sendKeys(Keys.ENTER)
   }
 }
 

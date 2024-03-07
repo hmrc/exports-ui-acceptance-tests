@@ -102,7 +102,7 @@ class StandardJourneyStepDefs extends BaseStepDef {
   }
   And("""^I select (.*) and enter location of goods as (.*)$""") {
     (selectOption: String, locationOfGoodsCode: String) =>
-      LocationOfGoodsPage.performActionsAndCache(selectOption, locationOfGoodsCode)
+      LocationOfGoodsPage.checkPage(selectOption, locationOfGoodsCode)
   }
   And("""^I select office of exit as (.*)$""") { (officeOfExitCode: String) =>
     OfficeOfExitPage.checkPageTitle()
