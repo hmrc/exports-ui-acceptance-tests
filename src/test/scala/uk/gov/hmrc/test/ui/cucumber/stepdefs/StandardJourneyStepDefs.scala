@@ -139,7 +139,7 @@ class StandardJourneyStepDefs extends BaseStepDef {
     AddDeclarationItemPage.clickToAddItem()
     AddProcedureCodesPage.checkPageTitle()
     AddProcedureCodesPage.enterProcedureCode(procedureCode)
-    AddAdditionalProcedureCodesPage.checkPage(additionalProcedureCode)
+    ProcedureCodesPage.checkPage(additionalProcedureCode)
   }
   And("""I select the commodity code and enter the item details information""") { () =>
     CommodityCodeDetailsPage.checkPageTitle()

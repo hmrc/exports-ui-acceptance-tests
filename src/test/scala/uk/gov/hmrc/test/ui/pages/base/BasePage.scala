@@ -22,9 +22,9 @@ import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import org.scalatest.matchers.should.Matchers
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.driver.BrowserDriver
+import uk.gov.hmrc.test.ui.pages.base.BasePage._
 import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.cache
 import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Clearance
-import uk.gov.hmrc.test.ui.pages.base.PageConstants._
 
 import scala.jdk.CollectionConverters.ListHasAsScala
 
@@ -32,9 +32,12 @@ trait BasePage extends BrowserDriver with Matchers {
 
   def title: String
   def path: String
-  val backButtonHrefs: List[String]
+  def backButtonHref: String
+
   val pageLinkHrefs: List[String] = List(languageToggle, signOut, technicalIssue, govUkLogo, feedbackBanner)
   val expanderHrefs: List[String] = List.empty
+
+  def value(id: String): String = s"${id}Value"
 
   def checkPage(values: String*): Unit = {
     checkUrlAndTitle()
@@ -49,7 +52,8 @@ trait BasePage extends BrowserDriver with Matchers {
     driver.getTitle mustBe title +  " - Make an export declaration online - GOV.UK"
     findElementsByTag("h1").head.getText mustBe title
   }
-  protected def performActionsAndCache(values: String*): Unit
+
+  protected def checkBackButton(): Unit = findElementById("back-link").getAttribute("href") must be(backButtonHref)
 
   protected def checkPageLinks(): Unit = {
     val links = findElementsByTag("a")
@@ -67,17 +71,17 @@ trait BasePage extends BrowserDriver with Matchers {
     expanderHrefs.forall(href => links.exists(_.getAttribute("href") == baseUrl + href))
   }
 
-  protected def checkBackButton(): Unit = findElementById("back-link").getAttribute("href") must be(backButtonHrefs.head)
+  protected def performActionsAndCache(values: String*): Unit
 
-  def submit(): Unit = clickById("submit")
+  val itemsPathBase: String = "/declaration/items"
+  val itemPathBase: String = itemsPathBase + "/([\\w]+)"
+  private val itemPathBasePattern = (itemPathBase + "/.+").r
 
-  def continue(): Unit = clickByXpath("//*[@role='button']")
+  protected def itemId: String = (Option(driver.getCurrentUrl) collect { case itemPathBasePattern(group) => group }).head
+  protected def itemUrl(page: String) =  s"$itemsPathBase/$itemId/$page"
 
-  private def changeLinkSelector(row: String): By = By.cssSelector(s".$row .govuk-link")
+  def changeLinkOnCYA(row: String): WebElement = driver.findElement(By.cssSelector(s".$row .govuk-link"))
 
-  def changeLink(row: String): WebElement = driver.findElement(changeLinkSelector(row))
-
-  //Finding Elements
   def findElementById(value: String): WebElement          = driver.findElement(By.id(value))
   def findElementByXpath(value: String): WebElement       = driver.findElement(By.xpath(value))
   def findElementByLinkText(value: String): WebElement    = driver.findElement(By.linkText(value))
@@ -96,16 +100,25 @@ trait BasePage extends BrowserDriver with Matchers {
   def elementDoesNotExist(elementBy: By): Boolean =
     driver.findElements(elementBy).size() == 0
 
-  def fillRadioButton(idSelector: String, refSelector: String, refText: String): Unit = {
-    clickById(idSelector)
+  def fillAutoComplete(elementId: String, value: String): Unit = {
+    val element = findElementById(elementId)
+    element.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE)
+    element.sendKeys(value)
+    element.sendKeys(Keys.ARROW_DOWN)
+    element.sendKeys(Keys.ENTER)
+  }
+
+  def fillRadioButton(elementId: String, refSelector: String, refText: String): Unit = {
+    clickById(elementId)
     findElementById(refSelector).sendKeys(refText)
   }
 
-  def fillTextBoxById(idSelector: String, text: String): Unit =
-    findElementById(idSelector).sendKeys(text)
+  def fillTextBoxById(elementId: String, text: String): Unit =
+    findElementById(elementId).sendKeys(text)
 
-  def selectRadioAndClick(element: WebElement): Unit = {
+  def selectRadioAndClick(elementId: String): Unit = {
     val actions = new Actions(driver)
+    val element = findElementById(elementId)
     actions.moveToElement(element).click().perform()
   }
 
@@ -115,17 +128,15 @@ trait BasePage extends BrowserDriver with Matchers {
       case "No"  => clickById("code_no")
     }
 
-  def fillAutoComplete(element: WebElement, value: String): Unit = {
-    element.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE)
-    element.sendKeys(value)
-    element.sendKeys(Keys.ARROW_DOWN)
-    element.sendKeys(Keys.ENTER)
-  }
+  def submit(): Unit = clickById("submit")
+
+  def continue(): Unit = clickByXpath("//*[@role='button']")
 }
 
 case class PageNotFoundException(s: String) extends Exception(s)
 
-object PageConstants {
+object BasePage {
+
   val languageToggle = "/customs-declare-exports/hmrc-frontend/language/cy"
   val feedbackBanner = "/contact/beta-feedback-unauthenticated?"
   val technicalIssue = "/contact/report-technical-problem?"
