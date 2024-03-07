@@ -34,7 +34,7 @@ object TotalPackageQuantityPage extends BasePage {
   def enterTotalPackageQuantity(totalPackageQty: String): Unit = {
     val totalPackageQuantity: WebElement = findElementById("totalPackage")
     totalPackageQuantity.sendKeys(totalPackageQty)
-cache += ("TotalPackageQuantityDetails" -> totalPackageQuantity.getText)
+store += ("TotalPackageQuantityDetails" -> totalPackageQuantity.getText)
     submit()
   }
 }

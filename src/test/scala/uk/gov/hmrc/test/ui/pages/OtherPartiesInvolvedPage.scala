@@ -39,7 +39,7 @@ object OtherPartiesInvolvedPage extends BasePage {
       case "Warehouse_keeper"              => findElementById("WF").click()
       case "No_other_parties_are_involved" => findElementById("no").click()
     }
-cache += ("OtherPartiesInvolved" -> selectOption)
+store += ("OtherPartiesInvolved" -> selectOption)
     submit()
   }
 }

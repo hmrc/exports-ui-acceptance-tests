@@ -35,8 +35,8 @@ object InvoiceAndExchangeRateChoicePage extends BasePage {
       case "Yes" => findElementById("code_yes").click()
       case "No"  => findElementById("code_no").click()
     }
-cache += ("InvoiceAndExchangeRateChoice" -> selectOption)
-cache += ("InvoiceAndExchangeRateChoice"                  -> selectOption)
+store += ("InvoiceAndExchangeRateChoice" -> selectOption)
+store += ("InvoiceAndExchangeRateChoice"                  -> selectOption)
     submit()
   }
 }

@@ -35,7 +35,7 @@ object AddSecuritySealsOptionPage extends BasePage {
       case "Yes" => findElementById("code_yes")
       case "No"  => findElementById("code_no")
     }
-cache += ("securitySealsOption" -> selectOption)
+store += ("securitySealsOption" -> selectOption)
     submit()
   }
 }

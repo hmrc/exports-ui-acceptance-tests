@@ -49,7 +49,7 @@ object EnterMUCRPage extends BasePage {
 
     //Enter the Ducr Value
     findElementById("MUCR").sendKeys("GB/123456789100-AB123")
-cache += ("MucrDetailsEntered" -> "GB/123456789100-AB123")
+store += ("MucrDetailsEntered" -> "GB/123456789100-AB123")
     submit()
   }
 }

@@ -36,7 +36,7 @@ object AreYouTheExporterPage extends BasePage {
       case "Yes" => findElementById("code_yes").click()
       case "No"  => findElementById("code_no").click()
     }
-cache += ("AreYouAnExporter" -> selectOption)
+store += ("AreYouAnExporter" -> selectOption)
     submit()
   }
 }

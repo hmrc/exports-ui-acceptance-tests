@@ -36,7 +36,7 @@ object AuthorisationChoicePage extends BasePage {
       case "Permanent_export_of_excise_goods " => findElementById("Code1007").click()
       case "Temporary_exports"                 => findElementById("CodeOther").click()
     }
-cache += ("AuthorisationChoice" -> selectOption)
+store += ("AuthorisationChoice" -> selectOption)
     submit()
   }
 }

@@ -37,7 +37,7 @@ object SupplementaryUnitsPage extends BasePage {
         findElementById("supplementaryUnits").sendKeys("10")
       case "No"  => findElementById("No").click()
     }
-cache += ("supplementaryDetails" -> selectOption)
+store += ("supplementaryDetails" -> selectOption)
     submit()
   }
 }

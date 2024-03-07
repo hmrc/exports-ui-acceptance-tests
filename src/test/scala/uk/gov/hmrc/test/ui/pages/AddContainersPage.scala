@@ -35,7 +35,7 @@ object AddContainersPage extends BasePage {
       case "Yes" => findElementById("code_yes")
       case "No"  => findElementById("code_no")
     }
-cache += ("addContainersDetails" -> selectOption)
+store += ("addContainersDetails" -> selectOption)
     submit()
   }
 }

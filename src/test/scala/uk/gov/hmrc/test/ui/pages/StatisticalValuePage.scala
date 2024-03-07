@@ -36,7 +36,7 @@ object StatisticalValuePage extends BasePage {
     val statisticalValue: WebElement = findElementById("statisticalValue")
     statisticalValue.sendKeys("1000")
 
-cache += ("statisticalValue" -> statisticalValue.getText)
+store += ("statisticalValue" -> statisticalValue.getText)
     submit()
   }
 }

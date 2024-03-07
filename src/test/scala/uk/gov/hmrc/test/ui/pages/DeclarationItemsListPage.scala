@@ -36,7 +36,7 @@ object DeclarationItemsListPage extends BasePage {
       case "Yes" => findElementById("code_yes").click()
       case "No"  => findElementById("code_no").click()
     }
-cache += ("AddAnotherItemOption" -> selectOption)
+store += ("AddAnotherItemOption" -> selectOption)
     submit()
   }
 }

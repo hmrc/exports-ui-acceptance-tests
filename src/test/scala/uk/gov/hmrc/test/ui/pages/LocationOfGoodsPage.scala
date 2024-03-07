@@ -28,13 +28,13 @@ object LocationOfGoodsPage extends BasePage {
   private val selectOption = 0
   private val locationOfGoodsCode = 1
 
-  def performActionsAndCache(locationOfGoods: String*): Unit = {
+  def performActionsAndStore(locationOfGoods: String*): Unit = {
     locationOfGoods(selectOption) match {
       case "Yes" => clickById("code_yes")
         findElementById("code").sendKeys(locationOfGoods(locationOfGoodsCode))
       case "No"  => clickById("code_no")
     }
-    cache += ("LocationOfGoodsSelectOption" -> locationOfGoods(selectOption))
-    cache += ("LocationOfGoodsCodeEntered"  -> locationOfGoods(locationOfGoodsCode))
+    store += ("LocationOfGoodsSelectOption" -> locationOfGoods(selectOption))
+    store += ("LocationOfGoodsCodeEntered"  -> locationOfGoods(locationOfGoodsCode))
   }
 }

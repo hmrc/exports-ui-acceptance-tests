@@ -16,23 +16,24 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{DeclarationChoiceId, DeclarationChoiceValue, cache}
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.DeclarationType
 import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes._
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 
 object DeclarationChoicePage extends BasePage {
 
-  val path: String   = "/declaration/declaration-choice"
-  val title = "Select a declaration type"
-  val backButtonHrefs: List[String] = List(StandardOrOtherPage.path)
+  val path: String           = "/declaration/declaration-choice"
+  val title                  = "Select a declaration type"
+  val backButtonHref: String = StandardOrOtherPage.path
 
-  override def performActionsAndCache(selectOption: String*): Unit = {
-    selectOption.headOption match {
-      case "SimplifiedOccasional"            => clickById(Occasional)
-      case "AuthorisedSimplifiedDeclaration" => clickById(Simplified)
-      case "ClearanceDeclaration"            => clickById(Clearance)
-      case "SupplementaryDeclaration"        => clickById(Supplementary)
+  override def performActionsAndStore(values: String*): Unit = {
+    val declarationType = values(0)
+    declarationType match {
+      case Occasional    => clickById(Occasional)
+      case Simplified    => clickById(Simplified)
+      case Clearance     => clickById(Clearance)
+      case Supplementary => clickById(Supplementary)
     }
-    cache + (DeclarationChoiceId -> "DeclarationType", DeclarationChoiceValue -> selectOption.head)
+    store(DeclarationType -> Detail("DeclarationType"), value(DeclarationType) -> Detail(declarationType))
   }
 }

@@ -31,7 +31,7 @@ object ChoicePage extends BasePage {
   val manageMovementsDeclaration          = "movements"
   val manageDocumentsByConnectingWithSFUS = "upload-documents"
 
-  def performActionsAndCache(selectOption: String*): Unit = {
+  def performActionsAndStore(selectOption: String*): Unit = {
     selectOption.head match {
       case "CreateDeclaration"       => clickById(createDeclaration)
       case "ManageDraftDeclaration"  => clickById(manageDraftDeclaration)

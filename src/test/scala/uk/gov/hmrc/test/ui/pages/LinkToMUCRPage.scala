@@ -35,7 +35,7 @@ object LinkToMUCRPage extends BasePage {
       case "Yes" => findElementById("code_yes").click()
       case "No"  => findElementById("code_no").click()
     }
-cache += ("LinkToMucrDetails" -> selectOption)
+store += ("LinkToMucrDetails" -> selectOption)
     submit()
   }
 

@@ -44,7 +44,7 @@ object OfficeOfExitPage extends BasePage {
 
   def enterOfficeOfExitCodeDetails(officeOfExitCode: String): Unit = {
     val officeOfExitCodeEntered: String = typeOfficeOfExitCode(officeOfExitCode)
-cache += ("officeOfExitCode" -> officeOfExitCodeEntered)
+store += ("officeOfExitCode" -> officeOfExitCodeEntered)
     submit()
   }
 }

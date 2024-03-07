@@ -35,12 +35,12 @@ object AddAuthorisationRequiredPage extends BasePage {
     driver.switchTo().activeElement().sendKeys(Keys.TAB)
   }
 
-  override protected def performActionsAndCache(values: String*): Unit = {
+  override protected def performActionsAndStore(values: String*): Unit = {
     values.head match {
       case "UserEori"  => findElementById("UserEori")
       case "OtherEori" => findElementById("OtherEori")
     }
     typeAuthorisationCode(values.head)
-    cache ++ Map("WhoHoldsAuthorisation" -> values.last, "authorisationCode"     -> values.head)
+    store ++ Map("WhoHoldsAuthorisation" -> values.last, "authorisationCode"     -> values.head)
   }
 }

@@ -35,7 +35,7 @@ object AuthorisationsRequiredPage extends BasePage {
       case "Yes" => findElementById("code_yes")
       case "No"  => findElementById("code_no")
     }
-cache += ("AddAnotherAuthorisation" -> addAnotherAuhorisationOption)
+store += ("AddAnotherAuthorisation" -> addAnotherAuhorisationOption)
     submit()
   }
 }

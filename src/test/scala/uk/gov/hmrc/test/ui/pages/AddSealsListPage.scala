@@ -35,7 +35,7 @@ object AddSealsListPage extends BasePage {
       case "Yes" => findElementById("code_yes")
       case "No"  => findElementById("code_no")
     }
-cache += ("sealsListDetails" -> selectOption)
+store += ("sealsListDetails" -> selectOption)
     submit()
   }
 }

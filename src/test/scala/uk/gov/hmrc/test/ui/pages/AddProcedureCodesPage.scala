@@ -44,7 +44,7 @@ object AddProcedureCodesPage extends BasePage {
 
     val procedureCodeEntered: String = typeProcedureCode(procedureCode).toString
 
-cache += ("procedureCode" -> procedureCodeEntered)
+store += ("procedureCode" -> procedureCodeEntered)
     submit()
   }
 }

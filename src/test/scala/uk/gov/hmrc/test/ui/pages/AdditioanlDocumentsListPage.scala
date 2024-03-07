@@ -36,7 +36,7 @@ object AdditioanlDocumentsListPage extends BasePage {
       case "Yes" => findElementById("code_yes")
       case "No"  => findElementById("code_no")
     }
-cache += ("AdditionalDocumentList" -> selectOption)
+store += ("AdditionalDocumentList" -> selectOption)
     submit()
   }
 }

@@ -38,8 +38,8 @@ object CommodityMeasurePage extends BasePage {
     val netWeight: WebElement   = findElementById("netMass")
     netWeight.sendKeys("1000")
 
-cache += ("grossWeight" -> grossWeight.getText)
-cache += ("netWeight"   -> netWeight.getText)
+store += ("grossWeight" -> grossWeight.getText)
+store += ("netWeight"   -> netWeight.getText)
     submit()
   }
 }

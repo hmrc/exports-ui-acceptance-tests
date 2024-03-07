@@ -30,11 +30,11 @@ object ExpressConsignmentPage extends BasePage {
 
   override def checkBackButton(): Unit = {}
 
-  def performActionsAndCache(selectOption: String*): Unit = {
+  def performActionsAndStore(selectOption: String*): Unit = {
     selectOption match {
       case "Yes" => clickById("code_yes")
       case "No"  => clickById("code_no")
     }
-    cache += (ExpressConsignmentId -> "Express consignment", ExpressConsignmentValue -> selectOption)
+    store += (ExpressConsignmentId -> "Express consignment", ExpressConsignmentValue -> selectOption)
   }
 }

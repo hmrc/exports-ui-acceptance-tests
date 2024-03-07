@@ -37,6 +37,6 @@ object DeclarantDetailsPage extends BasePage {
     }
 
     submit()
-    cache + ("DeclarantDetails" -> selectOption)
+    store + ("DeclarantDetails" -> selectOption)
   }
 }

@@ -35,7 +35,7 @@ object DeclarationTypePage extends BasePage {
 
   override val backButtonHrefs: List[String] = ???
 
-  override protected def performActionsAndCache(selectOption: String*): Unit =
+  override protected def performActionsAndStore(selectOption: String*): Unit =
     selectOption.head match {
       case "ArrivedDeclaration" => clickById("arrived")
       case "PreLodgedDeclaration" => clickById("prelodged")

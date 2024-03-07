@@ -47,8 +47,8 @@ object AddPreviousDocumentPage extends BasePage {
     val documentCodeReference: WebElement = findElementById("documentReference")
     documentCodeReference.sendKeys("SMITH")
 
-cache += ("DocumentCode"          -> documentCodeEntered)
-cache += ("DocumentCodeReference" -> documentCodeReference.getText)
+store += ("DocumentCode"          -> documentCodeEntered)
+store += ("DocumentCodeReference" -> documentCodeReference.getText)
     submit()
   }
 }

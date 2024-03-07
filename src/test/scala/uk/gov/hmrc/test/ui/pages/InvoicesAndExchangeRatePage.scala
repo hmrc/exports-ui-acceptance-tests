@@ -53,9 +53,9 @@ object InvoicesAndExchangeRatePage extends BasePage {
     val totalAmountInvoicedEntered: WebElement = findElementById("totalAmountInvoiced")
     totalAmountInvoicedEntered.sendKeys(totalAmountInvoiced)
 
-cache += ("CurrencyCode"               -> enteredCurrencyCodeEntered)
-cache += ("ExchangeRateWithDetails"    -> selectOption)
-cache += ("totalAmountInvoicedEntered" -> totalAmountInvoicedEntered.getText)
+store += ("CurrencyCode"               -> enteredCurrencyCodeEntered)
+store += ("ExchangeRateWithDetails"    -> selectOption)
+store += ("totalAmountInvoicedEntered" -> totalAmountInvoicedEntered.getText)
     submit()
   }
 }

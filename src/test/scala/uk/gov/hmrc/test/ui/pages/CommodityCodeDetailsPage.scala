@@ -38,8 +38,8 @@ object CommodityCodeDetailsPage extends BasePage {
     val commodityCodeDescription: WebElement = findElementById("descriptionOfGoods")
     commodityCodeDescription.sendKeys("Test Plastic")
 
-cache += ("CommodityCode"            -> commodityCodeReference.getText)
-cache += ("CommodityCodeDescription" -> commodityCodeDescription.getText)
+store += ("CommodityCode"            -> commodityCodeReference.getText)
+store += ("CommodityCodeDescription" -> commodityCodeDescription.getText)
     submit()
   }
 }

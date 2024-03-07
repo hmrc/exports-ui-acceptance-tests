@@ -39,8 +39,8 @@ object AdditionalDocumentationPage extends BasePage {
     val documentIdentifier: WebElement = findElementById("documentIdentifier")
     documentIdentifier.sendKeys("GBAEOC717572504502801")
 
-cache += ("documentCode"       -> documentCode.getText)
-cache += ("documentIdentifier" -> documentIdentifier.getText)
+store += ("documentCode"       -> documentCode.getText)
+store += ("documentIdentifier" -> documentIdentifier.getText)
 
     submit()
   }

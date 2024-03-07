@@ -25,7 +25,7 @@ object StandardOrOtherPage extends BasePage {
   val title = "Which type of declaration do you want to make? - Make an export declaration online - GOV.UK"
   val backButtonHrefs: List[String] = ???
 
-  override protected def performActionsAndCache(selectOption: String*): Unit = {
+  override protected def performActionsAndStore(selectOption: String*): Unit = {
     selectOption.head match {
       case "StandardDeclaration" => clickById("STANDARD")
       case "OtherDeclaration"    => clickById("NonStandardDeclarationType")

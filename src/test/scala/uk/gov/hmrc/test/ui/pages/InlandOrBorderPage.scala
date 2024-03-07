@@ -28,12 +28,12 @@ object InlandOrBorderPage extends BasePage {
     "https://www.gov.uk/government/collections/goods-location-codes-for-data-element-523-of-the-customs-declaration-service"
   )
 
-  def performActionsAndCache(selectOption: String*): Unit = {
+  def performActionsAndStore(selectOption: String*): Unit = {
     selectOption match {
       case "Border" => clickById("Border")
       case "Inland" => clickById("Inland")
     }
-    cache += (InlandOrBorderId -> "Customs supervising office", InlandOrBorderValue -> selectOption)
+    store += (InlandOrBorderId -> "Customs supervising office", InlandOrBorderValue -> selectOption)
 
   }
 }

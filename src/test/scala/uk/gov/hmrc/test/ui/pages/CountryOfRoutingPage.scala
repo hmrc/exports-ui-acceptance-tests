@@ -35,7 +35,7 @@ object CountryOfRoutingPage extends BasePage {
       case "Yes" => findElementById("Yes").click()
       case "No"  => findElementById("No").click()
     }
-cache += ("CountryOfRouting" -> selectOption)
+store += ("CountryOfRouting" -> selectOption)
     submit()
   }
 }

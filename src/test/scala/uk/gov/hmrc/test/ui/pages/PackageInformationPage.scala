@@ -50,9 +50,9 @@ object PackageInformationPage extends BasePage {
     val shippingMarks: WebElement    = findElementById("shippingMarks")
     shippingMarks.sendKeys("Test Shipping")
 
-cache += ("packageInformationDetails" -> enteredPackageType)
-cache += ("numberOfPackagesDetails"   -> numberOfPackages.getText)
-cache += ("shippingMarksDetails"      -> shippingMarks.getText)
+store += ("packageInformationDetails" -> enteredPackageType)
+store += ("numberOfPackagesDetails"   -> numberOfPackages.getText)
+store += ("shippingMarksDetails"      -> shippingMarks.getText)
     submit()
   }
 }

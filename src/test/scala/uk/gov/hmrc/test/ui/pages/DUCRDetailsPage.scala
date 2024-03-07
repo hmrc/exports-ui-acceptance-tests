@@ -49,7 +49,7 @@ object DUCRDetailsPage extends BasePage {
 
     //Enter the Ducr Value
     findElementById("ducr").sendKeys(generatedDucr)
-cache += ("DucrDetailsEntered" -> generatedDucr)
+store += ("DucrDetailsEntered" -> generatedDucr)
     submit()
   }
 }

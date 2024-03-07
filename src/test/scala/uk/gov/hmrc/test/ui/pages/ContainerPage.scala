@@ -37,7 +37,7 @@ object ContainerPage extends BasePage {
         findElementById("id").sendKeys("Container1")
       case "No"  => findElementById("code_no").click()
     }
-cache += ("containerDetails" -> selectOption)
+store += ("containerDetails" -> selectOption)
     submit()
   }
 }

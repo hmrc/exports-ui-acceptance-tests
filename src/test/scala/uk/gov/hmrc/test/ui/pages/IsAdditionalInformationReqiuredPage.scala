@@ -35,7 +35,7 @@ object IsAdditionalInformationReqiuredPage extends BasePage {
       case "Yes" => findElementById("code_yes").click()
       case "No"  => findElementById("code_no").click()
     }
-cache += ("additionalInformationStatements" -> selectOption)
+store += ("additionalInformationStatements" -> selectOption)
     submit()
   }
 }

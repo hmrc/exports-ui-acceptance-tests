@@ -35,7 +35,7 @@ object NationalAdditionalCodePage extends BasePage {
       case "Yes" => findElementById("code_yes").click()
       case "No"  => findElementById("code_no").click()
     }
-cache += ("NationalAdditionalCode" -> selectOption)
+store += ("NationalAdditionalCode" -> selectOption)
     submit()
   }
 }

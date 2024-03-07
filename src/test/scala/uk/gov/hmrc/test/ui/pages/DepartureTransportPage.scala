@@ -23,7 +23,7 @@ object DepartureTransportPage extends BasePage {
 
   val path: String                   = "/declaration/departure-transport"
   def title: String                 =
-    s"What are the details for the ${cache.getOrElse(TransportLeavingBorderValue, "default value").toLowerCase} transport?"
+    s"What are the details for the ${store.getOrElse(TransportLeavingBorderValue, "default value").toLowerCase} transport?"
   val backButtonHrefs: List[String] = List.empty
   override val expanderHrefs: List[String] = List(
     "group-7-transport-information-modes-means-and-equipment#de-77-identity-of-the-means-of-transport-at-departure"
@@ -31,7 +31,7 @@ object DepartureTransportPage extends BasePage {
 
   override def checkBackButton(): Unit = {}
 
-  def performActionsAndCache(selectOptions: String*): Unit = {
+  def performActionsAndStore(selectOptions: String*): Unit = {
     val optionToRadioMap: Map[String, (String, String, String)] = Map(
       "Ship IMO number"                                 -> ("radio_ShipOrRoroImoNumber", "ShipOrRoroImoNumber", "123456"),
       "Ship name"                                       -> ("radio_NameOfVessel", "NameOfVessel", "Seraphim"),
@@ -46,7 +46,7 @@ object DepartureTransportPage extends BasePage {
     for (selectOption <- selectOptions)
       optionToRadioMap.get(selectOption).foreach { case (radioId, radioName, radioValue) =>
         fillRadioButton(radioId, radioName, radioValue)
-        cache += (DepartureTransportId -> "Transport details at the border", DepartureTransportValue -> selectOption, DepartureTransportRef -> radioValue)
+        store += (DepartureTransportId -> "Transport details at the border", DepartureTransportValue -> selectOption, DepartureTransportRef -> radioValue)
       }
   }
 }

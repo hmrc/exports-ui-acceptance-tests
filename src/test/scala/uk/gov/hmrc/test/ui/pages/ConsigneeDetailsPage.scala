@@ -65,7 +65,7 @@ object ConsigneeDetailsPage extends BasePage {
     goodsDeliveredAddressDetails += ("postCode"       -> postCode.getText)
     goodsDeliveredAddressDetails += ("countryEntered" -> countryEntered)
 
-cache += ("registeredAddress" -> goodsDeliveredAddressDetails)
+store += ("registeredAddress" -> goodsDeliveredAddressDetails)
     submit()
   }
 }

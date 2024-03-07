@@ -35,7 +35,7 @@ object IsLicenseRequiredPage extends BasePage {
       case "Yes" => findElementById("code_yes").click()
       case "No"  => findElementById("code_no").click()
     }
-cache += ("isLicenseRequired" -> selectOption)
+store += ("isLicenseRequired" -> selectOption)
     submit()
   }
 }

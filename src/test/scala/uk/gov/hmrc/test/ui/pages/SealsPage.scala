@@ -35,7 +35,7 @@ object SealsPage extends BasePage {
       case "Yes" => findElementById("code_yes").click()
       case "No"  => findElementById("code_no").click()
     }
-cache += ("securitySealsDetails" -> selectOption)
+store += ("securitySealsDetails" -> selectOption)
     submit()
   }
 }

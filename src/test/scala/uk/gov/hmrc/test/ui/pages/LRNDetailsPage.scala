@@ -49,7 +49,7 @@ object LRNDetailsPage extends BasePage {
 
     //Enter the Lrn Value
     findElementById("lrn").sendKeys(generatedLrn)
-cache += ("DucrDetailsEntered" -> generatedLrn)
+store += ("DucrDetailsEntered" -> generatedLrn)
     submit()
   }
 }

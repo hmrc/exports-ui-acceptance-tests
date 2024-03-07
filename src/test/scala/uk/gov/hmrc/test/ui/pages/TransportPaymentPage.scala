@@ -29,7 +29,7 @@ object TransportPaymentPage extends BasePage {
     "group-4-valuation-information-and-taxes#de-42-transport-charges-method-of-payment"
   )
 
-  def performActionsAndCache(selectOption: String*): Unit = {
+  def performActionsAndStore(selectOption: String*): Unit = {
     val elementId           = selectOption match {
       case "Payment in cash"                      => "cash"
       case "Payment by credit card"               => "creditCard"
@@ -44,6 +44,6 @@ object TransportPaymentPage extends BasePage {
     val updatedSelectOption =
       if (elementId == "other") "Other (e.g. Direct debit to cash account)"
       else selectOption.headOption.getOrElse("Other")
-    cache ++ (TransportPaymentId -> "Method of payment for transport", TransportPaymentValue -> updatedSelectOption)
+    store ++ (TransportPaymentId -> "Method of payment for transport", TransportPaymentValue -> updatedSelectOption)
   }
 }

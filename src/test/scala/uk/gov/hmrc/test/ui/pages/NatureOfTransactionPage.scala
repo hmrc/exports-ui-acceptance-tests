@@ -43,7 +43,7 @@ object NatureOfTransactionPage extends BasePage {
       case "Goods being supplied under a contract" => findElementById("Construction").click()
       case "Other"                                 => findElementById("Other").click()
     }
-cache += ("NatureOfTransactionDetails" -> selectOption)
+store += ("NatureOfTransactionDetails" -> selectOption)
     submit()
   }
 }

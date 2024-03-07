@@ -37,7 +37,7 @@ object VatRatingPage extends BasePage {
       case "VATE"   => findElementById("VATE").click()
       case "VAT_NO" => findElementById("VAT_NO").click()
     }
-cache += ("vatRatingDetails" -> selectOption)
+store += ("vatRatingDetails" -> selectOption)
     submit()
   }
 }

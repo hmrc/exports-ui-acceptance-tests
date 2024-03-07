@@ -38,7 +38,7 @@ object DoYouKnowTheCarrierEORINumberPage extends BasePage {
         findElementById("eori").sendKeys("GB121212121212")
       case "No"  => findElementById("No").click()
     }
-cache += ("DoYouKnowTheCarrierEORI" -> selectOption)
+store += ("DoYouKnowTheCarrierEORI" -> selectOption)
     submit()
   }
 }

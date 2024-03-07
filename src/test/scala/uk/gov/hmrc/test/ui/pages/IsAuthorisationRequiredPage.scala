@@ -38,7 +38,7 @@ object IsAuthorisationRequiredPage extends BasePage {
       case "Yes" => findElementById("code_yes").click()
       case "No"  => findElementById("code_no").click()
     }
-cache += ("IsAuthorisationRequired" -> selectOption)
+store += ("IsAuthorisationRequired" -> selectOption)
     submit()
   }
 }

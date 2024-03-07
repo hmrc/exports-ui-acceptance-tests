@@ -44,7 +44,7 @@ object DestinationCountryPage extends BasePage {
 
   def enterDestinationCountry(destinationCountry: String): Unit = {
     val countryEntered: String = typeDestinationCountry(destinationCountry)
-cache += ("DestinationCountryEntered" -> countryEntered)
+store += ("DestinationCountryEntered" -> countryEntered)
     submit()
   }
 }

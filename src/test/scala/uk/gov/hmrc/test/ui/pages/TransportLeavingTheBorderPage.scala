@@ -29,7 +29,7 @@ object TransportLeavingTheBorderPage extends BasePage {
     "group-7-transport-information-modes-means-and-equipment#de-74-mode-of-transport-at-the-border-box-25-mode-of-transport-at-the-border"
   )
 
-  def performActionsAndCache(selectOptions: String*): Unit = {
+  def performActionsAndStore(selectOptions: String*): Unit = {
     val optionToIdMap: Map[String, String] = Map(
       "Sea transport"                     -> "Border_Sea",
       "Roll on roll off (RoRo) transport" -> "Border_Ferry",
@@ -45,7 +45,7 @@ object TransportLeavingTheBorderPage extends BasePage {
     for (selectOption <- selectOptions)
       optionToIdMap.get(selectOption).foreach { id =>
         clickById(id)
-        cache += (TransportLeavingBorderId -> "Transport at the border", TransportLeavingBorderValue -> selectOption)
+        store += (TransportLeavingBorderId -> "Transport at the border", TransportLeavingBorderValue -> selectOption)
       }
   }
 }

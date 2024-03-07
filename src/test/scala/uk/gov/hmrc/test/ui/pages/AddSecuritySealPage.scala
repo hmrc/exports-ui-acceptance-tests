@@ -34,7 +34,7 @@ object AddSecuritySealPage extends BasePage {
   def addSecuritySealInformation(): Unit = {
     val securitySealName: WebElement = findElementById("id")
     securitySealName.sendKeys("Seal1")
-cache += ("securitySealsOption" -> securitySealName.getText)
+store += ("securitySealsOption" -> securitySealName.getText)
     submit()
   }
 }
