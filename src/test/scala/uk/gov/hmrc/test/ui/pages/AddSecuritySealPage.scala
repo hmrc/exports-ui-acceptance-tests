@@ -18,22 +18,23 @@ package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.WebElement
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object AddSecuritySealPage extends BasePage {
 
-  val url: String                                    = TestConfiguration.url("exports-frontend") + "/declaration/containers/([^/]+)/add-seal"
-  val addSecuritySealPageTitle                       = "What is the security seal for container"
-  var addSecuritySealDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                                    = "/declaration/containers/([^/]+)/add-seal"
+  val title                       = "What is the security seal for container"
+
 
   def checkPageTitle(): Unit =
     AddSecuritySealPage.checkUrlAndTitle(addSecuritySealPageTitle)
 
   def addSecuritySealInformation(): Unit = {
-    val securitySealName: WebElement = findElement("id", "id")
+    val securitySealName: WebElement = findElementById("id")
     securitySealName.sendKeys("Seal1")
-    declarationDetailsMap += ("securitySealsOption" -> securitySealName.getText)
+cache += ("securitySealsOption" -> securitySealName.getText)
     submit()
   }
 }

@@ -17,15 +17,16 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 object AddDeclarationItemPage extends BasePage {
 
-  val url: String                 = TestConfiguration.url("exports-frontend") + "/declaration/add-declaration-item"
-  val addDeclarationItemPageTitle = "Add declaration item"
+  val path: String                 = "/declaration/add-declaration-item"
+  val title = "Add declaration item"
 
   def checkPageTitle(): Unit =
     AreYouTheExporterPage.checkUrlAndTitle(addDeclarationItemPageTitle)
 
   def clickToAddItem(): Unit =
-    findElement("id", "add")
+    findElementById("add")
 }

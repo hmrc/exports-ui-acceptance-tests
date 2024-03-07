@@ -28,19 +28,18 @@ class StandardJourneyStepDefs extends BaseStepDef {
   }
 
   And("""^I select (.*) to create (.*) prelodged$""") { (CreateDeclaration: String, StandardDeclaration: String) =>
-    ExportsHomePage.selectOptionToMakeAndManageDeclaration(CreateDeclaration)
-    StandardOrOtherPage.selectOptionToProgressWith("StandardDeclaration")
+    ChoicePage.checkPage(CreateDeclaration)
+    StandardOrOtherPage.checkPage("StandardDeclaration")
   //DeclarationChoicePage.selectOptionToCreateWhatTypeOfDeclaration(StandardDeclaration)
   }
 
   And("""^I select the option No for Arrived export declaration$""") { () =>
-    DeclarationTypePage.checkPageTitle()
     DeclarationTypePage.selectDeclarationTypeOption("PreLodgedDeclaration")
   }
 
   And("""choose declarant details as Yes""") { () =>
     DeclarantDetailsPage.checkPageTitle()
-    DeclarantDetailsPage.selectOptionForISYourEori("Yes")
+    DeclarantDetailsPage.checkPage("Yes")
   }
   And("""I provide the ducr details""") { () =>
     DoYouHaveDUCRPage.checkPageTitle()
@@ -87,8 +86,7 @@ class StandardJourneyStepDefs extends BaseStepDef {
   }
   And("""^I provide the details for authorisation with (.*) and select hold the authorisation option as (.*)$""") {
     (authorisationCode: String, userEori: String) =>
-      AddAuthorisationRequiredPage.checkPageTitle()
-      AddAuthorisationRequiredPage.enterAuthorisationCodeWithDetails(authorisationCode, userEori)
+      AddAuthorisationRequiredPage.checkPage(authorisationCode, userEori)
   }
   And("""^I select "(.*)" for adding another authorisation$""") { (addAnotherAuthorisation: String) =>
     AuthorisationsRequiredPage.checkPageTitle()
@@ -104,8 +102,7 @@ class StandardJourneyStepDefs extends BaseStepDef {
   }
   And("""^I select (.*) and enter location of goods as (.*)$""") {
     (selectOption: String, locationOfGoodsCode: String) =>
-      LocationOfGoodsPage.checkPageTitle()
-      LocationOfGoodsPage.selectDoYouWantToSearchForAGoodsLocationCodeOption(selectOption, locationOfGoodsCode)
+      LocationOfGoodsPage.checkPage(selectOption, locationOfGoodsCode)
   }
   And("""^I select office of exit as (.*)$""") { (officeOfExitCode: String) =>
     OfficeOfExitPage.checkPageTitle()
@@ -142,8 +139,7 @@ class StandardJourneyStepDefs extends BaseStepDef {
     AddDeclarationItemPage.clickToAddItem()
     AddProcedureCodesPage.checkPageTitle()
     AddProcedureCodesPage.enterProcedureCode(procedureCode)
-    AddAdditionalProcedureCodesPage.checkPageTitle()
-    AddAdditionalProcedureCodesPage.enterAdditionalProcedureCodeDetails(additionalProcedureCode)
+    AddAdditionalProcedureCodesPage.checkPage(additionalProcedureCode)
   }
   And("""I select the commodity code and enter the item details information""") { () =>
     CommodityCodeDetailsPage.checkPageTitle()
@@ -198,28 +194,22 @@ class StandardJourneyStepDefs extends BaseStepDef {
     DeclarationItemsListPage.selectDoYouNeedToAddAnotherItemOption("No")
   }
   And("""^I select (.*) as transport leaving the border$""") { (modeOfTransport: String) =>
-    TransportLeavingTheBorderPage.checkPageTitle()
-    TransportLeavingTheBorderPage.selectBorderModeOfTransportOption(modeOfTransport)
+    TransportLeavingTheBorderPage.checkPage(modeOfTransport)
   }
   And("""^I select (.*) option for inland or border page$""") { (inlandOrBorderOption: String) =>
-    InlandOrBorderPage.checkPageTitle()
-    InlandOrBorderPage.selectInlandOrBorderOption(inlandOrBorderOption)
+    InlandOrBorderPage.checkPage(inlandOrBorderOption)
   }
   And("""^I provide (.*) details for departure transport$""") { (departureTransportOption: String) =>
-    DepartureTransportPage.checkUrlAndTitle()
-    DepartureTransportPage.selectBorderModeOfTransportOption(departureTransportOption)
+    DepartureTransportPage.checkPage(departureTransportOption)
   }
   And("""^I provide the transport country details$""") { () =>
-    TransportCountryPage.checkPageTitle()
-    TransportCountryPage.selectDoYouKnowTheCountryWhereTheSeaTransportIsRegisteredOption()
+    TransportCountryPage.checkPage()
   }
   And("""^I select Yes for express consignment$""") { () =>
-    ExpressConsignmentPage.checkPageTitle()
-    ExpressConsignmentPage.selectIsThisExpressConsignmentOption("Yes")
+    ExpressConsignmentPage.checkPage("Yes")
   }
   And("""^I select (.*) option for transport payment$""") { (transportPaymentOption: String) =>
-    TransportPaymentPage.checkPageTitle()
-    TransportPaymentPage.selectHowDoyouPayForTheExpressTransportOption(transportPaymentOption)
+    TransportPaymentPage.checkPage(transportPaymentOption)
   }
   And("""^I select Yes option to add the container and provide security seals details$""") { () =>
     ContainerPage.checkPageTitle()

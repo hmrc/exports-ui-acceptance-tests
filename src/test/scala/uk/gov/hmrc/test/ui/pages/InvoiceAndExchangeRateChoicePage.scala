@@ -17,25 +17,26 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object InvoiceAndExchangeRateChoicePage extends BasePage {
 
-  val url: String                                                 = TestConfiguration.url("exports-frontend") + "/declaration/invoices-and-exchange-rate-choice"
-  val invoiceAndExchangeRateChoicePageTitle                       = "Is the total amount invoiced less than £100,000 in value? "
-  var invoiceAndExchangeRateChoiceDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                                                 = "/declaration/invoices-and-exchange-rate-choice"
+  val title                       = "Is the total amount invoiced less than £100,000 in value? "
+
 
   def checkPageTitle(): Unit =
     InvoiceAndExchangeRateChoicePage.checkUrlAndTitle(invoiceAndExchangeRateChoicePageTitle)
 
   def isTheTotalAmountInvoicedLessThan100000IValueOption(selectOption: String): Unit = {
     selectOption match {
-      case "Yes" => findElement("id", "code_yes").click()
-      case "No"  => findElement("id", "code_no").click()
+      case "Yes" => findElementById("code_yes").click()
+      case "No"  => findElementById("code_no").click()
     }
-    invoiceAndExchangeRateChoiceDetailsMap += ("InvoiceAndExchangeRateChoice" -> selectOption)
-    declarationDetailsMap += ("InvoiceAndExchangeRateChoice"                  -> selectOption)
+cache += ("InvoiceAndExchangeRateChoice" -> selectOption)
+cache += ("InvoiceAndExchangeRateChoice"                  -> selectOption)
     submit()
   }
 }

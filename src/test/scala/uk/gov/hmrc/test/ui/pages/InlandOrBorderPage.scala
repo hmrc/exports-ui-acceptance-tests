@@ -16,25 +16,24 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import uk.gov.hmrc.test.ui.conf.TestConfiguration
-
-import scala.collection.immutable.HashMap
+import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{InlandOrBorderId, InlandOrBorderValue, cache}
 
 object InlandOrBorderPage extends BasePage {
 
-  val url: String                                   = TestConfiguration.url("exports-frontend") + "/declaration/inland-or-border"
-  val inlandOrBorderPageTitle                       = "Where are you presenting your goods to customs?"
-  var inlandOrBorderDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                   = "/declaration/inland-or-border"
+  def title                         = "Where are you presenting your goods to customs?"
+  val backButtonHrefs: List[String] = List.empty
+  override val expanderHrefs        = List(
+    "https://www.gov.uk/government/collections/goods-location-codes-for-data-element-523-of-the-customs-declaration-service"
+  )
 
-  def checkPageTitle(): Unit =
-    InlandOrBorderPage.checkUrlAndTitle(inlandOrBorderPageTitle)
-
-  def selectInlandOrBorderOption(selectOption: String): Unit = {
+  def performActionsAndCache(selectOption: String*): Unit = {
     selectOption match {
-      case "Border" => findElement("id", "Border").click()
-      case "Inland" => findElement("id", "Inland").click()
+      case "Border" => clickById("Border")
+      case "Inland" => clickById("Inland")
     }
-    inlandOrBorderDetailsMap += ("InlandOrBoderDetails" -> selectOption)
-    submit()
+    cache += (InlandOrBorderId -> "Customs supervising office", InlandOrBorderValue -> selectOption)
+
   }
 }

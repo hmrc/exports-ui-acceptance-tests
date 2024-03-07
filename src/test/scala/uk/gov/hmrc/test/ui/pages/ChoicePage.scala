@@ -17,11 +17,13 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
-object ExportsHomePage extends BasePage {
+object ChoicePage extends BasePage {
 
-  val url: String   = TestConfiguration.url("exports-frontend") + "/choice"
-  val homePageTitle = "Make and manage export declarations - Make an export declaration online - GOV.UK"
+  val path: String   = "/choice"
+  val title = "Make and manage export declarations - Make an export declaration online - GOV.UK"
+  val backButtonHrefs: List[String] = List.empty
 
   val createDeclaration                   = "create-declaration"
   val manageDraftDeclaration              = "manage-draft-declarations"
@@ -29,21 +31,15 @@ object ExportsHomePage extends BasePage {
   val manageMovementsDeclaration          = "movements"
   val manageDocumentsByConnectingWithSFUS = "upload-documents"
 
-  def checkTitle(): Unit =
-    ExportsHomePage.checkUrlAndTitle(homePageTitle)
-
-  def selectOptionToProgressWith(selectOption: String): Unit =
-    selectOption match {
-      case "StandardDeclaration"     => findElement("id", createDeclaration).click()
-      case "ManageDraftDeclaration"  => findElement("id", manageDraftDeclaration).click()
-      case "ManageSubmitDeclaration" => findElement("id", manageSubmitDeclaration).click()
+  def performActionsAndCache(selectOption: String*): Unit = {
+    selectOption.head match {
+      case "CreateDeclaration"       => clickById(createDeclaration)
+      case "ManageDraftDeclaration"  => clickById(manageDraftDeclaration)
+      case "ManageSubmitDeclaration" => clickById(manageSubmitDeclaration)
+      case "ManageMovementsDeclaration" => clickById(manageMovementsDeclaration)
+      case "ManageDocumentsByConnectingWithSFUS" => clickById(manageDocumentsByConnectingWithSFUS)
     }
+  }
 
-  def selectOptionToMakeAndManageDeclaration(selectOption: String): Unit =
-    selectOption match {
-      case "CreateDeclaration"       => findElement("id", createDeclaration).click()
-      case "ManageDraftDeclaration"  => findElement("id", manageDraftDeclaration).click()
-      case "ManageSubmitDeclaration" => findElement("id", manageSubmitDeclaration).click()
-    }
-
+  override def checkBackButton(): Unit = ()
 }

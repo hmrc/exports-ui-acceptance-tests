@@ -17,24 +17,25 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object AddSealsListPage extends BasePage {
 
-  val url: String                                 = TestConfiguration.url("exports-frontend") + "/declaration/containers/([^/]+)/seals"
-  val addSealsListPageTitle                       = "You have added"
-  var addSealsListDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                                 = "/declaration/containers/([^/]+)/seals"
+  val title                       = "You have added"
+
 
   def checkPageTitle(): Unit =
     AddSealsListPage.checkUrlAndTitle(addSealsListPageTitle)
 
   def selectDoYouWantToAddAnotherSealOption(selectOption: String): Unit = {
     selectOption match {
-      case "Yes" => findElement("id", "code_yes")
-      case "No"  => findElement("id", "code_no")
+      case "Yes" => findElementById("code_yes")
+      case "No"  => findElementById("code_no")
     }
-    declarationDetailsMap += ("sealsListDetails" -> selectOption)
+cache += ("sealsListDetails" -> selectOption)
     submit()
   }
 }

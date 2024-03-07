@@ -18,13 +18,14 @@ package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.{By, WebDriver, WebElement}
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.jdk.CollectionConverters._
 
 object SavedDeclarationsPage extends BasePage {
 
-  val url: String   = TestConfiguration.url("exports-frontend") + "/saved-declarations"
-  val homePageTitle = "Your saved declarations - Make an export declaration online - GOV.UK"
+  val path: String   = "/saved-declarations"
+  val title = "Your saved declarations - Make an export declaration online - GOV.UK"
 
   val backToSelectionPageNavigationLink = "back-link"
 
@@ -32,7 +33,7 @@ object SavedDeclarationsPage extends BasePage {
     driver.findElements(By.cssSelector("""a[href*="saved-declarations/"]""")).asScala.toList
 
   def clickDraftDeclarationByUsingDUCR(ducr: String): Unit = {
-    SavedDeclarationsPage.checkUrlAndTitle(homePageTitle)
+    SavedDeclarationsPage.checkUrlAndTitle(title)
     val obtainedDucrLink =
       declarationLinks().find(_.getText.contains(ducr)).getOrElse(fail(s"Could not find declaration $ducr on list"))
     obtainedDucrLink

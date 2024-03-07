@@ -18,24 +18,25 @@ package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.Keys
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object AddProcedureCodesPage extends BasePage {
 
-  val url: String                                      = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/procedure-codes"
-  val AddProcedureCodesPageTitle                       = "What is the procedure code for this item?"
-  var addProcedureCodesDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                                      = "/declaration/items/([^/]+)/procedure-codes"
+  val title                       = "What is the procedure code for this item?"
+
   val superKey: Keys                                   = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
 
   def checkPageTitle(): Unit =
     AddProcedureCodesPage.checkUrlAndTitle(AddProcedureCodesPageTitle)
 
   def typeProcedureCode(procedureCode: String): Unit = {
-    findElement("id", "procedureCode").clear()
-    findElement("id", "procedureCode").sendKeys(Keys.chord(superKey, "a"))
-    findElement("id", "procedureCode").sendKeys(procedureCode)
-    findElement("id", "procedureCode").sendKeys(Keys.ARROW_DOWN)
+    findElementById("procedureCode").clear()
+    findElementById("procedureCode").sendKeys(Keys.chord(superKey, "a"))
+    findElementById("procedureCode").sendKeys(procedureCode)
+    findElementById("procedureCode").sendKeys(Keys.ARROW_DOWN)
     driver.switchTo().activeElement().sendKeys(Keys.TAB)
   }
 
@@ -43,7 +44,7 @@ object AddProcedureCodesPage extends BasePage {
 
     val procedureCodeEntered: String = typeProcedureCode(procedureCode).toString
 
-    declarationDetailsMap += ("procedureCode" -> procedureCodeEntered)
+cache += ("procedureCode" -> procedureCodeEntered)
     submit()
   }
 }

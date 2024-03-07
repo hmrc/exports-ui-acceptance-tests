@@ -41,8 +41,8 @@ class CommonStepDef extends BaseStepDef {
 
   Then("""^I should be navigated to the (.*)$""") { (page: String) =>
     page match {
-      case "Departure Transport Page" => DepartureTransportPage.checkUrlAndTitle()
-      case "Border Transport Page"    => DepartureTransportPage.checkUrlAndTitle()
+      case "Departure Transport Page" => DepartureTransportPage.checkPage()
+      case "Border Transport Page"    => DepartureTransportPage.checkPage()
     }
   }
 }

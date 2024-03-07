@@ -17,15 +17,16 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 import scala.util.Random
 
 object EnterMUCRPage extends BasePage {
 
-  val url: String                         = TestConfiguration.url("exports-frontend") + "/declaration/enter-a-mucr"
-  val pageTitle                           = "Enter the MUCR"
-  var mucrDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                         = "/declaration/enter-a-mucr"
+  val title                           = "Enter the MUCR"
+
 
   def checkPageTitle(): Unit =
     DUCRDetailsPage.checkUrlAndTitle(pageTitle)
@@ -47,8 +48,8 @@ object EnterMUCRPage extends BasePage {
     val generatedMucr = generateRandomMUCRString()
 
     //Enter the Ducr Value
-    findElement("id", "MUCR").sendKeys("GB/123456789100-AB123")
-    mucrDetailsMap += ("MucrDetailsEntered" -> "GB/123456789100-AB123")
+    findElementById("MUCR").sendKeys("GB/123456789100-AB123")
+cache += ("MucrDetailsEntered" -> "GB/123456789100-AB123")
     submit()
   }
 }

@@ -17,25 +17,26 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object AuthorisationChoicePage extends BasePage {
 
-  val url: String                                        = TestConfiguration.url("exports-frontend") + "/declaration/authorisation-choice"
-  val authorisationChoicePageTitle                       = "Which export procedure are you using?"
-  var authorisationChoiceDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                                        = "/declaration/authorisation-choice"
+  val title                       = "Which export procedure are you using?"
+
 
   def checkPageTitle(): Unit =
     AuthorisationChoicePage.checkUrlAndTitle(authorisationChoicePageTitle)
 
   def selectAuthorisationChoiceOption(selectOption: String): Unit = {
     selectOption match {
-      case "Permanent_export_of_UK_goods"      => findElement("id", "Code1040").click()
-      case "Permanent_export_of_excise_goods " => findElement("id", "Code1007").click()
-      case "Temporary_exports"                 => findElement("id", "CodeOther").click()
+      case "Permanent_export_of_UK_goods"      => findElementById("Code1040").click()
+      case "Permanent_export_of_excise_goods " => findElementById("Code1007").click()
+      case "Temporary_exports"                 => findElementById("CodeOther").click()
     }
-    declarationDetailsMap += ("AuthorisationChoice" -> selectOption)
+cache += ("AuthorisationChoice" -> selectOption)
     submit()
   }
 }

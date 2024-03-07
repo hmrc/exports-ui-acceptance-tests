@@ -17,33 +17,26 @@
 package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.Keys
-import uk.gov.hmrc.test.ui.conf.TestConfiguration
-
-import scala.collection.immutable.HashMap
+import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.cache
 
 object AddAdditionalProcedureCodesPage extends BasePage {
 
-  val url: String                                                = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/additional-procedure-codes"
-  val addAdditionalProcedureCodesPageTitle                       = "Add any additional procedure codes to"
-  var addAdditionalProcedureCodesDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                                                = "/declaration/items/([^/]+)/additional-procedure-codes"
+  val title                       = "Add any additional procedure codes to"
+  val backButtonHrefs: List[String] = ???
   val superKey: Keys                                             = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
 
-  def checkPageTitle(): Unit =
-    AddProcedureCodesPage.checkUrlAndTitle(addAdditionalProcedureCodesPageTitle)
-
-  def typeAdditionalProcedureCode(procedureCode: String): Unit = {
-    findElement("id", "additionalProcedureCode").clear()
-    findElement("id", "additionalProcedureCode").sendKeys(Keys.chord(superKey, "a"), Keys.BACK_SPACE)
-    findElement("id", "additionalProcedureCode").sendKeys(procedureCode)
-    findElement("id", "additionalProcedureCode").sendKeys(Keys.ARROW_DOWN)
+  private def typeAdditionalProcedureCode(procedureCode: String): Unit = {
+    findElementById("additionalProcedureCode").clear()
+    findElementById("additionalProcedureCode").sendKeys(Keys.chord(superKey, "a"), Keys.BACK_SPACE)
+    findElementById("additionalProcedureCode").sendKeys(procedureCode)
+    findElementById("additionalProcedureCode").sendKeys(Keys.ARROW_DOWN)
     driver.switchTo().activeElement().sendKeys(Keys.TAB)
   }
 
-  def enterAdditionalProcedureCodeDetails(additionalProcedureCode: String): Unit = {
-
-    val additionalProcedureCodeEntered: String = typeAdditionalProcedureCode(additionalProcedureCode).toString
-
-    declarationDetailsMap += ("AdditionalProcedureCode" -> additionalProcedureCodeEntered)
-    submit()
+  override protected def performActionsAndCache(additionalProcedureCode: String*): Unit = {
+    typeAdditionalProcedureCode(additionalProcedureCode.head)
+    cache += ("AdditionalProcedureCode" -> additionalProcedureCode.head)
   }
 }

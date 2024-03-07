@@ -21,6 +21,6 @@ import uk.gov.hmrc.test.ui.pages._
 class DepartureTransportStepDefs extends BaseStepDef {
 
   And("""^I select (.*) radio option on Departure Transport Page$""") { (radio: String) =>
-    DepartureTransportPage.selectBorderModeOfTransportOption(radio)
+    DepartureTransportPage.checkPage(radio)
   }
 }

@@ -18,24 +18,25 @@ package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.WebElement
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object StatisticalValuePage extends BasePage {
 
-  val url: String                                     = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/statistical-value"
-  val statisticalValuePageTitle                       = "The statistical value of this item in pounds"
-  var statisticalValueDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                                     = "/declaration/items/([^/]+)/statistical-value"
+  val title                       = "The statistical value of this item in pounds"
+
 
   def checkPageTitle(): Unit =
     AreYouTheExporterPage.checkUrlAndTitle(statisticalValuePageTitle)
 
   def enterStatisticalValue(): Unit = {
 
-    val statisticalValue: WebElement = findElement("id", "statisticalValue")
+    val statisticalValue: WebElement = findElementById("statisticalValue")
     statisticalValue.sendKeys("1000")
 
-    statisticalValueDetailsMap += ("statisticalValue" -> statisticalValue.getText)
+cache += ("statisticalValue" -> statisticalValue.getText)
     submit()
   }
 }

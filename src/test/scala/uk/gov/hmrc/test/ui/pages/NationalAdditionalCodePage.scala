@@ -17,24 +17,25 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object NationalAdditionalCodePage extends BasePage {
 
-  val url: String                                           = TestConfiguration.url("exports-frontend") + "/declaration/items/([^/]+)/national-additional-code"
-  val nationalAdditionalCodePageTitle                       = "Do you need to add a national additional code?"
-  var nationalAdditionalCodeDetailsMap: Map[String, String] = HashMap[String, String]()
+  val path: String                                           = "/declaration/items/([^/]+)/national-additional-code"
+  val title                       = "Do you need to add a national additional code?"
+
 
   def checkPageTitle(): Unit =
     NationalAdditionalCodePage.checkUrlAndTitle(nationalAdditionalCodePageTitle)
 
   def selectDoYouNeedANationalAdditionalCodeOption(selectOption: String): Unit = {
     selectOption match {
-      case "Yes" => findElement("id", "code_yes").click()
-      case "No"  => findElement("id", "code_no").click()
+      case "Yes" => findElementById("code_yes").click()
+      case "No"  => findElementById("code_no").click()
     }
-    nationalAdditionalCodeDetailsMap += ("NationalAdditionalCode" -> selectOption)
+cache += ("NationalAdditionalCode" -> selectOption)
     submit()
   }
 }

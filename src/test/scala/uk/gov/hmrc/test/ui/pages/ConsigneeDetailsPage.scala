@@ -18,13 +18,14 @@ package uk.gov.hmrc.test.ui.pages
 
 import org.openqa.selenium.{Keys, WebElement}
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object ConsigneeDetailsPage extends BasePage {
 
-  val url: String                                                  = TestConfiguration.url("exports-frontend") + "/declaration/consignee-details"
-  val consigneeDetailsPageTitle                                    = "Where will the goods be delivered?"
+  val path: String                                                  = "/declaration/consignee-details"
+  val title                                    = "Where will the goods be delivered?"
   var goodsDeliveredAddressDetails: Map[String, String]            = HashMap[String, String]()
   var consigneeDetailsAddressMap: Map[String, Map[String, String]] = HashMap[String, Map[String, String]]()
   val superKey: Keys                                               = if (System.getProperty("os.name").toLowerCase.contains("mac")) Keys.COMMAND else Keys.CONTROL
@@ -33,27 +34,27 @@ object ConsigneeDetailsPage extends BasePage {
     CarrierOrHaulierDetailsPage.checkUrlAndTitle(consigneeDetailsPageTitle)
 
   def typeCountry(): String = {
-    findElement("id", "details_address_country").clear()
-    findElement("id", "details_address_country").sendKeys(Keys.chord(superKey, "a"), Keys.BACK_SPACE)
-    val country: WebElement = findElement("id", "details_address_country")
+    findElementById("details_address_country").clear()
+    findElementById("details_address_country").sendKeys(Keys.chord(superKey, "a"), Keys.BACK_SPACE)
+    val country: WebElement = findElementById("details_address_country")
     country.sendKeys("AD")
-    findElement("id", "details_address_country").sendKeys(Keys.ARROW_DOWN)
+    findElementById("details_address_country").sendKeys(Keys.ARROW_DOWN)
     driver.switchTo().activeElement().sendKeys(Keys.TAB)
     country.getText
   }
 
   def enterAddressDetailsToGetGoodsToBeDelivered(): Unit = {
 
-    val fullName: WebElement = findElement("id", "details_address_fullName")
+    val fullName: WebElement = findElementById("details_address_fullName")
     fullName.sendKeys("TEST Full Name")
 
-    val addressLine: WebElement = findElement("id", "details_address_addressLine")
+    val addressLine: WebElement = findElementById("details_address_addressLine")
     addressLine.sendKeys("TEST Address Line 1")
 
-    val town: WebElement = findElement("id", "details_address_townOrCity")
+    val town: WebElement = findElementById("details_address_townOrCity")
     town.sendKeys("TEST Town")
 
-    val postCode: WebElement = findElement("id", "details_address_postCode")
+    val postCode: WebElement = findElementById("details_address_postCode")
     postCode.sendKeys("SL6 0FF")
 
     val countryEntered: String = typeCountry()
@@ -64,7 +65,7 @@ object ConsigneeDetailsPage extends BasePage {
     goodsDeliveredAddressDetails += ("postCode"       -> postCode.getText)
     goodsDeliveredAddressDetails += ("countryEntered" -> countryEntered)
 
-    consigneeDetailsAddressMap += ("registeredAddress" -> goodsDeliveredAddressDetails)
+cache += ("registeredAddress" -> goodsDeliveredAddressDetails)
     submit()
   }
 }

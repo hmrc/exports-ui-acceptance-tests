@@ -17,15 +17,16 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 import scala.collection.immutable.HashMap
 
 object DoYouKnowTheCarrierEORINumberPage extends BasePage {
 
-  val url: String                                            = TestConfiguration.url("exports-frontend") + "/are-you-the-exporter"
-  val areYouTheExporterPageTitle                             =
+  val path: String                                            = "/are-you-the-exporter"
+  val title                             =
     "Do you know the EORI number of your carrier or haulier?"
-  var doYouKnowTheCarrierEORIDetailsMap: Map[String, String] = HashMap[String, String]()
+
 
   def checkPageTitle(): Unit =
     AreYouTheExporterPage.checkUrlAndTitle(areYouTheExporterPageTitle)
@@ -33,11 +34,11 @@ object DoYouKnowTheCarrierEORINumberPage extends BasePage {
   def selectAreYouAnExporterOption(selectOption: String): Unit = {
     selectOption match {
       case "Yes" =>
-        findElement("id", "Yes").click()
-        findElement("id", "eori").sendKeys("GB121212121212")
-      case "No"  => findElement("id", "No").click()
+        findElementById("Yes").click()
+        findElementById("eori").sendKeys("GB121212121212")
+      case "No"  => findElementById("No").click()
     }
-    doYouKnowTheCarrierEORIDetailsMap += ("DoYouKnowTheCarrierEORI" -> selectOption)
+cache += ("DoYouKnowTheCarrierEORI" -> selectOption)
     submit()
   }
 }

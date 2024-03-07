@@ -17,21 +17,18 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 object StandardOrOtherPage extends BasePage {
 
-  val url: String   = TestConfiguration.url("exports-frontend") + "/standard-or-other"
-  val homePageTitle = "Make and manage export declarations - Make an export declaration online - GOV.UK"
+  val path: String   = "/standard-or-other"
+  val title = "Which type of declaration do you want to make? - Make an export declaration online - GOV.UK"
+  val backButtonHrefs: List[String] = ???
 
-  def checkTitle(): Unit =
-    ExportsHomePage.checkUrlAndTitle(homePageTitle)
-
-  def selectOptionToProgressWith(selectOption: String): Unit = {
-    selectOption match {
-      case "StandardDeclaration" => findElement("id", "STANDARD").click()
-      case "OtherDeclaration"    => findElement("id", "NonStandardDeclarationType").click()
+  override protected def performActionsAndCache(selectOption: String*): Unit = {
+    selectOption.head match {
+      case "StandardDeclaration" => clickById("STANDARD")
+      case "OtherDeclaration"    => clickById("NonStandardDeclarationType")
     }
-    submit()
   }
-
 }
