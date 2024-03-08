@@ -2,7 +2,7 @@ package uk.gov.hmrc.test.ui.pages.base
 
 object DeclarationTypes {
 
-  val Common        = "COMMON"  // Used for the expander only
+  val Common        = "COMMON"  // Used for the tariff expander only
 
   val Clearance     = "CLEARANCE"
   val Occasional    = "OCCASIONAL"

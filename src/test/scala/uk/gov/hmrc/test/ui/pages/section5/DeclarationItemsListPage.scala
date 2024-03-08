@@ -36,8 +36,5 @@ object DeclarationItemsListPage extends BasePage {
     Common -> List("https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-1-message-information-including-procedure-codes#de-19-total-number-of-items-box-5-items")
   )
 
-  override protected def performActionsAndStore(values: String*): Unit = {
-    selectYesOrNoRadio(values.head)
-    store(DeclarationItemsListYesNo -> Detail(values.head))
-  }
+  override protected def performActionsAndStore(values: String*): Unit = selectYesOrNoRadio(values.head)
 }

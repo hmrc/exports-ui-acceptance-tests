@@ -22,6 +22,9 @@ trait DriverHelper extends BrowserDriver {
   def elementDoesNotExist(elementBy: By): Boolean =
     driver.findElements(elementBy).size() == 0
 
+  def elementByIdDoesNotExist(elementId: String): Boolean =
+    driver.findElements(By.id(elementId)).size() == 0
+
   def findElementById(value: String): WebElement          = driver.findElement(By.id(value))
   def findElementByXpath(value: String): WebElement       = driver.findElement(By.xpath(value))
   def findElementByLinkText(value: String): WebElement    = driver.findElement(By.linkText(value))
@@ -52,10 +55,10 @@ trait DriverHelper extends BrowserDriver {
     actions.moveToElement(element).click().perform()
   }
 
-  def selectYesOrNoRadio(option: String): Unit =
+  def selectYesOrNoRadio(option: String): Boolean =
     option match {
-      case "Yes" => clickById("code_yes")
-      case "No"  => clickById("code_no")
+      case "Yes" => clickById("code_yes"); true
+      case "No"  => clickById("code_no"); false
     }
 
   def submit(): Unit = clickById("submit")
