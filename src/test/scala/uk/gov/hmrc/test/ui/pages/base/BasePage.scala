@@ -30,8 +30,8 @@ trait BasePage extends CacheHelper with DriverHelper with Matchers {
   def path: String
   def title: String
 
-  val pageLinkHrefs: Seq[String] = List(languageToggle, signOut, technicalIssue, govUkLogo, feedbackBanner)
   val expanderHrefs: Map[String, Seq[String]] = Map.empty
+  val pageLinkHrefs: Seq[String] = List(exitAndCompleteLater, feedbackBanner, govUkLogo, languageToggle, signOut, technicalIssue)
 
   def checkPage(values: String*): Unit = {
     checkUrlAndTitle()
@@ -69,6 +69,10 @@ trait BasePage extends CacheHelper with DriverHelper with Matchers {
     }
   }
 
+  // Required for multi-value pages, like "Package Information", "Additional Information", "Containers", ...
+  // The sequence of the page must be always at zero-position for the list of values passed to "performActionsAndStore".
+  val sequenceId = 0
+
   protected def performActionsAndStore(values: String*): Unit
 
   val itemsPathBase: String = "/declaration/items"
@@ -83,9 +87,10 @@ case class PageNotFoundException(s: String) extends Exception(s)
 
 object BasePage {
 
-  val languageToggle = "/customs-declare-exports/hmrc-frontend/language/cy"
+  val exitAndCompleteLater = "/customs-declare-exports/declaration/draft-saved"
   val feedbackBanner = "/contact/beta-feedback-unauthenticated?"
-  val technicalIssue = "/contact/report-technical-problem?"
   val govUkLogo = "https://www.gov.uk/"
+  val languageToggle = "/customs-declare-exports/hmrc-frontend/language/cy"
   val signOut = "/customs-declare-exports/sign-out?"
+  val technicalIssue = "/contact/report-technical-problem?"
 }
