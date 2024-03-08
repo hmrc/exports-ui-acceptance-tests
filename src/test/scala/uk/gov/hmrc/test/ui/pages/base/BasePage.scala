@@ -49,7 +49,7 @@ trait BasePage extends BrowserDriver with Matchers {
 
   protected def checkUrlAndTitle(): Unit = {
     assert(driver.getCurrentUrl.startsWith(TestConfiguration.url("exports-frontend") + path))
-    driver.getTitle mustBe title +  " - Make an export declaration online - GOV.UK"
+    driver.getTitle mustBe title + " - Make an export declaration online - GOV.UK"
     findElementsByTag("h1").head.getText mustBe title
   }
 
@@ -61,24 +61,28 @@ trait BasePage extends BrowserDriver with Matchers {
   }
 
   protected def checkExpanders(): Unit = {
-    val baseUrl = if (cache.getOrElse(???, ???).contains(Clearance))
+    val baseUrl =
+      if (cache.getOrElse(???, ???).contains(Clearance))
         "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/"
-       else {
+      else {
         "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/"
-       }
+      }
     elementDoesNotExist(By.id("tariffReference")) mustBe false
-    val links = findElementsByTag("a")
+    val links   = findElementsByTag("a")
     expanderHrefs.forall(href => links.exists(_.getAttribute("href") == baseUrl + href))
   }
 
   protected def performActionsAndCache(values: String*): Unit
 
-  val itemsPathBase: String = "/declaration/items"
-  val itemPathBase: String = itemsPathBase + "/([\\w]+)"
+  def toCache(elements: (String, DeclarationDetails)*): cache.type = cache.addAll(elements)
+
+  val itemsPathBase: String       = "/declaration/items"
+  val itemPathBase: String        = itemsPathBase + "/([\\w]+)"
   private val itemPathBasePattern = (itemPathBase + "/.+").r
 
-  protected def itemId: String = (Option(driver.getCurrentUrl) collect { case itemPathBasePattern(group) => group }).head
-  protected def itemUrl(page: String) =  s"$itemsPathBase/$itemId/$page"
+  protected def itemId: String        =
+    (Option(driver.getCurrentUrl) collect { case itemPathBasePattern(group) => group }).head
+  protected def itemUrl(page: String) = s"$itemsPathBase/$itemId/$page"
 
   def changeLinkOnCYA(row: String): WebElement = driver.findElement(By.cssSelector(s".$row .govuk-link"))
 
@@ -88,7 +92,7 @@ trait BasePage extends BrowserDriver with Matchers {
   def findElementByPartialLink(value: String): WebElement = driver.findElement(By.partialLinkText(value))
   def findElementByCssSelector(value: String): WebElement = driver.findElement(By.cssSelector(value))
   def findElementByClassName(value: String): WebElement   = driver.findElement(By.className(value))
-  def findElementsByTag(value: String): List[WebElement]   = driver.findElements(By.tagName(value)).asScala.toList
+  def findElementsByTag(value: String): List[WebElement]  = driver.findElements(By.tagName(value)).asScala.toList
 
   def clickById(value: String): Unit          = findElementById(value).click()
   def clickByXpath(value: String): Unit       = findElementByXpath(value).click()
@@ -116,6 +120,12 @@ trait BasePage extends BrowserDriver with Matchers {
   def fillTextBoxById(elementId: String, text: String): Unit =
     findElementById(elementId).sendKeys(text)
 
+  def retrieveItemDetail(id: String): Detail   =
+    cache.collectFirst { case (key: String, value: Detail) if key.endsWith(s"/$id") => value }.head
+
+  def retrieveItemDetails(id: String): Details =
+    cache.collectFirst { case (key: String, values: Details) if key.endsWith(s"/$id") => values }.head
+
   def selectRadioAndClick(elementId: String): Unit = {
     val actions = new Actions(driver)
     val element = findElementById(elementId)
@@ -140,6 +150,6 @@ object BasePage {
   val languageToggle = "/customs-declare-exports/hmrc-frontend/language/cy"
   val feedbackBanner = "/contact/beta-feedback-unauthenticated?"
   val technicalIssue = "/contact/report-technical-problem?"
-  val govUkLogo = "https://www.gov.uk/"
-  val signOut = "/customs-declare-exports/sign-out?"
+  val govUkLogo      = "https://www.gov.uk/"
+  val signOut        = "/customs-declare-exports/sign-out?"
 }

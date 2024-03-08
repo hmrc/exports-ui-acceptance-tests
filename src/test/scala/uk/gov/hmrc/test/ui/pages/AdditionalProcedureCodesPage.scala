@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, Details}
-import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{AdditionalProcedureCodes, cache}
+import uk.gov.hmrc.test.ui.pages.base._
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails._
 
 object AdditionalProcedureCodesPage extends BasePage {
 
@@ -26,7 +26,7 @@ object AdditionalProcedureCodesPage extends BasePage {
   val title: String          = "What is the procedure code for this item?"
 
   override protected def performActionsAndCache(values: String*): Unit = {
-    cache += (s"$itemId/$AdditionalProcedureCodes" -> Detail(""))
+    cache += (s"$itemId/$AdditionalProcedureCodes"        -> Detail(""))
     cache += (value(s"$itemId/$AdditionalProcedureCodes") -> Details(values))
   }
 }

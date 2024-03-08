@@ -11,15 +11,18 @@ object DeclarationDetails {
 
   val cache: mutable.Map[String, DeclarationDetails] = mutable.Map.empty[String, DeclarationDetails]
 
-  val DeclarationChoiceId           = "declarationChoiceId"
-  val DeclarationChoiceValue        = "declarationChoiceValue"
-  val DepartureTransportId          = "departureTransportId"
-  val DepartureTransportValue       = "departureTransportValue"
-  val DepartureTransportRef         = "departureTransportRef"
-  val TransportLeavingBorderId      = "transportLeavingBorderId"
-  val TransportLeavingBorderValue   = "transportLeavingBorderValue"
-  val WareHouseId                   = "wareHouseId"
-  val WareHouseValue                = "wareHouseValue"
+  val DeclarationChoiceId    = "declarationChoiceId"
+  val DeclarationChoiceValue = "declarationChoiceValue"
+
+  //////////******** Section 6 **************//////
+
+  val DepartureTransportId    = "departureTransportId"
+  val DepartureTransportValue = "departureTransportValue"
+  val DepartureTransportRef   = "departureTransportRef"
+
+  val TransportLeavingBorder = "transportLeavingBorder"
+
+  val WareHouse                     = "wareHouse"
   val SuperVisingCustomsOfficeId    = "superVisingCustomsOfficeId"
   val SuperVisingCustomsOfficeValue = "superVisingCustomsOfficeValue"
   val InlandOrBorderId              = "inlandOrBorderId"
@@ -33,10 +36,10 @@ object DeclarationDetails {
   val TransportCountryValue         = "transportCountryValue"
   val ExpressConsignmentId          = "expressConsignmentId"
   val ExpressConsignmentValue       = "expressConsignmentValue"
-  val TransportPaymentId            = "transportPaymentId"
-  val TransportPaymentValue         = "transportPaymentValue"
+  val TransportPayment              = "transportPayment"
 
-  /*** SECTION 5: ITEMS ***/
+  /** * SECTION 5: ITEMS **
+    */
 
   // /add-declaration-item
   val ItemIds = "item-identifiers"
@@ -52,7 +55,7 @@ object DeclarationDetails {
 
   // /items/[id]/additional-fiscal-references
   val AdditionalFiscalReferencesCountry = "additional-fiscal-references-country"
-  val AdditionalFiscalReferencesVAT = "additional-fiscal-references-vat"
+  val AdditionalFiscalReferencesVAT     = "additional-fiscal-references-vat"
 
   // /items/[id]/additional-fiscal-references-list
   val AdditionalFiscalReferencesListYesNo = "additional-fiscal-references-list-yes-no"
@@ -67,7 +70,7 @@ object DeclarationDetails {
 
   // /items/[id]/cus-code
   val CusCodeYesNo = "cus-code-yes-no"
-  val CusCode = "cus-code"
+  val CusCode      = "cus-code"
 
   // /items/[id]/vat-rating
   val VatRating = "vat-rating"

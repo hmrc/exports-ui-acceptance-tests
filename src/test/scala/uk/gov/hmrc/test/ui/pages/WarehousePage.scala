@@ -16,21 +16,27 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import uk.gov.hmrc.test.ui.conf.TestConfiguration
-import uk.gov.hmrc.test.ui.pages.DeclarationDetails._
+import uk.gov.hmrc.test.ui.pages.TransportLeavingTheBorderPage.value
+import uk.gov.hmrc.test.ui.pages.base._
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails._
 
 object WarehousePage extends BasePage {
 
-  val path: String                   = "/declaration/warehouse-details"
-  def title: String                 = "What is the customs approved warehouse number?"
-  val backButtonHrefs: List[String] = List.empty
-  override val expanderHrefs        = List(
+  val path: String           = "/declaration/warehouse-details"
+  def title: String          = "What is the customs approved warehouse number?"
+  override val expanderHrefs = List(
     "group-2-references-of-messages-document-certificates-and-authorisations#de-27-identification-of-warehouse-box-49-warehouse-id"
   )
+
+  def backButtonHref: String = {
+    val res = cache(value(TransportLeavingBorder))
+    cache += (TransportLeavingBorder -> "Transport at the border")
+  }
 
   def performActionsAndCache(wareHouseRefs: String*): Unit =
     wareHouseRefs.headOption.foreach { wareHouseRef =>
       fillTextBoxById("identificationNumber", wareHouseRef)
-      cache += (WareHouseId -> "Warehouse ID", WareHouseValue -> wareHouseRef)
+      cache += (WareHouse -> "Warehouse ID", value(WareHouse) -> Detail(wareHouseRef))
+
     }
 }

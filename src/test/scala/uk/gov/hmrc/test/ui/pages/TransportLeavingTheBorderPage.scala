@@ -16,18 +16,21 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import uk.gov.hmrc.test.ui.conf.TestConfiguration
-import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{TransportLeavingBorderId, TransportLeavingBorderValue, cache}
+import uk.gov.hmrc.test.ui.pages.base._
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails._
 
 object TransportLeavingTheBorderPage extends BasePage {
 
-  val path: String                   = "/declaration/transport-leaving-the-border"
-  val title: String                 = "What mode of transport will the goods leave the UK on?"
-  val backButtonHrefs: List[String] = List.empty
+  val path: String                         = "/declaration/transport-leaving-the-border"
+  val title: String                        = "What mode of transport will the goods leave the UK on?"
   override val expanderHrefs: List[String] = List(
     "group-7-transport-information-modes-means-and-equipment#de-74-mode-of-transport-at-the-border-box-25-mode-of-transport-at-the-border"
   )
+
+  def backButtonHref: String = {
+    val res = cache(value(TransportLeavingBorder))
+    cache += (TransportLeavingBorder -> "Transport at the border")
+  }
 
   def performActionsAndCache(selectOptions: String*): Unit = {
     val optionToIdMap: Map[String, String] = Map(
@@ -45,7 +48,9 @@ object TransportLeavingTheBorderPage extends BasePage {
     for (selectOption <- selectOptions)
       optionToIdMap.get(selectOption).foreach { id =>
         clickById(id)
-        cache += (TransportLeavingBorderId -> "Transport at the border", TransportLeavingBorderValue -> selectOption)
+        cache += (TransportLeavingBorder -> "Transport at the border", value(TransportLeavingBorder) -> Detail(
+          selectOption
+        ))
       }
   }
 }

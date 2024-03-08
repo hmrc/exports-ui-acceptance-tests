@@ -16,23 +16,23 @@
 
 package uk.gov.hmrc.test.ui.pages
 
-import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{TransportCountryId, TransportCountryValue, TransportLeavingBorderValue, cache}
+import uk.gov.hmrc.test.ui.pages.base._
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails._
 
 object TransportCountryPage extends BasePage {
 
-  val path: String                   = "declaration/transport-country"
-  def title: String                 =
-    s"Select the country where the ${cache.getOrElse(TransportLeavingBorderValue, "default value").toLowerCase} is registered"
-  val backButtonHrefs: List[String] = List.empty
+  val path: String                         = "declaration/transport-country"
+  def title: String                        =
+    s"Select the country where the ${cache(TransportLeavingBorder).toString.toLowerCase} is registered"
+  val backButtonHrefs: List[String]        = List.empty
   override val expanderHrefs: List[String] = List(
     "group-7-transport-information-modes-means-and-equipment#de-715-nationality-of-active-means-of-transport-crossing-the-border-box-21---identity-and-nationality-of-the-active-means-of-transport-crossing-the-border-nationality"
   )
 
   override def checkBackButton(): Unit = {}
 
-  def performActionsAndCache(country: String*): Unit = {
-    fillAutoComplete(findElementById("transport-country"), country.head)
+  def performActionsAndCache(values: String*): Unit = {
+    fillAutoComplete(findElementById("transport-country"), values.head)
     cache += (TransportCountryId -> "Country of registration for the transport leaving the UK border", TransportCountryValue -> country)
   }
 
