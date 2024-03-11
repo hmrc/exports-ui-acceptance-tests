@@ -70,7 +70,7 @@ trait BasePage extends CacheHelper with DriverHelper with Matchers {
   }
 
   // Required for multi-value pages, like "Package Information", "Additional Information", "Containers", ...
-  // The sequence of the page must be always at zero-position for the list of values passed to "performActionsAndStore".
+  // The page sequence must be always at zero-position in the list of values passed to "performActionsAndStore".
   val sequenceId = 0
 
   protected def performActionsAndStore(values: String*): Unit
