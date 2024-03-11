@@ -16,29 +16,25 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalFiscalReferences, itemsAdditionalFiscalReferencesCL}
+import uk.gov.hmrc.test.ui.pages.base.Constants.Common
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsStatisticalValue, itemsStatisticalValue1, itemsStatisticalValue2}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.FiscalInformationYesNo
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.StatisticalValue
 
-object FiscalInformationPage extends BasePage {
+object StatisticalValuePage extends BasePage {
 
-  def backButtonHref: String = AdditionalProcedureCodesPage.path
-  def path: String           = itemUrl("fiscal-information")
-
-  val title: String = "Do you want to claim Onward Supply Relief (OSR)?"
+  def backButtonHref: String = NationalAdditionalCodesListPage.path
+  def path: String           = itemUrl("statistical-value")
+  val title: String          = "The statistical value of this item in pounds"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List(itemsAdditionalFiscalReferences),
-    Clearance -> List(itemsAdditionalFiscalReferencesCL)
+    Common -> List(itemsStatisticalValue, itemsStatisticalValue1, itemsStatisticalValue2)
   )
 
-  // No  => performActionsAndStore(no)
-  // Yes => performActionsAndStore(yes)
+  // ex: performActionsAndStore("1000")
 
   override protected def performActionsAndStore(values: String*): Unit = {
-    val yesNo =  values.head
-    selectYesOrNoRadio(yesNo)
-    store(FiscalInformationYesNo(itemId) -> Detail(yesNo))
+    fillTextBoxById("statisticalValue", values.head)
+    store(StatisticalValue(itemId) -> Detail(values.head))
   }
 }

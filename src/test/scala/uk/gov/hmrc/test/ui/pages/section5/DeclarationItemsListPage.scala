@@ -16,9 +16,11 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.Common
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, DetailKey}
+import uk.gov.hmrc.test.ui.pages.section4.SummarySection4Page
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.section5
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{declarationItemsList, declarationItemsListCL}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, DetailKey}
 
 object DeclarationItemsListPage extends BasePage {
 
@@ -32,8 +34,12 @@ object DeclarationItemsListPage extends BasePage {
     }
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List("https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-1-message-information-including-procedure-codes#de-19-total-number-of-items-box-5-items")
+    Common -> List(declarationItemsList),
+    Clearance -> List(declarationItemsListCL)
   )
+
+  // No  => performActionsAndStore(no)
+  // Yes => performActionsAndStore(yes)
 
   override protected def performActionsAndStore(values: String*): Unit = selectYesOrNoRadio(values.head)
 }

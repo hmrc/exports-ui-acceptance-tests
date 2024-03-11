@@ -16,24 +16,36 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{
+  itemsAdditionalProcedureCodes,
+  itemsAdditionalProcedureCodes1,
+  itemsAdditionalProcedureCodes2,
+  itemsAdditionalProcedureCodesCL
+}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalProcedureCodes
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalProcedureCodes, ProcedureCode}
 
 object AdditionalProcedureCodesPage extends BasePage {
 
+  val lowValueDeclaration = "3LV"
+
   def backButtonHref: String = ProcedureCodesPage.path
-  val path: String           = itemUrl("additional-procedure-codes")
-  val title: String          = "What is the procedure code for this item?"
+  def path: String           = itemUrl("additional-procedure-codes")
+  def title: String          = s"Add any additional procedure codes to ${detail(ProcedureCode(itemId))}"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List(
-      "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-1-message-information-including-procedure-codes#de-111-additional-procedure-code-box-37-procedure",
-      "https://www.gov.uk/government/publications/4-digit-to-3-digit-procedure-to-additional-procedure-code-correlation-matrix-for-exports",
-      "https://www.gov.uk/government/publications/4-digit-to-3-digit-procedure-to-additional-procedure-code-correlation-matrix-for-inventory-exports"
-    ),
-    Clearance -> List("https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/group-1-message-information-including-procedure-codes#de-111-additional-procedure-code-box-37-procedure")
+    Common    -> List(itemsAdditionalProcedureCodes, itemsAdditionalProcedureCodes1, itemsAdditionalProcedureCodes2),
+    Clearance -> List(itemsAdditionalProcedureCodesCL, itemsAdditionalProcedureCodes1, itemsAdditionalProcedureCodes2)
   )
 
-  override protected def performActionsAndStore(values: String*): Unit =
+  // ex: performActionsAndStore("1CS")
+
+  override protected def performActionsAndStore(values: String*): Unit = {
+    values.foreach { value =>
+      fillAutoComplete("additionalProcedureCode", value)
+      clickById("add")
+    }
     store(AdditionalProcedureCodes(itemId) -> Details(values))
+  }
 }

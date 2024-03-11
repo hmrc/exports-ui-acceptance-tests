@@ -16,18 +16,17 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.Common
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, DetailKey}
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.Section5
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 object AddDeclarationItemPage extends BasePage {
 
   def backButtonHref: String = SummarySection4Page.path
   val path: String           = "/declaration/add-declaration-item"
-
-  val title: String = "Add declaration item 1"
+  val title: String          = "Add declaration item 1"
 
   override def checkExpanders(): Unit = ()
+
+  // ex: performActionsAndStore()
 
   override protected def performActionsAndStore(values: String*): Unit = ()
 }

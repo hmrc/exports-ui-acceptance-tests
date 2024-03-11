@@ -17,28 +17,29 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalFiscalReferences, itemsAdditionalFiscalReferencesCL}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.FiscalInformationYesNo
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsUnDangerousGoodsCode, itemsUnDangerousGoodsCodeCL}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.DangerousGoodsCode
 
-object FiscalInformationPage extends BasePage {
+object DangerousGoodsCodePage extends BasePage {
 
-  def backButtonHref: String = AdditionalProcedureCodesPage.path
-  def path: String           = itemUrl("fiscal-information")
-
-  val title: String = "Do you want to claim Onward Supply Relief (OSR)?"
+  def backButtonHref: String = CommodityDetailsPage.path
+  def path: String           = itemUrl("un-dangerous-goods-code")
+  val title: String          = "Is there a UN dangerous goods code for this item?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List(itemsAdditionalFiscalReferences),
-    Clearance -> List(itemsAdditionalFiscalReferencesCL)
+    Common    -> List(itemsUnDangerousGoodsCode),
+    Clearance -> List(itemsUnDangerousGoodsCodeCL)
   )
 
+  val yesNo = 0
+  val code  = 1
+
   // No  => performActionsAndStore(no)
-  // Yes => performActionsAndStore(yes)
+  // Yes => performActionsAndStore(yes, "1234")
 
   override protected def performActionsAndStore(values: String*): Unit = {
-    val yesNo =  values.head
-    selectYesOrNoRadio(yesNo)
-    store(FiscalInformationYesNo(itemId) -> Detail(yesNo))
+    if (selectYesOrNoRadio(values(yesNo))) fillTextBoxById("dangerousGoodsCode", values(code))
+    store(DangerousGoodsCode(itemId) -> Details(values))
   }
 }
