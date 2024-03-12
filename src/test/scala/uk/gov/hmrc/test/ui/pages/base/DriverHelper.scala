@@ -55,10 +55,10 @@ trait DriverHelper extends BrowserDriver {
     actions.moveToElement(element).click().perform()
   }
 
-  def selectYesOrNoRadio(option: String): Boolean =
+  def selectYesOrNoRadio(option: String, yes: String = "code_yes", no: String = "code_no"): Boolean =
     option match {
-      case "Yes" => clickById("code_yes"); true
-      case "No"  => clickById("code_no"); false
+      case "Yes" => clickById(yes); true
+      case "No"  => clickById(no); false
     }
 
   def submit(): Unit = clickById("submit")
