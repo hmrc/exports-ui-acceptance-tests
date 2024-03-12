@@ -31,6 +31,7 @@ trait DriverHelper extends BrowserDriver {
   def findElementByPartialLink(value: String): WebElement = driver.findElement(By.partialLinkText(value))
   def findElementByCssSelector(value: String): WebElement = driver.findElement(By.cssSelector(value))
   def findElementByClassName(value: String): WebElement   = driver.findElement(By.className(value))
+  def findElementsByClassName(value: String): List[WebElement]   = driver.findElements(By.className(value)).asScala.toList
   def findElementsByTag(value: String): List[WebElement]   = driver.findElements(By.tagName(value)).asScala.toList
 
   def fillAutoComplete(elementId: String, value: String): Unit = {

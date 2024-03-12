@@ -9,4 +9,11 @@ object DeclarationTypes {
   val Simplified    = "SIMPLIFIED"
   val Standard      = "STANDARD"
   val Supplementary = "SUPPLEMENTARY"
+
+  val Arrived       = "arrived"
+  val Prelodged     = "prelodged"
+
+  // For supplementary only
+  val TypeY = "simplified"
+  val TypeZ = "eidr"
 }
