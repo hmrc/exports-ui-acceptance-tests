@@ -16,35 +16,30 @@
 
 package uk.gov.hmrc.test.ui.pages.base
 
-import org.openqa.selenium.interactions.Actions
-import org.openqa.selenium.{By, Keys, WebElement}
+import org.openqa.selenium.By
 import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import org.scalatest.matchers.should.Matchers
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
-import uk.gov.hmrc.test.ui.driver.BrowserDriver
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
-import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.cache
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Clearance
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
+import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Common
 
-import scala.jdk.CollectionConverters.ListHasAsScala
+trait BasePage extends CacheHelper with DriverHelper with Matchers {
 
-trait BasePage extends BrowserDriver with Matchers {
-
-  def title: String
-  def path: String
   def backButtonHref: String
+  def path: String
+  def title: String
 
-  val pageLinkHrefs: List[String] = List(languageToggle, signOut, technicalIssue, govUkLogo, feedbackBanner)
-  val expanderHrefs: List[String] = List.empty
-
-  def value(id: String): String = s"${id}Value"
+  val expanderHrefs: Map[String, Seq[String]] = Map.empty
+  val pageLinkHrefs: Seq[String]              =
+    List(exitAndCompleteLater, feedbackBanner, govUkLogo, languageToggle, signOut, technicalIssue)
 
   def checkPage(values: String*): Unit = {
     checkUrlAndTitle()
     checkBackButton()
     checkPageLinks()
     checkExpanders()
-    performActionsAndCache(values: _*)
+    performActionsAndStore(values: _*)
   }
 
   protected def checkUrlAndTitle(): Unit = {
@@ -61,20 +56,25 @@ trait BasePage extends BrowserDriver with Matchers {
   }
 
   protected def checkExpanders(): Unit = {
-    val baseUrl =
-      if (cache.getOrElse(???, ???).contains(Clearance))
-        "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/"
-      else {
-        "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/"
-      }
     elementDoesNotExist(By.id("tariffReference")) mustBe false
-    val links   = findElementsByTag("a")
-    expanderHrefs.forall(href => links.exists(_.getAttribute("href") == baseUrl + href))
+
+    maybeDetail(DeclarationType).map { case detail =>
+      val declarationType = detail.value
+      // We could have link sets for a specific declaration type (e.g. Clearance or Supplementary)
+      // as well as link sets "Common" to multiple declaration types
+      val maybeHrefs      = expanderHrefs.get(declarationType).fold(expanderHrefs.get(Common))(Some(_))
+      maybeHrefs.map { hrefs =>
+        val links = findElementsByTag("a")
+        hrefs.forall(href => links.exists(_.getAttribute("href") == href))
+      }
+    }
   }
 
-  protected def performActionsAndCache(values: String*): Unit
+  // Required for multi-value pages, like "Package Information", "Additional Information", "Containers", ...
+  // The sequence of the page must be always at zero-position for the list of values passed to "performActionsAndStore".
+  val sequenceId = 0
 
-  def toCache(elements: (String, DeclarationDetails)*): cache.type = cache.addAll(elements)
+  protected def performActionsAndStore(values: String*): Unit
 
   val itemsPathBase: String       = "/declaration/items"
   val itemPathBase: String        = itemsPathBase + "/([\\w]+)"
@@ -83,73 +83,16 @@ trait BasePage extends BrowserDriver with Matchers {
   protected def itemId: String        =
     (Option(driver.getCurrentUrl) collect { case itemPathBasePattern(group) => group }).head
   protected def itemUrl(page: String) = s"$itemsPathBase/$itemId/$page"
-
-  def changeLinkOnCYA(row: String): WebElement = driver.findElement(By.cssSelector(s".$row .govuk-link"))
-
-  def findElementById(value: String): WebElement          = driver.findElement(By.id(value))
-  def findElementByXpath(value: String): WebElement       = driver.findElement(By.xpath(value))
-  def findElementByLinkText(value: String): WebElement    = driver.findElement(By.linkText(value))
-  def findElementByPartialLink(value: String): WebElement = driver.findElement(By.partialLinkText(value))
-  def findElementByCssSelector(value: String): WebElement = driver.findElement(By.cssSelector(value))
-  def findElementByClassName(value: String): WebElement   = driver.findElement(By.className(value))
-  def findElementsByTag(value: String): List[WebElement]  = driver.findElements(By.tagName(value)).asScala.toList
-
-  def clickById(value: String): Unit          = findElementById(value).click()
-  def clickByXpath(value: String): Unit       = findElementByXpath(value).click()
-  def clickByLinkText(value: String): Unit    = findElementByLinkText(value).click()
-  def clickByPartialLink(value: String): Unit = findElementByPartialLink(value).click()
-  def clickByCssSelector(value: String): Unit = findElementByCssSelector(value).click()
-  def clickByClassName(value: String): Unit   = findElementByClassName(value).click()
-
-  def elementDoesNotExist(elementBy: By): Boolean =
-    driver.findElements(elementBy).size() == 0
-
-  def fillAutoComplete(elementId: String, value: String): Unit = {
-    val element = findElementById(elementId)
-    element.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE)
-    element.sendKeys(value)
-    element.sendKeys(Keys.ARROW_DOWN)
-    element.sendKeys(Keys.ENTER)
-  }
-
-  def fillRadioButton(elementId: String, refSelector: String, refText: String): Unit = {
-    clickById(elementId)
-    findElementById(refSelector).sendKeys(refText)
-  }
-
-  def fillTextBoxById(elementId: String, text: String): Unit =
-    findElementById(elementId).sendKeys(text)
-
-  def retrieveItemDetail(id: String): Detail   =
-    cache.collectFirst { case (key: String, value: Detail) if key.endsWith(s"/$id") => value }.head
-
-  def retrieveItemDetails(id: String): Details =
-    cache.collectFirst { case (key: String, values: Details) if key.endsWith(s"/$id") => values }.head
-
-  def selectRadioAndClick(elementId: String): Unit = {
-    val actions = new Actions(driver)
-    val element = findElementById(elementId)
-    actions.moveToElement(element).click().perform()
-  }
-
-  def selectYesOrNoRadio(option: String): Unit =
-    option match {
-      case "Yes" => clickById("code_yes")
-      case "No"  => clickById("code_no")
-    }
-
-  def submit(): Unit = clickById("submit")
-
-  def continue(): Unit = clickByXpath("//*[@role='button']")
 }
 
 case class PageNotFoundException(s: String) extends Exception(s)
 
 object BasePage {
 
-  val languageToggle = "/customs-declare-exports/hmrc-frontend/language/cy"
-  val feedbackBanner = "/contact/beta-feedback-unauthenticated?"
-  val technicalIssue = "/contact/report-technical-problem?"
-  val govUkLogo      = "https://www.gov.uk/"
-  val signOut        = "/customs-declare-exports/sign-out?"
+  val exitAndCompleteLater = "/customs-declare-exports/declaration/draft-saved"
+  val feedbackBanner       = "/contact/beta-feedback-unauthenticated?"
+  val govUkLogo            = "https://www.gov.uk/"
+  val languageToggle       = "/customs-declare-exports/hmrc-frontend/language/cy"
+  val signOut              = "/customs-declare-exports/sign-out?"
+  val technicalIssue       = "/contact/report-technical-problem?"
 }
