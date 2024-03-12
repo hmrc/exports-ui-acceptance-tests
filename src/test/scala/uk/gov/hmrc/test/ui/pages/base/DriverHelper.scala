@@ -22,6 +22,9 @@ trait DriverHelper extends BrowserDriver {
   def elementDoesNotExist(elementBy: By): Boolean =
     driver.findElements(elementBy).size() == 0
 
+  def elementByIdDoesNotExist(elementId: String): Boolean =
+    driver.findElements(By.id(elementId)).size() == 0
+
   def findElementById(value: String): WebElement          = driver.findElement(By.id(value))
   def findElementByXpath(value: String): WebElement       = driver.findElement(By.xpath(value))
   def findElementByLinkText(value: String): WebElement    = driver.findElement(By.linkText(value))

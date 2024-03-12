@@ -58,11 +58,10 @@ trait BasePage extends CacheHelper with DriverHelper with Matchers {
   protected def checkExpanders(): Unit = {
     elementDoesNotExist(By.id("tariffReference")) mustBe false
 
-    maybeDetail(DeclarationType).map { case detail =>
-      val declarationType = detail.value
+    maybeDetail(DeclarationType).map { declarationType =>
       // We could have link sets for a specific declaration type (e.g. Clearance or Supplementary)
       // as well as link sets "Common" to multiple declaration types
-      val maybeHrefs      = expanderHrefs.get(declarationType).fold(expanderHrefs.get(Common))(Some(_))
+      val maybeHrefs = expanderHrefs.get(declarationType).fold(expanderHrefs.get(Common))(Some(_))
       maybeHrefs.map { hrefs =>
         val links = findElementsByTag("a")
         hrefs.forall(href => links.exists(_.getAttribute("href") == href))

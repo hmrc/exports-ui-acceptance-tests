@@ -1,6 +1,7 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes._
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{containersSeals, containersSealsCL}
 import uk.gov.hmrc.test.ui.pages.base._
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
 
@@ -11,12 +12,8 @@ object SealsPage extends BasePage {
   val backButtonHref: String = TransportPaymentPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(
-      "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/group-7-transport-information-modes-means-and-equipment#de-718-seal-number-ex-box-d"
-    ),
-    Clearance -> List(
-      "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/group-7-transport-information-modes-means-and-equipment#de-718-seal-number-ex-box-d"
-    )
+    Common    -> List(containersSeals),
+    Clearance -> List(containersSealsCL)
   )
 
   val id = 0

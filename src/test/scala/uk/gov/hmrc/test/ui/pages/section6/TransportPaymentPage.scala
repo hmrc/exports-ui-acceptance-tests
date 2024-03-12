@@ -1,22 +1,19 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes._
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{transportPayment, transportPaymentCL}
 import uk.gov.hmrc.test.ui.pages.base._
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.TransportPayment
 
 object TransportPaymentPage extends BasePage {
 
-  val path: String           = "/declaration/nature-of-transaction"
+  val path: String           = "/declaration/transport-payment"
   def title                  = "How did you pay for the express transport?"
   val backButtonHref: String = ExpressConsignmentPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(
-      "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-4-valuation-information-and-taxes#de-42-transport-charges-method-of-payment"
-    ),
-    Clearance -> List(
-      "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/group-4-valuation-information-and-taxes"
-    )
+    Common    -> List(transportPayment),
+    Clearance -> List(transportPaymentCL)
   )
 
   val paymentType = 0

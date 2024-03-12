@@ -1,6 +1,7 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes._
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{transportLeavingTheBorder, transportLeavingTheBorderCL}
 import uk.gov.hmrc.test.ui.pages.base._
 import uk.gov.hmrc.test.ui.pages.section5.SummarySection5Page
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.TransportLeavingBorder
@@ -12,12 +13,8 @@ object TransportLeavingTheBorderPage extends BasePage {
   val backButtonHref: String = SummarySection5Page.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(
-      "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-7-transport-information-modes-means-and-equipment#de-74-mode-of-transport-at-the-border-box-25-mode-of-transport-at-the-border"
-    ),
-    Clearance -> List(
-      "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/group-7-transport-information-modes-means-and-equipment#de-74-mode-of-transport-at-the-border-box-25-mode-of-transport-at-the-border"
-    )
+    Common    -> List(transportLeavingTheBorder),
+    Clearance -> List(transportLeavingTheBorderCL)
   )
 
   val transportType = 0

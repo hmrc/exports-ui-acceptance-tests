@@ -1,20 +1,19 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Common
-import uk.gov.hmrc.test.ui.pages.base._
+import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
 
 object BorderTransportPage extends BasePage {
 
   val path: String           = "/declaration/border-transport"
   def title: String          =
-    s"What are the details for the ${detail(TransportLeavingBorder).value.toLowerCase} transport?"
+    s"What are the details for the ${detail(TransportLeavingBorder).toLowerCase} transport?"
   val backButtonHref: String = DepartureTransportPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List(
-      "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-7-transport-information-modes-means-and-equipment#de-714-identity-of-active-means-of-transport-crossing-the-border-box-21---identity-and-nationality-of-the-active-means-of-transport-crossing-the-border"
-    )
+    Common -> List(borderTransport)
   )
 
   val transport = 0
