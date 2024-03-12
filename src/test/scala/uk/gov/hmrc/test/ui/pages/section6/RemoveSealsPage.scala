@@ -5,7 +5,7 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
 
 object RemoveSealsPage extends BasePage {
 
-  val path: String           = s"/declaration/containers/${detail(Container).value}/remove"
+  val path: String           = s"/declaration/containers/${detail(Container)}/remove"
   val title                  = "Are you sure you want to remove this container?"
   val backButtonHref: String = ContainersListPage.path
 
