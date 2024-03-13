@@ -16,6 +16,9 @@ object Constants {
   val Arrived       = "arrived"
   val Prelodged     = "prelodged"
 
+  val TypeY = "simplified"
+  val TypeZ = "eidr"
+
   // Generally we need to pass different values for a drop down and the cache
   // ex : for countries
   val enteredValue = 0

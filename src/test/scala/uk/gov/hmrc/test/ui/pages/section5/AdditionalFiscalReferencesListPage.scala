@@ -16,13 +16,13 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Common
+import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, DetailKey}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalFiscalReferenceLabel, AdditionalProcedureCodes, Section5}
 
 object AdditionalFiscalReferencesListPage extends BasePage {
 
-  val backButtonHref: String = AdditionalProcedureCodesPage.path
+  def backButtonHref: String = AdditionalProcedureCodesPage.path
   val path: String           = itemUrl("additional-fiscal-references-list")
 
   def title: String =

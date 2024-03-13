@@ -22,7 +22,7 @@ import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.section5
 
 object DeclarationItemsListPage extends BasePage {
 
-  val backButtonHref: String = SummarySection4Page.path
+  def backButtonHref: String = SummarySection4Page.path
   val path: String           = "/declaration/declaration-items-list"
 
   def title: String =

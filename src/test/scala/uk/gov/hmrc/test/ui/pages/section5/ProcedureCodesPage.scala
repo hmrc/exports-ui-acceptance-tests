@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.ProcedureCode
 
 object ProcedureCodesPage extends BasePage {
 
-  val backButtonHref: String = DeclarationItemsListPage.path
+  def backButtonHref: String = DeclarationItemsListPage.path
   val path: String           = itemUrl("procedure-codes")
   val title: String          = "What is the procedure code for this item?"
 

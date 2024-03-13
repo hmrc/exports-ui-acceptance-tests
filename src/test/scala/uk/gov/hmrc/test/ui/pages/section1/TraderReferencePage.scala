@@ -1,7 +1,7 @@
 package uk.gov.hmrc.test.ui.pages.section1
 
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{traderReference, traderReferenceCL}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{DeclarationEori, Ducr}
 
@@ -9,11 +9,11 @@ import java.time.{Instant, ZoneId}
 
 object TraderReferencePage extends BasePage {
 
-  override def backButtonHref: String = DoYouHaveADucrPage.path
+  def backButtonHref: String = DoYouHaveADucrPage.path
 
-  override def path: String = "/declaration/trader-reference"
+  val path: String = "/declaration/trader-reference"
 
-  override def title: String = "Enter a reference"
+  val title: String = "Enter a reference"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common -> Seq(traderReference),

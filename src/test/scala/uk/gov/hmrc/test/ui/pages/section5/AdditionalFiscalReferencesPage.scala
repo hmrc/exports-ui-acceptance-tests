@@ -16,13 +16,13 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Common
+import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalFiscalReferences
 
 object AdditionalFiscalReferencesPage extends BasePage {
 
-  val backButtonHref: String = FiscalInformationPage.path
+  def backButtonHref: String = FiscalInformationPage.path
   val path: String           = itemUrl("additional-fiscal-references")
   val title: String          = "What are the exporter’s VAT details?"
 

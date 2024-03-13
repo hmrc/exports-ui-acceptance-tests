@@ -16,16 +16,16 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Common
+import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.FiscalInformationYesNo
 
 object FiscalInformationPage extends BasePage {
 
-  val backButtonHref: String = AdditionalProcedureCodesPage.path
+  def backButtonHref: String = AdditionalProcedureCodesPage.path
   val path: String           = itemUrl("fiscal-information")
 
-  def title: String = "Do you want to claim Onward Supply Relief (OSR)?"
+  val title: String = "Do you want to claim Onward Supply Relief (OSR)?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common -> List("https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-3-parties#de-340-additional-fiscal-references-identification-number-no-previous-reference")
