@@ -25,13 +25,17 @@ trait DriverHelper extends BrowserDriver {
   def elementByIdDoesNotExist(elementId: String): Boolean =
     driver.findElements(By.id(elementId)).size() == 0
 
-  def findElementById(value: String): WebElement          = driver.findElement(By.id(value))
-  def findElementByXpath(value: String): WebElement       = driver.findElement(By.xpath(value))
-  def findElementByLinkText(value: String): WebElement    = driver.findElement(By.linkText(value))
-  def findElementByPartialLink(value: String): WebElement = driver.findElement(By.partialLinkText(value))
-  def findElementByCssSelector(value: String): WebElement = driver.findElement(By.cssSelector(value))
-  def findElementByClassName(value: String): WebElement   = driver.findElement(By.className(value))
-  def findElementsByTag(value: String): List[WebElement]   = driver.findElements(By.tagName(value)).asScala.toList
+  def findElementById(value: String): WebElement               = driver.findElement(By.id(value))
+  def findElementByXpath(value: String): WebElement            = driver.findElement(By.xpath(value))
+  def findElementByLinkText(value: String): WebElement         = driver.findElement(By.linkText(value))
+  def findElementByPartialLink(value: String): WebElement      = driver.findElement(By.partialLinkText(value))
+  def findElementByCssSelector(value: String): WebElement      = driver.findElement(By.cssSelector(value))
+  def findElementByClassName(value: String): WebElement        = driver.findElement(By.className(value))
+  def findElementsByClassName(value: String): Seq[WebElement] = driver.findElements(By.className(value)).asScala.toList
+  def findElementsByTag(value: String): Seq[WebElement]       = driver.findElements(By.tagName(value)).asScala.toList
+
+  def findChildByClassName(parent: WebElement, className: String): WebElement =
+    parent.findElement(By.className(className))
 
   def fillAutoComplete(elementId: String, value: String): Unit = {
     val element = findElementById(elementId)
@@ -57,8 +61,8 @@ trait DriverHelper extends BrowserDriver {
 
   def selectYesOrNoRadio(option: String, yes: String = "code_yes", no: String = "code_no"): Boolean =
     option match {
-      case "Yes" => clickById(yes); true
-      case "No"  => clickById(no); false
+      case Constants.yes => clickById(yes); true
+      case Constants.no  => clickById(no); false
     }
 
   def submit(): Unit = clickById("submit")

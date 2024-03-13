@@ -84,8 +84,6 @@ object TariffLinks {
   val itemsAdditionalProcedureCodes1 = "https://www.gov.uk/government/publications/4-digit-to-3-digit-procedure-to-additional-procedure-code-correlation-matrix-for-exports"
   val itemsAdditionalProcedureCodes2 = "https://www.gov.uk/government/publications/4-digit-to-3-digit-procedure-to-additional-procedure-code-correlation-matrix-for-inventory-exports"
   val itemsAdditionalProcedureCodesCL = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/group-1-message-information-including-procedure-codes#de-111-additional-procedure-code-box-37-procedure"
-  val itemsFiscalInformation = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-3-parties#de-340-additional-fiscal-references-identification-number-no-previous-reference"
-  val itemsFiscalInformationCL = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports"
   val itemsAdditionalFiscalReferences = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-3-parties#de-340-additional-fiscal-references-identification-number-no-previous-reference"
   val itemsAdditionalFiscalReferencesCL = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports"
   val itemsCommodityDetails = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-6-goods-identification#de-614-commodity-code---combined-nomenclature-code-box-33-commodity-code"

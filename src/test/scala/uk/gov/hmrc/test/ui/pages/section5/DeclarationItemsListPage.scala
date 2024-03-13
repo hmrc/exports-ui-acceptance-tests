@@ -17,8 +17,8 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.section4.SummarySection4Page
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{DeclarationItemsListYesNo, Section5}
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Common
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{DeclarationItemsListYesNo, section5}
+import .Common
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, DetailKey}
 
 object DeclarationItemsListPage extends BasePage {
@@ -27,7 +27,7 @@ object DeclarationItemsListPage extends BasePage {
   val path: String           = "/declaration/declaration-items-list"
 
   def title: String =
-    allSectionDetails(Section5).groupBy { case (detailKey: DetailKey, _) => detailKey.additionalId.head }.size match {
+    allSectionDetails(section5).groupBy { case (detailKey: DetailKey, _) => detailKey.additionalId.head }.size match {
       case 1 => "You have added 1 item"
       case n => s"You have added $n items"
     }

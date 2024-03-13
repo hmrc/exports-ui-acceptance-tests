@@ -18,15 +18,14 @@ package uk.gov.hmrc.test.ui.pages.base
 
 import org.openqa.selenium.By
 import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
-import org.scalatest.matchers.should.Matchers
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Common
+import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 
 import scala.util.matching.Regex
 
-trait BasePage extends CacheHelper with DriverHelper with Matchers {
+trait BasePage extends CacheHelper with DriverHelper {
 
   def backButtonHref: String
   def path: String
@@ -50,7 +49,7 @@ trait BasePage extends CacheHelper with DriverHelper with Matchers {
     findElementsByTag("h1").head.getText mustBe title
   }
 
-  protected def checkBackButton(): Unit = findElementById("back-link").getAttribute("href") must be(backButtonHref)
+  protected def checkBackButton(): Unit = findElementById("back-link").getAttribute("href") mustBe backButtonHref
 
   protected def checkPageLinks(): Unit = {
     val links = findElementsByTag("a")
