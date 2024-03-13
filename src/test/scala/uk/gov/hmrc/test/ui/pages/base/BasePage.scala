@@ -17,16 +17,15 @@
 package uk.gov.hmrc.test.ui.pages.base
 
 import org.openqa.selenium.By
-import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
-import org.scalatest.matchers.should.Matchers
+import org.scalatest.matchers.must.Matchers.{convertToAnyMustWrapper, defined}
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Common
+import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 
 import scala.util.matching.Regex
 
-trait BasePage extends CacheHelper with DriverHelper with Matchers {
+trait BasePage extends CacheHelper with DriverHelper {
 
   def backButtonHref: String
   def path: String
@@ -50,7 +49,7 @@ trait BasePage extends CacheHelper with DriverHelper with Matchers {
     findElementsByTag("h1").head.getText mustBe title
   }
 
-  protected def checkBackButton(): Unit = findElementById("back-link").getAttribute("href") must be(backButtonHref)
+  protected def checkBackButton(): Unit = findElementById("back-link").getAttribute("href") mustBe backButtonHref
 
   protected def checkPageLinks(): Unit = {
     val links = findElementsByTag("a")
@@ -95,6 +94,39 @@ trait BasePage extends CacheHelper with DriverHelper with Matchers {
 
   protected def removeUrl(partId: String, additionalPartId: String): String =
     s"$initPart/$partId/$elementId/$additionalPartId/$elementId/remove"
+
+  def checkSectionSummary(detailKey: DetailKey): Unit = {
+    val rows = findElementsByClassName("govuk-summary-card")
+      .filter(findChildByClassName(_, detailKey.id.head).getText == detailKey.label)
+      .map(findChildByClassName(_, "govuk-summary-list__row"))
+
+    val displayedKeysAndDetails = rows
+      .map { webElement =>
+        findChildByClassName(webElement, "govuk-summary-list__key") ->
+          findChildByClassName(webElement, "govuk-summary-list__value")
+      }
+
+    val cacheDetails = allSectionDetails(detailKey.sectionId)
+
+    cacheDetails.foreach { case (detailKey, details) =>
+      val expectedRow = displayedKeysAndDetails.find(_._1.getText == detailKey.label)
+      expectedRow mustBe defined
+
+      val values = details match {
+        case detail: Detail  => Seq(detail.value)
+        case detail: Details => detail.values
+      }
+
+      // There may be some edge cases here not accounted for, please add accordingly.
+      val valuesSeparator = detailKey.label match {
+        case RoutingCountry => ","
+        case _              => "\n"
+      }
+
+      val displayValues = expectedRow.head._2.getText.split(valuesSeparator).toList
+      displayValues mustBe values
+    }
+  }
 }
 
 case class PageNotFoundException(s: String) extends Exception(s)

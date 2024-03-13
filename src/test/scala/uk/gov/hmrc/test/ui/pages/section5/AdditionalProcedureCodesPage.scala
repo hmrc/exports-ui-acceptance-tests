@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalProcedureCodes
 

@@ -17,7 +17,6 @@
 package uk.gov.hmrc.test.ui.pages.section1
 
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 
 object DeclarationChoicePage extends BasePage {
