@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.ProcedureCode
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 
 object ProcedureCodesPage extends BasePage {
@@ -27,12 +27,8 @@ object ProcedureCodesPage extends BasePage {
   val title: String          = "What is the procedure code for this item?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(
-      "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-1-message-information-including-procedure-codes#de-110-procedure-box-37-procedure"
-    ),
-    Clearance -> List(
-      "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/group-1-message-information-including-procedure-codes#de-110-procedure-box-37-procedure"
-    )
+    Common -> List("https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-1-message-information-including-procedure-codes#de-110-procedure-box-37-procedure"),
+    Clearance -> List("https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/group-1-message-information-including-procedure-codes#de-110-procedure-box-37-procedure")
   )
 
   override protected def performActionsAndStore(values: String*): Unit = {

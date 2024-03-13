@@ -4,40 +4,41 @@ import uk.gov.hmrc.test.ui.pages.base.DetailKey
 
 object DetailKeys {
 
-  val Section6 = 6
+  val section6            = 6
+  val Section6: DetailKey = DetailKey("Section 6 of 6: Transport", section6, Some("transport-card"))
 
   // /transport-leaving-the-border
-  val TransportLeavingBorder: DetailKey = DetailKey("Transport at the border", Section6)
+  val TransportLeavingBorder: DetailKey = DetailKey("Transport at the border", section6)
 
   // /warehouse-details
-  val WarehouseHouse: DetailKey = DetailKey("Warehouse ID", Section6)
+  val WarehouseHouse: DetailKey = DetailKey("Warehouse ID", section6)
 
   // /supervising-customs-office
-  val SuperVisingCustomsOffice: DetailKey = DetailKey("Customs supervising office", Section6)
+  val SuperVisingCustomsOffice: DetailKey = DetailKey("Customs supervising office", section6)
 
   // /inland-or-border
-  val InlandOrBorder: DetailKey = DetailKey("Presenting to customs", Section6)
+  val InlandOrBorder: DetailKey = DetailKey("Presenting to customs", section6)
 
   // /inland-transport-details
-  val InlandModeOfTransport: DetailKey = DetailKey("Inland mode of transport", Section6)
+  val InlandModeOfTransport: DetailKey = DetailKey("Inland mode of transport", section6)
 
   // /departure-transport
-  val DepartureTransport: DetailKey = DetailKey("Transport details at the border", Section6)
+  val DepartureTransport: DetailKey = DetailKey("Transport details at the border", section6)
 
   // /border-transport
-  val BorderTransport: DetailKey = DetailKey("Transport leaving the border", Section6)
+  val BorderTransport: DetailKey = DetailKey("Transport leaving the border", section6)
 
   // /transport-country
   val TransportCountry: DetailKey =
-    DetailKey("Country of registration for the transport leaving the UK border", Section6)
+    DetailKey("Country of registration for the transport leaving the UK border", section6)
 
   // /express-consignment
-  val ExpressConsignment: DetailKey = DetailKey("Express consignment", Section6)
+  val ExpressConsignment: DetailKey = DetailKey("Express consignment", section6)
 
   // /express-consignment
-  val TransportPayment: DetailKey = DetailKey("Method of payment for transport", Section6)
+  val TransportPayment: DetailKey = DetailKey("Method of payment for transport", section6)
 
-  val Container: DetailKey = DetailKey("Container ID", Section6)
+  val Container: DetailKey = DetailKey("Container ID", section6)
 
-  val AddSeals: DetailKey = DetailKey("Security seals", Section6)
+  val AddSeals: DetailKey = DetailKey("Security seals", section6)
 }

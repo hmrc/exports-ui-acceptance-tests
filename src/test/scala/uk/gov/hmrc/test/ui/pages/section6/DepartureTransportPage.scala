@@ -1,6 +1,6 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes._
+import uk.gov.hmrc.test.ui.pages.base.Constants._
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base._
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys._
@@ -19,10 +19,10 @@ object DepartureTransportPage extends BasePage {
   )
 
   val checkIfDecIsSupEidr: Boolean =
-    detail(DeclarationType) == DeclarationTypes.Occasional && detail(DeclarationType) == DeclarationTypes.Simplified
+    detail(DeclarationType) == Constants.Occasional && detail(DeclarationType) == Constants.Simplified
 
   def backButtonHref: String =
-    if (detail(DeclarationType) == DeclarationTypes.Clearance)
+    if (detail(DeclarationType) == Constants.Clearance)
       SupervisingCustomsOfficePage.path
     else if (inlandOrBorderValue && !checkIfDecIsSupEidr && !shouldSkipInlandOrBorder)
       InlandOrBorderPage.path

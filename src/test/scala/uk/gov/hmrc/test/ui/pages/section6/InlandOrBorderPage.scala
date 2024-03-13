@@ -1,10 +1,10 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Common
+import uk.gov.hmrc.test.ui.pages.base.Constants._
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.inlandOrBorder
 import uk.gov.hmrc.test.ui.pages.base._
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
-import uk.gov.hmrc.test.ui.pages.section6.ConditionChecksSection6.isSPOFFNotNeeded
+import uk.gov.hmrc.test.ui.pages.section6.ConditionChecksSection6.{checkIfDecIsClr, isSPOFFNotNeeded}
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.InlandOrBorder
 
 object InlandOrBorderPage extends BasePage {
@@ -17,7 +17,7 @@ object InlandOrBorderPage extends BasePage {
   def backButtonHref(): String =
     if (isSPOFFNotNeeded) {
       TransportLeavingTheBorderPage.path
-    } else if (detail(DeclarationType) == DeclarationTypes.Clearance) {
+    } else if (checkIfDecIsClr) {
       WarehousePage.path
     } else {
       SupervisingCustomsOfficePage.path

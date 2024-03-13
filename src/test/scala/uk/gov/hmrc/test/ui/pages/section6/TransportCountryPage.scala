@@ -1,6 +1,6 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes._
+import uk.gov.hmrc.test.ui.pages.base.Constants._
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.transportCountry
 import uk.gov.hmrc.test.ui.pages.base._
 import uk.gov.hmrc.test.ui.pages.section6.ConditionChecksSection6._
@@ -19,7 +19,7 @@ object TransportCountryPage extends BasePage {
   private val country = 0
 
   def backButtonHref: String =
-    if (inlandOrBorderValue && !isTransportLeavingBorderModePostalOrFixed && !shouldSkipInlandOrBorder()) {
+    if (inlandOrBorderValue && !isTransportLeavingBorderModePostalOrFixed && !shouldSkipInlandOrBorder) {
       if (checkIfDecIsOcaOrSim) InlandOrBorderPage.path
       else if (checkIfDecIsStdOrSup) DepartureTransportPage.path
       else BorderTransportPage.path

@@ -6,7 +6,8 @@ object ContainersListPage extends BasePage {
 
   val path: String           = s"/declaration/containers"
   val title                  = s"You have added 2 containers" // check the url again
-  val backButtonHref: String = FirstContainerPage.backButtonHref()
+  val backButtonHref: String =
+    FirstContainerPage.backButtonHref() // should have the same back button logic as first container page
 
   private val yesNo = 0
 

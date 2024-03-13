@@ -17,17 +17,17 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, DetailKey}
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.Section5
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.section5
 
 object SummarySection5Page extends BasePage {
 
-  val backButtonHref: String = DeclarationItemsListPage.path
-  val path: String = "/declaration/summary-section/5"
-  val title: String = "Check your answers"
+  def backButtonHref: String = DeclarationItemsListPage.path
+  val path: String           = "/declaration/summary-section/5"
+  val title: String          = "Check your answers"
 
   override def checkExpanders(): Unit = ()
 
   override protected def performActionsAndStore(values: String*): Unit = {
-    val items = allSectionDetails(Section5).groupBy { case (detailKey: DetailKey, _) => detailKey.additionalId.head }
+    val items = allSectionDetails(section5).groupBy { case (detailKey: DetailKey, _) => detailKey.additionalId.head }
   }
 }

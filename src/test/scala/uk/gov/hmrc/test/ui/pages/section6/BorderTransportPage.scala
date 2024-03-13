@@ -1,6 +1,6 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Common
+import uk.gov.hmrc.test.ui.pages.base.Constants._
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base._
 import uk.gov.hmrc.test.ui.pages.section6.ConditionChecksSection6.checkIfDecIsOcaOrSim
@@ -31,17 +31,40 @@ object BorderTransportPage extends BasePage {
     val data = values.head match {
       case "Ship or RoRo ferry IMO number"                   =>
         BorderTransportData("radio_ShipOrRoroImoNumber", "ShipOrRoroImoNumber", "123456", "Ship IMO number")
-      case "Ship or RoRo ferry name"                         => BorderTransportData("radio_NameOfVessel", "NameOfVessel", "Seraphim")
-      case "Eurotunnel or other rail details"                => BorderTransportData("radio_WagonNumber", "WagonNumber", "EuroTunnel")
+      case "Ship or RoRo ferry name"                         =>
+        BorderTransportData("radio_NameOfVessel", "NameOfVessel", "Seraphim", "Ship name")
+      case "Eurotunnel or other rail details"                =>
+        BorderTransportData("radio_WagonNumber", "WagonNumber", "EuroTunnel", "Train")
       case "Vehicle registration number"                     =>
-        BorderTransportData("radio_VehicleRegistrationNumber", "VehicleRegistrationNumber", "123456")
-      case "Flight number and date of flight"                => BorderTransportData("radio_FlightNumber", "FlightNumber", "123456")
+        BorderTransportData(
+          "radio_VehicleRegistrationNumber",
+          "VehicleRegistrationNumber",
+          "123456",
+          "Vehicle registration"
+        )
+      case "Flight number and date of flight"                =>
+        BorderTransportData("radio_FlightNumber", "FlightNumber", "123456", "Flight number")
       case "Aircraft registration number and date of flight" =>
-        BorderTransportData("radio_AircraftRegistrationNumber", "AircraftRegistrationNumber", "123456")
+        BorderTransportData(
+          "radio_AircraftRegistrationNumber",
+          "AircraftRegistrationNumber",
+          "123456",
+          "Aircraft number"
+        )
       case "European vessel identification (ENI) number"     =>
-        BorderTransportData("radio_EuropeanVesselIDNumber", "EuropeanVesselIDNumber", "123456")
+        BorderTransportData(
+          "radio_EuropeanVesselIDNumber",
+          "EuropeanVesselIDNumber",
+          "123456",
+          "European vessel number (ENI)"
+        )
       case "Inland vessel’s name"                            =>
-        BorderTransportData("radio_NameOfInlandWaterwayVessel", "NameOfInlandWaterwayVessel", "123456")
+        BorderTransportData(
+          "radio_NameOfInlandWaterwayVessel",
+          "NameOfInlandWaterwayVessel",
+          "123456",
+          "Inland vessel’s name"
+        )
     }
     fillRadioButton(data.radioId, data.textboxId, data.textboxValue)
     store(BorderTransport -> Details(List(data.summaryValue, data.textboxValue)))

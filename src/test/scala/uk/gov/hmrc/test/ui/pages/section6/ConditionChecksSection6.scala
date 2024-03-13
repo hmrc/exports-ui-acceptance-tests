@@ -1,7 +1,7 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes._
+import uk.gov.hmrc.test.ui.pages.base.Constants
+import uk.gov.hmrc.test.ui.pages.base.Constants._
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys._
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys._
 import uk.gov.hmrc.test.ui.pages.section6.BorderTransportPage.detail
@@ -13,16 +13,16 @@ object ConditionChecksSection6 {
   val inlandOrBorderValue: Boolean = !shouldSkipInlandOrBorder && detail(InlandOrBorder) == "Border Location"
 
   val checkIfDecIsOcaOrSim: Boolean =
-    detail(DeclarationType) == DeclarationTypes.Occasional || detail(DeclarationType) == DeclarationTypes.Simplified
+    detail(DeclarationType) == Constants.Occasional || detail(DeclarationType) == Constants.Simplified
 
   val checkIfDecIsStdOrSup: Boolean =
-    detail(DeclarationType) == DeclarationTypes.Standard || detail(DeclarationType) == DeclarationTypes.Supplementary
+    detail(DeclarationType) == Constants.Standard || detail(DeclarationType) == Constants.Supplementary
 
-  val checkIfDecIsClr: Boolean = detail(DeclarationType) == DeclarationTypes.Clearance
+  val checkIfDecIsClr: Boolean = detail(DeclarationType) == Constants.Clearance
 
-  val checkIfDecIsStd: Boolean = detail(DeclarationType) == DeclarationTypes.Standard
+  val checkIfDecIsStd: Boolean = detail(DeclarationType) == Constants.Standard
 
-  val checkIfDecIsSup: Boolean = detail(DeclarationType) == DeclarationTypes.Supplementary
+  val checkIfDecIsSup: Boolean = detail(DeclarationType) == Constants.Supplementary
 
   def hasEndingCodes: Boolean =
     listOfItemDetailFor(ProcedureCodeLabel).exists(code =>

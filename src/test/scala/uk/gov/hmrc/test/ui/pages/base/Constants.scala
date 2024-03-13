@@ -1,8 +1,11 @@
 package uk.gov.hmrc.test.ui.pages.base
 
-object DeclarationTypes {
+object Constants {
 
-  val Common = "COMMON" // Used for the tariff expander only
+  val yes = "Yes"
+  val no = "No"
+
+  val Common        = "COMMON"  // Used for the tariff expander only
 
   val Clearance     = "CLEARANCE"
   val Occasional    = "OCCASIONAL"
@@ -13,7 +16,11 @@ object DeclarationTypes {
   val Arrived       = "arrived"
   val Prelodged     = "prelodged"
 
-  // For supplementary only
   val TypeY = "simplified"
   val TypeZ = "eidr"
+
+  // Generally we need to pass different values for a drop down and the cache
+  // ex : for countries
+  val enteredValue = 0
+  val storedValue  = 1
 }
