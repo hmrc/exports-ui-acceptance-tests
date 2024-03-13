@@ -4,7 +4,6 @@ import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Common
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.inlandOrBorder
 import uk.gov.hmrc.test.ui.pages.base._
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys._
 import uk.gov.hmrc.test.ui.pages.section6.ConditionChecksSection6.isSPOFFNotNeeded
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.InlandOrBorder
 
@@ -24,7 +23,7 @@ object InlandOrBorderPage extends BasePage {
       SupervisingCustomsOfficePage.path
     }
 
-  val location = 0
+  private val location = 0
 
   def performActionsAndStore(values: String*): Unit = {
     values match {

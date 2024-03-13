@@ -1,7 +1,7 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes._
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{transportPayment, transportPaymentCL}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base._
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.TransportPayment
 
@@ -16,7 +16,7 @@ object TransportPaymentPage extends BasePage {
     Clearance -> List(transportPaymentCL)
   )
 
-  val paymentType = 0
+  private val paymentType = 0
 
   def performActionsAndStore(values: String*): Unit = {
     val elementId           = values(paymentType) match {

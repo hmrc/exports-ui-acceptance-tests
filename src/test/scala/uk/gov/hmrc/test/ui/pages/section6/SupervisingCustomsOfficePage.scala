@@ -1,7 +1,7 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes._
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{supervisingCustomsOffice, supervisingCustomsOfficeCL}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base._
 import uk.gov.hmrc.test.ui.pages.section6.ConditionChecksSection6.hasEndingCodes
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.SuperVisingCustomsOffice
@@ -20,7 +20,7 @@ object SupervisingCustomsOfficePage extends BasePage {
     if (hasEndingCodes) WarehousePage.path
     else TransportLeavingTheBorderPage.path
 
-  val officeCode = 0
+  private val officeCode = 0
 
   def performActionsAndStore(values: String*): Unit = {
     fillAutoComplete("supervisingCustomsOffice", values(officeCode))

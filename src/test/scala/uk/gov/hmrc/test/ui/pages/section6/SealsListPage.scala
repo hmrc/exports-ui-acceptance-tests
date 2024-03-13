@@ -9,7 +9,7 @@ object SealsListPage extends BasePage {
   val title                  = s"You have added 1 security seal for container ${detail(Container)}" // check the url again
   val backButtonHref: String = TransportPaymentPage.path
 
-  val yesNo = 0
+  private val yesNo = 0
 
   def performActionsAndStore(values: String*): Unit =
     selectYesOrNoRadio(values(yesNo))

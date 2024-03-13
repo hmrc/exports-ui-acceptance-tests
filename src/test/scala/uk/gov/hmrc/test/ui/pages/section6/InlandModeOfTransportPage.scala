@@ -1,22 +1,30 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes._
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{container, containerCL, containerCL1, inlandTransportDetails}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.inlandTransportDetails
 import uk.gov.hmrc.test.ui.pages.base._
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.TransportLeavingBorder
+import uk.gov.hmrc.test.ui.pages.section6.ConditionChecksSection6._
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
 
 object InlandModeOfTransportPage extends BasePage {
 
-  val path: String           = "/declaration/inland-transport-details"
-  def title: String          = "How will the goods be transported to the UK border?"
-  val backButtonHref: String = InlandOrBorderPage.path
+  val path: String  = "/declaration/inland-transport-details"
+  def title: String = "How will the goods be transported to the UK border?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(container),
-    Clearance -> List(containerCL, containerCL1)
+    Common -> List(inlandTransportDetails)
   )
 
-  val mode = 0
+  def backButtonHref(): String =
+    if (!shouldSkipInlandOrBorder && detail(InlandOrBorder) == "Border Location") {
+      InlandOrBorderPage.path
+    } else if (shouldSkipInlandOrBorder && isSPOFFNotNeeded) {
+      TransportLeavingTheBorderPage.path
+    } else {
+      SupervisingCustomsOfficePage.path
+    }
+
+  private val mode = 0
 
   def performActionsAndStore(values: String*): Unit = {
     val elementId = values(mode) match {

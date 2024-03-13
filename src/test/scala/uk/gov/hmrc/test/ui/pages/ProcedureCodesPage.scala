@@ -16,20 +16,31 @@
 
 package uk.gov.hmrc.test.ui.pages
 
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.ProcedureCode
+import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{ProcedureCode, cache}
 
 object ProcedureCodesPage extends BasePage {
 
-  val backButtonHref: String = "/declaration/declaration-items-list"
+  val backButtonHref: String = DeclarationItemsListPage.path
   val path: String           = itemUrl("procedure-codes")
   val title: String          = "What is the procedure code for this item?"
 
-  val procedureCode = 0
+  override val expanderHrefs: Map[String, Seq[String]] = Map(
+    Common    -> List(
+      "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-1-message-information-including-procedure-codes#de-110-procedure-box-37-procedure"
+    ),
+    Clearance -> List(
+      "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/group-1-message-information-including-procedure-codes#de-110-procedure-box-37-procedure"
+    )
+  )
 
-  override protected def performActionsAndCache(values: String*): Unit = {
-    fillAutoComplete("procedureCode", values(procedureCode))
-    cache += (s"$itemId/$ProcedureCode" -> Detail(""))
-    cache += (value(s"$itemId/$ProcedureCode") -> Detail(values(procedureCode)))
+  override protected def performActionsAndStore(values: String*): Unit = {
+    val procedureCode = values.head
+    fillAutoComplete("procedureCode", procedureCode)
+    store(
+      s"$itemId/$ProcedureCode"        -> Detail("Procedure code"),
+      value(s"$itemId/$ProcedureCode") -> Detail(procedureCode)
+    )
   }
 }

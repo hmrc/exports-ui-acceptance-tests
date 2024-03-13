@@ -1,12 +1,28 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
+import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes
+import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes._
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys._
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys._
 import uk.gov.hmrc.test.ui.pages.section6.BorderTransportPage.detail
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.TransportLeavingBorder
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
 import uk.gov.hmrc.test.ui.pages.section6.InlandOrBorderPage.listOfItemDetailFor
 
 object ConditionChecksSection6 {
+
+  val inlandOrBorderValue: Boolean = !shouldSkipInlandOrBorder && detail(InlandOrBorder) == "Border Location"
+
+  val checkIfDecIsOcaOrSim: Boolean =
+    detail(DeclarationType) == DeclarationTypes.Occasional || detail(DeclarationType) == DeclarationTypes.Simplified
+
+  val checkIfDecIsStdOrSup: Boolean =
+    detail(DeclarationType) == DeclarationTypes.Standard || detail(DeclarationType) == DeclarationTypes.Supplementary
+
+  val checkIfDecIsClr: Boolean = detail(DeclarationType) == DeclarationTypes.Clearance
+
+  val checkIfDecIsStd: Boolean = detail(DeclarationType) == DeclarationTypes.Standard
+
+  val checkIfDecIsSup: Boolean = detail(DeclarationType) == DeclarationTypes.Supplementary
 
   def hasEndingCodes: Boolean =
     listOfItemDetailFor(ProcedureCodeLabel).exists(code =>
@@ -17,7 +33,26 @@ object ConditionChecksSection6 {
     listOfItemDetailFor(ProcedureCodeLabel).contains("1040") &&
       listOfItemDetailFor(AdditionalProcedureCodeLabel).contains("00")
 
-  def shouldSkipInlandOrBorder(): Boolean = {
+  def isTransportLeavingBorderModePostalOrFixed: Boolean =
+    detail(TransportLeavingBorder) == "Postal" || detail(TransportLeavingBorder) == "Fixed transport installation"
+
+  def isTransportLeavingBorderModeRail: Boolean =
+    detail(TransportLeavingBorder) == "Rail"
+
+  def isTransportLeavingBorderModePostalOrFixedOrRail: Boolean =
+    detail(TransportLeavingBorder) == "Postal" ||
+      detail(TransportLeavingBorder) == "Fixed transport installation" ||
+      isTransportLeavingBorderModeRail
+
+  def isInlandModeOfTransportPostalOrFixed: Boolean =
+    detail(InlandModeOfTransport) == "Postal" || detail(InlandModeOfTransport) == "Fixed transport installation"
+
+  def isGuernseyOrJersey: Boolean =
+    detail(InlandModeOfTransport) == "Guernsey" || detail(InlandModeOfTransport) == "Jersey"
+
+  def isExpressConsignment: Boolean = detail(ExpressConsignment) == "Yes"
+
+  def shouldSkipInlandOrBorder: Boolean = {
 
     def furtherChecks: Boolean =
       if (detail(TransportLeavingBorder) == "Roll on roll off (RoRo) transport") true
@@ -27,16 +62,16 @@ object ConditionChecksSection6 {
       else if (depCodes.contains(declaration.locationOfGoods.code)) true
       else false
 
-    detail(DeclarationType) match {
-//      case AdditionalDeclarationTypeEnum.SUPPLEMENTARY_EIDR       => true
-//      case AdditionalDeclarationTypeEnum.SUPPLEMENTARY_SIMPLIFIED => furtherChecks
-//      case AdditionalDeclarationTypeEnum.STANDARD_FRONTIER        => furtherChecks
-//      case AdditionalDeclarationTypeEnum.STANDARD_PRE_LODGED      => furtherChecks
-//      case AdditionalDeclarationTypeEnum.SIMPLIFIED_FRONTIER      => furtherChecks
-//      case AdditionalDeclarationTypeEnum.SIMPLIFIED_PRE_LODGED    => furtherChecks
-//      case AdditionalDeclarationTypeEnum.OCCASIONAL_FRONTIER      => furtherChecks
-//      case AdditionalDeclarationTypeEnum.OCCASIONAL_PRE_LODGED    => furtherChecks
-//      case _                                                      => false
+    (detail(DeclarationType), detail(AdditionalDeclarationType)) match {
+      case (Supplementary, TypeZ)  => true
+      case (Supplementary, TypeY)  => furtherChecks
+      case (Standard, Arrived)     => furtherChecks
+      case (Standard, Prelodged)   => furtherChecks
+      case (Simplified, Arrived)   => furtherChecks
+      case (Simplified, Prelodged) => furtherChecks
+      case (Occasional, Arrived)   => furtherChecks
+      case (Occasional, Prelodged) => furtherChecks
+      case _                       => false
     }
   }
 }

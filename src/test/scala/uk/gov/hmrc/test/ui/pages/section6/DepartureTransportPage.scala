@@ -1,23 +1,35 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes._
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{departureTransport, departureTransportCL}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base._
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys._
+import uk.gov.hmrc.test.ui.pages.section6.ConditionChecksSection6._
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
 
 object DepartureTransportPage extends BasePage {
 
-  val path: String           = "/declaration/departure-transport"
-  def title: String          =
+  val path: String  = "/declaration/departure-transport"
+  def title: String =
     s"What are the details for the ${detail(TransportLeavingBorder).toLowerCase} transport?"
-  val backButtonHref: String = InlandOrBorderPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common    -> List(departureTransport),
     Clearance -> List(departureTransportCL)
   )
 
-  val departRef = 0
+  val checkIfDecIsSupEidr: Boolean =
+    detail(DeclarationType) == DeclarationTypes.Occasional && detail(DeclarationType) == DeclarationTypes.Simplified
+
+  def backButtonHref: String =
+    if (detail(DeclarationType) == DeclarationTypes.Clearance)
+      SupervisingCustomsOfficePage.path
+    else if (inlandOrBorderValue && !checkIfDecIsSupEidr && !shouldSkipInlandOrBorder)
+      InlandOrBorderPage.path
+    else
+      InlandModeOfTransportPage.path
+
+  private val departRef = 0
 
   def performActionsAndStore(values: String*): Unit = {
     val (radioId, textboxId, textboxValue) = values.head match {

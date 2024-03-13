@@ -1,7 +1,7 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes._
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{transportLeavingTheBorder, transportLeavingTheBorderCL}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base._
 import uk.gov.hmrc.test.ui.pages.section5.SummarySection5Page
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.TransportLeavingBorder
@@ -17,7 +17,7 @@ object TransportLeavingTheBorderPage extends BasePage {
     Clearance -> List(transportLeavingTheBorderCL)
   )
 
-  val transportType = 0
+  private val transportType = 0
 
   def performActionsAndStore(values: String*): Unit = {
     val elementId = values(transportType) match {

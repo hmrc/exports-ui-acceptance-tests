@@ -2,21 +2,28 @@ package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Common
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, Details}
+import uk.gov.hmrc.test.ui.pages.base._
+import uk.gov.hmrc.test.ui.pages.section6.ConditionChecksSection6.checkIfDecIsOcaOrSim
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
 
 object BorderTransportPage extends BasePage {
 
-  val path: String           = "/declaration/border-transport"
-  def title: String          =
+  val path: String  = "/declaration/border-transport"
+  def title: String =
     s"What are the details for the ${detail(TransportLeavingBorder).toLowerCase} transport?"
-  val backButtonHref: String = DepartureTransportPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common -> List(borderTransport)
   )
 
-  val transport = 0
+  private val transport = 0
+
+  def backButtonHref: String =
+    if (checkIfDecIsOcaOrSim) {
+      InlandModeOfTransportPage.path
+    } else {
+      DepartureTransportPage.path
+    }
 
   case class BorderTransportData(radioId: String, textboxId: String, textboxValue: String, summaryValue: String)
 

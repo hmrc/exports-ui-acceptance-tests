@@ -16,7 +16,7 @@ object WarehousePage extends BasePage {
     Clearance -> List(warehouseIdentificationCL)
   )
 
-  val code = 0
+  private val code = 0
 
   def performActionsAndStore(values: String*): Unit = {
     fillTextBoxById("identificationNumber", values(code))

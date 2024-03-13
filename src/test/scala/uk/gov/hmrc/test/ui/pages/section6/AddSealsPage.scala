@@ -1,22 +1,22 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes._
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{containersSeals, containersSealsCL}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base._
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
 
-object SealsPage extends BasePage {
+object AddSealsPage extends BasePage {
 
-  val path: String           = s"/declaration/containers/${detail(Container)}/seals"
-  val title                  = s"Does container ${detail(Container)} have any security seals?"
-  val backButtonHref: String = TransportPaymentPage.path
+  val path: String           = s"/declaration/containers/${detail(Container)}/add-seals"
+  val title                  = s"What is the security seal for container ${detail(Container)}"
+  val backButtonHref: String = SealsChoicePage.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common    -> List(containersSeals),
     Clearance -> List(containersSealsCL)
   )
 
-  val id = 0
+  private val id = 0
 
   def performActionsAndStore(values: String*): Unit = {
     findElementById("id").sendKeys(values(id))

@@ -15,7 +15,7 @@ object MultipleContainerPage extends BasePage {
     Clearance -> List(containerChangeCL)
   )
 
-  val code = 0
+  private val code = 0
 
   def performActionsAndStore(values: String*): Unit = {
     findElementById("id").sendKeys(values(code))

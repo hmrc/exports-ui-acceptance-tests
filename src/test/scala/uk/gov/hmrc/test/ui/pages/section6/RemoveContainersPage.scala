@@ -9,7 +9,7 @@ object RemoveContainersPage extends BasePage {
   val title                  = "Are you sure you want to remove this container?"
   val backButtonHref: String = ContainersListPage.path
 
-  val yesNo = 0
+  private val yesNo = 0
 
   def performActionsAndStore(values: String*): Unit =
     selectYesOrNoRadio(values(yesNo))
