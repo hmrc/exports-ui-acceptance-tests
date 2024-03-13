@@ -16,22 +16,27 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.Common
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalFiscalReferences, itemsAdditionalFiscalReferencesCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.FiscalInformationYesNo
 
-object FiscalInformationPage extends BasePage {
+object FiscalInformationYesNoPage extends BasePage {
 
   def backButtonHref: String = AdditionalProcedureCodesPage.path
-  val path: String           = itemUrl("fiscal-information")
+  def path: String           = itemUrl("fiscal-information")
 
   val title: String = "Do you want to claim Onward Supply Relief (OSR)?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List("https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-3-parties#de-340-additional-fiscal-references-identification-number-no-previous-reference")
+    Common -> List(itemsAdditionalFiscalReferences),
+    Clearance -> List(itemsAdditionalFiscalReferencesCL)
   )
 
-  override protected def performActionsAndStore(values: String*): Unit = {
+  // No  => processPage(no)
+  // Yes => processPage(yes)
+
+  def processPage(values: String*): Unit = {
     val yesNo =  values.head
     selectYesOrNoRadio(yesNo)
     store(FiscalInformationYesNo(itemId) -> Detail(yesNo))

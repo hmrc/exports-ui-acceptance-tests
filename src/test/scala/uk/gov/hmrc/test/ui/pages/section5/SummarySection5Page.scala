@@ -27,7 +27,7 @@ object SummarySection5Page extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
-  override protected def performActionsAndStore(values: String*): Unit = {
+  def processPage(values: String*): Unit = {
     val items = allSectionDetails(section5).groupBy { case (detailKey: DetailKey, _) => detailKey.additionalId.head }
   }
 }

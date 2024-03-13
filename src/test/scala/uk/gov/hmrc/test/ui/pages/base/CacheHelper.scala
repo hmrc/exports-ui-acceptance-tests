@@ -18,6 +18,18 @@ trait CacheHelper {
       }
     }
 
+  def itemDetailFor(itemId: String, label: String): Seq[String] =
+    allSectionDetails(section5, Some(itemId)).filter(_._1.label == label).values.flatMap {
+      case detail: Detail => Some(detail.value)
+      case _              => None
+    }.toList
+
+  def itemDetailsFor(itemId: String, label: String): Seq[Seq[String]] =
+    allSectionDetails(section5, Some(itemId)).filter(_._1.label == label).values.flatMap {
+      case details: Details => Some(details.values)
+      case _              => None
+    }.toList
+
   def listOfItemDetailFor(label: String): Seq[String] =
     allSectionDetails(section5).filter(_._1.label == label).values.flatMap {
       case detail: Detail => Some(detail.value)

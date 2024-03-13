@@ -17,16 +17,23 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.PackageTypeLabel
 
-object AddDeclarationItemPage extends BasePage {
+object PackageInformationListPage extends BasePage {
 
-  def backButtonHref: String = SummarySection4Page.path
-  val path: String           = "/declaration/add-declaration-item"
-  val title: String          = "Add declaration item 1"
+  def backButtonHref: String = PackageInformationPage.backButtonHref
+  def path: String           = itemUrl("packages-list")
+
+  def title: String =
+    itemDetailFor(itemId, PackageTypeLabel).size match {
+      case 1 => "You have added 1 package type"
+      case n => s"You have added $n package types"
+    }
 
   override def checkExpanders(): Unit = ()
 
-  // ex: processPage()
+  // No  => processPage(no)
+  // Yes => processPage(yes)
 
-  def processPage(values: String*): Unit = ()
+  def processPage(values: String*): Unit = selectYesOrNoRadio(values.head)
 }

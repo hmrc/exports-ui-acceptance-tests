@@ -16,24 +16,25 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalFiscalReferences
 
-object AdditionalFiscalReferencesListPage extends BasePage {
+object AdditionalFiscalReferencesRemovePage extends BasePage {
 
-  def backButtonHref: String = AdditionalProcedureCodesPage.path
-  def path: String           = itemUrl("additional-fiscal-references-list")
-
-  def title: String =
-    details(AdditionalFiscalReferences(itemId)).size match {
-      case 1 => "You have added 1 VAT number"
-      case n => s"You have added $n VAT numbers"
-    }
+  def backButtonHref: String = AdditionalFiscalReferencesListPage.path
+  def path: String           = removeUrl("items", "additional-fiscal-references")
+  val title: String          = "Are you sure you want to remove these VAT details?"
 
   override def checkExpanders(): Unit = ()
 
   // No  => processPage(no)
   // Yes => processPage(yes)
 
-  def processPage(values: String*): Unit = selectYesOrNoRadio(values.head)
+  def processPage(values: String*): Unit =
+    if (selectYesOrNoRadio(values.head)) {
+      val detailKey          = AdditionalFiscalReferences(itemId)
+      val vatDetailsToRemove = values.head
+      val result             = details(detailKey).filterNot(_ == vatDetailsToRemove)
+      if (result.isEmpty) clear(detailKey) else store(detailKey -> Details(result))
+    }
 }

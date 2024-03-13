@@ -20,7 +20,7 @@ import org.openqa.selenium.By
 import org.scalatest.matchers.must.Matchers.{convertToAnyMustWrapper, defined}
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
+import .DeclarationType
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 
 import scala.util.matching.Regex
@@ -32,15 +32,15 @@ trait BasePage extends CacheHelper with DriverHelper {
   def title: String
 
   val expanderHrefs: Map[String, Seq[String]] = Map.empty
-  val pageLinkHrefs: Seq[String]              =
+
+  def pageLinkHrefs: Seq[String] =
     List(exitAndCompleteLater, feedbackBanner, govUkLogo, languageToggle, signOut, technicalIssue)
 
-  def checkPage(values: String*): Unit = {
+  def checkPage(): Unit = {
     checkUrlAndTitle()
     checkBackButton()
     checkPageLinks()
     checkExpanders()
-    performActionsAndStore(values: _*)
   }
 
   protected def checkUrlAndTitle(): Unit = {
@@ -71,10 +71,10 @@ trait BasePage extends CacheHelper with DriverHelper {
   }
 
   // Required for multi-value pages, like "Package Information", "Additional Information", "Containers", ...
-  // The page sequence must be always at zero-position in the list of values passed to "performActionsAndStore".
+  // The page sequence must be always at zero-position in the list of values passed to "processPage".
   val sequenceId = 0
 
-  protected def performActionsAndStore(values: String*): Unit
+  def processPage(values: String*): Unit
 
   private val initPart: String  = "/declaration"
   private val elementId: String = "[\\w]+"

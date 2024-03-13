@@ -18,15 +18,15 @@ package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 
-object AddDeclarationItemPage extends BasePage {
+object PackageInformationChangePage extends BasePage {
 
-  def backButtonHref: String = SummarySection4Page.path
-  val path: String           = "/declaration/add-declaration-item"
-  val title: String          = "Add declaration item 1"
+  def backButtonHref: String = PackageInformationListPage.path
+  def path: String = changeUrl("package-information")
+  def title: String = PackageInformationPage.title
 
-  override def checkExpanders(): Unit = ()
+  override val expanderHrefs: Map[String, Seq[String]] = PackageInformationPage.expanderHrefs
 
-  // ex: processPage()
+  // ex: processPage("Aerosol", "20", "No shipping mark")
 
-  def processPage(values: String*): Unit = ()
+  def processPage(values: String*): Unit = PackageInformationPage.processPage(values:_*)
 }
