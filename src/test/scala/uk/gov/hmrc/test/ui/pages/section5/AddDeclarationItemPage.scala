@@ -18,22 +18,16 @@ package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, DetailKey}
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.section5
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.Section5
 
-object DeclarationItemsListPage extends BasePage {
+object AddDeclarationItemPage extends BasePage {
 
   def backButtonHref: String = SummarySection4Page.path
-  val path: String           = "/declaration/declaration-items-list"
+  val path: String           = "/declaration/add-declaration-item"
 
-  def title: String =
-    allSectionDetails(section5).groupBy { case (detailKey: DetailKey, _) => detailKey.additionalId.head }.size match {
-      case 1 => "You have added 1 item"
-      case n => s"You have added $n items"
-    }
+  val title: String = "Add declaration item 1"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List("https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-1-message-information-including-procedure-codes#de-19-total-number-of-items-box-5-items")
-  )
+  override def checkExpanders(): Unit = ()
 
-  override protected def performActionsAndStore(values: String*): Unit = selectYesOrNoRadio(values.head)
+  override protected def performActionsAndStore(values: String*): Unit = ()
 }

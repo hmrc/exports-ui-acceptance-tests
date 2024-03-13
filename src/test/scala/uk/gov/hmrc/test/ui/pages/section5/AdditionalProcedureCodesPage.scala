@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalProcedureCodes
 
 object AdditionalProcedureCodesPage extends BasePage {
 
-  val backButtonHref: String = ProcedureCodesPage.path
+  def backButtonHref: String = ProcedureCodesPage.path
   val path: String           = itemUrl("additional-procedure-codes")
   val title: String          = "What is the procedure code for this item?"
 

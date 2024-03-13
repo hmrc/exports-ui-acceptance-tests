@@ -16,14 +16,20 @@
 
 package uk.gov.hmrc.test.ui.pages.section1
 
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
+import uk.gov.hmrc.test.ui.pages.base.Constants._
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{decType, decTypeCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 
 object DeclarationChoicePage extends BasePage {
 
-  val backButtonHref: String = StandardOrOtherPage.path
+  def backButtonHref: String = StandardOrOtherPage.path
   val path: String           = "/declaration/declaration-choice"
   val title                  = "Select a declaration type"
+  override val expanderHrefs: Map[String, Seq[String]] = Map(
+    Common -> Seq(decType),
+    Clearance -> Seq(decTypeCL)
+  )
 
   override def performActionsAndStore(values: String*): Unit = {
     val declarationType = values(0)
