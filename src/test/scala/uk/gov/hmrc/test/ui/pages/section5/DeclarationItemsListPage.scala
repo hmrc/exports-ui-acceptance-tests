@@ -16,10 +16,9 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.section4.SummarySection4Page
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{DeclarationItemsListYesNo, section5}
-import .Common
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, DetailKey}
+import uk.gov.hmrc.test.ui.pages.base.Constants.Common
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, DetailKey}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.section5
 
 object DeclarationItemsListPage extends BasePage {
 
