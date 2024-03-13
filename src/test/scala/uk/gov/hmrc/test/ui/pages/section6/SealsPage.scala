@@ -7,8 +7,8 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
 
 object SealsPage extends BasePage {
 
-  val path: String           = s"/declaration/containers/${detail(Container).value}/seals"
-  val title                  = s"Does container ${detail(Container).value} have any security seals?"
+  val path: String           = s"/declaration/containers/${detail(Container)}/seals"
+  val title                  = s"Does container ${detail(Container)} have any security seals?"
   val backButtonHref: String = TransportPaymentPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(

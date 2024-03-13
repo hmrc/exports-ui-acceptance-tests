@@ -24,6 +24,8 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage._
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Common
 
+import scala.util.matching.Regex
+
 trait BasePage extends CacheHelper with DriverHelper with Matchers {
 
   def backButtonHref: String
@@ -43,7 +45,7 @@ trait BasePage extends CacheHelper with DriverHelper with Matchers {
   }
 
   protected def checkUrlAndTitle(): Unit = {
-    assert(driver.getCurrentUrl.startsWith(TestConfiguration.url("exports-frontend") + path))
+    assert((TestConfiguration.url("exports-frontend") + path).r.matches(driver.getCurrentUrl))
     driver.getTitle mustBe title + " - Make an export declaration online - GOV.UK"
     findElementsByTag("h1").head.getText mustBe title
   }
@@ -75,13 +77,24 @@ trait BasePage extends CacheHelper with DriverHelper with Matchers {
 
   protected def performActionsAndStore(values: String*): Unit
 
-  val itemsPathBase: String       = "/declaration/items"
-  val itemPathBase: String        = itemsPathBase + "/([\\w]+)"
-  private val itemPathBasePattern = (itemPathBase + "/.+").r
+  private val initPart: String  = "/declaration"
+  private val elementId: String = "[\\w]+"
 
-  protected def itemId: String        =
-    (Option(driver.getCurrentUrl) collect { case itemPathBasePattern(group) => group }).head
-  protected def itemUrl(page: String) = s"$itemsPathBase/$itemId/$page"
+  private val itemIdPattern: Regex = s"/$initPart/items/($elementId)/.+".r
+  protected def itemId: String     = (Option(driver.getCurrentUrl) collect { case itemIdPattern(group) => group }).head
+
+  protected def changeUrl(partId: String): String = s"$initPart/$partId/$elementId/change"
+
+  protected def changeUrl(partId: String, additionalPartId: String): String =
+    s"$initPart/$partId/$elementId/$additionalPartId/$elementId/change"
+
+  protected def itemUrl(partId: String): String = s"$initPart/items/$elementId/$partId"
+  protected def pathUrl(partId: String): String = s"$initPart/$partId/$elementId"
+
+  protected def removeUrl(partId: String): String = s"$initPart/$partId/$elementId/remove"
+
+  protected def removeUrl(partId: String, additionalPartId: String): String =
+    s"$initPart/$partId/$elementId/$additionalPartId/$elementId/remove"
 }
 
 case class PageNotFoundException(s: String) extends Exception(s)
