@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.pages
 
 import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.AdditionalProcedureCodes
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, Details}
 
 object AdditionalProcedureCodesPage extends BasePage {

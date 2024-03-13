@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Common
+import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, DetailKey}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalFiscalReferenceLabel, AdditionalProcedureCodes, Section5}
 

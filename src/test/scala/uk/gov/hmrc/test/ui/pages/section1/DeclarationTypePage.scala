@@ -1,7 +1,7 @@
 package uk.gov.hmrc.test.ui.pages.section1
 
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.{Arrived, Clearance, Common, Prelodged, Supplementary, TypeY, TypeZ}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Arrived, Clearance, Common, Prelodged, Supplementary, TypeY, TypeZ}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{decType, decTypeCL}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{AdditionalDeclarationType, DeclarationType}
 

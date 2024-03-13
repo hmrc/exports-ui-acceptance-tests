@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.test.ui.pages.section1
 
+import uk.gov.hmrc.test.ui.pages.base.Constants.Standard
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.base.DeclarationTypes.Standard
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 
 object StandardOrOtherPage extends BasePage {
