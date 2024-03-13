@@ -16,26 +16,33 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.Common
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalFiscalReferences, itemsAdditionalFiscalReferencesCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalFiscalReferences
 
 object AdditionalFiscalReferencesPage extends BasePage {
 
   def backButtonHref: String = FiscalInformationPage.path
-  val path: String           = itemUrl("additional-fiscal-references")
+  def path: String           = itemUrl("additional-fiscal-references")
   val title: String          = "What are the exporter’s VAT details?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List("https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-3-parties#de-340-additional-fiscal-references-identification-number-no-previous-reference"),
+    Common -> List(itemsAdditionalFiscalReferences),
+    Clearance -> List(itemsAdditionalFiscalReferencesCL)
   )
 
-  val country = 1
+  val country = 0
+  val countryCode = 1
   val vatNumber = 2
+
+  // ex: performActionsAndStore("United States of America", "US", "1234567890")
 
   override protected def performActionsAndStore(values: String*): Unit = {
     fillAutoComplete("country", values(country))
-    fillTextBoxById("", values(vatNumber))
-    store(AdditionalFiscalReferences(itemId, values(sequenceId)) -> Details(List(values(country), values(vatNumber))))
+    fillTextBoxById("reference", values(vatNumber))
+
+    val detailKey = AdditionalFiscalReferences(itemId)
+    store(detailKey -> Details(details(detailKey) :+ s"${values(countryCode)}${values(vatNumber)}"))
   }
 }
