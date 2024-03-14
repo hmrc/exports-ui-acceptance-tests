@@ -7,8 +7,9 @@ object DetailKeys {
   val section1 = 1
   val Section1: DetailKey = DetailKey("Section 1 of 6: Declaration details", section1, Some("references-card"))
 
+  //    /gg-sign-in
   val DeclarationEori: DetailKey = DetailKey("Your EORI number", section1)
-  //     /standard-or-other & /declaration-choice
+  //    /standard-or-other & /declaration-choice
   val DeclarationType: DetailKey = DetailKey("Declaration type", section1)
   //    /type
   val AdditionalDeclarationType: DetailKey = DetailKey("Type of declaration", section1)
