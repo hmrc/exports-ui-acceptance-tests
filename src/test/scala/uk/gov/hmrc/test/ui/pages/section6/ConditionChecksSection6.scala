@@ -57,9 +57,9 @@ object ConditionChecksSection6 {
     def furtherChecks: Boolean =
       if (detail(TransportLeavingBorder) == "Roll on roll off (RoRo) transport") true
       else if (hasEndingCodes) true
-      else if (declaration.holderOfAuthorisation.data.map(_.authorisationCode).contains("EXRR")) true
-      else if (declaration.holderOfAuthorisation.data.map(_.authorisationCode).contains("CSE")) true
-      else if (depCodes.contains(declaration.locationOfGoods.code)) true
+      // else if (contains("EXRR")) true  // need to add logics once section 2 and section 4 changes are pushed
+      // else if (contains("CSE")) true
+      // else if (locationOfGoods.code) true
       else false
 
     (detail(DeclarationType), detail(AdditionalDeclarationType)) match {
