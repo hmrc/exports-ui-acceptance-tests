@@ -19,7 +19,8 @@ package uk.gov.hmrc.test.ui.pages.section4
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.natureOfTransaction
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.TotalAmountInvoiced
+import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{NatureOfTransaction, TotalAmountInvoiced}
+import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.NatureOfTransaction
 
 
 object NatureOfTransactionPage extends BasePage {
@@ -38,15 +39,13 @@ object NatureOfTransactionPage extends BasePage {
 
   def performActionsAndStore(values: String*): Unit = {
     val optionSelected = values.head
-    optionSelected match {
-      case "Goods being sold" => NatureOfTransactionData("Sale","Goods being sold")
-      case "Goods being sold" => NatureOfTransactionData("Sale","Goods being sold")
-      case "Goods being sold" => NatureOfTransactionData("Sale","Goods being sold")
-      case "Goods being sold" => NatureOfTransactionData("Sale","Goods being sold")
-      case "Goods being sold" => NatureOfTransactionData("Sale","Goods being sold")
-      case "Goods being sold" => NatureOfTransactionData("Sale","Goods being sold")
-      case "Goods being sold" => NatureOfTransactionData("Sale","Goods being sold")
+    val label = optionSelected match {
+      case "Goods being sold" => clickById("Sale"); "Goods being sold"
+      case "Item purchased"   => clickById("Sale"); "Item purchased new in the UK for business use"
+      case "House removal"   => clickById("HouseRemoval"); "Item purchased new in the UK for business use"
+
     }
+    store(NatureOfTransaction -> Detail(label))
   }
 
 }

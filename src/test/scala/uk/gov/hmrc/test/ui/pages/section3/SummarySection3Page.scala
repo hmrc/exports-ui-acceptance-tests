@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section3
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{officeOfExit, officeOfExitCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
-import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{OfficeOfExitCode, Section3}
+import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{OfficeOfExitCode, section3}
 
 object SummarySection3Page extends BasePage {
 
@@ -30,7 +30,7 @@ object SummarySection3Page extends BasePage {
   val title: String = "Check your answers"
 
   override protected def performActionsAndStore(values: String*): Unit = {
-    checkSectionSummary(Section3)
+    checkSectionSummary(section3)
   }
 
 }

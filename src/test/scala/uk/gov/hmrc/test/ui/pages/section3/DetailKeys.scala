@@ -20,13 +20,13 @@ import uk.gov.hmrc.test.ui.pages.base.DetailKey
 
 object DetailKeys {
 
-  val Section3                      = 3
-  val DestinationCountry: DetailKey = DetailKey("Destination country", Section3)
-  val CountriesOfRouting: DetailKey   = DetailKey("Routing countries", Section3)
-  val LocationOfGoodsCode: DetailKey   = DetailKey("Goods location code", Section3)
-  val OfficeOfExitCode : DetailKey = DetailKey("Office of exit",Section3)
-  val TotalAmountInvoiced : DetailKey = DetailKey("Total amount invoiced",Section3)
-  val InvoiceExchangeRate: DetailKey = DetailKey("Rate of exchange",Section3)
+  val section3                      = 3
+  val Section3: DetailKey = DetailKey("Section 3 of 6: Routes and locations",section3,Some("routes-and-locations-card"))
+  val DestinationCountry: DetailKey = DetailKey("Destination country", section3)
+  val CountriesOfRouting: DetailKey   = DetailKey("Routing countries", section3)
+  val LocationOfGoodsCode: DetailKey   = DetailKey("Goods location code", section3)
+  val OfficeOfExitCode : DetailKey = DetailKey("Office of exit",section3)
+
 
 
 
