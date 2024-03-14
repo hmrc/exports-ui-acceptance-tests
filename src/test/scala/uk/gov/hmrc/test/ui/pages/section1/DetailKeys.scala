@@ -5,7 +5,7 @@ import uk.gov.hmrc.test.ui.pages.base.DetailKey
 object DetailKeys {
 
   val section1 = 1
-  val Section1: DetailKey = DetailKey("Section 1 of 6: Declaration details", section1, Some("items-card"))
+  val Section1: DetailKey = DetailKey("Section 1 of 6: Declaration details", section1, Some("references-card"))
 
   val DeclarationEori: DetailKey = DetailKey("Your EORI number", section1)
   //     /standard-or-other & /declaration-choice

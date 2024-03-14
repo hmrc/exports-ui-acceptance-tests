@@ -3,14 +3,13 @@ package uk.gov.hmrc.test.ui.pages.section6
 import uk.gov.hmrc.test.ui.pages.base.Constants._
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.inlandOrBorder
 import uk.gov.hmrc.test.ui.pages.base._
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
-import uk.gov.hmrc.test.ui.pages.section6.ConditionChecksSection6.{checkIfDecIsClr, isSPOFFNotNeeded}
+import uk.gov.hmrc.test.ui.pages.section6.ConditionChecksSection6._
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.InlandOrBorder
 
 object InlandOrBorderPage extends BasePage {
 
   val path: String  = "/declaration/inland-or-border"
-  def title: String = "Where are you presenting your goods to customs?"
+  val title: String = "Where are you presenting your goods to customs?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(inlandOrBorder))
 

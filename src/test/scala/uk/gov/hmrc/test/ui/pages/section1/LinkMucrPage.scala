@@ -7,11 +7,11 @@ import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.LinkToMucr
 
 object LinkMucrPage extends BasePage {
 
-  override def backButtonHref: String = LrnPage.path
+  def backButtonHref: String = LrnPage.path
 
-  override def path: String = "/declaration/link-to-mucr"
+  val path: String = "/declaration/link-to-mucr"
 
-  override def title: String = "Do you want to link this declaration’s DUCR to a Master Unique Consignment Reference (MUCR)?"
+  val title: String = "Do you want to link this declaration’s DUCR to a Master Unique Consignment Reference (MUCR)?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common -> Seq(mucr),

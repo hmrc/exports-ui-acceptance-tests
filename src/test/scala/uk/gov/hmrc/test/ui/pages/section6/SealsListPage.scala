@@ -5,9 +5,14 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
 
 object SealsListPage extends BasePage {
 
-  val path: String           = s"/declaration/containers/${detail(Container)}/seals"
-  val title                  = s"You have added 1 security seal for container ${detail(Container)}" // check the url again
-  val backButtonHref: String = TransportPaymentPage.path
+  def path: String           = s"/declaration/containers/$containerId/seals"
+  def backButtonHref: String = TransportPaymentPage.path
+
+  def title: String =
+    details(Seals(containerId)).size match {
+      case 1 => s"You have added 1 security seal for container $containerId"
+      case n => s"You have added $n security seal for container $containerId"
+    }
 
   private val yesNo = 0
 

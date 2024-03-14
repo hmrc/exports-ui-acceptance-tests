@@ -9,13 +9,13 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
 object InlandModeOfTransportPage extends BasePage {
 
   val path: String  = "/declaration/inland-transport-details"
-  def title: String = "How will the goods be transported to the UK border?"
+  val title: String = "How will the goods be transported to the UK border?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common -> List(inlandTransportDetails)
   )
 
-  def backButtonHref(): String =
+  def backButtonHref: String =
     if (!shouldSkipInlandOrBorder && detail(InlandOrBorder) == "Border Location") {
       InlandOrBorderPage.path
     } else if (shouldSkipInlandOrBorder && isSPOFFNotNeeded) {

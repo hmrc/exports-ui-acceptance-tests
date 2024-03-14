@@ -8,7 +8,7 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.WarehouseHouse
 object WarehousePage extends BasePage {
 
   val path: String           = "/declaration/warehouse-details"
-  def title: String          = "What is the customs approved warehouse number?"
+  val title: String          = "What is the customs approved warehouse number?"
   val backButtonHref: String = TransportLeavingTheBorderPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(

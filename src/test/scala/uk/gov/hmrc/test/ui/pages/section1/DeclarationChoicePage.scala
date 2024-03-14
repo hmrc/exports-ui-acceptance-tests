@@ -23,7 +23,7 @@ import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 
 object DeclarationChoicePage extends BasePage {
 
-  val backButtonHref: String = StandardOrOtherPage.path
+  def backButtonHref: String = StandardOrOtherPage.path
   val path: String           = "/declaration/declaration-choice"
   val title                  = "Select a declaration type"
   override val expanderHrefs: Map[String, Seq[String]] = Map(

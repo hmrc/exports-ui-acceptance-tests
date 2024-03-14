@@ -9,11 +9,11 @@ import java.time.{Instant, ZoneId}
 
 object TraderReferencePage extends BasePage {
 
-  override def backButtonHref: String = DoYouHaveADucrPage.path
+  def backButtonHref: String = DoYouHaveADucrPage.path
 
-  override def path: String = "/declaration/trader-reference"
+  val path: String = "/declaration/trader-reference"
 
-  override def title: String = "Enter a reference"
+  val title: String = "Enter a reference"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common -> Seq(traderReference),

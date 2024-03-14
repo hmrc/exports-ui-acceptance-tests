@@ -79,8 +79,12 @@ trait BasePage extends CacheHelper with DriverHelper {
   private val initPart: String  = "/declaration"
   private val elementId: String = "[\\w]+"
 
-  private val itemIdPattern: Regex = s"/$initPart/items/($elementId)/.+".r
-  protected def itemId: String     = (Option(driver.getCurrentUrl) collect { case itemIdPattern(group) => group }).head
+  private val containerIdPattern: Regex = s"/$initPart/containers/($elementId)/.+".r
+  protected def containerId: String     =
+    (Option(driver.getCurrentUrl) collect { case containerIdPattern(group) => group }).head
+
+  private val itemIdPattern: Regex      = s"/$initPart/items/($elementId)/.+".r
+  protected def itemId: String          = (Option(driver.getCurrentUrl) collect { case itemIdPattern(group) => group }).head
 
   protected def changeUrl(partId: String): String = s"$initPart/$partId/$elementId/change"
 

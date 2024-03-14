@@ -19,6 +19,7 @@ package uk.gov.hmrc.test.ui.pages.base
 object TariffLinks {
 
   // CL: Clearance; SUP: Supplementary
+
   val decType = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-1-message-information-including-procedure-codes#de-12-additional-declaration-type-box-1-declaration-second-subdivision"
   val decTypeCL = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/group-1-message-information-including-procedure-codes#de-12-additional-declaration-type-box-1-declaration-second-subdivision"
   val traderReference = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-2-references-of-messages-document-certificates-and-authorisations#de-24-reference-number-ucr-box-7-reference-number"
@@ -146,12 +147,11 @@ object TariffLinks {
   val personPresentingGoodsCL = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/group-3-parties#de-341-person-presenting-the-goods-to-customs-in-case-of-entry-in-the-declarants-records-eidr-or-pre-lodged-customs-declaration-identification-number-no-previous-reference"
 
   // guidance links for /authorisation-choice page
-  val endUseRelief =                       "https://www.gov.uk/government/publications/appendix-1-de-110-requested-and-previous-procedure-codes/requested-procedure-10-permanent-export-or-dispatch#section-3 "
+  val endUseRelief =                       "https://www.gov.uk/government/publications/appendix-1-de-110-requested-and-previous-procedure-codes/requested-procedure-10-permanent-export-or-dispatch#section-3"
+  val inwardProcessing =                   "https://www.gov.uk/government/publications/appendix-1-de-110-requested-and-previous-procedure-codes/requested-procedure-11-inward-processing-prior-export-equivalence"
   val outwardProcessing =                  "https://www.gov.uk/guidance/apply-to-pay-less-duty-on-goods-you-export-to-process-or-repair"
   val onwardSupplyRelief =                 "https://www.gov.uk/government/publications/appendix-1-de-110-requested-and-previous-procedure-codes/requested-procedure-10-permanent-export-or-dispatch#section-2"
   val reExportFollowingSpecialProcedure =  "https://www.gov.uk/guidance/moving-processed-or-repaired-goods-into-free-circulation-or-re-exporting-them"
-  val temporaryExport =                    "https://www.gov.uk/guidance/pay-less-import-duty-and-vat-when-re-importing-goods-to-the-uk-and-eu#claiming-relief-for-exporting-goods-using-a-duplicate-list"
   val removalOfGoodsFromExciseWarehouse =  "https://www.gov.uk/government/publications/appendix-1-de-110-requested-and-previous-procedure-codes/requested-procedure-10-permanent-export-or-dispatch#section"
-  val inwardProcessing =                   "https://www.gov.uk/government/publications/appendix-1-de-110-requested-and-previous-procedure-codes/requested-procedure-11-inward-processing-prior-export-equivalence"
-
+  val temporaryExport =                    "https://www.gov.uk/guidance/pay-less-import-duty-and-vat-when-re-importing-goods-to-the-uk-and-eu#claiming-relief-for-exporting-goods-using-a-duplicate-list"
 }

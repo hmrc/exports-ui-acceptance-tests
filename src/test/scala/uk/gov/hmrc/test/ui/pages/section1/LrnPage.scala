@@ -7,11 +7,11 @@ import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.Lrn
 
 object LrnPage extends BasePage {
 
-  override def backButtonHref: String = DucrEntryPage.path
+  def backButtonHref: String = DucrEntryPage.path
 
-  override def path: String = "/declaration/local-reference-number"
+  val path: String = "/declaration/local-reference-number"
 
-  override def title: String = "Create a Local Reference Number (LRN)"
+  val title: String = "Create a Local Reference Number (LRN)"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common -> Seq(lrn),

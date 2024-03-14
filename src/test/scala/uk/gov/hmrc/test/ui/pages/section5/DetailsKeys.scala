@@ -11,6 +11,9 @@ object DetailsKeys {
 
   val Section5: DetailKey = DetailKey("Section 5 of 6: About the items", section5, Some("items-card"))
 
+  val AdditionalFiscalReferenceLabel = "VAT details"
+  val ProcedureCodeLabel = "Procedure code"
+
   // /add-declaration-item
 
   // /items/[id]/procedure-codes
@@ -25,7 +28,8 @@ object DetailsKeys {
     DetailKey("Onward Supply Relief (OSR)", section5, Some(itemId))
 
   // /items/[id]/additional-fiscal-references
-  def AdditionalFiscalReferences(itemId: String): DetailKey = DetailKey("VAT details", section5, Some(itemId))
+  def AdditionalFiscalReferences(itemId: String): DetailKey =
+    DetailKey(AdditionalFiscalReferenceLabel, section5, Some(itemId))
 
   // /items/[id]/additional-fiscal-references-list
   // /items/[id]/additional-fiscal-references/[id]/remove

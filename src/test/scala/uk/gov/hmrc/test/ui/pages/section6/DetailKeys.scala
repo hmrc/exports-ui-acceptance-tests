@@ -4,7 +4,8 @@ import uk.gov.hmrc.test.ui.pages.base.DetailKey
 
 object DetailKeys {
 
-  val section6            = 6
+  val section6 = 6
+
   val Section6: DetailKey = DetailKey("Section 6 of 6: Transport", section6, Some("transport-card"))
 
   // /transport-leaving-the-border
@@ -38,7 +39,9 @@ object DetailKeys {
   // /express-consignment
   val TransportPayment: DetailKey = DetailKey("Method of payment for transport", section6)
 
-  val Container: DetailKey = DetailKey("Container ID", section6)
+  def Container(containerId: String): DetailKey = DetailKey("Container ID", section6, Some(containerId))
 
-  val AddSeals: DetailKey = DetailKey("Security seals", section6)
+  def NoContainers: DetailKey = DetailKey("Goods in a container", section6)
+
+  def Seals(containerId: String): DetailKey = DetailKey("Security seals", section6, Some(containerId))
 }

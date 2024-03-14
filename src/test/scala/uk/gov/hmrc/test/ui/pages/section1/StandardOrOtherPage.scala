@@ -29,11 +29,8 @@ object StandardOrOtherPage extends BasePage {
   val nonStandardDeclarationType = "NonStandardDeclarationType"
 
   protected def performActionsAndStore(values: String*): Unit = {
-    val declarationChoice = values(0)
-    declarationChoice match {
-      case Standard => clickById(Standard)
-      store(DeclarationType -> Detail(declarationChoice))
-      case nonStandardDeclarationType    => clickById(nonStandardDeclarationType)
-    }
+    val declarationType = values(0)
+    clickById(declarationType)
+    if (declarationType == Standard) store(DeclarationType -> Detail(Standard))
   }
 }

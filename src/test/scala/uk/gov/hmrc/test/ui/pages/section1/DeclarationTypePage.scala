@@ -7,11 +7,11 @@ import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{AdditionalDeclarationType,
 
 object DeclarationTypePage extends BasePage {
 
-  override def backButtonHref: String = DeclarationChoicePage.path
+  def backButtonHref: String = DeclarationChoicePage.path
 
-  override def path: String = "/declaration/type"
+  val path: String = "/declaration/type"
 
-  override def title: String = if(detail(DeclarationType) == Supplementary) "What type of supplementary declaration do you want to make?"
+  def title: String = if(detail(DeclarationType) == Supplementary) "What type of supplementary declaration do you want to make?"
     else "Do you have to make an arrived export declaration?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(

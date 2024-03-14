@@ -7,11 +7,11 @@ import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.Ducr
 
 object DucrEntryPage extends BasePage {
 
-  override def backButtonHref: String = DoYouHaveADucrPage.path
+  def backButtonHref: String = DoYouHaveADucrPage.path
 
-  override def path: String = "/declaration/ducr-entry"
+  val path: String = "/declaration/ducr-entry"
 
-  override def title: String = "Enter your Declaration Unique Consignment Reference (DUCR)"
+  val title: String = "Enter your Declaration Unique Consignment Reference (DUCR)"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common -> Seq(ducr),

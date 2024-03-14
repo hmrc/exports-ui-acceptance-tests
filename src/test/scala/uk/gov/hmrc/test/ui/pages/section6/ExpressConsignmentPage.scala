@@ -9,7 +9,7 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
 object ExpressConsignmentPage extends BasePage {
 
   val path: String  = "/declaration/express-consignment"
-  def title: String = "Is this an express consignment?"
+  val title: String = "Is this an express consignment?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common    -> List(expressConsignment),
@@ -32,7 +32,7 @@ object ExpressConsignmentPage extends BasePage {
     else
       DepartureTransportPage.path
 
-  def standardBackNavigation: String =
+  private def standardBackNavigation: String =
     if (
       (isTransportLeavingBorderModePostalOrFixed && inlandOrBorderValue && !shouldSkipInlandOrBorder) ||
       (!shouldSkipInlandOrBorder && isGuernseyOrJersey && inlandOrBorderValue)

@@ -8,7 +8,7 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.TransportPayment
 object TransportPaymentPage extends BasePage {
 
   val path: String           = "/declaration/transport-payment"
-  def title                  = "How did you pay for the express transport?"
+  val title                  = "How did you pay for the express transport?"
   val backButtonHref: String = ExpressConsignmentPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(

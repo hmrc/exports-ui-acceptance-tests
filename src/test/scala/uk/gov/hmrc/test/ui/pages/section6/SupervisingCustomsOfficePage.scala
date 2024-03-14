@@ -9,7 +9,7 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.SuperVisingCustomsOffice
 object SupervisingCustomsOfficePage extends BasePage {
 
   val path: String  = "/declaration/supervising-customs-office"
-  def title: String = "Where is the HMRC supervising customs office (SPOFF)?"
+  val title: String = "Where is the HMRC supervising customs office (SPOFF)?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common    -> List(supervisingCustomsOffice),
