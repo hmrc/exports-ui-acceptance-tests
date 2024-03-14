@@ -12,11 +12,11 @@ object DoYouHaveADucrPage extends BasePage {
   val title: String = "Do you have a Declaration Unique Consignment Reference Number (DUCR)?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> Seq(ducr),
+    Common    -> Seq(ducr),
     Clearance -> Seq(ducrCL)
   )
 
-  override protected def performActionsAndStore(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     val yesNo = values.head
     selectYesOrNoRadio(yesNo)
   }

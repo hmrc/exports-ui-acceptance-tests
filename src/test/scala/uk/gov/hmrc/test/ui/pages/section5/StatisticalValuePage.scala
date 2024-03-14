@@ -33,7 +33,7 @@ object StatisticalValuePage extends BasePage {
 
   // ex: performActionsAndStore("1000")
 
-  override protected def performActionsAndStore(values: String*): Unit = {
+  override protected def fillPage(values: String*): Unit = {
     fillTextBoxById("statisticalValue", values.head)
     store(StatisticalValue(itemId) -> Detail(values.head))
   }

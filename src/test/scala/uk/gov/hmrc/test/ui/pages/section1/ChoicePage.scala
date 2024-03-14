@@ -20,8 +20,8 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 object ChoicePage extends BasePage {
 
-  val path: String   = "/choice"
-  val title = "Make and manage export declarations - Make an export declaration online - GOV.UK"
+  val path: String           = "/choice"
+  val title                  = "Make and manage export declarations - Make an export declaration online - GOV.UK"
   def backButtonHref: String = ""
 
   val createDeclaration                   = "create-declaration"
@@ -30,15 +30,14 @@ object ChoicePage extends BasePage {
   val manageMovementsDeclaration          = "movements"
   val manageDocumentsByConnectingWithSFUS = "upload-documents"
 
-  def performActionsAndStore(values: String*): Unit = {
+  def fillPage(values: String*): Unit =
     values.head match {
-      case "CreateDeclaration"       => clickById(createDeclaration)
-      case "ManageDraftDeclaration"  => clickById(manageDraftDeclaration)
-      case "ManageSubmitDeclaration" => clickById(manageSubmitDeclaration)
-      case "ManageMovementsDeclaration" => clickById(manageMovementsDeclaration)
+      case "create a declaration"                => clickById(createDeclaration)
+      case "ManageDraftDeclaration"              => clickById(manageDraftDeclaration)
+      case "ManageSubmitDeclaration"             => clickById(manageSubmitDeclaration)
+      case "ManageMovementsDeclaration"          => clickById(manageMovementsDeclaration)
       case "ManageDocumentsByConnectingWithSFUS" => clickById(manageDocumentsByConnectingWithSFUS)
     }
-  }
 
   override def checkBackButton(): Unit = ()
 }

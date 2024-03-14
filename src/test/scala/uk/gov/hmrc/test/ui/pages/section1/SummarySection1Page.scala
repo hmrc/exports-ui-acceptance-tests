@@ -11,8 +11,7 @@ object SummarySection1Page extends BasePage {
 
   val title: String = "Check your answers"
 
-  override protected def performActionsAndStore(values: String*): Unit = {
+  override protected def fillPage(values: String*): Unit =
     checkSectionSummary(Section1)
-  }
 
 }

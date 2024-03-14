@@ -35,7 +35,7 @@ object NationalAdditionalCodesListPage extends BasePage {
       case Standard =>
         detail(NatureOfTransaction) match {
           case NatureOfTransactionPage.Sale | NatureOfTransactionPage.BusinessPurchase => VatRatingPage.path
-          case _ => VatRatingPage.backButtonHref
+          case _                                                                       => VatRatingPage.backButtonHref
         }
 
       case Supplementary => VatRatingPage.backButtonHref
@@ -54,5 +54,5 @@ object NationalAdditionalCodesListPage extends BasePage {
   // No  => performActionsAndStore(no)
   // Yes => performActionsAndStore(yes)
 
-  override protected def performActionsAndStore(values: String*): Unit = selectYesOrNoRadio(values.head)
+  override protected def fillPage(values: String*): Unit = selectYesOrNoRadio(values.head)
 }

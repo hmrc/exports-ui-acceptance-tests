@@ -14,11 +14,11 @@ object DucrEntryPage extends BasePage {
   val title: String = "Enter your Declaration Unique Consignment Reference (DUCR)"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> Seq(ducr),
+    Common    -> Seq(ducr),
     Clearance -> Seq(ducrCL)
   )
 
-  override protected def performActionsAndStore(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     val ducr = values.head
     fillTextBoxById("ducr", ducr)
     store(Ducr -> Detail(ducr))

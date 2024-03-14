@@ -28,17 +28,17 @@ object AdditionalFiscalReferencesPage extends BasePage {
   val title: String          = "What are the exporter’s VAT details?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List(itemsAdditionalFiscalReferences),
+    Common    -> List(itemsAdditionalFiscalReferences),
     Clearance -> List(itemsAdditionalFiscalReferencesCL)
   )
 
-  val country = 0
+  val country     = 0
   val countryCode = 1
-  val vatNumber = 2
+  val vatNumber   = 2
 
   // ex: performActionsAndStore("United States of America", "US", "1234567890")
 
-  override protected def performActionsAndStore(values: String*): Unit = {
+  override protected def fillPage(values: String*): Unit = {
     fillAutoComplete("country", values(country))
     fillTextBoxById("reference", values(vatNumber))
 

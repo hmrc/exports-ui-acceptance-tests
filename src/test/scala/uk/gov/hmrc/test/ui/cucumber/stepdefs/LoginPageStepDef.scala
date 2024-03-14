@@ -14,19 +14,15 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.pages.section5
+package uk.gov.hmrc.test.ui.cucumber.stepdefs
 
-import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.section1.LoginPage
 
-object AddDeclarationItemPage extends BasePage {
+class LoginPageStepDef extends BaseStepDef {
 
-  def backButtonHref: String = SummarySection4Page.path
-  val path: String           = "/declaration/add-declaration-item"
-  val title: String          = "Add declaration item 1"
+  Given("""^I enter EORI (.*) on Login Page and click submit""") { (eori: String) =>
+    LoginPage.fillPage(eori)
+    LoginPage.submit
+  }
 
-  override def checkExpanders(): Unit = ()
-
-  // ex: performActionsAndStore()
-
-  override protected def fillPage(values: String*): Unit = ()
 }

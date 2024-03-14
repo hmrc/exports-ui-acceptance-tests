@@ -14,11 +14,11 @@ object DeclarantDetailsPage extends BasePage {
   def title: String = s"Is your EORI number ${detail(DeclarationEori)}?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> Seq(declarantDetails),
+    Common    -> Seq(declarantDetails),
     Clearance -> Seq(declarantDetailsCL)
   )
 
-  override protected def performActionsAndStore(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     val isThisYourEori = values.head
     selectYesOrNoRadio(isThisYourEori)
   }

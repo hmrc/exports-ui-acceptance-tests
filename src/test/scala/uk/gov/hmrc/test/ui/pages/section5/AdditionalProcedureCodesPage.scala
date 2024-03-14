@@ -17,12 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{
-  itemsAdditionalProcedureCodes,
-  itemsAdditionalProcedureCodes1,
-  itemsAdditionalProcedureCodes2,
-  itemsAdditionalProcedureCodesCL
-}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalProcedureCodes, itemsAdditionalProcedureCodes1, itemsAdditionalProcedureCodes2, itemsAdditionalProcedureCodesCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalProcedureCodes, ProcedureCode}
 
@@ -41,7 +36,7 @@ object AdditionalProcedureCodesPage extends BasePage {
 
   // ex: performActionsAndStore("1CS")
 
-  override protected def performActionsAndStore(values: String*): Unit = {
+  override protected def fillPage(values: String*): Unit = {
     values.foreach { value =>
       fillAutoComplete("additionalProcedureCode", value)
       clickById("add")

@@ -35,12 +35,11 @@ trait BasePage extends CacheHelper with DriverHelper {
   val pageLinkHrefs: Seq[String]              =
     List(exitAndCompleteLater, feedbackBanner, govUkLogo, languageToggle, signOut, technicalIssue)
 
-  def checkPage(values: String*): Unit = {
+  def checkPage: Unit = {
     checkUrlAndTitle()
     checkBackButton()
     checkPageLinks()
     checkExpanders()
-    performActionsAndStore(values: _*)
   }
 
   protected def checkUrlAndTitle(): Unit = {
@@ -74,7 +73,7 @@ trait BasePage extends CacheHelper with DriverHelper {
   // The page sequence must be always at zero-position in the list of values passed to "performActionsAndStore".
   val sequenceId = 0
 
-  protected def performActionsAndStore(values: String*): Unit
+  def fillPage(values: String*): Unit
 
   private val initPart: String  = "/declaration"
   private val elementId: String = "[\\w]+"

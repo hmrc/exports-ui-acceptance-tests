@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.pages.section5
+package uk.gov.hmrc.test.ui.cucumber.stepdefs.section1
 
-import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
+import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage
 
-object AddDeclarationItemPage extends BasePage {
+class StandardOrOtherPageStepDef extends BaseStepDef {
 
-  def backButtonHref: String = SummarySection4Page.path
-  val path: String           = "/declaration/add-declaration-item"
-  val title: String          = "Add declaration item 1"
+  And("""^I should land on Standard-Or-Other page""")(() => StandardOrOtherPage.checkPage)
 
-  override def checkExpanders(): Unit = ()
-
-  // ex: performActionsAndStore()
-
-  override protected def fillPage(values: String*): Unit = ()
+  And("""^I select the (.*) declaration option""") { (option: String) =>
+    StandardOrOtherPage.fillPage(option)
+  }
 }

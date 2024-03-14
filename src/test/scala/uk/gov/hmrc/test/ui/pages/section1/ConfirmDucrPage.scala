@@ -14,16 +14,16 @@ object ConfirmDucrPage extends BasePage {
   val title: String = "Do you want to use this DUCR?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> Seq(traderReference),
+    Common    -> Seq(traderReference),
     Clearance -> Seq(traderReferenceCL)
   )
 
-  override protected def performActionsAndStore(values: String*): Unit = {
+  override protected def fillPage(values: String*): Unit = {
     val yesNo = values.head
     selectYesOrNoRadio(yesNo)
     yesNo match {
       case Constants.yes => ()
-      case Constants.no => clear(Ducr)
+      case Constants.no  => clear(Ducr)
     }
   }
 }
