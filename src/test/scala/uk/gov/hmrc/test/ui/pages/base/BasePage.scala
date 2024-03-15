@@ -16,12 +16,12 @@
 
 package uk.gov.hmrc.test.ui.pages.base
 
-import org.openqa.selenium.By
+import org.openqa.selenium.{By, WebElement}
 import org.scalatest.matchers.must.Matchers.{convertToAnyMustWrapper, defined}
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
-import uk.gov.hmrc.test.ui.pages.base.BasePage._
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
+import uk.gov.hmrc.test.ui.pages.base.BasePage.{exitAndCompleteLater, feedbackBanner, govUkLogo, host, languageToggle, signOut, technicalIssue}
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 
 import scala.util.matching.Regex
 
@@ -35,7 +35,7 @@ trait BasePage extends CacheHelper with DriverHelper {
   val pageLinkHrefs: Seq[String]              =
     List(exitAndCompleteLater, feedbackBanner, govUkLogo, languageToggle, signOut, technicalIssue)
 
-  def checkPage(values: String*): Unit = {
+  def checkPage: Unit = {
     checkUrlAndTitle()
     checkBackButton()
     checkPageLinks()
@@ -43,12 +43,16 @@ trait BasePage extends CacheHelper with DriverHelper {
   }
 
   protected def checkUrlAndTitle(): Unit = {
-    assert((TestConfiguration.url("exports-frontend") + path).r.matches(driver.getCurrentUrl))
-    driver.getTitle mustBe title + " - Make an export declaration online - GOV.UK"
+    assert((host + path).r.matches(driver.getCurrentUrl))
+    val sectionHeader =
+      if (elementByIdDoesNotExist("section-header")) ""
+      else s" - ${findElementById("section-header").getText}"
+
+    driver.getTitle mustBe title +  sectionHeader + " - Make an export declaration online - GOV.UK"
     findElementsByTag("h1").head.getText mustBe title
   }
 
-  protected def checkBackButton(): Unit = findElementById("back-link").getAttribute("href") mustBe backButtonHref
+  protected def checkBackButton(): Unit = findElementById("back-link").getAttribute("href") mustBe host + backButtonHref
 
   protected def checkPageLinks(): Unit = {
     val links = findElementsByTag("a")
@@ -73,7 +77,7 @@ trait BasePage extends CacheHelper with DriverHelper {
   // The page sequence must be always at zero-position in the list of values passed to "performActionsAndStore".
   val sequenceId = 0
 
-  protected def fillPage(values: String*): Unit
+  def fillPage(values: String*): Unit
 
   private val initPart: String  = "/declaration"
   private val elementId: String = "[\\w]+"
@@ -101,9 +105,9 @@ trait BasePage extends CacheHelper with DriverHelper {
   def checkSectionSummary(detailKey: DetailKey): Unit = {
     val rows = findElementsByClassName("govuk-summary-card")
       .filter(findChildByClassName(_, detailKey.id.head).getText == detailKey.label)
-      .map(findChildByClassName(_, "govuk-summary-list__row"))
+      .flatMap(findChildrenByClassName(_, "govuk-summary-list__row"))
 
-    val displayedKeysAndDetails = rows
+    val displayedKeysAndDetails: Seq[(WebElement, WebElement)] = rows
       .map { webElement =>
         findChildByClassName(webElement, "govuk-summary-list__key") ->
           findChildByClassName(webElement, "govuk-summary-list__value")
@@ -115,19 +119,21 @@ trait BasePage extends CacheHelper with DriverHelper {
       val expectedRow = displayedKeysAndDetails.find(_._1.getText == detailKey.label)
       expectedRow mustBe defined
 
-      val values = details match {
-        case detail: Detail  => Seq(detail.value)
-        case detail: Details => detail.values
-      }
+      if (!detailKey.skipSummaryCheck) {
+        val values = details match {
+          case detail: Detail => Seq(detail.value)
+          case detail: Details => detail.values
+        }
 
-      // There may be some edge cases here not accounted for, please add accordingly.
-      val valuesSeparator = detailKey.label match {
-        case RoutingCountry => ","
-        case _              => "\n"
-      }
+        // There may be some edge cases here not accounted for, please add accordingly.
+        val valuesSeparator = detailKey.label match {
+          //   case RoutingCountry => ","
+          case _ => "\n"
+        }
 
-      val displayValues = expectedRow.head._2.getText.split(valuesSeparator).toList
-      displayValues mustBe values
+        val displayValues = expectedRow.head._2.getText.split(valuesSeparator).toList
+        displayValues mustBe values
+      }
     }
   }
 }
@@ -142,4 +148,6 @@ object BasePage {
   val languageToggle       = "/customs-declare-exports/hmrc-frontend/language/cy"
   val signOut              = "/customs-declare-exports/sign-out?"
   val technicalIssue       = "/contact/report-technical-problem?"
+
+  val host = TestConfiguration.url("exports-frontend")
 }

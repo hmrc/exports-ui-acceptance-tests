@@ -16,33 +16,9 @@
 
 package uk.gov.hmrc.test.ui.cucumber.stepdefs
 
-import uk.gov.hmrc.test.ui.pages._
+import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage
 
 class CommonStepDef extends BaseStepDef {
 
-  Then("""^I switches language to (.*)$""") { (language: String) =>
-    if (language.contains("welsh"))
-      CommonPage.languageSwitch("cy").click()
-    else
-      CommonPage.languageSwitch("en").click()
-  }
-
-  Then("""^I clicks back on (.*) page$""") { (page: String) =>
-    CommonPage.backLink().click()
-  }
-
-  And("""I click continue on mini CYA page""") { () =>
-    CommonPage.continue()
-  }
-
-  And("""I click on Continue button""") { () =>
-    CommonPage.continue()
-  }
-
-  Then("""^I should be navigated to the (.*)$""") { (page: String) =>
-    page match {
-      case "Departure Transport Page" => DepartureTransportPage.checkPage()
-      case "Border Transport Page"    => DepartureTransportPage.checkPage()
-    }
-  }
+  And("""^I click continue""")(() => StandardOrOtherPage.continue())
 }
