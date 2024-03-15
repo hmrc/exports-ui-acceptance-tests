@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section5
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yes}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsCommodityMeasure, itemsCommodityMeasure1, itemsCommodityMeasureCL, itemsCommodityMeasureCL1}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import .DeclarationType
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section1.IsThisExsPage.isThisExs
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{CommodityMeasureGross, CommodityMeasureNet}
 import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.isExportInventoryCleansingRecord
@@ -42,12 +42,12 @@ object CommodityMeasurePage extends BasePage {
   val netWeight   = 0
   val grossWeight = 1
 
-  // ex: processPage()
-  // ex: processPage("500", "700")
-  // ex: processPage("500")
-  // ex: processPage("", "700")
+  // ex: fillPage()
+  // ex: fillPage("500", "700")
+  // ex: fillPage("500")
+  // ex: fillPage("", "700")
 
-  def processPage(values: String*): Unit =
+  override def fillPage(values: String*): Unit =
     values.size match {
       case 0 =>
         clear(CommodityMeasureNet(itemId))

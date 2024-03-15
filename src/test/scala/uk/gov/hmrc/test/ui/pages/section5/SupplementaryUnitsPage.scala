@@ -39,10 +39,10 @@ object SupplementaryUnitsPage extends BasePage {
   val yesNo = 0
   val code  = 1
 
-  // No  => processPage(no)
-  // Yes => processPage(yes, "11.1")
+  // No  => fillPage(no)
+  // Yes => fillPage(yes, "11.1")
 
-  def processPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     if (selectYesOrNoRadio(values(yesNo), "Yes", "No")) fillTextBoxById("supplementaryUnits", values(code))
     store(SupplementaryUnits(itemId) -> Details(values))
   }

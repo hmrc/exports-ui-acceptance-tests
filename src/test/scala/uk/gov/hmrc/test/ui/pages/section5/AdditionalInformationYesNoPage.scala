@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section5
 import uk.gov.hmrc.test.ui.pages.base.Constants._
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsIsAdditionalInformationRequired, itemsIsAdditionalInformationRequiredCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import .DeclarationType
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{NoAdditionalInformation, PackageInformationType}
 
 object AdditionalInformationYesNoPage extends BasePage {
@@ -46,9 +46,9 @@ object AdditionalInformationYesNoPage extends BasePage {
       "https://www.gov.uk/guidance/additional-information-ai-statement-codes-for-data-element-22-of-the-customs-declaration-service-cds"
     )
 
-  // No  => processPage(no)
-  // Yes => processPage(yes)
+  // No  => fillPage(no)
+  // Yes => fillPage(yes)
 
-  def processPage(values: String*): Unit =
+  override def fillPage(values: String*): Unit =
     if (!selectYesOrNoRadio(values.head)) store(NoAdditionalInformation(itemId) -> Detail("None"))
 }

@@ -18,7 +18,7 @@ package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants._
-import .DeclarationType
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section5.AdditionalProcedureCodesPage.isLowValueDeclaration
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodes
 
@@ -47,8 +47,8 @@ object NationalAdditionalCodesListPage extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
-  // No  => processPage(no)
-  // Yes => processPage(yes)
+  // No  => fillPage(no)
+  // Yes => fillPage(yes)
 
-  def processPage(values: String*): Unit = selectYesOrNoRadio(values.head)
+  override def fillPage(values: String*): Unit = selectYesOrNoRadio(values.head)
 }

@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section5
 import uk.gov.hmrc.test.ui.pages.base.Constants._
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import .DeclarationType
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section2.IsThisExsPage.isThisExs
 import uk.gov.hmrc.test.ui.pages.section5.AdditionalProcedureCodesPage.isLowValueDeclaration
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{PackageInformationNumber, PackageInformationShippingMark, PackageInformationType}
@@ -48,9 +48,9 @@ object PackageInformationPage extends BasePage {
   val shippingMark     = 3
 
   // The 1st parameter is the sequenceId of the current "Packing Details" element: "0", "1", "2", ...
-  // ex: processPage("2", "Aerosol", "20", "No shipping mark")
+  // ex: fillPage("2", "Aerosol", "20", "No shipping mark")
 
-  def processPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     fillAutoComplete("typesOfPackages", values(packageType))
     fillTextBoxById("numberOfPackages", values(numberOfPackages))
     fillTextBoxById("shippingMarks", values(shippingMark))

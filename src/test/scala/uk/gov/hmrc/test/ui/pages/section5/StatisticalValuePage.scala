@@ -31,9 +31,9 @@ object StatisticalValuePage extends BasePage {
     Common -> List(itemsStatisticalValue, itemsStatisticalValue1, itemsStatisticalValue2)
   )
 
-  // ex: processPage("1000")
+  // ex: fillPage("1000")
 
-  def processPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     fillTextBoxById("statisticalValue", values.head)
     store(StatisticalValue(itemId) -> Detail(values.head))
   }

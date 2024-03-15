@@ -33,10 +33,10 @@ object FiscalInformationYesNoPage extends BasePage {
     Clearance -> List(itemsAdditionalFiscalReferencesCL)
   )
 
-  // No  => processPage(no)
-  // Yes => processPage(yes)
+  // No  => fillPage(no)
+  // Yes => fillPage(yes)
 
-  def processPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     val yesNo =  values.head
     selectYesOrNoRadio(yesNo)
     store(FiscalInformationYesNo(itemId) -> Detail(yesNo))

@@ -1,3 +1,19 @@
+/*
+ * Copyright 2024 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.gov.hmrc.test.ui.pages.base
 
 import org.openqa.selenium.{By, Keys, WebElement}
@@ -10,7 +26,7 @@ trait DriverHelper extends BrowserDriver {
 
   def changeLinkOnCYA(row: String): WebElement = driver.findElement(By.cssSelector(s".$row .govuk-link"))
 
-  def continue(): Unit = clickByXpath("//*[@role='button']")
+  def continue(): Unit = clickById("submit")
 
   def clickById(value: String): Unit          = findElementById(value).click()
   def clickByXpath(value: String): Unit       = findElementByXpath(value).click()
@@ -31,7 +47,7 @@ trait DriverHelper extends BrowserDriver {
   def findElementByPartialLink(value: String): WebElement = driver.findElement(By.partialLinkText(value))
   def findElementByCssSelector(value: String): WebElement = driver.findElement(By.cssSelector(value))
   def findElementByClassName(value: String): WebElement   = driver.findElement(By.className(value))
-  def findElementByTag(value: String): WebElement         = driver.findElement(By.tagName(value))
+  def findElementByName(value: String): WebElement = driver.findElement(By.name(value))
 
   def findElementsByClassName(value: String): Seq[WebElement] = driver.findElements(By.className(value)).asScala.toList
   def findElementsByTag(value: String): Seq[WebElement]       = driver.findElements(By.tagName(value)).asScala.toList
@@ -57,6 +73,9 @@ trait DriverHelper extends BrowserDriver {
 
   def fillTextBoxById(elementId: String, text: String): Unit =
     findElementById(elementId).sendKeys(text)
+
+  def fillTextBoxByName(name: String, text: String): Unit =
+    findElementByName(name).sendKeys(text)
 
   def selectRadioAndClick(elementId: String): Unit = {
     val actions = new Actions(driver)

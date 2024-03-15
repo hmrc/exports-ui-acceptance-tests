@@ -39,11 +39,11 @@ object NationalAdditionalCodesPage extends BasePage {
   val code  = 1
   val anotherNationalCode  = 0
 
-  // No  => processPage(no)
-  // Yes => processPage(yes, "A123")
-  //     => processPage("A123")
+  // No  => fillPage(no)
+  // Yes => fillPage(yes, "A123")
+  //     => fillPage("A123")
 
-  def processPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     val nationalAdditionalCodes =
       if (elementByIdDoesNotExist("code_yes")) details(NationalAdditionalCodes(itemId)) :+ values(anotherNationalCode)
       else if (selectYesOrNoRadio(values(yesNo))) List(values(code)) else List("None")

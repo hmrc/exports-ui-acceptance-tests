@@ -36,12 +36,12 @@ object VatRatingPage extends BasePage {
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(itemsZeroRatedForVat))
 
-  // processPage("Yes")         => "Yes"
-  // processPage("VAT reduced") => "No, a reduced VAT 5% duty rate applies in the UK and is being paid"
-  // processPage("VAT exempt")  => "No, the goods are VAT exempt in the UK anyway"
-  // processPage("VAT paid")    => "No, 20% VAT is being paid in the UK on these goods"
+  // fillPage("Yes")         => "Yes"
+  // fillPage("VAT reduced") => "No, a reduced VAT 5% duty rate applies in the UK and is being paid"
+  // fillPage("VAT exempt")  => "No, the goods are VAT exempt in the UK anyway"
+  // fillPage("VAT paid")    => "No, 20% VAT is being paid in the UK on these goods"
 
-  def processPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     val value = values.head match {
       case "Yes"         => "Yes"
       case "VAT reduced" => "No, reduced"

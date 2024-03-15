@@ -28,12 +28,12 @@ object PackageInformationRemovePage extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
-  // No  => processPage(no)
+  // No  => fillPage(no)
 
   // The 1st parameter is the sequenceId of the current "Packing Details" element: "0", "1", "2", ...
-  // Yes => processPage("2", yes)
+  // Yes => fillPage("2", yes)
 
-  def processPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     if (values.head == no) selectYesOrNoRadio(no)
     else {
       selectYesOrNoRadio(yes)

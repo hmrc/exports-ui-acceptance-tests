@@ -32,8 +32,8 @@ object PackageInformationListPage extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
-  // No  => processPage(no)
-  // Yes => processPage(yes)
+  // No  => fillPage(no)
+  // Yes => fillPage(yes)
 
-  def processPage(values: String*): Unit = selectYesOrNoRadio(values.head)
+  override def fillPage(values: String*): Unit = selectYesOrNoRadio(values.head)
 }

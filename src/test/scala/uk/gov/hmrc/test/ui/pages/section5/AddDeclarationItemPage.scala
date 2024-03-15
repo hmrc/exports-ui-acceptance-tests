@@ -26,7 +26,7 @@ object AddDeclarationItemPage extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
-  // ex: processPage()
+  // ex: fillPage()
 
-  def processPage(values: String*): Unit = ()
+  override def fillPage(values: String*): Unit = ()
 }

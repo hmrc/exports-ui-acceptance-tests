@@ -43,9 +43,9 @@ object CommodityDetailsPage extends BasePage {
   val code        = 0
   val description = 1
 
-  // ex: processPage("4203400090", "Straw for bottles")
+  // ex: fillPage("4203400090", "Straw for bottles")
 
-  def processPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     fillTextBoxById("combinedNomenclatureCode", values(code))
     fillTextBoxById("descriptionOfGoods", values(description))
     store(

@@ -36,9 +36,9 @@ object AdditionalFiscalReferencesPage extends BasePage {
   val countryCode = 1
   val vatNumber = 2
 
-  // ex: processPage("United States of America", "US", "1234567890")
+  // ex: fillPage("United States of America", "US", "1234567890")
 
-  def processPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     fillAutoComplete("country", values(country))
     fillTextBoxById("reference", values(vatNumber))
 

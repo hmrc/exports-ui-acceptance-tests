@@ -26,7 +26,7 @@ object PackageInformationChangePage extends BasePage {
 
   override val expanderHrefs: Map[String, Seq[String]] = PackageInformationPage.expanderHrefs
 
-  // ex: processPage("Aerosol", "20", "No shipping mark")
+  // ex: fillPage(2, "Aerosol", "10", "Shipping mark change")
 
-  def processPage(values: String*): Unit = PackageInformationPage.processPage(values:_*)
+  override def fillPage(values: String*): Unit = PackageInformationPage.fillPage(values:_*)
 }

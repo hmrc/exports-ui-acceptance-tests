@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section5
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yes}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import .DeclarationType
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.EntryIntoDeclarantsRecords
 import uk.gov.hmrc.test.ui.pages.section5.CommodityMeasurePage.{detail, itemId}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.ProcedureCode
@@ -46,9 +46,9 @@ object ProcedureCodesPage extends BasePage {
         temporaryExport
       )
 
-  // ex: processPage("1040")
+  // ex: fillPage("1040")
 
-  def processPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     val procedureCode = values.head
     fillAutoComplete("procedureCode", procedureCode)
     store(ProcedureCode(itemId) -> Detail(procedureCode))

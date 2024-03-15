@@ -39,9 +39,9 @@ object AdditionalProcedureCodesPage extends BasePage {
     Clearance -> List(itemsAdditionalProcedureCodesCL, itemsAdditionalProcedureCodes1, itemsAdditionalProcedureCodes2)
   )
 
-  // ex: processPage("1CS")
+  // ex: fillPage("1CS")
 
-  def processPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     values.foreach { value =>
       fillAutoComplete("additionalProcedureCode", value)
       clickById("add")

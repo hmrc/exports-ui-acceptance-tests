@@ -38,8 +38,8 @@ object DeclarationItemsListPage extends BasePage {
     Clearance -> List(declarationItemsListCL)
   )
 
-  // No  => processPage(no)
-  // Yes => processPage(yes)
+  // No  => fillPage(no)
+  // Yes => fillPage(yes)
 
-  def processPage(values: String*): Unit = selectYesOrNoRadio(values.head)
+  override def fillPage(values: String*): Unit = selectYesOrNoRadio(values.head)
 }
