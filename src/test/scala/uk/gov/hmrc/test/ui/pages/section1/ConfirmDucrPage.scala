@@ -30,7 +30,7 @@ object ConfirmDucrPage extends BasePage {
   val title: String = "Do you want to use this DUCR?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> Seq(traderReference),
+    Common -> Seq(traderReference),
     Clearance -> Seq(traderReferenceCL)
   )
 
@@ -39,7 +39,7 @@ object ConfirmDucrPage extends BasePage {
     selectYesOrNoRadio(yesNo)
     yesNo match {
       case Constants.yes => ()
-      case Constants.no  => clear(Ducr)
+      case Constants.no => clear(Ducr)
     }
   }
 }

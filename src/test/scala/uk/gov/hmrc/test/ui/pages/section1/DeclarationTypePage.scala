@@ -55,5 +55,4 @@ object DeclarationTypePage extends BasePage {
       }
     store(AdditionalDeclarationType -> Detail(additionalDeclarationType))
   }
-
 }

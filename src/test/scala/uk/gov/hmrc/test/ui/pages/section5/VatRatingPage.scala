@@ -31,8 +31,8 @@ object VatRatingPage extends BasePage {
     if (isChemicalCommodityCode) CusCodePage.path else DangerousGoodsCodePage.path
   }
 
-  def path: String           = itemUrl("vat-rating")
-  val title: String          = "Are these goods being zero-rated for VAT?"
+  def path: String  = itemUrl("vat-rating")
+  val title: String = "Are these goods being zero-rated for VAT?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(itemsZeroRatedForVat))
 
@@ -41,7 +41,7 @@ object VatRatingPage extends BasePage {
   // performActionsAndStore("VATE")   => "No, the goods are VAT exempt in the UK anyway"
   // performActionsAndStore("VAT_NO") => "No, 20% VAT is being paid in the UK on these goods"
 
-  override protected def performActionsAndStore(values: String*): Unit = {
+  override protected def fillPage(values: String*): Unit = {
     val value = values.head match {
       case "VATZ"   => "Yes"
       case "VATR"   => "No, reduced"

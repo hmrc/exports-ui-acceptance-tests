@@ -35,18 +35,19 @@ object NationalAdditionalCodesPage extends BasePage {
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(itemsNationalAdditionalCode))
 
-  val yesNo = 0
-  val code  = 1
-  val anotherNationalCode  = 0
+  val yesNo               = 0
+  val code                = 1
+  val anotherNationalCode = 0
 
   // No  => performActionsAndStore(no)
   // Yes => performActionsAndStore(yes, "A123")
   //     => performActionsAndStore("A123")
 
-  override protected def performActionsAndStore(values: String*): Unit = {
+  override protected def fillPage(values: String*): Unit = {
     val nationalAdditionalCodes =
       if (elementByIdDoesNotExist("code_yes")) details(NationalAdditionalCodes(itemId)) :+ values(anotherNationalCode)
-      else if (selectYesOrNoRadio(values(yesNo))) List(values(code)) else List("None")
+      else if (selectYesOrNoRadio(values(yesNo))) List(values(code))
+      else List("None")
 
     store(NationalAdditionalCodes(itemId) -> Details(nationalAdditionalCodes))
   }
