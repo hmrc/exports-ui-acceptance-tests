@@ -17,6 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants._
+import uk.gov.hmrc.test.ui.pages.base.PageLinks.{aiCodes, aiCodesForContainers}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsIsAdditionalInformationRequired, itemsIsAdditionalInformationRequiredCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
@@ -40,11 +41,7 @@ object AdditionalInformationYesNoPage extends BasePage {
     Clearance -> List(itemsIsAdditionalInformationRequiredCL)
   )
 
-  override def pageLinkHrefs: Seq[String] =
-    super.pageLinkHrefs ++ List(
-      "https://www.gov.uk/government/publications/appendix-1-de-110-requested-and-previous-procedure-codes/requested-procedure-10-permanent-export-or-dispatch#additional-information-de-22-1",
-      "https://www.gov.uk/guidance/additional-information-ai-statement-codes-for-data-element-22-of-the-customs-declaration-service-cds"
-    )
+  override def pageLinkHrefs: Seq[String] = super.pageLinkHrefs ++ List(aiCodes, aiCodesForContainers)
 
   // No  => fillPage(no)
   // Yes => fillPage(yes)

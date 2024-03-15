@@ -27,7 +27,7 @@ object BorderTransportPage extends BasePage {
 
   case class BorderTransportData(radioId: String, textboxId: String, textboxValue: String, summaryValue: String)
 
-  override def fillPage(values: String*): Unit = {
+  def fillPage(values: String*): Unit = {
     val data = values.head match {
       case "Ship or RoRo ferry IMO number"                   =>
         BorderTransportData("radio_ShipOrRoroImoNumber", "ShipOrRoroImoNumber", "123456", "Ship IMO number")

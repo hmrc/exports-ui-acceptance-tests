@@ -34,7 +34,7 @@ object DeclarationItemsListPage extends BasePage {
     }
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List(declarationItemsList),
+    Common    -> List(declarationItemsList),
     Clearance -> List(declarationItemsListCL)
   )
 

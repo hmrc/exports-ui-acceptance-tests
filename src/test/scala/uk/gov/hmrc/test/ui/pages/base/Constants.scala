@@ -19,9 +19,9 @@ package uk.gov.hmrc.test.ui.pages.base
 object Constants {
 
   val yes = "Yes"
-  val no = "No"
+  val no  = "No"
 
-  val Common        = "COMMON"  // Used for the tariff expander only
+  val Common = "COMMON" // Used for the tariff expander only
 
   val Clearance     = "Customs clearance request (C21)"
   val Occasional    = "Simplified declaration (occasional use)"
@@ -29,8 +29,8 @@ object Constants {
   val Standard      = "Standard declaration"
   val Supplementary = "Supplementary declaration"
 
-  val Arrived       = "arrived"
-  val Prelodged     = "prelodged"
+  val Arrived   = "arrived"
+  val Prelodged = "prelodged"
 
   val NonEidr = "simplified"
   val Eidr    = "eidr"

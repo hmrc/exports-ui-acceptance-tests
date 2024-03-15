@@ -17,6 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
+import uk.gov.hmrc.test.ui.pages.base.PageLinks.tariffCommodities
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.itemsSupplementaryUnits
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{CommodityDetailsCode, SupplementaryUnits}
@@ -33,7 +34,7 @@ object SupplementaryUnitsPage extends BasePage {
     if (title != "Do you need to add supplementary units?") super.pageLinkHrefs
     else {
       val commodityCode = detail(CommodityDetailsCode(itemId))
-      super.pageLinkHrefs :+ s"https://www.trade-tariff.service.gov.uk/commodities/$commodityCode"
+      super.pageLinkHrefs :+ s"$tariffCommodities$commodityCode"
     }
 
   val yesNo = 0

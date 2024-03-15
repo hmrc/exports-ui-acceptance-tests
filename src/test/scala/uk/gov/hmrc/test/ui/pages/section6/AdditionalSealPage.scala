@@ -18,7 +18,7 @@ object AdditionalSealPage extends BasePage {
 
   private val id = 0
 
-  override def fillPage(values: String*): Unit = {
+  def fillPage(values: String*): Unit = {
     val seal  = values(id)
     fillTextBoxById("id", seal)
     val seals = maybeDetails(Seals(containerId)).fold(Seq(seal))(_ :+ seal)

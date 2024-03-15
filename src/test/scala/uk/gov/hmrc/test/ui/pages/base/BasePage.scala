@@ -128,8 +128,8 @@ trait BasePage extends CacheHelper with DriverHelper {
 
         // There may be some edge cases here not accounted for, please add accordingly.
         val valuesSeparator = detailKey.label match {
-            //   case RoutingCountry => ","
-          case _              => "\n"
+          //   case RoutingCountry => ","
+          case _ => "\n"
         }
 
         val displayValues = expectedRow.head._2.getText.split(valuesSeparator).toList

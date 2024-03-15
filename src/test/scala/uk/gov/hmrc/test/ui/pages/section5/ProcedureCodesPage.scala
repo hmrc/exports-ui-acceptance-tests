@@ -17,7 +17,8 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yes}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
+import uk.gov.hmrc.test.ui.pages.base.PageLinks._
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsProcedureCodes, itemsProcedureCodesCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.EntryIntoDeclarantsRecords
@@ -34,7 +35,7 @@ object ProcedureCodesPage extends BasePage {
     Common    -> List(itemsProcedureCodes),
     Clearance -> List(itemsProcedureCodesCL)
   )
-  override def pageLinkHrefs: Seq[String]              =
+  override def pageLinkHrefs: Seq[String] =
     if (detail(DeclarationType) == Clearance && detail(EntryIntoDeclarantsRecords) == yes) super.pageLinkHrefs
     else super.pageLinkHrefs ++ List(
         endUseRelief,
