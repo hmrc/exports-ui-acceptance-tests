@@ -18,7 +18,7 @@ object TransportPaymentPage extends BasePage {
 
   private val paymentType = 0
 
-  def performActionsAndStore(values: String*): Unit = {
+  def fillPage(values: String*): Unit = {
     val elementId           = values(paymentType) match {
       case "Payment in cash"                      => "cash"
       case "Payment by credit card"               => "creditCard"

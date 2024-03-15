@@ -18,7 +18,7 @@ object WarehousePage extends BasePage {
 
   private val code = 0
 
-  def performActionsAndStore(values: String*): Unit = {
+  def fillPage(values: String*): Unit = {
     fillTextBoxById("identificationNumber", values(code))
     store(WarehouseHouse -> Detail(values(code)))
   }

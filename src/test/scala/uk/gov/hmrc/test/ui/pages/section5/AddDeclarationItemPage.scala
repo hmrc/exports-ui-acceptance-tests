@@ -28,5 +28,5 @@ object AddDeclarationItemPage extends BasePage {
 
   // ex: performActionsAndStore()
 
-  override protected def performActionsAndStore(values: String*): Unit = ()
+  override protected def fillPage(values: String*): Unit = ()
 }

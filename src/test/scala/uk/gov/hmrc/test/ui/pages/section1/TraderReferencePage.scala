@@ -16,20 +16,20 @@ object TraderReferencePage extends BasePage {
   val title: String = "Enter a reference"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> Seq(traderReference),
+    Common    -> Seq(traderReference),
     Clearance -> Seq(traderReferenceCL)
   )
 
-  override protected def performActionsAndStore(values: String*): Unit = {
+  override protected def fillPage(values: String*): Unit = {
     val traderReference = values.head
-    val generatedDucr = generateDucr(traderReference)
+    val generatedDucr   = generateDucr(traderReference)
     fillTextBoxById("traderReferenceInput", generatedDucr)
     store(Ducr -> Detail(generatedDucr))
   }
 
   private def generateDucr(traderReference: String): String = {
     val lastDigitOfYear = Instant.now.atZone(ZoneId.of("Europe/London")).getYear.toString.last
-    val eori = detail(DeclarationEori).toUpperCase
+    val eori            = detail(DeclarationEori).toUpperCase
 
     s"${lastDigitOfYear}GB${eori.dropWhile(_.isLetter)}-$traderReference"
   }

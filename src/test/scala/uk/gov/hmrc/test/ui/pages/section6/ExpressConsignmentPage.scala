@@ -58,7 +58,7 @@ object ExpressConsignmentPage extends BasePage {
     else if (checkIfDecIsClr) clearanceBackNavigation
     else standardBackNavigation
 
-  def performActionsAndStore(values: String*): Unit = {
+  def fillPage(values: String*): Unit = {
     selectYesOrNoRadio(values(yesNo))
     store(ExpressConsignment -> Detail(values(yesNo)))
   }

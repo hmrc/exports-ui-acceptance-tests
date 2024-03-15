@@ -38,7 +38,7 @@ object DangerousGoodsCodePage extends BasePage {
   // No  => performActionsAndStore(no)
   // Yes => performActionsAndStore(yes, "1234")
 
-  override protected def performActionsAndStore(values: String*): Unit = {
+  override protected def fillPage(values: String*): Unit = {
     if (selectYesOrNoRadio(values(yesNo))) fillTextBoxById("dangerousGoodsCode", values(code))
     store(DangerousGoodsCode(itemId) -> Details(values))
   }

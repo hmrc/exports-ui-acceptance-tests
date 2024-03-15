@@ -16,6 +16,6 @@ object SealsListPage extends BasePage {
 
   private val yesNo = 0
 
-  def performActionsAndStore(values: String*): Unit =
+  def fillPage(values: String*): Unit =
     selectYesOrNoRadio(values(yesNo))
 }
