@@ -11,21 +11,22 @@ object DeclarationTypePage extends BasePage {
 
   val path: String = "/declaration/type"
 
-  def title: String = if(detail(DeclarationType) == Supplementary) "What type of supplementary declaration do you want to make?"
-    else "Do you have to make an arrived export declaration?"
+  def title: String = if (detail(DeclarationType) == Supplementary)
+    "What type of supplementary declaration do you want to make?"
+  else "Do you have to make an arrived export declaration?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> Seq(decType),
+    Common    -> Seq(decType),
     Clearance -> Seq(decTypeCL)
   )
 
-  override protected def performActionsAndStore(values: String*): Unit = {
+  override protected def fillPage(values: String*): Unit = {
     val additionalDeclarationType = values(0)
     additionalDeclarationType match {
-      case Arrived => clickById(Arrived)
+      case Arrived   => clickById(Arrived)
       case Prelodged => clickById(Prelodged)
-      case TypeY => clickById(TypeY)
-      case TypeZ => clickById(TypeZ)
+      case TypeY     => clickById(TypeY)
+      case TypeZ     => clickById(TypeZ)
     }
     store(AdditionalDeclarationType -> Detail(additionalDeclarationType))
   }

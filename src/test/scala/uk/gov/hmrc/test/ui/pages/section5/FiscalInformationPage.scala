@@ -29,15 +29,15 @@ object FiscalInformationPage extends BasePage {
   val title: String = "Do you want to claim Onward Supply Relief (OSR)?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List(itemsAdditionalFiscalReferences),
+    Common    -> List(itemsAdditionalFiscalReferences),
     Clearance -> List(itemsAdditionalFiscalReferencesCL)
   )
 
   // No  => performActionsAndStore(no)
   // Yes => performActionsAndStore(yes)
 
-  override protected def performActionsAndStore(values: String*): Unit = {
-    val yesNo =  values.head
+  override protected def fillPage(values: String*): Unit = {
+    val yesNo = values.head
     selectYesOrNoRadio(yesNo)
     store(FiscalInformationYesNo(itemId) -> Detail(yesNo))
   }

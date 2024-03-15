@@ -10,5 +10,5 @@ object NotDeclarantPage extends BasePage {
 
   val title: String = "Use a different EORI number"
 
-  override protected def performActionsAndStore(values: String*): Unit = ()
+  override protected def fillPage(values: String*): Unit = ()
 }

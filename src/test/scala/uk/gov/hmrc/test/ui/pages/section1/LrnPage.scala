@@ -14,10 +14,10 @@ object LrnPage extends BasePage {
   val title: String = "Create a Local Reference Number (LRN)"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> Seq(lrn),
+    Common    -> Seq(lrn),
     Clearance -> Seq(lrnCL)
   )
-  override protected def performActionsAndStore(values: String*): Unit = {
+  override protected def fillPage(values: String*): Unit = {
     val lrn = values.head
     fillTextBoxById("lrn", lrn)
     store(Lrn -> Detail(lrn))

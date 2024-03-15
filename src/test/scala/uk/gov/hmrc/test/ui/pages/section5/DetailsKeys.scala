@@ -6,6 +6,9 @@ object DetailsKeys {
 
   val section5 = 5
 
+  val ProcedureCodeLabel           = "Procedure code"
+  val AdditionalProcedureCodeLabel = "Procedure code"
+
   val Section5: DetailKey = DetailKey("Section 5 of 6: About the items", section5, Some("items-card"))
 
   val AdditionalFiscalReferenceLabel = "VAT details"
@@ -17,10 +20,12 @@ object DetailsKeys {
   def ProcedureCode(itemId: String): DetailKey = DetailKey(ProcedureCodeLabel, section5, Some(itemId))
 
   // /items/[id]/additional-procedure-codes
-  def AdditionalProcedureCodes(itemId: String): DetailKey = DetailKey("Additional procedure codes", section5, Some(itemId))
+  def AdditionalProcedureCodes(itemId: String): DetailKey =
+    DetailKey(AdditionalProcedureCodeLabel, section5, Some(itemId))
 
   // /items/[id]/fiscal-information
-  def FiscalInformationYesNo(itemId: String): DetailKey = DetailKey("Onward Supply Relief (OSR)", section5, Some(itemId))
+  def FiscalInformationYesNo(itemId: String): DetailKey =
+    DetailKey("Onward Supply Relief (OSR)", section5, Some(itemId))
 
   // /items/[id]/additional-fiscal-references
   def AdditionalFiscalReferences(itemId: String): DetailKey =
@@ -30,7 +35,7 @@ object DetailsKeys {
   // /items/[id]/additional-fiscal-references/[id]/remove
 
   // /items/[id]/commodity-details
-  def CommodityDetailsCode       (itemId: String): DetailKey = DetailKey("Commodity code", section5, Some(itemId))
+  def CommodityDetailsCode(itemId: String): DetailKey        = DetailKey("Commodity code", section5, Some(itemId))
   def CommodityDetailsDescription(itemId: String): DetailKey = DetailKey("Goods description", section5, Some(itemId))
 
   // /items/[id]/un-dangerous-goods-code
@@ -67,7 +72,7 @@ object DetailsKeys {
   // /items/[id]/package-information/[packageId]/remove
 
   // /items/[id]/commodity-measure
-  def CommodityMeasureNet  (itemId: String): DetailKey = DetailKey("Net weight in kilograms", section5, Some(itemId))
+  def CommodityMeasureNet(itemId: String): DetailKey   = DetailKey("Net weight in kilograms", section5, Some(itemId))
   def CommodityMeasureGross(itemId: String): DetailKey = DetailKey("Gross weight in kilograms", section5, Some(itemId))
 
   // /items/[id]/supplementary-units
@@ -92,37 +97,37 @@ object DetailsKeys {
   def IsLicenceRequired(itemId: String): DetailKey = DetailKey("Licences", section5, Some(itemId))
 
   // /items/[id]/additional-documentation
-  def AdditionalDocumentationCode      (itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentationCode(itemId: String, sequenceId: String): DetailKey =
     DetailKey("Document code", section5, Some(itemId), Some(sequenceId))
 
   def AdditionalDocumentationIdentifier(itemId: String, sequenceId: String): DetailKey =
     DetailKey("Document identifier", section5, Some(itemId), Some(sequenceId))
 
-  def AdditionalDocumentationStatus    (itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentationStatus(itemId: String, sequenceId: String): DetailKey =
     DetailKey("additional-documentation-status", section5, Some(itemId), Some(sequenceId))
 
-  def AdditionalDocumentationReason    (itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentationReason(itemId: String, sequenceId: String): DetailKey =
     DetailKey("additional-documentation-reason", section5, Some(itemId), Some(sequenceId))
 
-  def AdditionalDocumentationAuthName  (itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentationAuthName(itemId: String, sequenceId: String): DetailKey =
     DetailKey("additional-documentation-authority-name", section5, Some(itemId), Some(sequenceId))
 
-  def AdditionalDocumentationDay       (itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentationDay(itemId: String, sequenceId: String): DetailKey =
     DetailKey("additional-documentation-day", section5, Some(itemId), Some(sequenceId))
 
-  def AdditionalDocumentationMonth     (itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentationMonth(itemId: String, sequenceId: String): DetailKey =
     DetailKey("additional-documentation-month", section5, Some(itemId), Some(sequenceId))
 
-  def AdditionalDocumentationYear      (itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentationYear(itemId: String, sequenceId: String): DetailKey =
     DetailKey("additional-documentation-year", section5, Some(itemId), Some(sequenceId))
 
-  def AdditionalDocumentationUnit      (itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentationUnit(itemId: String, sequenceId: String): DetailKey =
     DetailKey("additional-documentation-unit", section5, Some(itemId), Some(sequenceId))
 
-  def AdditionalDocumentationQualifier (itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentationQualifier(itemId: String, sequenceId: String): DetailKey =
     DetailKey("additional-documentation-qualifier", section5, Some(itemId), Some(sequenceId))
 
-  def AdditionalDocumentationQuantity  (itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentationQuantity(itemId: String, sequenceId: String): DetailKey =
     DetailKey("additional-documentation-quantity", section5, Some(itemId), Some(sequenceId))
 
   // /items/[id]/additional-documentation-list

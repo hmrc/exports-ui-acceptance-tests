@@ -14,11 +14,11 @@ object EnterAMucrPage extends BasePage {
   val title: String = "Enter the MUCR"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> Seq(mucr),
+    Common    -> Seq(mucr),
     Clearance -> Seq(mucrCL)
   )
 
-  override protected def performActionsAndStore(values: String*): Unit = {
+  override protected def fillPage(values: String*): Unit = {
     val mucr = values.head
     fillTextBoxById("MUCR", mucr)
     store(Mucr -> Detail(mucr))

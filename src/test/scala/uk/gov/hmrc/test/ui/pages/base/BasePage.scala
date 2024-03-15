@@ -40,7 +40,6 @@ trait BasePage extends CacheHelper with DriverHelper {
     checkBackButton()
     checkPageLinks()
     checkExpanders()
-    performActionsAndStore(values: _*)
   }
 
   protected def checkUrlAndTitle(): Unit = {
@@ -74,13 +73,17 @@ trait BasePage extends CacheHelper with DriverHelper {
   // The page sequence must be always at zero-position in the list of values passed to "performActionsAndStore".
   val sequenceId = 0
 
-  protected def performActionsAndStore(values: String*): Unit
+  protected def fillPage(values: String*): Unit
 
   private val initPart: String  = "/declaration"
   private val elementId: String = "[\\w]+"
 
-  private val itemIdPattern: Regex = s"/$initPart/items/($elementId)/.+".r
-  protected def itemId: String     = (Option(driver.getCurrentUrl) collect { case itemIdPattern(group) => group }).head
+  private val containerIdPattern: Regex = s"/$initPart/containers/($elementId)/.+".r
+  protected def containerId: String     =
+    (Option(driver.getCurrentUrl) collect { case containerIdPattern(group) => group }).head
+
+  private val itemIdPattern: Regex      = s"/$initPart/items/($elementId)/.+".r
+  protected def itemId: String          = (Option(driver.getCurrentUrl) collect { case itemIdPattern(group) => group }).head
 
   protected def changeUrl(partId: String): String = s"$initPart/$partId/$elementId/change"
 

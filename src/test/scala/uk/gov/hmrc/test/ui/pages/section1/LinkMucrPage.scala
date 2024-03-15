@@ -14,11 +14,11 @@ object LinkMucrPage extends BasePage {
   val title: String = "Do you want to link this declaration’s DUCR to a Master Unique Consignment Reference (MUCR)?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> Seq(mucr),
+    Common    -> Seq(mucr),
     Clearance -> Seq(mucrCL)
   )
 
-  override protected def performActionsAndStore(values: String*): Unit = {
+  override protected def fillPage(values: String*): Unit = {
     val yesNo = values.head
     selectYesOrNoRadio(yesNo)
     store(LinkToMucr -> Detail(yesNo))

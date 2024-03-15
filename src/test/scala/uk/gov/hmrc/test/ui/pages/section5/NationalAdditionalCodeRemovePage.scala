@@ -22,22 +22,23 @@ import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodes
 object NationalAdditionalCodeRemovePage extends BasePage {
 
   def backButtonHref: String = NationalAdditionalCodesListPage.path
-  def path: String = removeUrl("items", "national-additional-code")
-  val title: String = "Are you sure you want to remove this national additional code?"
+  def path: String           = removeUrl("items", "national-additional-code")
+  val title: String          = "Are you sure you want to remove this national additional code?"
 
   override def checkExpanders(): Unit = ()
 
-  val yesNo = 0
-  val code  = 1
-  val anotherNationalCode  = 0
+  val yesNo               = 0
+  val code                = 1
+  val anotherNationalCode = 0
 
   // No  => performActionsAndStore(no)
   // Yes => performActionsAndStore(yes)
 
-  override protected def performActionsAndStore(values: String*): Unit = {
+  override protected def fillPage(values: String*): Unit = {
     val nationalAdditionalCodes =
       if (elementByIdDoesNotExist("code_yes")) details(NationalAdditionalCodes(itemId)) :+ values(anotherNationalCode)
-      else if (selectYesOrNoRadio(values(yesNo))) List(values(code)) else List("None")
+      else if (selectYesOrNoRadio(values(yesNo))) List(values(code))
+      else List("None")
 
     store(NationalAdditionalCodes(itemId) -> Details(nationalAdditionalCodes))
   }

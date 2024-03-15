@@ -18,6 +18,7 @@ package uk.gov.hmrc.test.ui.cucumber.stepdefs
 
 import uk.gov.hmrc.test.ui.pages._
 import uk.gov.hmrc.test.ui.pages.section5.{DeclarationItemsListPage, ProcedureCodesPage}
+import uk.gov.hmrc.test.ui.pages.section6.{TransportCountryPage, TransportLeavingTheBorderPage, TransportPaymentPage}
 
 class StandardJourneyStepDefs extends BaseStepDef {
 
