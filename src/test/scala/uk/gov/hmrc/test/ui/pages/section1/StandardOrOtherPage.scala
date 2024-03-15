@@ -22,15 +22,14 @@ import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 
 object StandardOrOtherPage extends BasePage {
 
-  val path: String           = "/standard-or-other"
-  val title                  = "Which type of declaration do you want to make? - Make an export declaration online - GOV.UK"
+  val path: String           = "/declaration/standard-or-other"
+  val title                  = "Which type of declaration do you want to make?"
   def backButtonHref: String = ChoicePage.path
 
   val nonStandardDeclarationType = "NonStandardDeclarationType"
 
   def fillPage(values: String*): Unit = {
-    val declarationType = values(0)
-    clickById(declarationType)
-    if (declarationType == Standard) store(DeclarationType -> Detail(Standard))
+    clickById(values(0))
+    if (values(0) == "STANDARD") store(DeclarationType -> Detail(Standard))
   }
 }

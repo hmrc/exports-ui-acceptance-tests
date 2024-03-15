@@ -39,7 +39,7 @@ object CommodityDetailsPage extends BasePage {
 
   // ex: performActionsAndStore("4203400090", "Straw for bottles")
 
-  override protected def fillPage(values: String*): Unit = {
+  override protected def performActionsAndStore(values: String*): Unit = {
     fillTextBoxById("combinedNomenclatureCode", values(code))
     fillTextBoxById("descriptionOfGoods", values(description))
     store(

@@ -1,19 +1,37 @@
+/*
+ * Copyright 2024 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.gov.hmrc.test.ui.pages.section1
 
-import uk.gov.hmrc.test.ui.pages.base._
 import uk.gov.hmrc.test.ui.pages.base.Constants._
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
+import uk.gov.hmrc.test.ui.pages.base._
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys._
 
 object DeclarationTypePage extends BasePage {
 
-  def backButtonHref: String = DeclarationChoicePage.path
+  def backButtonHref: String =
+    if (detail(DeclarationType) == Standard) StandardOrOtherPage.path
+    else DeclarationChoicePage.path
 
   val path: String = "/declaration/type"
 
-  def title: String = if (detail(DeclarationType) == Supplementary)
-    "What type of supplementary declaration do you want to make?"
-  else "Do you have to make an arrived export declaration?"
+  def title: String =
+    if (detail(DeclarationType) == Supplementary) "What type of supplementary declaration do you want to make?"
+    else "Do you have to make an arrived export declaration?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common    -> Seq(decType),

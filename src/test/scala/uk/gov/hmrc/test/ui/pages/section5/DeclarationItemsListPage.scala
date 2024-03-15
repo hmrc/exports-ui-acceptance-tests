@@ -34,12 +34,12 @@ object DeclarationItemsListPage extends BasePage {
     }
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(declarationItemsList),
+    Common -> List(declarationItemsList),
     Clearance -> List(declarationItemsListCL)
   )
 
   // No  => performActionsAndStore(no)
   // Yes => performActionsAndStore(yes)
 
-  override protected def fillPage(values: String*): Unit = selectYesOrNoRadio(values.head)
+  override protected def performActionsAndStore(values: String*): Unit = selectYesOrNoRadio(values.head)
 }

@@ -40,7 +40,7 @@ object CommodityMeasurePage extends BasePage {
   // ex: performActionsAndStore("500")
   // ex: performActionsAndStore("", "700")
 
-  override protected def fillPage(values: String*): Unit =
+  override protected def performActionsAndStore(values: String*): Unit =
     values.size match {
       case 0 =>
         clear(CommodityMeasureNet(itemId))

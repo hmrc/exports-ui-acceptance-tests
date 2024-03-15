@@ -35,8 +35,7 @@ object ProcedureCodesPage extends BasePage {
   )
   override def pageLinkHrefs: Seq[String]              =
     if (detail(DeclarationType) == Clearance && detail(EntryIntoDeclarantsRecords) == yes) super.pageLinkHrefs
-    else
-      super.pageLinkHrefs ++ List(
+    else super.pageLinkHrefs ++ List(
         endUseRelief,
         inwardProcessing,
         outwardProcessing,
@@ -48,7 +47,7 @@ object ProcedureCodesPage extends BasePage {
 
   // ex: performActionsAndStore("1040")
 
-  override protected def fillPage(values: String*): Unit = {
+  override protected def performActionsAndStore(values: String*): Unit = {
     val procedureCode = values.head
     fillAutoComplete("procedureCode", procedureCode)
     store(ProcedureCode(itemId) -> Detail(procedureCode))

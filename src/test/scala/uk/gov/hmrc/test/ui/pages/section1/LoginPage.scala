@@ -1,3 +1,19 @@
+/*
+ * Copyright 2024 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.gov.hmrc.test.ui.pages.section1
 
 import org.openqa.selenium.support.ui.Select
@@ -31,14 +47,11 @@ object LoginPage extends BasePage {
 
   private def navigateToLoginPage(): Unit             = driver.navigate().to(url("login-stub-frontend") + path)
   private def enterRedirectPage(): Unit = {
-    val redirectUrl = url("exports-frontend") + StartPage.path
+    val redirectUrl = url("exports-frontend")+ChoicePage.path
     fillTextBoxById("redirectionUrl", redirectUrl)
   }
-  private def selectAffinity(option: String): Unit = {
-    val affinity = findElementById("affinityGroupSelect")
-    new Select(affinity).selectByValue(option)
-  }
-  private def enterEnrolmentType(input: String): Unit = fillTextBoxById("enrolment[0].name", input)
-  private def enterTaxIdentifier(input: String): Unit = fillTextBoxById("enrolment[0].taxIdentifier[0].name", input)
-  private def enterEori(input: String): Unit          = fillTextBoxById("enrolment[0].taxIdentifier[0].value", input)
+
+  private def enterEnrolmentType(input: String): Unit = fillTextBoxByName("enrolment[0].name", input)
+  private def enterTaxIdentifier(input: String): Unit = fillTextBoxByName("enrolment[0].taxIdentifier[0].name", input)
+  private def enterEori(input: String): Unit          = fillTextBoxByName("enrolment[0].taxIdentifier[0].value", input)
 }

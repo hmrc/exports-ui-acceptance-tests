@@ -32,13 +32,13 @@ object DeclarationChoicePage extends BasePage {
   )
 
   override def fillPage(values: String*): Unit = {
-    val declarationType = values(0)
-    declarationType match {
-      case Occasional    => clickById(Occasional)
-      case Simplified    => clickById(Simplified)
-      case Clearance     => clickById(Clearance)
-      case Supplementary => clickById(Supplementary)
+    clickById(values(0))
+    val journeyType = values(0) match {
+      case "OCCASIONAL"    => Occasional
+      case "SIMPLIFIED"    => Simplified
+      case "CLEARANCE"     => Clearance
+      case "SUPPLEMENTARY" => Supplementary
     }
-    store(DeclarationType -> Detail(declarationType))
+    store(DeclarationType -> Detail(journeyType))
   }
 }

@@ -31,7 +31,7 @@ object AdditionalFiscalReferencesRemovePage extends BasePage {
   // No  => performActionsAndStore(no)
   // Yes => performActionsAndStore(yes)
 
-  override protected def fillPage(values: String*): Unit =
+  override protected def performActionsAndStore(values: String*): Unit =
     if (values.isEmpty) selectYesOrNoRadio(no)
     else {
       selectYesOrNoRadio(yes)

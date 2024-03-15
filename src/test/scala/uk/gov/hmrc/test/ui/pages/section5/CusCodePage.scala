@@ -35,7 +35,7 @@ object CusCodePage extends BasePage {
   // No  => performActionsAndStore(no)
   // Yes => performActionsAndStore(yes, "12345678")
 
-  override protected def fillPage(values: String*): Unit = {
+  override protected def performActionsAndStore(values: String*): Unit = {
     if (selectYesOrNoRadio(values(yesNo))) fillTextBoxById("cusCode", values(code))
     store(CusCode(itemId) -> Details(values))
   }

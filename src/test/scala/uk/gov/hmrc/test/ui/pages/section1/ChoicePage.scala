@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage
 object ChoicePage extends BasePage {
 
   val path: String           = "/choice"
-  val title                  = "Make and manage export declarations - Make an export declaration online - GOV.UK"
+  val title                  = "Make and manage export declarations"
   def backButtonHref: String = ""
 
   val createDeclaration                   = "create-declaration"
@@ -29,6 +29,8 @@ object ChoicePage extends BasePage {
   val manageSubmitDeclaration             = "manage-submitted-declarations"
   val manageMovementsDeclaration          = "movements"
   val manageDocumentsByConnectingWithSFUS = "upload-documents"
+
+  override protected def checkExpanders(): Unit = ()
 
   def fillPage(values: String*): Unit =
     values.head match {
