@@ -18,8 +18,9 @@ package uk.gov.hmrc.test.ui.pages.base
 
 object Constants {
 
-  val yes = "Yes"
-  val no  = "No"
+  val yes  = "Yes"
+  val no   = "No"
+  val none = "None"
 
   val Common = "COMMON" // Used for the tariff expander only
 
