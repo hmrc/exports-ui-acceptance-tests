@@ -23,14 +23,14 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{ConsignorEORI, EORI, yesNo
 
 object ConsignorEORINumberPage extends BasePage {
 
-  val path: String           = "/declaration/consignor-eori-number"
-  val title: String          = "Does the consignor have an EORI number?"
-  val backButtonHref: String = IsThisExsPage.path
+  val path: String = "/declaration/consignor-eori-number"
+  val title: String = "Does the consignor have an EORI number?"
+  def backButtonHref: String = IsThisExsPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Clearance -> List(consignorEoriNumberCL))
 
   override def fillPage(values: String*): Unit =
-    if (selectYesOrNoRadio("Yes", "No", values(yesNo))) {
+    if (selectYesOrNoRadio(values(yesNo), "Yes", "No")) {
       fillTextBoxById("eori", values(EORI))
       store(ConsignorEORI -> Detail(values(EORI)))
     }

@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section2
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AdditionalPartiesInvolvedTypeLabel, section2}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AdditionalPartiesInvolvedTypeLabel, section2, yesNo}
 
 object OtherPartiesInvolvedListPage extends BasePage {
 
@@ -29,15 +29,8 @@ object OtherPartiesInvolvedListPage extends BasePage {
       case n => s"You have added $n additional parties"
     }
 
-  val backButtonHref: String = ConsigneeDetailsPage.path
-
-  val action           = 0
-  val partyToBeRemoved = 1
-  val yesNoConfirm     = 2
+  def backButtonHref: String = ConsigneeDetailsPage.path
 
   override def fillPage(values: String*): Unit =
-    values(action) match {
-      case "Remove" => OtherPartiesInvolvedRemovePage.fillPage(values(partyToBeRemoved), values(yesNoConfirm))
-      case _        => selectYesOrNoRadio(values(action))
-    }
+    selectYesOrNoRadio(values(yesNo))
 }

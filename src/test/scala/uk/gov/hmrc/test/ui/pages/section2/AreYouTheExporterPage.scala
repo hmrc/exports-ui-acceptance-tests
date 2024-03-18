@@ -25,8 +25,8 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{ExporterYesNo, yesNo}
 
 object AreYouTheExporterPage extends BasePage {
 
-  val path: String           = "/declaration/are-you-the-exporter"
-  val title: String          = "Are you the exporter?"
+  val path: String = "/declaration/are-you-the-exporter"
+  val title: String = "Are you the exporter?"
   def backButtonHref: String = detail(DeclarationType) match {
     case Clearance => DeclarantDetailsPage.path
     case _         => SummarySection1Page.path

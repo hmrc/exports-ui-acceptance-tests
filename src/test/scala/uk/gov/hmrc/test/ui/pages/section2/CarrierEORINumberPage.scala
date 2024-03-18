@@ -23,8 +23,8 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{CarrierEORI, EORI, Exporte
 
 object CarrierEORINumberPage extends BasePage {
 
-  val path: String           = "/declaration/carrier-eori-number"
-  val title: String          = "Do you know the EORI number of your carrier or haulier?"
+  val path: String = "/declaration/carrier-eori-number"
+  val title: String = "Do you know the EORI number of your carrier or haulier?"
   def backButtonHref: String = maybeDetail(ExporterEORI) match {
     case Some(_) => AreYouTheExporterPage.path
     case None    => RepresentationTypeAgreedPage.path
@@ -33,8 +33,6 @@ object CarrierEORINumberPage extends BasePage {
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Common -> List(carrierEoriNumber), Clearance -> List(carrierEoriNumberCL))
 
-  override def fillPage(values: String*): Unit = {
-    selectYesOrNoRadio(values(yesNo))
-    if (values.size == 2) store(CarrierEORI -> Detail(values(EORI)))
-  }
+  override def fillPage(values: String*): Unit =
+    if (selectYesOrNoRadio(values(yesNo))) store(CarrierEORI -> Detail(values(EORI)))
 }

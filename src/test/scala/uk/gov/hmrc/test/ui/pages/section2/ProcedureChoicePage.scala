@@ -16,39 +16,39 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.PageLinks._
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.ProcedureChoice
 
 object ProcedureChoicePage extends BasePage {
 
-  val path: String           = "/declaration/authorisation-choice"
-  val title: String          = "Which export procedure are you using?"
-  val backButtonHref: String = OtherPartiesInvolvedPage.path
+  val path: String = "/declaration/authorisation-choice"
+  val title: String = "Which export procedure are you using?"
+  def backButtonHref: String = OtherPartiesInvolvedPage.path
 
-  override val expanderHrefs: Map[String, Seq[String]] = {
-    val authorisationChoiceTariffLinks: List[String] = List(
-      endUseRelief,
-      outwardProcessing,
-      onwardSupplyRelief,
-      reExportFollowingSpecialProcedure,
-      temporaryExport,
-      removalOfGoodsFromExciseWarehouse,
-      inwardProcessing
-    )
-
+  override val expanderHrefs: Map[String, Seq[String]] =
     Map(
-      Common    -> authorisationChoiceTariffLinks,
-      Clearance -> authorisationChoiceTariffLinks
+      Common -> List(
+        endUseRelief,
+        outwardProcessing,
+        onwardSupplyRelief,
+        reExportFollowingSpecialProcedure,
+        temporaryExport,
+        removalOfGoodsFromExciseWarehouse,
+        inwardProcessing
+      )
     )
-  }
 
   val exportProcedure = 0
 
-  override def fillPage(values: String*): Unit =
+  override def fillPage(values: String*): Unit = {
     values(exportProcedure) match {
       case "Permanent"             => clickById("Code1040")
       case "Permanent with excise" => clickById("Code1007")
       case "Temporary"             => clickById("CodeOther")
     }
+
+    store(ProcedureChoice -> Detail(values(exportProcedure)))
+  }
 }

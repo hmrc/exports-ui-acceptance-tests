@@ -23,32 +23,41 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AdditionalPartiesInvolved,
 
 object OtherPartiesInvolvedPage extends BasePage {
 
-  val path: String           = "/declaration/other-parties-involved"
-  val title: String          = "What are the EORI numbers of others involved in this export?"
-  val backButtonHref: String = ConsigneeDetailsPage.path
+  val path: String = "/declaration/other-parties-involved"
+  val title: String = "What are the EORI numbers of others involved in this export?"
+  def backButtonHref: String = ConsigneeDetailsPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Common -> List(otherPartiesInvolved), Clearance -> List(otherPartiesInvolved))
 
   // the method can be called like follows
-  // fillPage("{sequenceId}", "CS", "GB...")
+  // fillPage("{sequenceId}", "None")
+  // fillPage("{sequenceId}", "Consolidator", "GB...")
 
-  val choice    = 0
-  val typeIndex = 1
-  val EORI      = 2
+  val choice = 1
+  val EORI = 2
+
+  val map: Map[String, String] = Map(
+    "None" -> "no",
+    "Consolidator" -> "CS",
+    "Manufacturer" -> "MF",
+    "Freight forwarder" -> "FW",
+    "Warehouse keeper" -> "WH"
+  )
 
   override def fillPage(values: String*): Unit = {
-    val otherParties = maybeDetails(AdditionalPartiesInvolvedType(values(sequenceId)))
-    clickById(values(typeIndex))
+    val id = map(values(choice))
+    clickById(id)
 
-    values(choice) match {
+    id match {
       case "no" =>
+        val otherParties = maybeDetails(AdditionalPartiesInvolvedType(values(sequenceId)))
         if (otherParties.isEmpty) store(AdditionalPartiesInvolved -> Detail(none))
 
-      case _    =>
-        fillTextBoxById(s"eori${values(typeIndex)}", values(EORI))
+      case _ =>
+        fillTextBoxById(s"eori$id", values(EORI))
         store(
-          AdditionalPartiesInvolvedType(values(sequenceId)) -> Detail(values(typeIndex)),
+          AdditionalPartiesInvolvedType(values(sequenceId)) -> Detail(values(choice)),
           AdditionalPartiesInvolvedEORI(values(sequenceId)) -> Detail(values(EORI))
         )
     }

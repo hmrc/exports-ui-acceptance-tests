@@ -17,20 +17,16 @@
 package uk.gov.hmrc.test.ui.pages.section2
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.base.Constants.yes
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.AuthorisationType
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AuthorisationType, yesNo}
 
 object AuthorisationRemovePage extends BasePage {
 
-  val path: String           = removeUrl("/authorisations-required")
-  val title: String          = "Are you sure you want to remove this authorisation?"
-  val backButtonHref: String = AuthorisationsListPage.path
+  val path: String = removeUrl("/authorisations-required")
+  val title: String = "Are you sure you want to remove this authorisation?"
+  def backButtonHref: String = AuthorisationsListPage.path
 
-  val authToBeRemoved = 0
-  val yesNoConfirm    = 1
+  val authToBeRemoved = 1
 
-  override def fillPage(values: String*): Unit = {
-    selectYesOrNoRadio(values(yesNoConfirm))
-    if (values(yesNoConfirm) == yes) clear(AuthorisationType(values(authToBeRemoved)))
-  }
+  override def fillPage(values: String*): Unit =
+    if (selectYesOrNoRadio(values(yesNo))) clear(AuthorisationType(values(authToBeRemoved)))
 }

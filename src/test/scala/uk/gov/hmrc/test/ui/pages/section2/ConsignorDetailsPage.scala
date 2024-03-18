@@ -19,18 +19,18 @@ package uk.gov.hmrc.test.ui.pages.section2
 import uk.gov.hmrc.test.ui.pages.base.Constants.Clearance
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.consignorAddressCL
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{ConsignorDetails, detailsHelper}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{ConsignorDetails, addressHelper}
 
 object ConsignorDetailsPage extends BasePage {
 
-  val path: String           = "/declaration/consignor-address"
-  val title: String          = "What is the consignor’s name and address?"
-  val backButtonHref: String = ConsignorEORINumberPage.path
+  val path: String = "/declaration/consignor-address"
+  val title: String = "What is the consignor’s name and address?"
+  def backButtonHref: String = ConsignorEORINumberPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Clearance -> List(consignorAddressCL))
 
   override def fillPage(values: String*): Unit = {
-    detailsHelper(values: _*)
+    addressHelper(values: _*)
     store(ConsignorDetails -> Details(values))
   }
 }

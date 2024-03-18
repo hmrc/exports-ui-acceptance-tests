@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.section2.CarrierDetailsPage.{fillAutoComplete, 
 
 object DetailKeys {
 
-  def detailsHelper(values: String*): Unit = {
+  def addressHelper(values: String*): Unit = {
     fillTextBoxById("details_address_fullName", values(0))
     fillTextBoxById("details_address_addressLine", values(1))
     fillTextBoxById("details_address_townOrCity", values(2))
@@ -37,6 +37,7 @@ object DetailKeys {
 
   val AdditionalPartiesInvolvedTypeLabel = "Other parties’s type"
   val AuthorisationTypeLabel = "Authorisation type"
+  val ProcedureChoiceLabel = "Authorisation choice"
 
   // /are-you-the-exporter
   val ExporterYesNo: DetailKey = DetailKey("Are you the exporter?", section2)
@@ -67,15 +68,21 @@ object DetailKeys {
 
   // /other-parties-involved
   val AdditionalPartiesInvolved: DetailKey = DetailKey("Additional parties involved", section2)
-  def AdditionalPartiesInvolvedType(seqId: String): DetailKey = DetailKey(AdditionalPartiesInvolvedTypeLabel, section2, Some(seqId))
-  def AdditionalPartiesInvolvedEORI(seqId: String): DetailKey = DetailKey("Other parties’s EORI number", section2, Some(seqId))
+  def AdditionalPartiesInvolvedType(seqId: String): DetailKey =
+    DetailKey(AdditionalPartiesInvolvedTypeLabel, section2, Some(seqId))
+  def AdditionalPartiesInvolvedEORI(seqId: String): DetailKey =
+    DetailKey("Other parties’s EORI number", section2, Some(seqId))
+
+  // /authorisation-choice
+  val ProcedureChoice: DetailKey = DetailKey(ProcedureChoiceLabel, section2, None, None, skipSummaryCheck = true)
 
   // /is-authorisation-required
   val AuthorisationsRequired: DetailKey = DetailKey("Authorisations for this declaration", section2)
 
   // /add-authorisation-required
   def AuthorisationType(seqId: String): DetailKey = DetailKey(AuthorisationTypeLabel, section2, Some(seqId))
-  def AuthorisationHolderEORI(seqId: String): DetailKey = DetailKey("Authorised party’s EORI number", section2, Some(seqId))
+  def AuthorisationHolderEORI(seqId: String): DetailKey =
+    DetailKey("Authorised party’s EORI number", section2, Some(seqId))
 
   // CLEARANCE pages
 

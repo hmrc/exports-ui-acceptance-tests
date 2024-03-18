@@ -19,19 +19,19 @@ package uk.gov.hmrc.test.ui.pages.section2
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{exporterAddress, exporterAddressCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{ExporterDetails, detailsHelper}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{ExporterDetails, addressHelper}
 
 object ExporterDetailsPage extends BasePage {
 
-  val path: String           = "/declaration/exporter-address"
-  val title: String          = "What is the exporter’s name and business address?"
-  val backButtonHref: String = ExporterEORINumberPage.path
+  val path: String = "/declaration/exporter-address"
+  val title: String = "What is the exporter’s name and business address?"
+  def backButtonHref: String = ExporterEORINumberPage.path
 
-  override val expanderHrefs: Map[String, Seq[String]]                 =
+  override val expanderHrefs: Map[String, Seq[String]] =
     Map(Common -> List(exporterAddress), Clearance -> List(exporterAddressCL))
 
   override def fillPage(values: String*): Unit = {
-    detailsHelper(values: _*)
+    addressHelper(values: _*)
     store(ExporterDetails -> Details(values))
   }
 }

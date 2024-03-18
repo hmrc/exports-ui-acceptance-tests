@@ -23,12 +23,12 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AuthorisationsRequired, ye
 
 object AuthorisationYesNoPage extends BasePage {
 
-  val path: String           = "/declaration/is-authorisation-required"
-  val title: String          = "Do you have any authorisations you want to declare?"
-  val backButtonHref: String = ProcedureChoicePage.path
+  val path: String = "/declaration/is-authorisation-required"
+  val title: String = "Do you have any authorisations you want to declare?"
+  def backButtonHref: String = ProcedureChoicePage.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(isAuthorisationRequired, isAuthorisationRequired1, isAuthorisationRequired2),
+    Common -> List(isAuthorisationRequired, isAuthorisationRequired1, isAuthorisationRequired2),
     Clearance -> List(isAuthorisationRequiredCL, isAuthorisationRequiredCL1, isAuthorisationRequiredCL2)
   )
 

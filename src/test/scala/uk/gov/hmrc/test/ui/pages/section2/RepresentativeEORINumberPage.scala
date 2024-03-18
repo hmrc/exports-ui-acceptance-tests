@@ -23,9 +23,9 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.RepresentativeEORI
 
 object RepresentativeEORINumberPage extends BasePage {
 
-  val path: String           = "/declaration/representatives-eori-number"
-  val title: String          = "What is the EORI number of the other agent?"
-  val backButtonHref: String = OnBehalfOfOtherAgentPage.path
+  val path: String = "/declaration/representatives-eori-number"
+  val title: String = "What is the EORI number of the other agent?"
+  def backButtonHref: String = OnBehalfOfOtherAgentPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Common -> List(representativesEoriNumber), Clearance -> List(representativesEoriNumberCL))

@@ -22,8 +22,8 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{ExporterEORI, ExporterYesN
 
 object IsThisExsPage extends BasePage {
 
-  val path: String           = "/declaration/is-this-exs"
-  val title: String          = "Do you need to give us safety and security information?"
+  val path: String = "/declaration/is-this-exs"
+  val title: String = "Do you need to give us safety and security information?"
   def backButtonHref: String = if (detail(ExporterYesNo) == yes) AreYouTheExporterPage.path
   else
     maybeDetail(ExporterEORI) match {

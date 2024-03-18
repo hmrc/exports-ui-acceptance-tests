@@ -23,9 +23,9 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.PersonPresentingGoods
 
 object PersonPresentingGoodsPage extends BasePage {
 
-  val path: String           = "/declaration/person-presenting-goods"
-  val title: String          = "What is the EORI number of the person presenting the goods to customs?"
-  val backButtonHref: String = EIDRPage.path
+  val path: String = "/declaration/person-presenting-goods"
+  val title: String = "What is the EORI number of the person presenting the goods to customs?"
+  def backButtonHref: String = EIDRPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Clearance -> List(personPresentingGoodsCL))

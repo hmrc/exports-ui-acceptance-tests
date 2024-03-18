@@ -21,13 +21,13 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AuthorisationTypeLabel, se
 
 object AuthorisationsListPage extends BasePage {
 
-  val path: String           = "/declaration/authorisations-required"
-  def title: String          =
+  val path: String = "/declaration/authorisations-required"
+  def title: String =
     allSectionDetails(section2).count(_._1.label == AuthorisationTypeLabel) match {
       case 1 => "You have added 1 authorisation"
       case n => s"You have added $n authorisations"
     }
-  val backButtonHref: String = AuthorisationPage.path
+  def backButtonHref: String = AuthorisationPage.path
 
   override def fillPage(values: String*): Unit =
     selectYesOrNoRadio(values(yesNo))
