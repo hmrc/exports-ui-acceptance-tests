@@ -35,4 +35,6 @@ object IsThisExsPage extends BasePage {
     selectYesOrNoRadio(values(yesNo))
     store(IsThisExs -> Detail(values(yesNo)))
   }
+
+  def isThisExs: Boolean = maybeDetail(IsThisExs).fold(false)(_ == yes)
 }

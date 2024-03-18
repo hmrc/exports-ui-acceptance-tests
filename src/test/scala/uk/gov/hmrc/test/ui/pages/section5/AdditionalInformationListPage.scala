@@ -17,17 +17,23 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.Section5
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalInformationCodeLabel
 
-object SummarySection5Page extends BasePage {
+object AdditionalInformationListPage extends BasePage {
 
-  def backButtonHref: String = DeclarationItemsListPage.path
-  val path: String           = "/declaration/summary-section/5"
-  val title: String          = "Check your answers"
+  def backButtonHref: String = AdditionalInformationYesNoPage.backButtonHref
+  def path: String           = itemUrl("additional-information-list")
+
+  def title: String =
+    itemDetailFor(itemId, AdditionalInformationCodeLabel).size match {
+      case 1 => "You have added 1 Additional Information code"
+      case n => s"You have added $n Additional Information codes"
+    }
 
   override def checkExpanders(): Unit = ()
 
-  override def fillPage(values: String*): Unit = {
-    checkSectionSummary(Section5)
-  }
+  // No  => fillPage(no)
+  // Yes => fillPage(yes)
+
+  override def fillPage(values: String*): Unit = selectYesOrNoRadio(values.head)
 }

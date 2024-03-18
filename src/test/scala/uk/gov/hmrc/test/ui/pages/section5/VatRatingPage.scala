@@ -17,10 +17,12 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
+import uk.gov.hmrc.test.ui.pages.base.PageLinks.{previousProcedureCodes, vatOnGoodsExportedFromUK}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.itemsZeroRatedForVat
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section5.CommodityDetailsPage.commodityCodeChemicalPrefixes
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{CommodityDetailsCode, VatRating}
+import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.isCodeRestrictingZeroVat
 
 object VatRatingPage extends BasePage {
 
@@ -35,6 +37,9 @@ object VatRatingPage extends BasePage {
   val title: String          = "Are these goods being zero-rated for VAT?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(itemsZeroRatedForVat))
+
+  override def pageLinkHrefs: Seq[String] =
+    super.pageLinkHrefs ++ List(if (isCodeRestrictingZeroVat) previousProcedureCodes else vatOnGoodsExportedFromUK)
 
   // fillPage("Yes")         => "Yes"
   // fillPage("VAT reduced") => "No, a reduced VAT 5% duty rate applies in the UK and is being paid"

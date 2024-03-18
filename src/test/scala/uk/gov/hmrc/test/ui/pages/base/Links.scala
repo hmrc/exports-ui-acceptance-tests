@@ -157,8 +157,11 @@ object PageLinks {
   val removalOfGoodsFromExciseWarehouse = "https://www.gov.uk/government/publications/appendix-1-de-110-requested-and-previous-procedure-codes/requested-procedure-10-permanent-export-or-dispatch#section"
   val temporaryExport =                   "https://www.gov.uk/guidance/pay-less-import-duty-and-vat-when-re-importing-goods-to-the-uk-and-eu#claiming-relief-for-exporting-goods-using-a-duplicate-list"
 
-  val aiCodes =              "https://www.gov.uk/guidance/additional-information-ai-statement-codes-for-data-element-22-of-the-customs-declaration-service-cds"
-  val aiCodesForContainers = "https://www.gov.uk/government/publications/appendix-1-de-110-requested-and-previous-procedure-codes/requested-procedure-10-permanent-export-or-dispatch#additional-information-de-22-1"
+  val aiCodes =                           "https://www.gov.uk/guidance/additional-information-ai-statement-codes-for-data-element-22-of-the-customs-declaration-service-cds"
+  val aiCodesForContainers =              "https://www.gov.uk/government/publications/appendix-1-de-110-requested-and-previous-procedure-codes/requested-procedure-10-permanent-export-or-dispatch#additional-information-de-22-1"
 
-  val tariffCommodities =    "https://www.trade-tariff.service.gov.uk/commodities/"
+  val tariffCommodities =                 "https://www.trade-tariff.service.gov.uk/commodities/"
+
+  val previousProcedureCodes =            "https://www.gov.uk/government/publications/appendix-1-de-110-requested-and-previous-procedure-codes"
+  val vatOnGoodsExportedFromUK =          "https://www.gov.uk/guidance/vat-on-goods-exported-from-the-uk-notice-703"
 }

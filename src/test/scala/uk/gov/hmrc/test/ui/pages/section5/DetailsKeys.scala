@@ -5,15 +5,13 @@ import uk.gov.hmrc.test.ui.pages.base.DetailKey
 object DetailsKeys {
 
   val section5 = 5
-
-  val ProcedureCodeLabel           = "Procedure code"
-  val AdditionalProcedureCodeLabel = "Procedure code"
-
   val Section5: DetailKey = DetailKey("Section 5 of 6: About the items", section5, Some("items-card"))
 
+  val ProcedureCodeLabel           = "Procedure code"
+  val AdditionalProcedureCodeLabel = "Additional procedure codes"
   val AdditionalFiscalReferenceLabel = "VAT details"
-  val ProcedureCodeLabel = "Procedure code"
   val PackageTypeLabel = "Package type"
+  val AdditionalInformationCodeLabel = "Statement code"
 
   // /add-declaration-item
 
@@ -87,7 +85,7 @@ object DetailsKeys {
 
   // /items/[id]/additional-information
   def AdditionalInformationCode(itemId: String, sequenceId: String): DetailKey =
-    DetailKey("Statement code", section5, Some(itemId), Some(sequenceId))
+    DetailKey(AdditionalInformationCodeLabel, section5, Some(itemId), Some(sequenceId))
 
   def AdditionalInformationDescription(itemId: String, sequenceId: String): DetailKey =
     DetailKey("Required information", section5, Some(itemId), Some(sequenceId))

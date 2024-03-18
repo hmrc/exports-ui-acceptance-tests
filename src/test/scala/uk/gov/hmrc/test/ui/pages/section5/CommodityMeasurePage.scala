@@ -20,14 +20,14 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yes}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsCommodityMeasure, itemsCommodityMeasure1, itemsCommodityMeasureCL, itemsCommodityMeasureCL1}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
-import uk.gov.hmrc.test.ui.pages.section1.IsThisExsPage.isThisExs
+import uk.gov.hmrc.test.ui.pages.section2.IsThisExsPage.isThisExs
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{CommodityMeasureGross, CommodityMeasureNet}
 import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.isExportInventoryCleansingRecord
 
 object CommodityMeasurePage extends BasePage {
 
   def backButtonHref: String =
-    if (detail(DeclarationType) != Clearance || !isExportInventoryCleansingRecord) PackagesListPage.path
+    if (detail(DeclarationType) != Clearance || !isExportInventoryCleansingRecord) PackageInformationPage.path
     else if (isThisExs) DangerousGoodsCodePage.path
     else CommodityDetailsPage.path
 
