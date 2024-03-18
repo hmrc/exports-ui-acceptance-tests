@@ -63,8 +63,8 @@ object ConditionChecksSection6 {
       else false
 
     (detail(DeclarationType), detail(AdditionalDeclarationType)) match {
-      case (Supplementary, TypeZ)  => true
-      case (Supplementary, TypeY)  => furtherChecks
+      case (Supplementary, NonEidr)  => true
+      case (Supplementary, Eidr)  => furtherChecks
       case (Standard, Arrived)     => furtherChecks
       case (Standard, Prelodged)   => furtherChecks
       case (Simplified, Arrived)   => furtherChecks

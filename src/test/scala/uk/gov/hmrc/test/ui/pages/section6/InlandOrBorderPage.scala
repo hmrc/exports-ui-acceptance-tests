@@ -13,7 +13,7 @@ object InlandOrBorderPage extends BasePage {
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(inlandOrBorder))
 
-  def backButtonHref(): String =
+  def backButtonHref: String =
     if (isSPOFFNotNeeded) {
       TransportLeavingTheBorderPage.path
     } else if (checkIfDecIsClr) {
@@ -25,7 +25,7 @@ object InlandOrBorderPage extends BasePage {
   private val location = 0
 
   override def fillPage(values: String*): Unit = {
-    values match {
+    values(location) match {
       case "Border Location"             => clickById("Border")
       case "Customs controlled location" => clickById("Inland")
     }

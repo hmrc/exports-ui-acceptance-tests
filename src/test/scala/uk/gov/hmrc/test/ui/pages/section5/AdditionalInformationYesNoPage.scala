@@ -17,20 +17,23 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants._
-import uk.gov.hmrc.test.ui.pages.base.PageLinks.{aiCodes, aiCodesForContainers}
+import uk.gov.hmrc.test.ui.pages.base.PageLinks.{aiCodes, aiCodesForContainers, previousProcedureCodes}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsIsAdditionalInformationRequired, itemsIsAdditionalInformationRequiredCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{NoAdditionalInformation, PackageInformationType}
+import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.isPermanentExportOfUKGoods
 
 object AdditionalInformationYesNoPage extends BasePage {
 
   def backButtonHref: String =
     detail(DeclarationType) match {
+      case Clearance => CommodityMeasurePage.path
+
       case Occasional | Simplified =>
         maybeDetail(PackageInformationType(itemId, "0")).fold(PackageInformationPage.path)(_ => PackageInformationListPage.path)
 
-      case _ => CommodityMeasurePage.path
+      case _ => SupplementaryUnitsPage.path
     }
 
   def path: String  = itemUrl("is-additional-information-required")
@@ -41,7 +44,11 @@ object AdditionalInformationYesNoPage extends BasePage {
     Clearance -> List(itemsIsAdditionalInformationRequiredCL)
   )
 
-  override def pageLinkHrefs: Seq[String] = super.pageLinkHrefs ++ List(aiCodes, aiCodesForContainers)
+  override def pageLinkHrefs: Seq[String] =
+    super.pageLinkHrefs ++ List(
+      aiCodes,
+      if (detail(DeclarationType) == Clearance || isPermanentExportOfUKGoods) aiCodesForContainers else previousProcedureCodes
+    )
 
   // No  => fillPage(no)
   // Yes => fillPage(yes)

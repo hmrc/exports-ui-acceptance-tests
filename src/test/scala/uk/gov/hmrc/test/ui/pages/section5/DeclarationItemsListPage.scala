@@ -16,15 +16,17 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.section4.SummarySection4Page
+//import uk.gov.hmrc.test.ui.pages.section4.SummarySection4Page
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.section5
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{declarationItemsList, declarationItemsListCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, DetailKey}
+import uk.gov.hmrc.test.ui.pages.section2.SummarySection2Page
 
 object DeclarationItemsListPage extends BasePage {
 
-  def backButtonHref: String = SummarySection4Page.path
+  // def backButtonHref: String = SummarySection4Page.path
+  def backButtonHref: String = SummarySection2Page.path
   val path: String           = "/declaration/declaration-items-list"
 
   def title: String =

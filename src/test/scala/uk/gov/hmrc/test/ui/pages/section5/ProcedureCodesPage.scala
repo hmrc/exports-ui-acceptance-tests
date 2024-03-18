@@ -22,7 +22,6 @@ import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsProcedureCodes, itemsPro
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.EntryIntoDeclarantsRecords
-import uk.gov.hmrc.test.ui.pages.section5.CommodityMeasurePage.{detail, itemId}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.ProcedureCode
 
 object ProcedureCodesPage extends BasePage {
@@ -35,9 +34,11 @@ object ProcedureCodesPage extends BasePage {
     Common    -> List(itemsProcedureCodes),
     Clearance -> List(itemsProcedureCodesCL)
   )
+
   override def pageLinkHrefs: Seq[String] =
     if (detail(DeclarationType) == Clearance && detail(EntryIntoDeclarantsRecords) == yes) super.pageLinkHrefs
-    else super.pageLinkHrefs ++ List(
+    else
+      super.pageLinkHrefs ++ List(
         endUseRelief,
         inwardProcessing,
         outwardProcessing,
@@ -55,6 +56,11 @@ object ProcedureCodesPage extends BasePage {
     store(ProcedureCode(itemId) -> Detail(procedureCode))
   }
 
+  val codesRestrictingZeroVat: Seq[String] =
+    List("1007", "1042", "2151", "2154", "2200", "3151", "3154", "3171", "2100", "2144", "2244", "2300", "3153")
+
+  def isCodeRestrictingZeroVat: Boolean         = codesRestrictingZeroVat.contains(detail(ProcedureCode(itemId)))
   def isExportInventoryCleansingRecord: Boolean = detail(ProcedureCode(itemId)) == "0019" // EICR procedure code
-  def isOsrProcedureCode: Boolean = detail(ProcedureCode(itemId)) == "1042"
+  def isPermanentExportOfUKGoods: Boolean       = detail(ProcedureCode(itemId)) == "1040"
+  def isOsrProcedureCode: Boolean               = detail(ProcedureCode(itemId)) == "1042"
 }
