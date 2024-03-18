@@ -21,11 +21,11 @@ import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{addAuthorisationRequired, add
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys._
 
-object AddAuthorisationRequiredPage extends BasePage {
+object AuthorisationPage extends BasePage {
 
   val path: String           = "/declaration/add-authorisation-required"
   val title: String          = "Add any authorisations for this export"
-  val backButtonHref: String = IsAuthorisationRequiredPage.path
+  val backButtonHref: String = AuthorisationYesNoPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common    -> List(addAuthorisationRequired),
@@ -35,15 +35,19 @@ object AddAuthorisationRequiredPage extends BasePage {
   val typeIndex = 1
   val EORI      = 2
 
-  override protected def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     fillAutoComplete("authorisationTypeCode", values(typeIndex))
-    store(AuthorisationType(values(sequenceId)) -> Detail(findElementById("authorisationTypeCode__option--0").getText))
 
-    values(EORI) match {
-      case "Declarant EORI" => store(AuthorisationHolderEORI(values(sequenceId)) -> Detail(detail(ExporterEORI)))
+    val eori = values(EORI) match {
+      case "Declarant EORI" => detail(ExporterEORI)
       case _                =>
         fillTextBoxById("eori", values(EORI))
-        store(AuthorisationHolderEORI(values(sequenceId)) -> Detail(values(EORI)))
+        values(EORI)
     }
+
+    store(
+      AuthorisationType(values(sequenceId))       -> Detail(findElementById("authorisationTypeCode__option--0").getText),
+      AuthorisationHolderEORI(values(sequenceId)) -> Detail(eori)
+    )
   }
 }

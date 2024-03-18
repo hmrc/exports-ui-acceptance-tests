@@ -35,7 +35,7 @@ object OtherPartiesInvolvedListPage extends BasePage {
   val partyToBeRemoved = 1
   val yesNoConfirm     = 2
 
-  override protected def fillPage(values: String*): Unit =
+  override def fillPage(values: String*): Unit =
     values(action) match {
       case "Remove" => OtherPartiesInvolvedRemovePage.fillPage(values(partyToBeRemoved), values(yesNoConfirm))
       case _        => selectYesOrNoRadio(values(action))

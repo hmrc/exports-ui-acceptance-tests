@@ -27,7 +27,7 @@ object ExporterEORINumberPage extends BasePage {
 
   override val expanderHrefs: Map[String, Seq[String]] = AreYouTheExporterPage.expanderHrefs
 
-  override protected def fillPage(values: String*): Unit =
+  override def fillPage(values: String*): Unit =
     if (selectYesOrNoRadio("Yes", "No", values(yesNo))) {
       fillTextBoxById("eori", values(EORI))
       store(ExporterEORI -> Detail(values(EORI)))

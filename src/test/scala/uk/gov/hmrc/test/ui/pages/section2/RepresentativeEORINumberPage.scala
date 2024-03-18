@@ -32,7 +32,7 @@ object RepresentativeEORINumberPage extends BasePage {
 
   val EORI = 0
 
-  override protected def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     fillTextBoxById("details_eori", values(EORI))
     store(RepresentativeEORI -> Detail(values(EORI)))
   }

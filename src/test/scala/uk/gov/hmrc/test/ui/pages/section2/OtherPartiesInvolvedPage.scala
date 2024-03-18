@@ -33,11 +33,11 @@ object OtherPartiesInvolvedPage extends BasePage {
   // the method can be called like follows
   // fillPage("{sequenceId}", "CS", "GB...")
 
-  val choice = 0
+  val choice    = 0
   val typeIndex = 1
   val EORI      = 2
 
-  override protected def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     val otherParties = maybeDetails(AdditionalPartiesInvolvedType(values(sequenceId)))
     clickById(values(typeIndex))
 

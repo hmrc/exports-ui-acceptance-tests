@@ -24,7 +24,7 @@ object AuthorisationRemovePage extends BasePage {
 
   val path: String           = removeUrl("/authorisations-required")
   val title: String          = "Are you sure you want to remove this authorisation?"
-  val backButtonHref: String = AuthorisationsRequiredPage.path
+  val backButtonHref: String = AuthorisationsListPage.path
 
   val authToBeRemoved = 0
   val yesNoConfirm    = 1

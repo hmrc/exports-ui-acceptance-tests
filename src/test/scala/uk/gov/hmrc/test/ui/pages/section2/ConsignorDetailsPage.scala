@@ -29,7 +29,7 @@ object ConsignorDetailsPage extends BasePage {
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Clearance -> List(consignorAddressCL))
 
-  override protected def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     detailsHelper(values: _*)
     store(ConsignorDetails -> Details(values))
   }

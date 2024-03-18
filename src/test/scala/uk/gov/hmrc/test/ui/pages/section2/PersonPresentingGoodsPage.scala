@@ -32,7 +32,7 @@ object PersonPresentingGoodsPage extends BasePage {
 
   val EORI = 0
 
-  override protected def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     fillTextBoxById("eori", values(EORI))
     store(PersonPresentingGoods -> Detail(values(EORI)))
   }

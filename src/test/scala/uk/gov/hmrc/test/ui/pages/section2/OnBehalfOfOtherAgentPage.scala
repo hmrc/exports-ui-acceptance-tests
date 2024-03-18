@@ -41,7 +41,7 @@ object OnBehalfOfOtherAgentPage extends BasePage {
       Clearance -> List(areYouCompletingThisDeclarationOnBehalfOfAnotherAgentCL)
     )
 
-  override protected def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     selectYesOrNoRadio(values(yesNo), "agent_yes", "agent_no")
     store(onBehalfOfOtherAgentYesNo -> Detail(values(yesNo)))
   }

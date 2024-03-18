@@ -35,7 +35,7 @@ object RepresentationTypeAgreedPage extends BasePage {
 
   val representationType = 0
 
-  override protected def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     values(representationType) match {
       case "Direct"   => clickById("2")
       case "Indirect" => clickById("3")

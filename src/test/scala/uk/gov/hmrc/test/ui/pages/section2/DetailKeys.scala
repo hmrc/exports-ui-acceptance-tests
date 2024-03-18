@@ -32,11 +32,11 @@ object DetailKeys {
   val yesNo = 0
   val EORI = 1
 
-  val section2: Int       = 2
+  val section2: Int = 2
   val Section2: DetailKey = DetailKey("Section 2 of 6: Parties involved", section2, Some("references-card"))
 
   val AdditionalPartiesInvolvedTypeLabel = "Other parties’s type"
-  val AuthorisationTypeLabel             = "Authorisation type"
+  val AuthorisationTypeLabel = "Authorisation type"
 
   // /are-you-the-exporter
   val ExporterYesNo: DetailKey = DetailKey("Are you the exporter?", section2)
@@ -66,24 +66,16 @@ object DetailKeys {
   val ConsigneeDetails: DetailKey = DetailKey("Consignee’s details", section2)
 
   // /other-parties-involved
-  val AdditionalPartiesInvolved: DetailKey                =
-    DetailKey("Additional parties involved", section2)
-  def AdditionalPartiesInvolvedType(seqId: String): DetailKey =
-    DetailKey(AdditionalPartiesInvolvedTypeLabel, section2, Some(seqId))
-  def AdditionalPartiesInvolvedEORI(seqId: String): DetailKey =
-    DetailKey("Other parties’s EORI number", section2, Some(seqId))
+  val AdditionalPartiesInvolved: DetailKey = DetailKey("Additional parties involved", section2)
+  def AdditionalPartiesInvolvedType(seqId: String): DetailKey = DetailKey(AdditionalPartiesInvolvedTypeLabel, section2, Some(seqId))
+  def AdditionalPartiesInvolvedEORI(seqId: String): DetailKey = DetailKey("Other parties’s EORI number", section2, Some(seqId))
 
   // /is-authorisation-required
   val AuthorisationsRequired: DetailKey = DetailKey("Authorisations for this declaration", section2)
 
   // /add-authorisation-required
-  val AuthorisationType: DetailKey       = DetailKey("Authorisation type", section2)
-  val AuthorisationHolderEORI: DetailKey = DetailKey("Authorised party’s EORI number", section2)
-
-  def AuthorisationType(seqId: String): DetailKey       =
-    DetailKey(AuthorisationTypeLabel, section2, Some(seqId))
-  def AuthorisationHolderEORI(seqId: String): DetailKey =
-    DetailKey("Authorised party’s EORI number", section2, Some(seqId))
+  def AuthorisationType(seqId: String): DetailKey = DetailKey(AuthorisationTypeLabel, section2, Some(seqId))
+  def AuthorisationHolderEORI(seqId: String): DetailKey = DetailKey("Authorised party’s EORI number", section2, Some(seqId))
 
   // CLEARANCE pages
 

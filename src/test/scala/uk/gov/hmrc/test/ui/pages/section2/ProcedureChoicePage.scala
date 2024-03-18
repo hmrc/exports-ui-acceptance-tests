@@ -18,9 +18,9 @@ package uk.gov.hmrc.test.ui.pages.section2
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
+import uk.gov.hmrc.test.ui.pages.base.PageLinks._
 
-object AuthorisationChoicePage extends BasePage {
+object ProcedureChoicePage extends BasePage {
 
   val path: String           = "/declaration/authorisation-choice"
   val title: String          = "Which export procedure are you using?"
@@ -45,7 +45,7 @@ object AuthorisationChoicePage extends BasePage {
 
   val exportProcedure = 0
 
-  override protected def fillPage(values: String*): Unit =
+  override def fillPage(values: String*): Unit =
     values(exportProcedure) match {
       case "Permanent"             => clickById("Code1040")
       case "Permanent with excise" => clickById("Code1007")

@@ -29,7 +29,7 @@ object ConsignorEORINumberPage extends BasePage {
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Clearance -> List(consignorEoriNumberCL))
 
-  override protected def fillPage(values: String*): Unit =
+  override def fillPage(values: String*): Unit =
     if (selectYesOrNoRadio("Yes", "No", values(yesNo))) {
       fillTextBoxById("eori", values(EORI))
       store(ConsignorEORI -> Detail(values(EORI)))

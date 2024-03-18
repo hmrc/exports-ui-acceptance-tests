@@ -25,8 +25,8 @@ object SummarySection2Page extends BasePage {
   val path: String           = "/declaration/summary-section/2"
   val title: String          = "Check your answers"
   def backButtonHref: String =
-    if (detail(AuthorisationsRequired) == none) IsAuthorisationRequiredPage.path else AuthorisationsRequiredPage.path
+    if (detail(AuthorisationsRequired) == none) AuthorisationYesNoPage.path else AuthorisationsListPage.path
 
-  override protected def fillPage(values: String*): Unit =
+  override def fillPage(values: String*): Unit =
     checkSectionSummary(Section2)
 }

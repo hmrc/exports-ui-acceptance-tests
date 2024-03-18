@@ -35,7 +35,7 @@ object AreYouTheExporterPage extends BasePage {
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Common -> List(areYouTheExporter), Clearance -> List(areYouTheExporterCL))
 
-  override protected def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     selectYesOrNoRadio(values(yesNo))
     store(ExporterYesNo -> Detail(values(yesNo)))
   }

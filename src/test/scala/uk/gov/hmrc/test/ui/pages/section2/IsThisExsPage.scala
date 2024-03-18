@@ -31,7 +31,7 @@ object IsThisExsPage extends BasePage {
       case None    => ExporterDetailsPage.path
     }
 
-  override protected def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     selectYesOrNoRadio(values(yesNo))
     store(IsThisExs -> Detail(values(yesNo)))
   }

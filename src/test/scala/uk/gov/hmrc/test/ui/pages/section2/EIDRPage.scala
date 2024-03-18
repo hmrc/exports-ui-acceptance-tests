@@ -26,7 +26,7 @@ object EIDRPage extends BasePage {
   val title: String          = "Is this an entry into declarant’s records (EIDR)?"
   val backButtonHref: String = SummarySection1Page.path
 
-  override protected def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     selectYesOrNoRadio(values(yesNo), "answer_yes", "answer_no")
     store(EntryIntoDeclarantsRecords -> Detail(values(yesNo)))
   }
