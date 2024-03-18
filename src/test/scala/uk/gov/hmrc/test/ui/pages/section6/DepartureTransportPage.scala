@@ -31,7 +31,7 @@ object DepartureTransportPage extends BasePage {
 
   private val departRef = 0
 
-  def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     val (radioId, textboxId, textboxValue) = values.head match {
       case "Ship IMO number"                                 => ("radio_ShipOrRoroImoNumber", "ShipOrRoroImoNumber", "123456")
       case "Ship name"                                       => ("radio_NameOfVessel", "NameOfVessel", "Seraphim")

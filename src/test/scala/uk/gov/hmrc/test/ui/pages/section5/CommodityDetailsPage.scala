@@ -19,15 +19,21 @@ package uk.gov.hmrc.test.ui.pages.section5
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsCommodityDetails, itemsCommodityDetails1, itemsCommodityDetailsCL, itemsCommodityDetailsCL1}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{CommodityDetailsCode, CommodityDetailsDescription}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{CommodityDetailsCode, CommodityDetailsDescription, NoAdditionalInformation}
+import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.isOsrProcedureCode
 
 object CommodityDetailsPage extends BasePage {
 
   val commodityCodeChemicalPrefixes: Seq[String] = List("28", "29", "38")
 
-  def backButtonHref: String = s"${FiscalInformationPage.path}?fastForward=true"
-  def path: String           = itemUrl("commodity-details")
-  val title: String          = "Commodity code and item details"
+  def backButtonHref: String =
+    if (!isOsrProcedureCode) AdditionalProcedureCodesPage.path
+    else maybeDetail(NoAdditionalInformation(itemId)).fold(AdditionalFiscalReferencesListPage.path) { _ =>
+      s"${FiscalInformationYesNoPage.path}?fastForward=true"
+    }
+
+  def path: String  = itemUrl("commodity-details")
+  val title: String = "Commodity code and item details"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common    -> List(itemsCommodityDetails, itemsCommodityDetails1),
@@ -37,9 +43,9 @@ object CommodityDetailsPage extends BasePage {
   val code        = 0
   val description = 1
 
-  // ex: performActionsAndStore("4203400090", "Straw for bottles")
+  // ex: fillPage("4203400090", "Straw for bottles")
 
-  override protected def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     fillTextBoxById("combinedNomenclatureCode", values(code))
     fillTextBoxById("descriptionOfGoods", values(description))
     store(

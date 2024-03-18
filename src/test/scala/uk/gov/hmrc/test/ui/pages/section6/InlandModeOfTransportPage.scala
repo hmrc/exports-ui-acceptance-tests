@@ -26,7 +26,7 @@ object InlandModeOfTransportPage extends BasePage {
 
   private val mode = 0
 
-  def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     val elementId = values(mode) match {
       case "Road transport"                           => "Inland_Road"
       case "Rail transport"                           => "Inland_Rail"

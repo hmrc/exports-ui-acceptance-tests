@@ -17,6 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.base
 
 import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{Cache, cache}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.section5
 
 trait CacheHelper {
 
@@ -33,7 +34,19 @@ trait CacheHelper {
       }
     }
 
- /* def listOfItemDetailFor(label: String): Seq[String] =
+  def itemDetailFor(itemId: String, label: String): Seq[String] =
+    allSectionDetails(section5, Some(itemId)).filter(_._1.label == label).values.flatMap {
+      case detail: Detail => Some(detail.value)
+      case _              => None
+    }.toList
+
+  def itemDetailsFor(itemId: String, label: String): Seq[Seq[String]] =
+    allSectionDetails(section5, Some(itemId)).filter(_._1.label == label).values.flatMap {
+      case details: Details => Some(details.values)
+      case _              => None
+    }.toList
+
+  def listOfItemDetailFor(label: String): Seq[String] =
     allSectionDetails(section5).filter(_._1.label == label).values.flatMap {
       case detail: Detail => Some(detail.value)
       case _              => None
@@ -44,7 +57,7 @@ trait CacheHelper {
       case details: Details => Some(details.values)
       case _                => None
     }.toList
-*/
+
   // Use a detailKey to retrieve the value of a Detail (a Detail corresponds to a single value)
   def detail(detailKey: DetailKey): String = cache(detailKey) match { case (detail: Detail) => detail.value }
 

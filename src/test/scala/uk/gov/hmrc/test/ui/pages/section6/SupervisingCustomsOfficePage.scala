@@ -22,7 +22,7 @@ object SupervisingCustomsOfficePage extends BasePage {
 
   private val officeCode = 0
 
-  def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     fillAutoComplete("supervisingCustomsOffice", values(officeCode))
     store(SuperVisingCustomsOffice -> Detail(values(officeCode)))
   }

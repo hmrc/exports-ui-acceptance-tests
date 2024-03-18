@@ -20,26 +20,22 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 object ChoicePage extends BasePage {
 
+  val backButtonHref: String = ""
   val path: String           = "/choice"
   val title                  = "Make and manage export declarations"
-  def backButtonHref: String = ""
-
-  val createDeclaration                   = "create-declaration"
-  val manageDraftDeclaration              = "manage-draft-declarations"
-  val manageSubmitDeclaration             = "manage-submitted-declarations"
-  val manageMovementsDeclaration          = "movements"
-  val manageDocumentsByConnectingWithSFUS = "upload-documents"
-
-  override protected def checkExpanders(): Unit = ()
-
-  def fillPage(values: String*): Unit =
-    values.head match {
-      case "create a declaration"                => clickById(createDeclaration)
-      case "ManageDraftDeclaration"              => clickById(manageDraftDeclaration)
-      case "ManageSubmitDeclaration"             => clickById(manageSubmitDeclaration)
-      case "ManageMovementsDeclaration"          => clickById(manageMovementsDeclaration)
-      case "ManageDocumentsByConnectingWithSFUS" => clickById(manageDocumentsByConnectingWithSFUS)
-    }
 
   override def checkBackButton(): Unit = ()
+
+  override def checkExpanders(): Unit = ()
+
+  // ex: fillPage("create a declaration")
+
+  override def fillPage(values: String*): Unit =
+    values.head match {
+      case "create a declaration"                => clickById("create-declaration")
+      case "ManageDraftDeclaration"              => clickById("manage-draft-declarations")
+      case "ManageSubmitDeclaration"             => clickById("manage-submitted-declarations")
+      case "ManageMovementsDeclaration"          => clickById("movements")
+      case "ManageDocumentsByConnectingWithSFUS" => clickById("upload-documents")
+    }
 }

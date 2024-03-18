@@ -21,10 +21,10 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage
 object NotDeclarantPage extends BasePage {
 
   def backButtonHref: String = ChoicePage.path
-
   val path: String = "/declaration/not-declarant"
-
   val title: String = "Use a different EORI number"
 
-   def fillPage(values: String*): Unit = ()
+  // ex: fillPage()
+
+   override def fillPage(values: String*): Unit = ()
 }

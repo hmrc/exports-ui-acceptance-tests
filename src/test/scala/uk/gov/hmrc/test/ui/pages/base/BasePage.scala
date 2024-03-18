@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.base
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.matchers.must.Matchers.{convertToAnyMustWrapper, defined}
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
-import uk.gov.hmrc.test.ui.pages.base.BasePage.{exitAndCompleteLater, feedbackBanner, govUkLogo, host, languageToggle, signOut, technicalIssue}
+import uk.gov.hmrc.test.ui.pages.base.BasePage._
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 
@@ -32,10 +32,11 @@ trait BasePage extends CacheHelper with DriverHelper {
   def title: String
 
   val expanderHrefs: Map[String, Seq[String]] = Map.empty
-  val pageLinkHrefs: Seq[String]              =
+
+  def pageLinkHrefs: Seq[String] =
     List(exitAndCompleteLater, feedbackBanner, govUkLogo, languageToggle, signOut, technicalIssue)
 
-  def checkPage: Unit = {
+  def checkPage(): Unit = {
     checkUrlAndTitle()
     checkBackButton()
     checkPageLinks()
@@ -74,7 +75,7 @@ trait BasePage extends CacheHelper with DriverHelper {
   }
 
   // Required for multi-value pages, like "Package Information", "Additional Information", "Containers", ...
-  // The page sequence must be always at zero-position in the list of values passed to "performActionsAndStore".
+  // The page sequence must be always at zero-position in the list of values passed to "fillPage".
   val sequenceId = 0
 
   def fillPage(values: String*): Unit
@@ -86,8 +87,8 @@ trait BasePage extends CacheHelper with DriverHelper {
   protected def containerId: String     =
     (Option(driver.getCurrentUrl) collect { case containerIdPattern(group) => group }).head
 
-  private val itemIdPattern: Regex      = s"/$initPart/items/($elementId)/.+".r
-  protected def itemId: String          = (Option(driver.getCurrentUrl) collect { case itemIdPattern(group) => group }).head
+  private val itemIdPattern: Regex = s"/$initPart/items/($elementId)/.+".r
+  protected def itemId: String     = (Option(driver.getCurrentUrl) collect { case itemIdPattern(group) => group }).head
 
   protected def changeUrl(partId: String): String = s"$initPart/$partId/$elementId/change"
 
@@ -121,7 +122,7 @@ trait BasePage extends CacheHelper with DriverHelper {
 
       if (!detailKey.skipSummaryCheck) {
         val values = details match {
-          case detail: Detail => Seq(detail.value)
+          case detail: Detail  => Seq(detail.value)
           case detail: Details => detail.values
         }
 

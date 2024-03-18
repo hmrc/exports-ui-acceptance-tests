@@ -57,7 +57,7 @@ object ContainerPage extends BasePage {
     store(Container(containerId) -> Detail(containerId))
   }
 
-  def fillPage(values: String*): Unit =
+  override def fillPage(values: String*): Unit =
     if (elementByIdDoesNotExist("code_yes")) saveContainerId(values(additionalCode))
     else if (selectYesOrNoRadio(values(yesNo))) saveContainerId(values(code))
     else store(NoContainers -> Detail("None"))

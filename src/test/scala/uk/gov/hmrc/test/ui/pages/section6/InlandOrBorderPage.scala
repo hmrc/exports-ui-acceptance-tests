@@ -24,7 +24,7 @@ object InlandOrBorderPage extends BasePage {
 
   private val location = 0
 
-  def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     values match {
       case "Border Location"             => clickById("Border")
       case "Customs controlled location" => clickById("Inland")

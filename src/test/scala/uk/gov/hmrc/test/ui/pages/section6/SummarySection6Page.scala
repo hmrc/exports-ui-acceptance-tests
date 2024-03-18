@@ -9,7 +9,7 @@ object SummarySection6Page extends BasePage {
   val title: String          = "Check your answers"
   val backButtonHref: String = ContainerPage.path
 
-  override protected def fillPage(values: String*): Unit =
+  override def fillPage(values: String*): Unit =
     checkSectionSummary(Section6)
 
 }

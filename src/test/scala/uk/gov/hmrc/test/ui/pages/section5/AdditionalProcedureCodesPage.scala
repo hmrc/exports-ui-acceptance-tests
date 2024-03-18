@@ -17,7 +17,12 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalProcedureCodes, itemsAdditionalProcedureCodes1, itemsAdditionalProcedureCodes2, itemsAdditionalProcedureCodesCL}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{
+  itemsAdditionalProcedureCodes,
+  itemsAdditionalProcedureCodes1,
+  itemsAdditionalProcedureCodes2,
+  itemsAdditionalProcedureCodesCL
+}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalProcedureCodes, ProcedureCode}
 
@@ -34,13 +39,15 @@ object AdditionalProcedureCodesPage extends BasePage {
     Clearance -> List(itemsAdditionalProcedureCodesCL, itemsAdditionalProcedureCodes1, itemsAdditionalProcedureCodes2)
   )
 
-  // ex: performActionsAndStore("1CS")
+  // ex: fillPage("1CS")
 
-  override protected def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     values.foreach { value =>
       fillAutoComplete("additionalProcedureCode", value)
       clickById("add")
     }
     store(AdditionalProcedureCodes(itemId) -> Details(values))
   }
+
+  def isLowValueDeclaration: Boolean = details(AdditionalProcedureCodes(itemId)).contains(lowValueDeclaration)
 }

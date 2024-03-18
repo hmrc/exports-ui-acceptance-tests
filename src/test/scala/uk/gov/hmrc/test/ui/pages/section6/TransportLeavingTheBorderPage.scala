@@ -19,7 +19,7 @@ object TransportLeavingTheBorderPage extends BasePage {
 
   private val transportType = 0
 
-  def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     val elementId = values(transportType) match {
       case "Sea transport"                     => "Border_Sea"
       case "Roll on roll off (RoRo) transport" => "Border_Ferry"

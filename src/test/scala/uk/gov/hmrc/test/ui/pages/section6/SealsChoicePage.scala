@@ -18,6 +18,6 @@ object SealsChoicePage extends BasePage {
 
   private val yesNo = 0
 
-  def fillPage(values: String*): Unit =
+  override def fillPage(values: String*): Unit =
     if (!selectYesOrNoRadio(values(yesNo))) store(Seals(containerId) -> Details(List("No Seals")))
 }

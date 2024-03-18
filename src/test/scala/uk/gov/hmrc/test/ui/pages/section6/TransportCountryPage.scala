@@ -27,7 +27,7 @@ object TransportCountryPage extends BasePage {
       BorderTransportPage.path
     }
 
-  def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     fillAutoComplete("transport-country", values(country))
     store(TransportCountry -> Detail(values(country)))
   }

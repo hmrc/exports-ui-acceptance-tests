@@ -11,6 +11,6 @@ object ContainersListPage extends BasePage {
 
   private val yesNo = 0
 
-  def fillPage(values: String*): Unit =
+  override def fillPage(values: String*): Unit =
     selectYesOrNoRadio(values(yesNo))
 }

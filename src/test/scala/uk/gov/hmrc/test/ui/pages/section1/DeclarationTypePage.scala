@@ -17,9 +17,9 @@
 package uk.gov.hmrc.test.ui.pages.section1
 
 import uk.gov.hmrc.test.ui.pages.base.Constants._
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
-import uk.gov.hmrc.test.ui.pages.base._
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys._
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{decType, decTypeCL}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{AdditionalDeclarationType, DeclarationType}
 
 object DeclarationTypePage extends BasePage {
 
@@ -38,8 +38,9 @@ object DeclarationTypePage extends BasePage {
     Clearance -> Seq(decTypeCL)
   )
 
-  override def fillPage(values: String*): Unit = {
+  // ex: fillPage("arrived")
 
+  override def fillPage(values: String*): Unit = {
     val additionalDeclarationType =
       (detail(DeclarationType), values(0)) match {
         case (Supplementary, NonEidr) => clickById(NonEidr); "Simplified - type Y"

@@ -16,42 +16,40 @@
 
 package uk.gov.hmrc.test.ui.pages.section1
 
-import org.openqa.selenium.support.ui.Select
 import uk.gov.hmrc.test.ui.conf.TestConfiguration.url
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationEori
 
 object LoginPage extends BasePage {
 
-  def backButtonHref: String = ""
+  val backButtonHref: String = ""
   val path: String           = "/gg-sign-in"
   val title: String          = "Authority Wizard"
 
-  override protected def checkBackButton(): Unit  = ()
-  override protected def checkUrlAndTitle(): Unit = ()
-  override protected def checkPageLinks(): Unit   = ()
+  override def checkBackButton(): Unit  = ()
+  override def checkUrlAndTitle(): Unit = ()
+  override def checkPageLinks(): Unit   = ()
 
-  // ex: performActionsAndStore("GB7172755076437")
+  // ex: fillPage("GB7172755076437")
+
   override def fillPage(values: String*): Unit = {
-    val eori = values(0)
-
     navigateToLoginPage()
     enterRedirectPage()
-    enterEnrolmentType("HMRC-CUS-ORG")
-    enterTaxIdentifier("EORINumber")
-    enterEori(eori)
+
+    fillTextBoxByName("enrolment[0].name", "HMRC-CUS-ORG")
+    fillTextBoxByName("enrolment[0].taxIdentifier[0].name", "EORINumber")
+
+    val eori = values(0)
+    fillTextBoxByName("enrolment[0].taxIdentifier[0].value", eori)  // EORI field
     store(DeclarationEori -> Detail(eori))
   }
 
-  override def submit: Unit = clickById("submit-top")
+  override def submit(): Unit = clickById("submit-top")
 
-  private def navigateToLoginPage(): Unit             = driver.navigate().to(url("login-stub-frontend") + path)
+  private def navigateToLoginPage(): Unit = driver.navigate().to(url("login-stub-frontend") + path)
+
   private def enterRedirectPage(): Unit = {
-    val redirectUrl = url("exports-frontend")+ChoicePage.path
+    val redirectUrl = url("exports-frontend") + ChoicePage.path
     fillTextBoxById("redirectionUrl", redirectUrl)
   }
-
-  private def enterEnrolmentType(input: String): Unit = fillTextBoxByName("enrolment[0].name", input)
-  private def enterTaxIdentifier(input: String): Unit = fillTextBoxByName("enrolment[0].taxIdentifier[0].name", input)
-  private def enterEori(input: String): Unit          = fillTextBoxByName("enrolment[0].taxIdentifier[0].value", input)
 }

@@ -32,6 +32,8 @@ object DeclarationChoicePage extends BasePage {
     Clearance -> Seq(decTypeCL)
   )
 
+  // ex: fillPage("OCCASIONAL")
+
   override def fillPage(values: String*): Unit = {
     clickById(values(0))
     val journeyType = values(0) match {

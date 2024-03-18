@@ -32,10 +32,10 @@ object CusCodePage extends BasePage {
   val yesNo = 0
   val code  = 1
 
-  // No  => performActionsAndStore(no)
-  // Yes => performActionsAndStore(yes, "12345678")
+  // No  => fillPage(no)
+  // Yes => fillPage(yes, "12345678")
 
-  override protected def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     if (selectYesOrNoRadio(values(yesNo))) fillTextBoxById("cusCode", values(code))
     store(CusCode(itemId) -> Details(values))
   }

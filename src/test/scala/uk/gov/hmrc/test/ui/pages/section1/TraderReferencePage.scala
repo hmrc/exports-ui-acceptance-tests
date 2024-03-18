@@ -26,9 +26,7 @@ import java.time.{Instant, ZoneId}
 object TraderReferencePage extends BasePage {
 
   def backButtonHref: String = DoYouHaveADucrPage.path
-
   val path: String = "/declaration/trader-reference"
-
   val title: String = "Enter a reference"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
@@ -36,7 +34,9 @@ object TraderReferencePage extends BasePage {
     Clearance -> Seq(traderReferenceCL)
   )
 
-  def fillPage(values: String*): Unit = {
+  // ex: fillPage("101SHIP1")
+
+  override def fillPage(values: String*): Unit = {
     val traderReference = values.head
     val generatedDucr   = generateDucr(traderReference)
     fillTextBoxById("traderReferenceInput", generatedDucr)
@@ -49,5 +49,4 @@ object TraderReferencePage extends BasePage {
 
     s"${lastDigitOfYear}GB${eori.dropWhile(_.isLetter)}-$traderReference"
   }
-
 }

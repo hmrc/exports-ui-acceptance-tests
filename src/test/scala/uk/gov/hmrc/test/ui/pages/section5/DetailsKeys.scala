@@ -13,6 +13,7 @@ object DetailsKeys {
 
   val AdditionalFiscalReferenceLabel = "VAT details"
   val ProcedureCodeLabel = "Procedure code"
+  val PackageTypeLabel = "Package type"
 
   // /add-declaration-item
 
@@ -57,9 +58,11 @@ object DetailsKeys {
   // /items/[id]/statistical-value
   def StatisticalValue(itemId: String): DetailKey = DetailKey("Item value", section5, Some(itemId))
 
+  def NoPackageInformation(itemId: String): DetailKey = DetailKey("Packing details", section5, Some(itemId))
+
   // /items/[id]/package-information
   def PackageInformationType(itemId: String, sequenceId: String): DetailKey =
-    DetailKey("Package type", section5, Some(itemId), Some(sequenceId))
+    DetailKey(PackageTypeLabel, section5, Some(itemId), Some(sequenceId))
 
   def PackageInformationNumber(itemId: String, sequenceId: String): DetailKey =
     DetailKey("Number of package type", section5, Some(itemId), Some(sequenceId))
@@ -80,6 +83,8 @@ object DetailsKeys {
 
   // /items/[id]/is-additional-information-required
 
+  def NoAdditionalInformation(itemId: String): DetailKey = DetailKey("Additional information statement codes", section5, Some(itemId))
+
   // /items/[id]/additional-information
   def AdditionalInformationCode(itemId: String, sequenceId: String): DetailKey =
     DetailKey("Statement code", section5, Some(itemId), Some(sequenceId))
@@ -95,6 +100,8 @@ object DetailsKeys {
 
   // /items/[id]/is-licence-required
   def IsLicenceRequired(itemId: String): DetailKey = DetailKey("Licences", section5, Some(itemId))
+
+  def NoAdditionalDocuments(itemId: String): DetailKey = DetailKey("Additional references and documents", section5, Some(itemId))
 
   // /items/[id]/additional-documentation
   def AdditionalDocumentationCode(itemId: String, sequenceId: String): DetailKey =

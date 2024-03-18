@@ -35,10 +35,10 @@ object DangerousGoodsCodePage extends BasePage {
   val yesNo = 0
   val code  = 1
 
-  // No  => performActionsAndStore(no)
-  // Yes => performActionsAndStore(yes, "1234")
+  // No  => fillPage(no)
+  // Yes => fillPage(yes, "1234")
 
-  override protected def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     if (selectYesOrNoRadio(values(yesNo))) fillTextBoxById("dangerousGoodsCode", values(code))
     store(DangerousGoodsCode(itemId) -> Details(values))
   }

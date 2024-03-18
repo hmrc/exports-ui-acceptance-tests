@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalFiscalReferenc
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.FiscalInformationYesNo
 
-object FiscalInformationPage extends BasePage {
+object FiscalInformationYesNoPage extends BasePage {
 
   def backButtonHref: String = AdditionalProcedureCodesPage.path
   def path: String           = itemUrl("fiscal-information")
@@ -29,15 +29,15 @@ object FiscalInformationPage extends BasePage {
   val title: String = "Do you want to claim Onward Supply Relief (OSR)?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(itemsAdditionalFiscalReferences),
+    Common -> List(itemsAdditionalFiscalReferences),
     Clearance -> List(itemsAdditionalFiscalReferencesCL)
   )
 
-  // No  => performActionsAndStore(no)
-  // Yes => performActionsAndStore(yes)
+  // No  => fillPage(no)
+  // Yes => fillPage(yes)
 
-  override protected def fillPage(values: String*): Unit = {
-    val yesNo = values.head
+  override def fillPage(values: String*): Unit = {
+    val yesNo =  values.head
     selectYesOrNoRadio(yesNo)
     store(FiscalInformationYesNo(itemId) -> Detail(yesNo))
   }

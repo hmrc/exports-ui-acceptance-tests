@@ -16,18 +16,17 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, DetailKey}
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.section5
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
-object SummarySection5Page extends BasePage {
+object PackageInformationChangePage extends BasePage {
 
-  def backButtonHref: String = DeclarationItemsListPage.path
-  val path: String           = "/declaration/summary-section/5"
-  val title: String          = "Check your answers"
+  def backButtonHref: String = PackageInformationListPage.path
+  def path: String = changeUrl("package-information")
+  def title: String = PackageInformationPage.title
 
-  override def checkExpanders(): Unit = ()
+  override val expanderHrefs: Map[String, Seq[String]] = PackageInformationPage.expanderHrefs
 
-  override def fillPage(values: String*): Unit = {
-    val items = allSectionDetails(section5).groupBy { case (detailKey: DetailKey, _) => detailKey.additionalId.head }
-  }
+  // ex: fillPage(2, "Aerosol", "10", "Shipping mark change")
+
+  override def fillPage(values: String*): Unit = PackageInformationPage.fillPage(values:_*)
 }

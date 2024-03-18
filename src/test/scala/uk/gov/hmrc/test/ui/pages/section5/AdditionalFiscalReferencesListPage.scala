@@ -32,8 +32,8 @@ object AdditionalFiscalReferencesListPage extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
-  // No  => performActionsAndStore(no)
-  // Yes => performActionsAndStore(yes)
+  // No  => fillPage(no)
+  // Yes => fillPage(yes)
 
-  override protected def fillPage(values: String*): Unit = selectYesOrNoRadio(values.head)
+  override def fillPage(values: String*): Unit = selectYesOrNoRadio(values.head)
 }

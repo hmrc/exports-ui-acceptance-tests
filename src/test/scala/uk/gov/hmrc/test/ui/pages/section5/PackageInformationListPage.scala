@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,23 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.pages.section1
+package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{declarantDetails, declarantDetailsCL}
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationEori
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.PackageTypeLabel
 
-object DeclarantDetailsPage extends BasePage {
+object PackageInformationListPage extends BasePage {
 
-  def backButtonHref: String = DeclarationTypePage.path
-  val path: String = "/declaration/declarant-details"
-  def title: String = s"Is your EORI number ${detail(DeclarationEori)}?"
+  def backButtonHref: String = PackageInformationPage.backButtonHref
+  def path: String           = itemUrl("packages-list")
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> Seq(declarantDetails),
-    Clearance -> Seq(declarantDetailsCL)
-  )
+  def title: String =
+    itemDetailFor(itemId, PackageTypeLabel).size match {
+      case 1 => "You have added 1 package type"
+      case n => s"You have added $n package types"
+    }
+
+  override def checkExpanders(): Unit = ()
 
   // No  => fillPage(no)
   // Yes => fillPage(yes)
