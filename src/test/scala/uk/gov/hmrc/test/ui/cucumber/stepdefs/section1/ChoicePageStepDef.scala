@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.section1.ChoicePage
 
 class ChoicePageStepDef extends BaseStepDef {
 
-  And("""^I should land on Choice page""")(() => ChoicePage.checkPage)
+  And("""^I should land on Choice page""")(() => ChoicePage.checkPage())
 
   And("""^I select to (.*)""")((dec: String) => ChoicePage.fillPage(dec))
 }

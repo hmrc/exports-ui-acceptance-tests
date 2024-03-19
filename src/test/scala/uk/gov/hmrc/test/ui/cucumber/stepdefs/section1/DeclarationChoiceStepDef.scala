@@ -17,13 +17,13 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.section1
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage
+import uk.gov.hmrc.test.ui.pages.section1.{DeclarationChoicePage, StandardOrOtherPage}
 
-class StandardOrOtherPageStepDef extends BaseStepDef {
+class DeclarationChoiceStepDef extends BaseStepDef {
 
-  And("""^I should land on Standard-Or-Other page""")(() => StandardOrOtherPage.checkPage())
+  And("""^I should land on Declaration-Choice page""")(() => DeclarationChoicePage.checkPage())
 
-  And("""^I select the (.*) declaration option""") { (option: String) =>
-    StandardOrOtherPage.fillPage(option)
+  And("""^I select the (.*) declaration""") { (option: String) =>
+    DeclarationChoicePage.fillPage(option)
   }
 }

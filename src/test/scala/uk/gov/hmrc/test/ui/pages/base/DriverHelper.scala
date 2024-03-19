@@ -27,13 +27,14 @@ trait DriverHelper extends BrowserDriver {
   def changeLinkOnCYA(row: String): WebElement = driver.findElement(By.cssSelector(s".$row .govuk-link"))
 
   def continue(): Unit = clickById("submit")
+  def continueOnMiniCya(): Unit = clickByXpath("//*[@role='button']")
 
-  def clickById(value: String): Unit          = findElementById(value).click()
-  def clickByXpath(value: String): Unit       = findElementByXpath(value).click()
-  def clickByLinkText(value: String): Unit    = findElementByLinkText(value).click()
+  def clickById(value: String): Unit = findElementById(value).click()
+  def clickByXpath(value: String): Unit = findElementByXpath(value).click()
+  def clickByLinkText(value: String): Unit = findElementByLinkText(value).click()
   def clickByPartialLink(value: String): Unit = findElementByPartialLink(value).click()
   def clickByCssSelector(value: String): Unit = findElementByCssSelector(value).click()
-  def clickByClassName(value: String): Unit   = findElementByClassName(value).click()
+  def clickByClassName(value: String): Unit = findElementByClassName(value).click()
 
   def elementDoesNotExist(elementBy: By): Boolean =
     driver.findElements(elementBy).size() == 0
@@ -41,17 +42,17 @@ trait DriverHelper extends BrowserDriver {
   def elementByIdDoesNotExist(elementId: String): Boolean =
     driver.findElements(By.id(elementId)).size() == 0
 
-  def findElementById(value: String): WebElement          = driver.findElement(By.id(value))
-  def findElementByXpath(value: String): WebElement       = driver.findElement(By.xpath(value))
-  def findElementByLinkText(value: String): WebElement    = driver.findElement(By.linkText(value))
+  def findElementById(value: String): WebElement = driver.findElement(By.id(value))
+  def findElementByXpath(value: String): WebElement = driver.findElement(By.xpath(value))
+  def findElementByLinkText(value: String): WebElement = driver.findElement(By.linkText(value))
   def findElementByPartialLink(value: String): WebElement = driver.findElement(By.partialLinkText(value))
   def findElementByCssSelector(value: String): WebElement = driver.findElement(By.cssSelector(value))
-  def findElementByClassName(value: String): WebElement   = driver.findElement(By.className(value))
-  def findElementByName(value: String): WebElement        = driver.findElement(By.name(value))
-  def findElementByTag(value: String): WebElement         = driver.findElement(By.tagName(value))
+  def findElementByClassName(value: String): WebElement = driver.findElement(By.className(value))
+  def findElementByName(value: String): WebElement = driver.findElement(By.name(value))
+  def findElementByTag(value: String): WebElement = driver.findElement(By.tagName(value))
 
   def findElementsByClassName(value: String): Seq[WebElement] = driver.findElements(By.className(value)).asScala.toList
-  def findElementsByTag(value: String): Seq[WebElement]       = driver.findElements(By.tagName(value)).asScala.toList
+  def findElementsByTag(value: String): Seq[WebElement] = driver.findElements(By.tagName(value)).asScala.toList
 
   def findChildByClassName(parent: WebElement, className: String): WebElement =
     parent.findElement(By.className(className))

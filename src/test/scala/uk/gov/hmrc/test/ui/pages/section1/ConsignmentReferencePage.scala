@@ -16,25 +16,23 @@
 
 package uk.gov.hmrc.test.ui.pages.section1
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.Standard
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
+import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.consignmentReferencesSUP
 
-object StandardOrOtherPage extends BasePage {
+object ConsignmentReferencePage extends BasePage {
 
-  def backButtonHref: String = ChoicePage.path
-  val path: String = "/declaration/standard-or-other"
-  val title: String = "Which type of declaration do you want to make?"
+  val backButtonHref: String = DeclarantDetailsPage.path
+  val path: String = "/consignment-references"
+  val title = "Consignment references"
 
-  val nonStandardDeclarationType = "NonStandardDeclarationType"
+  override val expanderHrefs: Map[String, Seq[String]] = Map(
+    Common    -> Seq(consignmentReferencesSUP),
+    Clearance -> Seq(consignmentReferencesSUP)
+  )
 
-  // ex: fillPage(nonStandardDeclarationType)
-
+  //ex: fillPage()
   override def fillPage(values: String*): Unit =
-    if (values(0) == "STANDARD") {
-      clickById(values(0))
-      store(DeclarationType -> Detail(Standard))
-    } else {
-      clickById(nonStandardDeclarationType)
-    }
+
+
 }
