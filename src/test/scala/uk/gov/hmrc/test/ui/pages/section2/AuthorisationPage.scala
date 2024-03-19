@@ -53,7 +53,7 @@ object AuthorisationPage extends BasePage {
     }
 
     store(
-      AuthorisationType(values(sequenceId)) -> Detail(findElementById("authorisationTypeCode__option--0").getText),
+      AuthorisationType(values(sequenceId)) -> Detail(enteredValue),
       AuthorisationHolderEORI(values(sequenceId)) -> Detail(eori)
     )
   }

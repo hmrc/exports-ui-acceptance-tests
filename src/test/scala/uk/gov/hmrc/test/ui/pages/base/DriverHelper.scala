@@ -20,6 +20,7 @@ import org.openqa.selenium.{By, Keys, WebElement}
 import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.support.ui.Select
 import uk.gov.hmrc.test.ui.driver.BrowserDriver
+import uk.gov.hmrc.test.ui.pages.section2.AuthorisationPage.findElementById
 
 import scala.jdk.CollectionConverters.ListHasAsScala
 
@@ -74,10 +75,10 @@ trait DriverHelper extends BrowserDriver {
     val element = driver.findElement(By.id(elementId))
     element.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE)
     element.sendKeys(value)
+    val optionText: String = driver.findElement(By.id("authorisationTypeCode__listbox")).findElement(By.tagName("li")).getText
     element.sendKeys(Keys.ARROW_DOWN)
     element.sendKeys(Keys.TAB)
-    val jsDriver = driver.executeScript("""document.getElementById("authorisationTypeCode__option--0").textContent""")
-    jsDriver.toString
+    optionText
   }
 
   def fillRadioButton(elementId: String, refSelector: String, refText: String): Unit = {
