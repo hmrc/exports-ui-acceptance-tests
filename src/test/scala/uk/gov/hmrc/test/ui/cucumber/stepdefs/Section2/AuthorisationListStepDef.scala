@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.section2.AuthorisationsListPage
 
 class AuthorisationListStepDef extends BaseStepDef {
 
-  And("""^I should land on Authorisations-Required page""")(() => AuthorisationsListPage.checkPage())
+  And("""^I should land on Authorisations-Required-List page""")(() => AuthorisationsListPage.checkPage())
 
-  And("""^I select (.*) to add another authorisations""")((yesNo: String) => AuthorisationsListPage.fillPage(yesNo))
+  And("""^I select (.*) to add another authorisation""")((yesNo: String) => AuthorisationsListPage.fillPage(yesNo))
 }

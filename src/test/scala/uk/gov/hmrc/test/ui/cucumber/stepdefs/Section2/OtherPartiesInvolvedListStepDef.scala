@@ -17,13 +17,11 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section2.RepresentationTypeAgreedPage
+import uk.gov.hmrc.test.ui.pages.section2.{AuthorisationsListPage, OtherPartiesInvolvedListPage}
 
-class RepresentationTypeAgreedStepDef extends BaseStepDef {
+class OtherPartiesInvolvedListStepDef extends BaseStepDef {
 
-  And("""^I should land on Representation-Type-Agreed page""")(() => RepresentationTypeAgreedPage.checkPage())
+  And("""^I should land on Other-Parties-Involved-List page""")(() => OtherPartiesInvolvedListPage.checkPage())
 
-  And("""^I select (.*) as the type of representation""") { reprType: String =>
-    RepresentationTypeAgreedPage.fillPage(reprType)
-  }
+  And("""^I select (.*) on other party involved list page""")((yesNo: String) => OtherPartiesInvolvedListPage.fillPage(yesNo))
 }

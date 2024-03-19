@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
+package uk.gov.hmrc.test.ui.pages.base
 
-import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section2.RepresentationTypeAgreedPage
+object CommonPage extends BasePage {
 
-class RepresentationTypeAgreedStepDef extends BaseStepDef {
+  val backButtonHref: String = ""
+  val path: String           = ""
+  val title                  = ""
 
-  And("""^I should land on Representation-Type-Agreed page""")(() => RepresentationTypeAgreedPage.checkPage())
+  override def checkBackButton(): Unit = ()
 
-  And("""^I select (.*) as the type of representation""") { reprType: String =>
-    RepresentationTypeAgreedPage.fillPage(reprType)
-  }
+  override def checkExpanders(): Unit = ()
+
+  override def fillPage(values: String*): Unit = ()
 }

@@ -18,6 +18,7 @@ package uk.gov.hmrc.test.ui.pages.base
 
 import org.openqa.selenium.{By, Keys, WebElement}
 import org.openqa.selenium.interactions.Actions
+import org.openqa.selenium.support.ui.Select
 import uk.gov.hmrc.test.ui.driver.BrowserDriver
 
 import scala.jdk.CollectionConverters.ListHasAsScala
@@ -27,6 +28,8 @@ trait DriverHelper extends BrowserDriver {
   def changeLinkOnCYA(row: String): WebElement = driver.findElement(By.cssSelector(s".$row .govuk-link"))
 
   def continue(): Unit = clickById("submit")
+
+  def continueOnMiniCya(): Unit = clickByXpath("//*[@role='button']")
 
   def clickById(value: String): Unit          = findElementById(value).click()
   def clickByXpath(value: String): Unit       = findElementByXpath(value).click()
@@ -67,6 +70,16 @@ trait DriverHelper extends BrowserDriver {
     element.sendKeys(Keys.ENTER)
   }
 
+  def fillAutoCompleteNew(elementId: String, value:String): String = {
+    val element = driver.findElement(By.id(elementId))
+    element.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE)
+    element.sendKeys(value)
+    element.sendKeys(Keys.ARROW_DOWN)
+    element.sendKeys(Keys.TAB)
+    val jsDriver = driver.executeScript("""document.getElementById("authorisationTypeCode__option--0").textContent""")
+    jsDriver.toString
+  }
+
   def fillRadioButton(elementId: String, refSelector: String, refText: String): Unit = {
     clickById(elementId)
     findElementById(refSelector).sendKeys(refText)
@@ -90,5 +103,4 @@ trait DriverHelper extends BrowserDriver {
       case Constants.no  => clickById(no); false
     }
 
-  def submit(): Unit = clickById("submit")
 }

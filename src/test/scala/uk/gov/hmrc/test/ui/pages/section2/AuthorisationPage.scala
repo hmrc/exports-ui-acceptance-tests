@@ -38,11 +38,16 @@ object AuthorisationPage extends BasePage {
   // ex: fillPage({sequenceId}, "CSE", "Declarant EORI")
 
   override def fillPage(values: String*): Unit = {
-    fillAutoComplete("authorisationTypeCode", values(typeIndex))
+    val enteredValue = fillAutoCompleteNew("authorisationTypeCode", values(typeIndex))
+    print("================",enteredValue)
 
     val eori = values(EORI) match {
-      case "Declarant EORI" => detail(DeclarationEori)
+      case "Declarant EORI" =>
+        clickById("UserEori")
+        detail(DeclarationEori)
+
       case _ =>
+        clickById("OtherEori")
         fillTextBoxById("eori", values(EORI))
         values(EORI)
     }

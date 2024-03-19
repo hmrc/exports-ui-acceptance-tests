@@ -33,7 +33,7 @@ object DetailKeys {
   val EORI = 1
 
   val section2: Int = 2
-  val Section2: DetailKey = DetailKey("Section 2 of 6: Parties involved", section2, Some("references-card"))
+  val Section2: DetailKey = DetailKey("Section 2 of 6: Parties involved", section2, Some("parties-card"))
 
   val AdditionalPartiesInvolvedTypeLabel = "Other parties’s type"
   val AuthorisationTypeLabel = "Authorisation type"
@@ -67,7 +67,8 @@ object DetailKeys {
   val ConsigneeDetails: DetailKey = DetailKey("Consignee’s details", section2)
 
   // /other-parties-involved
-  val AdditionalPartiesInvolved: DetailKey = DetailKey("Additional parties involved", section2)
+  val NoAdditionalPartiesInvolved: DetailKey = DetailKey("Additional parties involved", section2)
+
   def AdditionalPartiesInvolvedType(seqId: String): DetailKey =
     DetailKey(AdditionalPartiesInvolvedTypeLabel, section2, Some(seqId))
   def AdditionalPartiesInvolvedEORI(seqId: String): DetailKey =
@@ -77,7 +78,7 @@ object DetailKeys {
   val ProcedureChoice: DetailKey = DetailKey(ProcedureChoiceLabel, section2, None, None, skipSummaryCheck = true)
 
   // /is-authorisation-required
-  val AuthorisationsRequired: DetailKey = DetailKey("Authorisations for this declaration", section2)
+  val NoAuthorisationRequired: DetailKey = DetailKey("Authorisations for this declaration", section2)
 
   // /add-authorisation-required
   def AuthorisationType(seqId: String): DetailKey = DetailKey(AuthorisationTypeLabel, section2, Some(seqId))

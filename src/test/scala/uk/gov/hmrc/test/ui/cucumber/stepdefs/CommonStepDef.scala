@@ -16,12 +16,52 @@
 
 package uk.gov.hmrc.test.ui.cucumber.stepdefs
 
-import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage
+import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.{continue, continueOnMiniCya}
+import uk.gov.hmrc.test.ui.pages.base.Constants.yes
+import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
+import uk.gov.hmrc.test.ui.pages.section1.{ChoicePage, DeclarantDetailsPage, DeclarationTypePage, DoYouHaveADucrPage, DucrEntryPage, EnterAMucrPage, LinkMucrPage, LoginPage, LrnPage, StandardOrOtherPage, SummarySection1Page}
+import uk.gov.hmrc.test.ui.pages.section2.{AreYouTheExporterPage, AuthorisationPage, AuthorisationYesNoPage, AuthorisationsListPage, CarrierAddressPage, CarrierEORINumberPage, ConsigneeDetailsPage, ExporterAddressPage, ExporterEORINumberPage, OnBehalfOfAnotherAgentPage, OtherPartiesInvolvedPage, ProcedureChoicePage, RepresentationTypeAgreedPage, RepresentativesEORINumberPage}
 
 class CommonStepDef extends BaseStepDef {
 
-  And("""^I click continue""")(() => StandardOrOtherPage.continue())
+  And("""^I click continue""")(() => CommonPage.continue())
+
+  And("""^I click continue on MiniCya""")(() => CommonPage.continueOnMiniCya())
+
+  And("""^I fill section1""") { () =>
+    LoginPage.fillPage("GB123456789000"); continue()
+    ChoicePage.fillPage("create a declaration"); continue()
+    StandardOrOtherPage.fillPage("STANDARD"); continue()
+    DeclarationTypePage.fillPage("prelodged"); continue()
+    DeclarantDetailsPage.fillPage(yes); continue()
+    DoYouHaveADucrPage.fillPage(yes); continue()
+    DucrEntryPage.fillPage("3GB986007773125-INVOICE123"); continue()
+    LrnPage.fillPage("MSLRN2872100"); continue()
+    LinkMucrPage.fillPage(yes); continue()
+    EnterAMucrPage.fillPage("GB/AZ09-B12345"); continue()
+    continueOnMiniCya()
+  }
+
+  And("""^I fill section2""") { () =>
+    AreYouTheExporterPage.fillPage(yes); continue()
+    ExporterEORINumberPage.fillPage(Constants.no); continue()
+    ExporterAddressPage.fillPage(Constants.Address: _*); continue()
+    OnBehalfOfAnotherAgentPage.fillPage(Constants.no); continue()
+    RepresentativesEORINumberPage.fillPage("GB121012121212"); continue()
+    RepresentationTypeAgreedPage.fillPage("Direct"); continue()
+    CarrierEORINumberPage.fillPage(Constants.no); continue()
+    CarrierAddressPage.fillPage(Constants.Address: _*); continue()
+    ConsigneeDetailsPage.fillPage(Constants.Address: _*); continue()
+    OtherPartiesInvolvedPage.fillPage(genSequenceId("first"), "Consolidator", "GB121212121212"); continue()
+    ProcedureChoicePage.fillPage("Permanent"); continue()
+    AuthorisationYesNoPage.fillPage(yes); continue()
+    AuthorisationPage.fillPage(genSequenceId("first"), "ACR", "GB123456789008"); continue()
+    AuthorisationsListPage.fillPage(Constants.no); continue()
+    continueOnMiniCya()
+  }
 }
+
 
 object CommonStepDef {
   def genSequenceId(seqId: String): String =

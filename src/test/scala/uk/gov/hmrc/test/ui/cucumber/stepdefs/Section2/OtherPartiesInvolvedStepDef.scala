@@ -17,6 +17,7 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
+import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
 import uk.gov.hmrc.test.ui.pages.base.Constants
 import uk.gov.hmrc.test.ui.pages.section2.{ConsigneeDetailsPage, OtherPartiesInvolvedPage}
 
@@ -24,7 +25,7 @@ class OtherPartiesInvolvedStepDef extends BaseStepDef {
 
   And("""^I should land on Other-Parties-Involved page""")(() => OtherPartiesInvolvedPage.checkPage())
 
-  And("""^I select (.*) and (.*) as the other party involved""") { (party: String, eori: String) =>
-    OtherPartiesInvolvedPage.fillPage(party, eori)
+  And("""^I select (.*) party (.*) and eori (.*) as the other party involved""") { (seqId: String, party: String, eori: String) =>
+    OtherPartiesInvolvedPage.fillPage(genSequenceId(seqId), party, eori)
   }
 }

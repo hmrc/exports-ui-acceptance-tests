@@ -33,6 +33,8 @@ object CarrierEORINumberPage extends BasePage {
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Common -> List(carrierEoriNumber), Clearance -> List(carrierEoriNumberCL))
 
+  // No  => fillPage(no)
+  // Yes => fillPage(yes, "GB121212121212")
   override def fillPage(values: String*): Unit =
-    if (selectYesOrNoRadio(values(yesNo))) store(CarrierEORI -> Detail(values(EORI)))
+    if (selectYesOrNoRadio(values(yesNo), "Yes", "No")) store(CarrierEORI -> Detail(values(EORI)))
 }

@@ -22,7 +22,7 @@ import uk.gov.hmrc.test.ui.pages.section2.AuthorisationPage
 
 class AuthorisationPageDef extends BaseStepDef {
 
-  And("""^I should land on Add-Authorisation-Required page""")(() => AuthorisationPage.checkPage())
+  And("""^I should land on Authorisation-Required page""")(() => AuthorisationPage.checkPage())
 
   And("""^I select (.*) Authorisation code (.*) and enter eori (.*)""") {
     (seqId: String, authCode: String, eori: String) =>
