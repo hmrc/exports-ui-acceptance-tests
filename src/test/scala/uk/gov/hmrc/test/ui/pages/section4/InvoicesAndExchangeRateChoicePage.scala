@@ -21,6 +21,7 @@ import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{invoiceAndExchangeRateChoice,
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.TotalAmountInvoiced
 import uk.gov.hmrc.test.ui.pages.section3.SummarySection3Page
+import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.TotalAmountInvoiced
 
 import scala.Predef.->
 
@@ -36,7 +37,7 @@ object InvoicesAndExchangeRateChoicePage extends BasePage {
     Common -> List(invoiceAndExchangeRateChoice, invoiceAndExchangeRateChoice1)
   )
 
-  def performActionsAndStore(values: String*): Unit = {
+  def fillPage(values: String*): Unit = {
     val yesNo = values.head
     if (selectYesOrNoRadio(yesNo)) store(TotalAmountInvoiced -> Detail("Less than £100,000"))
   }

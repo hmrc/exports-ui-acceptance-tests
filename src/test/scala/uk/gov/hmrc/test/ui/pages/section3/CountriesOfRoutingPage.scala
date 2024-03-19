@@ -34,7 +34,7 @@ object CountriesOfRoutingPage extends BasePage {
   )
 
   //performActionsAndStore("United States of America","The United States of America","China","China")
-  def performActionsAndStore(values: String*): Unit = {
+  def fillPage(values: String*): Unit = {
     val countries: Seq[String] = values.zipWithIndex.flatMap { case (value, index) =>
       if (index % 2 == 0) {
         fillAutoComplete("countryCode", value)

@@ -21,6 +21,7 @@ import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{destinationCountry, destinati
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.DestinationCountry
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.SummarySection2Page
+import uk.gov.hmrc.test.ui.pages.section2.SummarySection2Page
 
 object DestinationCountryPage extends BasePage {
 
@@ -33,8 +34,7 @@ object DestinationCountryPage extends BasePage {
     Clearance -> List(destinationCountryCL, destinationCountryCL1)
   )
 
-
-  def performActionsAndStore(values: String*): Unit = {
+  def fillPage(values: String*): Unit = {
     fillAutoComplete("countryCode", values(enteredValue))
     store(
       DestinationCountry -> Detail(

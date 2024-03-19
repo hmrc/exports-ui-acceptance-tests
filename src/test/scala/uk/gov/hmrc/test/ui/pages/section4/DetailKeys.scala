@@ -17,13 +17,25 @@
 package uk.gov.hmrc.test.ui.pages.section4
 
 import uk.gov.hmrc.test.ui.pages.base.DetailKey
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AuthorisationTypeLabel, section2}
 
 object DetailKeys {
 
   val section4 = 4
+
   val Section4: DetailKey = DetailKey("Section 4 of 6: About this transaction",section4,Some("transaction-card"))
+
+  val DocumentCodeLabel: DetailKey = DetailKey("Document type", section4)
+
+  val DocumentReferenceLabel: DetailKey = DetailKey("Document reference", section4)
+
   val TotalAmountInvoiced: DetailKey = DetailKey("Total amount invoiced", section4)
+
   val InvoiceExchangeRate: DetailKey = DetailKey("Rate of exchange", section4)
+
   val NatureOfTransaction: DetailKey = DetailKey("Nature of transaction", section4)
+  def DocumentCode(seqId: String): DetailKey = DetailKey(DocumentCodeLabel.label, section4, Some(seqId))
+  def DocumentReference(seqId: String): DetailKey = DetailKey(DocumentReferenceLabel.label, section4, Some(seqId))
+
 
 }

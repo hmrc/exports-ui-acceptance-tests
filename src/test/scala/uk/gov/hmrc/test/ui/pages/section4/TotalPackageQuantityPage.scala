@@ -20,6 +20,7 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.totalPackageQuantity
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.TotalAmountInvoiced
+import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.TotalAmountInvoiced
 
 
 object TotalPackageQuantityPage extends BasePage {
@@ -34,7 +35,7 @@ object TotalPackageQuantityPage extends BasePage {
     Common -> List(totalPackageQuantity)
   )
 
-  def performActionsAndStore(values: String*): Unit = {
+  def fillPage(values: String*): Unit = {
     val enteredTotalNumberOfPackages = values.head
     fillTextBoxById("totalPackage",enteredTotalNumberOfPackages)
    store(TotalAmountInvoiced -> Detail(enteredTotalNumberOfPackages))

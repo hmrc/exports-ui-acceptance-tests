@@ -20,6 +20,7 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{invoiceAndExchangeRateChoice, invoiceAndExchangeRateChoice1}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{InvoiceExchangeRate, TotalAmountInvoiced}
+import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.{InvoiceExchangeRate, TotalAmountInvoiced}
 
 object InvoiceAndExchangeRatePage extends BasePage {
 
@@ -35,7 +36,7 @@ object InvoiceAndExchangeRatePage extends BasePage {
 
   //Afghani AFN , 567640, No -- No Scenario
   //Pounds Sterling GBP, Yes, 1.25 -- Yes Scenario
-  def performActionsAndStore(values: String*): Unit = {
+  def fillPage(values: String*): Unit = {
     val currencySelected = values(0)
     val totalAmountInvoiced = values(1)
     val rateOfExchangeYesNo = values(2)

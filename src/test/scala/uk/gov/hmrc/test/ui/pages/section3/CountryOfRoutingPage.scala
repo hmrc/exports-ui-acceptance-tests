@@ -31,6 +31,6 @@ object CountryOfRoutingPage extends BasePage {
     Common -> List(countryOfRouting)
   )
 
-  def performActionsAndStore(values: String*): Unit =
+  def fillPage(values: String*): Unit =
     if (!selectYesOrNoRadio(values.head, "Yes", "No")) store(CountriesOfRouting -> Details(List("None")))
 }

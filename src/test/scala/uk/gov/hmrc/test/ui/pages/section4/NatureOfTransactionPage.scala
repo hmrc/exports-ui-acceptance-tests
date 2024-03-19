@@ -43,9 +43,15 @@ object NatureOfTransactionPage extends BasePage {
       case "Goods being sold" => clickById("Sale"); "Goods being sold"
       case "Item purchased"   => clickById("Sale"); "Item purchased new in the UK for business use"
       case "House removal"   => clickById("HouseRemoval"); "Item purchased new in the UK for business use"
-
+      case "A return or a replacement" => clickById("Return"); "A return or a replacement, free of charge"
+      case "Non Commercial" => clickById("Donation"); "Non-commercial change of ownership"
+      case "Being sent out for processing" => clickById("Processing"); "Being sent out for processing"
+      case "Goods have been processed" => clickById("Processed"); "Goods have been processed"
+      case "Inter Governmental" => clickById("Military"); "Inter-governmental or defence purposes"
+      case "Goods being supplied under a contract" => clickById("Construction"); "Goods supplied under a contract for construction purposes"
+      case _ => clickById("Other"); "Other"
     }
+   def fillPage(values: String*): Unit = values.head
     store(NatureOfTransaction -> Detail(label))
   }
-
 }

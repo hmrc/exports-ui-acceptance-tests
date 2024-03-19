@@ -16,11 +16,13 @@
 
 package uk.gov.hmrc.test.ui.pages.section3
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Arrived, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{locationOfGoods, locationOfGoodsCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{AdditionalDeclarationType, DeclarationType}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AuthorisationType, AuthorisationTypeLabel, section2}
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.LocationOfGoodsCode
+
 import scala.util.Random
 
 object LocationOfGoodsPage extends BasePage {
@@ -37,16 +39,16 @@ object LocationOfGoodsPage extends BasePage {
   )
 
   def titleForDecTypeAndAuthCode(): String = {
-    val authorisationCodes = details(AuthorisationCode)
-    (detail(DeclarationType), detail(AdditionlDeclarationType)) match {
-      case (_ , Arrived ) if authorisationCodes.contains("CSE") => "Enter the code for the CSE premises"
-      case (_ , Arrived )                                        => "Select a permitted goods location for exports using the Goods Vehicle Movement Service"
-      case _                                                     => "Where will the goods be presented to customs?"
+   val  allSectionDetails(section2, Some(AuthorisationTypeLabel)).values
+    detail(AdditionalDeclarationType) match {
+      case Arrived  if .filter(_._1.label == AuthorisationType()).contains("CSE") => "Enter the code for the CSE premises"
+      case Arrived                                        => "Select a permitted goods location for exports using the Goods Vehicle Movement Service"
+      case _                                              => "Where will the goods be presented to customs?"
     }
   }
 
   //If i select goods location code as GBAUABDABDABDGVM by clicking Yes
-  def performActionsAndStore(values: String*): Unit = {
+  def fillPage(values: String*): Unit = {
      val random = new Random()
      val option = if(values.length<2) { if (random.nextBoolean()) "Yes" else "No"} else values(1)
     val locationOfGoodsCode: String = values.head

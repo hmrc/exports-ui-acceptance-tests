@@ -14,23 +14,23 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.pages.section3
+package uk.gov.hmrc.test.ui.pages.section4
 
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{officeOfExit, officeOfExitCL}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
-import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{OfficeOfExitCode, section3}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{addPreviousDocument, addPreviousDocumentCL}
 
-object SummarySection3Page extends BasePage {
 
-  def backButtonHref: String = OfficeOfExitPage.path
+object PreviousDocumentList extends BasePage {
 
-  val path: String = "/declaration/summary-section/3"
+  val path: String = "/declaration/previous-documents-list"
 
-  val title: String = "Check your answers"
+  def title = "You’ve added details for"
 
-  override def fillPage(values: String*): Unit = {
-    checkSectionSummary(section3)
-  }
+  val backButtonHref: String = NatureOfTransactionPage.path
+
+  override def checkExpanders(): Unit = ()
+
+  def fillPage(values: String*): Unit = store()
 
 }
