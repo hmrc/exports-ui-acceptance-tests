@@ -16,13 +16,16 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, no, yes}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{areYouCompletingThisDeclarationOnBehalfOfAnotherAgent, areYouCompletingThisDeclarationOnBehalfOfAnotherAgentCL}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{no, yes, Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{
+  areYouCompletingThisDeclarationOnBehalfOfAnotherAgent,
+  areYouCompletingThisDeclarationOnBehalfOfAnotherAgentCL
+}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys._
 
-object OnBehalfOfOtherAgentPage extends BasePage {
+object OnBehalfOfAnotherAgentPage extends BasePage {
 
   val path: String = "/declaration/are-you-completing-this-declaration-on-behalf-of-another-agent"
   val title: String = "Do you hold the contract to complete the customs formalities?"
@@ -32,7 +35,7 @@ object OnBehalfOfOtherAgentPage extends BasePage {
       else if (detail(ExporterYesNo) == yes) ConsignorEORINumberPage.path
       else ConsignorDetailsPage.path
     case _ =>
-      if (maybeDetail(ExporterEORI).isEmpty) ExporterDetailsPage.path else ExporterEORINumberPage.path
+      if (maybeDetail(ExporterEORI).isEmpty) ExporterAddressPage.path else ExporterEORINumberPage.path
   }
 
   override val expanderHrefs: Map[String, Seq[String]] =
@@ -40,6 +43,9 @@ object OnBehalfOfOtherAgentPage extends BasePage {
       Common -> List(areYouCompletingThisDeclarationOnBehalfOfAnotherAgent),
       Clearance -> List(areYouCompletingThisDeclarationOnBehalfOfAnotherAgentCL)
     )
+
+  // No  => fillPage(no)
+  // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit = {
     selectYesOrNoRadio(values(yesNo), "agent_yes", "agent_no")

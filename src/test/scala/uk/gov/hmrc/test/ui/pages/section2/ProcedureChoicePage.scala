@@ -42,6 +42,8 @@ object ProcedureChoicePage extends BasePage {
 
   val exportProcedure = 0
 
+  // ex: fillPage("Permanent")
+
   override def fillPage(values: String*): Unit = {
     values(exportProcedure) match {
       case "Permanent"             => clickById("Code1040")

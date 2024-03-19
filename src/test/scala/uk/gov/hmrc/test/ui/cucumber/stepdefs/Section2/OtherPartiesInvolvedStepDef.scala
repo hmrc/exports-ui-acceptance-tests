@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.cucumber.stepdefs
+package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
 
-import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage
+import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
+import uk.gov.hmrc.test.ui.pages.base.Constants
+import uk.gov.hmrc.test.ui.pages.section2.{ConsigneeDetailsPage, OtherPartiesInvolvedPage}
 
-class CommonStepDef extends BaseStepDef {
+class OtherPartiesInvolvedStepDef extends BaseStepDef {
 
-  And("""^I click continue""")(() => StandardOrOtherPage.continue())
-}
+  And("""^I should land on Other-Parties-Involved page""")(() => OtherPartiesInvolvedPage.checkPage())
 
-object CommonStepDef {
-  def genSequenceId(seqId: String): String =
-    seqId match {
-      case "first"  => "0"
-      case "second" => "1"
-      case "third"  => "2"
-    }
+  And("""^I select (.*) and (.*) as the other party involved""") { (party: String, eori: String) =>
+    OtherPartiesInvolvedPage.fillPage(party, eori)
+  }
 }

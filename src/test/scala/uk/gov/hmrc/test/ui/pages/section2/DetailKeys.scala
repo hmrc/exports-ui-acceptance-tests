@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section2
 
 import uk.gov.hmrc.test.ui.pages.base.DetailKey
-import uk.gov.hmrc.test.ui.pages.section2.CarrierDetailsPage.{fillAutoComplete, fillTextBoxById}
+import uk.gov.hmrc.test.ui.pages.section2.CarrierAddressPage.{fillAutoComplete, fillTextBoxById}
 
 object DetailKeys {
 

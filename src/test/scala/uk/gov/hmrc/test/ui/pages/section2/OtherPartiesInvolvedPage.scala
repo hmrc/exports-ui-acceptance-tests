@@ -16,10 +16,14 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, none}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{none, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.otherPartiesInvolved
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AdditionalPartiesInvolved, AdditionalPartiesInvolvedEORI, AdditionalPartiesInvolvedType}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{
+  AdditionalPartiesInvolved,
+  AdditionalPartiesInvolvedEORI,
+  AdditionalPartiesInvolvedType
+}
 
 object OtherPartiesInvolvedPage extends BasePage {
 
@@ -44,6 +48,9 @@ object OtherPartiesInvolvedPage extends BasePage {
     "Freight forwarder" -> "FW",
     "Warehouse keeper" -> "WH"
   )
+
+  // ex: fillPage({sequenceId}, "Consolidator", "GB121212121212")
+  // ex: fillPage({sequenceId}, "None")
 
   override def fillPage(values: String*): Unit = {
     val id = map(values(choice))

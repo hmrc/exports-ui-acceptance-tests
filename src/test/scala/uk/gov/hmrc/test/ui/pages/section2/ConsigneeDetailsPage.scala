@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section2
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{consigneeDetails, consigneeDetailsCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{CarrierEORI, ConsigneeDetails, addressHelper}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{addressHelper, CarrierEORI, ConsigneeDetails}
 
 object ConsigneeDetailsPage extends BasePage {
 
@@ -27,11 +27,13 @@ object ConsigneeDetailsPage extends BasePage {
   val title: String = "What is the exporter’s name and business address?"
   def backButtonHref: String = maybeDetail(CarrierEORI) match {
     case Some(_) => CarrierEORINumberPage.path
-    case None    => CarrierDetailsPage.path
+    case None    => CarrierAddressPage.path
   }
 
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Common -> List(consigneeDetails), Clearance -> List(consigneeDetailsCL))
+
+  // ex: fillPage(Constants.Address)
 
   override def fillPage(values: String*): Unit = {
     addressHelper(values: _*)

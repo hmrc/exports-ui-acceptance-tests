@@ -17,21 +17,25 @@
 package uk.gov.hmrc.test.ui.pages.section2
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{exporterAddress, exporterAddressCL}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{ExporterDetails, addressHelper}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{representativesEoriNumber, representativesEoriNumberCL}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.RepresentativeEORI
 
-object ExporterDetailsPage extends BasePage {
+object RepresentativesEORINumberPage extends BasePage {
 
-  val path: String = "/declaration/exporter-address"
-  val title: String = "What is the exporter’s name and business address?"
-  def backButtonHref: String = ExporterEORINumberPage.path
+  val path: String = "/declaration/representatives-eori-number"
+  val title: String = "What is the EORI number of the other agent?"
+  def backButtonHref: String = OnBehalfOfAnotherAgentPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] =
-    Map(Common -> List(exporterAddress), Clearance -> List(exporterAddressCL))
+    Map(Common -> List(representativesEoriNumber), Clearance -> List(representativesEoriNumberCL))
+
+  val EORI = 0
+
+  // ex: fillPage("GB121212121212")
 
   override def fillPage(values: String*): Unit = {
-    addressHelper(values: _*)
-    store(ExporterDetails -> Details(values))
+    fillTextBoxById("details_eori", values(EORI))
+    store(RepresentativeEORI -> Detail(values(EORI)))
   }
 }

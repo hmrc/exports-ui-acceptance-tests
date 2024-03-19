@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.pages.section6
+package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
 
-import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
+import uk.gov.hmrc.test.ui.pages.section2.RepresentationTypeAgreedPage
 
-object ContainerRemovePage extends BasePage {
+class RepresentationTypeAgreedStepDef extends BaseStepDef {
 
-  def path: String           = removeUrl("containers")
-  val title                  = "Are you sure you want to remove this container?"
-  def backButtonHref: String = ContainersListPage.path
+  And("""^I should land on Representation-Type-Agreed page""")(() => RepresentationTypeAgreedPage.checkPage())
 
-  private val yesNo = 0
-
-  override def fillPage(values: String*): Unit =
-    selectYesOrNoRadio(values(yesNo))
+  And("""^I select (.*) as the type of representation""") { yesNo: String =>
+    RepresentationTypeAgreedPage.fillPage(yesNo)
+  }
 }
