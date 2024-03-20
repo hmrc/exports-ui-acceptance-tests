@@ -23,7 +23,7 @@ class RepresentationTypeAgreedStepDef extends BaseStepDef {
 
   And("""^I should land on Representation-Type-Agreed page""")(() => RepresentationTypeAgreedPage.checkPage())
 
-  And("""^I select (.*) as the type of representation""") { yesNo: String =>
-    RepresentationTypeAgreedPage.fillPage(yesNo)
+  And("""^I select (.*) as the type of representation""") { reprType: String =>
+    RepresentationTypeAgreedPage.fillPage(reprType)
   }
 }

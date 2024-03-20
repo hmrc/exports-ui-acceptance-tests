@@ -36,6 +36,9 @@ Feature: Example Feature file using Cucumber
     Then I should land on Are-You-The-Exporter page
     And I select No to I am the Exporter
     And I click continue
+    Then I should land on Exporter-Eori-Number page
+    And I select No on exporter eori number page
+    And I click continue
     Then I should land on Exporter-Address page
     And I provide Exporter Address Details
     And I click continue
@@ -58,7 +61,7 @@ Feature: Example Feature file using Cucumber
     And I provide consignee details
     And I click continue
     Then I should land on Other-Parties-Involved page
-    And I select Consolidator and GB121212121212 as the other party involved
+    And I select Consolidator party and GB121212121212 as the other party involved
     And I click continue
     Then I should land on Authorisation-Choice page
     And I select Permanent as export procedure choice
@@ -114,5 +117,3 @@ Feature: Example Feature file using Cucumber
       | DecType   |
       | prelodged |
       | arrived   |
-
-
