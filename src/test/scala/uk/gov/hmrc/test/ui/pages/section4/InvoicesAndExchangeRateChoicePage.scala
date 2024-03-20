@@ -16,30 +16,27 @@
 
 package uk.gov.hmrc.test.ui.pages.section4
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.Common
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{invoiceAndExchangeRateChoice, invoiceAndExchangeRateChoice1}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.TotalAmountInvoiced
 import uk.gov.hmrc.test.ui.pages.section3.SummarySection3Page
 import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.TotalAmountInvoiced
 
-import scala.Predef.->
-
 object InvoicesAndExchangeRateChoicePage extends BasePage {
 
-  val path: String = "/declaration/office-of-exit"
+  val lessThan100000 = "Less than £100,000"
 
+  def backButtonHref: String = SummarySection3Page.path
+  val path: String = "/declaration/invoices-and-exchange-rate-choice"
   def title = "Is the total amount invoiced less than £100,000 in value?"
-
-  val backButtonHref: String = SummarySection3Page.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common -> List(invoiceAndExchangeRateChoice, invoiceAndExchangeRateChoice1)
   )
 
-  def fillPage(values: String*): Unit = {
-    val yesNo = values.head
-    if (selectYesOrNoRadio(yesNo)) store(TotalAmountInvoiced -> Detail("Less than £100,000"))
-  }
+  // No  => fillPage(no)
+  // Yes => fillPage(yes)
 
+  override def fillPage(values: String*): Unit =
+    if (selectYesOrNoRadio(values(yesNo))) store(TotalAmountInvoiced -> Detail(lessThan100000))
 }

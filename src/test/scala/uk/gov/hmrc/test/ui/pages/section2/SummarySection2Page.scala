@@ -17,19 +17,17 @@
 package uk.gov.hmrc.test.ui.pages.section2
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.base.Constants.none
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{NoAuthorisationRequired, Section2}
 
 object SummarySection2Page extends BasePage {
 
+  def backButtonHref: String = maybeDetail(NoAuthorisationRequired).fold(AuthorisationsListPage.path)(_ => AuthorisationYesNoPage.path)
   val path: String = "/declaration/summary-section/2"
   val title: String = "Check your answers"
-  def backButtonHref: String =
-   maybeDetail(NoAuthorisationRequired).fold(AuthorisationsListPage.path)(_ => AuthorisationYesNoPage.path)
 
   override def checkExpanders(): Unit = ()
 
   // ex: fillPage()
-  override def fillPage(values: String*): Unit =
-    checkSectionSummary(Section2)
+
+  override def fillPage(values: String*): Unit = checkSectionSummary(Section2)
 }

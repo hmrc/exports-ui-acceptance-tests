@@ -16,21 +16,21 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{none, Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, none, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{yesNo, NoAuthorisationRequired, ProcedureChoice}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{NoAuthorisationRequired, ProcedureChoice}
 
 object AuthorisationYesNoPage extends BasePage {
 
+  def backButtonHref: String = ProcedureChoicePage.path
   val path: String = "/declaration/is-authorisation-required"
+
   def title: String =
     detail(ProcedureChoice) match {
       case "Permanent" => "Do you have any authorisations you want to declare?"
       case "Temporary" => "Do you want to add any authorisations?"
     }
-
-  def backButtonHref: String = ProcedureChoicePage.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common -> List(isAuthorisationRequired, isAuthorisationRequired1, isAuthorisationRequired2),

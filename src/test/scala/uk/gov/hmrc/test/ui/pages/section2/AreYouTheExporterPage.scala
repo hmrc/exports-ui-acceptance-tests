@@ -16,21 +16,22 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{areYouTheExporter, areYouTheExporterCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section1.{DeclarantDetailsPage, SummarySection1Page}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{yesNo, ExporterYesNo}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.ExporterYesNo
 
 object AreYouTheExporterPage extends BasePage {
 
-  val path: String = "/declaration/are-you-the-exporter"
-  val title: String = "Are you the exporter?"
   def backButtonHref: String = detail(DeclarationType) match {
     case Clearance => DeclarantDetailsPage.path
     case _         => SummarySection1Page.path
   }
+
+  val path: String = "/declaration/are-you-the-exporter"
+  val title: String = "Are you the exporter?"
 
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Common -> List(areYouTheExporter), Clearance -> List(areYouTheExporterCL))

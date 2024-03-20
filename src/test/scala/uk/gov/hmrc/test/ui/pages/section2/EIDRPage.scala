@@ -16,15 +16,19 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.SummarySection1Page
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{EntryIntoDeclarantsRecords, yesNo}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.EntryIntoDeclarantsRecords
 
 object EIDRPage extends BasePage {
 
+  def backButtonHref: String = SummarySection1Page.path
   val path: String = "/declaration/entry-into-declarants-records"
   val title: String = "Is this an entry into declarant’s records (EIDR)?"
-  def backButtonHref: String = SummarySection1Page.path
+
+  // No  => fillPage(no)
+  // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit = {
     selectYesOrNoRadio(values(yesNo), "answer_yes", "answer_no")

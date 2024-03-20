@@ -16,18 +16,21 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.Clearance
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.consignorEoriNumberCL
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{ConsignorEORI, EORI, yesNo}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{ConsignorEORI, EORI}
 
 object ConsignorEORINumberPage extends BasePage {
 
+  def backButtonHref: String = IsThisExsPage.path
   val path: String = "/declaration/consignor-eori-number"
   val title: String = "Does the consignor have an EORI number?"
-  def backButtonHref: String = IsThisExsPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Clearance -> List(consignorEoriNumberCL))
+
+  // No  => fillPage(no)
+  // Yes => fillPage(yes, "GB12314567897000")
 
   override def fillPage(values: String*): Unit =
     if (selectYesOrNoRadio(values(yesNo), "Yes", "No")) {

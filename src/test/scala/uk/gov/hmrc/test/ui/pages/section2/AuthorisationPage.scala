@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, sequenceId}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{addAuthorisationRequired, addAuthorisationRequiredCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationEori
@@ -24,9 +24,12 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys._
 
 object AuthorisationPage extends BasePage {
 
+  def backButtonHref: String =
+    if (detailForLabel(section2, AuthorisationTypeLabel).isEmpty) AuthorisationYesNoPage.path
+    else AuthorisationsListPage.path
+
   val path: String = "/declaration/add-authorisation-required"
   val title: String = "Add any authorisations for this export"
-  def backButtonHref: String = AuthorisationYesNoPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Common -> List(addAuthorisationRequired), Clearance -> List(addAuthorisationRequiredCL))
@@ -34,12 +37,12 @@ object AuthorisationPage extends BasePage {
   val typeIndex = 1
   val EORI = 2
 
+  // The 1st parameter is the sequenceId of the current "Authorisation" element: "0", "1", "2", ...
   // ex: fillPage({sequenceId}, "CSE", "GB121212121212")
   // ex: fillPage({sequenceId}, "CSE", "Declarant EORI")
 
   override def fillPage(values: String*): Unit = {
-    val enteredValue = fillAutoCompleteNew("authorisationTypeCode", values(typeIndex))
-    print("================",enteredValue)
+    val selection = fillDropdown("authorisationTypeCode", values(typeIndex))
 
     val eori = values(EORI) match {
       case "Declarant EORI" =>
@@ -53,7 +56,7 @@ object AuthorisationPage extends BasePage {
     }
 
     store(
-      AuthorisationType(values(sequenceId)) -> Detail(enteredValue),
+      AuthorisationType(values(sequenceId)) -> Detail(selection),
       AuthorisationHolderEORI(values(sequenceId)) -> Detail(eori)
     )
   }

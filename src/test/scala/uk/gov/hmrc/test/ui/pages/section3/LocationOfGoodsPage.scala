@@ -16,48 +16,52 @@
 
 package uk.gov.hmrc.test.ui.pages.section3
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Arrived, Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{locationOfGoods, locationOfGoodsCL}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{AdditionalDeclarationType, DeclarationType}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AuthorisationType, AuthorisationTypeLabel, section2}
-import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.LocationOfGoodsCode
-
-import scala.util.Random
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.AdditionalDeclarationType
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AuthorisationTypeLabel, section2}
+import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{LocationOfGoods, RRS01}
 
 object LocationOfGoodsPage extends BasePage {
 
+  val backButtonHref: String = CountryOfRoutingPage.path
   val path: String = "/declaration/location-of-goods"
 
-  def title = titleForDecTypeAndAuthCode
+  private val customsTitle = "Where will the goods be presented to customs?"
+  private val gvmsTitle = "Select a permitted goods location for exports using the Goods Vehicle Movement Service"
 
-  val backButtonHref: String = CountryOfRoutingPage.path
+  def title: String = {
+    val adt = detail(AdditionalDeclarationType)
+    val authorisationType = detailForLabel(section2, AuthorisationTypeLabel)
+
+    if (isPrelodgedDeclaration(adt)) customsTitle
+    else if (authorisationType.startsWith("CSE -") && isArrivedDeclaration(adt)) "Enter the code for the CSE premises"
+    else if (authorisationType.startsWith("EXRR -") && adt.startsWith("Arrived -")) gvmsTitle
+    else if (!authorisationType.startsWith("MIB -") && adt.startsWith("Arrived -")) gvmsTitle
+    else customsTitle
+  }
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common -> List(locationOfGoods),
     Clearance -> List(locationOfGoodsCL)
   )
 
-  def titleForDecTypeAndAuthCode(): String = {
-   val  allSectionDetails(section2, Some(AuthorisationTypeLabel)).values
-    detail(AdditionalDeclarationType) match {
-      case Arrived  if .filter(_._1.label == AuthorisationType()).contains("CSE") => "Enter the code for the CSE premises"
-      case Arrived                                        => "Select a permitted goods location for exports using the Goods Vehicle Movement Service"
-      case _                                              => "Where will the goods be presented to customs?"
-    }
+  val code = 1
+
+  // No  => fillPage(no, "GBAUNHVNHVNHVGVM")
+  // Yes => fillPage(yes, "GBAUABDABDABDGVM")
+
+  override def fillPage(values: String*): Unit = {
+    val locationOfGoods = values(code)
+    fillTextBoxById(if (selectYesOrNoRadio(values(yesNo))) "glc" else "code", locationOfGoods)
+    store(LocationOfGoods -> Detail(locationOfGoods))
+    if (locationOfGoods.endsWith("GVM")) store(RRS01 -> Detail("RRS01 (GVMS releases)"))
   }
 
-  //If i select goods location code as GBAUABDABDABDGVM by clicking Yes
-  def fillPage(values: String*): Unit = {
-     val random = new Random()
-     val option = if(values.length<2) { if (random.nextBoolean()) "Yes" else "No"} else values(1)
-    val locationOfGoodsCode: String = values.head
-      selectYesOrNoRadio(option)
-      option match {
-        case "Yes" => fillAutoComplete("glc", locationOfGoodsCode)
-        case "No" => findElementById("code").sendKeys(locationOfGoodsCode)
-      }
-      store(LocationOfGoodsCode -> Details(Seq(locationOfGoodsCode)))
-    }
+  private def isArrivedDeclaration(adt: String): Boolean =
+    adt.startsWith("Arrived -") || adt.startsWith("Simplified -") || adt.startsWith("EIDR -")
 
+  private def isPrelodgedDeclaration(adt: String): Boolean =
+    adt.startsWith("Pre-lodged -") || adt.startsWith("Simplified -") || adt.startsWith("EIDR -")
 }

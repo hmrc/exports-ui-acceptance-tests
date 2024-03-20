@@ -16,21 +16,18 @@
 
 package uk.gov.hmrc.test.ui.pages.section3
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{officeOfExit, officeOfExitCL}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
-import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{OfficeOfExitCode, section3}
+import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.Section3
 
 object SummarySection3Page extends BasePage {
 
   def backButtonHref: String = OfficeOfExitPage.path
-
   val path: String = "/declaration/summary-section/3"
-
   val title: String = "Check your answers"
 
-  override def fillPage(values: String*): Unit = {
-    checkSectionSummary(section3)
-  }
+  override def checkExpanders(): Unit = ()
 
+  // ex: fillPage()
+
+  override def fillPage(values: String*): Unit = checkSectionSummary(Section3)
 }

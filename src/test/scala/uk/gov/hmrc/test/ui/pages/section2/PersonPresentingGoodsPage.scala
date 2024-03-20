@@ -23,14 +23,16 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.PersonPresentingGoods
 
 object PersonPresentingGoodsPage extends BasePage {
 
+  def backButtonHref: String = EIDRPage.path
   val path: String = "/declaration/person-presenting-goods"
   val title: String = "What is the EORI number of the person presenting the goods to customs?"
-  def backButtonHref: String = EIDRPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Clearance -> List(personPresentingGoodsCL))
 
   val EORI = 0
+
+  // ex: fillPage("GB11234567890987")
 
   override def fillPage(values: String*): Unit = {
     fillTextBoxById("eori", values(EORI))

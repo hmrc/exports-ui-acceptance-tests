@@ -54,5 +54,5 @@ object AdditionalInformationYesNoPage extends BasePage {
   // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit =
-    if (!selectYesOrNoRadio(values.head)) store(NoAdditionalInformation(itemId) -> Detail("None"))
+    if (!selectYesOrNoRadio(values(yesNo))) store(NoAdditionalInformation(itemId) -> Detail("None"))
 }

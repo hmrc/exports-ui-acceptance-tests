@@ -29,7 +29,6 @@ object DetailKeys {
     fillAutoComplete("details_address_country", values(4))
   }
 
-  val yesNo = 0
   val EORI = 1
 
   val section2: Int = 2
@@ -69,10 +68,8 @@ object DetailKeys {
   // /other-parties-involved
   val NoAdditionalPartiesInvolved: DetailKey = DetailKey("Additional parties involved", section2)
 
-  def AdditionalPartiesInvolvedType(seqId: String): DetailKey =
-    DetailKey(AdditionalPartiesInvolvedTypeLabel, section2, Some(seqId))
-  def AdditionalPartiesInvolvedEORI(seqId: String): DetailKey =
-    DetailKey("Other parties’s EORI number", section2, Some(seqId))
+  def AdditionalPartiesInvolvedType(sequenceId: String): DetailKey = DetailKey(AdditionalPartiesInvolvedTypeLabel, section2, Some(sequenceId))
+  def AdditionalPartiesInvolvedEORI(sequenceId: String): DetailKey = DetailKey("Other parties’s EORI number", section2, Some(sequenceId))
 
   // /authorisation-choice
   val ProcedureChoice: DetailKey = DetailKey(ProcedureChoiceLabel, section2, None, None, skipSummaryCheck = true)
@@ -81,9 +78,8 @@ object DetailKeys {
   val NoAuthorisationRequired: DetailKey = DetailKey("Authorisations for this declaration", section2)
 
   // /add-authorisation-required
-  def AuthorisationType(seqId: String): DetailKey = DetailKey(AuthorisationTypeLabel, section2, Some(seqId))
-  def AuthorisationHolderEORI(seqId: String): DetailKey =
-    DetailKey("Authorised party’s EORI number", section2, Some(seqId))
+  def AuthorisationType(sequenceId: String): DetailKey = DetailKey(AuthorisationTypeLabel, section2, Some(sequenceId))
+  def AuthorisationHolderEORI(sequenceId: String): DetailKey = DetailKey("Authorised party’s EORI number", section2, Some(sequenceId))
 
   // CLEARANCE pages
 

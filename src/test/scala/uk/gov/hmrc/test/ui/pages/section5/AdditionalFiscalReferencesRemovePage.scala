@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalFiscalReferences
 
@@ -28,10 +29,12 @@ object AdditionalFiscalReferencesRemovePage extends BasePage {
   override def checkExpanders(): Unit = ()
 
   // No  => fillPage(no)
-  // Yes => fillPage(yes)
+
+  // The 2nd parameter is the sequenceId of the current "Additional Information" element: "0", "1", "2", ...
+  // Yes => fillPage(yes, "2")
 
   override def fillPage(values: String*): Unit =
-    if (selectYesOrNoRadio(values.head)) {
+    if (selectYesOrNoRadio(values(yesNo))) {
       val detailKey          = AdditionalFiscalReferences(itemId)
       val vatDetailsToRemove = values.head
       val result             = details(detailKey).filterNot(_ == vatDetailsToRemove)

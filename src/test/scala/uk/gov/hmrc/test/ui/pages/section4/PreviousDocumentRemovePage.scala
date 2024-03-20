@@ -14,27 +14,28 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.pages.section5
+package uk.gov.hmrc.test.ui.pages.section4
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.PackageTypeLabel
+import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.{DocumentCode, DocumentReference}
 
-object PackageInformationListPage extends BasePage {
+object PreviousDocumentRemovePage extends BasePage {
 
-  def backButtonHref: String = PackageInformationPage.backButtonHref
-  def path: String           = itemUrl("packages-list")
-
-  def title: String =
-    itemDetailFor(itemId, PackageTypeLabel).size match {
-      case 1 => "You have added 1 package type"
-      case n => s"You have added $n package types"
-    }
+  def backButtonHref: String = PreviousDocumentListPage.path
+  def path: String = removeUrl("previous-document")
+  val title: String = "Are you sure you want to remove this document?"
 
   override def checkExpanders(): Unit = ()
 
-  // No  => fillPage(no)
-  // Yes => fillPage(yes)
+  val documentToRemove  = 1
 
-  override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
+  // No  => fillPage(no)
+
+  // The 2nd parameter is the sequenceId of the current "Previous Document" element: "0", "1", "2", ...
+  // Yes => fillPage(yes, "{sequenceId}")
+
+  override def fillPage(values: String*): Unit =
+    if (selectYesOrNoRadio(values(yesNo)))
+      clear(DocumentCode(values(documentToRemove)), DocumentReference(values(documentToRemove)))
 }

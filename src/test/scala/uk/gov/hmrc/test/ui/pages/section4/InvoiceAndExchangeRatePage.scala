@@ -16,38 +16,41 @@
 
 package uk.gov.hmrc.test.ui.pages.section4
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.Common
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Common, no, yes}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{invoiceAndExchangeRateChoice, invoiceAndExchangeRateChoice1}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{InvoiceExchangeRate, TotalAmountInvoiced}
-import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.{InvoiceExchangeRate, TotalAmountInvoiced}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, Details}
+import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.{ExchangeRate, TotalAmountInvoiced}
 
 object InvoiceAndExchangeRatePage extends BasePage {
 
+  def backButtonHref: String = InvoicesAndExchangeRateChoicePage.path
   val path: String = "/declaration/invoices-and-exchange-rate"
-
   def title = "Total amount invoiced"
-
-  val backButtonHref: String = InvoicesAndExchangeRateChoicePage.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common -> List(invoiceAndExchangeRateChoice, invoiceAndExchangeRateChoice1)
   )
 
-  //Afghani AFN , 567640, No -- No Scenario
-  //Pounds Sterling GBP, Yes, 1.25 -- Yes Scenario
-  def fillPage(values: String*): Unit = {
-    val currencySelected = values(0)
+  // No Scenario  => fillPage("AFN", "1000", "No")
+  // Yes Scenario => fillPage("GBP", "123456", "1.25")
+
+  override def fillPage(values: String*): Unit = {
+    val currency = values(0)
     val totalAmountInvoiced = values(1)
-    val rateOfExchangeYesNo = values(2)
-    val exchangeRateEntered = values(3)
-    fillAutoComplete("totalAmountInvoicedCurrency", currencySelected)
+    val exchangeRate = values(2)
+
+    fillAutoComplete("totalAmountInvoicedCurrency", currency)
     fillTextBoxById("totalAmountInvoiced", totalAmountInvoiced)
-      if (selectYesOrNoRadio(rateOfExchangeYesNo)) {
-        fillTextBoxById("exchangeRate", exchangeRateEntered)
-        store(InvoiceExchangeRate -> Detail(exchangeRateEntered))
-      }
-   val  totalAmountInvoicedSummary = currencySelected.takeRight(3)+" "+totalAmountInvoiced
-      store(TotalAmountInvoiced -> Detail(totalAmountInvoicedSummary))
+
+    if (exchangeRate == no) {
+      selectYesOrNoRadio(no)
     }
+    else {
+      selectYesOrNoRadio(yes)
+      fillTextBoxById("exchangeRate", exchangeRate)
+      store(ExchangeRate -> Detail(exchangeRate))
+    }
+
+    store(TotalAmountInvoiced -> Detail(s"$currency $totalAmountInvoiced"))
+  }
 }

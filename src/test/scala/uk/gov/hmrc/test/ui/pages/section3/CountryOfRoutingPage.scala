@@ -16,21 +16,22 @@
 
 package uk.gov.hmrc.test.ui.pages.section3
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.Common
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.countryOfRouting
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{CountriesOfRouting, DestinationCountry}
 
 object CountryOfRoutingPage extends BasePage {
 
+  def backButtonHref: String = DestinationCountryPage.path
   val path: String           = "/declaration/country-of-routing"
   def title                  = s"Will the goods pass through any other countries before arriving in ${detail(DestinationCountry)}"
-  val backButtonHref: String = DestinationCountryPage.path
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List(countryOfRouting)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(countryOfRouting))
 
-  def fillPage(values: String*): Unit =
-    if (!selectYesOrNoRadio(values.head, "Yes", "No")) store(CountriesOfRouting -> Details(List("None")))
+  // No  => fillPage(no)
+  // Yes => fillPage(yes)
+
+  override def fillPage(values: String*): Unit =
+    if (!selectYesOrNoRadio(values(yesNo), "Yes", "No")) store(CountriesOfRouting -> Details(List("None")))
 }

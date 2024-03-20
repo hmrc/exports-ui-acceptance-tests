@@ -149,6 +149,9 @@ object TariffLinks {
 
 object PageLinks {
 
+ val fullExportDeclaration =             "https://www.gov.uk/guidance/making-a-full-export-declaration"
+ val goodsExportedInBaggage =            "https://www.gov.uk/guidance/declare-commercial-goods-youre-taking-out-of-great-britain-in-your-accompanied-baggage-or-small-vehicles"
+
   val endUseRelief =                      "https://www.gov.uk/government/publications/appendix-1-de-110-requested-and-previous-procedure-codes/requested-procedure-10-permanent-export-or-dispatch#section-3"
   val inwardProcessing =                  "https://www.gov.uk/government/publications/appendix-1-de-110-requested-and-previous-procedure-codes/requested-procedure-11-inward-processing-prior-export-equivalence"
   val outwardProcessing =                 "https://www.gov.uk/guidance/apply-to-pay-less-duty-on-goods-you-export-to-process-or-repair"

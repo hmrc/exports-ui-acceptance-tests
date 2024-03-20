@@ -18,28 +18,35 @@ package uk.gov.hmrc.test.ui.pages.base
 
 object Constants {
 
-  val yes = "Yes"
-  val no = "No"
+  // Required for multi-value pages, like "Package Information", "Additional Information", "Containers", ...
+  // The page sequence must be always at zero-position in the list of values passed to "fillPage".
+  val sequenceId = 0
+
+  // Zero-position of the parameter passed to fillPage for Yes/No Pages
+  val yesNo = 0
+
+  val yes  = "Yes"
+  val no   = "No"
   val none = "None"
 
   val Common = "COMMON" // Used for the tariff expander only
 
-  val Clearance = "Customs clearance request (C21)"
-  val Occasional = "Simplified declaration (occasional use)"
-  val Simplified = "Simplified declaration (regular use)"
-  val Standard = "Standard declaration"
+  val Clearance     = "Customs clearance request (C21)"
+  val Occasional    = "Simplified declaration (occasional use)"
+  val Simplified    = "Simplified declaration (regular use)"
+  val Standard      = "Standard declaration"
   val Supplementary = "Supplementary declaration"
 
-  val Arrived = "arrived"
+  val Arrived   = "arrived"
   val Prelodged = "prelodged"
 
   val NonEidr = "simplified"
-  val Eidr = "eidr"
+  val Eidr    = "eidr"
 
   // Generally we need to pass different values for a drop down and the cache
   // ex : for countries
   val enteredValue = 0
-  val storedValue = 1
+  val storedValue  = 1
 
   val Address = List("XYZ Carrier", "School Road", "London", "WS1 2AB", "Ukraine - UA")
 }

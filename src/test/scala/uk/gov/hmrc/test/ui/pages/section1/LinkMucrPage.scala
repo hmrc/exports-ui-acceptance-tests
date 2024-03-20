@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section1
 
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{mucr, mucrCL}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.LinkToMucr
 
@@ -36,8 +36,7 @@ object LinkMucrPage extends BasePage {
   // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit = {
-    val yesNo = values.head
-    selectYesOrNoRadio(yesNo)
-    store(LinkToMucr -> Detail(yesNo))
+    selectYesOrNoRadio(values(yesNo))
+    store(LinkToMucr -> Detail(values(yesNo)))
   }
 }

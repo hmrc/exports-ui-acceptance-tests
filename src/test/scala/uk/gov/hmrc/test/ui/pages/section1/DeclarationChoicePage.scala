@@ -17,6 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section1
 
 import uk.gov.hmrc.test.ui.pages.base.Constants._
+import uk.gov.hmrc.test.ui.pages.base.PageLinks.goodsExportedInBaggage
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{decType, decTypeCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
@@ -28,6 +29,8 @@ object DeclarationChoicePage extends BasePage {
   val title = "Select a declaration type"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> Seq(decType), Clearance -> Seq(decTypeCL))
+
+  override val pageLinkHrefs: Seq[String] = super.pageLinkHrefs ++ goodsExportedInBaggage
 
   // ex: fillPage("OCCASIONAL")
 

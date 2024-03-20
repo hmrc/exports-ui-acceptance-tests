@@ -16,19 +16,20 @@
 
 package uk.gov.hmrc.test.ui.pages.section4
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, sequenceId}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{addPreviousDocument, addPreviousDocumentCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.{DocumentCode, DocumentReference}
+import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.{DocumentCode, DocumentCodeLabel, DocumentReference, section4}
 
 
-object PreviousDocument extends BasePage {
+object PreviousDocumentPage extends BasePage {
 
-  val backButtonHref: String = NatureOfTransactionPage.path
+  def backButtonHref: String =
+    if (detailForLabel(section4, DocumentCodeLabel).nonEmpty) PreviousDocumentListPage.path
+    else PreviousDocumentListPage.backButtonHref
 
   val path: String = "/declaration/add-previous-document"
-
-  def title = "Details for each document that supports this declaration"
+  val title = "Details for each document that supports this declaration"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common -> List(addPreviousDocument),
@@ -38,13 +39,16 @@ object PreviousDocument extends BasePage {
   val documentCode = 1
   val documentReference = 2
 
+  // The 1st parameter is the sequenceId of the current "Previous Document" element: "0", "1", "2", ...
   //ex: fillPage("3", "Commercial Invoice", "SMITH 321/890")
 
-  def fillPage(values: String*): Unit = {
-    fillAutoComplete("documentType", values(documentCode))
+  override def fillPage(values: String*): Unit = {
+    val selection = fillDropdown("documentType", values(documentCode))
     fillTextBoxById("documentReference", values(documentReference))
 
-    store(DocumentCode(values(sequenceId)) -> Detail(findElementById("documentType__option--0").getText),
-         DocumentReference(values(sequenceId)) -> Detail(values(documentReference)))
+    store(
+      DocumentCode(values(sequenceId)) -> Detail(selection),
+      DocumentReference(values(sequenceId)) -> Detail(values(documentReference))
+    )
   }
 }

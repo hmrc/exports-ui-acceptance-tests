@@ -23,9 +23,9 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{addressHelper, ExporterDet
 
 object ExporterAddressPage extends BasePage {
 
+  def backButtonHref: String = ExporterEORINumberPage.path
   val path: String = "/declaration/exporter-address"
   val title: String = "What is the exporter’s name and business address?"
-  def backButtonHref: String = ExporterEORINumberPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Common -> List(exporterAddress), Clearance -> List(exporterAddressCL))

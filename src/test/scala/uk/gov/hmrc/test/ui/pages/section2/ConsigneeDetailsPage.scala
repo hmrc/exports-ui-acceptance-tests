@@ -23,12 +23,13 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{addressHelper, CarrierEORI
 
 object ConsigneeDetailsPage extends BasePage {
 
-  val path: String = "/declaration/consignee-details"
-  val title: String = "Where will the goods be delivered?"
   def backButtonHref: String = maybeDetail(CarrierEORI) match {
     case Some(_) => CarrierEORINumberPage.path
     case None    => CarrierAddressPage.path
   }
+
+  val path: String = "/declaration/consignee-details"
+  val title: String = "Where will the goods be delivered?"
 
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Common -> List(consigneeDetails), Clearance -> List(consigneeDetailsCL))

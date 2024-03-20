@@ -17,24 +17,17 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.PackageTypeLabel
 
-object PackageInformationListPage extends BasePage {
+object AdditionalInformationChangePage extends BasePage {
 
-  def backButtonHref: String = PackageInformationPage.backButtonHref
-  def path: String           = itemUrl("packages-list")
+  def backButtonHref: String = AdditionalInformationListPage.path
+  def path: String = changeUrl("additional-information")
+  def title: String = AdditionalInformationPage.title
 
-  def title: String =
-    itemDetailFor(itemId, PackageTypeLabel).size match {
-      case 1 => "You have added 1 package type"
-      case n => s"You have added $n package types"
-    }
+  override val expanderHrefs: Map[String, Seq[String]] = AdditionalInformationPage.expanderHrefs
 
-  override def checkExpanders(): Unit = ()
+  // The 1st parameter is the sequenceId of the "Additional Information" element to change: "0", "1", "2", ...
+  // ex: fillPage("2", "00400", "EXPORTER")
 
-  // No  => fillPage(no)
-  // Yes => fillPage(yes)
-
-  override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
+  override def fillPage(values: String*): Unit = AdditionalInformationPage.fillPage(values:_*)
 }

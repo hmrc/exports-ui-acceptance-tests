@@ -16,42 +16,50 @@
 
 package uk.gov.hmrc.test.ui.pages.section4
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.Common
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Common, Standard, Supplementary}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.natureOfTransaction
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{NatureOfTransaction, TotalAmountInvoiced}
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
+import uk.gov.hmrc.test.ui.pages.section3.DestinationCountryPage.isGuernseyOrJerseyDestination
 import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.NatureOfTransaction
-
 
 object NatureOfTransactionPage extends BasePage {
 
+  val Sale = "Goods being sold"
+  val BusinessPurchase = "Item purchased new in the UK for business use"
+
+  val backButtonHref: String =
+    detail(DeclarationType) match {
+      case Standard | Supplementary if isGuernseyOrJerseyDestination => TotalPackageQuantityPage.backButtonHref
+      case _ => TotalPackageQuantityPage.path
+    }
+
   val path: String = "/declaration/nature-of-transaction"
+  val title = "What sort of export is it?"
 
-  def title = "What sort of export is it?"
+  override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(natureOfTransaction))
 
-  val backButtonHref: String = TotalPackageQuantityPage.path
+  // ex: fillPage("Goods being sold")
+  //     fillPage("Item purchased")
+  //     fillPage("...")
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List(natureOfTransaction)
-  )
-
-  case class NatureOfTransactionData(radioId: String, summaryValue: String)
-
-  def performActionsAndStore(values: String*): Unit = {
-    val optionSelected = values.head
-    val label = optionSelected match {
-      case "Goods being sold" => clickById("Sale"); "Goods being sold"
-      case "Item purchased"   => clickById("Sale"); "Item purchased new in the UK for business use"
-      case "House removal"   => clickById("HouseRemoval"); "Item purchased new in the UK for business use"
-      case "A return or a replacement" => clickById("Return"); "A return or a replacement, free of charge"
-      case "Non Commercial" => clickById("Donation"); "Non-commercial change of ownership"
+  override def fillPage(values: String*): Unit = {
+    val label = values(0) match {
+      case "Goods being sold"              => clickById("Sale"); Sale
+      case "Item purchased"                => clickById("BusinessPurchase"); BusinessPurchase
+      case "House removal"                 => clickById("HouseRemoval"); "House removal or not-new vehicle"
+      case "A return or a replacement"     => clickById("Return"); "A return or a replacement, free of charge"
+      case "Non Commercial change"         => clickById("Donation"); "Non-commercial change of ownership"
       case "Being sent out for processing" => clickById("Processing"); "Being sent out for processing"
-      case "Goods have been processed" => clickById("Processed"); "Goods have been processed"
-      case "Inter Governmental" => clickById("Military"); "Inter-governmental or defence purposes"
-      case "Goods being supplied under a contract" => clickById("Construction"); "Goods supplied under a contract for construction purposes"
+      case "Goods have been processed"     => clickById("Processed"); "Goods have been processed"
+      case "Inter Governmental"            => clickById("Military"); "Inter-governmental or defence purposes"
+
+      case "Goods for construction or civil engineering" =>
+        clickById("Construction"); "Goods supplied under a contract for construction purposes"
+
       case _ => clickById("Other"); "Other"
     }
-   def fillPage(values: String*): Unit = values.head
+
     store(NatureOfTransaction -> Detail(label))
   }
 }

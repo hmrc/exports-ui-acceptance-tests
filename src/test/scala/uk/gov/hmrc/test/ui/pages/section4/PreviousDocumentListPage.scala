@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,22 +14,23 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.pages.section2
+package uk.gov.hmrc.test.ui.pages.section4
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AuthorisationTypeLabel, section2}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Standard, Supplementary, yesNo}
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
+import uk.gov.hmrc.test.ui.pages.section3.SummarySection3Page
 
-object AuthorisationsListPage extends BasePage {
+object PreviousDocumentListPage extends BasePage {
 
-  def backButtonHref: String = ProcedureChoicePage.path
-  val path: String = "/declaration/authorisations-required"
-
-  def title: String =
-    allSectionDetails(section2).count(_._1.label == AuthorisationTypeLabel) match {
-      case 1 => "You have added 1 authorisation"
-      case n => s"You have added $n authorisations"
+  def backButtonHref: String =
+    detail(DeclarationType) match {
+      case Standard | Supplementary => NatureOfTransactionPage.path
+      case _ => SummarySection3Page.path
     }
+
+  val path: String = "/declaration/previous-documents-list"
+  val title = "You’ve added details for"
 
   override def checkExpanders(): Unit = ()
 

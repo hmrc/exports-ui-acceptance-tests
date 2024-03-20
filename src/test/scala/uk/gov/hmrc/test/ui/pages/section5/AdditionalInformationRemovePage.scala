@@ -16,29 +16,31 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodes
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalInformationCode, AdditionalInformationDescription}
 
-object NationalAdditionalCodeRemovePage extends BasePage {
+object AdditionalInformationRemovePage extends BasePage {
 
-  def backButtonHref: String = NationalAdditionalCodesListPage.path
-  def path: String = removeUrl("items", "national-additional-code")
-  val title: String = "Are you sure you want to remove this national additional code?"
+  def backButtonHref: String = AdditionalInformationListPage.path
+  def path: String           = removeUrl("items", "additional-information")
+  val title: String          = "Are you sure you want to remove this Additional Information code?"
 
   override def checkExpanders(): Unit = ()
 
-  val nationalCodeToTemove = 1
+  val additionalInfoToBeRemoved = 1
 
   // No  => fillPage(no)
 
-  // The 2nd parameter is the "National Code" to remove
-  // Yes => fillPage(yes, "A123")
+  // The 2nd parameter is the sequenceId of the current "Additional Information" element: "0", "1", "2", ...
+  // Yes => fillPage(yes, "2")
 
   override def fillPage(values: String*): Unit =
     if (selectYesOrNoRadio(values(yesNo))) {
-      val detailKey = NationalAdditionalCodes(itemId)
-      val codes = details(detailKey).filterNot(_ == values(nationalCodeToTemove))
-      store(detailKey -> Details(if (codes.isEmpty) List("None") else codes))
+      val seqId = values(additionalInfoToBeRemoved)
+      clear(
+        AdditionalInformationCode(itemId, seqId),
+        AdditionalInformationDescription(itemId, seqId)
+      )
     }
 }

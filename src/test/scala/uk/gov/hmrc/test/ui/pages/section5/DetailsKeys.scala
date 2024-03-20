@@ -28,6 +28,7 @@ object DetailsKeys {
   val AdditionalFiscalReferenceLabel = "VAT details"
   val PackageTypeLabel = "Package type"
   val AdditionalInformationCodeLabel = "Statement code"
+  val AdditionalInformationDescriptionLabel = "Statement code"
 
   // /add-declaration-item
 

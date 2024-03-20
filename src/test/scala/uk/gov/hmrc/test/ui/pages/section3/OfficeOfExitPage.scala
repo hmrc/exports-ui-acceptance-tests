@@ -17,28 +17,28 @@
 package uk.gov.hmrc.test.ui.pages.section3
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{countryOfRouting, officeOfExit, officeOfExitCL}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
-import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{CountriesOfRouting, DestinationCountry, OfficeOfExitCode}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{officeOfExit, officeOfExitCL}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.OfficeOfExit
 
 object OfficeOfExitPage extends BasePage {
 
+  def backButtonHref: String = LocationOfGoodsPage.path
   val path: String = "/declaration/office-of-exit"
-
-  def title = "Where is the customs office of exit?"
-
-  val backButtonHref: String = LocationOfGoodsPage.path
+  val title = "Where is the customs office of exit?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common -> List(officeOfExit),
     Clearance -> List(officeOfExitCL)
   )
 
-  //performActionsAndStore("United States of America","The United States of America","China","China")
-  def fillPage(values: String*): Unit = {
-    val officeOfExitCodes: String = values.head
-        fillAutoComplete("countryCode", officeOfExitCodes)
-    store(OfficeOfExitCode -> Details(Seq(officeOfExitCodes)))
-  }
+  val place = 0
+  val code = 1
 
+  // ex: fillPage("Folkestone", "GB000041")
+
+  override def fillPage(values: String*): Unit = {
+    fillAutoComplete("countryCode", values(place))
+    store(OfficeOfExit -> Detail(values(code)))
+  }
 }

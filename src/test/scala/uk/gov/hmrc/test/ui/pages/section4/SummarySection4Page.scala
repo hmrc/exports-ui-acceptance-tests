@@ -17,20 +17,17 @@
 package uk.gov.hmrc.test.ui.pages.section4
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{addPreviousDocument, addPreviousDocumentCL}
+import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.Section4
 
+object SummarySection4Page extends BasePage {
 
-object PreviousDocumentList extends BasePage {
-
-  val path: String = "/declaration/previous-documents-list"
-
-  def title = "You’ve added details for"
-
-  val backButtonHref: String = NatureOfTransactionPage.path
+  def backButtonHref: String = PreviousDocumentListPage.path
+  val path: String           = "/declaration/summary-section/4"
+  val title: String          = "Check your answers"
 
   override def checkExpanders(): Unit = ()
 
-  def fillPage(values: String*): Unit = store()
+  // ex: fillPage()
 
+  override def fillPage(values: String*): Unit = checkSectionSummary(Section4)
 }

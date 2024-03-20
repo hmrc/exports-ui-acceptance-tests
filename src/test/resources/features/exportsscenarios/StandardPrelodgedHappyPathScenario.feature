@@ -20,7 +20,6 @@ Feature: StandardPrelodged Journey Happy Path With Procedure Code as 1040 and Ad
       And I click continue on mini CYA page
       And I select the destination country as CD
       And I select No for country of routing
-      And I select China and Ukraine
       And I select No and enter location of goods as GBAUMNCMANMNC
       And I select office of exit as Aberdeen
       And I click continue on mini CYA page

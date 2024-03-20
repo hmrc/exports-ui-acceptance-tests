@@ -19,6 +19,8 @@ package uk.gov.hmrc.test.ui.pages.section5
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants._
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
+import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.NatureOfTransaction
+import uk.gov.hmrc.test.ui.pages.section4.NatureOfTransactionPage.{BusinessPurchase, Sale}
 import uk.gov.hmrc.test.ui.pages.section5.AdditionalProcedureCodesPage.isLowValueDeclaration
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodes
 
@@ -27,13 +29,13 @@ object NationalAdditionalCodesListPage extends BasePage {
   def backButtonHref: String =
     detail(DeclarationType) match {
       case Occasional | Simplified => if (isLowValueDeclaration) VatRatingPage.path else VatRatingPage.backButtonHref
-/*
+
       case Standard =>
         detail(NatureOfTransaction) match {
-          case NatureOfTransactionPage.Sale | NatureOfTransactionPage.BusinessPurchase => VatRatingPage.path
+          case Sale | BusinessPurchase => VatRatingPage.path
           case _ => VatRatingPage.backButtonHref
         }
-*/
+
       case Supplementary => VatRatingPage.backButtonHref
     }
 
@@ -50,5 +52,5 @@ object NationalAdditionalCodesListPage extends BasePage {
   // No  => fillPage(no)
   // Yes => fillPage(yes)
 
-  override def fillPage(values: String*): Unit = selectYesOrNoRadio(values.head)
+  override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
 }

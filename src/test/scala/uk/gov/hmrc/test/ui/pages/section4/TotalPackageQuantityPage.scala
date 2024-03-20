@@ -19,26 +19,24 @@ package uk.gov.hmrc.test.ui.pages.section4
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.totalPackageQuantity
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.TotalAmountInvoiced
-import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.TotalAmountInvoiced
-
+import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.{TotalAmountInvoiced, TotalNumberOfPackages}
+import uk.gov.hmrc.test.ui.pages.section4.InvoicesAndExchangeRateChoicePage.lessThan100000
 
 object TotalPackageQuantityPage extends BasePage {
 
-  val path: String = "/declaration/total-package-quantity"
+  def backButtonHref: String =
+    if (detail(TotalAmountInvoiced) == lessThan100000) InvoicesAndExchangeRateChoicePage.path else InvoiceAndExchangeRatePage.path
 
+  val path: String = "/declaration/total-package-quantity"
   def title = "What is the total number of packages in this declaration?"
 
-  val backButtonHref: String = InvoiceAndExchangeRatePage.path
+  override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(totalPackageQuantity))
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List(totalPackageQuantity)
-  )
+  // ex: fillPage("1234")
 
-  def fillPage(values: String*): Unit = {
-    val enteredTotalNumberOfPackages = values.head
-    fillTextBoxById("totalPackage",enteredTotalNumberOfPackages)
-   store(TotalAmountInvoiced -> Detail(enteredTotalNumberOfPackages))
+  override def fillPage(values: String*): Unit = {
+    val totalNumberOfPackages = values.head
+    fillTextBoxById("totalPackage",totalNumberOfPackages)
+    store(TotalNumberOfPackages -> Detail(totalNumberOfPackages))
   }
-
 }

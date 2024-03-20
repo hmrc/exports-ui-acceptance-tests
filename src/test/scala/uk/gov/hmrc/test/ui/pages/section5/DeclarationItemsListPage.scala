@@ -16,18 +16,16 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-//import uk.gov.hmrc.test.ui.pages.section4.SummarySection4Page
+import uk.gov.hmrc.test.ui.pages.section4.SummarySection4Page
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.section5
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{declarationItemsList, declarationItemsListCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, DetailKey}
-import uk.gov.hmrc.test.ui.pages.section2.SummarySection2Page
 
 object DeclarationItemsListPage extends BasePage {
 
-  // def backButtonHref: String = SummarySection4Page.path
-  def backButtonHref: String = SummarySection2Page.path
-  val path: String           = "/declaration/declaration-items-list"
+  def backButtonHref: String = SummarySection4Page.path
+  val path: String = "/declaration/declaration-items-list"
 
   def title: String =
     allSectionDetails(section5).groupBy { case (detailKey: DetailKey, _) => detailKey.additionalId.head }.size match {
@@ -43,5 +41,5 @@ object DeclarationItemsListPage extends BasePage {
   // No  => fillPage(no)
   // Yes => fillPage(yes)
 
-  override def fillPage(values: String*): Unit = selectYesOrNoRadio(values.head)
+  override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
 }

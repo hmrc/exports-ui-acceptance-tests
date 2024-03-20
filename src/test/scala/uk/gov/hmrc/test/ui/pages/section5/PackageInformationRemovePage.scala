@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.base.Constants.{no, yes}
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{PackageInformationNumber, PackageInformationShippingMark, PackageInformationType}
 
 object PackageInformationRemovePage extends BasePage {
@@ -28,20 +28,20 @@ object PackageInformationRemovePage extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
+  val packageInfoToBeRemoved = 1
+
   // No  => fillPage(no)
 
-  // The 1st parameter is the sequenceId of the current "Packing Details" element: "0", "1", "2", ...
-  // Yes => fillPage("2", yes)
+  // The 2nd parameter is the sequenceId of the current "Packing Details" element: "0", "1", "2", ...
+  // Yes => fillPage(yes, "2")
 
-  override def fillPage(values: String*): Unit = {
-    if (values.head == no) selectYesOrNoRadio(no)
-    else {
-      selectYesOrNoRadio(yes)
+  override def fillPage(values: String*): Unit =
+    if (selectYesOrNoRadio(values(yesNo))) {
+      val seqId = values(packageInfoToBeRemoved)
       clear(
-        PackageInformationType(itemId, values(sequenceId)),
-        PackageInformationNumber(itemId, values(sequenceId)),
-        PackageInformationShippingMark(itemId, values(sequenceId))
+        PackageInformationType(itemId, seqId),
+        PackageInformationNumber(itemId, seqId),
+        PackageInformationShippingMark(itemId, seqId)
       )
     }
-  }
 }

@@ -23,18 +23,15 @@ import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{CountriesOfRouting, Destin
 
 object CountriesOfRoutingPage extends BasePage {
 
+  def backButtonHref: String = CountryOfRoutingPage.path
   val path: String = "/declaration/countries-of-routing"
-
   def title = s"Add the countries of routing between Great Britain and ${detail(DestinationCountry)}"
 
-  val backButtonHref: String = CountryOfRoutingPage.path
+  override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(countryOfRouting))
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List(countryOfRouting)
-  )
+  // ex: fillPage("United States of America", "The United States of America", "China", "China")
 
-  //performActionsAndStore("United States of America","The United States of America","China","China")
-  def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit = {
     val countries: Seq[String] = values.zipWithIndex.flatMap { case (value, index) =>
       if (index % 2 == 0) {
         fillAutoComplete("countryCode", value)
@@ -44,5 +41,4 @@ object CountriesOfRoutingPage extends BasePage {
     }
     store(CountriesOfRouting -> Details(countries))
   }
-
 }

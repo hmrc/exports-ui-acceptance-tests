@@ -16,33 +16,31 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{no, yes, Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{
-  areYouCompletingThisDeclarationOnBehalfOfAnotherAgent,
-  areYouCompletingThisDeclarationOnBehalfOfAnotherAgentCL
-}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, no, yes, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{areYouCompletingThisDeclarationOnBehalfOfAnotherAgent, areYouCompletingThisDeclarationOnBehalfOfAnotherAgentCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys._
 
 object OnBehalfOfAnotherAgentPage extends BasePage {
 
+  def backButtonHref: String =
+    detail(DeclarationType) match {
+      case Clearance =>
+        if (detail(IsThisExs) == no) IsThisExsPage.path
+        else if (detail(ExporterYesNo) == yes) ConsignorEORINumberPage.path
+        else ConsignorDetailsPage.path
+
+      case _ => if (maybeDetail(ExporterEORI).isEmpty) ExporterAddressPage.path else ExporterEORINumberPage.path
+    }
+
   val path: String = "/declaration/are-you-completing-this-declaration-on-behalf-of-another-agent"
   val title: String = "Do you hold the contract to complete the customs formalities?"
-  def backButtonHref: String = detail(DeclarationType) match {
-    case Clearance =>
-      if (detail(IsThisExs) == no) IsThisExsPage.path
-      else if (detail(ExporterYesNo) == yes) ConsignorEORINumberPage.path
-      else ConsignorDetailsPage.path
-    case _ =>
-      if (maybeDetail(ExporterEORI).isEmpty) ExporterAddressPage.path else ExporterEORINumberPage.path
-  }
 
-  override val expanderHrefs: Map[String, Seq[String]] =
-    Map(
-      Common -> List(areYouCompletingThisDeclarationOnBehalfOfAnotherAgent),
-      Clearance -> List(areYouCompletingThisDeclarationOnBehalfOfAnotherAgentCL)
-    )
+  override val expanderHrefs: Map[String, Seq[String]] = Map(
+    Common -> List(areYouCompletingThisDeclarationOnBehalfOfAnotherAgent),
+    Clearance -> List(areYouCompletingThisDeclarationOnBehalfOfAnotherAgentCL)
+  )
 
   // No  => fillPage(no)
   // Yes => fillPage(yes)

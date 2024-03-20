@@ -71,15 +71,14 @@ trait DriverHelper extends BrowserDriver {
     element.sendKeys(Keys.ENTER)
   }
 
-  def fillAutoCompleteNew(elementId: String, value: String): String = {
-    val element = driver.findElement(By.id(elementId))
+  def fillDropdown(elementId: String, value: String): String = {
+    val element = findElementById(elementId)
     element.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE)
     element.sendKeys(value)
-    val optionText: String =
-      driver.findElement(By.id("authorisationTypeCode__listbox")).findElement(By.tagName("li")).getText
+    val selection = findElementById("authorisationTypeCode__listbox").findElement(By.tagName("li")).getText
     element.sendKeys(Keys.ARROW_DOWN)
     element.sendKeys(Keys.TAB)
-    optionText
+    selection
   }
 
   def fillRadioButton(elementId: String, refSelector: String, refText: String): Unit = {

@@ -20,27 +20,30 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, enteredValue
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{destinationCountry, destinationCountry1, destinationCountryCL, destinationCountryCL1}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.DestinationCountry
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.SummarySection2Page
 import uk.gov.hmrc.test.ui.pages.section2.SummarySection2Page
 
 object DestinationCountryPage extends BasePage {
 
+  def backButtonHref: String = SummarySection2Page.path
   val path: String           = "/declaration/destination-country"
   val title                  = "Where are the goods being exported to?"
-  val backButtonHref: String = SummarySection2Page.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common    -> List(destinationCountry, destinationCountry1),
     Clearance -> List(destinationCountryCL, destinationCountryCL1)
   )
 
-  def fillPage(values: String*): Unit = {
+  // ex: fillPage("United States of America", "The United States of America")
+  // ex: fillPage("China")
+
+  override def fillPage(values: String*): Unit = {
     fillAutoComplete("countryCode", values(enteredValue))
-    store(
-      DestinationCountry -> Detail(
-        values(if (values.size == 2) storedValue else enteredValue)
-      )
-    )
+    store(DestinationCountry -> Detail(values(if (values.size == 2) storedValue else enteredValue)))
   }
 
+  def isGuernseyOrJerseyDestination: Boolean =
+    detail(DestinationCountry) match {
+      case "Guernsey" | "Jersey" => true
+      case _ => false
+    }
 }
