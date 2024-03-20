@@ -17,6 +17,7 @@
 package uk.gov.hmrc.test.ui.conf
 
 import com.typesafe.config.{Config, ConfigFactory}
+import scala.sys.process.Process
 
 object TestConfiguration {
   val config: Config        = ConfigFactory.load()
@@ -37,4 +38,6 @@ object TestConfiguration {
   def servicePort(serviceName: String): String = envConfig.getString(s"services.$serviceName.port")
 
   def serviceRoute(serviceName: String): String = envConfig.getString(s"services.$serviceName.productionRoute")
+
+  def setBrowser(): String = System.setProperty("browser","chrome")
 }

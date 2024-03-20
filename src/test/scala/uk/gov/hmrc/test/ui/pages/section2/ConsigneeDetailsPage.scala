@@ -23,8 +23,8 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{addressHelper, CarrierEORI
 
 object ConsigneeDetailsPage extends BasePage {
 
-  val path: String = "/declaration/exporter-address"
-  val title: String = "What is the exporter’s name and business address?"
+  val path: String = "/declaration/consignee-details"
+  val title: String = "Where will the goods be delivered?"
   def backButtonHref: String = maybeDetail(CarrierEORI) match {
     case Some(_) => CarrierEORINumberPage.path
     case None    => CarrierAddressPage.path

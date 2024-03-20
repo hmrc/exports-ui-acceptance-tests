@@ -16,16 +16,19 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
+import org.openqa.selenium.By
+import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.PageLinks._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.ProcedureChoice
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{NoAdditionalPartiesInvolved, ProcedureChoice}
 
 object ProcedureChoicePage extends BasePage {
 
   val path: String = "/declaration/authorisation-choice"
   val title: String = "Which export procedure are you using?"
-  def backButtonHref: String = OtherPartiesInvolvedPage.path
+  def backButtonHref: String =
+    maybeDetail(NoAdditionalPartiesInvolved).fold(OtherPartiesInvolvedListPage.path)(_ => OtherPartiesInvolvedPage.path)
 
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(
@@ -39,6 +42,11 @@ object ProcedureChoicePage extends BasePage {
         inwardProcessing
       )
     )
+
+  override def checkExpanders(): Unit = {
+    elementDoesNotExist(By.id("authorisationProcedureCodeChoice-readMore")) mustBe false
+    checkExpanderLinks()
+  }
 
   val exportProcedure = 0
 

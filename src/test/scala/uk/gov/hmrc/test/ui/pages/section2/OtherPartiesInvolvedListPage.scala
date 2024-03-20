@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AdditionalPartiesInvolvedT
 
 object OtherPartiesInvolvedListPage extends BasePage {
 
-  val path: String = "/declaration/other-party-list"
+  val path: String = "/declaration/other-parties-list"
 
   def title: String =
     allSectionDetails(section2).count(_._1.label == AdditionalPartiesInvolvedTypeLabel) match {
@@ -31,6 +31,8 @@ object OtherPartiesInvolvedListPage extends BasePage {
 
   def backButtonHref: String = ConsigneeDetailsPage.path
 
+  override def checkExpanders(): Unit = ()
+  
   override def fillPage(values: String*): Unit =
     selectYesOrNoRadio(values(yesNo))
 }

@@ -20,7 +20,7 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.{none, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.otherPartiesInvolved
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{
-  AdditionalPartiesInvolved,
+  NoAdditionalPartiesInvolved,
   AdditionalPartiesInvolvedEORI,
   AdditionalPartiesInvolvedType
 }
@@ -41,25 +41,24 @@ object OtherPartiesInvolvedPage extends BasePage {
   val choice = 1
   val EORI = 2
 
-  val map: Map[String, String] = Map(
-    "None" -> "no",
-    "Consolidator" -> "CS",
-    "Manufacturer" -> "MF",
-    "Freight forwarder" -> "FW",
-    "Warehouse keeper" -> "WH"
-  )
 
   // ex: fillPage({sequenceId}, "Consolidator", "GB121212121212")
   // ex: fillPage({sequenceId}, "None")
 
   override def fillPage(values: String*): Unit = {
-    val id = map(values(choice))
+    val id = values(choice) match {
+      case "None" => "no"
+      case "Consolidator" => "CS"
+      case "Manufacturer" => "MF"
+      case "Freight forwarder" => "FW"
+      case "Warehouse keeper" => "WH"
+    }
     clickById(id)
 
     id match {
       case "no" =>
         val otherParties = maybeDetails(AdditionalPartiesInvolvedType(values(sequenceId)))
-        if (otherParties.isEmpty) store(AdditionalPartiesInvolved -> Detail(none))
+        if (otherParties.isEmpty) store(NoAdditionalPartiesInvolved -> Detail(none))
 
       case _ =>
         fillTextBoxById(s"eori$id", values(EORI))

@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section2
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{section2, yesNo, AuthorisationTypeLabel}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AuthorisationTypeLabel, ProcedureChoice, section2, yesNo}
 
 object AuthorisationsListPage extends BasePage {
 
@@ -27,7 +27,9 @@ object AuthorisationsListPage extends BasePage {
       case 1 => "You have added 1 authorisation"
       case n => s"You have added $n authorisations"
     }
-  def backButtonHref: String = AuthorisationPage.path
+  def backButtonHref: String = ProcedureChoicePage.path
+
+  override def checkExpanders(): Unit = ()
 
   // No  => fillPage(no)
   // Yes => fillPage(yes)

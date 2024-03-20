@@ -44,7 +44,7 @@ object LoginPage extends BasePage {
     store(DeclarationEori -> Detail(eori))
   }
 
-  override def submit: Unit = clickById("submit-top")
+  def submit(): Unit = clickById("submit-top")
 
   private def navigateToLoginPage(): Unit = driver.navigate().to(url("login-stub-frontend") + path)
 
