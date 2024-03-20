@@ -23,12 +23,13 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{onBehalfOfOtherAgentYesNo,
 
 object RepresentationTypeAgreedPage extends BasePage {
 
-  val path: String = "/declaration/representation-type-agreed"
-  val title: String = "What type of representation will be used?"
   def backButtonHref: String = maybeDetail(onBehalfOfOtherAgentYesNo) match {
     case Some(Constants.yes) => OnBehalfOfAnotherAgentPage.path
     case Some(Constants.no)  => RepresentativesEORINumberPage.path
   }
+
+  val path: String = "/declaration/representation-type-agreed"
+  val title: String = "What type of representation will be used?"
 
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Common -> List(representationTypeAgreed), Clearance -> List(representationTypeAgreedCL))

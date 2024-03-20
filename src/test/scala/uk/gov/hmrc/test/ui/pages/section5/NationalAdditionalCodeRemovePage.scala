@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodes
 
@@ -27,18 +28,17 @@ object NationalAdditionalCodeRemovePage extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
-  val yesNo = 0
-  val code  = 1
-  val anotherNationalCode  = 0
+  val nationalCodeToTemove = 1
 
   // No  => fillPage(no)
-  // Yes => fillPage(yes)
 
-  override def fillPage(values: String*): Unit = {
-    val nationalAdditionalCodes =
-      if (elementByIdDoesNotExist("code_yes")) details(NationalAdditionalCodes(itemId)) :+ values(anotherNationalCode)
-      else if (selectYesOrNoRadio(values(yesNo))) List(values(code)) else List("None")
+  // The 2nd parameter is the "National Code" to remove
+  // Yes => fillPage(yes, "A123")
 
-    store(NationalAdditionalCodes(itemId) -> Details(nationalAdditionalCodes))
-  }
+  override def fillPage(values: String*): Unit =
+    if (selectYesOrNoRadio(values(yesNo))) {
+      val detailKey = NationalAdditionalCodes(itemId)
+      val codes = details(detailKey).filterNot(_ == values(nationalCodeToTemove))
+      store(detailKey -> Details(if (codes.isEmpty) List("None") else codes))
+    }
 }

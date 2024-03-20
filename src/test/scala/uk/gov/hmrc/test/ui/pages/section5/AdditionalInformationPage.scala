@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, sequenceId}
 import uk.gov.hmrc.test.ui.pages.base.PageLinks.aiCodes
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalInformation, itemsAdditionalInformationCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
@@ -35,7 +35,7 @@ object AdditionalInformationPage extends BasePage {
     Clearance -> List(itemsAdditionalInformationCL)
   )
 
-  override def pageLinkHrefs: Seq[String] = super.pageLinkHrefs ++ List(aiCodes)
+  override val pageLinkHrefs: Seq[String] = super.pageLinkHrefs ++ List(aiCodes)
 
   val code        = 1
   val description = 2

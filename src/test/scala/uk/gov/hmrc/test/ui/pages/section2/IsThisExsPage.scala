@@ -16,20 +16,24 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.yes
+import uk.gov.hmrc.test.ui.pages.base.Constants.{yes, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{yesNo, ExporterEORI, ExporterYesNo, IsThisExs}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{ExporterEORI, ExporterYesNo, IsThisExs}
 
 object IsThisExsPage extends BasePage {
 
-  val path: String = "/declaration/is-this-exs"
-  val title: String = "Do you need to give us safety and security information?"
-  def backButtonHref: String = if (detail(ExporterYesNo) == yes) AreYouTheExporterPage.path
-  else
-    maybeDetail(ExporterEORI) match {
+  def backButtonHref: String =
+    if (detail(ExporterYesNo) == yes) AreYouTheExporterPage.path
+    else maybeDetail(ExporterEORI) match {
       case Some(_) => ExporterEORINumberPage.path
       case None    => ExporterAddressPage.path
     }
+
+  val path: String = "/declaration/is-this-exs"
+  val title: String = "Do you need to give us safety and security information?"
+
+  // No  => fillPage(no)
+  // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit = {
     selectYesOrNoRadio(values(yesNo))

@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.Common
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.itemsNationalAdditionalCode
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodes
@@ -35,7 +35,6 @@ object NationalAdditionalCodesPage extends BasePage {
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(itemsNationalAdditionalCode))
 
-  val yesNo = 0
   val code  = 1
   val anotherNationalCode  = 0
 

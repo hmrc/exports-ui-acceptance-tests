@@ -26,6 +26,6 @@ object SealsRemovePage extends BasePage {
 
   private val yesNo = 0
 
-  override def fillPage(values: String*): Unit =
+  override override def fillPage(values: String*): Unit =
     selectYesOrNoRadio(values(yesNo))
 }

@@ -16,9 +16,9 @@
 
 package uk.gov.hmrc.test.ui.pages.section1
 
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, TariffLinks}
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{consignmentReferences, consignmentReferencesCL, consignmentReferencesSUP}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{Ducr, Lrn, Mrn}
 
 object ConsignmentReferencesPage extends BasePage {
@@ -28,19 +28,21 @@ object ConsignmentReferencesPage extends BasePage {
   val title = "Consignment references"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> Seq(consignmentReferencesSUP, consignmentReferences, lrn),
-    Clearance -> Seq(consignmentReferencesSUP, consignmentReferencesCL, lrnCL)
+    Common -> Seq(consignmentReferencesSUP, consignmentReferences, TariffLinks.lrn),
+    Clearance -> Seq(consignmentReferencesSUP, consignmentReferencesCL, TariffLinks.lrnCL)
   )
 
-  // ex: fillPage(ducr, mrn, lrn)
-  override def fillPage(values: String*): Unit = {
-    val ducr = values(0)
-    val mrn = values(1)
-    val lrn = values(2)
-    fillTextBoxById("ducr_ducr", ducr)
-    fillTextBoxById("mrn", mrn)
-    fillTextBoxById("lrn", lrn)
+  val ducr = 0
+  val mrn = 1
+  val lrn = 2
 
-    store(Ducr -> Detail(ducr), Mrn -> Detail(mrn), Lrn -> Detail(lrn))
+  // ex: fillPage(ducr, mrn, lrn)
+
+  override def fillPage(values: String*): Unit = {
+    fillTextBoxById("ducr_ducr", values(ducr))
+    fillTextBoxById("mrn", values(mrn))
+    fillTextBoxById("lrn", values(lrn))
+
+    store(Ducr -> Detail(values(ducr)), Mrn -> Detail(values(mrn)), Lrn -> Detail(values(lrn)))
   }
 }

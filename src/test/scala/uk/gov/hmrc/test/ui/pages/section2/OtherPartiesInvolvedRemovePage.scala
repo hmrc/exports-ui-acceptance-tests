@@ -17,15 +17,21 @@
 package uk.gov.hmrc.test.ui.pages.section2
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AdditionalPartiesInvolvedType, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.AdditionalPartiesInvolvedType
 
 object OtherPartiesInvolvedRemovePage extends BasePage {
 
+  def backButtonHref: String = OtherPartiesInvolvedListPage.path
   val path: String = removeUrl("other-party")
   val title: String = "Are you sure you want to remove this party?"
-  def backButtonHref: String = OtherPartiesInvolvedListPage.path
 
   val partyToBeRemoved = 1
+
+  // No  => fillPage(no)
+
+  // The 2nd parameter is the sequenceId of the current "Other Party" element: "0", "1", "2", ...
+  // Yes => fillPage(yes, "{sequenceId}")
 
   override def fillPage(values: String*): Unit =
     if (selectYesOrNoRadio(values(yesNo))) clear(AdditionalPartiesInvolvedType(values(partyToBeRemoved)))

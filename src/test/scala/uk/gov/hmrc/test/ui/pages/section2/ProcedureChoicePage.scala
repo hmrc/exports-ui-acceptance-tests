@@ -25,10 +25,11 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{NoAdditionalPartiesInvolve
 
 object ProcedureChoicePage extends BasePage {
 
-  val path: String = "/declaration/authorisation-choice"
-  val title: String = "Which export procedure are you using?"
   def backButtonHref: String =
     maybeDetail(NoAdditionalPartiesInvolved).fold(OtherPartiesInvolvedListPage.path)(_ => OtherPartiesInvolvedPage.path)
+
+  val path: String = "/declaration/authorisation-choice"
+  val title: String = "Which export procedure are you using?"
 
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(
@@ -50,7 +51,7 @@ object ProcedureChoicePage extends BasePage {
 
   val exportProcedure = 0
 
-  // ex: fillPage("Permanent")
+  // ex: fillPage("Permanent with excise")
 
   override def fillPage(values: String*): Unit = {
     values(exportProcedure) match {

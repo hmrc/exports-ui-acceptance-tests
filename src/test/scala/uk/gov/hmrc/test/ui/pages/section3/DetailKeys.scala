@@ -16,8 +16,24 @@
 
 package uk.gov.hmrc.test.ui.pages.section3
 
+import uk.gov.hmrc.test.ui.pages.base.DetailKey
+
 object DetailKeys {
 
-  val Section3 = 3
+  val section3  = 3
+  val Section3: DetailKey = DetailKey("Section 3 of 6: Routes and locations", section3, Some("routes-and-locations-card"))
 
+  // /destination-country
+  val DestinationCountry: DetailKey = DetailKey("Destination country", section3)
+
+  // /country-of-routing
+  // /countries-of-routing
+  val CountriesOfRouting: DetailKey = DetailKey("Routing countries", section3)
+
+  // /location-of-goods
+  val LocationOfGoods: DetailKey = DetailKey("Goods location code", section3)
+  val RRS01: DetailKey = DetailKey("Additional Information code", section3)
+
+  // /office-of-exit
+  val OfficeOfExit : DetailKey = DetailKey("Office of exit", section3)
 }

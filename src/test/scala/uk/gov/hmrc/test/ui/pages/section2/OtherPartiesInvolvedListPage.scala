@@ -17,10 +17,12 @@
 package uk.gov.hmrc.test.ui.pages.section2
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AdditionalPartiesInvolvedTypeLabel, section2, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AdditionalPartiesInvolvedTypeLabel, section2}
 
 object OtherPartiesInvolvedListPage extends BasePage {
 
+  def backButtonHref: String = ConsigneeDetailsPage.path
   val path: String = "/declaration/other-parties-list"
 
   def title: String =
@@ -29,10 +31,10 @@ object OtherPartiesInvolvedListPage extends BasePage {
       case n => s"You have added $n additional parties"
     }
 
-  def backButtonHref: String = ConsigneeDetailsPage.path
-
   override def checkExpanders(): Unit = ()
-  
-  override def fillPage(values: String*): Unit =
-    selectYesOrNoRadio(values(yesNo))
+
+  // No  => fillPage(no)
+  // Yes => fillPage(yes)
+
+  override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
 }

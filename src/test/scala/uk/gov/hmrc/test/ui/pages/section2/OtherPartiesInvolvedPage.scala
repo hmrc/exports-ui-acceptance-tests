@@ -16,32 +16,24 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{none, Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, none, sequenceId}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.otherPartiesInvolved
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{
-  NoAdditionalPartiesInvolved,
-  AdditionalPartiesInvolvedEORI,
-  AdditionalPartiesInvolvedType
-}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AdditionalPartiesInvolvedEORI, AdditionalPartiesInvolvedType, NoAdditionalPartiesInvolved}
 
 object OtherPartiesInvolvedPage extends BasePage {
 
+  def backButtonHref: String = ConsigneeDetailsPage.path
   val path: String = "/declaration/other-parties-involved"
   val title: String = "What are the EORI numbers of others involved in this export?"
-  def backButtonHref: String = ConsigneeDetailsPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Common -> List(otherPartiesInvolved), Clearance -> List(otherPartiesInvolved))
 
-  // the method can be called like follows
-  // fillPage("{sequenceId}", "None")
-  // fillPage("{sequenceId}", "Consolidator", "GB...")
-
   val choice = 1
   val EORI = 2
 
-
+  // The 1st parameter is the sequenceId of the current "Other Party" element: "0", "1", "2", ...
   // ex: fillPage({sequenceId}, "Consolidator", "GB121212121212")
   // ex: fillPage({sequenceId}, "None")
 

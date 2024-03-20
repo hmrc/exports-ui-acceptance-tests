@@ -73,8 +73,8 @@ object TariffLinks {
   val locationOfGoodsCL = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/group-5-dates-times-periods-places-countries-and-regions#de-523-location-of-goods-box-30-location-of-goods"
   val officeOfExit = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-5-dates-times-periods-places-countries-and-regions#de-512-customs-office-of-exit-box-29-office-of-exit"
   val officeOfExitCL = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/group-5-dates-times-periods-places-countries-and-regions#de-512-customs-office-of-exit-box-29-office-of-exit"
-  val totalNumbersOfItems = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-4-valuation-information-and-taxes#de-411-total-amount-invoiced-box-22-invoice-currency-and-total-amount-invoiced"
-  val totalNumbersOfItems1 = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-4-valuation-information-and-taxes#de-415-exchange-rate---fixed-in-advance-by-contract-box-23-exchange-rate"
+  val invoiceAndExchangeRateChoice = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-4-valuation-information-and-taxes#de-411-total-amount-invoiced-box-22-invoice-currency-and-total-amount-invoiced"
+  val invoiceAndExchangeRateChoice1 = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-4-valuation-information-and-taxes#de-415-exchange-rate---fixed-in-advance-by-contract-box-23-exchange-rate"
   val totalPackageQuantity = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-6-goods-identification#de-618-total-packages-box-6-total-packages"
   val natureOfTransaction = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-8-other-data-elements-statistical-data-guarantees-and-tariff-related-data#de-85-nature-of-transaction-box-24-nature-of-transaction"
   val addPreviousDocument = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-2-references-of-messages-document-certificates-and-authorisations#de-21-simplified-declaration-previous-documents-box-40-declaration-previous-document"
@@ -148,6 +148,9 @@ object TariffLinks {
 }
 
 object PageLinks {
+
+ val fullExportDeclaration =             "https://www.gov.uk/guidance/making-a-full-export-declaration"
+ val goodsExportedInBaggage =            "https://www.gov.uk/guidance/declare-commercial-goods-youre-taking-out-of-great-britain-in-your-accompanied-baggage-or-small-vehicles"
 
   val endUseRelief =                      "https://www.gov.uk/government/publications/appendix-1-de-110-requested-and-previous-procedure-codes/requested-procedure-10-permanent-export-or-dispatch#section-3"
   val inwardProcessing =                  "https://www.gov.uk/government/publications/appendix-1-de-110-requested-and-previous-procedure-codes/requested-procedure-11-inward-processing-prior-export-equivalence"

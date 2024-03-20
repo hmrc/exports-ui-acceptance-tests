@@ -23,20 +23,7 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage._
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 
-import scala.util.matching.Regex
-
-trait BasePage extends CacheHelper with DriverHelper {
-
-  def backButtonHref: String
-
-  def path: String
-
-  def title: String
-
-  val expanderHrefs: Map[String, Seq[String]] = Map.empty
-
-  def pageLinkHrefs: Seq[String] =
-    List(exitAndCompleteLater, feedbackBanner, govUkLogo, languageToggle, signOut, technicalIssue)
+trait BasePage extends CacheHelper with DriverHelper with PageHelper {
 
   def checkPage(): Unit = {
     checkUrlAndTitle()
@@ -44,6 +31,17 @@ trait BasePage extends CacheHelper with DriverHelper {
     checkPageLinks()
     checkExpanders()
   }
+
+  def fillPage(values: String*): Unit
+
+  protected def backButtonHref: String
+  protected def path: String
+  protected def title: String
+
+  protected val expanderHrefs: Map[String, Seq[String]] = Map.empty
+
+  protected def pageLinkHrefs: Seq[String] =
+    List(exitAndCompleteLater, feedbackBanner, govUkLogo, languageToggle, signOut, technicalIssue)
 
   protected def checkUrlAndTitle(): Unit = {
     assert((host + path).r.matches(driver.getCurrentUrl))
@@ -79,36 +77,7 @@ trait BasePage extends CacheHelper with DriverHelper {
     }
   }
 
-  // Required for multi-value pages, like "Package Information", "Additional Information", "Containers", ...
-  // The page sequence must be always at zero-position in the list of values passed to "fillPage".
-  val sequenceId = 0
-
-  def fillPage(values: String*): Unit
-
-  private val initPart: String  = "/declaration"
-  private val elementId: String = "[\\w]+"
-
-  private val containerIdPattern: Regex = s"/$initPart/containers/($elementId)/.+".r
-  protected def containerId: String     =
-    (Option(driver.getCurrentUrl) collect { case containerIdPattern(group) => group }).head
-
-  private val itemIdPattern: Regex = s"/$initPart/items/($elementId)/.+".r
-  protected def itemId: String     = (Option(driver.getCurrentUrl) collect { case itemIdPattern(group) => group }).head
-
-  protected def changeUrl(partId: String): String = s"$initPart/$partId/$elementId/change"
-
-  protected def changeUrl(partId: String, additionalPartId: String): String =
-    s"$initPart/$partId/$elementId/$additionalPartId/$elementId/change"
-
-  protected def itemUrl(partId: String): String = s"$initPart/items/$elementId/$partId"
-  protected def pathUrl(partId: String): String = s"$initPart/$partId/$elementId"
-
-  protected def removeUrl(partId: String): String = s"$initPart/$partId/$elementId/remove"
-
-  protected def removeUrl(partId: String, additionalPartId: String): String =
-    s"$initPart/$partId/$elementId/$additionalPartId/$elementId/remove"
-
-  def checkSectionSummary(detailKey: DetailKey): Unit = {
+  protected def checkSectionSummary(detailKey: DetailKey): Unit = {
     val rows = findElementsByClassName("govuk-summary-card")
       .filter(findChildByClassName(_, detailKey.id.head).getText == detailKey.label)
       .flatMap(findChildrenByClassName(_, "govuk-summary-list__row"))
@@ -143,8 +112,6 @@ trait BasePage extends CacheHelper with DriverHelper {
     }
   }
 }
-
-case class PageNotFoundException(s: String) extends Exception(s)
 
 object BasePage {
 

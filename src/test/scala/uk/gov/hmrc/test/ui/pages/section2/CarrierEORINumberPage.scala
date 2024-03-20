@@ -16,25 +16,27 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{carrierEoriNumber, carrierEoriNumberCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{CarrierEORI, EORI, ExporterEORI, yesNo}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{CarrierEORI, EORI, ExporterEORI}
 
 object CarrierEORINumberPage extends BasePage {
 
-  val path: String = "/declaration/carrier-eori-number"
-  val title: String = "Do you know the EORI number of your carrier or haulier?"
   def backButtonHref: String = maybeDetail(ExporterEORI) match {
     case Some(_) => AreYouTheExporterPage.path
     case None    => RepresentationTypeAgreedPage.path
   }
+
+  val path: String = "/declaration/carrier-eori-number"
+  val title: String = "Do you know the EORI number of your carrier or haulier?"
 
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Common -> List(carrierEoriNumber), Clearance -> List(carrierEoriNumberCL))
 
   // No  => fillPage(no)
   // Yes => fillPage(yes, "GB121212121212")
+
   override def fillPage(values: String*): Unit =
     if (selectYesOrNoRadio(values(yesNo), "Yes", "No")) store(CarrierEORI -> Detail(values(EORI)))
 }

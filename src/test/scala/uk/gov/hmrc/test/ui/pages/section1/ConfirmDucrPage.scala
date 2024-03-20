@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section1
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{traderReference, traderReferenceCL}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.Ducr
 
@@ -35,5 +35,5 @@ object ConfirmDucrPage extends BasePage {
   // No  => fillPage(no)
   // Yes => fillPage(yes)
 
-  override def fillPage(values: String*): Unit = if (!selectYesOrNoRadio(values.head)) clear(Ducr)
+  override def fillPage(values: String*): Unit = if (!selectYesOrNoRadio(values(yesNo))) clear(Ducr)
 }

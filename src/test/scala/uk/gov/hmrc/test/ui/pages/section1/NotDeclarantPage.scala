@@ -24,6 +24,8 @@ object NotDeclarantPage extends BasePage {
   val path: String = "/declaration/not-declarant"
   val title: String = "Use a different EORI number"
 
+  override def checkExpanders(): Unit = ()
+
   // ex: fillPage()
 
    override def fillPage(values: String*): Unit = ()

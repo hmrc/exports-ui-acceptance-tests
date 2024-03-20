@@ -17,6 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.PackageTypeLabel
 
 object PackageInformationListPage extends BasePage {
@@ -35,5 +36,5 @@ object PackageInformationListPage extends BasePage {
   // No  => fillPage(no)
   // Yes => fillPage(yes)
 
-  override def fillPage(values: String*): Unit = selectYesOrNoRadio(values.head)
+  override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
 }

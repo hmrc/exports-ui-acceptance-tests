@@ -17,6 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section1
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.Standard
+import uk.gov.hmrc.test.ui.pages.base.PageLinks.fullExportDeclaration
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 
@@ -26,15 +27,15 @@ object StandardOrOtherPage extends BasePage {
   val path: String = "/declaration/standard-or-other"
   val title: String = "Which type of declaration do you want to make?"
 
-  val nonStandardDeclarationType = "NonStandardDeclarationType"
+  override val pageLinkHrefs: Seq[String] = super.pageLinkHrefs ++ fullExportDeclaration
 
-  // ex: fillPage(nonStandardDeclarationType)
+  // ex: fillPage("STANDARD")
+  // ex: fillPage("Other")
 
   override def fillPage(values: String*): Unit =
-    if (values(0) == "STANDARD") {
+    if (values(0) != "STANDARD") clickById("NonStandardDeclarationType")
+    else {
       clickById(values(0))
       store(DeclarationType -> Detail(Standard))
-    } else {
-      clickById(nonStandardDeclarationType)
     }
 }
