@@ -19,12 +19,17 @@ package uk.gov.hmrc.test.ui.pages.section2
 import uk.gov.hmrc.test.ui.pages.base.Constants.{none, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{yesNo, AuthorisationsRequired}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{yesNo, NoAuthorisationRequired, ProcedureChoice}
 
 object AuthorisationYesNoPage extends BasePage {
 
   val path: String = "/declaration/is-authorisation-required"
-  val title: String = "Do you have any authorisations you want to declare?"
+  def title: String =
+    detail(ProcedureChoice) match {
+      case "Permanent" => "Do you have any authorisations you want to declare?"
+      case "Temporary" => "Do you want to add any authorisations?"
+    }
+
   def backButtonHref: String = ProcedureChoicePage.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
@@ -36,5 +41,5 @@ object AuthorisationYesNoPage extends BasePage {
   // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit =
-    if (!selectYesOrNoRadio(values(yesNo))) store(AuthorisationsRequired -> Detail(none))
+    if (!selectYesOrNoRadio(values(yesNo))) store(NoAuthorisationRequired -> Detail(none))
 }

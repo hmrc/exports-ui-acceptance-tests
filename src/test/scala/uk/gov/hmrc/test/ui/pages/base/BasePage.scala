@@ -28,7 +28,9 @@ import scala.util.matching.Regex
 trait BasePage extends CacheHelper with DriverHelper {
 
   def backButtonHref: String
+
   def path: String
+
   def title: String
 
   val expanderHrefs: Map[String, Seq[String]] = Map.empty
@@ -49,7 +51,7 @@ trait BasePage extends CacheHelper with DriverHelper {
       if (elementByIdDoesNotExist("section-header")) ""
       else s" - ${findElementById("section-header").getText}"
 
-    driver.getTitle mustBe title +  sectionHeader + " - Make an export declaration online - GOV.UK"
+    driver.getTitle mustBe title + sectionHeader + " - Make an export declaration online - GOV.UK"
     findElementsByTag("h1").head.getText mustBe title
   }
 
@@ -62,7 +64,10 @@ trait BasePage extends CacheHelper with DriverHelper {
 
   protected def checkExpanders(): Unit = {
     elementDoesNotExist(By.id("tariffReference")) mustBe false
+    checkExpanderLinks()
+  }
 
+  protected def checkExpanderLinks(): Unit = {
     maybeDetail(DeclarationType).map { declarationType =>
       // We could have link sets for a specific declaration type (e.g. Clearance or Supplementary)
       // as well as link sets "Common" to multiple declaration types
