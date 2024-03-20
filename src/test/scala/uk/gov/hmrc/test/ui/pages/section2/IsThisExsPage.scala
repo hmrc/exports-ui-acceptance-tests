@@ -18,7 +18,7 @@ package uk.gov.hmrc.test.ui.pages.section2
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.yes
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{ExporterEORI, ExporterYesNo, IsThisExs, yesNo}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{yesNo, ExporterEORI, ExporterYesNo, IsThisExs}
 
 object IsThisExsPage extends BasePage {
 
@@ -28,7 +28,7 @@ object IsThisExsPage extends BasePage {
   else
     maybeDetail(ExporterEORI) match {
       case Some(_) => ExporterEORINumberPage.path
-      case None    => ExporterDetailsPage.path
+      case None    => ExporterAddressPage.path
     }
 
   override def fillPage(values: String*): Unit = {

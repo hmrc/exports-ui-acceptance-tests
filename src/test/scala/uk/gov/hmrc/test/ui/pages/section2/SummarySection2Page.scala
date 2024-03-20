@@ -27,6 +27,9 @@ object SummarySection2Page extends BasePage {
   def backButtonHref: String =
     if (detail(AuthorisationsRequired) == none) AuthorisationYesNoPage.path else AuthorisationsListPage.path
 
+  override def checkExpanders(): Unit = ()
+
+  // ex: fillPage()
   override def fillPage(values: String*): Unit =
     checkSectionSummary(Section2)
 }

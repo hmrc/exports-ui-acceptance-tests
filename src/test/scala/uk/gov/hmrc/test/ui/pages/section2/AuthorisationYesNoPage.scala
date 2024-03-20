@@ -16,10 +16,10 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, none}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{none, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AuthorisationsRequired, yesNo}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{yesNo, AuthorisationsRequired}
 
 object AuthorisationYesNoPage extends BasePage {
 
@@ -31,6 +31,9 @@ object AuthorisationYesNoPage extends BasePage {
     Common -> List(isAuthorisationRequired, isAuthorisationRequired1, isAuthorisationRequired2),
     Clearance -> List(isAuthorisationRequiredCL, isAuthorisationRequiredCL1, isAuthorisationRequiredCL2)
   )
+
+  // No  => fillPage(no)
+  // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit =
     if (!selectYesOrNoRadio(values(yesNo))) store(AuthorisationsRequired -> Detail(none))

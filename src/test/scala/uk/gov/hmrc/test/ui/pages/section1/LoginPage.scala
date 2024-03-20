@@ -23,12 +23,12 @@ import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationEori
 object LoginPage extends BasePage {
 
   val backButtonHref: String = ""
-  val path: String           = "/gg-sign-in"
-  val title: String          = "Authority Wizard"
+  val path: String = "/gg-sign-in"
+  val title: String = "Authority Wizard"
 
-  override def checkBackButton(): Unit  = ()
+  override def checkBackButton(): Unit = ()
   override def checkUrlAndTitle(): Unit = ()
-  override def checkPageLinks(): Unit   = ()
+  override def checkPageLinks(): Unit = ()
 
   // ex: fillPage("GB7172755076437")
 
@@ -40,11 +40,11 @@ object LoginPage extends BasePage {
     fillTextBoxByName("enrolment[0].taxIdentifier[0].name", "EORINumber")
 
     val eori = values(0)
-    fillTextBoxByName("enrolment[0].taxIdentifier[0].value", eori)  // EORI field
+    fillTextBoxByName("enrolment[0].taxIdentifier[0].value", eori) // EORI field
     store(DeclarationEori -> Detail(eori))
   }
 
-  override def submit(): Unit = clickById("submit-top")
+  override def submit: Unit = clickById("submit-top")
 
   private def navigateToLoginPage(): Unit = driver.navigate().to(url("login-stub-frontend") + path)
 

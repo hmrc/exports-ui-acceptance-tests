@@ -27,10 +27,7 @@ object DeclarationChoicePage extends BasePage {
   val path: String = "/declaration/declaration-choice"
   val title = "Select a declaration type"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> Seq(decType),
-    Clearance -> Seq(decTypeCL)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> Seq(decType), Clearance -> Seq(decTypeCL))
 
   // ex: fillPage("OCCASIONAL")
 

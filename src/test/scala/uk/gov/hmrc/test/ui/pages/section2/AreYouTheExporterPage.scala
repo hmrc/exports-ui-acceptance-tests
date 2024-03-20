@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{areYouTheExporter, areYouTheE
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section1.{DeclarantDetailsPage, SummarySection1Page}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{ExporterYesNo, yesNo}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{yesNo, ExporterYesNo}
 
 object AreYouTheExporterPage extends BasePage {
 
@@ -34,6 +34,9 @@ object AreYouTheExporterPage extends BasePage {
 
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Common -> List(areYouTheExporter), Clearance -> List(areYouTheExporterCL))
+
+  // No  => fillPage(no)
+  // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit = {
     selectYesOrNoRadio(values(yesNo))

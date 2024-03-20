@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.section1._
 
 class DeclarationDetailsStepDef extends BaseStepDef {
 
-  And("""^I should land on Declarant-Details page""")(() => DeclarantDetailsPage.checkPage)
+  And("""^I should land on Declarant-Details page""")(() => DeclarantDetailsPage.checkPage())
 
   And("""^I select (.*) to confirm my eori""") { (option: String) =>
     DeclarantDetailsPage.fillPage(option)

@@ -16,9 +16,34 @@
 
 package uk.gov.hmrc.test.ui.cucumber.stepdefs
 
-import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage
+import uk.gov.hmrc.test.ui.pages.section1._
 
 class CommonStepDef extends BaseStepDef {
 
   And("""^I click continue""")(() => StandardOrOtherPage.continue())
+
+  And("""^I click continue on MiniCya""")(() => StandardOrOtherPage.continueOnMiniCya())
+
+  And("""^I fill section1""") { () =>
+    LoginPage.fillPage("GB123456789000"); LoginPage.continue()
+    ChoicePage.fillPage("create a declaration"); ChoicePage.continue()
+    StandardOrOtherPage.fillPage("STANDARD"); StandardOrOtherPage.continue()
+    DeclarationTypePage.fillPage("prelodged"); DeclarationTypePage.continue()
+    DeclarantDetailsPage.fillPage("Yes"); DeclarantDetailsPage.continue()
+    DoYouHaveADucrPage.fillPage("Yes"); DoYouHaveADucrPage.continue()
+    DucrEntryPage.fillPage("3GB986007773125-INVOICE123"); DucrEntryPage.continue()
+    LrnPage.fillPage("MSLRN2872100"); LrnPage.continue()
+    LinkMucrPage.fillPage("Yes"); LinkMucrPage.continue()
+    EnterAMucrPage.fillPage("GB/AZ09-B12345"); EnterAMucrPage.continue()
+    SummarySection1Page.continue()
+  }
+}
+
+object CommonStepDef {
+  def genSequenceId(seqId: String): String =
+    seqId match {
+      case "first"  => "0"
+      case "second" => "1"
+      case "third"  => "2"
+    }
 }

@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage
 
 class StandardOrOtherPageStepDef extends BaseStepDef {
 
-  And("""^I should land on Standard-Or-Other page""")(() => StandardOrOtherPage.checkPage)
+  And("""^I should land on Standard-Or-Other page""")(() => StandardOrOtherPage.checkPage())
 
   And("""^I select the (.*) declaration option""") { (option: String) =>
     StandardOrOtherPage.fillPage(option)

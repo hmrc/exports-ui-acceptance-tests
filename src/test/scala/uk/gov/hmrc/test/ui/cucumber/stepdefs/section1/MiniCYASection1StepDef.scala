@@ -21,10 +21,10 @@ import uk.gov.hmrc.test.ui.pages.section1._
 
 class MiniCYASection1StepDef extends BaseStepDef {
 
-  And("""^I should land on MiniCYA-Section-1 page""")(() => SummarySection1Page.checkPage)
+  And("""^I should land on MiniCYA-Section-1 page""")(() => SummarySection1Page.checkPage())
 
-  And("""^I check the values and change links present in Summary (.*) page""") { (section: String) =>
-    SummarySection1Page.fillPage(section)
+  And("""^I check the MiniCYA page for Section-1""") { () =>
+    SummarySection1Page.fillPage()
   }
 
 }

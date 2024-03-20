@@ -19,6 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section2
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{addAuthorisationRequired, addAuthorisationRequiredCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationEori
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys._
 
 object AuthorisationPage extends BasePage {
@@ -33,11 +34,14 @@ object AuthorisationPage extends BasePage {
   val typeIndex = 1
   val EORI = 2
 
+  // ex: fillPage({sequenceId}, "CSE", "GB121212121212")
+  // ex: fillPage({sequenceId}, "CSE", "Declarant EORI")
+
   override def fillPage(values: String*): Unit = {
     fillAutoComplete("authorisationTypeCode", values(typeIndex))
 
     val eori = values(EORI) match {
-      case "Declarant EORI" => detail(ExporterEORI)
+      case "Declarant EORI" => detail(DeclarationEori)
       case _ =>
         fillTextBoxById("eori", values(EORI))
         values(EORI)

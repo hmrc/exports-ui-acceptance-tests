@@ -27,5 +27,7 @@ object SummarySection1Page extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
+  // ex: fillPage()
+
   override def fillPage(values: String*): Unit = checkSectionSummary(Section1)
 }

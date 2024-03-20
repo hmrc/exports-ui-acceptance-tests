@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section2
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AuthorisationTypeLabel, section2, yesNo}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{section2, yesNo, AuthorisationTypeLabel}
 
 object AuthorisationsListPage extends BasePage {
 
@@ -28,6 +28,9 @@ object AuthorisationsListPage extends BasePage {
       case n => s"You have added $n authorisations"
     }
   def backButtonHref: String = AuthorisationPage.path
+
+  // No  => fillPage(no)
+  // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit =
     selectYesOrNoRadio(values(yesNo))

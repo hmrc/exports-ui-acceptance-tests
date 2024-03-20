@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.section1._
 
 class DoYouHaveADucrStepDef extends BaseStepDef {
 
-  And("""^I should land on Do-You-Have-Ducr page""")(() => DoYouHaveADucrPage.checkPage)
+  And("""^I should land on Do-You-Have-Ducr page""")(() => DoYouHaveADucrPage.checkPage())
 
   And("""^I select (.*) to confirm i have a ducr""") { (option: String) =>
     DoYouHaveADucrPage.fillPage(option)

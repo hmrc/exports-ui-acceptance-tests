@@ -19,21 +19,23 @@ package uk.gov.hmrc.test.ui.pages.section2
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{representationTypeAgreed, representationTypeAgreedCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{RepresentativeTypeAgreed, onBehalfOfOtherAgentYesNo}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{onBehalfOfOtherAgentYesNo, RepresentativeTypeAgreed}
 
 object RepresentationTypeAgreedPage extends BasePage {
 
   val path: String = "/declaration/representation-type-agreed"
   val title: String = "What type of representation will be used?"
   def backButtonHref: String = maybeDetail(onBehalfOfOtherAgentYesNo) match {
-    case Some(Constants.yes) => OnBehalfOfOtherAgentPage.path
-    case Some(Constants.no)  => RepresentativeEORINumberPage.path
+    case Some(Constants.yes) => OnBehalfOfAnotherAgentPage.path
+    case Some(Constants.no)  => RepresentativesEORINumberPage.path
   }
 
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Common -> List(representationTypeAgreed), Clearance -> List(representationTypeAgreedCL))
 
   val representationType = 0
+
+  // ex: fillPage("Direct")
 
   override def fillPage(values: String*): Unit = {
     values(representationType) match {
