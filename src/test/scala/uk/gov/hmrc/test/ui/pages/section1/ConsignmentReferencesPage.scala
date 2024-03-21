@@ -18,8 +18,15 @@ package uk.gov.hmrc.test.ui.pages.section1
 
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, TariffLinks}
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{consignmentReferences, consignmentReferencesCL, consignmentReferencesSUP}
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{Ducr, Lrn, Mrn}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{
+  AdditionalDeclarationType,
+  DeclarationType,
+  Ducr,
+  EidrDate,
+  Lrn,
+  Mrn
+}
 
 object ConsignmentReferencesPage extends BasePage {
 
@@ -35,14 +42,24 @@ object ConsignmentReferencesPage extends BasePage {
   val ducr = 0
   val mrn = 1
   val lrn = 2
+  val edirDate = 3
 
   // ex: fillPage(ducr, mrn, lrn)
+  // ex: fillPage(ducr, edirDate, lrn)
 
   override def fillPage(values: String*): Unit = {
     fillTextBoxById("ducr_ducr", values(ducr))
+    if (detail(AdditionalDeclarationType) == "eidr") {
+      fillTextBoxById("eidrDateStamp", values(mrn))
+    }
     fillTextBoxById("mrn", values(mrn))
     fillTextBoxById("lrn", values(lrn))
 
-    store(Ducr -> Detail(values(ducr)), Mrn -> Detail(values(mrn)), Lrn -> Detail(values(lrn)))
+    store(
+      Ducr -> Detail(values(ducr)),
+      Mrn -> Detail(values(mrn)),
+      EidrDate -> Detail(values(edirDate)),
+      Lrn -> Detail(values(lrn))
+    )
   }
 }

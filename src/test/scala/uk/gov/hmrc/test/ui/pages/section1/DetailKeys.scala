@@ -40,6 +40,7 @@ object DetailKeys {
 
   // /consignment-references
   val Mrn: DetailKey = DetailKey("MRN", section1)
+  val EidrDate: DetailKey = DetailKey("Date of EIDR", section1)
 
   // /local-reference-number
   val Lrn: DetailKey = DetailKey("Your reference (LRN)", section1)

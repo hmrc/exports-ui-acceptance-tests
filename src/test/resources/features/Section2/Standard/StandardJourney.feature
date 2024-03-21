@@ -1,6 +1,6 @@
 Feature: Section2 Standard Prelodged
 
-  @Section2 @StandardPrelodged
+  @Section2 @StandardPrelodged1
   Scenario: exports standard declaration journey
     Given I fill section1
     Then I should land on Are-You-The-Exporter page
