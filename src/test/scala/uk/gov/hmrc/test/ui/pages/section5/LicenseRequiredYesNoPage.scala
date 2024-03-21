@@ -36,7 +36,7 @@ object LicenseRequiredYesNoPage extends BasePage {
 
   override def pageLinkHrefs: Seq[String] = {
     val commodityCode = detail(CommodityDetailsCode(itemId))
-    super.pageLinkHrefs :+ List(s"$tariffCommodities$commodityCode#export", isLicenceRequired)
+    super.pageLinkHrefs ++ List(s"$tariffCommodities$commodityCode#export", isLicenceRequired)
   }
 
   // No  => fillPage(no)

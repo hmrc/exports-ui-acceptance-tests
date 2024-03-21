@@ -30,7 +30,7 @@ object DeclarationChoicePage extends BasePage {
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> Seq(decType), Clearance -> Seq(decTypeCL))
 
-  override val pageLinkHrefs: Seq[String] = super.pageLinkHrefs ++ goodsExportedInBaggage
+  override val pageLinkHrefs: Seq[String] = super.pageLinkHrefs ++ List(goodsExportedInBaggage)
 
   // ex: fillPage("OCCASIONAL")
 

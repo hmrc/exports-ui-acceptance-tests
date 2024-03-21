@@ -48,5 +48,5 @@ object Constants {
   val enteredValue = 0
   val storedValue  = 1
 
-  val Address = List("XYZ Carrier", "School Road", "London", "WS1 2AB", "Ukraine - UA")
+  val Address = List("XYZ Carrier", "School Road", "London", "WS1 2AB", "Ukraine")
 }

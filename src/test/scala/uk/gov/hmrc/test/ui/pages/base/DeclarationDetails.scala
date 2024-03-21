@@ -23,7 +23,8 @@ case class DetailKey(
   sectionId: Int,
   id: Option[String] = None,
   additionalId: Option[String] = None,
-  skipSummaryCheck: Boolean = false
+  skipSummaryCheck: Boolean = false,
+  skipLabelCheck: Boolean = false
 )
 
 trait DeclarationDetails

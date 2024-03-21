@@ -24,7 +24,7 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{ConsignorDetails, addressH
 object ConsignorDetailsPage extends BasePage {
 
   def backButtonHref: String = ConsignorEORINumberPage.path
-4  val path: String = "/declaration/consignor-address"
+  val path: String = "/declaration/consignor-address"
   val title: String = "What is the consignor’s name and address?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Clearance -> List(consignorAddressCL))
