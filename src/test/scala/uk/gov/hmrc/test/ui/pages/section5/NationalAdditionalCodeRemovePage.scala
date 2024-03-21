@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Details}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodes
 
 object NationalAdditionalCodeRemovePage extends BasePage {
@@ -39,6 +39,6 @@ object NationalAdditionalCodeRemovePage extends BasePage {
     if (selectYesOrNoRadio(values(yesNo))) {
       val detailKey = NationalAdditionalCodes(itemId)
       val codes = details(detailKey).filterNot(_ == values(nationalCodeToTemove))
-      store(detailKey -> Details(if (codes.isEmpty) List("None") else codes))
+      store(detailKey -> Details(if (codes.isEmpty) List(Constants.none) else codes))
     }
 }

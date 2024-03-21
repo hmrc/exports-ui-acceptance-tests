@@ -18,8 +18,11 @@ package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants._
 import uk.gov.hmrc.test.ui.pages.base.PageLinks.{aiCodes, aiCodesForContainers, previousProcedureCodes}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsIsAdditionalInformationRequired, itemsIsAdditionalInformationRequiredCL}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{
+  itemsIsAdditionalInformationRequired,
+  itemsIsAdditionalInformationRequiredCL
+}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{NoAdditionalInformation, PackageInformationType}
 import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.isPermanentExportOfUKGoods
@@ -31,28 +34,29 @@ object AdditionalInformationYesNoPage extends BasePage {
       case Clearance => CommodityMeasurePage.path
 
       case Occasional | Simplified =>
-        maybeDetail(PackageInformationType(itemId, "0")).fold(PackageInformationPage.path)(_ => PackageInformationListPage.path)
+        maybeDetail(PackageInformationType(itemId, "0")).fold(PackageInformationPage.path)(_ =>
+          PackageInformationListPage.path
+        )
 
       case _ => SupplementaryUnitsPage.path
     }
 
-  def path: String  = itemUrl("is-additional-information-required")
+  def path: String = itemUrl("is-additional-information-required")
   val title: String = "Do you need to make any Additional Information statements?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(itemsIsAdditionalInformationRequired),
-    Clearance -> List(itemsIsAdditionalInformationRequiredCL)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] =
+    Map(Common -> List(itemsIsAdditionalInformationRequired), Clearance -> List(itemsIsAdditionalInformationRequiredCL))
 
   override def pageLinkHrefs: Seq[String] =
     super.pageLinkHrefs ++ List(
       aiCodes,
-      if (detail(DeclarationType) == Clearance || isPermanentExportOfUKGoods) aiCodesForContainers else previousProcedureCodes
+      if (detail(DeclarationType) == Clearance || isPermanentExportOfUKGoods) aiCodesForContainers
+      else previousProcedureCodes
     )
 
   // No  => fillPage(no)
   // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit =
-    if (!selectYesOrNoRadio(values(yesNo))) store(NoAdditionalInformation(itemId) -> Detail("None"))
+    if (!selectYesOrNoRadio(values(yesNo))) store(NoAdditionalInformation(itemId) -> Detail(Constants.none))
 }

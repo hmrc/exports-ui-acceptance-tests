@@ -27,10 +27,8 @@ object OfficeOfExitPage extends BasePage {
   val path: String = "/declaration/office-of-exit"
   val title = "Where is the customs office of exit?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List(officeOfExit),
-    Clearance -> List(officeOfExitCL)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] =
+    Map(Common -> List(officeOfExit), Clearance -> List(officeOfExitCL))
 
   val place = 0
   val code = 1
@@ -38,7 +36,7 @@ object OfficeOfExitPage extends BasePage {
   // ex: fillPage("Folkestone", "GB000041")
 
   override def fillPage(values: String*): Unit = {
-    fillAutoComplete("countryCode", values(place))
+    fillAutoComplete("officeId", values(place))
     store(OfficeOfExit -> Detail(values(code)))
   }
 }

@@ -16,10 +16,14 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, none, sequenceId}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{none, sequenceId, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.otherPartiesInvolved
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AdditionalPartiesInvolvedEORI, AdditionalPartiesInvolvedType, NoAdditionalPartiesInvolved}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{
+  AdditionalPartiesInvolvedEORI,
+  AdditionalPartiesInvolvedType,
+  NoAdditionalPartiesInvolved
+}
 
 object OtherPartiesInvolvedPage extends BasePage {
 
@@ -35,15 +39,15 @@ object OtherPartiesInvolvedPage extends BasePage {
 
   // The 1st parameter is the sequenceId of the current "Other Party" element: "0", "1", "2", ...
   // ex: fillPage({sequenceId}, "Consolidator", "GB121212121212")
-  // ex: fillPage({sequenceId}, "None")
+  // ex: fillPage({sequenceId}, Constants.none)
 
   override def fillPage(values: String*): Unit = {
     val id = values(choice) match {
-      case "None" => "no"
-      case "Consolidator" => "CS"
-      case "Manufacturer" => "MF"
+      case Constants.none      => "no"
+      case "Consolidator"      => "CS"
+      case "Manufacturer"      => "MF"
       case "Freight forwarder" => "FW"
-      case "Warehouse keeper" => "WH"
+      case "Warehouse keeper"  => "WH"
     }
     clickById(id)
 

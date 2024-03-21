@@ -68,7 +68,7 @@ trait DriverHelper extends BrowserDriver {
     element.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE)
     element.sendKeys(value)
     element.sendKeys(Keys.ARROW_DOWN)
-    element.sendKeys(Keys.ENTER)
+    element.sendKeys(Keys.TAB)
   }
 
   def fillDropdown(elementId: String, value: String): String = {

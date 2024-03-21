@@ -16,9 +16,9 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Common, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.itemsNationalAdditionalCode
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Details}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodes
 
 object NationalAdditionalCodesPage extends BasePage {
@@ -35,8 +35,8 @@ object NationalAdditionalCodesPage extends BasePage {
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(itemsNationalAdditionalCode))
 
-  val code  = 1
-  val anotherNationalCode  = 0
+  val code = 1
+  val anotherNationalCode = 0
 
   // No  => fillPage(no)
   // Yes => fillPage(yes, "A123")
@@ -45,7 +45,8 @@ object NationalAdditionalCodesPage extends BasePage {
   override def fillPage(values: String*): Unit = {
     val nationalAdditionalCodes =
       if (elementByIdDoesNotExist("code_yes")) details(NationalAdditionalCodes(itemId)) :+ values(anotherNationalCode)
-      else if (selectYesOrNoRadio(values(yesNo))) List(values(code)) else List("None")
+      else if (selectYesOrNoRadio(values(yesNo))) List(values(code))
+      else List(Constants.none)
 
     store(NationalAdditionalCodes(itemId) -> Details(nationalAdditionalCodes))
   }
