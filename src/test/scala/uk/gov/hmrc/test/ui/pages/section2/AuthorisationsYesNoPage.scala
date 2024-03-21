@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{NoAuthorisationRequired, ProcedureChoice}
 
-object AuthorisationYesNoPage extends BasePage {
+object AuthorisationsYesNoPage extends BasePage {
 
   def backButtonHref: String = ProcedureChoicePage.path
   val path: String = "/declaration/is-authorisation-required"

@@ -36,7 +36,7 @@ import uk.gov.hmrc.test.ui.pages.section1.{
 import uk.gov.hmrc.test.ui.pages.section2.{
   AreYouTheExporterPage,
   AuthorisationPage,
-  AuthorisationYesNoPage,
+  AuthorisationsYesNoPage,
   AuthorisationsListPage,
   CarrierAddressPage,
   CarrierEORINumberPage,
@@ -82,7 +82,7 @@ class CommonStepDef extends BaseStepDef {
     ConsigneeDetailsPage.fillPage(Constants.Address: _*); continue()
     OtherPartiesInvolvedPage.fillPage(genSequenceId("first"), "Consolidator", "GB121212121212"); continue()
     ProcedureChoicePage.fillPage("Permanent"); continue()
-    AuthorisationYesNoPage.fillPage(yes); continue()
+    AuthorisationsYesNoPage.fillPage(yes); continue()
     AuthorisationPage.fillPage(genSequenceId("first"), "ACR", "GB123456789008"); continue()
     AuthorisationsListPage.fillPage(Constants.no); continue()
     continueOnMiniCya()

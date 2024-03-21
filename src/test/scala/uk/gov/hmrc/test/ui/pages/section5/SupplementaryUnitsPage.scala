@@ -34,7 +34,7 @@ object SupplementaryUnitsPage extends BasePage {
     if (title != "Do you need to add supplementary units?") super.pageLinkHrefs
     else {
       val commodityCode = detail(CommodityDetailsCode(itemId))
-      super.pageLinkHrefs :+ s"$tariffCommodities$commodityCode"
+      super.pageLinkHrefs :+ s"$tariffCommodities$commodityCode}"
     }
 
   val code  = 1

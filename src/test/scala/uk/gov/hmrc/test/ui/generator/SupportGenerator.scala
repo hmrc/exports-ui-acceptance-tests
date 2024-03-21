@@ -35,7 +35,6 @@ object SupportGenerator {
   def generateEORI: String = "GB" + s"${eoriCounter.getAndIncrement()}".padTo(15, '0')
 
   def generateString(min: Int = 1, max: Int): String = {
-
     val howMany       = min + random.nextInt((max - min) + 1)
     val stringBuilder = new StringBuilder(max)
 
@@ -45,7 +44,6 @@ object SupportGenerator {
   }
 
   def generateDigits(min: Int = 1, max: Int): String = {
-
     val howMany       = min + random.nextInt((max - min) + 1)
     val stringBuilder = new StringBuilder(max)
 
@@ -55,7 +53,6 @@ object SupportGenerator {
   }
 
   def generateAlphaNumeric(min: Int = 1, max: Int): String = {
-
     val howMany       = min + random.nextInt((max - min) + 1)
     val stringBuilder = new StringBuilder(max)
 
