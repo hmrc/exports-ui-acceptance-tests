@@ -97,7 +97,6 @@ object DetailsKeys {
   def SupplementaryUnits(itemId: String): DetailKey = DetailKey("Supplementary units", section5, Some(itemId))
 
   // /items/[id]/is-additional-information-required
-
   def NoAdditionalInformation(itemId: String): DetailKey = DetailKey("Additional information statement codes", section5, Some(itemId))
 
   // /items/[id]/additional-information
@@ -111,45 +110,44 @@ object DetailsKeys {
   // /items/[id]/additional-information/[addInfoId]/change
   // /items/[id]/additional-information/[addInfoId]/remove
 
-  // /items/[id]/is-additional-documentation-required
-
   // /items/[id]/is-licence-required
   def IsLicenceRequired(itemId: String): DetailKey = DetailKey("Licences", section5, Some(itemId))
 
+  // /items/[id]/is-additional-documentation-required
   def NoAdditionalDocuments(itemId: String): DetailKey = DetailKey("Additional references and documents", section5, Some(itemId))
 
   // /items/[id]/additional-documentation
-  def AdditionalDocumentationCode(itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentCode(itemId: String, sequenceId: String): DetailKey =
     DetailKey("Document code", section5, Some(itemId), Some(sequenceId))
 
-  def AdditionalDocumentationIdentifier(itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentIdentifier(itemId: String, sequenceId: String): DetailKey =
     DetailKey("Document identifier", section5, Some(itemId), Some(sequenceId))
 
-  def AdditionalDocumentationStatus(itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentStatus(itemId: String, sequenceId: String): DetailKey =
     DetailKey("additional-documentation-status", section5, Some(itemId), Some(sequenceId))
 
-  def AdditionalDocumentationReason(itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentReason(itemId: String, sequenceId: String): DetailKey =
     DetailKey("additional-documentation-reason", section5, Some(itemId), Some(sequenceId))
 
-  def AdditionalDocumentationAuthName(itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentAuthName(itemId: String, sequenceId: String): DetailKey =
     DetailKey("additional-documentation-authority-name", section5, Some(itemId), Some(sequenceId))
 
-  def AdditionalDocumentationDay(itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentDay(itemId: String, sequenceId: String): DetailKey =
     DetailKey("additional-documentation-day", section5, Some(itemId), Some(sequenceId))
 
-  def AdditionalDocumentationMonth(itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentMonth(itemId: String, sequenceId: String): DetailKey =
     DetailKey("additional-documentation-month", section5, Some(itemId), Some(sequenceId))
 
-  def AdditionalDocumentationYear(itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentYear(itemId: String, sequenceId: String): DetailKey =
     DetailKey("additional-documentation-year", section5, Some(itemId), Some(sequenceId))
 
-  def AdditionalDocumentationUnit(itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentUnit(itemId: String, sequenceId: String): DetailKey =
     DetailKey("additional-documentation-unit", section5, Some(itemId), Some(sequenceId))
 
-  def AdditionalDocumentationQualifier(itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentQualifier(itemId: String, sequenceId: String): DetailKey =
     DetailKey("additional-documentation-qualifier", section5, Some(itemId), Some(sequenceId))
 
-  def AdditionalDocumentationQuantity(itemId: String, sequenceId: String): DetailKey =
+  def AdditionalDocumentQuantity(itemId: String, sequenceId: String): DetailKey =
     DetailKey("additional-documentation-quantity", section5, Some(itemId), Some(sequenceId))
 
   // /items/[id]/additional-documentation-list

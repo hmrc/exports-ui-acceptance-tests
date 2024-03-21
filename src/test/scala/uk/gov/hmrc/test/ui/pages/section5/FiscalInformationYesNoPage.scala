@@ -31,6 +31,7 @@ object FiscalInformationYesNoPage extends BasePage {
     Common -> List(itemsAdditionalFiscalReferences),
     Clearance -> List(itemsAdditionalFiscalReferencesCL)
   )
+
   val countryCode = 1
   val vatNumber = 2
 

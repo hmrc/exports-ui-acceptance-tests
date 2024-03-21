@@ -17,13 +17,13 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section2.{AreYouTheExporterPage, AuthorisationYesNoPage}
+import uk.gov.hmrc.test.ui.pages.section2.{AreYouTheExporterPage, AuthorisationsYesNoPage}
 
 class AuthorisationYesNoStepDef extends BaseStepDef {
 
-  And("""^I should land on Is-Authorisation-Required page""")(() => AuthorisationYesNoPage.checkPage())
+  And("""^I should land on Is-Authorisation-Required page""")(() => AuthorisationsYesNoPage.checkPage())
 
   And("""^I select (.*) to declare authorisations""") { yesNo: String =>
-    AuthorisationYesNoPage.fillPage(yesNo)
+    AuthorisationsYesNoPage.fillPage(yesNo)
   }
 }

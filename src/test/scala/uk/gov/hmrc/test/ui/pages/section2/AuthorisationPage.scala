@@ -25,7 +25,7 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys._
 object AuthorisationPage extends BasePage {
 
   def backButtonHref: String =
-    if (detailForLabel(section2, AuthorisationTypeLabel).isEmpty) AuthorisationYesNoPage.path
+    if (detailForLabel(section2, AuthorisationTypeLabel).isEmpty) AuthorisationsYesNoPage.path
     else AuthorisationsListPage.path
 
   val path: String = "/declaration/add-authorisation-required"
@@ -60,4 +60,16 @@ object AuthorisationPage extends BasePage {
       AuthorisationHolderEORI(values(sequenceId)) -> Detail(eori)
     )
   }
+
+  private val codesRequiringAdditionalDocuments = List(
+    "ACE", "ACP", "ACR", "ACT", "AEOC", "AEOF", "AEOS",
+    "BOI", "BTI", "CCL", "CGU", "CSE", "CVA", "CW1", "CW2",
+    "CWP", "DEP", "DPO", "EIR", "EPSS", "ETD", "EUS", "EXW",
+    "EXWH", "FAS", "FZ", "GGA", "IPO", "MIB", "MOU", "OPO",
+    "REP", "REX", "RSS", "SDE", "SIVA", "SSE", "TEA", "TEAH",
+    "TRD", "TST", "UKCS",
+  )
+
+  def hasCodesRequiringAdditionalDocuments: Boolean =
+    detailForLabel(section2, AuthorisationTypeLabel).exists(codesRequiringAdditionalDocuments.contains)
 }

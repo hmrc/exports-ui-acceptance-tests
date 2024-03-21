@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section5
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsCommodityDetails, itemsCommodityDetails1, itemsCommodityDetailsCL, itemsCommodityDetailsCL1}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{CommodityDetailsCode, CommodityDetailsDescription, NoAdditionalInformation}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalFiscalReferences, CommodityDetailsCode, CommodityDetailsDescription, NoAdditionalInformation}
 import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.isOsrProcedureCode
 
 object CommodityDetailsPage extends BasePage {
@@ -28,8 +28,8 @@ object CommodityDetailsPage extends BasePage {
 
   def backButtonHref: String =
     if (!isOsrProcedureCode) AdditionalProcedureCodesPage.path
-    else maybeDetail(NoAdditionalInformation(itemId)).fold(AdditionalFiscalReferencesListPage.path) { _ =>
-      s"${FiscalInformationYesNoPage.path}?fastForward=true"
+    else maybeDetail(AdditionalFiscalReferences(itemId)).fold(s"${FiscalInformationYesNoPage.path}?fastForward=true") { _ =>
+      AdditionalFiscalReferencesListPage.path
     }
 
   def path: String  = itemUrl("commodity-details")
@@ -53,4 +53,7 @@ object CommodityDetailsPage extends BasePage {
       CommodityDetailsDescription(itemId) -> Detail(values(description))
     )
   }
+
+  def isChemicalCommodityCode: Boolean =
+    commodityCodeChemicalPrefixes.exists(detail(CommodityDetailsCode(itemId)).startsWith)
 }

@@ -18,29 +18,29 @@ package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalInformationCode, AdditionalInformationDescription}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalDocumentCode, AdditionalDocumentIdentifier}
 
-object AdditionalInformationRemovePage extends BasePage {
+object AdditionalDocumentRemovePage extends BasePage {
 
-  def backButtonHref: String = AdditionalInformationListPage.path
-  def path: String           = removeUrl("items", "additional-information")
-  val title: String          = "Are you sure you want to remove this Additional Information code?"
+  def backButtonHref: String = AdditionalDocumentListPage.path
+  def path: String           = removeUrl("items", "additional-documentation")
+  val title: String          = "Are you sure you want to remove this document or reference?"
 
   override def checkExpanders(): Unit = ()
 
-  val additionalInfoToBeRemoved = 1
+  val additionalDocumentToBeRemoved = 1
 
   // No  => fillPage(no)
 
-  // The 2nd parameter is the sequenceId of the "Additional Information" element to remove: "0", "1", "2", ...
+  // The 2nd parameter is the sequenceId of the "Additional Document" element to remove: "0", "1", "2", ...
   // Yes => fillPage(yes, "2")
 
   override def fillPage(values: String*): Unit =
     if (selectYesOrNoRadio(values(yesNo))) {
-      val seqId = values(additionalInfoToBeRemoved)
+      val seqId = values(additionalDocumentToBeRemoved)
       clear(
-        AdditionalInformationCode(itemId, seqId),
-        AdditionalInformationDescription(itemId, seqId)
+        AdditionalDocumentCode(itemId, seqId),
+        AdditionalDocumentIdentifier(itemId, seqId)
       )
     }
 }

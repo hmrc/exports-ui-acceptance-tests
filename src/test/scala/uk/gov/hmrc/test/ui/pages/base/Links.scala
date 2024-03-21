@@ -116,9 +116,7 @@ object TariffLinks {
   val itemsAdditionalInformationCL = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/group-2-references-of-messages-document-certificates-and-authorisations#de-22-additional-information-box-44"
   val itemsAdditionalDocuments = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-2-references-of-messages-document-certificates-and-authorisations#de-23-documents-produced-certificates-and-authorisations-additional-references-and-de-87-writing-off--box-44"
   val itemsAdditionalDocumentsCL = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/group-2-references-of-messages-document-certificates-and-authorisations#de-23-documents-produced-certificates-and-authorisations-additional-references-and-de-87-writing-off-box-44"
-  val itemsIsLicenceRequired = "https://www.trade-tariff.service.gov.uk/commodities/"
-  val itemsIsLicenceRequired1 = "https://www.gov.uk/government/publications/uk-trade-tariff-export-prohibitions-and-restrictions/uk-trade-tariff-export-prohibitions-and-restrictions"
-  val itemsIsLicenceRequired2 = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-2-references-of-messages-document-certificates-and-authorisations#de-23-documents-produced-certificates-and-authorisations-additional-references-and-de-87-writing-off--box-44"
+  val itemsIsLicenceRequired = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-2-references-of-messages-document-certificates-and-authorisations#de-23-documents-produced-certificates-and-authorisations-additional-references-and-de-87-writing-off--box-44"
   val declarationItemsList = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-1-message-information-including-procedure-codes#de-19-total-number-of-items-box-5-items"
   val declarationItemsListCL = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-c21-customs-clearance-request-completion-guide-inventory-exports/group-1-message-information-including-procedure-codes#de-19-total-number-of-items-box-5-items"
   val transportLeavingTheBorder = "https://www.gov.uk/government/publications/uk-trade-tariff-cds-volume-3-export-declaration-completion-guide/group-7-transport-information-modes-means-and-equipment#de-74-mode-of-transport-at-the-border-box-25-mode-of-transport-at-the-border"
@@ -167,4 +165,12 @@ object PageLinks {
 
   val previousProcedureCodes =            "https://www.gov.uk/government/publications/appendix-1-de-110-requested-and-previous-procedure-codes"
   val vatOnGoodsExportedFromUK =          "https://www.gov.uk/guidance/vat-on-goods-exported-from-the-uk-notice-703"
+
+  val isLicenceRequired =                 "https://www.gov.uk/government/publications/uk-trade-tariff-export-prohibitions-and-restrictions/uk-trade-tariff-export-prohibitions-and-restrictions"
+
+  val licensesForExportingGoods =         "https://www.trade-tariff.service.gov.uk/commodities/0306310010#export"
+
+  val additionalDocumentsUnionCodes =     "https://www.gov.uk/government/publications/data-element-23-documents-and-other-reference-codes-union-of-the-customs-declaration-service-cds"
+  val additionalDocumentsReferenceCodes = "https://www.gov.uk/guidance/data-element-23-documents-and-other-reference-codes-national-of-the-customs-declaration-service-cds#table-2-national-document-codes"
+  val additionalDocumentsUnitCodes =      "https://www.gov.uk/government/publications/measurement-unit-codes-for-data-elements-23-and-44-of-the-customs-declaration-service"
 }
