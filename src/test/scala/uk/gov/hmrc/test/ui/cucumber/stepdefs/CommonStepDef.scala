@@ -36,14 +36,15 @@ import uk.gov.hmrc.test.ui.pages.section1.{
 import uk.gov.hmrc.test.ui.pages.section2.{
   AreYouTheExporterPage,
   AuthorisationPage,
-  AuthorisationsYesNoPage,
   AuthorisationsListPage,
+  AuthorisationsYesNoPage,
   CarrierAddressPage,
   CarrierEORINumberPage,
   ConsigneeDetailsPage,
   ExporterAddressPage,
   ExporterEORINumberPage,
   OnBehalfOfAnotherAgentPage,
+  OtherPartiesInvolvedListPage,
   OtherPartiesInvolvedPage,
   ProcedureChoicePage,
   RepresentationTypeAgreedPage,
@@ -71,7 +72,7 @@ class CommonStepDef extends BaseStepDef {
   }
 
   And("""^I fill section2""") { () =>
-    AreYouTheExporterPage.fillPage(yes); continue()
+    AreYouTheExporterPage.fillPage(Constants.no); continue()
     ExporterEORINumberPage.fillPage(Constants.no); continue()
     ExporterAddressPage.fillPage(Constants.Address: _*); continue()
     OnBehalfOfAnotherAgentPage.fillPage(Constants.no); continue()
@@ -81,6 +82,7 @@ class CommonStepDef extends BaseStepDef {
     CarrierAddressPage.fillPage(Constants.Address: _*); continue()
     ConsigneeDetailsPage.fillPage(Constants.Address: _*); continue()
     OtherPartiesInvolvedPage.fillPage(genSequenceId("first"), "Consolidator", "GB121212121212"); continue()
+    OtherPartiesInvolvedListPage.fillPage(Constants.no); continue()
     ProcedureChoicePage.fillPage("Permanent"); continue()
     AuthorisationsYesNoPage.fillPage(yes); continue()
     AuthorisationPage.fillPage(genSequenceId("first"), "ACR", "GB123456789008"); continue()

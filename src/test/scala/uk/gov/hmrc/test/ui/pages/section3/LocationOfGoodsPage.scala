@@ -16,16 +16,19 @@
 
 package uk.gov.hmrc.test.ui.pages.section3
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{locationOfGoods, locationOfGoodsCL}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.AdditionalDeclarationType
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AuthorisationTypeLabel, section2}
-import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{LocationOfGoods, RRS01}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{section2, AuthorisationTypeLabel}
+import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{CountriesOfRouting, LocationOfGoods, RRS01}
 
 object LocationOfGoodsPage extends BasePage {
 
-  val backButtonHref: String = CountryOfRoutingPage.path
+  def backButtonHref: String =
+    if (details(CountriesOfRouting).head == Constants.none) CountryOfRoutingPage.path
+    else CountriesOfRoutingPage.path
+
   val path: String = "/declaration/location-of-goods"
 
   private val customsTitle = "Where will the goods be presented to customs?"
@@ -42,10 +45,8 @@ object LocationOfGoodsPage extends BasePage {
     else customsTitle
   }
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List(locationOfGoods),
-    Clearance -> List(locationOfGoodsCL)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] =
+    Map(Common -> List(locationOfGoods), Clearance -> List(locationOfGoodsCL))
 
   val code = 1
 
@@ -54,7 +55,7 @@ object LocationOfGoodsPage extends BasePage {
 
   override def fillPage(values: String*): Unit = {
     val locationOfGoods = values(code)
-    fillTextBoxById(if (selectYesOrNoRadio(values(yesNo))) "glc" else "code", locationOfGoods)
+    fillAutoComplete(if (selectYesOrNoRadio(values(yesNo))) "glc" else "code", locationOfGoods)
     store(LocationOfGoods -> Detail(locationOfGoods))
     if (locationOfGoods.endsWith("GVM")) store(RRS01 -> Detail("RRS01 (GVMS releases)"))
   }

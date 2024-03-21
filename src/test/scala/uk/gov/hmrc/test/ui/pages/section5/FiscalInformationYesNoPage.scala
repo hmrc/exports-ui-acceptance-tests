@@ -16,21 +16,19 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalFiscalReferences, itemsAdditionalFiscalReferencesCL}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Details}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalFiscalReferences
 
 object FiscalInformationYesNoPage extends BasePage {
 
   def backButtonHref: String = AdditionalProcedureCodesPage.path
-  def path: String           = itemUrl("fiscal-information")
+  def path: String = itemUrl("fiscal-information")
   val title: String = "Do you want to claim Onward Supply Relief (OSR)?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List(itemsAdditionalFiscalReferences),
-    Clearance -> List(itemsAdditionalFiscalReferencesCL)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] =
+    Map(Common -> List(itemsAdditionalFiscalReferences), Clearance -> List(itemsAdditionalFiscalReferencesCL))
 
   val countryCode = 1
   val vatNumber = 2
@@ -44,6 +42,6 @@ object FiscalInformationYesNoPage extends BasePage {
     if (selectYesOrNoRadio(values(yesNo))) {
       val detailKey = AdditionalFiscalReferences(itemId)
       val codes = details(detailKey).filterNot(_ == s"${values(countryCode)}${values(vatNumber)}")
-      store(detailKey -> Details(if (codes.isEmpty) List("None") else codes))
+      store(detailKey -> Details(if (codes.isEmpty) List(Constants.none) else codes))
     }
 }

@@ -30,6 +30,7 @@ object CountriesOfRoutingPage extends BasePage {
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(countryOfRouting))
 
   // ex: fillPage("United States of America", "The United States of America", "China", "China")
+  // ex: fillPage("China", "China")
 
   override def fillPage(values: String*): Unit = {
     val countries: Seq[String] = values.zipWithIndex.flatMap { case (value, index) =>

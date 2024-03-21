@@ -1,61 +1,27 @@
-Feature: Section2 Standard Prelodged
+Feature: Section3 Standard Prelodged
 
-  @Section2 @StandardPrelodged
+  @Section3 @StandardPrelodged
   Scenario: exports standard declaration journey
     Given I fill section1
-    Then I should land on Are-You-The-Exporter page
-    And I select No to I am the Exporter
+    And I fill section2
+    Then I should land on Destination-Country page
+    And I select Ukraine as the destination country
     And I click continue
-    Then I should land on Exporter-Eori-Number page
-    And I select No on exporter eori number page
+    Then I should land on Country-Of-Routing page
+    And I select Yes to provide routing countries
     And I click continue
-    Then I should land on Exporter-Address page
-    And I provide Exporter Address Details
+    Then I should land on Countries-Of-Routing page
+    And I add China as a routing country
+    And I add Chile as a routing country
     And I click continue
-    Then I should land on On-Behalf-Of-Another-Agent page
-    And I select No to hold the contract
+    Then I should land on Location-Of-Goods page
+    And I select Yes to provide location as GBCUASDDOVAPF
     And I click continue
-    Then I should land on Representatives-Eori-Number page
-    And I provide Representatives Eori as GB121012121212
+    Then I should land on Office-Of-Exit page
+    And I select Aberdeen with code GB000434 as the office of exit
     And I click continue
-    Then I should land on Representation-Type-Agreed page
-    And I select Direct as the type of representation
-    And I click continue
-    Then I should land on Carrier-Eori-Number page
-    And I select No on carrier eori number page
-    And I click continue
-    Then I should land on Carrier-Address page
-    And I provide Carrier Address Details
-    And I click continue
-    Then I should land on Consignee-Details page
-    And I provide consignee details
-    And I click continue
-    Then I should land on Other-Parties-Involved page
-    And I select first party Consolidator and eori GB121212121212 as the other party involved
-    And I click continue
-    Then I should land on Other-Parties-Involved-List page
-    And I select Yes on other party involved list page
-    And I click continue
-    Then I should land on Other-Parties-Involved page
-    And I select second party Manufacturer and eori GB121212131313 as the other party involved
-    And I click continue
-    Then I should land on Other-Parties-Involved-List page
-    And I select No on other party involved list page
-    And I click continue
-    Then I should land on Authorisation-Choice page
-    And I select Permanent as export procedure choice
-    And I click continue
-    Then I should land on Is-Authorisation-Required page
-    And I select Yes to declare authorisations
-    And I click continue
-    Then I should land on Authorisation-Required page
-    And I select first Authorisation code ACR and enter eori GB123456789008
-    And I click continue
-    Then I should land on Authorisations-Required-List page
-    And I select No to add another authorisation
-    And I click continue
-    Then I should land on MiniCYA-Section-2 page
-    And I check the MiniCYA page for Section-2
+    Then I should land on MiniCYA-Section-3 page
+    And I check the MiniCYA page for Section-3
     And I click continue on MiniCya
 
 

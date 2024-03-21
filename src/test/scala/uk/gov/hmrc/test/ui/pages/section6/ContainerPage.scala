@@ -30,10 +30,8 @@ object ContainerPage extends BasePage {
     if (elementByIdDoesNotExist("code_yes")) "What is the container ID?"
     else "Are the goods in a container or containers?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(container),
-    Clearance -> List(containerCL, containerCL1)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] =
+    Map(Common -> List(container), Clearance -> List(containerCL, containerCL1))
 
   private def SupplementaryBackNavigation: String =
     if (
@@ -64,8 +62,8 @@ object ContainerPage extends BasePage {
     else
       ExpressConsignmentPage.path
 
-  private val yesNo          = 0
-  private val code           = 1
+  private val yesNo = 0
+  private val code = 1
   private val additionalCode = 0
 
   private def saveContainerId(containerId: String): Unit = {
@@ -76,5 +74,5 @@ object ContainerPage extends BasePage {
   override def fillPage(values: String*): Unit =
     if (elementByIdDoesNotExist("code_yes")) saveContainerId(values(additionalCode))
     else if (selectYesOrNoRadio(values(yesNo))) saveContainerId(values(code))
-    else store(NoContainers -> Detail("None"))
+    else store(NoContainers -> Detail(Constants.none))
 }
