@@ -27,7 +27,7 @@ object StandardOrOtherPage extends BasePage {
   val path: String = "/declaration/standard-or-other"
   val title: String = "Which type of declaration do you want to make?"
 
-  override val pageLinkHrefs: Seq[String] = super.pageLinkHrefs ++ fullExportDeclaration
+  override val pageLinkHrefs: Seq[String] = super.pageLinkHrefs ++ List(fullExportDeclaration)
 
   // ex: fillPage("STANDARD")
   // ex: fillPage("Other")

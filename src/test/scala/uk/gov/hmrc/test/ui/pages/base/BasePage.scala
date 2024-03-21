@@ -91,23 +91,24 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper {
     val cacheDetails = allSectionDetails(detailKey.sectionId)
 
     cacheDetails.foreach { case (detailKey, details) =>
-      val expectedRow = displayedKeysAndDetails.find(_._1.getText == detailKey.label)
-      expectedRow mustBe defined
+      if (!detailKey.skipLabelCheck) {
+        val expectedRows = displayedKeysAndDetails.filter(_._1.getText == detailKey.label)
+        assert(expectedRows.nonEmpty)
 
-      if (!detailKey.skipSummaryCheck) {
-        val values = details match {
-          case detail: Detail  => Seq(detail.value)
-          case detail: Details => detail.values
+        if (!detailKey.skipSummaryCheck) {
+          val values = details match {
+            case detail: Detail => Seq(detail.value)
+            case detail: Details => detail.values
+          }
+
+          // There may be some edge cases here not accounted for, please add accordingly.
+          val valuesSeparator = detailKey.label match {
+            //   case RoutingCountry => ","
+            case _ => "\n"
+          }
+
+          assert(expectedRows.exists(_._2.getText.split(valuesSeparator).toList == values))
         }
-
-        // There may be some edge cases here not accounted for, please add accordingly.
-        val valuesSeparator = detailKey.label match {
-          //   case RoutingCountry => ","
-          case _ => "\n"
-        }
-
-        val displayValues = expectedRow.head._2.getText.split(valuesSeparator).toList
-        displayValues mustBe values
       }
     }
   }

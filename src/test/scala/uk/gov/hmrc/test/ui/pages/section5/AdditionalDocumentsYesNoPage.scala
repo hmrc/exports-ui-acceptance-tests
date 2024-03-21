@@ -41,7 +41,7 @@ object AdditionalDocumentsYesNoPage extends BasePage {
 
   override def pageLinkHrefs: Seq[String] = {
     val commodityCode = detail(CommodityDetailsCode(itemId))
-    super.pageLinkHrefs :+ List(s"$tariffCommodities$commodityCode#export", licensesForExportingGoods)
+    super.pageLinkHrefs ++ List(s"$tariffCommodities$commodityCode#export", licensesForExportingGoods)
   }
 
   // No  => fillPage(no)

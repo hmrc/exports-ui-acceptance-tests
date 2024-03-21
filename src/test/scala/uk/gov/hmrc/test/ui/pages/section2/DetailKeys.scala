@@ -45,7 +45,7 @@ object DetailKeys {
   val ExporterEORI: DetailKey = DetailKey("Exporter’s EORI number", section2)
 
   // /exporter-address
-  val ExporterDetails: DetailKey = DetailKey("Exporter's details", section2)
+  val ExporterDetails: DetailKey = DetailKey("Exporter’s details", section2)
 
   // /are-you-completing-this-declaration-on-behalf-of-another-agent
   val onBehalfOfOtherAgentYesNo: DetailKey = DetailKey("Hold the contract with the exporter", section2)
@@ -72,7 +72,7 @@ object DetailKeys {
   def AdditionalPartiesInvolvedEORI(sequenceId: String): DetailKey = DetailKey("Other parties’s EORI number", section2, Some(sequenceId))
 
   // /authorisation-choice
-  val ProcedureChoice: DetailKey = DetailKey(ProcedureChoiceLabel, section2, None, None, skipSummaryCheck = true)
+  val ProcedureChoice: DetailKey = DetailKey(ProcedureChoiceLabel, section2, None, None, skipSummaryCheck = true, skipLabelCheck = true)
 
   // /is-authorisation-required
   val NoAuthorisationRequired: DetailKey = DetailKey("Authorisations for this declaration", section2)

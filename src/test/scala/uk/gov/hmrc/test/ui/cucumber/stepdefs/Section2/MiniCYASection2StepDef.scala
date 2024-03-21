@@ -27,5 +27,4 @@ class MiniCYASection2StepDef extends BaseStepDef {
   And("""^I check the MiniCYA page for Section-2""") { () =>
     SummarySection2Page.fillPage()
   }
-
 }
