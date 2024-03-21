@@ -33,13 +33,10 @@ object CountriesOfRoutingPage extends BasePage {
   // ex: fillPage("China", "China")
 
   override def fillPage(values: String*): Unit = {
-    val countries: Seq[String] = values.zipWithIndex.flatMap { case (value, index) =>
-      if (index % 2 == 0) {
-        fillAutoComplete("countryCode", value)
-        clickById("add")
-        None
-      } else Some(value)
-    }
-    store(CountriesOfRouting -> Details(countries))
+    fillAutoComplete("countryCode", values(0))
+    clickById("add")
   }
+
+  def storeCountry(country: String): Unit =
+    store(CountriesOfRouting -> Details(maybeDetails(CountriesOfRouting).fold(Seq(country))(_ :+ country)))
 }

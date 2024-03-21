@@ -11,8 +11,8 @@ Feature: Section3 Standard Prelodged
     And I select Yes to provide routing countries
     And I click continue
     Then I should land on Countries-Of-Routing page
-    And I add China as a routing country
-    And I add Chile as a routing country
+    And I add United States of America : The United States of America as a routing country
+    And I add Chile : Chile as a routing country
     And I click continue
     Then I should land on Location-Of-Goods page
     And I select Yes to provide location as GBCUASDDOVAPF

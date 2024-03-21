@@ -50,6 +50,12 @@ import uk.gov.hmrc.test.ui.pages.section2.{
   RepresentationTypeAgreedPage,
   RepresentativesEORINumberPage
 }
+import uk.gov.hmrc.test.ui.pages.section3.{
+  CountryOfRoutingPage,
+  DestinationCountryPage,
+  LocationOfGoodsPage,
+  OfficeOfExitPage
+}
 
 class CommonStepDef extends BaseStepDef {
 
@@ -59,7 +65,7 @@ class CommonStepDef extends BaseStepDef {
 
   And("""^I fill section1""") { () =>
     LoginPage.fillPage("GB123456789000"); continue()
-    ChoicePage.fillPage("create a declaration"); continue()
+    ChoicePage.fillPage("create a declaration")
     StandardOrOtherPage.fillPage("STANDARD"); continue()
     DeclarationTypePage.fillPage("prelodged"); continue()
     DeclarantDetailsPage.fillPage(yes); continue()
@@ -87,6 +93,14 @@ class CommonStepDef extends BaseStepDef {
     AuthorisationsYesNoPage.fillPage(yes); continue()
     AuthorisationPage.fillPage(genSequenceId("first"), "ACR", "GB123456789008"); continue()
     AuthorisationsListPage.fillPage(Constants.no); continue()
+    continueOnMiniCya()
+  }
+
+  And("""^I fill section3""") { () =>
+    DestinationCountryPage.fillPage("China"); continue()
+    CountryOfRoutingPage.fillPage(Constants.no); continue()
+    LocationOfGoodsPage.fillPage(Constants.no, "GBAUNHVNHVNHVVVM"); continue()
+    OfficeOfExitPage.fillPage("Folkestone", "GB000041"); continue()
     continueOnMiniCya()
   }
 }

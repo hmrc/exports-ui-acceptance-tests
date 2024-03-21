@@ -106,7 +106,7 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper {
             case _                  => "\n"
           }
 
-          assert(expectedRows.exists(_._2.getText.split(valuesSeparator).toList == values))
+          assert(expectedRows.exists(_._2.getText.split(valuesSeparator).toList.map(_.trim) == values))
         }
       }
     }

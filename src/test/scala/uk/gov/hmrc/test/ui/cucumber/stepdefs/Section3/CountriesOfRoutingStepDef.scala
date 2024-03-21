@@ -23,7 +23,8 @@ class CountriesOfRoutingStepDef extends BaseStepDef {
 
   And("""^I should land on Countries-Of-Routing page""")(() => CountriesOfRoutingPage.checkPage())
 
-  And("""^I add (.*) as a routing country""") { country: String =>
-    CountriesOfRoutingPage.fillPage(country, country)
+  And("""^I add (.*) : (.*) as a routing country""") { (countryDropDown: String, countryCya: String) =>
+    CountriesOfRoutingPage.fillPage(countryDropDown)
+    CountriesOfRoutingPage.storeCountry(countryCya)
   }
 }
