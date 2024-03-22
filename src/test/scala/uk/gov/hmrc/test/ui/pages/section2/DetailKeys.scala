@@ -98,5 +98,4 @@ object DetailKeys {
 
   // /consignor-address
   val ConsignorDetails: DetailKey = DetailKey("Consignor’s details", section2)
-
 }
