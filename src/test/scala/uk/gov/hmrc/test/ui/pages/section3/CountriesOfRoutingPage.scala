@@ -33,7 +33,7 @@ object CountriesOfRoutingPage extends BasePage {
   // ex: fillPage("China", "China")
 
   override def fillPage(values: String*): Unit = {
-    fillAutoComplete("countryCode", values(0))
+    fillDropdown("countryCode", values(0))
     clickById("add")
   }
 

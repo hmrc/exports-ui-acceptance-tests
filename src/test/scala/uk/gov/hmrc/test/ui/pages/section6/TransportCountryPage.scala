@@ -44,7 +44,7 @@ object TransportCountryPage extends BasePage {
     }
 
   override def fillPage(values: String*): Unit = {
-    fillAutoComplete("transport-country", values(country))
+    fillDropdown("transport-country", values(country))
     store(TransportCountry -> Detail(values(country)))
   }
 }

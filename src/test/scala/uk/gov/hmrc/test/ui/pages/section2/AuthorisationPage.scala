@@ -42,7 +42,7 @@ object AuthorisationPage extends BasePage {
   // ex: fillPage({sequenceId}, "CSE", "Declarant EORI")
 
   override def fillPage(values: String*): Unit = {
-    val selection = fillDropdown("authorisationTypeCode", values(typeIndex))
+    val selection = fillDropdown("authorisationTypeCode", values(typeIndex), Some("authorisationTypeCode__listbox"))
 
     val eori = values(EORI) match {
       case "Declarant EORI" =>

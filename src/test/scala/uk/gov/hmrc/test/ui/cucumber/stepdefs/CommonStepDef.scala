@@ -20,42 +20,10 @@ import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.{continue, continueOnMiniCya}
 import uk.gov.hmrc.test.ui.pages.base.Constants.yes
 import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
-import uk.gov.hmrc.test.ui.pages.section1.{
-  ChoicePage,
-  DeclarantDetailsPage,
-  DeclarationTypePage,
-  DoYouHaveADucrPage,
-  DucrEntryPage,
-  EnterAMucrPage,
-  LinkMucrPage,
-  LoginPage,
-  LrnPage,
-  StandardOrOtherPage,
-  SummarySection1Page
-}
-import uk.gov.hmrc.test.ui.pages.section2.{
-  AreYouTheExporterPage,
-  AuthorisationPage,
-  AuthorisationsListPage,
-  AuthorisationsYesNoPage,
-  CarrierAddressPage,
-  CarrierEORINumberPage,
-  ConsigneeDetailsPage,
-  ExporterAddressPage,
-  ExporterEORINumberPage,
-  OnBehalfOfAnotherAgentPage,
-  OtherPartiesInvolvedListPage,
-  OtherPartiesInvolvedPage,
-  ProcedureChoicePage,
-  RepresentationTypeAgreedPage,
-  RepresentativesEORINumberPage
-}
-import uk.gov.hmrc.test.ui.pages.section3.{
-  CountryOfRoutingPage,
-  DestinationCountryPage,
-  LocationOfGoodsPage,
-  OfficeOfExitPage
-}
+import uk.gov.hmrc.test.ui.pages.section1._
+import uk.gov.hmrc.test.ui.pages.section2._
+import uk.gov.hmrc.test.ui.pages.section3._
+import uk.gov.hmrc.test.ui.pages.section4._
 
 class CommonStepDef extends BaseStepDef {
 
@@ -101,6 +69,17 @@ class CommonStepDef extends BaseStepDef {
     CountryOfRoutingPage.fillPage(Constants.no); continue()
     LocationOfGoodsPage.fillPage(Constants.no, "GBAUNHVNHVNHVVVM"); continue()
     OfficeOfExitPage.fillPage("Folkestone", "GB000041"); continue()
+    continueOnMiniCya()
+  }
+
+  And("""^I fill section4""") { () =>
+    InvoicesAndExchangeRateChoicePage.fillPage(Constants.no); continue()
+    InvoicesAndExchangeRatePage.fillPage("GBP","567640","1.25"); continue()
+    TotalPackageQuantityPage.fillPage("4"); continue()
+    NatureOfTransactionPage.fillPage("Goods being sol"); continue()
+    PreviousDocumentPage.fillPage("first", "Commercial Invoice", "9GB123456782317-BH1433A61"); continue()
+    PreviousDocumentPage.fillPage("second", "Packing List", "9GB12345678899"); continue()
+    PreviousDocumentListPage.fillPage(Constants.no); continue()
     continueOnMiniCya()
   }
 }

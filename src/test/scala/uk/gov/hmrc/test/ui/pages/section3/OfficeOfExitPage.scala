@@ -36,7 +36,7 @@ object OfficeOfExitPage extends BasePage {
   // ex: fillPage("Folkestone", "GB000041")
 
   override def fillPage(values: String*): Unit = {
-    fillAutoComplete("officeId", values(place))
+    fillDropdown("officeId", values(place))
     store(OfficeOfExit -> Detail(values(code)))
   }
 }

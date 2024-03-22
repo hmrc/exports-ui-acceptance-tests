@@ -17,12 +17,14 @@
 package uk.gov.hmrc.test.ui.pages.base
 
 import org.openqa.selenium.{By, WebElement}
-import org.scalatest.matchers.must.Matchers.{convertToAnyMustWrapper, defined}
+import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.CountriesOfRouting
+
+import scala.collection.mutable
 
 trait BasePage extends CacheHelper with DriverHelper with PageHelper {
 
@@ -82,33 +84,44 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper {
       .filter(findChildByClassName(_, detailKey.id.head).getText == detailKey.label)
       .flatMap(findChildrenByClassName(_, "govuk-summary-list__row"))
 
-    val displayedKeysAndDetails: Seq[(WebElement, WebElement)] = rows.map { webElement =>
-      findChildByClassName(webElement, "govuk-summary-list__key") ->
-        findChildByClassName(webElement, "govuk-summary-list__value")
-    }
+    val displayedLabelsAndValues: Seq[(WebElement, WebElement)] =
+     rows.map { webElement =>
+        findChildByClassName(webElement, "govuk-summary-list__key") ->
+          findChildByClassName(webElement, "govuk-summary-list__value")
+      }
 
     val cacheDetails = allSectionDetails(detailKey.sectionId)
 
-    cacheDetails.foreach { case (detailKey, details) =>
-      if (!detailKey.skipLabelCheck) {
-        val expectedRows = displayedKeysAndDetails.filter(_._1.getText == detailKey.label)
-        assert(expectedRows.nonEmpty)
+    cacheDetails.foldLeft(displayedLabelsAndValues) {
+      case (labelsAndValues, (detailKey, details)) =>
 
-        if (!detailKey.skipSummaryCheck) {
-          val values = details match {
-            case detail: Detail  => Seq(detail.value)
-            case detail: Details => detail.values
+        // To remove (or comment in) after we are done with the happy-path scenarios for the 6 sections
+        print(s"\n=========== ${detailKey.label} => \n")
+        labelsAndValues.foreach(we => print(s"${we._1.getText}\n"))
+
+        if (detailKey.skipLabelCheck) labelsAndValues
+        else {
+          val expectedRow = labelsAndValues.find(_._1.getText == detailKey.label).get
+
+          if (!detailKey.skipSummaryCheck) {
+            val values = details match {
+              case detail: Detail  => Seq(detail.value)
+              case detail: Details => detail.values
+            }
+
+            // There may be some edge cases here not accounted for, please add accordingly.
+            val valuesSeparator = detailKey match {
+              case CountriesOfRouting => ","
+              case _                  => "\n"
+            }
+
+            val text = expectedRow._2.getText
+            val result = text.split(valuesSeparator).toList.map(_.trim)
+            result mustBe values
           }
 
-          // There may be some edge cases here not accounted for, please add accordingly.
-          val valuesSeparator = detailKey match {
-            case CountriesOfRouting => ","
-            case _                  => "\n"
-          }
-
-          assert(expectedRows.exists(_._2.getText.split(valuesSeparator).toList.map(_.trim) == values))
+          labelsAndValues.diff(List(expectedRow))
         }
-      }
     }
   }
 }

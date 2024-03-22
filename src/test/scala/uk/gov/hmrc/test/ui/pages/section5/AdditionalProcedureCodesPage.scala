@@ -43,7 +43,7 @@ object AdditionalProcedureCodesPage extends BasePage {
 
   override def fillPage(values: String*): Unit = {
     values.foreach { value =>
-      fillAutoComplete("additionalProcedureCode", value)
+      fillDropdown("additionalProcedureCode", value)
       clickById("add")
     }
     store(AdditionalProcedureCodes(itemId) -> Details(values))

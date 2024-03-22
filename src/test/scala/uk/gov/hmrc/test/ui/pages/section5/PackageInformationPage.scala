@@ -51,7 +51,7 @@ object PackageInformationPage extends BasePage {
   // ex: fillPage("2", "Aerosol", "20", "No shipping mark")
 
   override def fillPage(values: String*): Unit = {
-    fillAutoComplete("typesOfPackages", values(packageType))
+    fillDropdown("typesOfPackages", values(packageType))
     fillTextBoxById("numberOfPackages", values(numberOfPackages))
     fillTextBoxById("shippingMarks", values(shippingMark))
     store(

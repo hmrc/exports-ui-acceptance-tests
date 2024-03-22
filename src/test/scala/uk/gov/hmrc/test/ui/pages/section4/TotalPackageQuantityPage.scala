@@ -25,7 +25,7 @@ import uk.gov.hmrc.test.ui.pages.section4.InvoicesAndExchangeRateChoicePage.less
 object TotalPackageQuantityPage extends BasePage {
 
   def backButtonHref: String =
-    if (detail(TotalAmountInvoiced) == lessThan100000) InvoicesAndExchangeRateChoicePage.path else InvoiceAndExchangeRatePage.path
+    if (detail(TotalAmountInvoiced) == lessThan100000) InvoicesAndExchangeRateChoicePage.path else InvoicesAndExchangeRatePage.path
 
   val path: String = "/declaration/total-package-quantity"
   def title = "What is the total number of packages in this declaration?"
