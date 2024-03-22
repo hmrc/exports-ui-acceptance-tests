@@ -20,10 +20,10 @@ import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.{continue, continueOnMiniCya}
 import uk.gov.hmrc.test.ui.pages.base.Constants.yes
 import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
-import uk.gov.hmrc.test.ui.pages.section1.{ChoicePage, DeclarantDetailsPage, DeclarationTypePage, DoYouHaveADucrPage, DucrEntryPage, EnterAMucrPage, LinkMucrPage, LoginPage, LrnPage, StandardOrOtherPage, SummarySection1Page}
-import uk.gov.hmrc.test.ui.pages.section2.{AreYouTheExporterPage, AuthorisationPage, AuthorisationsListPage, AuthorisationsYesNoPage, CarrierAddressPage, CarrierEORINumberPage, ConsigneeDetailsPage, ExporterAddressPage, ExporterEORINumberPage, OnBehalfOfAnotherAgentPage, OtherPartiesInvolvedListPage, OtherPartiesInvolvedPage, ProcedureChoicePage, RepresentationTypeAgreedPage, RepresentativesEORINumberPage}
-import uk.gov.hmrc.test.ui.pages.section3.{CountryOfRoutingPage, DestinationCountryPage, LocationOfGoodsPage, OfficeOfExitPage}
-import uk.gov.hmrc.test.ui.pages.section4.{InvoicesAndExchangeRateChoicePage, InvoicesAndExchangeRatePage, NatureOfTransactionPage, PreviousDocumentListPage, PreviousDocumentPage, TotalPackageQuantityPage}
+import uk.gov.hmrc.test.ui.pages.section1._
+import uk.gov.hmrc.test.ui.pages.section2._
+import uk.gov.hmrc.test.ui.pages.section3._
+import uk.gov.hmrc.test.ui.pages.section4._
 
 class CommonStepDef extends BaseStepDef {
 
