@@ -20,6 +20,7 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Standard, Supplementary, yesNo}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section3.SummarySection3Page
+import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.{DocumentCodeLabel, section4}
 
 object PreviousDocumentListPage extends BasePage {
 
@@ -30,7 +31,12 @@ object PreviousDocumentListPage extends BasePage {
     }
 
   val path: String = "/declaration/previous-documents-list"
-  val title = "You’ve added details for"
+
+  def title: String =
+    allSectionDetails(section4).count(_._1.label == DocumentCodeLabel) match {
+      case 1 => "You’ve added details for 1 document"
+      case n => s"You’ve added details for $n documents"
+    }
 
   override def checkExpanders(): Unit = ()
 

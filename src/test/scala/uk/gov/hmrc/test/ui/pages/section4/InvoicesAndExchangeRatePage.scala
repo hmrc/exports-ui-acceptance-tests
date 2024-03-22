@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{invoiceAndExchangeRateChoice,
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, Details}
 import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.{ExchangeRate, TotalAmountInvoiced}
 
-object InvoiceAndExchangeRatePage extends BasePage {
+object InvoicesAndExchangeRatePage extends BasePage {
 
   def backButtonHref: String = InvoicesAndExchangeRateChoicePage.path
   val path: String = "/declaration/invoices-and-exchange-rate"
@@ -39,7 +39,7 @@ object InvoiceAndExchangeRatePage extends BasePage {
     val totalAmountInvoiced = values(1)
     val exchangeRate = values(2)
 
-    fillAutoComplete("totalAmountInvoicedCurrency", currency)
+    fillDropdown("totalAmountInvoicedCurrency", currency)
     fillTextBoxById("totalAmountInvoiced", totalAmountInvoiced)
 
     if (exchangeRate == no) {

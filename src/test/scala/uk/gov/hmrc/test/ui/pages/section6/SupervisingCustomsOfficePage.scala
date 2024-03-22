@@ -39,7 +39,7 @@ object SupervisingCustomsOfficePage extends BasePage {
   private val officeCode = 0
 
   override def fillPage(values: String*): Unit = {
-    fillAutoComplete("supervisingCustomsOffice", values(officeCode))
+    fillDropdown("supervisingCustomsOffice", values(officeCode))
     store(SuperVisingCustomsOffice -> Detail(values(officeCode)))
   }
 }

@@ -52,7 +52,7 @@ object ProcedureCodesPage extends BasePage {
 
   override def fillPage(values: String*): Unit = {
     val procedureCode = values.head
-    fillAutoComplete("procedureCode", procedureCode)
+    fillDropdown("procedureCode", procedureCode)
     store(ProcedureCode(itemId) -> Detail(procedureCode))
   }
 

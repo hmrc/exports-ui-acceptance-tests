@@ -55,7 +55,7 @@ object LocationOfGoodsPage extends BasePage {
 
   override def fillPage(values: String*): Unit = {
     val locationOfGoods = values(code)
-    fillAutoComplete(if (selectYesOrNoRadio(values(yesNo))) "glc" else "code", locationOfGoods)
+    fillDropdown(if (selectYesOrNoRadio(values(yesNo))) "glc" else "code", locationOfGoods)
     store(LocationOfGoods -> Detail(locationOfGoods))
     if (locationOfGoods.endsWith("GVM")) store(RRS01 -> Detail("RRS01 (GVMS releases)"))
   }

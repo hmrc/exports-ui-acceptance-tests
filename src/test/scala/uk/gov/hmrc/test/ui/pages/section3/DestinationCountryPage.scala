@@ -37,7 +37,7 @@ object DestinationCountryPage extends BasePage {
   // ex: fillPage("China")
 
   override def fillPage(values: String*): Unit = {
-    fillAutoComplete("countryCode", values(enteredValue))
+    fillDropdown("countryCode", values(enteredValue))
     store(DestinationCountry -> Detail(values(if (values.size == 2) storedValue else enteredValue)))
   }
 

@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section2
 
 import uk.gov.hmrc.test.ui.pages.base.DetailKey
-import uk.gov.hmrc.test.ui.pages.section2.CarrierAddressPage.{fillAutoComplete, fillTextBoxById}
+import uk.gov.hmrc.test.ui.pages.section2.CarrierAddressPage.{fillDropdown, fillTextBoxById}
 
 object DetailKeys {
 
@@ -26,7 +26,7 @@ object DetailKeys {
     fillTextBoxById("details_address_addressLine", values(1))
     fillTextBoxById("details_address_townOrCity", values(2))
     fillTextBoxById("details_address_postCode", values(3))
-    fillAutoComplete("details_address_country", values(4))
+    fillDropdown("details_address_country", values(4))
   }
 
   val EORI = 1

@@ -21,8 +21,11 @@ import org.scalatest.matchers.must.Matchers.{convertToAnyMustWrapper, defined}
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.Cache
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.CountriesOfRouting
+
+import scala.collection.mutable
 
 trait BasePage extends CacheHelper with DriverHelper with PageHelper {
 
@@ -87,7 +90,7 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper {
         findChildByClassName(webElement, "govuk-summary-list__value")
     }
 
-    val cacheDetails = allSectionDetails(detailKey.sectionId)
+    val cacheDetails: Map[String, mutable.Map[DetailKey, DeclarationDetails]] = allSectionDetails(detailKey.sectionId).groupBy(_._1.label)
 
     cacheDetails.foreach { case (detailKey, details) =>
       if (!detailKey.skipLabelCheck) {
@@ -106,7 +109,11 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper {
             case _                  => "\n"
           }
 
-          assert(expectedRows.exists(_._2.getText.split(valuesSeparator).toList.map(_.trim) == values))
+          val result = expectedRows.flatMap { expectedRow  =>
+            val text = expectedRow._2.getText
+            text.split(valuesSeparator).toList.map(_.trim)
+          }
+          result mustBe values
         }
       }
     }

@@ -63,19 +63,15 @@ trait DriverHelper extends BrowserDriver {
   def findChildrenByClassName(parent: WebElement, className: String): Seq[WebElement] =
     parent.findElements(By.className(className)).asScala.toList
 
-  def fillAutoComplete(elementId: String, value: String): Unit = {
+   def fillDropdown(elementId: String, value: String, maybeId: Option[String] = None): String = {
     val element = findElementById(elementId)
     element.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE)
     element.sendKeys(value)
-    element.sendKeys(Keys.ARROW_DOWN)
-    element.sendKeys(Keys.TAB)
-  }
-
-  def fillDropdown(elementId: String, value: String): String = {
-    val element = findElementById(elementId)
-    element.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE)
-    element.sendKeys(value)
-    val selection = findElementById("authorisationTypeCode__listbox").findElement(By.tagName("li")).getText
+    val selection = maybeId.fold("") { id =>
+      val text = findElementById(id).getText
+      assert(text.nonEmpty, s"Option not retrieved for the dropdown $elementId($id)")
+      text
+    }
     element.sendKeys(Keys.ARROW_DOWN)
     element.sendKeys(Keys.TAB)
     selection

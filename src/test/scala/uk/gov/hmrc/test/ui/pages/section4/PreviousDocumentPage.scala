@@ -43,11 +43,11 @@ object PreviousDocumentPage extends BasePage {
   //ex: fillPage("3", "Commercial Invoice", "SMITH 321/890")
 
   override def fillPage(values: String*): Unit = {
-    val selection = fillDropdown("documentType", values(documentCode))
+    val code = fillDropdown("documentType", values(documentCode), Some("documentType__option--0"))
     fillTextBoxById("documentReference", values(documentReference))
 
     store(
-      DocumentCode(values(sequenceId)) -> Detail(selection),
+      DocumentCode(values(sequenceId)) -> Detail(code),
       DocumentReference(values(sequenceId)) -> Detail(values(documentReference))
     )
   }
