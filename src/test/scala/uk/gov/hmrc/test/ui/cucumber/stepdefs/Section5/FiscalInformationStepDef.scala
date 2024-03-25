@@ -17,13 +17,17 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section5
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section5.{AdditionalProcedureCodesPage, CommodityDetailsPage, FiscalInformationYesNoPage}
+import uk.gov.hmrc.test.ui.pages.section5.{
+  AdditionalProcedureCodesPage,
+  CommodityDetailsPage,
+  FiscalReferencesYesNoPage
+}
 
-class FisicalInformationStepDef extends BaseStepDef {
+class FiscalInformationStepDef extends BaseStepDef {
 
-  And("""^I should land on Fiscal-Information page""")(() => FiscalInformationYesNoPage.checkPage())
+  And("""^I should land on Fiscal-Information page""")(() => FiscalReferencesYesNoPage.checkPage())
 
   And("""^I select (.*) for Onward supply relief""") { (optionToSelect: String) =>
-    FiscalInformationYesNoPage.fillPage(optionToSelect)
+    FiscalReferencesYesNoPage.fillPage(optionToSelect)
   }
 }

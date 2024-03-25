@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, sequenceId}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{sequenceId, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{addAuthorisationRequired, addAuthorisationRequiredCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationEori
@@ -63,14 +63,52 @@ object AuthorisationPage extends BasePage {
   }
 
   private val codesRequiringAdditionalDocuments = List(
-    "ACE", "ACP", "ACR", "ACT", "AEOC", "AEOF", "AEOS",
-    "BOI", "BTI", "CCL", "CGU", "CSE", "CVA", "CW1", "CW2",
-    "CWP", "DEP", "DPO", "EIR", "EPSS", "ETD", "EUS", "EXW",
-    "EXWH", "FAS", "FZ", "GGA", "IPO", "MIB", "MOU", "OPO",
-    "REP", "REX", "RSS", "SDE", "SIVA", "SSE", "TEA", "TEAH",
-    "TRD", "TST", "UKCS",
+    "ACE",
+    "ACP",
+    "ACR",
+    "ACT",
+    "AEOC",
+    "AEOF",
+    "AEOS",
+    "BOI",
+    "BTI",
+    "CCL",
+    "CGU",
+    "CSE",
+    "CVA",
+    "CW1",
+    "CW2",
+    "CWP",
+    "DEP",
+    "DPO",
+    "EIR",
+    "EPSS",
+    "ETD",
+    "EUS",
+    "EXW",
+    "EXWH",
+    "FAS",
+    "FZ",
+    "GGA",
+    "IPO",
+    "MIB",
+    "MOU",
+    "OPO",
+    "REP",
+    "REX",
+    "RSS",
+    "SDE",
+    "SIVA",
+    "SSE",
+    "TEA",
+    "TEAH",
+    "TRD",
+    "TST",
+    "UKCS"
   )
 
   def hasCodesRequiringAdditionalDocuments: Boolean =
-    detailForLabel(section2, AuthorisationTypeLabel).exists(codesRequiringAdditionalDocuments.contains)
+    detailForLabel(section2, AuthorisationTypeLabel).exists(code =>
+      codesRequiringAdditionalDocuments.exists(code.startsWith)
+    )
 }

@@ -21,7 +21,9 @@ import uk.gov.hmrc.test.ui.pages.section5.{DangerousGoodsCodePage, VatRatingPage
 
 class VatRatingStepDef extends BaseStepDef {
 
-  And("""^I should land on VAT-Rating page""")(() => VatRatingPage.checkPage())
+  And("""^I should land on VAT-Rating page""") { () =>
+    VatRatingPage.checkPage()
+  }
 
   And("""^I select (.*) option as goods being VAT zero-rated""") { (optionToSelect: String) =>
     VatRatingPage.fillPage(optionToSelect)

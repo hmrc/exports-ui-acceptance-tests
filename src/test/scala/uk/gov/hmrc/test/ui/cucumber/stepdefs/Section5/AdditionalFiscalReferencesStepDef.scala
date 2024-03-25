@@ -17,13 +17,16 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section5
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section5.{AdditionalFiscalReferencesPage, FiscalInformationYesNoPage}
+import uk.gov.hmrc.test.ui.pages.section5.{FiscalReferencesPage, FiscalReferencesYesNoPage}
 
 class AdditionalFiscalReferencesStepDef extends BaseStepDef {
 
-  And("""^I should land on Additional-Fiscal-References page""")(() => AdditionalFiscalReferencesPage.checkPage())
+  And("""^I should land on Additional-Fiscal-References page""") { () =>
+    FiscalReferencesPage.checkPage()
+  }
 
-  And("""^I select VAT registered country as (.*) : (.*) and VAT number as (.*)""") { (country: String, countryCode: String, vatNumber: String) =>
-    AdditionalFiscalReferencesPage.fillPage(country, countryCode, vatNumber)
+  And("""^I select VAT registered country as (.*) : (.*) and VAT number as (.*)""") {
+    (country: String, countryCode: String, vatNumber: String) =>
+      FiscalReferencesPage.fillPage(country, countryCode, vatNumber)
   }
 }

@@ -21,10 +21,12 @@ import uk.gov.hmrc.test.ui.pages.section5.{DangerousGoodsCodePage, NationalAddit
 
 class NationalAdditionalCodeStepDef extends BaseStepDef {
 
-  And("""^I should land on National-Additional-Code page""")(() => NationalAdditionalCodesPage.checkPage())
+  And("""^I should land on National-Additional-Code page""") { () =>
+    NationalAdditionalCodesPage.checkPage()
+  }
 
-  And("""^I select (.*) and enter (.*) as national additional code""") { (optionToSelect: String, code: String) =>
-    NationalAdditionalCodesPage.fillPage(optionToSelect, code)
+  And("""^I select (.*) and enter (.*) as national additional code""") { (yesNo: String, code: String) =>
+    NationalAdditionalCodesPage.fillPage(yesNo, code)
   }
 
   And("""^I enter (.*) as another national additional code""") { (code: String) =>

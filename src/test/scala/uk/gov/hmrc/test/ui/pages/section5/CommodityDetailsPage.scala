@@ -17,9 +17,19 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsCommodityDetails, itemsCommodityDetails1, itemsCommodityDetailsCL, itemsCommodityDetailsCL1}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{
+  itemsCommodityDetails,
+  itemsCommodityDetails1,
+  itemsCommodityDetailsCL,
+  itemsCommodityDetailsCL1
+}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalFiscalReferences, CommodityDetailsCode, CommodityDetailsDescription, NoAdditionalInformation}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{
+  AdditionalFiscalReferences,
+  CommodityDetailsCode,
+  CommodityDetailsDescription,
+  NoAdditionalInformation
+}
 import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.isOsrProcedureCode
 
 object CommodityDetailsPage extends BasePage {
@@ -28,19 +38,20 @@ object CommodityDetailsPage extends BasePage {
 
   def backButtonHref: String =
     if (!isOsrProcedureCode) AdditionalProcedureCodesPage.path
-    else maybeDetail(AdditionalFiscalReferences(itemId)).fold(s"${FiscalInformationYesNoPage.path}?fastForward=true") { _ =>
-      AdditionalFiscalReferencesListPage.path
-    }
+    else
+      maybeDetail(AdditionalFiscalReferences(itemId)).fold(s"${FiscalReferencesYesNoPage.path}?fastForward=true") { _ =>
+        FiscalReferencesListPage.path
+      }
 
-  def path: String  = itemUrl("commodity-details")
+  def path: String = itemUrl("commodity-details")
   val title: String = "Commodity code and item details"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(itemsCommodityDetails, itemsCommodityDetails1),
+    Common -> List(itemsCommodityDetails, itemsCommodityDetails1),
     Clearance -> List(itemsCommodityDetailsCL, itemsCommodityDetailsCL1)
   )
 
-  val code        = 0
+  val code = 0
   val description = 1
 
   // ex: fillPage("4203400090", "Straw for bottles")
@@ -49,7 +60,7 @@ object CommodityDetailsPage extends BasePage {
     fillTextBoxById("combinedNomenclatureCode", values(code))
     fillTextBoxById("descriptionOfGoods", values(description))
     store(
-      CommodityDetailsCode(itemId)        -> Detail(values(code)),
+      CommodityDetailsCode(itemId) -> Detail(values(code)),
       CommodityDetailsDescription(itemId) -> Detail(values(description))
     )
   }

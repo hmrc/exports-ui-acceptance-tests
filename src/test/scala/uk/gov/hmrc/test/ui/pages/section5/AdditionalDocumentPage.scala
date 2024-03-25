@@ -16,8 +16,13 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, sequenceId}
-import uk.gov.hmrc.test.ui.pages.base.PageLinks.{additionalDocumentsReferenceCodes, additionalDocumentsUnionCodes, additionalDocumentsUnitCodes, aiCodes}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{sequenceId, Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.PageLinks.{
+  additionalDocumentsReferenceCodes,
+  additionalDocumentsUnionCodes,
+  additionalDocumentsUnitCodes,
+  aiCodes
+}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalDocuments, itemsAdditionalDocumentsCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
@@ -27,16 +32,15 @@ import uk.gov.hmrc.test.ui.pages.section5.LicenseRequiredYesNoPage.isLicenseRequ
 
 object AdditionalDocumentPage extends BasePage {
 
-  def backButtonHref: String = {
+  def backButtonHref: String =
     maybeDetail(AdditionalDocumentCode(itemId, "0")).fold {
       if (isLicenseRequired || hasCodesRequiringAdditionalDocuments) LicenseRequiredYesNoPage.path
       else AdditionalDocumentsYesNoPage.path
     }(_ => AdditionalDocumentListPage.path)
-  }
 
   def path: String = itemUrl("additional-documentation")
 
-  val title: String =
+  def title: String =
     (detail(DeclarationType), hasCodesRequiringAdditionalDocuments, isLicenseRequired) match {
       case (Clearance, true, _)  => "Declare each document code and authorisation number"
       case (Clearance, false, _) => "Declare each additional document required for this item"
@@ -46,15 +50,17 @@ object AdditionalDocumentPage extends BasePage {
       case (_, false, false)     => "Enter any other document details"
     }
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(itemsAdditionalDocuments),
-    Clearance -> List(itemsAdditionalDocumentsCL)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] =
+    Map(Common -> List(itemsAdditionalDocuments), Clearance -> List(itemsAdditionalDocumentsCL))
 
   override val pageLinkHrefs: Seq[String] =
-    super.pageLinkHrefs ++ List(additionalDocumentsUnionCodes, additionalDocumentsReferenceCodes, additionalDocumentsUnitCodes)
+    super.pageLinkHrefs ++ List(
+      additionalDocumentsUnionCodes,
+      additionalDocumentsReferenceCodes,
+      additionalDocumentsUnitCodes
+    )
 
-  val code       = 1
+  val code = 1
   val identifier = 2
 
   // The 1st parameter is the sequenceId of the current "Additional Document" element: "0", "1", "2", ...
@@ -64,7 +70,7 @@ object AdditionalDocumentPage extends BasePage {
     fillTextBoxById("documentTypeCode", values(code))
     fillTextBoxById("documentIdentifier", values(identifier))
     store(
-      AdditionalDocumentCode(itemId, values(sequenceId))       -> Detail(values(code)),
+      AdditionalDocumentCode(itemId, values(sequenceId)) -> Detail(values(code)),
       AdditionalDocumentIdentifier(itemId, values(sequenceId)) -> Detail(values(identifier))
     )
   }

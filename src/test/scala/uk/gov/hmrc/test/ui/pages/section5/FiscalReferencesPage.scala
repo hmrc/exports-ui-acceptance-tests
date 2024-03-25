@@ -16,32 +16,36 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalFiscalReferences, itemsAdditionalFiscalReferencesCL}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Details}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalFiscalReferences
 
-object FiscalInformationYesNoPage extends BasePage {
+object FiscalReferencesPage extends BasePage {
 
-  def backButtonHref: String = AdditionalProcedureCodesPage.path
-  def path: String = itemUrl("fiscal-information")
-  val title: String = "Do you want to claim Onward Supply Relief (OSR)?"
+  def backButtonHref: String =
+    maybeDetails(AdditionalFiscalReferences(itemId)).fold(FiscalReferencesYesNoPage.path)(_ =>
+      FiscalReferencesListPage.path
+    )
+  def path: String = itemUrl("additional-fiscal-references")
+  val title: String = "What are the exporter’s VAT details?"
 
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Common -> List(itemsAdditionalFiscalReferences), Clearance -> List(itemsAdditionalFiscalReferencesCL))
 
+  val country = 0
   val countryCode = 1
   val vatNumber = 2
 
-  // No  => fillPage(no)
+  // ex: fillPage("United States of America", "US", "1234567890")
 
-  // The 2nd and 3rd parameters are "Country Code" and "VAT number" to remove
-  // Yes => fillPage(yes, "US", "123456789")
+  override def fillPage(values: String*): Unit = {
+    fillDropdown("country", values(country))
+    fillTextBoxById("reference", values(vatNumber))
 
-  override def fillPage(values: String*): Unit =
-    if (selectYesOrNoRadio(values(yesNo))) {
-      val detailKey = AdditionalFiscalReferences(itemId)
-      val codes = details(detailKey).filterNot(_ == s"${values(countryCode)}${values(vatNumber)}")
-      store(detailKey -> Details(if (codes.isEmpty) List(Constants.none) else codes))
-    }
+    val detailKey = AdditionalFiscalReferences(itemId)
+    val fiscalReference = s"${values(countryCode)}${values(vatNumber)}"
+    val fiscalReferences = maybeDetails(detailKey).fold(Seq(fiscalReference))(_ :+ fiscalReference)
+    store(detailKey -> Details(fiscalReferences))
+  }
 }

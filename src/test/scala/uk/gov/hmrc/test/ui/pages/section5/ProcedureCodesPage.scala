@@ -26,9 +26,7 @@ import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{section5, ProcedureCode}
 
 object ProcedureCodesPage extends BasePage {
 
-  def backButtonHref: String =
-    if (allSectionDetails(section5).isEmpty) AddDeclarationItemPage.path
-    else DeclarationItemsListPage.path
+  def backButtonHref: String = DeclarationItemsListPage.path
 
   def path: String = itemUrl("procedure-codes")
   val title: String = "What is the procedure code for this item?"

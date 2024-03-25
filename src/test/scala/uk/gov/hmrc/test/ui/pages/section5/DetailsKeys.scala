@@ -23,12 +23,13 @@ object DetailsKeys {
   val section5 = 5
   val Section5: DetailKey = DetailKey("Section 5 of 6: About the items", section5, Some("items-card"))
 
-  val ProcedureCodeLabel           = "Procedure code"
+  val ProcedureCodeLabel = "Procedure code"
   val AdditionalProcedureCodeLabel = "Additional procedure codes"
   val AdditionalFiscalReferenceLabel = "VAT details"
   val PackageTypeLabel = "Package type"
   val AdditionalInformationCodeLabel = "Statement code"
   val AdditionalInformationDescriptionLabel = "Statement code"
+  val AdditionalDocumentCodeLabel = "Document code"
 
   // /add-declaration-item
 
@@ -51,7 +52,7 @@ object DetailsKeys {
   // /items/[id]/additional-fiscal-references/[id]/remove
 
   // /items/[id]/commodity-details
-  def CommodityDetailsCode(itemId: String): DetailKey        = DetailKey("Commodity code", section5, Some(itemId))
+  def CommodityDetailsCode(itemId: String): DetailKey = DetailKey("Commodity code", section5, Some(itemId))
   def CommodityDetailsDescription(itemId: String): DetailKey = DetailKey("Goods description", section5, Some(itemId))
 
   // /items/[id]/un-dangerous-goods-code
@@ -90,14 +91,15 @@ object DetailsKeys {
   // /items/[id]/package-information/[packageId]/remove
 
   // /items/[id]/commodity-measure
-  def CommodityMeasureNet(itemId: String): DetailKey   = DetailKey("Net weight in kilograms", section5, Some(itemId))
+  def CommodityMeasureNet(itemId: String): DetailKey = DetailKey("Net weight in kilograms", section5, Some(itemId))
   def CommodityMeasureGross(itemId: String): DetailKey = DetailKey("Gross weight in kilograms", section5, Some(itemId))
 
   // /items/[id]/supplementary-units
   def SupplementaryUnits(itemId: String): DetailKey = DetailKey("Supplementary units", section5, Some(itemId))
 
   // /items/[id]/is-additional-information-required
-  def NoAdditionalInformation(itemId: String): DetailKey = DetailKey("Additional information statement codes", section5, Some(itemId))
+  def NoAdditionalInformation(itemId: String): DetailKey =
+    DetailKey("Additional information statement codes", section5, Some(itemId))
 
   // /items/[id]/additional-information
   def AdditionalInformationCode(itemId: String, sequenceId: String): DetailKey =
@@ -114,11 +116,12 @@ object DetailsKeys {
   def IsLicenceRequired(itemId: String): DetailKey = DetailKey("Licences", section5, Some(itemId))
 
   // /items/[id]/is-additional-documentation-required
-  def NoAdditionalDocuments(itemId: String): DetailKey = DetailKey("Additional references and documents", section5, Some(itemId))
+  def NoAdditionalDocuments(itemId: String): DetailKey =
+    DetailKey("Additional references and documents", section5, Some(itemId))
 
   // /items/[id]/additional-documentation
   def AdditionalDocumentCode(itemId: String, sequenceId: String): DetailKey =
-    DetailKey("Document code", section5, Some(itemId), Some(sequenceId))
+    DetailKey(AdditionalDocumentCodeLabel, section5, Some(itemId), Some(sequenceId))
 
   def AdditionalDocumentIdentifier(itemId: String, sequenceId: String): DetailKey =
     DetailKey("Document identifier", section5, Some(itemId), Some(sequenceId))

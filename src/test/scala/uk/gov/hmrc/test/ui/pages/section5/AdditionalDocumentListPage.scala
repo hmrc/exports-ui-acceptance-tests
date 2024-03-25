@@ -18,15 +18,15 @@ package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalInformationCodeLabel
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalDocumentCodeLabel
 
 object AdditionalDocumentListPage extends BasePage {
 
   def backButtonHref: String = AdditionalDocumentsYesNoPage.backButtonHref
-  def path: String           = itemUrl("additional-documentation-list")
+  def path: String = itemUrl("additional-documentation-list")
 
   def title: String =
-    itemDetailFor(itemId, AdditionalInformationCodeLabel).size match {
+    itemDetailFor(itemId, AdditionalDocumentCodeLabel).size match {
       case 1 => "You’ve added details for 1 document or reference"
       case n => s"You’ve added details for $n documents or references"
     }

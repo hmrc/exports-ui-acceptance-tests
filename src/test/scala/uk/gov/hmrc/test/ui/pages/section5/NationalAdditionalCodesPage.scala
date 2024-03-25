@@ -30,8 +30,8 @@ object NationalAdditionalCodesPage extends BasePage {
   def path: String = itemUrl("national-additional-code")
 
   def title: String =
-    if (elementByIdDoesNotExist("code_yes")) "Do you need to add a national additional code?"
-    else "What is the next national additional code?"
+    if (elementByIdDoesNotExist("code_yes")) "What is the next national additional code?"
+    else "Do you need to add a national additional code?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(itemsNationalAdditionalCode))
 
@@ -44,9 +44,13 @@ object NationalAdditionalCodesPage extends BasePage {
 
   override def fillPage(values: String*): Unit = {
     val nationalAdditionalCodes =
-      if (elementByIdDoesNotExist("code_yes")) details(NationalAdditionalCodes(itemId)) :+ values(anotherNationalCode)
-      else if (selectYesOrNoRadio(values(yesNo))) List(values(code))
-      else List(Constants.none)
+      if (elementByIdDoesNotExist("code_yes")) {
+        fillTextBoxById("nactCode", values(anotherNationalCode))
+        details(NationalAdditionalCodes(itemId)) :+ values(anotherNationalCode)
+      } else if (selectYesOrNoRadio(values(yesNo))) {
+        fillTextBoxById("nactCode", values(code))
+        List(values(code))
+      } else List(Constants.none)
 
     store(NationalAdditionalCodes(itemId) -> Details(nationalAdditionalCodes))
   }

@@ -22,8 +22,8 @@ import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.PackageTypeLabel
 
 object PackageInformationListPage extends BasePage {
 
-  def backButtonHref: String = PackageInformationPage.backButtonHref
-  def path: String           = itemUrl("packages-list")
+  def backButtonHref: String = StatisticalValuePage.path
+  def path: String = itemUrl("packages-list")
 
   def title: String =
     itemDetailFor(itemId, PackageTypeLabel).size match {

@@ -20,10 +20,10 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalFiscalReferences
 
-object AdditionalFiscalReferencesListPage extends BasePage {
+object FiscalReferencesListPage extends BasePage {
 
   def backButtonHref: String = AdditionalProcedureCodesPage.path
-  def path: String           = itemUrl("additional-fiscal-references-list")
+  def path: String = itemUrl("additional-fiscal-references-list")
 
   def title: String =
     details(AdditionalFiscalReferences(itemId)).size match {

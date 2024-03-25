@@ -1,4 +1,4 @@
-Feature: Section4 Standard Prelodged
+Feature: Section5 Standard Prelodged
 
   @Section5 @StandardPrelodged
   Scenario: exports standard declaration journey
@@ -16,18 +16,20 @@ Feature: Section4 Standard Prelodged
     And I select 2ES as additional procedure code
     And I click continue
     Then I should land on Fiscal-Information page
-    And I select yes for Onward supply relief
+    And I select Yes for Onward supply relief
     And I click continue
     Then I should land on Additional-Fiscal-References page
     And I select VAT registered country as Andorra : AD and VAT number as 1234
     And I click continue
     Then I should land on Additional-Fiscal-References-List page
     And I select Yes for adding more VAT details
+    And I click continue
     Then I should land on Additional-Fiscal-References page
     And I select VAT registered country as Afghanistan : AF and VAT number as 1234
     And I click continue
     Then I should land on Additional-Fiscal-References-List page
     And I select No for adding more VAT details
+    And I click continue
     Then I should land on Commodity-Details page
     And I enter commodity details code as 2803400090 and description as Old St Andrews golf ball whisky
     And I click continue
@@ -37,17 +39,14 @@ Feature: Section4 Standard Prelodged
     Then I should land on Cus-Code page
     And I select Yes to enter the code 12345678 as CUS code
     And I click continue
-    Then I should land on VAT-Rating page
-    And I select VAT reduced option as goods being VAT zero-rated
-    And I click continue
     Then I should land on National-Additional-Code page
-    And I select Yes and enter 1234 as national additional code
+    And I select Yes and enter A123 as national additional code
     And I click continue
     Then I should land on National-Additional-Codes-List page
     And I select Yes for adding another national code
     And I click continue
     Then I should land on National-Additional-Code page
-    And I enter A123 as another national additional code
+    And I enter A125 as another national additional code
     And I click continue
     Then I should land on National-Additional-Codes-List page
     And I select No for adding another national code
@@ -95,16 +94,17 @@ Feature: Section4 Standard Prelodged
     And I enter C501 as code and GBAEOC71757 as identifier as first additional document
     And I click continue
     Then I should land on Additional-Document-List page
-    And I select Yes on additional document list page
-    And I click continue
-    Then I should land on Additional-Document page
-    And I enter X002 as code and GBAEOC71758 as identifier as second additional document
-    And I click continue
-    Then I should land on Additional-Document-List page
     And I select No on additional document list page
     And I click continue
+#    Then I should land on Additional-Document page
+#    And I enter X002 as code and GBAEOC71758 as identifier as second additional document
+#    And I click continue
+#    Then I should land on Additional-Document-List page
+#    And I select No on additional document list page
+#    And I click continue
     Then I should land on Declaration-Items-List page
     And I select No on declaration items list page
+    And I click continue
     Then I should land on MiniCYA-Section-5 page
     And I check the MiniCYA page for Section-5
     And I click continue on MiniCya

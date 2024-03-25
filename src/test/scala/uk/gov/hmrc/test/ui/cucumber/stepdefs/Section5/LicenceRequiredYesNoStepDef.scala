@@ -23,7 +23,7 @@ class LicenceRequiredYesNoStepDef extends BaseStepDef {
 
   And("""^I should land on Licence-Required-YesNo page""")(() => LicenseRequiredYesNoPage.checkPage())
 
-  And("""^I select Yes to check if the goods require a licence""") { (yesNo: String) =>
+  And("""^I select (.*) to check if the goods require a licence""") { (yesNo: String) =>
     LicenseRequiredYesNoPage.fillPage(yesNo)
   }
 }
