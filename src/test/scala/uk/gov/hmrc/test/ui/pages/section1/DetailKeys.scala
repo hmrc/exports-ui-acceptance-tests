@@ -23,17 +23,17 @@ object DetailKeys {
   val section1 = 1
   val Section1: DetailKey = DetailKey("Section 1 of 6: Declaration details", section1, Some("references-card"))
 
-  val CreationDate: DetailKey = DetailKey("Date created", section1, None, None, skipSummaryCheck = true)
-  val ExpiryDate: DetailKey = DetailKey("Expiry date", section1, None, None, skipSummaryCheck = true)
+  val CreationDate: DetailKey = DetailKey("Date created", section1, skipValueCheck = true, checkChangeLink = false)
+  val ExpiryDate: DetailKey = DetailKey("Expiry date", section1, skipValueCheck = true, checkChangeLink = false)
 
   // /gg-sign-in
-  val DeclarationEori: DetailKey = DetailKey("Your EORI number", section1)
+  val DeclarationEori: DetailKey = DetailKey("Your EORI number", section1, checkChangeLink = false)
 
   // /standard-or-other & /declaration-choice
-  val DeclarationType: DetailKey = DetailKey("Declaration type", section1)
+  val DeclarationType: DetailKey = DetailKey("Declaration type", section1, checkChangeLink = false)
 
   // /type
-  val AdditionalDeclarationType: DetailKey = DetailKey("Type of declaration", section1)
+  val AdditionalDeclarationType: DetailKey = DetailKey("Type of declaration", section1, checkChangeLink = false)
 
   // /trader-reference & /ducr-entry
   val Ducr: DetailKey = DetailKey("DUCR", section1)

@@ -29,7 +29,7 @@ object DetailKeys {
   // /invoices-and-exchange-rate-choice
   // /invoices-and-exchange-rate
   val TotalAmountInvoiced: DetailKey = DetailKey("Total amount invoiced", section4)
-  val ExchangeRate: DetailKey = DetailKey("Rate of exchange", section4)
+  val ExchangeRate: DetailKey = DetailKey("Rate of exchange", section4, checkChangeLink = false)
 
   // /total-package-quantity
   val TotalNumberOfPackages: DetailKey = DetailKey("Total number of packages", section4)
@@ -37,7 +37,9 @@ object DetailKeys {
   // /nature-of-transaction
   val NatureOfTransaction: DetailKey = DetailKey("Nature of transaction", section4)
 
+  val NoPreviousDocuments: DetailKey = DetailKey("Additional parties involved", section4)
+
   // /add-previous-document
   def DocumentCode(sequenceId: String): DetailKey = DetailKey(DocumentCodeLabel, section4, Some(sequenceId))
-  def DocumentReference(sequenceId: String): DetailKey = DetailKey("Document reference", section4, Some(sequenceId))
+  def DocumentReference(sequenceId: String): DetailKey = DetailKey("Document reference", section4, Some(sequenceId), checkChangeLink = false)
 }

@@ -60,6 +60,11 @@ trait DriverHelper extends BrowserDriver {
   def findChildByClassName(parent: WebElement, className: String): WebElement =
     parent.findElement(By.className(className))
 
+  def findChildByClassNameIfAny(parent: WebElement, className: String): Option[WebElement] = {
+    val elements = parent.findElements(By.className(className))
+    if (elements.isEmpty) None else Some(elements.get(0))
+  }
+
   def findChildrenByClassName(parent: WebElement, className: String): Seq[WebElement] =
     parent.findElements(By.className(className)).asScala.toList
 

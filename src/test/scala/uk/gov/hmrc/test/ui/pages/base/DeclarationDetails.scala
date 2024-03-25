@@ -23,8 +23,12 @@ case class DetailKey(
   sectionId: Int,
   id: Option[String] = None,
   additionalId: Option[String] = None,
-  skipSummaryCheck: Boolean = false,
-  skipLabelCheck: Boolean = false
+
+  // Flags specifying what validation must be skipped, or not, on the related mini-CYA page
+  // skipRowCheck(true) implies skipValueCheck(true) and checkChangeLink(false)
+  skipRowCheck: Boolean = false,
+  skipValueCheck: Boolean = false,
+  checkChangeLink: Boolean = true
 )
 
 trait DeclarationDetails
@@ -37,4 +41,6 @@ object DeclarationDetails {
   type Cache = mutable.Map[DetailKey, DeclarationDetails]
 
   val cache: Cache = mutable.LinkedHashMap.empty[DetailKey, DeclarationDetails]
+
+  val changeLinks = mutable.Map.empty[DetailKey, String]
 }

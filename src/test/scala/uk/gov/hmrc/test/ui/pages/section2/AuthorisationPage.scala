@@ -28,6 +28,7 @@ object AuthorisationPage extends BasePage {
     if (detailForLabel(section2, AuthorisationTypeLabel).isEmpty) AuthorisationsYesNoPage.path
     else AuthorisationsListPage.path
 
+  override def changeLink: String = ProcedureChoicePage.path
   val path: String = "/declaration/add-authorisation-required"
   val title: String = "Add any authorisations for this export"
 
