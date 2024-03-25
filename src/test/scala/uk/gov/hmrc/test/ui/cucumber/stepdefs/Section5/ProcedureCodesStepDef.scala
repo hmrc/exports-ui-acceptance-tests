@@ -21,9 +21,11 @@ import uk.gov.hmrc.test.ui.pages.section5.{AddDeclarationItemPage, ProcedureCode
 
 class ProcedureCodesStepDef extends BaseStepDef {
 
-  And("""^I should land on Procedure-codes page""")(() => ProcedureCodesPage.checkPage())
+  And("""^I should land on Procedure-codes page""") { () =>
+    ProcedureCodesPage.checkPage()
+  }
 
-  And("""^I select (.*) as procedure code""") { (procedureCodeToSelect : String) =>
-   ProcedureCodesPage.fillPage(procedureCodeToSelect)
+  And("""^I select (.*) as procedure code""") { (procedureCodeToSelect: String) =>
+    ProcedureCodesPage.fillPage(procedureCodeToSelect)
   }
 }

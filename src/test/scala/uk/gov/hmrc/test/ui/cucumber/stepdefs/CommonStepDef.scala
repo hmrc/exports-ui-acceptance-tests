@@ -74,11 +74,10 @@ class CommonStepDef extends BaseStepDef {
 
   And("""^I fill section4""") { () =>
     InvoicesAndExchangeRateChoicePage.fillPage(Constants.no); continue()
-    InvoicesAndExchangeRatePage.fillPage("GBP","567640","1.25"); continue()
+    InvoicesAndExchangeRatePage.fillPage("GBP", "567640", "1.25"); continue()
     TotalPackageQuantityPage.fillPage("4"); continue()
     NatureOfTransactionPage.fillPage("Goods being sol"); continue()
     PreviousDocumentPage.fillPage("first", "Commercial Invoice", "9GB123456782317-BH1433A61"); continue()
-    PreviousDocumentPage.fillPage("second", "Packing List", "9GB12345678899"); continue()
     PreviousDocumentListPage.fillPage(Constants.no); continue()
     continueOnMiniCya()
   }

@@ -1,4 +1,4 @@
-Feature: Section4 Standard Prelodged
+Feature: Section5 Standard Prelodged
 
   @Section5 @StandardPrelodged
   Scenario: exports standard declaration journey
@@ -16,18 +16,20 @@ Feature: Section4 Standard Prelodged
     And I select 2ES as additional procedure code
     And I click continue
     Then I should land on Fiscal-Information page
-    And I select yes for Onward supply relief
+    And I select Yes for Onward supply relief
     And I click continue
     Then I should land on Additional-Fiscal-References page
     And I select VAT registered country as Andorra : AD and VAT number as 1234
     And I click continue
     Then I should land on Additional-Fiscal-References-List page
     And I select Yes for adding more VAT details
+    And I click continue
     Then I should land on Additional-Fiscal-References page
     And I select VAT registered country as Afghanistan : AF and VAT number as 1234
     And I click continue
     Then I should land on Additional-Fiscal-References-List page
     And I select No for adding more VAT details
+    And I click continue
     Then I should land on Commodity-Details page
     And I enter commodity details code as 2803400090 and description as Old St Andrews golf ball whisky
     And I click continue
