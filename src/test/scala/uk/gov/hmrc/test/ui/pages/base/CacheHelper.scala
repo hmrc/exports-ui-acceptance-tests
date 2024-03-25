@@ -16,10 +16,13 @@
 
 package uk.gov.hmrc.test.ui.pages.base
 
-import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{Cache, cache}
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{Cache, cache, changeLinks}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.section5
 
 trait CacheHelper {
+
+  protected def path: String
+  protected def changeLink: String = path
 
   def clear(): Unit = cache.clear()
 
@@ -88,5 +91,9 @@ trait CacheHelper {
       case _                => None
     }.toList
 
-  def store(elements: (DetailKey, DeclarationDetails)*): Cache = cache.addAll(elements)
+  def store(elements: (DetailKey, DeclarationDetails)*): Cache = {
+    cache.addAll(elements)
+    elements.foreach(element => if (element._1.checkChangeLink) changeLinks += (element._1 -> changeLink))
+    cache
+  }
 }

@@ -69,17 +69,19 @@ object DetailKeys {
   val NoAdditionalPartiesInvolved: DetailKey = DetailKey("Additional parties involved", section2)
 
   def AdditionalPartiesInvolvedType(sequenceId: String): DetailKey = DetailKey(AdditionalPartiesInvolvedTypeLabel, section2, Some(sequenceId))
-  def AdditionalPartiesInvolvedEORI(sequenceId: String): DetailKey = DetailKey("Other parties’s EORI number", section2, Some(sequenceId))
+  def AdditionalPartiesInvolvedEORI(sequenceId: String): DetailKey =
+    DetailKey("Other parties’s EORI number", section2, Some(sequenceId), checkChangeLink = false)
 
   // /authorisation-choice
-  val ProcedureChoice: DetailKey = DetailKey(ProcedureChoiceLabel, section2, None, None, skipSummaryCheck = true, skipLabelCheck = true)
+  val ProcedureChoice: DetailKey = DetailKey(ProcedureChoiceLabel, section2, skipRowCheck = true)
 
   // /is-authorisation-required
   val NoAuthorisationRequired: DetailKey = DetailKey("Authorisations for this declaration", section2)
 
   // /add-authorisation-required
   def AuthorisationType(sequenceId: String): DetailKey = DetailKey(AuthorisationTypeLabel, section2, Some(sequenceId))
-  def AuthorisationHolderEORI(sequenceId: String): DetailKey = DetailKey("Authorised party’s EORI number", section2, Some(sequenceId))
+  def AuthorisationHolderEORI(sequenceId: String): DetailKey =
+    DetailKey("Authorised party’s EORI number", section2, Some(sequenceId), checkChangeLink = false)
 
   // CLEARANCE pages
 

@@ -16,10 +16,10 @@
 
 package uk.gov.hmrc.test.ui.pages.section4
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, sequenceId}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, none, sequenceId}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{addPreviousDocument, addPreviousDocumentCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.{DocumentCode, DocumentCodeLabel, DocumentReference, section4}
+import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.{DocumentCode, DocumentCodeLabel, DocumentReference, NoPreviousDocuments, section4}
 
 
 object PreviousDocumentPage extends BasePage {
@@ -28,6 +28,7 @@ object PreviousDocumentPage extends BasePage {
     if (detailForLabel(section4, DocumentCodeLabel).nonEmpty) PreviousDocumentListPage.path
     else PreviousDocumentListPage.backButtonHref
 
+  override def changeLink: String = PreviousDocumentListPage.path
   val path: String = "/declaration/add-previous-document"
   val title = "Details for each document that supports this declaration"
 
@@ -40,15 +41,18 @@ object PreviousDocumentPage extends BasePage {
   val documentReference = 2
 
   // The 1st parameter is the sequenceId of the current "Previous Document" element: "0", "1", "2", ...
-  //ex: fillPage("3", "Commercial Invoice", "SMITH 321/890")
+  // ex: fillPage("3", "Commercial Invoice", "SMITH 321/890")
+  // ex: fillPage(Constants.none)
 
-  override def fillPage(values: String*): Unit = {
-    val code = fillDropdown("documentType", values(documentCode), Some("documentType__option--0"))
-    fillTextBoxById("documentReference", values(documentReference))
+  override def fillPage(values: String*): Unit =
+    if (values.head == none) store(NoPreviousDocuments -> Detail(none))
+    else {
+      val code = fillDropdown("documentType", values(documentCode), Some("documentType__option--0"))
+      fillTextBoxById("documentReference", values(documentReference))
 
-    store(
-      DocumentCode(values(sequenceId)) -> Detail(code),
-      DocumentReference(values(sequenceId)) -> Detail(values(documentReference))
-    )
-  }
+      store(
+        DocumentCode(values(sequenceId)) -> Detail(code),
+        DocumentReference(values(sequenceId)) -> Detail(values(documentReference))
+      )
+    }
 }

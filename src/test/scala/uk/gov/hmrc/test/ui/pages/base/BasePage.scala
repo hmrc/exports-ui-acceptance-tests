@@ -21,10 +21,9 @@ import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.changeLinks
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.CountriesOfRouting
-
-import scala.collection.mutable
 
 trait BasePage extends CacheHelper with DriverHelper with PageHelper {
 
@@ -38,7 +37,6 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper {
   def fillPage(values: String*): Unit
 
   protected def backButtonHref: String
-  protected def path: String
   protected def title: String
 
   protected val expanderHrefs: Map[String, Seq[String]] = Map.empty
@@ -79,31 +77,34 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper {
       }
     }
 
+  private case class LabelAndValueRow(label: WebElement, value: WebElement, changeLink: Option[WebElement])
+
   protected def checkSectionSummary(detailKey: DetailKey): Unit = {
-    val rows = findElementsByClassName("govuk-summary-card")
+    val allCardRows = findElementsByClassName("govuk-summary-card")
       .filter(findChildByClassName(_, detailKey.id.head).getText == detailKey.label)
       .flatMap(findChildrenByClassName(_, "govuk-summary-list__row"))
 
-    val displayedLabelsAndValues: Seq[(WebElement, WebElement)] =
-     rows.map { webElement =>
-        findChildByClassName(webElement, "govuk-summary-list__key") ->
-          findChildByClassName(webElement, "govuk-summary-list__value")
-      }
+    val labelAndValueRows: Seq[LabelAndValueRow] =
+      allCardRows.map { webElement => LabelAndValueRow(
+        findChildByClassName(webElement, "govuk-summary-list__key"),
+        findChildByClassName(webElement, "govuk-summary-list__value"),
+        findChildByClassNameIfAny(webElement, "govuk-link"),
+      )}
 
     val cacheDetails = allSectionDetails(detailKey.sectionId)
 
-    cacheDetails.foldLeft(displayedLabelsAndValues) {
-      case (labelsAndValues, (detailKey, details)) =>
+    cacheDetails.foldLeft(labelAndValueRows) {
+      case (tailedLabelAndValueRows, (detailKey, details)) =>
 
         // To remove (or comment in) after we are done with the happy-path scenarios for the 6 sections
         print(s"\n=========== ${detailKey.label} => \n")
-        labelsAndValues.foreach(we => print(s"${we._1.getText}\n"))
+        tailedLabelAndValueRows.foreach(row => print(s"${row.label.getText}\n"))
 
-        if (detailKey.skipLabelCheck) labelsAndValues
+        if (detailKey.skipRowCheck) tailedLabelAndValueRows
         else {
-          val expectedRow = labelsAndValues.find(_._1.getText == detailKey.label).get
+          val labelAndValueRow = tailedLabelAndValueRows.find(_.label.getText == detailKey.label).get
 
-          if (!detailKey.skipSummaryCheck) {
+          if (!detailKey.skipValueCheck) {
             val values = details match {
               case detail: Detail  => Seq(detail.value)
               case detail: Details => detail.values
@@ -115,12 +116,20 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper {
               case _                  => "\n"
             }
 
-            val text = expectedRow._2.getText
+            val text = labelAndValueRow.value.getText
             val result = text.split(valuesSeparator).toList.map(_.trim)
             result mustBe values
           }
 
-          labelsAndValues.diff(List(expectedRow))
+          if (detailKey.checkChangeLink) {
+            val href = labelAndValueRow.changeLink.head.getAttribute("href")
+            s"$host${changeLinks(detailKey)}" mustBe href
+          }
+
+          // Remove the row that was just tested against from the sequence of rows.
+          // This is required for elements like, for instance "additional information" or
+          // "additional documents", which might have two or more rows with the same label.
+          tailedLabelAndValueRows.diff(List(labelAndValueRow))
         }
     }
   }

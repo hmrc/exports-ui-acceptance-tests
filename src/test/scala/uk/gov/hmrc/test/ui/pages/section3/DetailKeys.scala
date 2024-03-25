@@ -32,7 +32,7 @@ object DetailKeys {
 
   // /location-of-goods
   val LocationOfGoods: DetailKey = DetailKey("Goods location code", section3)
-  val RRS01: DetailKey = DetailKey("Additional Information code", section3)
+  val RRS01: DetailKey = DetailKey("Additional Information code", section3, checkChangeLink = false)
 
   // /office-of-exit
   val OfficeOfExit : DetailKey = DetailKey("Office of exit", section3)
