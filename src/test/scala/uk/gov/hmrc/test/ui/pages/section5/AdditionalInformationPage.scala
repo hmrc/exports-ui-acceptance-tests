@@ -30,6 +30,8 @@ object AdditionalInformationPage extends BasePage {
   def path: String = itemUrl("additional-information")
   val title: String = "Additional Information"
 
+  override def changeLink: String = AdditionalInformationListPage.path
+
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common    -> List(itemsAdditionalInformation),
     Clearance -> List(itemsAdditionalInformationCL)

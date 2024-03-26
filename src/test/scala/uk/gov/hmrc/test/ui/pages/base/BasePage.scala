@@ -24,6 +24,7 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.changeLinks
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.CountriesOfRouting
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodeLabel
 
 trait BasePage extends CacheHelper with DriverHelper with PageHelper {
 
@@ -85,52 +86,53 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper {
       .flatMap(findChildrenByClassName(_, "govuk-summary-list__row"))
 
     val labelAndValueRows: Seq[LabelAndValueRow] =
-      allCardRows.map { webElement => LabelAndValueRow(
-        findChildByClassName(webElement, "govuk-summary-list__key"),
-        findChildByClassName(webElement, "govuk-summary-list__value"),
-        findChildByClassNameIfAny(webElement, "govuk-link"),
-      )}
+      allCardRows.map { webElement =>
+        LabelAndValueRow(
+          findChildByClassName(webElement, "govuk-summary-list__key"),
+          findChildByClassName(webElement, "govuk-summary-list__value"),
+          findChildByClassNameIfAny(webElement, "govuk-link")
+        )
+      }
 
     val cacheDetails = allSectionDetails(detailKey.sectionId)
 
-    cacheDetails.foldLeft(labelAndValueRows) {
-      case (tailedLabelAndValueRows, (detailKey, details)) =>
+    cacheDetails.foldLeft(labelAndValueRows) { case (tailedLabelAndValueRows, (detailKey, details)) =>
+      // To remove (or comment in) after we are done with the happy-path scenarios for the 6 sections
+      print(s"\n=========== ${detailKey.label} => \n")
+      tailedLabelAndValueRows.foreach(row => print(s"${row.label.getText}\n"))
 
-        // To remove (or comment in) after we are done with the happy-path scenarios for the 6 sections
-        print(s"\n=========== ${detailKey.label} => \n")
-        tailedLabelAndValueRows.foreach(row => print(s"${row.label.getText}\n"))
+      if (detailKey.skipRowCheck) tailedLabelAndValueRows
+      else {
+        val labelAndValueRow = tailedLabelAndValueRows.find(_.label.getText == detailKey.label).get
 
-        if (detailKey.skipRowCheck) tailedLabelAndValueRows
-        else {
-          val labelAndValueRow = tailedLabelAndValueRows.find(_.label.getText == detailKey.label).get
-
-          if (!detailKey.skipValueCheck) {
-            val values = details match {
-              case detail: Detail  => Seq(detail.value)
-              case detail: Details => detail.values
-            }
-
-            // There may be some edge cases here not accounted for, please add accordingly.
-            val valuesSeparator = detailKey match {
-              case CountriesOfRouting => ","
-              case _                  => "\n"
-            }
-
-            val text = labelAndValueRow.value.getText
-            val result = text.split(valuesSeparator).toList.map(_.trim)
-            result mustBe values
+        if (!detailKey.skipValueCheck) {
+          val values = details match {
+            case detail: Detail  => Seq(detail.value)
+            case detail: Details => detail.values
           }
 
-          if (detailKey.checkChangeLink) {
-            val href = labelAndValueRow.changeLink.head.getAttribute("href")
-            s"$host${changeLinks(detailKey)}" mustBe href
+          // There may be some edge cases here not accounted for, please add accordingly.
+          val valuesSeparator = detailKey match {
+            case CountriesOfRouting                              => ","
+            case key if key.label == NationalAdditionalCodeLabel => ","
+            case _                                               => "\n"
           }
 
-          // Remove the row that was just tested against from the sequence of rows.
-          // This is required for elements like, for instance "additional information" or
-          // "additional documents", which might have two or more rows with the same label.
-          tailedLabelAndValueRows.diff(List(labelAndValueRow))
+          val text = labelAndValueRow.value.getText
+          val result = text.split(valuesSeparator).toList.map(_.trim)
+          result mustBe values
         }
+
+        if (detailKey.checkChangeLink) {
+          val href = labelAndValueRow.changeLink.head.getAttribute("href")
+          s"$host${changeLinks(detailKey)}" mustBe href
+        }
+
+        // Remove the row that was just tested against from the sequence of rows.
+        // This is required for elements like, for instance "additional information" or
+        // "additional documents", which might have two or more rows with the same label.
+        tailedLabelAndValueRows.diff(List(labelAndValueRow))
+      }
     }
   }
 }

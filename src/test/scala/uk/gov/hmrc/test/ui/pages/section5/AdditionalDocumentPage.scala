@@ -20,8 +20,7 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.{sequenceId, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.PageLinks.{
   additionalDocumentsReferenceCodes,
   additionalDocumentsUnionCodes,
-  additionalDocumentsUnitCodes,
-  aiCodes
+  additionalDocumentsUnitCodes
 }
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalDocuments, itemsAdditionalDocumentsCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
@@ -38,6 +37,7 @@ object AdditionalDocumentPage extends BasePage {
       else AdditionalDocumentsYesNoPage.path
     }(_ => AdditionalDocumentListPage.path)
 
+  override def changeLink: String = AdditionalDocumentListPage.path
   def path: String = itemUrl("additional-documentation")
 
   def title: String =
