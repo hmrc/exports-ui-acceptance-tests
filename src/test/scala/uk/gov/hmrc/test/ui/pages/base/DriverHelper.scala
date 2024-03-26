@@ -16,11 +16,9 @@
 
 package uk.gov.hmrc.test.ui.pages.base
 
-import org.openqa.selenium.{By, Keys, WebElement}
 import org.openqa.selenium.interactions.Actions
-import org.openqa.selenium.support.ui.Select
+import org.openqa.selenium.{By, Keys, WebElement}
 import uk.gov.hmrc.test.ui.driver.BrowserDriver
-import uk.gov.hmrc.test.ui.pages.section2.AuthorisationPage.findElementById
 
 import scala.jdk.CollectionConverters.ListHasAsScala
 
@@ -68,7 +66,8 @@ trait DriverHelper extends BrowserDriver {
   def findChildrenByClassName(parent: WebElement, className: String): Seq[WebElement] =
     parent.findElements(By.className(className)).asScala.toList
 
-   def fillDropdown(elementId: String, value: String, maybeId: Option[String] = None): String = {
+  def fillDropdown(elementId: String, value: String, maybeId: Option[String] = None): String = {
+
     val element = findElementById(elementId)
     element.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE)
     element.sendKeys(value)

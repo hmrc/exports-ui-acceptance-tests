@@ -27,6 +27,9 @@ object FiscalReferencesPage extends BasePage {
     maybeDetails(AdditionalFiscalReferences(itemId)).fold(FiscalReferencesYesNoPage.path)(_ =>
       FiscalReferencesListPage.path
     )
+
+  override def changeLink: String = FiscalReferencesListPage.path
+
   def path: String = itemUrl("additional-fiscal-references")
   val title: String = "What are the exporter’s VAT details?"
 

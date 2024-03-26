@@ -35,6 +35,8 @@ object PackageInformationPage extends BasePage {
       }
     )(_ => PackageInformationListPage.path)
 
+  override def changeLink: String = PackageInformationListPage.path
+
   def path: String = itemUrl("package-information")
   val title: String = "Enter the packing details for this item"
 
@@ -51,11 +53,11 @@ object PackageInformationPage extends BasePage {
   // ex: fillPage("2", "Aerosol", "20", "No shipping mark")
 
   override def fillPage(values: String*): Unit = {
-    fillDropdown("typesOfPackages", values(packageType))
+    val typeOfPackage = fillDropdown("typesOfPackages", values(packageType), Some("typesOfPackages__option--0"))
     fillTextBoxById("numberOfPackages", values(numberOfPackages))
     fillTextBoxById("shippingMarks", values(shippingMark))
     store(
-      PackageInformationType(itemId, values(sequenceId))         -> Detail(values(packageType)),
+      PackageInformationType(itemId, values(sequenceId))         -> Detail(typeOfPackage),
       PackageInformationNumber(itemId, values(sequenceId))       -> Detail(values(numberOfPackages)),
       PackageInformationShippingMark(itemId, values(sequenceId)) -> Detail(values(shippingMark))
     )

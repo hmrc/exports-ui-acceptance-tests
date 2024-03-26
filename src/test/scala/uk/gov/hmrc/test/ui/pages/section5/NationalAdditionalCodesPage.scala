@@ -27,6 +27,8 @@ object NationalAdditionalCodesPage extends BasePage {
     if (elementByIdDoesNotExist("code_yes")) NationalAdditionalCodesListPage.path
     else NationalAdditionalCodesListPage.backButtonHref
 
+  override def changeLink: String = NationalAdditionalCodesListPage.path
+
   def path: String = itemUrl("national-additional-code")
 
   def title: String =

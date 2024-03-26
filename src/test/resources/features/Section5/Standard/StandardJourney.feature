@@ -12,8 +12,7 @@ Feature: Section5 Standard Prelodged
     And I select 1042 as procedure code
     And I click continue
     Then I should land on Additional-Procedure-Codes page
-    And I select F75 as additional procedure code
-    And I select 2ES as additional procedure code
+    And I select F75 and 2ES and 1CD as additional procedure code
     And I click continue
     Then I should land on Fiscal-Information page
     And I select Yes for Onward supply relief
@@ -94,14 +93,14 @@ Feature: Section5 Standard Prelodged
     And I enter C501 as code and GBAEOC71757 as identifier as first additional document
     And I click continue
     Then I should land on Additional-Document-List page
+    And I select Yes on additional document list page
+    And I click continue
+    Then I should land on Additional-Document page
+    And I enter X002 as code and GBAEOC71758 as identifier as second additional document
+    And I click continue
+    Then I should land on Additional-Document-List page
     And I select No on additional document list page
     And I click continue
-#    Then I should land on Additional-Document page
-#    And I enter X002 as code and GBAEOC71758 as identifier as second additional document
-#    And I click continue
-#    Then I should land on Additional-Document-List page
-#    And I select No on additional document list page
-#    And I click continue
     Then I should land on Declaration-Items-List page
     And I select No on declaration items list page
     And I click continue
