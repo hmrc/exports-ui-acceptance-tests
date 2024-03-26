@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
+import uk.gov.hmrc.test.ui.pages.base.Detail
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{
   itemsAdditionalProcedureCodes,
@@ -23,7 +24,7 @@ import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{
   itemsAdditionalProcedureCodes2,
   itemsAdditionalProcedureCodesCL
 }
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalProcedureCodes, ProcedureCode}
 
 object AdditionalProcedureCodesPage extends BasePage {
@@ -39,14 +40,15 @@ object AdditionalProcedureCodesPage extends BasePage {
     Clearance -> List(itemsAdditionalProcedureCodesCL, itemsAdditionalProcedureCodes1, itemsAdditionalProcedureCodes2)
   )
 
-  // ex: fillPage("1CS")
+  // ex: fillPage("F75 and 2ES and 1CD")
 
   override def fillPage(values: String*): Unit = {
-    values.foreach { value =>
+    val codes = values.head.split(" and ")
+    codes.foreach { value =>
       fillDropdown("additionalProcedureCode", value)
       clickById("add")
     }
-    store(AdditionalProcedureCodes(itemId) -> Details(values))
+    store(AdditionalProcedureCodes(itemId) -> Detail(codes.mkString(" ")))
   }
 
   def isLowValueDeclaration: Boolean = details(AdditionalProcedureCodes(itemId)).contains(lowValueDeclaration)

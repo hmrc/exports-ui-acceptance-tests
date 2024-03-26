@@ -16,8 +16,13 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yes}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsCommodityMeasure, itemsCommodityMeasure1, itemsCommodityMeasureCL, itemsCommodityMeasureCL1}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{yes, Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{
+  itemsCommodityMeasure,
+  itemsCommodityMeasure1,
+  itemsCommodityMeasureCL,
+  itemsCommodityMeasureCL1
+}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section2.IsThisExsPage.isThisExs
@@ -27,19 +32,19 @@ import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.isExportInventoryCl
 object CommodityMeasurePage extends BasePage {
 
   def backButtonHref: String =
-    if (detail(DeclarationType) != Clearance || !isExportInventoryCleansingRecord) PackageInformationPage.path
+    if (detail(DeclarationType) != Clearance || !isExportInventoryCleansingRecord) PackageInformationListPage.path
     else if (isThisExs) DangerousGoodsCodePage.path
     else CommodityDetailsPage.path
 
-  def path: String           = itemUrl("commodity-measure")
-  val title: String          = "What is the weight of the goods?"
+  def path: String = itemUrl("commodity-measure")
+  val title: String = "What is the weight of the goods?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(itemsCommodityMeasure, itemsCommodityMeasure1),
+    Common -> List(itemsCommodityMeasure, itemsCommodityMeasure1),
     Clearance -> List(itemsCommodityMeasureCL, itemsCommodityMeasureCL1)
   )
 
-  val netWeight   = 0
+  val netWeight = 0
   val grossWeight = 1
 
   // ex: fillPage()

@@ -18,7 +18,7 @@ package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsUnDangerousGoodsCode, itemsUnDangerousGoodsCodeCL}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.DangerousGoodsCode
 
 object DangerousGoodsCodePage extends BasePage {
@@ -38,7 +38,10 @@ object DangerousGoodsCodePage extends BasePage {
   // Yes => fillPage(yes, "1234")
 
   override def fillPage(values: String*): Unit = {
-    if (selectYesOrNoRadio(values(yesNo))) fillTextBoxById("dangerousGoodsCode", values(code))
-    store(DangerousGoodsCode(itemId) -> Details(values))
+    if (selectYesOrNoRadio(values(yesNo))) {
+      fillTextBoxById("dangerousGoodsCode", values(code))
+      store(DangerousGoodsCode(itemId) -> Detail(values(code)))
+    }
+    else store(DangerousGoodsCode(itemId) -> Detail(Constants.no))
   }
 }

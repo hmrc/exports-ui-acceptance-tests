@@ -18,23 +18,16 @@ package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalFiscalReferences
+import uk.gov.hmrc.test.ui.pages.section4.SummarySection4Page
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalInformationCodeLabel
 
-object AdditionalFiscalReferencesListPage extends BasePage {
+object AddDeclarationItemPage extends BasePage {
 
-  def backButtonHref: String = AdditionalProcedureCodesPage.path
-  def path: String           = itemUrl("additional-fiscal-references-list")
-
-  def title: String =
-    details(AdditionalFiscalReferences(itemId)).size match {
-      case 1 => "You have added 1 VAT number"
-      case n => s"You have added $n VAT numbers"
-    }
+  def backButtonHref: String = SummarySection4Page.path
+  val path: String           = "/declaration/add-declaration-item"
+  val title: String = "Add declaration item 1"
 
   override def checkExpanders(): Unit = ()
 
-  // No  => fillPage(no)
-  // Yes => fillPage(yes)
-
-  override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
+  override def fillPage(values: String*): Unit = clickById("add")
 }

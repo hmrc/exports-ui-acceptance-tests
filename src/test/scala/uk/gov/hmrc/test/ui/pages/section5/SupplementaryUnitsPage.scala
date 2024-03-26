@@ -16,17 +16,17 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Common, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Common}
 import uk.gov.hmrc.test.ui.pages.base.PageLinks.tariffCommodities
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.itemsSupplementaryUnits
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{CommodityDetailsCode, SupplementaryUnits}
 
 object SupplementaryUnitsPage extends BasePage {
 
   def backButtonHref: String = CommodityMeasurePage.path
-  def path: String           = itemUrl("supplementary-units")
-  def title: String          = findElementByTag("h1").getText
+  def path: String = itemUrl("supplementary-units")
+  def title: String = findElementByTag("h1").getText
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(itemsSupplementaryUnits))
 
@@ -37,13 +37,14 @@ object SupplementaryUnitsPage extends BasePage {
       super.pageLinkHrefs :+ s"$tariffCommodities$commodityCode}"
     }
 
-  val code  = 1
+  val code = 1
 
   // No  => fillPage(no)
   // Yes => fillPage(yes, "11.1")
 
-  override def fillPage(values: String*): Unit = {
-    if (selectYesOrNoRadio(values(yesNo), "Yes", "No")) fillTextBoxById("supplementaryUnits", values(code))
-    store(SupplementaryUnits(itemId) -> Details(values))
-  }
+  override def fillPage(values: String*): Unit =
+    if (selectYesOrNoRadio(values(yesNo), "Yes", "No")) {
+      fillTextBoxById("supplementaryUnits", values(code))
+      store(SupplementaryUnits(itemId) -> Detail(values(code)))
+    } else store(SupplementaryUnits(itemId) -> Detail(Constants.no))
 }

@@ -18,17 +18,17 @@ package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.PackageTypeLabel
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalFiscalReferences
 
-object PackageInformationListPage extends BasePage {
+object FiscalReferencesListPage extends BasePage {
 
-  def backButtonHref: String = StatisticalValuePage.path
-  def path: String = itemUrl("packages-list")
+  def backButtonHref: String = AdditionalProcedureCodesPage.path
+  def path: String = itemUrl("additional-fiscal-references-list")
 
   def title: String =
-    itemDetailFor(itemId, PackageTypeLabel).size match {
-      case 1 => "You have added 1 package type"
-      case n => s"You have added $n package types"
+    details(AdditionalFiscalReferences(itemId)).size match {
+      case 1 => "You have added 1 VAT number"
+      case n => s"You have added $n VAT numbers"
     }
 
   override def checkExpanders(): Unit = ()

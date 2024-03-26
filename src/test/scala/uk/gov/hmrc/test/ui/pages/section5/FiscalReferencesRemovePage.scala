@@ -20,11 +20,11 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalFiscalReferences
 
-object AdditionalFiscalReferencesRemovePage extends BasePage {
+object FiscalReferencesRemovePage extends BasePage {
 
-  def backButtonHref: String = AdditionalFiscalReferencesListPage.path
-  def path: String           = removeUrl("items", "additional-fiscal-references")
-  val title: String          = "Are you sure you want to remove these VAT details?"
+  def backButtonHref: String = FiscalReferencesListPage.path
+  def path: String = removeUrl("items", "additional-fiscal-references")
+  val title: String = "Are you sure you want to remove these VAT details?"
 
   override def checkExpanders(): Unit = ()
 
@@ -35,9 +35,9 @@ object AdditionalFiscalReferencesRemovePage extends BasePage {
 
   override def fillPage(values: String*): Unit =
     if (selectYesOrNoRadio(values(yesNo))) {
-      val detailKey          = AdditionalFiscalReferences(itemId)
+      val detailKey = AdditionalFiscalReferences(itemId)
       val vatDetailsToRemove = values.head
-      val result             = details(detailKey).filterNot(_ == vatDetailsToRemove)
+      val result = details(detailKey).filterNot(_ == vatDetailsToRemove)
       if (result.isEmpty) clear(detailKey) else store(detailKey -> Details(result))
     }
 }
