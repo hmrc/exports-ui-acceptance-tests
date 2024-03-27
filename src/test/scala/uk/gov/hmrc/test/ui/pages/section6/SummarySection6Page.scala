@@ -22,7 +22,7 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{ContainerLabel, Section6, 
 object SummarySection6Page extends BasePage {
 
   def backButtonHref: String =
-    if (detailForLabel(section6, ContainerLabel).nonEmpty) ContainersListPage.path
+    if (detailForLabel(section6, ContainerLabel).nonEmpty) ContainerListPage.path
     else ContainerPage.path
 
   val path: String           = "/declaration/summary-section/6"

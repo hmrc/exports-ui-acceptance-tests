@@ -22,7 +22,7 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.Container
 
 object ContainerRemovePage extends BasePage {
 
-  def backButtonHref: String = ContainersListPage.path
+  def backButtonHref: String = ContainerListPage.path
   def path: String           = removeUrl("containers")
   val title                  = "Are you sure you want to remove this container?"
 

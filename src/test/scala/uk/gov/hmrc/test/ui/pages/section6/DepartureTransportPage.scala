@@ -20,6 +20,7 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{departureTransport, departureTransportCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{DepartureTransport, InlandModeOfTransport, TransportLeavingBorder}
+import uk.gov.hmrc.test.ui.pages.section6.InlandOrBorderPage.isBorderLocation
 
 object DepartureTransportPage extends BasePage {
 
@@ -27,7 +28,21 @@ object DepartureTransportPage extends BasePage {
     maybeDetail(InlandModeOfTransport).fold(InlandModeOfTransportPage.backButtonHref)( _=> InlandModeOfTransportPage.path)
 
   val path: String  = "/declaration/departure-transport"
-  def title: String = s"What are the details for the ${detail(TransportLeavingBorder).toLowerCase} transport?"
+  def title: String = {
+    val (detailKey, prefix) =
+      if (isBorderLocation) TransportLeavingBorder -> ""
+      else InlandModeOfTransport -> "inland "
+
+    val transportMode = detail(detailKey) match {
+      case "Road transport" => "road transport"
+      case "Rail transport" => "rail transport"
+      case "Sea transport" => "sea transport"
+      case "Air transport" => "air transport"
+      case "Inland waterway transport" => "inland waterway transport"
+      case "Mode unknown, for example own propulsion" => "own propulsion"
+    }
+    s"What are the details for the $prefix$transportMode?"
+  }
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common    -> List(departureTransport),

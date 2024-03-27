@@ -24,8 +24,10 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{Container, ContainerLabel,
 object ContainerPage extends BasePage {
 
   def backButtonHref: String =
-    if (detailForLabel(section6, ContainerLabel).nonEmpty) ContainersListPage.path
-    else ContainersListPage.backButtonHref
+    if (detailForLabel(section6, ContainerLabel).nonEmpty) ContainerListPage.path
+    else ContainerListPage.backButtonHref
+
+  override def changeLink: String = ContainerListPage.path
 
   val path: String = "/declaration/container"
 
@@ -36,8 +38,8 @@ object ContainerPage extends BasePage {
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Common -> List(container), Clearance -> List(containerCL, containerCL1))
 
-  private val code = 1
   private val additionalCode = 0
+  private val code = 1
 
   // No  => fillPage(no)
   // Yes => fillPage(yes, "Container identifier")

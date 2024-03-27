@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section6
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.inlandTransportDetails
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{InlandOrBorder, TransportLeavingBorder}
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{InlandModeOfTransport, InlandOrBorder}
 
 object InlandModeOfTransportPage extends BasePage {
 
@@ -45,6 +45,6 @@ object InlandModeOfTransportPage extends BasePage {
       case "Mode unknown, for example own propulsion" => "Inland_Unknown"
     }
     clickById(elementId)
-    store(TransportLeavingBorder -> Detail(values(mode)))
+    store(InlandModeOfTransport -> Detail(values(mode)))
   }
 }

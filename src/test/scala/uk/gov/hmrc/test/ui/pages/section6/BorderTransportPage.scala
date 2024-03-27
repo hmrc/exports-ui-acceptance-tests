@@ -23,9 +23,9 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{BorderTransport, Departure
 
 object BorderTransportPage extends BasePage {
 
-  def backButtonHref: String = maybeDetail(DepartureTransport).fold(DepartureTransportPage.backButtonHref)(_ => DepartureTransportPage.path)
+  def backButtonHref: String = maybeDetails(DepartureTransport).fold(DepartureTransportPage.backButtonHref)(_ => DepartureTransportPage.path)
   val path: String  = "/declaration/border-transport"
-  def title: String = s"What are the details for the ${detail(TransportLeavingBorder).toLowerCase} transport?"
+  def title: String = s"What are the details for the ${detail(TransportLeavingBorder).toLowerCase}?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(borderTransport))
 

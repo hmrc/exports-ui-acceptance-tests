@@ -25,6 +25,7 @@ import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.changeLinks
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.CountriesOfRouting
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodeLabel
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.SealLabel
 
 trait BasePage extends CacheHelper with DriverHelper with PageHelper {
 
@@ -48,7 +49,10 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper {
   protected def checkUrlAndTitle(): Unit = {
     val expectedUrl = host + path
     val actualUrl = driver.getCurrentUrl
-    assert(expectedUrl.r.matches(actualUrl), s"The expected URL($expectedUrl) does not match the actual URL($actualUrl)")
+    assert(
+      expectedUrl.r.matches(actualUrl),
+      s"The expected URL($expectedUrl) does not match the actual URL($actualUrl)"
+    )
     val sectionHeader =
       if (elementByIdDoesNotExist("section-header")) ""
       else s" - ${findElementById("section-header").getText}"
@@ -118,6 +122,7 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper {
           val valuesSeparator = detailKey match {
             case CountriesOfRouting                              => ","
             case key if key.label == NationalAdditionalCodeLabel => ","
+            case key if key.label == SealLabel                   => ","
             case _                                               => "\n"
           }
 

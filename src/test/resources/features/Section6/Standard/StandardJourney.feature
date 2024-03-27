@@ -26,7 +26,7 @@ Feature: Section6 Standard Prelodged
     And I select Ship or RoRo ferry IMO number as the border transport
     And I click continue
     Then I should land on Transport-Country page
-    And I select China as the transport country
+    And I select Macao as the transport country
     And I click continue
     Then I should land on Express-Consignment page
     And I select Yes to confirm consignment as express
@@ -34,6 +34,47 @@ Feature: Section6 Standard Prelodged
     Then I should land on Transport-Payment page
     And I select Payment in cash as the mode of payment
     And I click continue
+    Then I should land on Container page
+    And I select Yes to add Container1 as container
+    And I click continue
+    Then I should land on Seal-YesNo page
+    And I select Yes to add security seal
+    And I click continue
+    Then I should land on Seal page
+    And I enter Seal1 as seal
+    And I click continue
+    Then I should land on Seal-List page
+    And I select Yes to add another security seal
+    And I click continue
+    Then I should land on Seal page
+    And I enter Seal2 as seal
+    And I click continue
+    Then I should land on Seal-List page
+    And I select No to add another security seal
+    And I click continue
+    Then I should land on Container-List page
+    And I select Yes to add another container
+    And I click continue
+    And I enter Container2 container
+    And I click continue
+    Then I should land on Seal-YesNo page
+    And I select No to add security seal
+    And I click continue
+    Then I should land on Container-List page
+    And I select No to add another container
+    And I click continue
+    Then I should land on MiniCYA-Section-6 page
+    And I check the MiniCYA page for Section-6
+    And I click continue on MiniCya
+
+
+
+
+
+
+
+
+
 
 
 

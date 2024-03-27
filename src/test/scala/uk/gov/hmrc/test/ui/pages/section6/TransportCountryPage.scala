@@ -23,8 +23,8 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{BorderTransport, Transport
 
 object TransportCountryPage extends BasePage {
 
-  def backButtonHref: String = maybeDetail(BorderTransport).fold(BorderTransportPage.backButtonHref)(_ => BorderTransportPage.path)
-  val path: String  = "declaration/transport-country"
+  def backButtonHref: String = maybeDetails(BorderTransport).fold(BorderTransportPage.backButtonHref)(_ => BorderTransportPage.path)
+  val path: String  = "/declaration/transport-country"
   def title: String = s"Select the country where the ${detail(TransportLeavingBorder).toLowerCase} is registered"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(transportCountry))

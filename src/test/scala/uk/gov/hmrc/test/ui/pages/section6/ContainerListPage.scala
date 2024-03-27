@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.{yes, yesNo}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isSupplementary
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{ContainerLabel, ExpressConsignment, section6}
 
-object ContainersListPage extends BasePage {
+object ContainerListPage extends BasePage {
 
   def backButtonHref: String =
     if (isSupplementary) ExpressConsignmentPage.backButtonHref

@@ -21,11 +21,11 @@ import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base._
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.Seals
 
-object SealsChoicePage extends BasePage {
+object SealYesNoPage extends BasePage {
 
+  def backButtonHref: String = ContainerListPage.path
   def path: String           = s"/declaration/containers/$containerId/seals"
   def title                  = s"Does container $containerId have any security seals?"
-  def backButtonHref: String = ContainerPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common    -> List(containersSeals),
@@ -35,5 +35,5 @@ object SealsChoicePage extends BasePage {
   private val yesNo = 0
 
   override def fillPage(values: String*): Unit =
-    if (!selectYesOrNoRadio(values(yesNo))) store(Seals(containerId) -> Details(List("No Seals")))
+    if (!selectYesOrNoRadio(values(yesNo))) store(Seals(containerId) -> Details(List("No seals")))
 }

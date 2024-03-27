@@ -21,9 +21,10 @@ import uk.gov.hmrc.test.ui.pages.base.DetailKey
 object DetailKeys {
 
   val section6 = 6
-  val Section6: DetailKey = DetailKey("Section 6 of 6: Transport", section6, Some("transport-card"))
+  val Section6: DetailKey = DetailKey("Section 6 of 6: Transportation of the goods", section6, Some("transport-card"))
 
   val ContainerLabel = "Container ID"
+  val SealLabel = "Security seals"
 
   // /transport-leaving-the-border
   val TransportLeavingBorder: DetailKey = DetailKey("Transport at the border", section6)
@@ -60,5 +61,5 @@ object DetailKeys {
   def Container(containerId: String): DetailKey = DetailKey(ContainerLabel, section6, Some(containerId))
 
   // /container/seal
-  def Seals(containerId: String): DetailKey = DetailKey("Security seals", section6, Some(containerId))
+  def Seals(containerId: String): DetailKey = DetailKey(SealLabel, section6, Some(containerId), checkChangeLink = false)
 }

@@ -42,4 +42,6 @@ object InlandOrBorderPage extends BasePage {
     }
     store(InlandOrBorder -> Detail(values(location)))
   }
+
+  def isBorderLocation: Boolean = maybeDetail(InlandOrBorder).contains("Border Location")
 }
