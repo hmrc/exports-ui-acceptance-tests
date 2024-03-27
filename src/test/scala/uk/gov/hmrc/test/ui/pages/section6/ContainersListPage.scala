@@ -17,16 +17,29 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.base.Constants.{yes, yesNo}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isSupplementary
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{ContainerLabel, ExpressConsignment, section6}
 
 object ContainersListPage extends BasePage {
 
-  val path: String           = "/declaration/containers"
-  def title                  = s"You have added $containerId containers"
   def backButtonHref: String =
-    ContainerPage.backButtonHref // should have the same back button logic as first container page
+    if (isSupplementary) ExpressConsignmentPage.backButtonHref
+    else if (detail(ExpressConsignment) == yes) TransportPaymentPage.path
+    else ExpressConsignmentPage.path
 
-  private val yesNo = 0
+  val path: String = "/declaration/containers"
 
-  override def fillPage(values: String*): Unit =
-    selectYesOrNoRadio(values(yesNo))
+  def title: String =
+    allSectionDetails(section6).count(_._1.label == ContainerLabel) match {
+      case 1 => "You have added 1 container"
+      case n => s"You have added $n containers"
+    }
+
+  override def checkExpanders(): Unit = ()
+
+  // No  => fillPage(no)
+  // Yes => fillPage(yes)
+
+  override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
 }

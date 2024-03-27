@@ -16,14 +16,14 @@
 
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.Constants._
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
-import uk.gov.hmrc.test.ui.pages.base._
-import uk.gov.hmrc.test.ui.pages.section6.ConditionChecksSection6.hasEndingCodes
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.SuperVisingCustomsOffice
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{supervisingCustomsOffice, supervisingCustomsOfficeCL}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{SuperVisingCustomsOffice, WarehouseHouse}
 
 object SupervisingCustomsOfficePage extends BasePage {
 
+  def backButtonHref: String = maybeDetail(WarehouseHouse).fold(WarehousePage.backButtonHref)(_ => WarehousePage.path)
   val path: String  = "/declaration/supervising-customs-office"
   val title: String = "Where is the HMRC supervising customs office (SPOFF)?"
 
@@ -32,11 +32,9 @@ object SupervisingCustomsOfficePage extends BasePage {
     Clearance -> List(supervisingCustomsOfficeCL)
   )
 
-  def backButtonHref(): String =
-    if (hasEndingCodes) WarehousePage.path
-    else TransportLeavingTheBorderPage.path
-
   private val officeCode = 0
+
+  // ex: fillPage("GBBTH001")
 
   override def fillPage(values: String*): Unit = {
     fillDropdown("supervisingCustomsOffice", values(officeCode))

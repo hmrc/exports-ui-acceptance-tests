@@ -20,13 +20,11 @@ import uk.gov.hmrc.test.ui.pages.base.Constants._
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{decType, decTypeCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{AdditionalDeclarationType, DeclarationType}
+import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 
 object DeclarationTypePage extends BasePage {
 
-  def backButtonHref: String =
-    if (detail(DeclarationType) == Standard) StandardOrOtherPage.path
-    else DeclarationChoicePage.path
-
+  def backButtonHref: String = if (isStandard) StandardOrOtherPage.path else DeclarationChoicePage.path
   val path: String = "/declaration/type"
 
   def title: String =

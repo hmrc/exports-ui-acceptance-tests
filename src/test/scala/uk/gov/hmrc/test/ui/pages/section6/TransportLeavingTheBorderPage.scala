@@ -16,17 +16,17 @@
 
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.Constants._
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
-import uk.gov.hmrc.test.ui.pages.base._
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{transportLeavingTheBorder, transportLeavingTheBorderCL}
 import uk.gov.hmrc.test.ui.pages.section5.SummarySection5Page
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.TransportLeavingBorder
 
 object TransportLeavingTheBorderPage extends BasePage {
 
+  def backButtonHref: String = SummarySection5Page.path
   val path: String           = "/declaration/transport-leaving-the-border"
   val title: String          = "What mode of transport will the goods leave the UK on?"
-  val backButtonHref: String = SummarySection5Page.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common    -> List(transportLeavingTheBorder),
@@ -34,6 +34,8 @@ object TransportLeavingTheBorderPage extends BasePage {
   )
 
   private val transportType = 0
+
+  // ex: fillPage("Fixed transport installation")
 
   override def fillPage(values: String*): Unit = {
     val elementId = values(transportType) match {

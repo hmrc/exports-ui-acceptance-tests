@@ -16,36 +16,36 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{yes, Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yes}
 import uk.gov.hmrc.test.ui.pages.base.PageLinks._
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsProcedureCodes, itemsProcedureCodesCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.EntryIntoDeclarantsRecords
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{section5, ProcedureCode}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.ProcedureCode
 
 object ProcedureCodesPage extends BasePage {
 
   def backButtonHref: String = DeclarationItemsListPage.path
+  def path: String           = itemUrl("procedure-codes")
+  val title: String          = "What is the procedure code for this item?"
 
-  def path: String = itemUrl("procedure-codes")
-  val title: String = "What is the procedure code for this item?"
-
-  override val expanderHrefs: Map[String, Seq[String]] =
-    Map(Common -> List(itemsProcedureCodes), Clearance -> List(itemsProcedureCodesCL))
+  override val expanderHrefs: Map[String, Seq[String]] = Map(
+    Common    -> List(itemsProcedureCodes),
+    Clearance -> List(itemsProcedureCodesCL)
+  )
 
   override def pageLinkHrefs: Seq[String] =
-    if (detail(DeclarationType) == Clearance && detail(EntryIntoDeclarantsRecords) == yes) super.pageLinkHrefs
-    else
-      super.pageLinkHrefs ++ List(
-        endUseRelief,
-        inwardProcessing,
-        outwardProcessing,
-        onwardSupplyRelief,
-        reExportFollowingSpecialProcedure,
-        removalOfGoodsFromExciseWarehouse,
-        temporaryExport
-      )
+    if (isClearance && detail(EntryIntoDeclarantsRecords) == yes) super.pageLinkHrefs
+    else super.pageLinkHrefs ++ List(
+      endUseRelief,
+      inwardProcessing,
+      outwardProcessing,
+      onwardSupplyRelief,
+      reExportFollowingSpecialProcedure,
+      removalOfGoodsFromExciseWarehouse,
+      temporaryExport
+    )
 
   // ex: fillPage("1040")
 
@@ -55,11 +55,10 @@ object ProcedureCodesPage extends BasePage {
     store(ProcedureCode(itemId) -> Detail(procedureCode))
   }
 
-  val codesRestrictingZeroVat: Seq[String] =
+  private val codesRestrictingZeroVat: Seq[String] =
     List("1007", "1042", "2151", "2154", "2200", "3151", "3154", "3171", "2100", "2144", "2244", "2300", "3153")
 
-  def isCodeRestrictingZeroVat: Boolean = codesRestrictingZeroVat.contains(detail(ProcedureCode(itemId)))
-  def isExportInventoryCleansingRecord: Boolean = detail(ProcedureCode(itemId)) == "0019" // EICR procedure code
-  def isPermanentExportOfUKGoods: Boolean = detail(ProcedureCode(itemId)) == "1040"
-  def isOsrProcedureCode: Boolean = detail(ProcedureCode(itemId)) == "1042"
+  def hasRestrictingZeroVatPC: Boolean = codesRestrictingZeroVat.contains(detail(ProcedureCode(itemId)))
+
+  def isPermanentExportOfUKGoodsPC: Boolean        = detail(ProcedureCode(itemId)) == "1040"
 }

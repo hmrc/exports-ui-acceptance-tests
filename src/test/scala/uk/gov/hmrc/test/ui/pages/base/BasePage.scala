@@ -46,7 +46,9 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper {
     List(exitAndCompleteLater, feedbackBanner, govUkLogo, languageToggle, signOut, technicalIssue)
 
   protected def checkUrlAndTitle(): Unit = {
-    assert((host + path).r.matches(driver.getCurrentUrl))
+    val expectedUrl = host + path
+    val actualUrl = driver.getCurrentUrl
+    assert(expectedUrl.r.matches(actualUrl), s"The expected URL($expectedUrl) does not match the actual URL($actualUrl)")
     val sectionHeader =
       if (elementByIdDoesNotExist("section-header")) ""
       else s" - ${findElementById("section-header").getText}"
@@ -55,7 +57,8 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper {
     findElementsByTag("h1").head.getText mustBe title
   }
 
-  protected def checkBackButton(): Unit = findElementById("back-link").getAttribute("href") mustBe host + backButtonHref
+  protected def checkBackButton(): Unit =
+    findElementById("back-link").getAttribute("href") mustBe host + backButtonHref
 
   protected def checkPageLinks(): Unit = {
     val links = findElementsByTag("a")

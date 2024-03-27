@@ -16,26 +16,43 @@
 
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.Constants._
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
-import uk.gov.hmrc.test.ui.pages.base._
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{warehouseIdentification, warehouseIdentificationCL}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.WarehouseHouse
 
 object WarehousePage extends BasePage {
 
+  def backButtonHref: String = TransportLeavingTheBorderPage.path
   val path: String           = "/declaration/warehouse-details"
   val title: String          = "What is the customs approved warehouse number?"
-  val backButtonHref: String = TransportLeavingTheBorderPage.path
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common    -> List(warehouseIdentification),
     Clearance -> List(warehouseIdentificationCL)
   )
 
-  private val code = 0
+  private val identifierOnNonClearance = 0
+
+  // Non-Clearance Journey
+  // ex: fillPage("R1234567GB")
+
+  private val identifierOnClearance = 1
+
+  // On Clearance Journey
+  //   No  => fillPage(no)
+  //   Yes => fillPage(yes, "R1234567GB")
 
   override def fillPage(values: String*): Unit = {
-    fillTextBoxById("identificationNumber", values(code))
-    store(WarehouseHouse -> Detail(values(code)))
+    if (!isClearance) {
+      fillTextBoxById("identificationNumber", values(identifierOnNonClearance))
+      store(WarehouseHouse -> Detail(values(identifierOnNonClearance)))
+    }
+    else if (selectYesOrNoRadio(values(yesNo))) {
+      fillTextBoxById("identificationNumber", values(identifierOnClearance))
+      store(WarehouseHouse -> Detail(values(identifierOnClearance)))
+    }
+    else store(WarehouseHouse -> Detail(Constants.no))
   }
 }

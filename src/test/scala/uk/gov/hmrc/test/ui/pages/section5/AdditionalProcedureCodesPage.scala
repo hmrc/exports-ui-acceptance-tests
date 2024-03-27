@@ -16,16 +16,15 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Detail
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{
   itemsAdditionalProcedureCodes,
   itemsAdditionalProcedureCodes1,
   itemsAdditionalProcedureCodes2,
   itemsAdditionalProcedureCodesCL
 }
-import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalProcedureCodes, ProcedureCode}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalProcedureCodeLabel, AdditionalProcedureCodes, ProcedureCode}
 
 object AdditionalProcedureCodesPage extends BasePage {
 
@@ -51,5 +50,5 @@ object AdditionalProcedureCodesPage extends BasePage {
     store(AdditionalProcedureCodes(itemId) -> Detail(codes.mkString(" ")))
   }
 
-  def isLowValueDeclaration: Boolean = details(AdditionalProcedureCodes(itemId)).contains(lowValueDeclaration)
+  def isLowValueDeclaration: Boolean  = details(AdditionalProcedureCodes(itemId)).contains(lowValueDeclaration)
 }

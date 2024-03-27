@@ -29,9 +29,8 @@ object LoginPage extends BasePage {
   val title: String = "Authority Wizard"
 
   override def checkBackButton(): Unit = ()
-  override def checkUrlAndTitle(): Unit =
-    // first page to be tested. we set the driver to wait until the html elements are fully resolved
-    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2L))
+
+  override def checkUrlAndTitle(): Unit = ()
 
   override def checkPageLinks(): Unit = ()
 

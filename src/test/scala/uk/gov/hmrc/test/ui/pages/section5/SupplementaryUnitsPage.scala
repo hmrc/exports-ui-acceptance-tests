@@ -46,5 +46,6 @@ object SupplementaryUnitsPage extends BasePage {
     if (selectYesOrNoRadio(values(yesNo), "Yes", "No")) {
       fillTextBoxById("supplementaryUnits", values(code))
       store(SupplementaryUnits(itemId) -> Detail(values(code)))
-    } else store(SupplementaryUnits(itemId) -> Detail(Constants.no))
+    }
+    else store(SupplementaryUnits(itemId) -> Detail(Constants.no))
 }

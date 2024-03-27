@@ -19,14 +19,11 @@ package uk.gov.hmrc.test.ui.pages.section1
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{ducr, ducrCL}
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 
 object DoYouHaveADucrPage extends BasePage {
 
-  def backButtonHref: String =
-    if (detail(DeclarationType) == Clearance) DeclarationTypePage.path
-    else DeclarantDetailsPage.path
-
+  def backButtonHref: String = if (isClearance) DeclarationTypePage.path else DeclarantDetailsPage.path
   val path: String = "/declaration/do-you-have-ducr"
   val title: String = "Do you have a Declaration Unique Consignment Reference Number (DUCR)?"
 

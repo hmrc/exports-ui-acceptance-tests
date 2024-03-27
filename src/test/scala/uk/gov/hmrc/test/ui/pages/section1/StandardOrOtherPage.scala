@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section1
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.Standard
+import uk.gov.hmrc.test.ui.pages.base.Constants._
 import uk.gov.hmrc.test.ui.pages.base.PageLinks.fullExportDeclaration
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
@@ -38,4 +38,6 @@ object StandardOrOtherPage extends BasePage {
       clickById(values(0))
       store(DeclarationType -> Detail(Standard))
     }
+
+  def isStandard: Boolean = detail(DeclarationType) == Standard
 }
