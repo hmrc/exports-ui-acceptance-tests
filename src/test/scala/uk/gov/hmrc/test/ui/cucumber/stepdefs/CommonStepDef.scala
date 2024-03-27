@@ -24,6 +24,7 @@ import uk.gov.hmrc.test.ui.pages.section1._
 import uk.gov.hmrc.test.ui.pages.section2._
 import uk.gov.hmrc.test.ui.pages.section3._
 import uk.gov.hmrc.test.ui.pages.section4._
+import uk.gov.hmrc.test.ui.pages.section5._
 
 class CommonStepDef extends BaseStepDef {
 
@@ -79,6 +80,27 @@ class CommonStepDef extends BaseStepDef {
     NatureOfTransactionPage.fillPage("Goods being sol"); continue()
     PreviousDocumentPage.fillPage("first", "Commercial Invoice", "9GB123456782317-BH1433A61"); continue()
     PreviousDocumentListPage.fillPage(Constants.no); continue()
+    continueOnMiniCya()
+  }
+
+  And("""^I fill section5""") { () =>
+    AddDeclarationItemPage.fillPage()
+    ProcedureCodesPage.fillPage("1042"); continue()
+    AdditionalProcedureCodesPage.fillPage("F75"); continue()
+    FiscalReferencesYesNoPage.fillPage(Constants.no); continue()
+    CommodityDetailsPage.fillPage("4203400090", "Straw for bottles"); continue()
+    DangerousGoodsCodePage.fillPage(Constants.no); continue()
+    NationalAdditionalCodesPage.fillPage(Constants.no); continue()
+    StatisticalValuePage.fillPage("1000"); continue()
+    PackageInformationPage.fillPage("1", "Aerosol", "20", "No shipping mark"); continue()
+    PackageInformationListPage.fillPage(Constants.no); continue()
+    CommodityMeasurePage.fillPage("500", "700"); continue()
+    SupplementaryUnitsPage.fillPage(Constants.yes, "12"); continue()
+    AdditionalInformationYesNoPage.fillPage(Constants.no); continue()
+    LicenseRequiredYesNoPage.fillPage(Constants.yes); continue()
+    AdditionalDocumentPage.fillPage("1", "C501", "GBAEOC717572504502801"); continue()
+    AdditionalDocumentListPage.fillPage(Constants.no); continue()
+    DeclarationItemsListPage.fillPage(Constants.no); continue()
     continueOnMiniCya()
   }
 }
