@@ -44,4 +44,9 @@ object DeclarationChoicePage extends BasePage {
     }
     store(DeclarationType -> Detail(journeyType))
   }
+
+  def isClearance: Boolean = detail(DeclarationType) == Clearance
+  def isOccasional: Boolean = detail(DeclarationType) == Occasional
+  def isSimplified: Boolean = detail(DeclarationType) == Simplified
+  def isSupplementary: Boolean = detail(DeclarationType) == Supplementary
 }

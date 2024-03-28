@@ -18,8 +18,7 @@ package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
-import uk.gov.hmrc.test.ui.pages.base.Constants
-import uk.gov.hmrc.test.ui.pages.section2.{ConsigneeDetailsPage, OtherPartiesInvolvedPage}
+import uk.gov.hmrc.test.ui.pages.section2.OtherPartiesInvolvedPage
 
 class OtherPartiesInvolvedStepDef extends BaseStepDef {
 

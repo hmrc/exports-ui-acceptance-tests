@@ -32,7 +32,7 @@ object CusCodePage extends BasePage {
   val code  = 1
 
   // No  => fillPage(no)
-  // Yes => fillPage(yes, "12345678")
+  // Yes => fillPage(yes, "1234")
 
   override def fillPage(values: String*): Unit = {
     if (selectYesOrNoRadio(values(yesNo))) {

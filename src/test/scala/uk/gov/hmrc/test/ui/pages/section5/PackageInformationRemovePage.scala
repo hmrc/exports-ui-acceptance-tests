@@ -37,11 +37,11 @@ object PackageInformationRemovePage extends BasePage {
 
   override def fillPage(values: String*): Unit =
     if (selectYesOrNoRadio(values(yesNo))) {
-      val seqId = values(packageInfoToBeRemoved)
+      val sequenceId = values(packageInfoToBeRemoved)
       clear(
-        PackageInformationType(itemId, seqId),
-        PackageInformationNumber(itemId, seqId),
-        PackageInformationShippingMark(itemId, seqId)
+        PackageInformationType(itemId, sequenceId),
+        PackageInformationNumber(itemId, sequenceId),
+        PackageInformationShippingMark(itemId, sequenceId)
       )
     }
 }

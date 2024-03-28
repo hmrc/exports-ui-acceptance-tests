@@ -22,7 +22,6 @@ class LoginPageStepDef extends BaseStepDef {
 
   Given("""^I enter EORI (.*) on Login Page and click submit""") { (eori: String) =>
     LoginPage.fillPage(eori)
-    LoginPage.submit
+    LoginPage.submit()
   }
-
 }

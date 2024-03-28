@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.section1._
 
 class LRNStepDef extends BaseStepDef {
 
-  And("""^I should land on Lrn page""")(() => LrnPage.checkPage)
+  And("""^I should land on Lrn page""")(() => LrnPage.checkPage())
 
   And("""^I enter LRN (.*)""") { (lrn: String) =>
     LrnPage.fillPage(lrn)

@@ -16,31 +16,22 @@
 
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.Constants._
+import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.inlandTransportDetails
-import uk.gov.hmrc.test.ui.pages.base._
-import uk.gov.hmrc.test.ui.pages.section6.ConditionChecksSection6._
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{InlandModeOfTransport, InlandOrBorder}
 
 object InlandModeOfTransportPage extends BasePage {
 
+  def backButtonHref: String = maybeDetail(InlandOrBorder).fold(InlandOrBorderPage.backButtonHref)(_ => InlandOrBorderPage.path)
   val path: String  = "/declaration/inland-transport-details"
   val title: String = "How will the goods be transported to the UK border?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List(inlandTransportDetails)
-  )
-
-  def backButtonHref: String =
-    if (!shouldSkipInlandOrBorder && detail(InlandOrBorder) == "Border Location") {
-      InlandOrBorderPage.path
-    } else if (shouldSkipInlandOrBorder && isSPOFFNotNeeded) {
-      TransportLeavingTheBorderPage.path
-    } else {
-      SupervisingCustomsOfficePage.path
-    }
+  override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(inlandTransportDetails))
 
   private val mode = 0
+
+  // ex: fillPage("Air transport")
 
   override def fillPage(values: String*): Unit = {
     val elementId = values(mode) match {
@@ -54,6 +45,6 @@ object InlandModeOfTransportPage extends BasePage {
       case "Mode unknown, for example own propulsion" => "Inland_Unknown"
     }
     clickById(elementId)
-    store(TransportLeavingBorder -> Detail(values(mode)))
+    store(InlandModeOfTransport -> Detail(values(mode)))
   }
 }

@@ -17,42 +17,22 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants._
-import uk.gov.hmrc.test.ui.pages.base.PageLinks.{
-  aiCodes,
-  aiCodesForContainers,
-  licensesForExportingGoods,
-  previousProcedureCodes,
-  tariffCommodities
-}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{
-  itemsAdditionalDocuments,
-  itemsAdditionalDocumentsCL,
-  itemsIsAdditionalInformationRequired,
-  itemsIsAdditionalInformationRequiredCL
-}
+import uk.gov.hmrc.test.ui.pages.base.PageLinks.{licensesForExportingGoods, tariffCommodities}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{
-  AdditionalInformationCodeLabel,
-  CommodityDetailsCode,
-  IsLicenceRequired,
-  NoAdditionalDocuments,
-  NoAdditionalInformation,
-  PackageInformationType
-}
-import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.isPermanentExportOfUKGoods
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalInformationCodeLabel, CommodityDetailsCode, NoAdditionalDocuments}
 
 object AdditionalDocumentsYesNoPage extends BasePage {
 
   def backButtonHref: String =
-    if (detail(DeclarationType) != Clearance) LicenseRequiredYesNoPage.path
+    if (!isClearance) LicenseRequiredYesNoPage.path
     else if (itemDetailFor(itemId, AdditionalInformationCodeLabel).nonEmpty) AdditionalInformationListPage.path
     else AdditionalInformationYesNoPage.path
 
   def path: String = itemUrl("is-additional-information-required")
 
   val title: String =
-    if (detail(DeclarationType) == Clearance) "Do you need to declare any additional documents for this item?"
+    if (isClearance) "Do you need to declare any additional documents for this item?"
     else "Do you need to enter any other document details?"
 
   override def checkExpanders(): Unit = ()

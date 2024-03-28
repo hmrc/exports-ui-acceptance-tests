@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.pages.section6
+package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section6
 
-import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
+import uk.gov.hmrc.test.ui.pages.section6.ContainerListPage
 
-object ContainersListPage extends BasePage {
+class ContainerListStepDef extends BaseStepDef {
 
-  val path: String           = "/declaration/containers"
-  def title                  = s"You have added $containerId containers"
-  def backButtonHref: String =
-    ContainerPage.backButtonHref // should have the same back button logic as first container page
+  And("""^I should land on Container-List page""")(() => ContainerListPage.checkPage())
 
-  private val yesNo = 0
-
-  override def fillPage(values: String*): Unit =
-    selectYesOrNoRadio(values(yesNo))
+  And("""^I select (.*) to add another container""") { (yesNo: String) =>
+    ContainerListPage.fillPage(yesNo)
+  }
 }

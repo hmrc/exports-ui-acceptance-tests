@@ -20,20 +20,19 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.PageLinks.{previousProcedureCodes, vatOnGoodsExportedFromUK}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.itemsZeroRatedForVat
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section5.CommodityDetailsPage.isChemicalCommodityCode
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.VatRating
-import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.isCodeRestrictingZeroVat
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{CusCode, VatRating}
+import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.hasRestrictingZeroVatPC
 
 object VatRatingPage extends BasePage {
 
-  def backButtonHref: String = if (isChemicalCommodityCode) CusCodePage.path else DangerousGoodsCodePage.path
+  def backButtonHref: String = maybeDetail(CusCode(itemId)).fold(DangerousGoodsCodePage.path)(_ => CusCodePage.path)
   def path: String = itemUrl("vat-rating")
   val title: String = "Are these goods being zero-rated for VAT?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(itemsZeroRatedForVat))
 
   override def pageLinkHrefs: Seq[String] =
-    super.pageLinkHrefs ++ List(if (isCodeRestrictingZeroVat) previousProcedureCodes else vatOnGoodsExportedFromUK)
+    super.pageLinkHrefs ++ List(if (hasRestrictingZeroVatPC) previousProcedureCodes else vatOnGoodsExportedFromUK)
 
   // fillPage("Yes")         => "Yes"
   // fillPage("VAT reduced") => "No, a reduced VAT 5% duty rate applies in the UK and is being paid"

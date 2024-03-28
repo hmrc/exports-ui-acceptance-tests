@@ -17,9 +17,11 @@
 package uk.gov.hmrc.test.ui.pages.base
 
 import org.openqa.selenium.interactions.Actions
+import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait}
 import org.openqa.selenium.{By, Keys, WebElement}
 import uk.gov.hmrc.test.ui.driver.BrowserDriver
 
+import java.time.Duration
 import scala.jdk.CollectionConverters.ListHasAsScala
 
 trait DriverHelper extends BrowserDriver {
@@ -67,8 +69,7 @@ trait DriverHelper extends BrowserDriver {
     parent.findElements(By.className(className)).asScala.toList
 
   def fillDropdown(elementId: String, value: String, maybeId: Option[String] = None): String = {
-
-    val element = findElementById(elementId)
+    val element = waitFor(elementId)
     element.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE)
     element.sendKeys(value)
     val selection = maybeId.fold("") { id =>
@@ -87,7 +88,7 @@ trait DriverHelper extends BrowserDriver {
   }
 
   def fillTextBoxById(elementId: String, text: String): Unit =
-    findElementById(elementId).sendKeys(text)
+    waitFor(elementId).sendKeys(text)
 
   def fillTextBoxByName(name: String, text: String): Unit =
     findElementByName(name).sendKeys(text)
@@ -100,8 +101,14 @@ trait DriverHelper extends BrowserDriver {
 
   def selectYesOrNoRadio(option: String, yes: String = "code_yes", no: String = "code_no"): Boolean =
     option match {
-      case Constants.yes => clickById(yes); true
-      case Constants.no  => clickById(no); false
+      case Constants.yes    => clickById(yes); true
+      case Constants.no | _ => clickById(no); false
     }
 
+  private def waitFor(elementId: String): WebElement =
+    new FluentWait(driver)
+      .withTimeout(Duration.ofSeconds(10L))
+      .pollingEvery(Duration.ofMillis(500L))
+      .ignoring(classOf[Exception])
+      .until(ExpectedConditions.visibilityOfElementLocated(By.id(elementId)))
 }

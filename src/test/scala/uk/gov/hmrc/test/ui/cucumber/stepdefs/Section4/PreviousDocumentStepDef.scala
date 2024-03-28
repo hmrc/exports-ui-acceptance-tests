@@ -18,7 +18,7 @@ package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section4
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
-import uk.gov.hmrc.test.ui.pages.section4.{NatureOfTransactionPage, PreviousDocumentPage}
+import uk.gov.hmrc.test.ui.pages.section4.PreviousDocumentPage
 
 class PreviousDocumentStepDef extends BaseStepDef {
 

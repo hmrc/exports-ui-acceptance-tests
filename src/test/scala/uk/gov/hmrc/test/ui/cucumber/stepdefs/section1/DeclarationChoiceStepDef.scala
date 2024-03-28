@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.section1
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section1.{DeclarationChoicePage, StandardOrOtherPage}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage
 
 class DeclarationChoiceStepDef extends BaseStepDef {
 

@@ -24,8 +24,8 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{onBehalfOfOtherAgentYesNo,
 object RepresentationTypeAgreedPage extends BasePage {
 
   def backButtonHref: String = maybeDetail(onBehalfOfOtherAgentYesNo) match {
-    case Some(Constants.yes) => OnBehalfOfAnotherAgentPage.path
-    case Some(Constants.no)  => RepresentativesEORINumberPage.path
+    case Some(Constants.yes)    => OnBehalfOfAnotherAgentPage.path
+    case Some(Constants.no) | _ => RepresentativesEORINumberPage.path
   }
 
   val path: String = "/declaration/representation-type-agreed"

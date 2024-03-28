@@ -21,21 +21,23 @@ import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base._
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.Seals
 
-object AdditionalSealPage extends BasePage {
+object SealPage extends BasePage {
 
-  def path: String           = s"/declaration/containers/$containerId/add-seals"
-  def title                  = s"What is the security seal for container $containerId"
-  def backButtonHref: String = SealsChoicePage.path
+  def backButtonHref: String = SealYesNoPage.path
+  def path: String           = s"/declaration/containers/$containerId/add-seal"
+  def title                  = s"What is the security seal for container $containerId?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common    -> List(containersSeals),
     Clearance -> List(containersSealsCL)
   )
 
-  private val id = 0
+  private val sealId = 0
+
+  // ex: fillPage("Seal1")
 
   override def fillPage(values: String*): Unit = {
-    val seal  = values(id)
+    val seal  = values(sealId)
     fillTextBoxById("id", seal)
     val seals = maybeDetails(Seals(containerId)).fold(Seq(seal))(_ :+ seal)
     store(Seals(containerId) -> Details(seals))

@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.section1._
 
 class EnterAMucrStepDef extends BaseStepDef {
 
-  And("""^I should land on Enter-A-Mucr page""")(() => EnterAMucrPage.checkPage)
+  And("""^I should land on Enter-A-Mucr page""")(() => EnterAMucrPage.checkPage())
 
   And("""^I enter Mucr as (.*)""") { (mucr: String) =>
     EnterAMucrPage.fillPage(mucr)

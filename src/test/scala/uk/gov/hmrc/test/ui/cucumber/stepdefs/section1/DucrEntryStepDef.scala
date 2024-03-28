@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.section1._
 
 class DucrEntryStepDef extends BaseStepDef {
 
-  And("""^I should land on Ducr-Entry page""")(() => DucrEntryPage.checkPage)
+  And("""^I should land on Ducr-Entry page""")(() => DucrEntryPage.checkPage())
 
   And("""^I enter Ducr (.*)""") { (ducr: String) =>
     DucrEntryPage.fillPage(ducr)

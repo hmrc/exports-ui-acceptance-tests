@@ -38,10 +38,12 @@ object LocationOfGoodsPage extends BasePage {
     val adt = detail(AdditionalDeclarationType)
     val authorisationType = detailForLabel(section2, AuthorisationTypeLabel)
 
+    def hasAuthorisationType(code: String): Boolean = authorisationType.exists(_.startsWith(s"$code -"))
+
     if (isPrelodgedDeclaration(adt)) customsTitle
-    else if (authorisationType.startsWith("CSE -") && isArrivedDeclaration(adt)) "Enter the code for the CSE premises"
-    else if (authorisationType.startsWith("EXRR -") && adt.startsWith("Arrived -")) gvmsTitle
-    else if (!authorisationType.startsWith("MIB -") && adt.startsWith("Arrived -")) gvmsTitle
+    else if (hasAuthorisationType("CSE") && isArrivedDeclaration(adt)) "Enter the code for the CSE premises"
+    else if (hasAuthorisationType("EXRR") && adt.startsWith("Arrived -")) gvmsTitle
+    else if (!hasAuthorisationType("MIB") && adt.startsWith("Arrived -")) gvmsTitle
     else customsTitle
   }
 

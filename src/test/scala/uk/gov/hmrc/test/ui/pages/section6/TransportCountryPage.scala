@@ -16,32 +16,22 @@
 
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.Constants._
+import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.transportCountry
-import uk.gov.hmrc.test.ui.pages.base._
-import uk.gov.hmrc.test.ui.pages.section6.ConditionChecksSection6._
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{BorderTransport, TransportCountry, TransportLeavingBorder}
 
 object TransportCountryPage extends BasePage {
 
-  val path: String  = "declaration/transport-country"
-  def title: String =
-    s"Select the country where the ${detail(TransportLeavingBorder).toLowerCase} is registered"
+  def backButtonHref: String = maybeDetails(BorderTransport).fold(BorderTransportPage.backButtonHref)(_ => BorderTransportPage.path)
+  val path: String  = "/declaration/transport-country"
+  def title: String = s"Select the country where the ${detail(TransportLeavingBorder).toLowerCase} is registered"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List(transportCountry)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(transportCountry))
 
   private val country = 0
 
-  def backButtonHref: String =
-    if (inlandOrBorderValue && !isTransportLeavingBorderModePostalOrFixed && !shouldSkipInlandOrBorder) {
-      if (checkIfDecIsOcaOrSim) InlandOrBorderPage.path
-      else if (checkIfDecIsStdOrSup) DepartureTransportPage.path
-      else BorderTransportPage.path
-    } else {
-      BorderTransportPage.path
-    }
+  // ex: fillPage("United States of America", "The United States of America")
 
   override def fillPage(values: String*): Unit = {
     fillDropdown("transport-country", values(country))

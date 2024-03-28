@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.section1._
 
 class DeclarationTypeStepDef extends BaseStepDef {
 
-  And("""^I should land on Arrived-or-Prelodged page""")(() => DeclarationTypePage.checkPage)
+  And("""^I should land on Arrived-or-Prelodged page""")(() => DeclarationTypePage.checkPage())
 
   And("""^I select a (.*) declaration type""") { (option: String) =>
     DeclarationTypePage.fillPage(option)

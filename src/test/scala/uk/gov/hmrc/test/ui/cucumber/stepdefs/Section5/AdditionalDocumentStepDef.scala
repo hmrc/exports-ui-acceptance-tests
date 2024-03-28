@@ -18,7 +18,7 @@ package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section5
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
-import uk.gov.hmrc.test.ui.pages.section5.{AdditionalDocumentPage, VatRatingPage}
+import uk.gov.hmrc.test.ui.pages.section5.AdditionalDocumentPage
 
 class AdditionalDocumentStepDef extends BaseStepDef {
 

@@ -16,36 +16,42 @@
 
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.Constants._
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
-import uk.gov.hmrc.test.ui.pages.base._
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys._
-import uk.gov.hmrc.test.ui.pages.section6.ConditionChecksSection6._
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{departureTransport, departureTransportCL}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{DepartureTransport, InlandModeOfTransport, TransportLeavingBorder}
+import uk.gov.hmrc.test.ui.pages.section6.InlandOrBorderPage.isBorderLocation
 
 object DepartureTransportPage extends BasePage {
 
+  def backButtonHref: String =
+    maybeDetail(InlandModeOfTransport).fold(InlandModeOfTransportPage.backButtonHref)( _=> InlandModeOfTransportPage.path)
+
   val path: String  = "/declaration/departure-transport"
-  def title: String =
-    s"What are the details for the ${detail(TransportLeavingBorder).toLowerCase} transport?"
+  def title: String = {
+    val (detailKey, prefix) =
+      if (isBorderLocation) TransportLeavingBorder -> ""
+      else InlandModeOfTransport -> "inland "
+
+    val transportMode = detail(detailKey) match {
+      case "Road transport" => "road transport"
+      case "Rail transport" => "rail transport"
+      case "Sea transport" => "sea transport"
+      case "Air transport" => "air transport"
+      case "Inland waterway transport" => "inland waterway transport"
+      case "Mode unknown, for example own propulsion" => "own propulsion"
+    }
+    s"What are the details for the $prefix$transportMode?"
+  }
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common    -> List(departureTransport),
     Clearance -> List(departureTransportCL)
   )
 
-  val checkIfDecIsSupEidr: Boolean =
-    detail(DeclarationType) == Constants.Occasional && detail(DeclarationType) == Constants.Simplified
-
-  def backButtonHref: String =
-    if (detail(DeclarationType) == Constants.Clearance)
-      SupervisingCustomsOfficePage.path
-    else if (inlandOrBorderValue && !checkIfDecIsSupEidr && !shouldSkipInlandOrBorder)
-      InlandOrBorderPage.path
-    else
-      InlandModeOfTransportPage.path
-
   private val departRef = 0
+
+  // ex: fillPage("Flight number and date of flight")
 
   override def fillPage(values: String*): Unit = {
     val (radioId, textboxId, textboxValue) = values.head match {
@@ -55,8 +61,10 @@ object DepartureTransportPage extends BasePage {
       case "Flight number and date of flight"                => ("radio_FlightNumber", "FlightNumber", "123456")
       case "Aircraft registration number and date of flight" =>
         ("radio_AircraftRegistrationNumber", "AircraftRegistrationNumber", "123456")
+
       case "European vessel identification (ENI) number"     =>
         ("radio_EuropeanVesselIDNumber", "EuropeanVesselIDNumber", "123456")
+
       case "Inland vessel’s name"                            => ("radio_NameOfInlandWaterwayVessel", "NameOfVessel", "123456")
       case "Vehicle registration number"                     => ("radio_VehicleRegistrationNumber", "NameOfVessel", "123456")
     }

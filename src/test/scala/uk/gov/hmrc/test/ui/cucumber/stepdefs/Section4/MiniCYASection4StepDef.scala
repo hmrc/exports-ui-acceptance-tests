@@ -17,7 +17,6 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section4
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section3.SummarySection3Page
 import uk.gov.hmrc.test.ui.pages.section4.SummarySection4Page
 
 class MiniCYASection4StepDef extends BaseStepDef {

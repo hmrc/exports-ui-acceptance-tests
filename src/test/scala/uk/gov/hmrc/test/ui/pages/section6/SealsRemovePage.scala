@@ -22,7 +22,7 @@ object SealsRemovePage extends BasePage {
 
   def path: String           = removeUrl("containers", "seals")
   def title                  = s"Are you sure you want to remove this security seal for container $containerId?"
-  def backButtonHref: String = ContainersListPage.path
+  def backButtonHref: String = ContainerListPage.path
 
   private val yesNo = 0
 

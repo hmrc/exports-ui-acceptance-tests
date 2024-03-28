@@ -16,29 +16,24 @@
 
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.Constants._
+import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.inlandOrBorder
-import uk.gov.hmrc.test.ui.pages.base._
-import uk.gov.hmrc.test.ui.pages.section6.ConditionChecksSection6._
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.InlandOrBorder
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{InlandOrBorder, SuperVisingCustomsOffice}
 
 object InlandOrBorderPage extends BasePage {
+
+  def backButtonHref: String =
+    maybeDetail(SuperVisingCustomsOffice).fold(SupervisingCustomsOfficePage.backButtonHref)(_ => SupervisingCustomsOfficePage.path)
 
   val path: String  = "/declaration/inland-or-border"
   val title: String = "Where are you presenting your goods to customs?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(inlandOrBorder))
 
-  def backButtonHref: String =
-    if (isSPOFFNotNeeded) {
-      TransportLeavingTheBorderPage.path
-    } else if (checkIfDecIsClr) {
-      WarehousePage.path
-    } else {
-      SupervisingCustomsOfficePage.path
-    }
-
   private val location = 0
+
+  // ex: fillPage("Customs controlled location")
 
   override def fillPage(values: String*): Unit = {
     values(location) match {
@@ -47,4 +42,6 @@ object InlandOrBorderPage extends BasePage {
     }
     store(InlandOrBorder -> Detail(values(location)))
   }
+
+  def isBorderLocation: Boolean = maybeDetail(InlandOrBorder).contains("Border Location")
 }

@@ -29,14 +29,13 @@ object NationalAdditionalCodesListPage extends BasePage {
   def backButtonHref: String =
     detail(DeclarationType) match {
       case Occasional | Simplified => if (isLowValueDeclaration) VatRatingPage.path else VatRatingPage.backButtonHref
+      case Supplementary           => VatRatingPage.backButtonHref
 
-      case Standard =>
+      case Standard | _=>
         detail(NatureOfTransaction) match {
           case Sale | BusinessPurchase => VatRatingPage.path
           case _ => VatRatingPage.backButtonHref
         }
-
-      case Supplementary => VatRatingPage.backButtonHref
     }
 
   def path: String = itemUrl("national-additional-codes-list")

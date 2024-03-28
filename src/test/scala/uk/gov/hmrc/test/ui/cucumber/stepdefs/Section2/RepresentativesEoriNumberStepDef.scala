@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section2.{AreYouTheExporterPage, RepresentativesEORINumberPage}
+import uk.gov.hmrc.test.ui.pages.section2.RepresentativesEORINumberPage
 
 class RepresentativesEoriNumberStepDef extends BaseStepDef {
 

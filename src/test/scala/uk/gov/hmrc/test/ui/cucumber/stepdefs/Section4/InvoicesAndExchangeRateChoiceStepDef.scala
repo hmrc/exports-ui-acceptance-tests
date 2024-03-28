@@ -17,7 +17,6 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section4
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section3.OfficeOfExitPage
 import uk.gov.hmrc.test.ui.pages.section4.InvoicesAndExchangeRateChoicePage
 
 class InvoicesAndExchangeRateChoiceStepDef extends BaseStepDef {

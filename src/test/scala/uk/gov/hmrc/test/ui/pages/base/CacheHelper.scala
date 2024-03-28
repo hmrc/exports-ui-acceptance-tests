@@ -31,10 +31,18 @@ trait CacheHelper {
   def clear(detailKeys: DetailKey*): Cache = cache --= detailKeys
 
   // Use a detailKey to retrieve the value of a Detail (a Detail corresponds to a single value)
-  def detail(detailKey: DetailKey): String = cache(detailKey) match { case (detail: Detail) => detail.value }
+  def detail(detailKey: DetailKey): String =
+    cache(detailKey) match {
+      case detail: Detail => detail.value
+      case _ => assert(false, s"Cache does not contain a value for $detailKey"); ""
+    }
 
   // Use a detailKey to retrieve the values of a Details (a Details corresponds to a list of values)
-  def details(detailKey: DetailKey): Seq[String] = cache(detailKey) match { case (details: Details) => details.values }
+  def details(detailKey: DetailKey): Seq[String] =
+    cache(detailKey) match {
+      case details: Details => details.values
+      case _ => assert(false, s"Cache does not contain a value for $detailKey"); List.empty
+    }
 
   def maybeDetail(detailKey: DetailKey): Option[String] =
     cache.get(detailKey) match {

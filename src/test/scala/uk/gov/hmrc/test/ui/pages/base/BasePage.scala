@@ -25,6 +25,7 @@ import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.changeLinks
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.CountriesOfRouting
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodeLabel
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.SealLabel
 
 trait BasePage extends CacheHelper with DriverHelper with PageHelper {
 
@@ -46,7 +47,12 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper {
     List(exitAndCompleteLater, feedbackBanner, govUkLogo, languageToggle, signOut, technicalIssue)
 
   protected def checkUrlAndTitle(): Unit = {
-    assert((host + path).r.matches(driver.getCurrentUrl))
+    val expectedUrl = host + path
+    val actualUrl = driver.getCurrentUrl
+    assert(
+      expectedUrl.r.matches(actualUrl),
+      s"The expected URL($expectedUrl) does not match the actual URL($actualUrl)"
+    )
     val sectionHeader =
       if (elementByIdDoesNotExist("section-header")) ""
       else s" - ${findElementById("section-header").getText}"
@@ -55,7 +61,8 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper {
     findElementsByTag("h1").head.getText mustBe title
   }
 
-  protected def checkBackButton(): Unit = findElementById("back-link").getAttribute("href") mustBe host + backButtonHref
+  protected def checkBackButton(): Unit =
+    findElementById("back-link").getAttribute("href") mustBe host + backButtonHref
 
   protected def checkPageLinks(): Unit = {
     val links = findElementsByTag("a")
@@ -109,12 +116,16 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper {
           val values = details match {
             case detail: Detail  => Seq(detail.value)
             case detail: Details => detail.values
+
+            // It cannot happen. Just for silencing the compiler emitting "match may not be exhaustive".
+            case ign => assert(false, s"Not a 'Detail' or 'Details' value ?? ($ign)"); List.empty
           }
 
           // There may be some edge cases here not accounted for, please add accordingly.
           val valuesSeparator = detailKey match {
             case CountriesOfRouting                              => ","
             case key if key.label == NationalAdditionalCodeLabel => ","
+            case key if key.label == SealLabel                   => ","
             case _                                               => "\n"
           }
 

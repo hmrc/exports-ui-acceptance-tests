@@ -17,15 +17,28 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.Container
 
 object ContainerRemovePage extends BasePage {
 
+  def backButtonHref: String = ContainerListPage.path
   def path: String           = removeUrl("containers")
   val title                  = "Are you sure you want to remove this container?"
-  def backButtonHref: String = ContainersListPage.path
 
-  private val yesNo = 0
+  override def checkExpanders(): Unit = ()
+
+  val containerIdToBeRemoved = 1
+
+  // No  => fillPage(no)
+  // Yes => fillPage(yes, "ContainerId")
 
   override def fillPage(values: String*): Unit =
-    selectYesOrNoRadio(values(yesNo))
+    if (selectYesOrNoRadio(values(yesNo))) {
+      val containerId = values(containerIdToBeRemoved)
+      clear(
+        Container(containerId)
+        // Container's Seals, if any, to remove
+      )
+    }
 }
