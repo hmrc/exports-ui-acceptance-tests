@@ -29,9 +29,9 @@ object PackageInformationPage extends BasePage {
   def backButtonHref: String =
     maybeDetail(PackageInformationType(itemId, "0")).fold(
       detail(DeclarationType) match {
-        case Clearance                => if (isThisExs) DangerousGoodsCodePage.path else CommodityDetailsPage.path
-        case Occasional | Simplified  => if (isLowValueDeclaration) StatisticalValuePage.path else NationalAdditionalCodesListPage.path
-        case Standard | Supplementary => StatisticalValuePage.path
+        case Clearance                    => if (isThisExs) DangerousGoodsCodePage.path else CommodityDetailsPage.path
+        case Occasional | Simplified      => if (isLowValueDeclaration) StatisticalValuePage.path else NationalAdditionalCodesListPage.path
+        case Standard | Supplementary | _ => StatisticalValuePage.path
       }
     )(_ => PackageInformationListPage.path)
 

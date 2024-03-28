@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section5
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section5.{CommodityMeasurePage, VatRatingPage}
+import uk.gov.hmrc.test.ui.pages.section5.CommodityMeasurePage
 
 class CommodityMeasureStepDef extends BaseStepDef {
 

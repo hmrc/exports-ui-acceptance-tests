@@ -20,8 +20,6 @@ import uk.gov.hmrc.test.ui.conf.TestConfiguration.url
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationEori
 
-import java.time.Duration
-
 object LoginPage extends BasePage {
 
   val backButtonHref: String = ""

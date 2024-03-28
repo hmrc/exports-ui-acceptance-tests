@@ -18,7 +18,7 @@ package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
 import uk.gov.hmrc.test.ui.pages.base.Constants
-import uk.gov.hmrc.test.ui.pages.section2.{CarrierAddressPage, ExporterAddressPage}
+import uk.gov.hmrc.test.ui.pages.section2.ExporterAddressPage
 
 class ExporterAddressStepDef extends BaseStepDef {
 

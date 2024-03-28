@@ -17,7 +17,6 @@
 package uk.gov.hmrc.test.ui.conf
 
 import com.typesafe.config.{Config, ConfigFactory}
-import scala.sys.process.Process
 
 object TestConfiguration {
   val config: Config        = ConfigFactory.load()

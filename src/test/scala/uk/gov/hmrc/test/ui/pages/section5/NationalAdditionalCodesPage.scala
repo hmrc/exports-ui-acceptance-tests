@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import org.openqa.selenium.By
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.itemsNationalAdditionalCode
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Details}
@@ -47,7 +46,7 @@ object NationalAdditionalCodesPage extends BasePage {
 
   override def fillPage(values: String*): Unit = {
     val nationalAdditionalCodes =
-      if (!elementByIdDoesNotExist("code_yes")) {
+      if (elementByIdDoesNotExist("code_yes")) {
         fillTextBoxById("nactCode", values(anotherNationalCode))
         details(NationalAdditionalCodes(itemId)) :+ values(anotherNationalCode)
       } else if (selectYesOrNoRadio(values(yesNo))) {

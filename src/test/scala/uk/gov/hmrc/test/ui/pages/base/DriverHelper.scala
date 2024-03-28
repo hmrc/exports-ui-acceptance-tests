@@ -101,8 +101,8 @@ trait DriverHelper extends BrowserDriver {
 
   def selectYesOrNoRadio(option: String, yes: String = "code_yes", no: String = "code_no"): Boolean =
     option match {
-      case Constants.yes => clickById(yes); true
-      case Constants.no  => clickById(no); false
+      case Constants.yes    => clickById(yes); true
+      case Constants.no | _ => clickById(no); false
     }
 
   private def waitFor(elementId: String): WebElement =

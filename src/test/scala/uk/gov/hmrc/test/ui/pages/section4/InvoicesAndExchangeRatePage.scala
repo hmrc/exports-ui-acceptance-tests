@@ -18,7 +18,7 @@ package uk.gov.hmrc.test.ui.pages.section4
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Common, no, yes}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{invoiceAndExchangeRateChoice, invoiceAndExchangeRateChoice1}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, Details}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.{ExchangeRate, TotalAmountInvoiced}
 
 object InvoicesAndExchangeRatePage extends BasePage {

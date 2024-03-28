@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section5
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section5.{AddDeclarationItemPage, AdditionalInformationYesNoPage}
+import uk.gov.hmrc.test.ui.pages.section5.AdditionalInformationYesNoPage
 
 class AdditionalInformationYesNoStepDef extends BaseStepDef {
 

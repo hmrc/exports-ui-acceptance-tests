@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section6
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section6.{BorderTransportPage, DepartureTransportPage}
+import uk.gov.hmrc.test.ui.pages.section6.BorderTransportPage
 
 class BorderTransportStepDef extends BaseStepDef {
 

@@ -17,7 +17,6 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section6
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section5.AddDeclarationItemPage
 import uk.gov.hmrc.test.ui.pages.section6.TransportLeavingTheBorderPage
 
 class TransportLeavingTheBorderStepDef extends BaseStepDef {

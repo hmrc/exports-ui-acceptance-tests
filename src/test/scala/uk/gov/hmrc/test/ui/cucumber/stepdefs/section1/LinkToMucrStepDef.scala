@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.section1._
 
 class LinkToMucrStepDef extends BaseStepDef {
 
-  And("""^I should land on Link-To-Mucr page""")(() => LinkMucrPage.checkPage)
+  And("""^I should land on Link-To-Mucr page""")(() => LinkMucrPage.checkPage())
 
   And("""^I select (.*) to link MUCR to DUCR""") { (option: String) =>
     LinkMucrPage.fillPage(option)

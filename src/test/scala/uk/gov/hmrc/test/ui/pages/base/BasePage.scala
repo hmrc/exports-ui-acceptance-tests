@@ -116,6 +116,9 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper {
           val values = details match {
             case detail: Detail  => Seq(detail.value)
             case detail: Details => detail.values
+
+            // It cannot happen. Just for silencing the compiler emitting "match may not be exhaustive".
+            case ign => assert(false, s"Not a 'Detail' or 'Details' value ?? ($ign)"); List.empty
           }
 
           // There may be some edge cases here not accounted for, please add accordingly.

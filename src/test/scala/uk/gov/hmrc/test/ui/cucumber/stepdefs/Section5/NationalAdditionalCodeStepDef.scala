@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section5
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section5.{DangerousGoodsCodePage, NationalAdditionalCodesPage}
+import uk.gov.hmrc.test.ui.pages.section5.NationalAdditionalCodesPage
 
 class NationalAdditionalCodeStepDef extends BaseStepDef {
 
