@@ -16,12 +16,8 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{sequenceId, Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.PageLinks.{
-  additionalDocumentsReferenceCodes,
-  additionalDocumentsUnionCodes,
-  additionalDocumentsUnitCodes
-}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, sequenceId}
+import uk.gov.hmrc.test.ui.pages.base.PageLinks.{additionalDocumentsReferenceCodes, additionalDocumentsUnionCodes, additionalDocumentsUnitCodes}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalDocuments, itemsAdditionalDocumentsCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType

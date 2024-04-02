@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.driver
+package uk.gov.hmrc.test.ui.cucumber.stepdefs.common
 
-import com.typesafe.scalalogging.LazyLogging
-import org.openqa.selenium.remote.RemoteWebDriver
-import uk.gov.hmrc.selenium.webdriver.Driver
+import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
+import uk.gov.hmrc.test.ui.pages.common.SubmitYourDeclarationPage
 
-trait BrowserDriver extends LazyLogging {
-  logger.info(
-    s"Instantiating Browser: ${sys.props.getOrElse("browser", "'browser' System property not set. This is required")}"
-  )
+class SubmitYourDeclarationStepDef extends BaseStepDef {
 
-  implicit def driver: RemoteWebDriver = Driver.instance
+  And("""^I should land on Submit-Your-Declaration page""")(() => SubmitYourDeclarationPage.checkPage())
+
+  And("""^I submit the declaration""") { () =>
+    SubmitYourDeclarationPage.fillPage()
+  }
 }

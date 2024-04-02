@@ -16,9 +16,9 @@
 
 package uk.gov.hmrc.test.ui.pages.section1
 
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, TariffLinks}
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{consignmentReferences, consignmentReferencesCL, consignmentReferencesSUP}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, TariffLinks}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{Ducr, Lrn, Mrn}
 
 object ConsignmentReferencesPage extends BasePage {

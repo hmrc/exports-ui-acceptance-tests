@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, no, yes, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.Constants._
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{areYouCompletingThisDeclarationOnBehalfOfAnotherAgent, areYouCompletingThisDeclarationOnBehalfOfAnotherAgentCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType

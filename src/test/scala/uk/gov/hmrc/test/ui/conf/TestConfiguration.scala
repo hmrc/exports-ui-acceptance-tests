@@ -38,5 +38,5 @@ object TestConfiguration {
 
   def serviceRoute(serviceName: String): String = envConfig.getString(s"services.$serviceName.productionRoute")
 
-  def setBrowser(): String = System.setProperty("browser","chrome")
+  def setBrowser(): String = System.setProperty("browser", "chrome")
 }

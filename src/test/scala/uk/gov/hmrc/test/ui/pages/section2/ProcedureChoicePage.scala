@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import org.openqa.selenium.By
 import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.PageLinks._
@@ -45,7 +44,7 @@ object ProcedureChoicePage extends BasePage {
     )
 
   override def checkExpanders(): Unit = {
-    elementDoesNotExist(By.id("authorisationProcedureCodeChoice-readMore")) mustBe false
+    elementByIdDoesNotExist("authorisationProcedureCodeChoice-readMore") mustBe false
     checkExpanderLinks()
   }
 

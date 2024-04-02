@@ -17,12 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{
-  itemsCommodityDetails,
-  itemsCommodityDetails1,
-  itemsCommodityDetailsCL,
-  itemsCommodityDetailsCL1
-}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsCommodityDetails, itemsCommodityDetails1, itemsCommodityDetailsCL, itemsCommodityDetailsCL1}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{CommodityDetailsCode, CommodityDetailsDescription, FiscalInformationYesNo}
 

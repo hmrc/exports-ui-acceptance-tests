@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalFiscalReferences, itemsAdditionalFiscalReferencesCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalFiscalReferences, FiscalInformationYesNo}

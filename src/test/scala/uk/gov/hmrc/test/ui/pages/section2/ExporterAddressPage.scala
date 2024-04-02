@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section2
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{exporterAddress, exporterAddressCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{addressHelper, ExporterDetails}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{ExporterDetails, addressHelper}
 
 object ExporterAddressPage extends BasePage {
 

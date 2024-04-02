@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.cucumber.runner
+package uk.gov.hmrc.test.ui.cucumber.stepdefs.common
 
-import io.cucumber.junit.{Cucumber, CucumberOptions}
-import org.junit.runner.RunWith
+import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
+import uk.gov.hmrc.test.ui.pages.common.SummaryPage
 
-@RunWith(classOf[Cucumber])
-@CucumberOptions(
-  features = Array("src/test/resources/features"),
-  glue = Array("uk.gov.hmrc.test.ui.cucumber.stepdefs"),
-  plugin =
-    Array("pretty", "html:target/cucumber.html", "json:target/cucumber.json", "junit:target/test-reports/Runner.xml"),
-  tags = "@Regression"
-)
-class Runner {}
+class SummaryStepDef extends BaseStepDef {
+
+  And("""^I should land on Saved-Summary page""")(() => SummaryPage.checkPage())
+
+  And("""^I check the sections' headings and click confirm and continue""") { () =>
+    SummaryPage.fillPage()
+  }
+}

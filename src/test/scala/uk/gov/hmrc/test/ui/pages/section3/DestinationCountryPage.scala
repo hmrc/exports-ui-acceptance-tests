@@ -19,8 +19,8 @@ package uk.gov.hmrc.test.ui.pages.section3
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, enteredValue, storedValue}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{destinationCountry, destinationCountry1, destinationCountryCL, destinationCountryCL1}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.DestinationCountry
 import uk.gov.hmrc.test.ui.pages.section2.SummarySection2Page
+import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.DestinationCountry
 
 object DestinationCountryPage extends BasePage {
 

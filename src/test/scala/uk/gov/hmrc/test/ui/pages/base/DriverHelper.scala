@@ -16,15 +16,26 @@
 
 package uk.gov.hmrc.test.ui.pages.base
 
+import com.typesafe.scalalogging.LazyLogging
 import org.openqa.selenium.interactions.Actions
+import org.openqa.selenium.remote.RemoteWebDriver
 import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait}
 import org.openqa.selenium.{By, Keys, WebElement}
-import uk.gov.hmrc.test.ui.driver.BrowserDriver
+import uk.gov.hmrc.selenium.webdriver.Driver
 
 import java.time.Duration
 import scala.jdk.CollectionConverters.ListHasAsScala
+import scala.util.{Failure, Success, Try}
 
-trait DriverHelper extends BrowserDriver {
+trait ExpectedCondition
+
+case object Clickable extends ExpectedCondition
+case object Presence extends ExpectedCondition
+case object Visible extends ExpectedCondition
+
+trait DriverHelper {
+
+  protected val driver: RemoteWebDriver = uk.gov.hmrc.test.ui.pages.base.DriverHelper.driver
 
   def changeLinkOnCYA(row: String): WebElement = driver.findElement(By.cssSelector(s".$row .govuk-link"))
 
@@ -39,11 +50,19 @@ trait DriverHelper extends BrowserDriver {
   def clickByCssSelector(value: String): Unit = findElementByCssSelector(value).click()
   def clickByClassName(value: String): Unit = findElementByClassName(value).click()
 
-  def elementDoesNotExist(elementBy: By): Boolean =
-    driver.findElements(elementBy).size() == 0
+  def elementByClassDoesNotExist(className: String, secondsToWaitFor: Int = 0): Boolean =
+    if (secondsToWaitFor == 0) driver.findElements(By.className(className)).size() == 0
+    else Try(waitForClass(className, Presence, secondsToWaitFor)) match {
+      case Success(_) => false
+      case Failure(_) => true
+    }
 
-  def elementByIdDoesNotExist(elementId: String): Boolean =
-    driver.findElements(By.id(elementId)).size() == 0
+  def elementByIdDoesNotExist(elementId: String, secondsToWaitFor: Int = 0): Boolean =
+    if (secondsToWaitFor == 0) driver.findElements(By.id(elementId)).size() == 0
+    else Try(waitForId(elementId, Presence, secondsToWaitFor)) match {
+      case Success(_) => false
+      case Failure(_) => true
+    }
 
   def findElementById(value: String): WebElement = driver.findElement(By.id(value))
   def findElementByXpath(value: String): WebElement = driver.findElement(By.xpath(value))
@@ -52,10 +71,10 @@ trait DriverHelper extends BrowserDriver {
   def findElementByCssSelector(value: String): WebElement = driver.findElement(By.cssSelector(value))
   def findElementByClassName(value: String): WebElement = driver.findElement(By.className(value))
   def findElementByName(value: String): WebElement = driver.findElement(By.name(value))
-  def findElementByTag(value: String): WebElement = driver.findElement(By.tagName(value))
+  def findElementByTag(tag: String): WebElement = driver.findElement(By.tagName(tag))
 
   def findElementsByClassName(value: String): Seq[WebElement] = driver.findElements(By.className(value)).asScala.toList
-  def findElementsByTag(value: String): Seq[WebElement] = driver.findElements(By.tagName(value)).asScala.toList
+  def findElementsByTag(tag: String): Seq[WebElement] = driver.findElements(By.tagName(tag)).asScala.toList
 
   def findChildByClassName(parent: WebElement, className: String): WebElement =
     parent.findElement(By.className(className))
@@ -68,8 +87,11 @@ trait DriverHelper extends BrowserDriver {
   def findChildrenByClassName(parent: WebElement, className: String): Seq[WebElement] =
     parent.findElements(By.className(className)).asScala.toList
 
+  def findChildrenByTag(parent: WebElement, tag: String): Seq[WebElement] =
+    parent.findElements(By.tagName(tag)).asScala.toList
+
   def fillDropdown(elementId: String, value: String, maybeId: Option[String] = None): String = {
-    val element = waitFor(elementId)
+    val element = waitForId(elementId)
     element.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE)
     element.sendKeys(value)
     val selection = maybeId.fold("") { id =>
@@ -88,7 +110,7 @@ trait DriverHelper extends BrowserDriver {
   }
 
   def fillTextBoxById(elementId: String, text: String): Unit =
-    waitFor(elementId).sendKeys(text)
+    waitForId(elementId).sendKeys(text)
 
   def fillTextBoxByName(name: String, text: String): Unit =
     findElementByName(name).sendKeys(text)
@@ -101,14 +123,44 @@ trait DriverHelper extends BrowserDriver {
 
   def selectYesOrNoRadio(option: String, yes: String = "code_yes", no: String = "code_no"): Boolean =
     option match {
-      case Constants.yes    => clickById(yes); true
-      case Constants.no | _ => clickById(no); false
+      case Constants.yes    => waitForId(yes, Presence).click(); true
+      case Constants.no | _ => waitForId(no, Presence).click(); false
     }
 
-  private def waitFor(elementId: String): WebElement =
+  def waitForClass(className: String, expectedCondition: ExpectedCondition = Visible, secondsToWaitFor: Int = 10): WebElement =
+    Try(waitFor(By.className(className), expectedCondition, secondsToWaitFor)) match {
+      case Success(element) => element
+      case Failure(exception) =>
+        val message = s"Was waiting for an element with class($className) while on page ${driver.getCurrentUrl}"
+        throw new TestFailedException(message, exception)
+    }
+
+  def waitForId(elementId: String, expectedCondition: ExpectedCondition = Visible, secondsToWaitFor: Int = 10): WebElement =
+    Try(waitFor(By.id(elementId), expectedCondition, secondsToWaitFor)) match {
+      case Success(element) => element
+      case Failure(exception) =>
+        val message = s"Was waiting for an element with id($elementId) while on page ${driver.getCurrentUrl}"
+        throw new TestFailedException(message, exception)
+    }
+
+  private def waitFor(locator: By, expectedCondition: ExpectedCondition, secondsToWaitFor: Int): WebElement = {
+    val condition = expectedCondition match {
+      case Clickable   => ExpectedConditions.elementToBeClickable(locator)
+      case Presence    => ExpectedConditions.presenceOfElementLocated(locator)
+      case Visible | _ => ExpectedConditions.visibilityOfElementLocated(locator)
+    }
     new FluentWait(driver)
-      .withTimeout(Duration.ofSeconds(10L))
+      .withTimeout(Duration.ofSeconds(secondsToWaitFor))
       .pollingEvery(Duration.ofMillis(500L))
       .ignoring(classOf[Exception])
-      .until(ExpectedConditions.visibilityOfElementLocated(By.id(elementId)))
+      .until(condition)
+  }
 }
+
+object DriverHelper extends LazyLogging {
+
+  logger.info(s"Instantiating Browser: ${sys.props.getOrElse("browser", "'browser' System property not set. This is required")}")
+  implicit val driver: RemoteWebDriver = Driver.instance
+}
+
+class TestFailedException(message: String, cause: Throwable) extends RuntimeException(message, cause)

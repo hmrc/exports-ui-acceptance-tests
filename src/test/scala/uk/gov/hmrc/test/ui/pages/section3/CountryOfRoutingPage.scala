@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section3
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.countryOfRouting
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Details}
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{CountriesOfRouting, DestinationCountry}

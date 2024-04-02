@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section2
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{representationTypeAgreed, representationTypeAgreedCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{onBehalfOfOtherAgentYesNo, RepresentativeTypeAgreed}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{RepresentativeTypeAgreed, onBehalfOfOtherAgentYesNo}
 
 object RepresentationTypeAgreedPage extends BasePage {
 
