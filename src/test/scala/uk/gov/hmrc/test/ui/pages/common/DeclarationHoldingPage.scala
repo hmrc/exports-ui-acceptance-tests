@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,22 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.cucumber.runner
+package uk.gov.hmrc.test.ui.pages.common
 
-import io.cucumber.junit.{Cucumber, CucumberOptions}
-import org.junit.runner.RunWith
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Presence}
 
-@RunWith(classOf[Cucumber])
-@CucumberOptions(
-  features = Array("src/test/resources/features"),
-  glue = Array("uk.gov.hmrc.test.ui.cucumber.stepdefs"),
-  plugin =
-    Array("pretty", "html:target/cucumber.html", "json:target/cucumber.json", "junit:target/test-reports/Runner.xml"),
-  tags = "@Regression"
-)
-class Runner {}
+object DeclarationHoldingPage extends BasePage {
+
+  val backButtonHref: String = ""
+
+  val path: String = "/declaration/holding"
+  val title: String = "Submitting your declaration"
+
+  override def checkBackButton(): Unit = ()
+
+  override def checkExpanders(): Unit = ()
+
+  // ex: fillPage()
+
+  override def fillPage(values: String*): Unit = waitForClass("confirmation-content", Presence)
+}

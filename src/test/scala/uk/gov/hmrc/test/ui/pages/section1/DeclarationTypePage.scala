@@ -54,4 +54,7 @@ object DeclarationTypePage extends BasePage {
       }
     store(AdditionalDeclarationType -> Detail(additionalDeclarationType))
   }
+
+  def isArrivedDeclaration: Boolean = detail(AdditionalDeclarationType).startsWith("Arrived -")
+  def isPrelodgedDeclaration: Boolean = detail(AdditionalDeclarationType).startsWith("Pre-lodged -")
 }

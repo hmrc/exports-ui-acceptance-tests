@@ -22,15 +22,15 @@ import uk.gov.hmrc.selenium.webdriver.{Browser, Driver}
 import uk.gov.hmrc.test.ui.conf.TestConfiguration.setBrowser
 
 object Hooks extends ScalaDsl with EN with Browser {
-  this.
+
   After { scenario: Scenario =>
     if (scenario.isFailed) {
       val screenshotName = scenario.getName.replaceAll(" ", "_")
       val screenshot     = Driver.instance.asInstanceOf[TakesScreenshot].getScreenshotAs(OutputType.BYTES)
       scenario.attach(screenshot, "image/png", screenshotName)
     }
-    //SummaryPage.detailsMap.clear()
   }
+
   BeforeAll {
     setBrowser()
     startBrowser()
@@ -40,5 +40,4 @@ object Hooks extends ScalaDsl with EN with Browser {
   AfterAll {
     quitBrowser()
   }
-
 }
