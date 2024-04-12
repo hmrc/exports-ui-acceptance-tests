@@ -87,8 +87,10 @@ trait DriverHelper extends BrowserDriver {
     findElementById(refSelector).sendKeys(refText)
   }
 
-  def fillTextBoxById(elementId: String, text: String): Unit =
+  def fillTextBoxById(elementId: String, text: String): Unit = {
+    waitFor(elementId).clear()
     waitFor(elementId).sendKeys(text)
+  }
 
   def fillTextBoxByName(name: String, text: String): Unit =
     findElementByName(name).sendKeys(text)

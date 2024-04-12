@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section3
 import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{locationOfGoods, locationOfGoodsCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.AdditionalDeclarationType
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage._
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{section2, AuthorisationTypeLabel}
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{CountriesOfRouting, LocationOfGoods, RRS01}
 
@@ -35,15 +35,14 @@ object LocationOfGoodsPage extends BasePage {
   private val gvmsTitle = "Select a permitted goods location for exports using the Goods Vehicle Movement Service"
 
   def title: String = {
-    val adt = detail(AdditionalDeclarationType)
     val authorisationType = detailForLabel(section2, AuthorisationTypeLabel)
 
     def hasAuthorisationType(code: String): Boolean = authorisationType.exists(_.startsWith(s"$code -"))
 
-    if (isPrelodgedDeclaration(adt)) customsTitle
-    else if (hasAuthorisationType("CSE") && isArrivedDeclaration(adt)) "Enter the code for the CSE premises"
-    else if (hasAuthorisationType("EXRR") && adt.startsWith("Arrived -")) gvmsTitle
-    else if (!hasAuthorisationType("MIB") && adt.startsWith("Arrived -")) gvmsTitle
+    if (isPrelodgedDeclaration) customsTitle
+    else if (hasAuthorisationType("CSE") && isArrivedDeclaration) "Enter the code for the CSE premises"
+    else if (hasAuthorisationType("EXRR") && isArrivedDeclaration) gvmsTitle
+    else if (!hasAuthorisationType("MIB") && isArrivedDeclaration) gvmsTitle
     else customsTitle
   }
 
@@ -61,10 +60,4 @@ object LocationOfGoodsPage extends BasePage {
     store(LocationOfGoods -> Detail(locationOfGoods))
     if (locationOfGoods.endsWith("GVM")) store(RRS01 -> Detail("RRS01 (GVMS releases)"))
   }
-
-  private def isArrivedDeclaration(adt: String): Boolean =
-    adt.startsWith("Arrived -") || adt.startsWith("Simplified -") || adt.startsWith("EIDR -")
-
-  private def isPrelodgedDeclaration(adt: String): Boolean =
-    adt.startsWith("Pre-lodged -") || adt.startsWith("Simplified -") || adt.startsWith("EIDR -")
 }

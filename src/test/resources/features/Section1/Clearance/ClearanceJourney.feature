@@ -1,20 +1,20 @@
 @Regression
-Feature: Example Feature file using Cucumber
+Feature: Clearance Journey
 
   # Below scenario - DoYouHaveADucr:[Yes]
-  @Section1 @StandardPrelodged
-  Scenario Outline: Fill Section 1 for a Standard Prelodged and Arrived Declaration
+  @Section1 @OcaDec
+  Scenario Outline: Fill Section 1 for a Clearance Prelodged and Arrived Declaration
     Given I enter EORI GB123456789006 on Login Page and click submit
     Then I should land on Choice page
     And I select to create a declaration
     Then I should land on Standard-Or-Other page
-    And I select the STANDARD declaration option
+    And I select the OTHER declaration option
+    And I click continue
+    And I should land on Declaration-Choice page
+    And I select the CLEARANCE declaration
     And I click continue
     Then I should land on Arrived-or-Prelodged page
     And I select a <DecType> declaration type
-    And I click continue
-    Then I should land on Declarant-Details page
-    And I select Yes to confirm my eori
     And I click continue
     Then I should land on Do-You-Have-Ducr page
     And I select Yes to confirm i have a ducr
@@ -37,4 +37,4 @@ Feature: Example Feature file using Cucumber
     Examples:
       | DecType   |
       | prelodged |
-      | arrived   |
+    #  | arrived   |

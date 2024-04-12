@@ -31,10 +31,7 @@ object DeclarationTypePage extends BasePage {
     if (detail(DeclarationType) == Supplementary) "What type of supplementary declaration do you want to make?"
     else "Do you have to make an arrived export declaration?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> Seq(decType),
-    Clearance -> Seq(decTypeCL)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> Seq(decType), Clearance -> Seq(decTypeCL))
 
   // ex: fillPage("arrived")
 
@@ -53,5 +50,15 @@ object DeclarationTypePage extends BasePage {
         case (Standard, Prelodged) | _ => clickById(Prelodged); "Pre-lodged - type D"
       }
     store(AdditionalDeclarationType -> Detail(additionalDeclarationType))
+  }
+
+  def isArrivedDeclaration: Boolean = {
+    val adt = detail(AdditionalDeclarationType)
+    adt.startsWith("Arrived -") || adt.startsWith("EIDR -")
+  }
+
+  def isPrelodgedDeclaration: Boolean = {
+    val adt = detail(AdditionalDeclarationType)
+    adt.startsWith("Pre-lodged -") || adt.startsWith("Simplified -")
   }
 }
