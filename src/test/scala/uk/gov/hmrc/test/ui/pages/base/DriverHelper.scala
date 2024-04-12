@@ -69,7 +69,7 @@ trait DriverHelper extends BrowserDriver {
     parent.findElements(By.className(className)).asScala.toList
 
   def fillDropdown(elementId: String, value: String, maybeId: Option[String] = None): String = {
-    val element = waitFor(elementId)
+    val element = waitForId(elementId)
     element.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE)
     element.sendKeys(value)
     val selection = maybeId.fold("") { id =>
@@ -88,8 +88,8 @@ trait DriverHelper extends BrowserDriver {
   }
 
   def fillTextBoxById(elementId: String, text: String): Unit = {
-    waitFor(elementId).clear()
-    waitFor(elementId).sendKeys(text)
+    waitForId(elementId).clear()
+    waitForId(elementId).sendKeys(text)
   }
 
   def fillTextBoxByName(name: String, text: String): Unit =
@@ -107,7 +107,7 @@ trait DriverHelper extends BrowserDriver {
       case Constants.no | _ => clickById(no); false
     }
 
-  private def waitFor(elementId: String): WebElement =
+  private def waitForId(elementId: String): WebElement =
     new FluentWait(driver)
       .withTimeout(Duration.ofSeconds(10L))
       .pollingEvery(Duration.ofMillis(500L))
