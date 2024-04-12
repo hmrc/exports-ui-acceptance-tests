@@ -19,6 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section1
 import uk.gov.hmrc.test.ui.pages.base.Constants._
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{decType, decTypeCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isSupplementary
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{AdditionalDeclarationType, DeclarationType}
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 
@@ -28,7 +29,7 @@ object DeclarationTypePage extends BasePage {
   val path: String = "/declaration/type"
 
   def title: String =
-    if (detail(DeclarationType) == Supplementary) "What type of supplementary declaration do you want to make?"
+    if (isSupplementary) "What type of supplementary declaration do you want to make?"
     else "Do you have to make an arrived export declaration?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> Seq(decType), Clearance -> Seq(decTypeCL))
