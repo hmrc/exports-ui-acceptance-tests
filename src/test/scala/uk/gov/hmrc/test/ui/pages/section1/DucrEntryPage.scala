@@ -19,18 +19,24 @@ package uk.gov.hmrc.test.ui.pages.section1
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{ducr, ducrCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.Ducr
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{DeclarationEori, Ducr}
+
+import java.time.LocalDate
 
 object DucrEntryPage extends BasePage {
 
-  def backButtonHref: String = DoYouHaveADucrPage.path
+  def backButtonHref: String =
+    maybeDetail(Ducr).fold(DoYouHaveADucrPage.path) { ducr =>
+      if (ducr.startsWith(ducrPrefix)) ConfirmDucrPage.path
+      else DoYouHaveADucrPage.path
+    }
+
   val path: String = "/declaration/ducr-entry"
   val title: String = "Enter your Declaration Unique Consignment Reference (DUCR)"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> Seq(ducr),
-    Clearance -> Seq(ducrCL)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> Seq(ducr), Clearance -> Seq(ducrCL))
+
+  def ducrPrefix: String = s"${LocalDate.now.getYear.toString.last}${detail(DeclarationEori).toUpperCase}-"
 
   // ex: fillPage("8GB123456183182-101SHIP1")
 

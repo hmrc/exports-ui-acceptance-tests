@@ -16,13 +16,12 @@
 
 package uk.gov.hmrc.test.ui.pages.section3
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{locationOfGoods, locationOfGoodsCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isSupplementary
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage.{isArrivedDeclaration, isPrelodgedDeclaration}
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.AdditionalDeclarationType
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AuthorisationTypeLabel, section2}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage._
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{section2, AuthorisationTypeLabel}
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{CountriesOfRouting, LocationOfGoods, RRS01}
 
 object LocationOfGoodsPage extends BasePage {
@@ -37,15 +36,13 @@ object LocationOfGoodsPage extends BasePage {
   private val gvmsTitle = "Select a permitted goods location for exports using the Goods Vehicle Movement Service"
 
   def title: String = {
-    val adt = detail(AdditionalDeclarationType)
     val authorisationType = detailForLabel(section2, AuthorisationTypeLabel)
 
     def hasAuthorisationType(code: String): Boolean = authorisationType.exists(_.startsWith(s"$code -"))
 
-    if (isPrelodgedDeclaration || isSupplementary) customsTitle
-    else if (hasAuthorisationType("CSE") && (isArrivedDeclaration || isSupplementary)) "Enter the code for the CSE premises"
-    else if (hasAuthorisationType("EXRR") && adt.startsWith("Arrived -")) gvmsTitle
-    else if (!hasAuthorisationType("MIB") && adt.startsWith("Arrived -")) gvmsTitle
+    if (hasAuthorisationType("CSE") && (isArrivedDeclaration || isSupplementary)) "Enter the code for the CSE premises"
+    else if (hasAuthorisationType("EXRR") && isArrivedDeclaration) gvmsTitle
+    else if (hasAuthorisationType("MIB") && isArrivedDeclaration) gvmsTitle
     else customsTitle
   }
 

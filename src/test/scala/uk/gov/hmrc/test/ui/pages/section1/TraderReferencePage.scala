@@ -21,32 +21,31 @@ import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{traderReference, traderRefere
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{DeclarationEori, Ducr}
 
-import java.time.{Instant, ZoneId}
+import java.time.LocalDate
 
 object TraderReferencePage extends BasePage {
 
   def backButtonHref: String = DoYouHaveADucrPage.path
+  override def changeLink: String = DucrEntryPage.path
   val path: String = "/declaration/trader-reference"
   val title: String = "Enter a reference"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> Seq(traderReference),
-    Clearance -> Seq(traderReferenceCL)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] =
+    Map(Common -> Seq(traderReference), Clearance -> Seq(traderReferenceCL))
 
   // ex: fillPage("101SHIP1")
 
   override def fillPage(values: String*): Unit = {
     val traderReference = values.head
-    val generatedDucr   = generateDucr(traderReference)
-    fillTextBoxById("traderReferenceInput", generatedDucr)
+    val generatedDucr = generateDucr(traderReference)
+    fillTextBoxById("traderReferenceInput", traderReference)
     store(Ducr -> Detail(generatedDucr))
   }
 
   private def generateDucr(traderReference: String): String = {
-    val lastDigitOfYear = Instant.now.atZone(ZoneId.of("Europe/London")).getYear.toString.last
-    val eori            = detail(DeclarationEori).toUpperCase
+    val lastDigitOfYear = LocalDate.now.getYear.toString.last
+    val eori = detail(DeclarationEori).toUpperCase
 
-    s"${lastDigitOfYear}GB${eori.dropWhile(_.isLetter)}-$traderReference"
+    s"$lastDigitOfYear$eori-$traderReference"
   }
 }

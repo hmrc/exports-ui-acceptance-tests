@@ -19,11 +19,15 @@ package uk.gov.hmrc.test.ui.pages.section1
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{lrn, lrnCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.Lrn
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{Ducr, Lrn}
+import uk.gov.hmrc.test.ui.pages.section1.DucrEntryPage.ducrPrefix
 
 object LrnPage extends BasePage {
 
-  def backButtonHref: String = DucrEntryPage.path
+  def backButtonHref: String =
+    if(detail(Ducr).startsWith(ducrPrefix)) ConfirmDucrPage.path
+    else DucrEntryPage.path
+
   val path: String = "/declaration/local-reference-number"
   val title: String = "Create a Local Reference Number (LRN)"
 
