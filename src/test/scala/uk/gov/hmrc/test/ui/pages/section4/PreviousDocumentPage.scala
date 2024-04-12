@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section4
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, none, sequenceId}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{addPreviousDocument, addPreviousDocumentCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.{DocumentCode, DocumentCodeLabel, DocumentReference, NoPreviousDocuments, section4}
+import uk.gov.hmrc.test.ui.pages.section4.DetailKeys._
 
 
 object PreviousDocumentPage extends BasePage {

@@ -1,7 +1,7 @@
 @Regression
 Feature: Supplementary Journey
 
-  @Section1 @OcaDec
+  @Section1 @SupDec
   Scenario Outline: Fill Section 1 for a Supplementary Non Eidr and Eidr
     Given I enter EORI GB123456789017 on Login Page and click submit
     Then I should land on Choice page

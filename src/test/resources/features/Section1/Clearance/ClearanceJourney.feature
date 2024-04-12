@@ -2,7 +2,7 @@
 Feature: Clearance Journey
 
   # Below scenario - DoYouHaveADucr:[Yes]
-  @Section1 @OcaDec
+  @Section1 @ClrDec
   Scenario Outline: Fill Section 1 for a Clearance Prelodged and Arrived Declaration
     Given I enter EORI GB123456789006 on Login Page and click submit
     Then I should land on Choice page

@@ -16,9 +16,9 @@
 
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{transportLeavingTheBorder, transportLeavingTheBorderCL}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section5.SummarySection5Page
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.TransportLeavingBorder
 

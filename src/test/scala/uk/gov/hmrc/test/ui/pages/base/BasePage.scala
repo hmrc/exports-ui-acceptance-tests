@@ -16,7 +16,8 @@
 
 package uk.gov.hmrc.test.ui.pages.base
 
-import org.openqa.selenium.{By, WebElement}
+import com.typesafe.scalalogging.LazyLogging
+import org.openqa.selenium.WebElement
 import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
@@ -27,7 +28,9 @@ import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.CountriesOfRouting
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodeLabel
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.SealLabel
 
-trait BasePage extends CacheHelper with DriverHelper with PageHelper {
+trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLogging {
+
+  logger.info(getClass.getSimpleName.dropRight(1))
 
   def checkPage(): Unit = {
     checkUrlAndTitle()
@@ -66,11 +69,13 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper {
 
   protected def checkPageLinks(): Unit = {
     val links = findElementsByTag("a")
-    pageLinkHrefs.forall(href => links.exists(_.getAttribute("href").startsWith(href)))
+    pageLinkHrefs.forall { href =>
+      links.exists(link => Option(link.getAttribute("href")).fold(true)(_.startsWith(href)))
+    }
   }
 
   protected def checkExpanders(): Unit = {
-    elementDoesNotExist(By.id("tariffReference")) mustBe false
+    elementByIdDoesNotExist("tariffReference") mustBe false
     checkExpanderLinks()
   }
 

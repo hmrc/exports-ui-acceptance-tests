@@ -66,6 +66,8 @@ Feature: Section6 Standard Prelodged
     Then I should land on MiniCYA-Section-6 page
     And I check the MiniCYA page for Section-6
     And I click continue on MiniCya
+    Then I should land on Saved-Summary page
+
 
 
 

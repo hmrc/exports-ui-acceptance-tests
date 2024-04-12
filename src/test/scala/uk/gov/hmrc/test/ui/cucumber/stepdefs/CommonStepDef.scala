@@ -17,6 +17,7 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
+import uk.gov.hmrc.test.ui.generator.SupportGenerator.generateEORI
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.{continue, continueOnMiniCya}
 import uk.gov.hmrc.test.ui.pages.base.Constants.yes
 import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
@@ -25,7 +26,7 @@ import uk.gov.hmrc.test.ui.pages.section2._
 import uk.gov.hmrc.test.ui.pages.section3._
 import uk.gov.hmrc.test.ui.pages.section4._
 import uk.gov.hmrc.test.ui.pages.section5._
-import uk.gov.hmrc.test.ui.pages.section6.{ContainerListPage, ContainerPage, ExpressConsignmentPage, InlandModeOfTransportPage, InlandOrBorderPage, SealYesNoPage, SupervisingCustomsOfficePage, TransportLeavingTheBorderPage, TransportPaymentPage}
+import uk.gov.hmrc.test.ui.pages.section6._
 
 class CommonStepDef extends BaseStepDef {
 
@@ -34,14 +35,14 @@ class CommonStepDef extends BaseStepDef {
   And("""^I click continue on MiniCya""")(() => CommonPage.continueOnMiniCya())
 
   And("""^I fill section1""") { () =>
-    LoginPage.fillPage("GB123456789000"); continue()
+    LoginPage.fillPage(generateEORI); continue()
     ChoicePage.fillPage("create a declaration")
     StandardOrOtherPage.fillPage("STANDARD"); continue()
     DeclarationTypePage.fillPage("prelodged"); continue()
     DeclarantDetailsPage.fillPage(yes); continue()
     DoYouHaveADucrPage.fillPage(yes); continue()
     DucrEntryPage.fillPage("3GB986007773125-INVOICE123"); continue()
-    LrnPage.fillPage("MSLRN2872100"); continue()
+    LrnPage.fillPage("MSLRN813111"); continue()
     LinkMucrPage.fillPage(yes); continue()
     EnterAMucrPage.fillPage("GB/AZ09-B12345"); continue()
     continueOnMiniCya()
