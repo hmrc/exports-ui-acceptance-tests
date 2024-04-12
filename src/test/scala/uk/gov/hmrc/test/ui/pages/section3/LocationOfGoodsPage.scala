@@ -19,6 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section3
 import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{locationOfGoods, locationOfGoodsCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isSupplementary
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage._
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{section2, AuthorisationTypeLabel}
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{CountriesOfRouting, LocationOfGoods, RRS01}
@@ -39,10 +40,9 @@ object LocationOfGoodsPage extends BasePage {
 
     def hasAuthorisationType(code: String): Boolean = authorisationType.exists(_.startsWith(s"$code -"))
 
-    if (isPrelodgedDeclaration) customsTitle
-    else if (hasAuthorisationType("CSE") && isArrivedDeclaration) "Enter the code for the CSE premises"
+    if (hasAuthorisationType("CSE") && (isArrivedDeclaration || isSupplementary)) "Enter the code for the CSE premises"
     else if (hasAuthorisationType("EXRR") && isArrivedDeclaration) gvmsTitle
-    else if (!hasAuthorisationType("MIB") && isArrivedDeclaration) gvmsTitle
+    else if (hasAuthorisationType("MIB") && isArrivedDeclaration) gvmsTitle
     else customsTitle
   }
 

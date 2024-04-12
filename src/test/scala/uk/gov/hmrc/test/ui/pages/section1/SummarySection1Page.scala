@@ -22,7 +22,7 @@ import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{DeclarationType, Mucr, Sec
 object SummarySection1Page extends BasePage {
 
   def backButtonHref: String =
-    if (detail(DeclarationType).equals(Constants.Supplementary)) {
+    if (detail(DeclarationType).equals(is)) {
       ConsignmentReferencesPage.path
     } else if (maybeDetail(Mucr).isDefined) {
       EnterAMucrPage.path

@@ -52,13 +52,17 @@ object DeclarationTypePage extends BasePage {
     store(AdditionalDeclarationType -> Detail(additionalDeclarationType))
   }
 
-  def isArrivedDeclaration: Boolean = {
-    val adt = detail(AdditionalDeclarationType)
-    adt.startsWith("Arrived -") || adt.startsWith("EIDR -")
-  }
+  def isArrivedDeclaration: Boolean =
+    detail(AdditionalDeclarationType).startsWith("Arrived -")
 
-  def isPrelodgedDeclaration: Boolean = {
-    val adt = detail(AdditionalDeclarationType)
-    adt.startsWith("Pre-lodged -") || adt.startsWith("Simplified -")
-  }
+  def isEIDR: Boolean =
+    detail(AdditionalDeclarationType).startsWith("EIDR -")
+
+  def isPrelodgedDeclaration: Boolean =
+    detail(AdditionalDeclarationType) startsWith "Pre-lodged -"
+
+  def isSimplifiedDeclaration: Boolean =
+    detail(AdditionalDeclarationType).startsWith("Simplified -")
+
+
 }
