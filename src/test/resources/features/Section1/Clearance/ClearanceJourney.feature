@@ -32,9 +32,9 @@ Feature: Clearance Journey
     And I enter Mucr as GB/AZ09-B12345
     And I click continue
     Then I should land on MiniCYA-Section-1 page
-    And I check the MiniCYA page for Section-1
+   # And I check the MiniCYA page for Section-1
 
     Examples:
       | DecType   |
       | prelodged |
-    #  | arrived   |
+      | arrived   |

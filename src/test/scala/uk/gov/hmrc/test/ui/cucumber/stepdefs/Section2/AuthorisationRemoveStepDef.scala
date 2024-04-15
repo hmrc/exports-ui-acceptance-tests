@@ -17,19 +17,11 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section2.AuthorisationsListPage
+import uk.gov.hmrc.test.ui.pages.section2.AuthorisationRemovePage
 
-class AuthorisationListStepDef extends BaseStepDef {
+class AuthorisationRemoveStepDef extends BaseStepDef {
 
-  And("""^I should land on Authorisations-Required-List page""")(() => AuthorisationsListPage.checkPage())
+  And("""^I should land on Authorisations-Remove page""")(() => AuthorisationRemovePage.checkPage())
 
-  And("""^I select (.*) to add another authorisation""")((yesNo: String) => AuthorisationsListPage.fillPage(yesNo))
-
-  And("""^I navigate to authorisations required list page"""){() =>
-    AuthorisationsListPage.navigateToPage(AuthorisationsListPage.path)
-  }
-
-  And("""^I click on remove link""") { () =>
-    AuthorisationsListPage.removeAuthCode(0)
-  }
+  And("""^I select (.*) to remove authorisation""")((yesNo: String) => AuthorisationRemovePage.fillPage(yesNo, "0"))
 }

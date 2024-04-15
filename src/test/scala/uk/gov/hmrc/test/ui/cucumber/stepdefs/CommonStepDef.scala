@@ -18,9 +18,11 @@ package uk.gov.hmrc.test.ui.cucumber.stepdefs
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
 import uk.gov.hmrc.test.ui.generator.SupportGenerator.generateEORI
-import uk.gov.hmrc.test.ui.pages.base.CommonPage.{continue, continueOnMiniCya}
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.{clear, continue, continueOnMiniCya}
 import uk.gov.hmrc.test.ui.pages.base.Constants.yes
 import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isOccasional, isSimplified, isSupplementary}
+import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 import uk.gov.hmrc.test.ui.pages.section1._
 import uk.gov.hmrc.test.ui.pages.section2._
 import uk.gov.hmrc.test.ui.pages.section3._
@@ -34,34 +36,98 @@ class CommonStepDef extends BaseStepDef {
 
   And("""^I click continue on MiniCya""")(() => CommonPage.continueOnMiniCya())
 
-  And("""^I fill section1""") { () =>
+  And("""^I fill section1 for (.*),(.*) declaration""") { (decType: String, AdditionalDecType: String) =>
+    // Fill login page and continue
     LoginPage.fillPage(generateEORI); continue()
+
+    // Fill choice page to create a declaration
     ChoicePage.fillPage("create a declaration")
-    StandardOrOtherPage.fillPage("STANDARD"); continue()
-    DeclarationTypePage.fillPage("prelodged"); continue()
-    DeclarantDetailsPage.fillPage(yes); continue()
-    DoYouHaveADucrPage.fillPage(yes); continue()
-    DucrEntryPage.fillPage("3GB986007773125-INVOICE123"); continue()
-    LrnPage.fillPage("MSLRN813111"); continue()
-    LinkMucrPage.fillPage(yes); continue()
-    EnterAMucrPage.fillPage("GB/AZ09-B12345"); continue()
+
+    // Fill standard or other page based on decType
+    if (decType == "STANDARD") {
+      StandardOrOtherPage.fillPage(decType)
+    } else {
+      StandardOrOtherPage.fillPage("OTHER")
+    }
+    continue()
+
+    // Fill Declaration Choice Page if not standard
+    if (decType != "STANDARD") {
+      DeclarationChoicePage.fillPage(decType); continue()
+    }
+
+    // Fill Declaration Type Page
+    DeclarationTypePage.fillPage(AdditionalDecType); continue()
+
+    // Fill Declarant Details Page if not "CLEARANCE"
+    if (!decType.equals("CLEARANCE")) { DeclarantDetailsPage.fillPage(yes); continue() }
+
+    if (!isSupplementary) {
+      // Fill Ducr, Lrn details
+      DoYouHaveADucrPage.fillPage(yes); continue()
+      DucrEntryPage.fillPage("3GB986007773125-INVOICE123"); continue()
+      LrnPage.fillPage("MSLRN813111"); continue()
+      LinkMucrPage.fillPage(yes); continue()
+      EnterAMucrPage.fillPage("GB/AZ09-B12345"); continue()
+    }
+    // Fill Consignment References Page
+    if (isSupplementary) {
+      if (AdditionalDecType == "simplified") {
+        ConsignmentReferencesPage.fillPage("3GB986007773125-INVOICE123", "20GB46J8TMJ4RF1207", "MSLRN813111")
+        continue()
+      } else {
+        ConsignmentReferencesPage.fillPage("3GB986007773125-INVOICE123", "20230401", "MSLRN813112")
+        continue()
+      }
+    }
+
     continueOnMiniCya()
   }
 
+
   And("""^I fill section2""") { () =>
-    AreYouTheExporterPage.fillPage(Constants.no); continue()
+
+    if (isClearance) {
+      EntryIntoDeclarantRecordsPage.fillPage("Yes"); continue()
+      PersonPresentingGoodsPage.fillPage("GB11234567890987"); continue()
+    }
+
+    if (!isClearance) {
+      AreYouTheExporterPage.fillPage(Constants.no);
+      continue()
+    }
+
     ExporterEORINumberPage.fillPage(Constants.no); continue()
     ExporterAddressPage.fillPage(Constants.Address: _*); continue()
+
+    if(isClearance){
+      IsThisExsPage.fillPage("No"); continue()
+    }
     OnBehalfOfAnotherAgentPage.fillPage(Constants.no); continue()
     RepresentativesEORINumberPage.fillPage("GB121012121212"); continue()
     RepresentationTypeAgreedPage.fillPage("Direct"); continue()
-    CarrierEORINumberPage.fillPage(Constants.no); continue()
-    CarrierAddressPage.fillPage(Constants.Address: _*); continue()
+
+    if (isStandard ||isOccasional|| isSimplified) {
+      CarrierEORINumberPage.fillPage(Constants.no); continue()
+      CarrierAddressPage.fillPage(Constants.Address: _*); continue()
+    }
+
     ConsigneeDetailsPage.fillPage(Constants.Address: _*); continue()
-    OtherPartiesInvolvedPage.fillPage(genSequenceId("first"), "Consolidator", "GB121212121212"); continue()
-    OtherPartiesInvolvedListPage.fillPage(Constants.no); continue()
-    ProcedureChoicePage.fillPage("Permanent"); continue()
-    AuthorisationsYesNoPage.fillPage(yes); continue()
+
+    if (!isClearance) {
+      OtherPartiesInvolvedPage.fillPage(genSequenceId("first"), "Consolidator", "GB121212121212"); continue()
+      OtherPartiesInvolvedListPage.fillPage(Constants.no); continue()
+    }
+
+    if (!isOccasional) {
+      ProcedureChoicePage.fillPage("Permanent"); continue()
+    }
+
+    if (isStandard || isOccasional || isClearance) {
+      AuthorisationsYesNoPage.fillPage(yes)
+      continue()
+    }
+
     AuthorisationPage.fillPage(genSequenceId("first"), "ACR", "GB123456789008"); continue()
     AuthorisationsListPage.fillPage(Constants.no); continue()
     continueOnMiniCya()
@@ -106,7 +172,6 @@ class CommonStepDef extends BaseStepDef {
     continueOnMiniCya()
   }
 
-
   And("""^I fill section6""") { () =>
     TransportLeavingTheBorderPage.fillPage("Sea transport"); continue()
     SupervisingCustomsOfficePage.fillPage("GBBTH001"); continue()
@@ -118,6 +183,10 @@ class CommonStepDef extends BaseStepDef {
     SealYesNoPage.fillPage("No"); continue()
     ContainerListPage.fillPage("No"); continue()
     continueOnMiniCya()
+  }
+
+  And("""^I clear data in cache""") { () =>
+    clear()
   }
 }
 

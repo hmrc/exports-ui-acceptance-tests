@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section1
 import uk.gov.hmrc.test.ui.pages.base.Constants._
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, TariffLinks}
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage.isPrelodgedDeclaration
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage.isSimplifiedDeclaration
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys._
 object ConsignmentReferencesPage extends BasePage {
 
@@ -44,7 +44,7 @@ object ConsignmentReferencesPage extends BasePage {
     fillTextBoxById("ducr_ducr", values(ducr))
     fillTextBoxById("lrn", values(lrn))
 
-    if (isPrelodgedDeclaration) {
+    if (isSimplifiedDeclaration) {
       fillTextBoxById("mrn", values(mrn))
       clear(EidrDate)
       store(Ducr -> Detail(values(ducr)), Mrn -> Detail(values(mrn)), Lrn -> Detail(values(lrn)))

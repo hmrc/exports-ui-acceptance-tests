@@ -1,6 +1,9 @@
 @Regression
 Feature: Example Feature file using Cucumber
 
+  Background:
+    Given I clear data in cache
+
   # Below scenario - DoYouHaveADucr:[Yes]
   @Section1 @StandardPrelodged
   Scenario Outline: Fill Section 1 for a Standard Prelodged and Arrived Declaration

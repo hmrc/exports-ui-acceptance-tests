@@ -1,6 +1,9 @@
 @Regression
 Feature: Occasional Journey
 
+  Background:
+    Given I clear data in cache
+
   ## Below scenario - DoYouHaveADucr:[No], Confirm-Ducr:[Yes], Link-to-Mucr:[No]
   @Section1 @OcaDec
   Scenario Outline: Fill Section 1 for a Occasional Prelodged and Arrived Declaration

@@ -17,26 +17,21 @@
 package uk.gov.hmrc.test.ui.pages.section1
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isSupplementary
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{Mucr, Section1}
 
-object SummarySection1Page extends BasePage {
+object EntryIntoDeclarantRecordsPage extends BasePage {
 
-  def backButtonHref: String =
-    if (isSupplementary) {
-      ConsignmentReferencesPage.path
-    } else if (maybeDetail(Mucr).isDefined) {
-      EnterAMucrPage.path
-    } else {
-      LinkMucrPage.path
-    }
-
-  val path: String = "/declaration/summary-section/1"
-  val title: String = "Check your answers"
+  def backButtonHref: String = SummarySection1Page.path
+  val path: String = "/declaration/entry-into-declarants-records"
+  val title: String = "Is this an entry into declarant’s records (EIDR)?"
 
   override def checkExpanders(): Unit = ()
 
-  // ex: fillPage()
+  // No  => fillPage(no)
+  // Yes => fillPage(yes)
 
-  override def fillPage(values: String*): Unit = checkSectionSummary(Section1)
+  override def fillPage(values: String*): Unit =
+    values(0) match {
+      case "Yes" => clickById("answer_yes")
+      case _     => clickById("answer_no")
+    }
 }

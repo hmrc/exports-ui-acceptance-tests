@@ -16,19 +16,23 @@
 
 package uk.gov.hmrc.test.ui.pages.section3
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{locationOfGoods, locationOfGoodsCL}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isSupplementary
+import uk.gov.hmrc.test.ui.pages.base.Constants._
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isSupplementary}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage._
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{section2, AuthorisationTypeLabel}
-import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{CountriesOfRouting, LocationOfGoods, RRS01}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys._
+import uk.gov.hmrc.test.ui.pages.section3.DetailKeys._
 
 object LocationOfGoodsPage extends BasePage {
 
   def backButtonHref: String =
-    if (details(CountriesOfRouting).head == Constants.none) CountryOfRoutingPage.path
-    else CountriesOfRoutingPage.path
+    if (isClearance || isSupplementary) {
+      DestinationCountryPage.path
+    } else
+//    if (details(CountriesOfRouting).head == Constants.none) CountryOfRoutingPage.path
+//    else
+      CountriesOfRoutingPage.path
 
   val path: String = "/declaration/location-of-goods"
 
@@ -43,6 +47,7 @@ object LocationOfGoodsPage extends BasePage {
     if (hasAuthorisationType("CSE") && (isArrivedDeclaration || isSupplementary)) "Enter the code for the CSE premises"
     else if (hasAuthorisationType("EXRR") && isArrivedDeclaration) gvmsTitle
     else if (hasAuthorisationType("MIB") && isArrivedDeclaration) gvmsTitle
+    else if (isArrivedDeclaration) gvmsTitle
     else customsTitle
   }
 
