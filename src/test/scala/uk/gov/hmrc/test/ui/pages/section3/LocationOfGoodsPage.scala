@@ -30,8 +30,6 @@ object LocationOfGoodsPage extends BasePage {
     if (isClearance || isSupplementary) {
       DestinationCountryPage.path
     } else
-//    if (details(CountriesOfRouting).head == Constants.none) CountryOfRoutingPage.path
-//    else
       CountriesOfRoutingPage.path
 
   val path: String = "/declaration/location-of-goods"
