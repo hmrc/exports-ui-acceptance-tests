@@ -17,6 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section1
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 
 object EntryIntoDeclarantRecordsPage extends BasePage {
 
@@ -30,8 +31,5 @@ object EntryIntoDeclarantRecordsPage extends BasePage {
   // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit =
-    values(0) match {
-      case "Yes" => clickById("answer_yes")
-      case _     => clickById("answer_no")
-    }
+    selectYesOrNoRadio(values(yesNo), "answer_yes", "answer_no")
 }
