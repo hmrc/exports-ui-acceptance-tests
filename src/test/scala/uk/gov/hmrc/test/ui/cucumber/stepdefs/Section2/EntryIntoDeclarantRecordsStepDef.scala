@@ -17,15 +17,17 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section2.ProcedureChoicePage
+import uk.gov.hmrc.test.ui.pages.section1._
 
-class ProcedureChoiceStepDef extends BaseStepDef {
+class EntryIntoDeclarantRecordsStepDef extends BaseStepDef {
 
-  And("""^I should land on Authorisation-Choice page""")(() => ProcedureChoicePage.checkPage())
+  And("""^I should land on EIDR page""")(() => EntryIntoDeclarantRecordsPage.checkPage())
 
-  And("""^I select (.*) as export procedure choice""") { code: String =>
-    ProcedureChoicePage.fillPage(code)
+  And("""^I select (.*) for Entry Into Declarant Records""") { (option: String) =>
+    EntryIntoDeclarantRecordsPage.fillPage(option)
   }
 
-  And("""^I navigate to Authorisation Choice page""")(() => ProcedureChoicePage.navigateToPage(ProcedureChoicePage.path))
+  And("""^I navigate to Entry Into Declarant Records page""") { () =>
+    EntryIntoDeclarantRecordsPage.navigateToPage(EntryIntoDeclarantRecordsPage.path)
+  }
 }
