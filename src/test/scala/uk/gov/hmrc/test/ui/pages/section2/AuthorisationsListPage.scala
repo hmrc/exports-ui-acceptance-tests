@@ -37,4 +37,6 @@ object AuthorisationsListPage extends BasePage {
   // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
+
+  def removeAuthCode(index: Int): Unit = clickByCssSelector(s"#holder-table-row$index-remove_button>a")
 }

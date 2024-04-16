@@ -24,6 +24,7 @@ import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{CountriesOfRouting, Destin
 object CountryOfRoutingPage extends BasePage {
 
   def backButtonHref: String = DestinationCountryPage.path
+  override def changeLink: String = CountriesOfRoutingPage.path
   val path: String = "/declaration/country-of-routing"
   def title = s"Will the goods pass through any other countries before arriving in ${detail(DestinationCountry)}?"
 

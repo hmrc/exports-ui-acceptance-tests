@@ -2,7 +2,7 @@ Feature: Full Standard Journey
 
   @FullStandardJourney @StandardPrelodged
   Scenario: Full Standard Journey
-    Given I fill section1
+    Given I fill section1 for STANDARD, prelodged declaration
     And I fill section2
     And I fill section3
     And I fill section4

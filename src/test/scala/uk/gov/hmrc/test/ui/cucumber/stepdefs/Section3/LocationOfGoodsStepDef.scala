@@ -26,4 +26,7 @@ class LocationOfGoodsStepDef extends BaseStepDef {
   And("""^I select (.*) to provide location as (.*)""") { (yesNo: String, code: String) =>
     LocationOfGoodsPage.fillPage(yesNo, code)
   }
+
+  And("""^I should navigate to Location Of Goods page""")(() =>
+    LocationOfGoodsPage.navigateToPage(LocationOfGoodsPage.path))
 }

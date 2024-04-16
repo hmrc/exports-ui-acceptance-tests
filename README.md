@@ -125,3 +125,35 @@ sbt scalafmtAll
 ## License
 
 This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").
+
+## Testing Scenarios Coverage
+
+## Section 1
+
+ **Standard & Clearance Journey** -
+- User select DoYouHaveADucr value to Yes enters Ducr, Lrn and select Yes on Link-To-Mucr 
+
+ **Occasional Journey** -
+-  User select DoYouHaveADucr value to No Enters Trader-Reference, Select Yes on Confirm-Ducr, enters Lrn and select No on Link-To-Mucr page
+
+**Simplified Journey** -
+-  User select DoYouHaveADucr value to No Enters Trader-Reference, Select No on Confirm-Ducr, enters Ducr, Lrn and select Yes on Link-To-Mucr page
+
+**Supplementary Journey** -
+-  User completes simplified journey by providing MRN on consignment reference page
+-  User completes eidr journey by providing EIDR date on consignment reference page
+
+
+## Section 3
+
+**Standard** -
+- User select RoutingCountries as Yes, Adds multiple countries and selects LocationOfGoods as Yes to complete section3 for prelodged declaration
+- User completes section for arrived declaration and validate dynamic title changes on location of goods page
+
+**Occasional Journey & Simplified Journey** -
+-  User select RoutingCountries as Yes, Adds one country and selects LocationOfGoods as No to complete section3 for prelodged declaration
+-  User select RoutingCountries as Yes, Adds one country and selects LocationOfGoods as Yes to complete section3 for arrived declaration
+
+**Clearance Journey && Supplementary Journey** -
+-  User skips Country-Of-Routing, Countries-Of-Routing pages and select LocationOfGoods as No to complete section3 for prelodged declaration
+-  User skips Country-Of-Routing, Countries-Of-Routing pages and select LocationOfGoods as Yes to complete section3 for prelodged declaration

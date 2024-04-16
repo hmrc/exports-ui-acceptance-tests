@@ -23,8 +23,10 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.AuthorisationType
 object AuthorisationRemovePage extends BasePage {
 
   def backButtonHref: String = AuthorisationsListPage.path
-  val path: String = removeUrl("/authorisations-required")
+  val path: String = removeUrl("authorisations-required")
   val title: String = "Are you sure you want to remove this authorisation?"
+
+  override def checkExpanders(): Unit = ()
 
   val authToBeRemoved = 1
 

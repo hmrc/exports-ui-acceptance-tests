@@ -1,6 +1,9 @@
 @Regression
 Feature: Simplified Journey
 
+  Background:
+    Given I clear data in cache
+
   ## Below scenario - DoYouHaveADucr:[No], Confirm-Ducr:[No], Link-to-Mucr:[Yes]
   @Section1 @SimDec
   Scenario Outline: Fill Section 1 for a Simplified Prelodged and Arrived Declaration
