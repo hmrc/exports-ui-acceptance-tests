@@ -21,7 +21,12 @@ import uk.gov.hmrc.test.ui.generator.SupportGenerator.generateEORI
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.{clear, continue, continueOnMiniCya}
 import uk.gov.hmrc.test.ui.pages.base.Constants.yes
 import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isOccasional, isSimplified, isSupplementary}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{
+  isClearance,
+  isOccasional,
+  isSimplified,
+  isSupplementary
+}
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 import uk.gov.hmrc.test.ui.pages.section1._
 import uk.gov.hmrc.test.ui.pages.section2._
@@ -84,9 +89,7 @@ class CommonStepDef extends BaseStepDef {
     continueOnMiniCya()
   }
 
-
   And("""^I fill section2""") { () =>
-
     if (isClearance) {
       EntryIntoDeclarantRecordsPage.fillPage("Yes"); continue()
       PersonPresentingGoodsPage.fillPage("GB11234567890987"); continue()
@@ -100,14 +103,14 @@ class CommonStepDef extends BaseStepDef {
     ExporterEORINumberPage.fillPage(Constants.no); continue()
     ExporterAddressPage.fillPage(Constants.Address: _*); continue()
 
-    if(isClearance){
+    if (isClearance) {
       IsThisExsPage.fillPage("No"); continue()
     }
     OnBehalfOfAnotherAgentPage.fillPage(Constants.no); continue()
     RepresentativesEORINumberPage.fillPage("GB121012121212"); continue()
     RepresentationTypeAgreedPage.fillPage("Direct"); continue()
 
-    if (isStandard ||isOccasional|| isSimplified) {
+    if (isStandard || isOccasional || isSimplified) {
       CarrierEORINumberPage.fillPage(Constants.no); continue()
       CarrierAddressPage.fillPage(Constants.Address: _*); continue()
     }
@@ -134,8 +137,12 @@ class CommonStepDef extends BaseStepDef {
   }
 
   And("""^I fill section3""") { () =>
-    DestinationCountryPage.fillPage("China"); continue()
-    CountryOfRoutingPage.fillPage(Constants.no); continue()
+    DestinationCountryPage.fillPage("Ukraine"); continue()
+
+    if (isStandard || isSimplified || isOccasional) {
+      CountryOfRoutingPage.fillPage(Constants.no); continue()
+    }
+
     LocationOfGoodsPage.fillPage(Constants.no, "GBAUNHVNHVNHVVVM"); continue()
     OfficeOfExitPage.fillPage("Folkestone", "GB000041"); continue()
     continueOnMiniCya()

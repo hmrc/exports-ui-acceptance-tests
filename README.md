@@ -157,3 +157,41 @@ This code is open source software licensed under the [Apache 2.0 License]("http:
 **Clearance Journey && Supplementary Journey** -
 -  User skips Country-Of-Routing, Countries-Of-Routing pages and select LocationOfGoods as No to complete section3 for prelodged declaration
 -  User skips Country-Of-Routing, Countries-Of-Routing pages and select LocationOfGoods as Yes to complete section3 for prelodged declaration
+
+## Section 4
+
+**Standard** -
+- User select Invoices-And-Exchange-Rate-Choice as No, Exchange Rate as Yes and adds two Previous Documents Added
+- User select Invoices-And-Exchange-Rate-Choice as Yes and checks skipping of exchange rate page
+- User select Invoices-And-Exchange-Rate-Choice as No, Exchange Rate as No
+- User checks skipping of Previous-Documents page when destination country is Jersey and Guernsey
+- User completes section 4 for Standard Prelodged and Arrived declarations
+- Removal of Previous Documents
+- Checking Dynamic title update on previous documents pages based on authorisation code - Refer to Previous document page **title** method
+
+**Occasional Journey**
+- User completes section 4 for Occasional Prelodged and Arrived declarations
+
+**Simplified Journey**
+- User completes section 4 for Occasional Prelodged and Arrived declarations
+- Checking Dynamic title update on previous documents pages based on authorisation code - Refer to Previous document page **title** method
+
+ **Supplementary Journey**
+- User select Invoices-And-Exchange-Rate-Choice as No, Exchange Rate as Yes and adds two Previous Documents Added
+- User select Invoices-And-Exchange-Rate-Choice as Yes and checks skipping of exchange rate page
+- User select Invoices-And-Exchange-Rate-Choice as No, Exchange Rate as No
+- User checks skipping of Previous-Documents page when destination country is Jersey and Guernsey
+- User completes section 4 for Standard Prelodged and Arrived declarations
+- Checking Dynamic title update on previous documents pages based on authorisation code - Refer to Previous document page **title** method
+
+**Supplementary Journey**
+- User select Invoices-And-Exchange-Rate-Choice as No, Exchange Rate as Yes and adds two Previous Documents Added
+- User select Invoices-And-Exchange-Rate-Choice as Yes and checks skipping of exchange rate page
+- User select Invoices-And-Exchange-Rate-Choice as No, Exchange Rate as No
+- User checks skipping of Previous-Documents page when destination country is Jersey and Guernsey
+- User completes section 4 for Standard Prelodged and Arrived declarations
+- Checking Dynamic title update on previous documents pages based on authorisation code - Refer to Previous document page **title** method
+
+**Clearance Journey**
+- User completes section 4 for Occasional Prelodged and Arrived declarations
+- Checking Dynamic title update on previous documents pages based on authorisation code and entry into declarant records - Refer to Previous document page **title** method

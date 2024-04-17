@@ -21,9 +21,14 @@ import uk.gov.hmrc.test.ui.pages.section4.NatureOfTransactionPage
 
 class NatureOfTransactionStepDef extends BaseStepDef {
 
-  And("""^I should land on Nature-Of-Transaction page""")(() => NatureOfTransactionPage.checkPage())
+  And("""^I should land on Nature-Of-Transaction page"""){() =>
+    NatureOfTransactionPage.checkPage()}
 
   And("""^I select option as (.*)""") { (transactionType: String) =>
     NatureOfTransactionPage.fillPage(transactionType)
+  }
+
+  And("""^I navigate to Nature Of Transaction page""") { () =>
+    NatureOfTransactionPage.navigateToPage(NatureOfTransactionPage.path)
   }
 }

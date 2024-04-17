@@ -16,8 +16,9 @@
 
 package uk.gov.hmrc.test.ui.pages.section1
 
-import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.EntryIntoDeclarantsRecords
 
 object EntryIntoDeclarantRecordsPage extends BasePage {
 
@@ -30,6 +31,10 @@ object EntryIntoDeclarantRecordsPage extends BasePage {
   // No  => fillPage(no)
   // Yes => fillPage(yes)
 
-  override def fillPage(values: String*): Unit =
+  override def fillPage(values: String*): Unit = {
     selectYesOrNoRadio(values(yesNo), "answer_yes", "answer_no")
+    store(EntryIntoDeclarantsRecords -> Detail(values(yesNo)))
+  }
+
+  def isEIDR: Boolean = detail(EntryIntoDeclarantsRecords) == "Yes"
 }

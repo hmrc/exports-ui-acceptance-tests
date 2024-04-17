@@ -26,4 +26,8 @@ class InvoicesAndExchangeRateChoiceStepDef extends BaseStepDef {
   And("""^I select (.*) on invoices and exchange rate choice page""") { (yesOrNo: String) =>
     InvoicesAndExchangeRateChoicePage.fillPage(yesOrNo)
   }
+
+  And("""^I navigate to Invoices And Exchange Rate Choice page""") { () =>
+    InvoicesAndExchangeRateChoicePage.navigateToPage(InvoicesAndExchangeRateChoicePage.path)
+  }
 }

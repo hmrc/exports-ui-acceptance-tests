@@ -16,11 +16,14 @@
 
 package uk.gov.hmrc.test.ui.pages.section4
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, none, sequenceId}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{addPreviousDocument, addPreviousDocumentCL}
+import uk.gov.hmrc.test.ui.pages.base.Constants._
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage._
+import uk.gov.hmrc.test.ui.pages.section1.EntryIntoDeclarantRecordsPage.isEIDR
+import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
+import uk.gov.hmrc.test.ui.pages.section2.ProcedureChoicePage._
 import uk.gov.hmrc.test.ui.pages.section4.DetailKeys._
-
 
 object PreviousDocumentPage extends BasePage {
 
@@ -30,12 +33,30 @@ object PreviousDocumentPage extends BasePage {
 
   override def changeLink: String = PreviousDocumentListPage.path
   val path: String = "/declaration/add-previous-document"
-  val title = "Details for each document that supports this declaration"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List(addPreviousDocument),
-    Clearance -> List(addPreviousDocumentCL)
-  )
+  def title: String =
+    if (
+      ((isStandard || isSimplified || isSupplementary) && isProcedurePermanent) ||
+      (isClearance && isProcedurePermanent && isEIDR)
+    ) { "Details for each document that supports this declaration" }
+    else if (
+      ((isStandard || isSimplified || isSupplementary) && isProcedurePermanentAndExcise) ||
+      (isClearance && isProcedurePermanentAndExcise && isEIDR)
+    ) { "Declare each document, including excise guarantees" }
+    else if (
+      ((isStandard || isSimplified || isSupplementary) && isProcedureTemporary) ||
+      (isClearance && isProcedureTemporary && isEIDR)
+    ) { "Declare each document, including previous declarations" }
+    else if (
+      (isStandard || isSimplified || isSupplementary) ||
+      (isClearance && isEIDR)
+    ) { "Details for each document that supports this declaration" }
+    else if (isClearance) { "Details for each document that supports this clearance request" }
+    else if (isOccasional) { "Details for each document that supports this declaration" }
+    else { "Details for each document that supports this declaration" }
+
+  override val expanderHrefs: Map[String, Seq[String]] =
+    Map(Common -> List(addPreviousDocument), Clearance -> List(addPreviousDocumentCL))
 
   val documentCode = 1
   val documentReference = 2

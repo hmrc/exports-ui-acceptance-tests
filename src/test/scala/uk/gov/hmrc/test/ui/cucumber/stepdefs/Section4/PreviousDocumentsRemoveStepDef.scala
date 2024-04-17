@@ -14,18 +14,14 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
+package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section4
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section2.ProcedureChoicePage
+import uk.gov.hmrc.test.ui.pages.section4.PreviousDocumentRemovePage
 
-class ProcedureChoiceStepDef extends BaseStepDef {
+class PreviousDocumentsRemoveStepDef extends BaseStepDef {
 
-  And("""^I should land on Authorisation-Choice page""")(() => ProcedureChoicePage.checkPage())
+  And("""^I should land on Previous-Documents-Remove page""")(() => PreviousDocumentRemovePage.checkPage())
 
-  And("""^I select (.*) as export procedure choice""") { code: String =>
-    ProcedureChoicePage.fillPage(code)
-  }
-
-  And("""^I navigate to Authorisation Choice page""")(() => ProcedureChoicePage.navigateToPage(ProcedureChoicePage.path))
+  And("""^I select (.*) to remove Previous Documents""")((yesNo: String) => PreviousDocumentRemovePage.fillPage(yesNo, "0"))
 }

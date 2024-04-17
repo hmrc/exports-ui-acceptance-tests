@@ -44,4 +44,6 @@ object PreviousDocumentListPage extends BasePage {
   // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
+
+  def removePreviousDoc(index: Int): Unit = clickByCssSelector(s"#previous-document-$index-remove_button>a")
 }
