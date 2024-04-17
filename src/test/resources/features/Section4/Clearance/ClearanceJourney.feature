@@ -8,7 +8,7 @@ Feature: Section4 Clearance Journey
      # 1. checking prelodged and arrived type for section 4. Only we see previous documents page for section 4 on Simplified Declaration
      # 2. Validating Previous document page dynamic title changes
 
-  @Section4 @SimDec
+  @Section4 @ClrDec
   Scenario: Complete Transactions section on Clearance Prelodged declaration journey and validate dynamic title changes on previous documents page
     Given I fill section1 for CLEARANCE,prelodged declaration
     And I fill section2
@@ -45,7 +45,7 @@ Feature: Section4 Clearance Journey
     And I navigate to Previous Documents page
     Then I should land on Previous-Document page
 
-  @Section4 @SimDec
+  @Section4 @ClrDec
   Scenario: Complete Transactions section on Clearance Arrived declaration journey
     Given I fill section1 for CLEARANCE,arrived declaration
     And I fill section2

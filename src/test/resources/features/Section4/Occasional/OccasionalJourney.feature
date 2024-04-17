@@ -16,7 +16,6 @@ Feature: Section4 Occasional Journey
     And I select as first Document Commercial Invoice as code and 9GB123456782317-BH1433A61 as reference
     And I click continue
     Then I should land on Previous-Documents-list page
-    Then I should land on Previous-Documents-list page
     And I select No on previous documents list page
     And I click continue
     Then I should land on MiniCYA-Section-4 page
