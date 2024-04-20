@@ -19,11 +19,13 @@ package uk.gov.hmrc.test.ui.pages.section2
 import uk.gov.hmrc.test.ui.pages.base.Constants.{yes, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{ExporterEORI, ExporterYesNo, IsThisExs}
+import uk.gov.hmrc.test.ui.pages.section2.EntryIntoDeclarantRecordsPage.isEidr
 
 object IsThisExsPage extends BasePage {
 
   def backButtonHref: String =
     if (detail(ExporterYesNo) == yes) AreYouTheExporterPage.path
+    else if(isEidr) ExporterEORINumberPage.path
     else maybeDetail(ExporterEORI) match {
       case Some(_) => ExporterEORINumberPage.path
       case None    => ExporterAddressPage.path
@@ -39,6 +41,8 @@ object IsThisExsPage extends BasePage {
     selectYesOrNoRadio(values(yesNo))
     store(IsThisExs -> Detail(values(yesNo)))
   }
+
+  override def checkExpanders(): Unit = ()
 
   def isThisExs: Boolean = maybeDetail(IsThisExs).fold(false)(_ == yes)
 }

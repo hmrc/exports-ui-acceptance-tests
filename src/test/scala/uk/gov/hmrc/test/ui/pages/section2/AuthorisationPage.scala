@@ -19,14 +19,17 @@ package uk.gov.hmrc.test.ui.pages.section2
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, sequenceId}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{addAuthorisationRequired, addAuthorisationRequiredCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isSimplified, isSupplementary}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationEori
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AuthorisationHolderEORI, AuthorisationType, AuthorisationTypeLabel, section2}
 
 object AuthorisationPage extends BasePage {
 
-  def backButtonHref: String =
-    if (detailForLabel(section2, AuthorisationTypeLabel).isEmpty) AuthorisationsYesNoPage.path
+  def backButtonHref: String = {
+    if(isSimplified || isSupplementary) ProcedureChoicePage.path
+    else if (detailForLabel(section2, AuthorisationTypeLabel).isEmpty) AuthorisationsYesNoPage.path
     else AuthorisationsListPage.path
+  }
 
   override def changeLink: String = ProcedureChoicePage.path
   val path: String = "/declaration/add-authorisation-required"

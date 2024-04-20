@@ -19,17 +19,29 @@ package uk.gov.hmrc.test.ui.pages.section2
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, none, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isOccasional}
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.AdditionalDeclarationType
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{NoAuthorisationRequired, ProcedureChoice}
 
 object AuthorisationsYesNoPage extends BasePage {
 
-  def backButtonHref: String = ProcedureChoicePage.path
+  def backButtonHref: String = if (isOccasional) OtherPartiesInvolvedListPage.path
+  else if(isClearance) ConsigneeDetailsPage.path
+  else ProcedureChoicePage.path
   val path: String = "/declaration/is-authorisation-required"
 
   def title: String =
-    detail(ProcedureChoice) match {
-      case "Permanent" => "Do you have any authorisations you want to declare?"
-      case "Temporary" => "Do you want to add any authorisations?"
+    if (isOccasional || isClearance) "Do you want to add any authorisations?"
+    else if(detail(AdditionalDeclarationType).contains("Pre-lodged")) {
+      detail(ProcedureChoice) match {
+        case "Permanent" => "Do you have any authorisations you want to declare?"
+        case "Temporary" => "Do you want to add any authorisations?"
+      }
+    } else{
+      detail(ProcedureChoice) match {
+        case "Permanent" => "Do you want to add any authorisations?"
+        case "Temporary" => "Do you have any authorisations you want to declare?"
+      }
     }
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(

@@ -19,13 +19,13 @@ package uk.gov.hmrc.test.ui.pages.section2
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{carrierEoriNumber, carrierEoriNumberCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{CarrierEORI, EORI, ExporterEORI}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{CarrierEORI, EORI, ExporterYesNo}
 
 object CarrierEORINumberPage extends BasePage {
 
-  def backButtonHref: String = maybeDetail(ExporterEORI) match {
-    case Some(_) => AreYouTheExporterPage.path
-    case None    => RepresentationTypeAgreedPage.path
+  def backButtonHref: String = maybeDetail(ExporterYesNo) match {
+    case Some(_) =>  ThirdPartyGoodsTransportationPage.path
+    case None    =>  AreYouTheExporterPage.path
   }
 
   val path: String = "/declaration/carrier-eori-number"
@@ -38,5 +38,8 @@ object CarrierEORINumberPage extends BasePage {
   // Yes => fillPage(yes, "GB121212121212")
 
   override def fillPage(values: String*): Unit =
-    if (selectYesOrNoRadio(values(yesNo), "Yes", "No")) store(CarrierEORI -> Detail(values(EORI)))
+    if (selectYesOrNoRadio(values(yesNo), "Yes", "No")) {
+      fillTextBoxById("eori", values(EORI))
+      store(CarrierEORI -> Detail(values(EORI)))
+    }
 }
