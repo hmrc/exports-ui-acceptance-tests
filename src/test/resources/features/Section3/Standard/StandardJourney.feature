@@ -1,4 +1,4 @@
-Feature: Section3 Standard Prelodged
+Feature: Section3 Standard Journey
 
   Background:
     Given I clear data in cache
