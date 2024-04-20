@@ -26,4 +26,8 @@ class AreYouTheExporterStepDef extends BaseStepDef {
   And("""^I select (.*) to I am the Exporter""")((exporterChoice: String) =>
     AreYouTheExporterPage.fillPage(exporterChoice)
   )
+
+  And("""^I navigate to Are You The Exporter page""")(() =>
+    AreYouTheExporterPage.navigateToPage(AreYouTheExporterPage.path)
+  )
 }

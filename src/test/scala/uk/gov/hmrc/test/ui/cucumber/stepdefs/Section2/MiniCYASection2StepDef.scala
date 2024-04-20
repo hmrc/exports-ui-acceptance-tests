@@ -26,4 +26,8 @@ class MiniCYASection2StepDef extends BaseStepDef {
   And("""^I check the MiniCYA page for Section-2""") { () =>
     SummarySection2Page.fillPage()
   }
+
+  And("""^I navigate to Summary Section2 page""")(() =>
+    SummarySection2Page.navigateToPage(SummarySection2Page.path)
+  )
 }

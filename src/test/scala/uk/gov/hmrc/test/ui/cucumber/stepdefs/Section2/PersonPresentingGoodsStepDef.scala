@@ -17,17 +17,13 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section2.CarrierEORINumberPage
+import uk.gov.hmrc.test.ui.pages.section2.PersonPresentingGoodsPage
 
-class CarrierEoriNumberStepDef extends BaseStepDef {
+class PersonPresentingGoodsStepDef extends BaseStepDef {
 
-  And("""^I should land on Carrier-Eori-Number page""")(() => CarrierEORINumberPage.checkPage())
+  And("""^I should land on Person-Presenting-Goods page""")(() => PersonPresentingGoodsPage.checkPage())
 
-  And("""^I select (.*) on carrier eori number page""") { yesNo: String =>
-    CarrierEORINumberPage.fillPage(yesNo)
-  }
-
-  And("""^I select (.*) on carrier eori number page and entered eori as (.*)""") {(yesNo: String , eori: String) =>
-    CarrierEORINumberPage.fillPage(yesNo,eori)
+  And("""^I enter entered eori as (.*)""") {(eori: String) =>
+    PersonPresentingGoodsPage.fillPage(eori)
   }
 }

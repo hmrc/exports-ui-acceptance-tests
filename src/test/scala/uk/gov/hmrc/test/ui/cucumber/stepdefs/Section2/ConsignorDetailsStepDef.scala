@@ -17,17 +17,14 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section2.CarrierEORINumberPage
+import uk.gov.hmrc.test.ui.pages.base.Constants
+import uk.gov.hmrc.test.ui.pages.section2.ConsignorDetailsPage
 
-class CarrierEoriNumberStepDef extends BaseStepDef {
+class ConsignorDetailsStepDef extends BaseStepDef {
 
-  And("""^I should land on Carrier-Eori-Number page""")(() => CarrierEORINumberPage.checkPage())
+  And("""^I should land on Consingor-Address page""")(() => ConsignorDetailsPage.checkPage())
 
-  And("""^I select (.*) on carrier eori number page""") { yesNo: String =>
-    CarrierEORINumberPage.fillPage(yesNo)
-  }
-
-  And("""^I select (.*) on carrier eori number page and entered eori as (.*)""") {(yesNo: String , eori: String) =>
-    CarrierEORINumberPage.fillPage(yesNo,eori)
+  And("""^I provide consignor details""") { () =>
+    ConsignorDetailsPage.fillPage(Constants.Address: _*)
   }
 }

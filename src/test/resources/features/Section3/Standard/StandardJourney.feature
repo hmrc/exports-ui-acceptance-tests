@@ -61,7 +61,7 @@ Feature: Section3 Standard Prelodged
     And I select Yes to declare authorisations
     And I click continue
     Then I should land on Authorisation-Required page
-    And I select first Authorisation code CSE and enter eori GB123456789006
+    And I select first Authorisation code CSE and enter eori as GB123456789006
     And I click continue
     Then I should navigate to Location Of Goods page
 
@@ -74,7 +74,7 @@ Feature: Section3 Standard Prelodged
     And I select Yes to declare authorisations
     And I click continue
     Then I should land on Authorisation-Required page
-    And I select first Authorisation code EXRR and enter eori GB123456789016
+    And I select first Authorisation code EXRR and enter eori as GB123456789016
     And I click continue
 
     Then I should navigate to Location Of Goods page
@@ -88,7 +88,7 @@ Feature: Section3 Standard Prelodged
     And I select Yes to declare authorisations
     And I click continue
     Then I should land on Authorisation-Required page
-    And I select first Authorisation code MIB and enter eori GB123456789206
+    And I select first Authorisation code MIB and enter eori as GB123456789206
     And I click continue
     Then I should navigate to Location Of Goods page
 

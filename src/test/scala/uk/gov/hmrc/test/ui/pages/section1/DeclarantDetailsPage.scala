@@ -19,11 +19,13 @@ package uk.gov.hmrc.test.ui.pages.section1
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{declarantDetails, declarantDetailsCL}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationEori
+import uk.gov.hmrc.test.ui.pages.section2.EntryIntoDeclarantRecordsPage
 
 object DeclarantDetailsPage extends BasePage {
 
-  def backButtonHref: String = DeclarationTypePage.path
+  def backButtonHref: String = if(isClearance)EntryIntoDeclarantRecordsPage.path else DeclarationTypePage.path
   val path: String = "/declaration/declarant-details"
   def title: String = s"Is your EORI number ${detail(DeclarationEori)}?"
 
