@@ -25,7 +25,7 @@ import uk.gov.hmrc.test.ui.pages.section1.DucrEntryPage.ducrPrefix
 object LrnPage extends BasePage {
 
   def backButtonHref: String =
-    if(detail(Ducr).startsWith(ducrPrefix)) ConfirmDucrPage.path
+    if (detail(Ducr).startsWith(ducrPrefix)) ConfirmDucrPage.path
     else DucrEntryPage.path
 
   val path: String = "/declaration/local-reference-number"

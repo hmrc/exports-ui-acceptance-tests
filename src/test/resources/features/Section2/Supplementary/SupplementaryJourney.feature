@@ -3,10 +3,8 @@ Feature: Section2 Standard Prelodged
 
   Background:
     Given I clear data in cache
-  #The initial section 2 Journey starts with below combination
-  #isExporter=NO, isExporterEORI=NO, holdTheContract=NO, carrierEoriNumber=No
 
-  @Section2 @SupplementaryJourney
+  @Section2 @SupDec
   Scenario Outline: Exports Supplementary SDP Scenario When the user is not an exporter,
   not having EORI, not holding the contract to submit the declaration on behalf
   and not having the carrier EORI number, Supplementary Declaration doesn't contain
@@ -59,9 +57,9 @@ Feature: Section2 Standard Prelodged
     And I check the MiniCYA page for Section-2
     And I click continue on MiniCya
 
-    #  Given the user is on the Exporter Details page
-    #  When the user selects "Exporter-eori-number = yes"
-    #  Then the following pages are skipped
+    #  User is on the Exporter Details page
+    #  selects "Exporter-eori-number = yes"
+    #  the following pages are skipped
     #           Exporter-Eori-Number,
     #           Exporter-Address,
     #           On-Behalf-Of-Another-Agent,

@@ -32,7 +32,7 @@ object ConsigneeDetailsPage extends BasePage {
     AreYouTheExporterPage.path
   else if (isThisExs)
     ThirdPartyGoodsTransportationPage.path
-  else if(isClearance && !isExporter)
+  else if (isClearance && !isExporter)
     RepresentationTypeAgreedPage.path
   else {
     maybeDetail(CarrierEORI) match {

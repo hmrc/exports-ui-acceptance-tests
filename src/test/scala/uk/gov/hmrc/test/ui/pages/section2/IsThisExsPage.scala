@@ -25,7 +25,7 @@ object IsThisExsPage extends BasePage {
 
   def backButtonHref: String =
     if (detail(ExporterYesNo) == yes) AreYouTheExporterPage.path
-    else if(isEidr) ExporterEORINumberPage.path
+    else if (isEidr) ExporterEORINumberPage.path
     else maybeDetail(ExporterEORI) match {
       case Some(_) => ExporterEORINumberPage.path
       case None    => ExporterAddressPage.path

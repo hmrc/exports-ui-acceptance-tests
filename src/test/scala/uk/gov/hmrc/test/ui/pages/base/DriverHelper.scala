@@ -112,8 +112,9 @@ trait DriverHelper {
   }
 
   def fillTextBoxById(elementId: String, text: String): Unit = {
-    waitForId(elementId).clear()
-    waitForId(elementId).sendKeys(text)
+    val element = waitForId(elementId)
+    element.clear()
+    element.sendKeys(text)
   }
 
   def fillTextBoxByName(name: String, text: String): Unit =
