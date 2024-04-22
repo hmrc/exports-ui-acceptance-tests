@@ -24,8 +24,10 @@ import uk.gov.hmrc.test.ui.pages.section2.IsThisExsPage.isThisExs
 
 object ExporterEORINumberPage extends BasePage {
 
-      def backButtonHref: String = if (isThisExs || isEidr) PersonPresentingGoodsPage.path else AreYouTheExporterPage.path
+  def backButtonHref: String = if (isThisExs || isEidr) PersonPresentingGoodsPage.path else AreYouTheExporterPage.path
+
   val path: String = "/declaration/exporter-eori-number"
+
   val title: String = "Does the exporter have an EORI number?"
 
   override val expanderHrefs: Map[String, Seq[String]] = AreYouTheExporterPage.expanderHrefs

@@ -24,8 +24,11 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.EntryIntoDeclarantsRecords
 object EntryIntoDeclarantRecordsPage extends BasePage {
 
   def backButtonHref: String = SummarySection1Page.path
+
   val path: String = "/declaration/entry-into-declarants-records"
+
   val title: String = "Is this an entry into declarant’s records (EIDR)?"
+
   override def checkExpanders(): Unit = ()
   // No  => fillPage(no)
   // Yes => fillPage(yes)

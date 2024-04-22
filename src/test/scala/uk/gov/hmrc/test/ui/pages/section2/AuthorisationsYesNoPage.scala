@@ -28,16 +28,18 @@ object AuthorisationsYesNoPage extends BasePage {
   def backButtonHref: String = if (isOccasional) OtherPartiesInvolvedListPage.path
   else if(isClearance) ConsigneeDetailsPage.path
   else ProcedureChoicePage.path
+
   val path: String = "/declaration/is-authorisation-required"
 
   def title: String =
     if (isOccasional || isClearance) "Do you want to add any authorisations?"
-    else if(detail(AdditionalDeclarationType).contains("Pre-lodged")) {
+    else if (detail(AdditionalDeclarationType).contains("Pre-lodged")) {
       detail(ProcedureChoice) match {
         case "Permanent" => "Do you have any authorisations you want to declare?"
         case "Temporary" => "Do you want to add any authorisations?"
       }
     } else{
+
       detail(ProcedureChoice) match {
         case "Permanent" => "Do you want to add any authorisations?"
         case "Temporary" => "Do you have any authorisations you want to declare?"

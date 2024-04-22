@@ -23,10 +23,15 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.AdditionalPartiesInvolvedTy
 object OtherPartiesInvolvedRemovePage extends BasePage {
 
   def backButtonHref: String = OtherPartiesInvolvedListPage.path
+
   val path: String = removeUrl("other-party")
+
   val title: String = "Are you sure you want to remove this party?"
 
-  val partyToBeRemoved = 1
+  override def checkExpanders(): Unit = ()
+
+  val partyToBeRemoved = 0
+
 
   // No  => fillPage(no)
 

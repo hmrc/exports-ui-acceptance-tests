@@ -29,6 +29,7 @@ object ThirdPartyGoodsTransportationPage extends BasePage {
     if (detail(EntryIntoDeclarantsRecords).equals("Yes")) ConsignorEORINumberPage.path else ConsignorDetailsPage.path
   }
   else RepresentationTypeAgreedPage.path
+
   val path: String = "/declaration/third-party-goods-transportation"
 
   val title: String = "Will the goods be moved by a third party carrier or haulier?"
@@ -42,7 +43,6 @@ object ThirdPartyGoodsTransportationPage extends BasePage {
   // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit = {
-
     selectYesOrNoRadio(values(yesNo))
     store(ThirdPartyGoodsTransportation -> Detail(values(yesNo)))
   }
