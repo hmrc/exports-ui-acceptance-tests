@@ -3,11 +3,13 @@ Feature: Section2 Occasional Journey Scenarios
 
   Background:
     Given I clear data in cache
+  #The initial section 2 Journey starts with below combination
+  #isExporter=NO, isExporterEORI=NO, holdTheContract=NO, carrierEoriNumber=No
 
-  #isExporter=NO, isExporterEORI=Yes, holdTheContract=NO, carrierEoriNumber=No
-  @Section2 @OccasionalPrelodgedWithNotAnExporter
-  Scenario: exports standard declaration journey
-    Given I fill section1 for OCCASIONAL,prelodged declaration
+  @Section2 @OccasionalJourney
+  Scenario Outline: Exports Occasional declaration When the user is not an exporter,not having EORI, not holding
+  the contract to submit the declaration on behalf and not having the carrier EORI number
+    Given I fill section1 for OCCASIONAL,<Type> declaration
     Then I should land on Are-You-The-Exporter page
     And I select No to I am the Exporter
     And I click continue
@@ -52,3 +54,8 @@ Feature: Section2 Occasional Journey Scenarios
     And I click continue
     Then I should land on MiniCYA-Section-2 page
     And I check the MiniCYA page for Section-2
+
+    Examples:
+    |Type          |
+    | arrived      |
+    | prelodged    |

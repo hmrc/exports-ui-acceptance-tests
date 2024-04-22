@@ -20,7 +20,7 @@ import uk.gov.hmrc.test.ui.pages.base.Constants._
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage._
-import uk.gov.hmrc.test.ui.pages.section1.EntryIntoDeclarantRecordsPage.isEIDR
+import uk.gov.hmrc.test.ui.pages.section2.EntryIntoDeclarantRecordsPage.isEidr
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 import uk.gov.hmrc.test.ui.pages.section2.ProcedureChoicePage._
 import uk.gov.hmrc.test.ui.pages.section4.DetailKeys._
@@ -37,19 +37,19 @@ object PreviousDocumentPage extends BasePage {
   def title: String =
     if (
       ((isStandard || isSimplified || isSupplementary) && isProcedurePermanent) ||
-      (isClearance && isProcedurePermanent && isEIDR)
+      (isClearance && isProcedurePermanent && isEidr)
     ) { "Details for each document that supports this declaration" }
     else if (
       ((isStandard || isSimplified || isSupplementary) && isProcedurePermanentAndExcise) ||
-      (isClearance && isProcedurePermanentAndExcise && isEIDR)
+      (isClearance && isProcedurePermanentAndExcise && isEidr)
     ) { "Declare each document, including excise guarantees" }
     else if (
       ((isStandard || isSimplified || isSupplementary) && isProcedureTemporary) ||
-      (isClearance && isProcedureTemporary && isEIDR)
+      (isClearance && isProcedureTemporary && isEidr)
     ) { "Declare each document, including previous declarations" }
     else if (
       (isStandard || isSimplified || isSupplementary) ||
-      (isClearance && isEIDR)
+      (isClearance && isEidr)
     ) { "Details for each document that supports this declaration" }
     else if (isClearance) { "Details for each document that supports this clearance request" }
     else if (isOccasional) { "Details for each document that supports this declaration" }

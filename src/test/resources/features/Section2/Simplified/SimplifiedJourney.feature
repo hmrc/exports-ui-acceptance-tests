@@ -3,13 +3,14 @@ Feature: Section2 Simplified Journey Scenarios
 
   Background:
     Given I clear data in cache
+    #The initial section 2 Journey starts with below combination
+    #isExporter=NO, isExporterEORI=NO, holdTheContract=NO, carrierEoriNumber=No
 
-    #isExporter=NO, isExporterEORI=Yes, holdTheContract=NO, carrierEoriNumber=No
-    @Section2 @SimplifiedPrelodgedWithNotAnExporter
-    Scenario: Exports Simplified Prelodged Scenario When the user is not an exporter,
+    @Section2 @SimplifiedJourney
+    Scenario Outline: Exports Simplified Prelodged Scenario When the user is not an exporter,
     not having EORI, not holding the contract to submit the declaration on behalf
     and not having the carrier EORI number with this selection the
-    Given I fill section1 for SIMPLIFIED,prelodged declaration
+    Given I fill section1 for SIMPLIFIED,<Type> declaration
     Then I should land on Are-You-The-Exporter page
     And I select No to I am the Exporter
     And I click continue
@@ -55,33 +56,7 @@ Feature: Section2 Simplified Journey Scenarios
     Then I should land on MiniCYA-Section-2 page
     And I check the MiniCYA page for Section-2
 
-    #To change the holder of authorisation from Permanent to Permanent with excise
-    Then I click change link for Authorisation Type page
-    And I select Permanent with excise as export procedure choice
-    And I click continue
-    Then I should land on Authorisations-Required-List page
-    And I click on remove link
-    Then I should land on Authorisations-Remove page
-    And I select Yes to remove authorisation
-    Then I should land on Authorisations-Remove page
-    And I click continue
-    And I select first Authorisation code ACP and enter eori as Declarant EORI
-    And I click continue
-    Then I navigate to Summary Section2 page
-    And I check the MiniCYA page for Section-2
-
-    #To change the holder of authorisation from Permanent with excise to Temporary
-    Then I click change link for Authorisation Type page
-    And I select Temporary as export procedure choice
-    And I click continue
-    Then I should land on Authorisations-Required-List page
-    And I click on remove link
-    Then I should land on Authorisations-Remove page
-    And I select Yes to remove authorisation
-    Then I should land on Authorisations-Remove page
-    And I click continue
-    Then I should land on Authorisation-Required page
-    And I select first Authorisation code ACP and enter eori as Declarant EORI
-    And I click continue
-    Then I navigate to Summary Section2 page
-    And I check the MiniCYA page for Section-2
+      Examples:
+      |   Type   |
+      | preloged |
+      |  arrived |
