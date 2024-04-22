@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, none, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{none, yesNo, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isOccasional}
@@ -26,7 +26,7 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{NoAuthorisationRequired, P
 object AuthorisationsYesNoPage extends BasePage {
 
   def backButtonHref: String = if (isOccasional) OtherPartiesInvolvedListPage.path
-  else if(isClearance) ConsigneeDetailsPage.path
+  else if (isClearance) ConsigneeDetailsPage.path
   else ProcedureChoicePage.path
 
   val path: String = "/declaration/is-authorisation-required"
@@ -38,8 +38,8 @@ object AuthorisationsYesNoPage extends BasePage {
         case "Permanent" => "Do you have any authorisations you want to declare?"
         case "Temporary" => "Do you want to add any authorisations?"
       }
-    } else{
 
+    } else {
       detail(ProcedureChoice) match {
         case "Permanent" => "Do you want to add any authorisations?"
         case "Temporary" => "Do you have any authorisations you want to declare?"
