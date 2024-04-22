@@ -26,6 +26,7 @@ object AuthorisationsListPage extends BasePage {
   def backButtonHref: String = if(isOccasional)OtherPartiesInvolvedListPage.path
   else if (isClearance) ConsigneeDetailsPage.path
   else ProcedureChoicePage.path
+
   val path: String = "/declaration/authorisations-required"
 
   def title: String =
