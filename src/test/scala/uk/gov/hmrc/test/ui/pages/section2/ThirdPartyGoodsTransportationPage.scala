@@ -16,19 +16,22 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yes, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{yes, yesNo, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{EntryIntoDeclarantsRecords, ExporterYesNo, ThirdPartyGoodsTransportation}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{
+  EntryIntoDeclarantsRecords,
+  ExporterYesNo,
+  ThirdPartyGoodsTransportation
+}
 
 object ThirdPartyGoodsTransportationPage extends BasePage {
 
   def backButtonHref: String = if (detail(ExporterYesNo) == yes) AreYouTheExporterPage.path
   else if (isClearance) {
     if (detail(EntryIntoDeclarantsRecords).equals("Yes")) ConsignorEORINumberPage.path else ConsignorDetailsPage.path
-  }
-  else RepresentationTypeAgreedPage.path
+  } else RepresentationTypeAgreedPage.path
 
   val path: String = "/declaration/third-party-goods-transportation"
 
