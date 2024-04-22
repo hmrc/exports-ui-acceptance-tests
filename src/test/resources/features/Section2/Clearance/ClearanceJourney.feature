@@ -5,6 +5,7 @@ Feature: Section2 Clearance Prelodged
     Given I clear data in cache
   #The initial section 2 Journey starts with below combination
   #isEIDR=NO, #isExporter=NO, isExporterEORI=NO, holdTheContract=NO, carrierEoriNumber=No
+
   @Section2 @ClearancePrelodgedJourney
   Scenario: Exports Clearance Prelodged Scenario When the user is not having
   entry in declarant records is not an exporter,not having EORI, not holding
@@ -53,9 +54,9 @@ Feature: Section2 Clearance Prelodged
     And I click continue on MiniCya
 
     #  Given the user is on the Entry into declarant records page
-    #  When the user selects "isEIDR = yes" and "areYouTheExporter = No"
+    #  When the user selects "isEIDR = yes"
     #  Then user navigates to Person Presenting Goods page
-    #  And the following pages are skipped
+    #  The following pages are skipped
     #           Declarant-Details,
     #           Are-You-The-Exporter,
     And I navigate to Entry Into Declarant Records page

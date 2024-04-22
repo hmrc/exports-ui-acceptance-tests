@@ -6,7 +6,7 @@ Feature: Section2 Standard Prelodged
   #The initial section 2 Journey starts with below combination
   #isExporter=NO, isExporterEORI=NO, holdTheContract=NO, carrierEoriNumber=No
 
-  @Section2 @SupplementarySDPJourney
+  @Section2 @SupplementaryJourney
   Scenario Outline: Exports Supplementary SDP Scenario When the user is not an exporter,
   not having EORI, not holding the contract to submit the declaration on behalf
   and not having the carrier EORI number, Supplementary Declaration doesn't contain

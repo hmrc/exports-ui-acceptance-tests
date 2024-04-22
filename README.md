@@ -143,6 +143,35 @@ This code is open source software licensed under the [Apache 2.0 License]("http:
 -  User completes simplified journey by providing MRN on consignment reference page
 -  User completes eidr journey by providing EIDR date on consignment reference page
 
+## Section 2
+
+ **Standard Journey** -
+ - User is not an exporter, not having EORI, not holding the contract to submit the declaration on behalf and not having the carrier EORI number
+ - User is an exporter and choose to move goods by using Third party carrier or haulier
+ - User is an exporter and choose to use own transport
+ - User is not an exporter and has Exporter EORI
+ - User changes the holder of authorization from "Permanent" to "Permanent with excise"
+ - user changes the authorisation choice from "Permanent with excise" to "Temporary"
+ - User is not an exporter not having EORI, not holding the contract to submit the declaration on behalf and not having the carrier EORI number with Arrived Journey
+
+ **Clearance Journey** -
+ - User is not an exporter, not having EORI, not holding the contract to submit the declaration on behalf and not having the carrier EORI number
+ - User is having the Entry into declarant records and navigates to Person Presenting Goods page then user shouldn't see the Declarant-Details and Are you the exporter pages
+ - User is not having the Entry into declarant records and not an exporter then the user shouldn't see the On-Behalf-Of-Another-Agent page, representative-eori page and representative-type-agreed pages
+ - User is having the Entry into declarant records and having the exporter EORI number and willing to provide security information then 
+   the user shouldn't see the Are-you-the-exporter, Declarant details, are-you-completing-this-declaration-on-behalf-of-another-agent, representative-eori-number, representation-type-agreed pages
+ - Clearance Arrived Journey - User is not having entry in declarant records is not an exporter,not having EORI, not holding the contract to submit the declaration on behalf and not having the carrier EORI number and not willing to provide
+   Security information with this combination the user navigates to Exporter-Address, Consingor-EORI-Number, Third-Party-Goods-Transportation, Consignee-Details, Is-Authorisation-Required pages 
+
+ **Occasional Journey** -
+ - User is not an exporter,not having EORI, not holding the contract to submit the declaration on behalf and not having the carrier EORI number with both Arrived and Prelodged journeys
+
+ **Simplified Journey** -
+- User is not an exporter,not having EORI, not holding the contract to submit the declaration on behalf and not having the carrier EORI number with both Arrived and Prelodged journeys
+
+ **Supplementary Journey** -
+ - User is not an exporter, not having EORI, not holding the contract to submit the declaration on behalf and not having the carrier EORI number, Supplementary Declaration doesn't contain Third party goods transportation page.
+   this is for Simplified and Eidr journeys
 
 ## Section 3
 
