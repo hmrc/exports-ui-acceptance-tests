@@ -26,7 +26,7 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AuthorisationHolderEORI, A
 object AuthorisationPage extends BasePage {
 
   def backButtonHref: String = {
-    if(isSimplified || isSupplementary) ProcedureChoicePage.path
+    if (isSimplified || isSupplementary) ProcedureChoicePage.path
     else if (detailForLabel(section2, AuthorisationTypeLabel).isEmpty) AuthorisationsYesNoPage.path
     else AuthorisationsListPage.path
   }

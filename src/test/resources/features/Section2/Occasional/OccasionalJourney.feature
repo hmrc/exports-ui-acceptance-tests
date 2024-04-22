@@ -3,10 +3,8 @@ Feature: Section2 Occasional Journey Scenarios
 
   Background:
     Given I clear data in cache
-  #The initial section 2 Journey starts with below combination
-  #isExporter=NO, isExporterEORI=NO, holdTheContract=NO, carrierEoriNumber=No
 
-  @Section2 @OccasionalJourney
+  @Section2 @OcaDec
   Scenario Outline: Exports Occasional declaration When the user is not an exporter,not having EORI, not holding
   the contract to submit the declaration on behalf and not having the carrier EORI number
     Given I fill section1 for OCCASIONAL,<Type> declaration

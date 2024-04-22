@@ -3,10 +3,8 @@ Feature: Section2 Clearance Prelodged
 
   Background:
     Given I clear data in cache
-  #The initial section 2 Journey starts with below combination
-  #isEIDR=NO, #isExporter=NO, isExporterEORI=NO, holdTheContract=NO, carrierEoriNumber=No
 
-  @Section2 @ClearancePrelodgedJourney
+  @Section2 @ClrDec
   Scenario: Exports Clearance Prelodged Scenario When the user is not having
   entry in declarant records is not an exporter,not having EORI, not holding
   the contract to submit the declaration on behalf and not having the carrier EORI number
@@ -53,10 +51,10 @@ Feature: Section2 Clearance Prelodged
     And I check the MiniCYA page for Section-2
     And I click continue on MiniCya
 
-    #  Given the user is on the Entry into declarant records page
-    #  When the user selects "isEIDR = yes"
-    #  Then user navigates to Person Presenting Goods page
-    #  The following pages are skipped
+    #  User is on the Entry into declarant records page
+    #  selects "isEIDR = yes"
+    #  navigates to Person Presenting Goods page
+    #  the following pages are skipped
     #           Declarant-Details,
     #           Are-You-The-Exporter,
     And I navigate to Entry Into Declarant Records page
@@ -69,9 +67,9 @@ Feature: Section2 Clearance Prelodged
     And I navigate to Summary Section2 page
     And I check the MiniCYA page for Section-2
 
-    #  Given the user is on the Entry into declarant records page
-    #  When the user selects "isEIDR = No" and "areYouTheExporter = No"
-    #  Then user navigates to the following pages
+    #  User is on the Entry into declarant records page
+    #  selects "isEIDR = No" and "areYouTheExporter = No"
+    #  user navigates to the following pages
     #                On-Behalf-Of-Another-Agent page
     #                representative-eori page
     #                representative-type-agreed page
@@ -92,10 +90,10 @@ Feature: Section2 Clearance Prelodged
     And I navigate to Summary Section2 page
     And I check the MiniCYA page for Section-2
 
-    #  Given the user is on the Entry into declarant records page
-    #  When the user selects "isEIDR = Yes"
-    #  Then user navigates to Authorisation choice page
-    #  And the following pages are skipped
+    #  User is on the Entry into declarant records page
+    #  selects "isEIDR = Yes"
+    #  navigates to Authorisation choice page
+    #  the following pages are skipped
     #            Are-you-the-exporter
     #            Declarant details
     #            are-you-completing-this-declaration-on-behalf-of-another-agent
@@ -127,7 +125,7 @@ Feature: Section2 Clearance Prelodged
     And I navigate to Summary Section2 page
     And I check the MiniCYA page for Section-2
 
-  @Section2 @Smoke @ClearanceArrivedJourney
+  @Section2 @Smoke @ClrDec
   Scenario: Exports Clearance Prelodged Scenario When the user is not having
   entry in declarant records is not an exporter,not having EORI, not holding
   the contract to submit the declaration on behalf and not having the carrier EORI number

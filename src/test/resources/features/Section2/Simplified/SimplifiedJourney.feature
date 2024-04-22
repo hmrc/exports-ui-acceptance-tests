@@ -3,10 +3,8 @@ Feature: Section2 Simplified Journey Scenarios
 
   Background:
     Given I clear data in cache
-    #The initial section 2 Journey starts with below combination
-    #isExporter=NO, isExporterEORI=NO, holdTheContract=NO, carrierEoriNumber=No
 
-    @Section2 @SimplifiedJourney
+    @Section2 @SimDec
     Scenario Outline: Exports Simplified Prelodged Scenario When the user is not an exporter,
     not having EORI, not holding the contract to submit the declaration on behalf
     and not having the carrier EORI number with this selection the

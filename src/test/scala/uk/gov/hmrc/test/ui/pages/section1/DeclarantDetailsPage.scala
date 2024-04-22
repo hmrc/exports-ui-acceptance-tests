@@ -25,7 +25,7 @@ import uk.gov.hmrc.test.ui.pages.section2.EntryIntoDeclarantRecordsPage
 
 object DeclarantDetailsPage extends BasePage {
 
-  def backButtonHref: String = if(isClearance)EntryIntoDeclarantRecordsPage.path else DeclarationTypePage.path
+  def backButtonHref: String = if (isClearance) EntryIntoDeclarantRecordsPage.path else DeclarationTypePage.path
   val path: String = "/declaration/declarant-details"
   def title: String = s"Is your EORI number ${detail(DeclarationEori)}?"
 

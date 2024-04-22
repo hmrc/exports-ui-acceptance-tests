@@ -3,10 +3,8 @@ Feature: Section2 Standard Prelodged
 
   Background:
     Given I clear data in cache
-  #The initial section 2 Journey starts with below combination
-  #isExporter=NO, isExporterEORI=NO, holdTheContract=NO, carrierEoriNumber=No
 
-  @Section2 @StandardPrelodgedJourney
+  @Section2 @StdDec
   Scenario: Exports Standard Prelodged Scenario When the user is not an exporter,
             not having EORI, not holding the contract to submit the declaration on behalf
             and not having the carrier EORI number
@@ -69,9 +67,9 @@ Feature: Section2 Standard Prelodged
     And I check the MiniCYA page for Section-2
     And I click continue on MiniCya
 
-    #  Given the user is on the Goods Transportation Details page
-    #  When the user selects "Third party goods transportation = Yes"
-    #  Then the Consignee Details page should be skipped
+    #  User is on the Goods Transportation Details page
+    #  selects "Third party goods transportation = Yes"
+    #  the Consignee Details page should be skipped
     Then I navigate to Are You The Exporter page
     And I select Yes to I am the Exporter
     And I clear Exporter’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation keys from cache
@@ -83,9 +81,9 @@ Feature: Section2 Standard Prelodged
     Then I navigate to Summary Section2 page
     And I check the MiniCYA page for Section-2
 
-    #  Given the user is on the Goods Transportation Details page
-    #  When the user selects "Third party goods transportation = No"
-    #  Then the Carrier EORI Number field should be skipped
+    #  User is on the Goods Transportation Details page
+    #  selects "Third party goods transportation = No"
+    #  the Carrier EORI Number field should be skipped
     Then I navigate to Are You The Exporter page
     And I select Yes to I am the Exporter
     And I clear Exporter’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation, Carrier or haulier’s details keys from cache
@@ -97,9 +95,9 @@ Feature: Section2 Standard Prelodged
     Then I navigate to Summary Section2 page
     And I check the MiniCYA page for Section-2
 
-    #  Given the user is on the Exporter Details page
-    #  When the user selects "Exporter-eori-number = yes"
-    #  Then the Exporter Address page should be skipped
+    #  User is on the Exporter Details page
+    #  selects "Exporter-eori-number = yes"
+    #  the Exporter Address page should be skipped
     Then I navigate to Are You The Exporter page
     And I select No to I am the Exporter
     And I click continue
@@ -108,9 +106,9 @@ Feature: Section2 Standard Prelodged
     And I click continue
     Then I should land on On-Behalf-Of-Another-Agent page
 
-    #  Given the user is on the Are-you-completing-this-declaration-on-behalf-of-another-agent page
-    #  When the user selects yes"
-    #  Then the Representative EORI Number page should be skipped
+    #  User is on the Are-you-completing-this-declaration-on-behalf-of-another-agent page
+    #  selects yes"
+    #  the Representative EORI Number page should be skipped
     Then I navigate to Are You The Exporter page
     And I select No to I am the Exporter
     And I click continue
@@ -122,9 +120,9 @@ Feature: Section2 Standard Prelodged
     And I click continue
     Then I should land on Representation-Type-Agreed page
 
-     #  Given the user is on the authorization details page
-     #  When the user changes the holder of authorization from "Permanent" to "Permanent with excise"
-     #  Then the authorization holder is updated to "Permanent with excise"
+     #  User is on the authorization details page
+     #  changes the holder of authorization from "Permanent" to "Permanent with excise"
+     #  the authorization holder is updated to "Permanent with excise"
     And I navigate to Summary Section2 page
     Then I click change link for Authorisation Type page
     And I select Permanent with excise as export procedure choice
@@ -140,9 +138,9 @@ Feature: Section2 Standard Prelodged
     Then I navigate to Summary Section2 page
     And I check the MiniCYA page for Section-2
 
-    #  Given the user is on the authorisation choice page
-    #  When the user changes the authorisation choice from "Permanent with excise" to "Temporary"
-    #  Then the authorisation choice is updated to "Temporary"
+    #  User is on the authorisation choice page
+    #  changes the authorisation choice from "Permanent with excise" to "Temporary"
+    #  the authorisation choice is updated to "Temporary"
     Then I click change link for Authorisation Type page
     And I select Temporary as export procedure choice
     And I click continue
