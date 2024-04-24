@@ -36,7 +36,7 @@ Feature: Section2 Occasional Journey Scenarios
     And I provide consignee details
     And I click continue
     Then I should land on Other-Parties-Involved page
-    And I select first party Consolidator and eori GB121212121212 as the other party involved
+    And I select first party Freight forwarder and eori GB121212121212 as the other party involved
     And I click continue
     Then I should land on Other-Parties-Involved-List page
     And I select No on other party involved list page

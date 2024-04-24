@@ -120,44 +120,6 @@ Feature: Section2 Standard Prelodged
     And I click continue
     Then I should land on Representation-Type-Agreed page
 
-     #  User is on the authorization details page
-     #  changes the holder of authorization from "Permanent" to "Permanent with excise"
-     #  the authorization holder is updated to "Permanent with excise"
-    And I navigate to Summary Section2 page
-    Then I click change link for Authorisation Type page
-    And I select Permanent with excise as export procedure choice
-    And I click continue
-    Then I should land on Authorisations-Required-List page
-    And I click on remove link
-    Then I should land on Authorisations-Remove page
-    And I select Yes to remove authorisation
-    Then I should land on Authorisations-Remove page
-    And I click continue
-    And I select first Authorisation code ACP and enter eori as Declarant EORI
-    And I click continue
-    Then I navigate to Summary Section2 page
-    And I check the MiniCYA page for Section-2
-
-    #  User is on the authorisation choice page
-    #  changes the authorisation choice from "Permanent with excise" to "Temporary"
-    #  the authorisation choice is updated to "Temporary"
-    Then I click change link for Authorisation Type page
-    And I select Temporary as export procedure choice
-    And I click continue
-    Then I should land on Authorisations-Required-List page
-    And I click on remove link
-    Then I should land on Authorisations-Remove page
-    And I select Yes to remove authorisation
-    Then I should land on Authorisations-Remove page
-    And I click continue
-    Then I should land on Is-Authorisation-Required page
-    And I select Yes to declare authorisations
-    And I click continue
-    And I select first Authorisation code ACP and enter eori as Declarant EORI
-    And I click continue
-    Then I navigate to Summary Section2 page
-    And I check the MiniCYA page for Section-2
-
 
   @Smoke @Section2 @StandardArrivedJourney
   Scenario: Exports Standard Arrived Scenario When the user is not an exporter,
@@ -199,6 +161,10 @@ Feature: Section2 Standard Prelodged
     And I click continue
     Then I should land on Other-Parties-Involved-List page
     And I select Yes on other party involved list page
+    Then I should land on Other-Parties-Involved-List page
+    And I click on remove link to delete party 0
+    Then I should land on Other-Parties-Involved-Remove page
+    And I select Yes to remove other party
     And I click continue
     Then I should land on Other-Parties-Involved page
     And I select second party Manufacturer and eori GB121212131313 as the other party involved
@@ -207,10 +173,7 @@ Feature: Section2 Standard Prelodged
     And I select No on other party involved list page
     And I click continue
     Then I should land on Authorisation-Choice page
-    And I select Permanent as export procedure choice
-    And I click continue
-    Then I should land on Is-Authorisation-Required page
-    And I select Yes to declare authorisations
+    And I select Temporary as export procedure choice
     And I click continue
     Then I should land on Authorisation-Required page
     And I select first Authorisation code ACR and enter eori as GB123456789008
@@ -220,7 +183,6 @@ Feature: Section2 Standard Prelodged
     And I click continue
     Then I should land on MiniCYA-Section-2 page
     And I check the MiniCYA page for Section-2
-    And I click continue on MiniCya
 
 
 
