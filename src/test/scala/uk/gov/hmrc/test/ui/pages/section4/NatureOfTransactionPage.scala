@@ -21,18 +21,20 @@ import uk.gov.hmrc.test.ui.pages.base.TariffLinks.natureOfTransaction
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section3.DestinationCountryPage.isGuernseyOrJerseyDestination
-import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.NatureOfTransaction
+import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.{NatureOfTransaction, TotalAmountInvoiced}
 
 object NatureOfTransactionPage extends BasePage {
 
   val Sale = "Goods being sold"
   val BusinessPurchase = "Item purchased new in the UK for business use"
 
-  val backButtonHref: String =
-    detail(DeclarationType) match {
-      case Standard | Supplementary if isGuernseyOrJerseyDestination => TotalPackageQuantityPage.backButtonHref
+  def backButtonHref: String = {
+   detail(DeclarationType) match {
+      case Standard | Supplementary if isGuernseyOrJerseyDestination && detail(TotalAmountInvoiced) == "Less than £100,000" => InvoicesAndExchangeRateChoicePage.path
+      case Standard | Supplementary if isGuernseyOrJerseyDestination => InvoicesAndExchangeRatePage.path
       case _ => TotalPackageQuantityPage.path
     }
+  }
 
   val path: String = "/declaration/nature-of-transaction"
   val title = "What sort of export is it?"

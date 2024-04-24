@@ -93,6 +93,7 @@ trait DriverHelper {
 
   def fillDropdown(elementId: String, value: String, maybeId: Option[String] = None): String = {
     val element = waitForId(elementId)
+    element.click()
     element.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.BACK_SPACE)
     element.sendKeys(value)
     val selection = maybeId.fold("") { id =>

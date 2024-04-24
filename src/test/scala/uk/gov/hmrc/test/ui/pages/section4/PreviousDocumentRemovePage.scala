@@ -23,7 +23,7 @@ import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.{DocumentCode, DocumentRefe
 object PreviousDocumentRemovePage extends BasePage {
 
   def backButtonHref: String = PreviousDocumentListPage.path
-  def path: String = removeUrl("previous-document")
+  def path: String = removeUrl("previous-documents")
   val title: String = "Are you sure you want to remove this document?"
 
   override def checkExpanders(): Unit = ()

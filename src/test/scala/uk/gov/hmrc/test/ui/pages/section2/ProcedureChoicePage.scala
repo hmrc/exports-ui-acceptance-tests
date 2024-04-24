@@ -64,4 +64,8 @@ object ProcedureChoicePage extends BasePage {
 
     store(ProcedureChoice -> Detail(values(exportProcedure)))
   }
+
+  def isProcedurePermanent: Boolean = detail(ProcedureChoice) == "Permanent"
+  def isProcedurePermanentAndExcise: Boolean = detail(ProcedureChoice) == "Permanent with excise"
+  def isProcedureTemporary: Boolean = detail(ProcedureChoice) == "Temporary"
 }

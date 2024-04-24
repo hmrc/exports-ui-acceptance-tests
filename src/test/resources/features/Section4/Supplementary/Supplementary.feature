@@ -1,5 +1,5 @@
 @Regression
-Feature: Section4 Standard Journey
+Feature: Section4 Supplementary Journey
 
   Background:
     Given I clear data in cache
@@ -10,8 +10,8 @@ Feature: Section4 Standard Journey
      # 3. Validating skipping Total-Package-Quantity page when destination country is Guernsey Or Jersey
 
   @Section4 @StdDec
-  Scenario: Complete Transactions section on standard prelodged declaration journey and validate dynamic title changes on previous documents page
-    Given I fill section1 for STANDARD,prelodged declaration
+  Scenario: Complete Transactions section on Supplementary simplified declaration journey and validate dynamic title changes on previous documents page
+    Given I fill section1 for SUPPLEMENTARY,simplified declaration
     And I fill section2
     And I fill section3
     Then I should land on Invoices-And-Exchange-Rate-Choice page
@@ -74,12 +74,11 @@ Feature: Section4 Standard Journey
 
     ## Below scenario -
      # 1. Invoices-And-Exchange-Rate-Choice:[No], Exchange Rate:[No], Previous Documents Added:[1]
-     # 2. Check removal of Previous Documents
      # 3. Validating skipping Total-Package-Quantity page when destination country is Guernsey Or Jersey
 
   @Section4 @StdDec
-  Scenario: Complete Transactions section on standard arrived declaration journey
-    Given I fill section1 for STANDARD,arrived declaration
+  Scenario: Complete Transactions section on Supplementary eidr declaration journey
+    Given I fill section1 for SUPPLEMENTARY,eidr declaration
     And I fill section2
     And I fill section3
     Then I should land on Invoices-And-Exchange-Rate-Choice page
@@ -103,14 +102,6 @@ Feature: Section4 Standard Journey
     Then I should land on MiniCYA-Section-4 page
     And I check the MiniCYA page for Section-4
     And I click continue on MiniCya
-
-    # remove previous documents
-    And I navigate to Previous Documents List page
-    And I remove previous document
-    Then I should land on Previous-Documents-Remove page
-    And I select Yes to remove Previous Documents
-    And I click continue
-    Then I should land on Previous-Document page
 
     # validate skipping Total-Package-Quantity page when destination country is Jersey and Invoice and exchange rate choice is Yes
     And I navigate to Destination Country page
