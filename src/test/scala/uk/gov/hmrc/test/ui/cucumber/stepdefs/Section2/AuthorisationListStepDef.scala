@@ -25,7 +25,7 @@ class AuthorisationListStepDef extends BaseStepDef {
 
   And("""^I select (.*) to add another authorisation""")((yesNo: String) => AuthorisationsListPage.fillPage(yesNo))
 
-  And("""^I navigate to authorisations required list page"""){() =>
+  And("""^I navigate to authorisations required list page""") { () =>
     AuthorisationsListPage.navigateToPage(AuthorisationsListPage.path)
   }
 

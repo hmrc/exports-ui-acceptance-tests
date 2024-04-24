@@ -43,6 +43,7 @@ Feature: Section3 Standard Journey
     And I add Czech Republic : Czech Republic as a routing country
     And I click continue
     Then I should land on Location-Of-Goods page
+    And I click continue
     And I select Yes to provide location as GBCUASDDOVAPF
     And I click continue
     Then I should land on Office-Of-Exit page
