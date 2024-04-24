@@ -24,7 +24,7 @@ Feature: Clearance Journey Section 3
 
       # Below scenario - No routing and countries of routing pages, LocationOfGoods: [Yes], Number of countries Added: [1]
   @Section1 @ClrDec
-  Scenario: Complete Routes and Locations section on Clearance prelodged declaration journey
+  Scenario: Complete Routes and Locations section on Clearance arrived declaration journey
     Given I fill section1 for CLEARANCE,arrived declaration
     And I fill section2
     Then I should land on Destination-Country page

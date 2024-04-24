@@ -4,10 +4,14 @@ Feature: Section2 Simplified Journey Scenarios
   Background:
     Given I clear data in cache
 
-    @Section2 @SimDec
-    Scenario Outline: Exports Simplified Declaration When the user is not an exporter,
-    not having EORI, not holding the contract to submit the declaration on behalf
-    and not having the carrier EORI number with this selection the
+  ## Below scenario -
+  # 1. Simplified Prelodged and Arrived Declaration
+  # 2. Select No for exporter, no for exporter eori, No to hold the contract, no to carrier EORI
+  #    yes for third party goods transportation page and Temporary as Procedure Choice
+  # 3. With the above combination the journey is not navigated through Is-Authorisation-Required
+
+  @Section2 @SimDec
+    Scenario Outline: Exports Simplified Declaration (
     Given I fill section1 for SIMPLIFIED,<Type> declaration
     Then I should land on Are-You-The-Exporter page
     And I select No to I am the Exporter

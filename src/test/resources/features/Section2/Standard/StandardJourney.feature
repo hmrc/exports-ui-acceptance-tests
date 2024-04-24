@@ -4,10 +4,15 @@ Feature: Section2 Standard Prelodged
   Background:
     Given I clear data in cache
 
+  ## Below scenario -
+  # 1. Standard Prelodged Declaration
+  # 2. Select No for exporter, no for exporter eori, No to hold the contract, no to carrier EORI
+  #    yes for third party goods transportation page and Permanent as Procedure Choice
+  # 3. With the above combination the navigation through Is-Authorisation-Required page
+
   @Section2 @StdDec
-  Scenario: Exports Standard Prelodged Scenario When the user is not an exporter,
-            not having EORI, not holding the contract to submit the declaration on behalf
-            and not having the carrier EORI number
+  Scenario: Exports Standard Prelodged Scenario with Permanent as export procedure code choice, Consolidator and Manufacturer as other
+            parties are involved
     Given I fill section1 for STANDARD,prelodged declaration
     Then I should land on Are-You-The-Exporter page
     And I select No to I am the Exporter
@@ -121,10 +126,15 @@ Feature: Section2 Standard Prelodged
     Then I should land on Representation-Type-Agreed page
 
 
-  @Smoke @Section2 @StandardArrivedJourney
-  Scenario: Exports Standard Arrived Scenario When the user is not an exporter,
-  not having EORI, not holding the contract to submit the declaration on behalf
-  and not having the carrier EORI number
+  ## Below scenario -
+  # 1. Standard Arrived Declaration
+  # 2. Select No for exporter, no for exporter eori, No to hold the contract, no to carrier EORI
+  #    yes for third party goods transportation page and Temporary as Procedure Choice
+  # 3. With the above combination the page Is-Authorisation-Required is skipped
+
+  @Smoke @Section2 @StdDec
+  Scenario: Exports Standard Arrived Scenario with Temporary as export procedure code choice and No other
+            parties are involved
     Given I fill section1 for STANDARD,arrived declaration
     Then I should land on Are-You-The-Exporter page
     And I select No to I am the Exporter
@@ -157,20 +167,7 @@ Feature: Section2 Standard Prelodged
     And I provide consignee details
     And I click continue
     Then I should land on Other-Parties-Involved page
-    And I select first party Consolidator and eori GB121212121212 as the other party involved
-    And I click continue
-    Then I should land on Other-Parties-Involved-List page
-    And I select Yes on other party involved list page
-    Then I should land on Other-Parties-Involved-List page
-    And I click on remove link to delete party 0
-    Then I should land on Other-Parties-Involved-Remove page
-    And I select Yes to remove other party
-    And I click continue
-    Then I should land on Other-Parties-Involved page
-    And I select second party Manufacturer and eori GB121212131313 as the other party involved
-    And I click continue
-    Then I should land on Other-Parties-Involved-List page
-    And I select No on other party involved list page
+    And I select No for other parties are involved
     And I click continue
     Then I should land on Authorisation-Choice page
     And I select Temporary as export procedure choice

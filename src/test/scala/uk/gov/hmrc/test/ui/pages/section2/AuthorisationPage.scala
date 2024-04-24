@@ -16,23 +16,26 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, sequenceId}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{sequenceId, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{addAuthorisationRequired, addAuthorisationRequiredCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isSimplified, isSupplementary}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationEori
+import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys._
-import uk.gov.hmrc.test.ui.pages.section2.ProcedureChoicePage.{isProcedurePermanentAndExcise, isProcedureTemporary}
+import uk.gov.hmrc.test.ui.pages.section2.ProcedureChoicePage.isProcedurePermanentAndExcise
 
 object AuthorisationPage extends BasePage {
+  val isAuthorisationTypeEmpty: Boolean = detailForLabel(section2, AuthorisationTypeLabel).isEmpty
 
   def backButtonHref: String =
-    if (isSimplified || isSupplementary||isProcedurePermanentAndExcise || isProcedureTemporary)
+    if ((isSimplified || isSupplementary || (isStandard && isProcedurePermanentAndExcise)) && isAuthorisationTypeEmpty) {
       ProcedureChoicePage.path
-    else if (isProcedurePermanentAndExcise || isProcedureTemporary)
-      ProcedureChoicePage.path
-    else
+    } else if (!isAuthorisationTypeEmpty) {
       AuthorisationsListPage.path
+    } else {
+      AuthorisationsYesNoPage.path
+    }
 
   override def changeLink: String = ProcedureChoicePage.path
   val path: String = "/declaration/add-authorisation-required"

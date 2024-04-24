@@ -4,9 +4,14 @@ Feature: Section2 Occasional Journey Scenarios
   Background:
     Given I clear data in cache
 
+     ## Below scenario -
+  # 1. Occasional Prelodged and Arrived Declarations
+  # 2. Select No for exporter, no for exporter eori, No to hold the contract, no to carrier EORI
+  #    third party goods transportation page as Yes and Freight forwarder for Other parties involved
+  # 3. Both journeys to cover maximum pages
+
   @Section2 @OcaDec
-  Scenario Outline: Exports Occasional declaration When the user is not an exporter,not having EORI, not holding
-  the contract to submit the declaration on behalf and not having the carrier EORI number
+  Scenario Outline: Exports Occasional declaration (Prelodged and Arrived)
     Given I fill section1 for OCCASIONAL,<Type> declaration
     Then I should land on Are-You-The-Exporter page
     And I select No to I am the Exporter

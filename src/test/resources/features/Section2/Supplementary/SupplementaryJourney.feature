@@ -1,14 +1,17 @@
-@Smoke @Section2 @StandardArrivedJourney
-Feature: Section2 Standard Prelodged
+@Regression
+Feature: Section2 Supplementary Journey
 
   Background:
     Given I clear data in cache
 
+  ## Below scenario -
+  # 1. Supplementary SDP and EIDR Declarations
+  # 2. Select No for exporter, no for exporter eori, No to hold the contract, no to carrier EORI
+  # 3. Third party goods transportation page is not visible in Supplementary (Simplified and EDR) journeys
+  # 4. To check the remove functionality for Authorisation choice and Other parties involved
+
   @Section2 @SupDec
-  Scenario Outline: Exports Supplementary SDP Scenario When the user is not an exporter,
-  not having EORI, not holding the contract to submit the declaration on behalf
-  and not having the carrier EORI number, Supplementary Declaration doesn't contain
-  Third party goods transportation page.
+  Scenario Outline: Exports Supplementary SDP and eidr Scenarios
 
     Given I fill section1 for SUPPLEMENTARY,<DecType> declaration
     Then I should land on Are-You-The-Exporter page
@@ -33,7 +36,20 @@ Feature: Section2 Standard Prelodged
     And I provide consignee details
     And I click continue
     Then I should land on Other-Parties-Involved page
-    And I select No other parties are involved
+    And I select first party Consolidator and eori GB121212121212 as the other party involved
+    And I click continue
+    Then I should land on Other-Parties-Involved-List page
+    And I select Yes on other party involved list page
+    Then I should land on Other-Parties-Involved-List page
+    And I click on remove link to delete party 0
+    Then I should land on Other-Parties-Involved-Remove page
+    And I select Yes to remove other party
+    And I click continue
+    Then I should land on Other-Parties-Involved page
+    And I select second party Manufacturer and eori GB121212131313 as the other party involved
+    And I click continue
+    Then I should land on Other-Parties-Involved-List page
+    And I select No on other party involved list page
     And I click continue
     Then I should land on Authorisation-Choice page
     And I select Permanent as export procedure choice
