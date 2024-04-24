@@ -29,7 +29,7 @@ class OtherPartiesInvolvedStepDef extends BaseStepDef {
     (seqId: String, party: String, eori: String) =>
       OtherPartiesInvolvedPage.fillPage(genSequenceId(seqId), party, eori)
   }
-  And("""^I select No other parties are involved""") { () =>
+  And("""^I select No for other parties are involved""") { () =>
     OtherPartiesInvolvedPage.fillPage(none)
   }
 }

@@ -3,11 +3,14 @@ Feature: Section2 Clearance Prelodged
 
   Background:
     Given I clear data in cache
+  ## Below scenario -
+  # 1. Clearance Prelodged Declaration
+  # 2. Select No for isEIDRr,Yes for my EORI, No for exporter eori, Yes to isThisExs, no to consignor EORI,
+  #    no for third party goods transportation page and Permanent as Procedure Choice
+  # 3. The clearance journey doesn't contain other parties involved and list pages.
 
   @Section2 @ClrDec
-  Scenario: Exports Clearance Prelodged Scenario When the user is not having
-  entry in declarant records is not an exporter,not having EORI, not holding
-  the contract to submit the declaration on behalf and not having the carrier EORI number
+  Scenario: Exports Clearance Prelodged Scenario with possible scenarios
     Given I fill section1 for CLEARANCE,prelodged declaration
     Then I should land on Entry-Into-Declarant-Records page
     And I select No to is this an entry into declarant records
@@ -125,10 +128,15 @@ Feature: Section2 Clearance Prelodged
     And I navigate to Summary Section2 page
     And I check the MiniCYA page for Section-2
 
+
+  ## Below scenario -
+  # 1. Clearance Arrived Declaration
+  # 2. Select No for isEIDRr,Yes for my EORI, No for exporter eori, Yes to isThisExs, no to consignor EORI,
+  #    no for third party goods transportation page and Permanent as Procedure Choice
+  # 3. The clearance journey doesn't contain other parties invloved and list pages.
+
   @Section2 @Smoke @ClrDec
-  Scenario: Exports Clearance Arrived Scenario When the user is not having
-  entry in declarant records is not an exporter,not having EORI, not holding
-  the contract to submit the declaration on behalf and not having the carrier EORI number
+  Scenario: Exports Clearance Arrived Scenario which covers maximum number of pages
     Given I fill section1 for CLEARANCE,arrived declaration
     Then I should land on Entry-Into-Declarant-Records page
     And I select No to is this an entry into declarant records
