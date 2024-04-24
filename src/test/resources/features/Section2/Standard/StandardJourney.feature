@@ -1,6 +1,5 @@
 @Regression
 Feature: Section2 Standard Prelodged
-
   Background:
     Given I clear data in cache
 
