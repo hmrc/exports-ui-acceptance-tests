@@ -126,7 +126,7 @@ Feature: Section2 Clearance Prelodged
     And I check the MiniCYA page for Section-2
 
   @Section2 @Smoke @ClrDec
-  Scenario: Exports Clearance Prelodged Scenario When the user is not having
+  Scenario: Exports Clearance Arrived Scenario When the user is not having
   entry in declarant records is not an exporter,not having EORI, not holding
   the contract to submit the declaration on behalf and not having the carrier EORI number
     Given I fill section1 for CLEARANCE,arrived declaration
