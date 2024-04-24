@@ -26,4 +26,8 @@ class ExporterEoriNumberStepDef extends BaseStepDef {
   And("""^I select (.*) on exporter eori number page""") { yesNo: String =>
     ExporterEORINumberPage.fillPage(yesNo)
   }
+
+  And("""^I select (.*) on exporter eori number page and enter eori number as (.*)""") { (yesNo: String, eori: String) =>
+    ExporterEORINumberPage.fillPage(yesNo, eori)
+  }
 }

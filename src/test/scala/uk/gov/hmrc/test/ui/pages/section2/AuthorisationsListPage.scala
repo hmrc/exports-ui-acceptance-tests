@@ -18,11 +18,15 @@ package uk.gov.hmrc.test.ui.pages.section2
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isOccasional}
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AuthorisationTypeLabel, section2}
 
 object AuthorisationsListPage extends BasePage {
 
-  def backButtonHref: String = ProcedureChoicePage.path
+  def backButtonHref: String = if(isOccasional)OtherPartiesInvolvedListPage.path
+  else if (isClearance) ConsigneeDetailsPage.path
+  else ProcedureChoicePage.path
+
   val path: String = "/declaration/authorisations-required"
 
   def title: String =

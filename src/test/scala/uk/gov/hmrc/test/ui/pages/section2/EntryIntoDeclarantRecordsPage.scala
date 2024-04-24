@@ -14,20 +14,22 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.pages.section1
+package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
+import uk.gov.hmrc.test.ui.pages.base.Constants.{yes, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section1.SummarySection1Page
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.EntryIntoDeclarantsRecords
 
 object EntryIntoDeclarantRecordsPage extends BasePage {
 
   def backButtonHref: String = SummarySection1Page.path
+
   val path: String = "/declaration/entry-into-declarants-records"
+
   val title: String = "Is this an entry into declarant’s records (EIDR)?"
 
   override def checkExpanders(): Unit = ()
-
   // No  => fillPage(no)
   // Yes => fillPage(yes)
 
@@ -35,6 +37,6 @@ object EntryIntoDeclarantRecordsPage extends BasePage {
     selectYesOrNoRadio(values(yesNo), "answer_yes", "answer_no")
     store(EntryIntoDeclarantsRecords -> Detail(values(yesNo)))
   }
+  def isEidr: Boolean = maybeDetail(EntryIntoDeclarantsRecords).fold(false)(_ == yes)
 
-  def isEIDR: Boolean = detail(EntryIntoDeclarantsRecords) == "Yes"
 }

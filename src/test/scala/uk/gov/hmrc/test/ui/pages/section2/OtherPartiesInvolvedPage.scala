@@ -16,16 +16,23 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, none, sequenceId}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{none, sequenceId, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.otherPartiesInvolved
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AdditionalPartiesInvolvedEORI, AdditionalPartiesInvolvedType, NoAdditionalPartiesInvolved}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{
+  AdditionalPartiesInvolvedEORI,
+  AdditionalPartiesInvolvedType,
+  NoAdditionalPartiesInvolved
+}
 
 object OtherPartiesInvolvedPage extends BasePage {
 
   def backButtonHref: String = ConsigneeDetailsPage.path
+
   val path: String = "/declaration/other-parties-involved"
+
   override def changeLink: String = maybeDetail(NoAdditionalPartiesInvolved).fold(OtherPartiesInvolvedListPage.path)(_ => path)
+
   val title: String = "What are the EORI numbers of others involved in this export?"
 
   override val expanderHrefs: Map[String, Seq[String]] =
@@ -41,11 +48,9 @@ object OtherPartiesInvolvedPage extends BasePage {
 
   override def fillPage(values: String*): Unit =
     if (values.head == none) {
-      val otherParties = maybeDetails(AdditionalPartiesInvolvedType(values(sequenceId)))
-      if (otherParties.isEmpty) store(NoAdditionalPartiesInvolved -> Detail(none))
+      store(NoAdditionalPartiesInvolved -> Detail(none))
       clickById("no")
-    }
-    else {
+    } else {
       val id = values(choice) match {
         case "Consolidator"      => "CS"
         case "Manufacturer"      => "MF"

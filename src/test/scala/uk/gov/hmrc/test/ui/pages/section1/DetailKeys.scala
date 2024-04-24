@@ -51,6 +51,6 @@ object DetailKeys {
   // /enter-a-mucr
   val Mucr: DetailKey = DetailKey("MUCR", section1)
 
-  // /enterry-into-declarants-records
+  // /entry-into-declarants-records
   val Eidr: DetailKey = DetailKey("EIDR", section1, skipValueCheck = true, checkChangeLink = false)
 }

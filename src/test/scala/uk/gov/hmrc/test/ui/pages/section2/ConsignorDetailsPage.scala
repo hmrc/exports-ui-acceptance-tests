@@ -27,6 +27,8 @@ object ConsignorDetailsPage extends BasePage {
   val path: String = "/declaration/consignor-address"
   val title: String = "What is the consignor’s name and address?"
 
+  override def changeLink: String = ConsignorEORINumberPage.path
+
   override val expanderHrefs: Map[String, Seq[String]] = Map(Clearance -> List(consignorAddressCL))
 
   // ex: fillPage(Constants.Address)

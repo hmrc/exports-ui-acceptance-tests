@@ -30,6 +30,8 @@ trait CacheHelper {
 
   def clear(detailKeys: DetailKey*): Cache = cache --= detailKeys
 
+  def detailKeys(labels: String*): Seq[DetailKey] = cache.filter(kv => labels.contains(kv._1.label)).keys.toList
+
   // Use a detailKey to retrieve the value of a Detail (a Detail corresponds to a single value)
   def detail(detailKey: DetailKey): String =
     cache(detailKey) match {

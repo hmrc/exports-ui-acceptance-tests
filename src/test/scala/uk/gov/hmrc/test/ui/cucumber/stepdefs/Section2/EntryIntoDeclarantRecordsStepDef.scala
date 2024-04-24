@@ -17,17 +17,17 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section1._
+import uk.gov.hmrc.test.ui.pages.section2.EntryIntoDeclarantRecordsPage
 
 class EntryIntoDeclarantRecordsStepDef extends BaseStepDef {
 
-  And("""^I should land on EIDR page""")(() => EntryIntoDeclarantRecordsPage.checkPage())
+  And("""^I should land on Entry-Into-Declarant-Records page""")(() => EntryIntoDeclarantRecordsPage.checkPage())
 
-  And("""^I select (.*) for Entry Into Declarant Records""") { (option: String) =>
-    EntryIntoDeclarantRecordsPage.fillPage(option)
-  }
+  And("""^I select (.*) to is this an entry into declarant records""")((isEidr: String) =>
+    EntryIntoDeclarantRecordsPage.fillPage(isEidr)
+  )
 
-  And("""^I navigate to Entry Into Declarant Records page""") { () =>
+  And("""^I navigate to Entry Into Declarant Records page""")(() =>
     EntryIntoDeclarantRecordsPage.navigateToPage(EntryIntoDeclarantRecordsPage.path)
-  }
+  )
 }

@@ -37,4 +37,7 @@ object OtherPartiesInvolvedListPage extends BasePage {
   // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
+
+  def removeOtherPartiesInvolvedLink(index: Int): Unit = clickByCssSelector(s"#actor-table-row$index-remove_button > a ")
+
 }
