@@ -53,17 +53,19 @@ object ProcedureCodesPage extends BasePage {
   override def fillPage(values: String*): Unit = {
     val procedureCode = values.head
     fillDropdown("procedureCode", procedureCode)
-    val itemIds = maybeDetails(ItemIds)
     store(
-      ProcedureCode(itemId) -> Detail(procedureCode),
-      ItemIds -> Details(itemIds.fold(Seq(itemId))(_ :+ itemId))
+      ItemIds -> Details(maybeDetails(ItemIds).fold(Seq(itemId))(addItemId)),
+      ProcedureCode(itemId) -> Detail(procedureCode)
     )
   }
 
   private val codesRestrictingZeroVat: Seq[String] =
     List("1007", "1042", "2151", "2154", "2200", "3151", "3154", "3171", "2100", "2144", "2244", "2300", "3153")
 
-
+  private val addItemId = (itemIds: Seq[String]) => {
+    val id = itemId
+    if (itemIds.contains(id)) itemIds else itemIds :+ id
+  }
 
   def hasRestrictingZeroVatPC: Boolean = codesRestrictingZeroVat.contains(detail(ProcedureCode(itemId)))
 

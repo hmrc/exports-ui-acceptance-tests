@@ -27,13 +27,17 @@ object DetailsKeys {
   val AdditionalProcedureCodeLabel = "Additional procedure codes"
   val AdditionalFiscalReferenceLabel = "VAT details"
   val PackageTypeLabel = "Package type"
+
+  val AdditionalInformationLabel = "Additional information statement codes"
   val AdditionalInformationCodeLabel = "Statement code"
   val AdditionalInformationDescriptionLabel = "Statement code"
+
+  val AdditionalDocumentsLabel = "Additional references and documents"
   val AdditionalDocumentCodeLabel = "Document code"
   val NationalAdditionalCodeLabel = "National additional codes"
 
   // itemId's from cache
-  val ItemIds = DetailKey("", section5, skipRowCheck = true)
+  val ItemIds = DetailKey("List of Item identifiers", section5, skipRowCheck = true)
 
   // /add-declaration-item
 
@@ -101,12 +105,12 @@ object DetailsKeys {
 
   // /items/[id]/is-additional-information-required
   def NoAdditionalInformation(itemId: String): DetailKey =
-    DetailKey("Additional information statement codes", section5, Some(itemId))
+    DetailKey(AdditionalInformationLabel, section5, Some(itemId))
 
   // /items/[id]/additional-information
 
-  def AdditionalInformationHeading(itemId: String): DetailKey =
-    DetailKey("Additional information statement codes", section5, Some(itemId), skipRowCheck = true)
+  def AdditionalInformation(itemId: String): DetailKey =
+    DetailKey(AdditionalInformationLabel, section5, Some(itemId), skipRowCheck = true)
 
   def AdditionalInformationCode(itemId: String, sequenceId: String): DetailKey =
     DetailKey(AdditionalInformationCodeLabel, section5, Some(itemId), Some(sequenceId))
@@ -123,7 +127,10 @@ object DetailsKeys {
 
   // /items/[id]/is-additional-documentation-required
   def NoAdditionalDocuments(itemId: String): DetailKey =
-    DetailKey("Additional references and documents", section5, Some(itemId))
+    DetailKey(AdditionalDocumentsLabel, section5, Some(itemId))
+
+  def AdditionalDocuments(itemId: String): DetailKey =
+    DetailKey(AdditionalDocumentsLabel, section5, Some(itemId), skipRowCheck = true)
 
   // /items/[id]/additional-documentation
   def AdditionalDocumentCode(itemId: String, sequenceId: String): DetailKey =

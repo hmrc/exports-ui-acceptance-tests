@@ -162,9 +162,9 @@
 //    CommodityCodeDetailsPage.checkPageTitle()
 //    CommodityCodeDetailsPage.enterCommodityCodeDetails()
 //  }
-//  And("""I select No option for undangerous goods code""") { () =>
-//    UnDangerousGoodsCodePage.checkPageTitle()
-//    UnDangerousGoodsCodePage.selectIsThereAUndangerousGoodsOption("No")
+//  And("""I select No option for dangerous goods code""") { () =>
+//    DangerousGoodsCodePage.checkPageTitle()
+//    DangerousGoodsCodePage.selectIsThereAUndangerousGoodsOption("No")
 //  }
 //  And("""I select vat rating page option as Yes""") { () =>
 //    VatRatingPage.checkPageTitle()

@@ -22,7 +22,6 @@ import org.openqa.selenium.remote.RemoteWebDriver
 import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait}
 import org.openqa.selenium.{By, Keys, WebElement}
 import uk.gov.hmrc.selenium.webdriver.Driver
-import uk.gov.hmrc.test.ui.pages.base.BasePage.host
 
 import java.time.Duration
 import scala.jdk.CollectionConverters.ListHasAsScala
@@ -158,10 +157,6 @@ trait DriverHelper {
       .pollingEvery(Duration.ofMillis(500L))
       .ignoring(classOf[Exception])
       .until(condition)
-  }
-
-  def navigateToPage(path: String): Unit = {
-    driver.navigate().to(s"$host$path")
   }
 }
 

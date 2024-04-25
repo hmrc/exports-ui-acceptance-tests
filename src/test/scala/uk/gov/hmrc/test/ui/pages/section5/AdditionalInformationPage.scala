@@ -16,14 +16,12 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{sequenceId, Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, sequenceId}
 import uk.gov.hmrc.test.ui.pages.base.PageLinks.aiCodes
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalInformation, itemsAdditionalInformationCL}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, DetailKey}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{
-  AdditionalInformationCode,
-  AdditionalInformationDescription,
-  AdditionalInformationHeading
+  AdditionalInformation, AdditionalInformationCode, AdditionalInformationCodeLabel, AdditionalInformationDescription
 }
 
 object AdditionalInformationPage extends BasePage {
@@ -43,7 +41,6 @@ object AdditionalInformationPage extends BasePage {
 
   override val pageLinkHrefs: Seq[String] = super.pageLinkHrefs ++ List(aiCodes)
 
-  val heading = "0"
   val code = 1
   val description = 2
 
@@ -54,13 +51,16 @@ object AdditionalInformationPage extends BasePage {
     fillTextBoxById("code", values(code))
     fillTextBoxById("description", values(description))
 
-    if (maybeDetail(AdditionalInformationCode(itemId, heading)).isEmpty) {
-      store(AdditionalInformationHeading(itemId) -> Detail(""))
-    }
+    val keyAndValues: Seq[(DetailKey, Detail)] =
+      List(
+        if (itemDetailFor(itemId, AdditionalInformationCodeLabel).nonEmpty) None
+        else Some(AdditionalInformation(itemId) -> Detail("value ignored")),
 
-    store(
-      AdditionalInformationCode(itemId, values(sequenceId)) -> Detail(values(code)),
-      AdditionalInformationDescription(itemId, values(sequenceId)) -> Detail(values(description))
-    )
+        Some(AdditionalInformationCode(itemId, values(sequenceId)) -> Detail(values(code))),
+
+        Some(AdditionalInformationDescription(itemId, values(sequenceId)) -> Detail(values(description)))
+      ).flatten
+
+    store(keyAndValues:_*)
   }
 }

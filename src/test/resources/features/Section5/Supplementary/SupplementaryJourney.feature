@@ -34,7 +34,7 @@ Feature: Section5 Supplementary Journey
     Then I should land on Commodity-Details page
     And I enter commodity details code as 2803400090 and description as Old St Andrews golf ball whisky
     And I click continue
-    Then I should land on Undangerous-Goods-Code page
+    Then I should land on Dangerous-Goods-Code page
     And I select Yes to enter the code 1234 as UN dangerous goods
     And I click continue
     Then I should land on Cus-Code page
@@ -99,7 +99,7 @@ Feature: Section5 Supplementary Journey
     Then I should land on Commodity-Details page
     And I enter commodity details code as 2803400090 and description as Old St Andrews golf ball whisky
     And I click continue
-    Then I should land on Undangerous-Goods-Code page
+    Then I should land on Dangerous-Goods-Code page
     And I select No to enter UN dangerous goods
     And I click continue
     Then I should land on Cus-Code page
@@ -169,7 +169,7 @@ Feature: Section5 Supplementary Journey
     Then I navigate to Nature Of Transaction page
     And I select option as House removal
     Then I click continue
-    And I navigate to Undangerous Goods Code page
+    And I navigate to Dangerous Goods Code page
     And I select Yes to enter the code 1234 as UN dangerous goods
     And I click continue
    # skipping Cus Code Page when commodity details code doesnot end with 28,29,38 and VAT rating page when nature of transcation select option is not Goods being sold or Item purchased

@@ -26,7 +26,7 @@ Feature: Section5 Simplified Journey
     Then I should land on Commodity-Details page
     And I enter commodity details code as 9003400090 and description as St Andrews golf ball whisky
     And I click continue
-    And I navigate to Undangerous Goods Code page
+    And I navigate to Dangerous Goods Code page
     And I select Yes to enter the code 1204 as UN dangerous goods
     And I click continue
     # skipping cus code page
