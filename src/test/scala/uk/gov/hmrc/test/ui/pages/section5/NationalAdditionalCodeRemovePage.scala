@@ -28,7 +28,9 @@ object NationalAdditionalCodeRemovePage extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
-  val nationalCodeToTemove = 1
+  override def changeLink: String = NationalAdditionalCodesListPage.path
+
+  val nationalCodeToRemove = 1
 
   // No  => fillPage(no)
 
@@ -38,7 +40,7 @@ object NationalAdditionalCodeRemovePage extends BasePage {
   override def fillPage(values: String*): Unit =
     if (selectYesOrNoRadio(values(yesNo))) {
       val detailKey = NationalAdditionalCodes(itemId)
-      val codes = details(detailKey).filterNot(_ == values(nationalCodeToTemove))
+      val codes = details(detailKey).filter(_ == values(nationalCodeToRemove))
       store(detailKey -> Details(if (codes.isEmpty) List(Constants.none) else codes))
     }
 }

@@ -24,7 +24,7 @@ Feature: Section4 Supplementary Journey
     And I select 4 for the total number of packages
     And I click continue
     Then I should land on Nature-Of-Transaction page
-    And I select option as Goods being sol
+    And I select option as House removal
     And I click continue
     Then I should land on Previous-Document page
     And I select as first Document Commercial Invoice as code and 9GB123456782317-BH1433A61 as reference
@@ -91,7 +91,7 @@ Feature: Section4 Supplementary Journey
     And I select 2 for the total number of packages
     And I click continue
     Then I should land on Nature-Of-Transaction page
-    And I select option as Goods being sol
+    And I select option as Non Commercial change
     And I click continue
     Then I should land on Previous-Document page
     And I select as first Document Commercial Invoice as code and 9GB123456782317-BH1433A61 as reference

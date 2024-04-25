@@ -19,13 +19,14 @@ package uk.gov.hmrc.test.ui.pages.section5
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yes}
 import uk.gov.hmrc.test.ui.pages.base.PageLinks._
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsProcedureCodes, itemsProcedureCodesCL}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, Details}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.EntryIntoDeclarantsRecords
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.ProcedureCode
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{ItemIds, ProcedureCode}
 
 object ProcedureCodesPage extends BasePage {
 
+  val pageId = "procedure-codes"
   def backButtonHref: String = DeclarationItemsListPage.path
   def path: String           = itemUrl("procedure-codes")
   val title: String          = "What is the procedure code for this item?"
@@ -52,11 +53,17 @@ object ProcedureCodesPage extends BasePage {
   override def fillPage(values: String*): Unit = {
     val procedureCode = values.head
     fillDropdown("procedureCode", procedureCode)
-    store(ProcedureCode(itemId) -> Detail(procedureCode))
+    val itemIds = maybeDetails(ItemIds)
+    store(
+      ProcedureCode(itemId) -> Detail(procedureCode),
+      ItemIds -> Details(itemIds.fold(Seq(itemId))(_ :+ itemId))
+    )
   }
 
   private val codesRestrictingZeroVat: Seq[String] =
     List("1007", "1042", "2151", "2154", "2200", "3151", "3154", "3171", "2100", "2144", "2244", "2300", "3153")
+
+
 
   def hasRestrictingZeroVatPC: Boolean = codesRestrictingZeroVat.contains(detail(ProcedureCode(itemId)))
 

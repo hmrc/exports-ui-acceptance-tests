@@ -14,20 +14,14 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section5
+package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section5.SupplementaryUnitsPage
+import uk.gov.hmrc.test.ui.pages.section2.ThirdPartyGoodsTransportationPage
 
-class SupplementaryUnitsStepDef extends BaseStepDef {
+class ThirdPartyGoodsTransportationStepDef extends BaseStepDef {
 
-  And("""^I should land on Supplementary-Units page""")(() => SupplementaryUnitsPage.checkPage())
+  And("""^I should land on Third-Party-Goods-Transportation page""")(() => ThirdPartyGoodsTransportationPage.checkPage())
 
-  And("""^I select (.*) and enter (.*) as supplementary units""") { (yesNo: String, supplementaryUnits: String) =>
-    SupplementaryUnitsPage.fillPage(yesNo, supplementaryUnits)
-  }
-
-  And("""^I select (.*) to enter supplementary units""") { (yesNo: String) =>
-    SupplementaryUnitsPage.fillPage(yesNo)
-  }
+  And("""^I select (.*) on third party goods transportation page""")((yesNo: String) => ThirdPartyGoodsTransportationPage.fillPage(yesNo))
 }

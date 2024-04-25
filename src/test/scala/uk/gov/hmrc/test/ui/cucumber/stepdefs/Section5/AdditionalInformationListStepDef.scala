@@ -26,4 +26,16 @@ class AdditionalInformationListStepDef extends BaseStepDef {
   And("""^I select (.*) on additional information list page""") { (yesNo: String) =>
     AdditionalInformationListPage.fillPage(yesNo)
   }
+
+  And("""^I click remove on Additional Information List page""") { () =>
+    AdditionalInformationListPage.removeAdditionalInformation(0)
+  }
+
+  And("""^I click change to update Additional Information""") { () =>
+    AdditionalInformationListPage.changeAdditionalInformation(0)
+  }
+
+  And("""^I navigate to Additional Information list page""") { () =>
+    AdditionalInformationListPage.navigateToItemPage(AdditionalInformationListPage.pageId)
+  }
 }

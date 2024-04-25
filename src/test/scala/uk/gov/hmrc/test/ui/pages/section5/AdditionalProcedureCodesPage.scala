@@ -17,20 +17,29 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalProcedureCodes, itemsAdditionalProcedureCodes1, itemsAdditionalProcedureCodes2, itemsAdditionalProcedureCodesCL}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{
+  itemsAdditionalProcedureCodes,
+  itemsAdditionalProcedureCodes1,
+  itemsAdditionalProcedureCodes2,
+  itemsAdditionalProcedureCodesCL
+}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalProcedureCodes, ProcedureCode}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{
+  AdditionalProcedureCodeLabel,
+  AdditionalProcedureCodes,
+  ProcedureCode
+}
 
 object AdditionalProcedureCodesPage extends BasePage {
 
   val lowValueDeclaration = "3LV"
-
+  val pageId = "additional-procedure-codes"
   def backButtonHref: String = ProcedureCodesPage.path
-  def path: String           = itemUrl("additional-procedure-codes")
-  def title: String          = s"Add any additional procedure codes to ${detail(ProcedureCode(itemId))}"
+  def path: String = itemUrl(pageId)
+  def title: String = s"Add any additional procedure codes to ${detail(ProcedureCode(itemId))}"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(itemsAdditionalProcedureCodes, itemsAdditionalProcedureCodes1, itemsAdditionalProcedureCodes2),
+    Common -> List(itemsAdditionalProcedureCodes, itemsAdditionalProcedureCodes1, itemsAdditionalProcedureCodes2),
     Clearance -> List(itemsAdditionalProcedureCodesCL, itemsAdditionalProcedureCodes1, itemsAdditionalProcedureCodes2)
   )
 
@@ -45,5 +54,12 @@ object AdditionalProcedureCodesPage extends BasePage {
     store(AdditionalProcedureCodes(itemId) -> Detail(codes.mkString(" ")))
   }
 
-  def isLowValueDeclaration: Boolean  = details(AdditionalProcedureCodes(itemId)).contains(lowValueDeclaration)
+  def removeAdditionalProcedureCode(value: String): Unit = {
+    clickByCssSelector("#additionalProcedureCodes-table-row0-remove_button>button")
+    val additionalCodes = itemDetailFor(itemId, AdditionalProcedureCodeLabel).filterNot(_ == value)
+    if (additionalCodes.isEmpty) clear(AdditionalProcedureCodes(itemId))
+    else store(AdditionalProcedureCodes(itemId) -> Detail(additionalCodes.mkString(" ")))
+  }
+
+  def isLowValueDeclaration: Boolean = detail(AdditionalProcedureCodes(itemId)).contains(lowValueDeclaration)
 }

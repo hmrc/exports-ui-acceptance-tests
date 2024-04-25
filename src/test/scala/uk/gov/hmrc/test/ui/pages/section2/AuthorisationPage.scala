@@ -16,17 +16,29 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, sequenceId}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{addAuthorisationRequired, addAuthorisationRequiredCL}
+import uk.gov.hmrc.test.ui.pages.base.Constants._
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage._
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationEori
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AuthorisationHolderEORI, AuthorisationType, AuthorisationTypeLabel, section2}
+import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys._
+import uk.gov.hmrc.test.ui.pages.section2.ProcedureChoicePage.isProcedurePermanentAndExcise
 
 object AuthorisationPage extends BasePage {
 
+  val isAuthorisationTypeEmpty: Boolean = detailForLabel(section2, AuthorisationTypeLabel).isEmpty
+
   def backButtonHref: String =
-    if (detailForLabel(section2, AuthorisationTypeLabel).isEmpty) AuthorisationsYesNoPage.path
-    else AuthorisationsListPage.path
+    if (
+      (isSimplified || isSupplementary || (isStandard && isProcedurePermanentAndExcise)) && isAuthorisationTypeEmpty
+    ) {
+      ProcedureChoicePage.path
+    } else if (!isAuthorisationTypeEmpty) {
+      AuthorisationsListPage.path
+    } else {
+      AuthorisationsYesNoPage.path
+    }
 
   override def changeLink: String = ProcedureChoicePage.path
   val path: String = "/declaration/add-authorisation-required"
@@ -63,12 +75,48 @@ object AuthorisationPage extends BasePage {
   }
 
   private val codesRequiringAdditionalDocuments = List(
-    "ACE", "ACP", "ACR", "ACT", "AEOC", "AEOF", "AEOS",
-    "BOI", "BTI", "CCL", "CGU", "CSE", "CVA", "CW1", "CW2",
-    "CWP", "DEP", "DPO", "EIR", "EPSS", "ETD", "EUS", "EXW",
-    "EXWH", "FAS", "FZ", "GGA", "IPO", "MIB", "MOU", "OPO",
-    "REP", "REX", "RSS", "SDE", "SIVA", "SSE", "TEA", "TEAH",
-    "TRD", "TST", "UKCS",
+    "ACE",
+    "ACP",
+    "ACR",
+    "ACT",
+    "AEOC",
+    "AEOF",
+    "AEOS",
+    "BOI",
+    "BTI",
+    "CCL",
+    "CGU",
+    "CSE",
+    "CVA",
+    "CW1",
+    "CW2",
+    "CWP",
+    "DEP",
+    "DPO",
+    "EIR",
+    "EPSS",
+    "ETD",
+    "EUS",
+    "EXW",
+    "EXWH",
+    "FAS",
+    "FZ",
+    "GGA",
+    "IPO",
+    "MIB",
+    "MOU",
+    "OPO",
+    "REP",
+    "REX",
+    "RSS",
+    "SDE",
+    "SIVA",
+    "SSE",
+    "TEA",
+    "TEAH",
+    "TRD",
+    "TST",
+    "UKCS"
   )
 
   def hasCodesRequiringAdditionalDocuments: Boolean =

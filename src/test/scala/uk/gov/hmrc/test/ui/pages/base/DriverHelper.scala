@@ -111,8 +111,10 @@ trait DriverHelper {
     findElementById(refSelector).sendKeys(refText)
   }
 
-  def fillTextBoxById(elementId: String, text: String): Unit =
+  def fillTextBoxById(elementId: String, text: String): Unit = {
+    waitForId(elementId).clear()
     waitForId(elementId).sendKeys(text)
+  }
 
   def fillTextBoxByName(name: String, text: String): Unit =
     findElementByName(name).sendKeys(text)

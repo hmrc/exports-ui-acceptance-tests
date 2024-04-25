@@ -28,16 +28,18 @@ object FiscalReferencesRemovePage extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
+  val fiscalReferencesToRemove = 1
   // No  => fillPage(no)
 
   // The 2nd parameter is the sequenceId of the current "Additional Information" element: "0", "1", "2", ...
   // Yes => fillPage(yes, "2")
 
   override def fillPage(values: String*): Unit =
-    if (selectYesOrNoRadio(values(yesNo))) {
+    if (selectYesOrNoRadio(values(yesNo)))
+    {
       val detailKey = AdditionalFiscalReferences(itemId)
       val vatDetailsToRemove = values.head
-      val result = details(detailKey).filterNot(_ == vatDetailsToRemove)
+      val result = details(detailKey).filter(_ == vatDetailsToRemove)
       if (result.isEmpty) clear(detailKey) else store(detailKey -> Details(result))
     }
 }

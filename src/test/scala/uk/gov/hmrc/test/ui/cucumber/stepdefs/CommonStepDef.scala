@@ -18,17 +18,13 @@ package uk.gov.hmrc.test.ui.cucumber.stepdefs
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
 import uk.gov.hmrc.test.ui.generator.SupportGenerator.generateEORI
-import uk.gov.hmrc.test.ui.pages.base.CommonPage.{clear, continue, continueOnMiniCya}
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.{clear, continue, continueOnMiniCya, detailKeys}
 import uk.gov.hmrc.test.ui.pages.base.Constants.yes
 import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{
-  isClearance,
-  isOccasional,
-  isSimplified,
-  isSupplementary
-}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isOccasional, isSimplified, isSupplementary}
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 import uk.gov.hmrc.test.ui.pages.section1._
+import uk.gov.hmrc.test.ui.pages.section2.AreYouTheExporterPage.isExporter
 import uk.gov.hmrc.test.ui.pages.section2._
 import uk.gov.hmrc.test.ui.pages.section3._
 import uk.gov.hmrc.test.ui.pages.section4._
@@ -106,9 +102,15 @@ class CommonStepDef extends BaseStepDef {
     if (isClearance) {
       IsThisExsPage.fillPage("No"); continue()
     }
+
+
     OnBehalfOfAnotherAgentPage.fillPage(Constants.no); continue()
     RepresentativesEORINumberPage.fillPage("GB121012121212"); continue()
     RepresentationTypeAgreedPage.fillPage("Direct"); continue()
+
+    if ((isStandard || isOccasional || isSimplified) && !isExporter){
+      ThirdPartyGoodsTransportationPage.fillPage("Yes"); continue()
+    }
 
     if (isStandard || isOccasional || isSimplified) {
       CarrierEORINumberPage.fillPage(Constants.no); continue()
@@ -149,10 +151,12 @@ class CommonStepDef extends BaseStepDef {
   }
 
   And("""^I fill section4""") { () =>
-    InvoicesAndExchangeRateChoicePage.fillPage(Constants.no); continue()
-    InvoicesAndExchangeRatePage.fillPage("GBP", "567640", "1.25"); continue()
-    TotalPackageQuantityPage.fillPage("4"); continue()
-    NatureOfTransactionPage.fillPage("Goods being sol"); continue()
+    if (isStandard || isSupplementary) {
+      InvoicesAndExchangeRateChoicePage.fillPage(Constants.no); continue()
+      InvoicesAndExchangeRatePage.fillPage("GBP", "567640", "1.25"); continue()
+      TotalPackageQuantityPage.fillPage("4"); continue()
+      NatureOfTransactionPage.fillPage("Goods being sold"); continue()
+    }
     PreviousDocumentPage.fillPage("first", "Commercial Invoice", "9GB123456782317-BH1433A61"); continue()
     PreviousDocumentListPage.fillPage(Constants.no); continue()
     continueOnMiniCya()
@@ -194,6 +198,11 @@ class CommonStepDef extends BaseStepDef {
 
   And("""^I clear data in cache""") { () =>
     clear()
+  }
+
+  And("""^I clear (.*) keys from cache""") { (cacheKeysToDelete: String) =>
+    val keys = cacheKeysToDelete.split(", ").toList
+    clear(detailKeys(keys: _*): _*)
   }
 }
 

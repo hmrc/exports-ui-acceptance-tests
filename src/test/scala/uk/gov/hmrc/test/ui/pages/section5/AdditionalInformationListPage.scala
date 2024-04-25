@@ -22,6 +22,7 @@ import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalInformationCodeL
 
 object AdditionalInformationListPage extends BasePage {
 
+  val pageId = "additional-information-list"
   def backButtonHref: String = AdditionalInformationYesNoPage.backButtonHref
   def path: String           = itemUrl("additional-information-list")
 
@@ -37,4 +38,9 @@ object AdditionalInformationListPage extends BasePage {
   // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
+
+  def removeAdditionalInformation(index: Int): Unit = clickByCssSelector(s"#additional_information-row$index-remove_button>a")
+
+  def changeAdditionalInformation(index: Int): Unit = clickByCssSelector(s"#additional_information-row$index-change_button>a")
+
 }

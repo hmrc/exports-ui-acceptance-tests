@@ -16,30 +16,35 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, sequenceId}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{sequenceId, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.PageLinks.aiCodes
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalInformation, itemsAdditionalInformationCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalInformationCode, AdditionalInformationDescription}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{
+  AdditionalInformationCode,
+  AdditionalInformationDescription,
+  AdditionalInformationHeading
+}
 
 object AdditionalInformationPage extends BasePage {
 
   def backButtonHref: String =
-    maybeDetail(AdditionalInformationCode(itemId, "0")).fold(AdditionalInformationYesNoPage.path)(_ => AdditionalInformationListPage.path)
+    maybeDetail(AdditionalInformationCode(itemId, "0")).fold(AdditionalInformationYesNoPage.path)(_ =>
+      AdditionalInformationListPage.path
+    )
 
   def path: String = itemUrl("additional-information")
   val title: String = "Additional Information"
 
   override def changeLink: String = AdditionalInformationListPage.path
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(itemsAdditionalInformation),
-    Clearance -> List(itemsAdditionalInformationCL)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] =
+    Map(Common -> List(itemsAdditionalInformation), Clearance -> List(itemsAdditionalInformationCL))
 
   override val pageLinkHrefs: Seq[String] = super.pageLinkHrefs ++ List(aiCodes)
 
-  val code        = 1
+  val heading = "0"
+  val code = 1
   val description = 2
 
   // The 1st parameter is the sequenceId of the current "Additional Information" element: "0", "1", "2", ...
@@ -48,8 +53,13 @@ object AdditionalInformationPage extends BasePage {
   override def fillPage(values: String*): Unit = {
     fillTextBoxById("code", values(code))
     fillTextBoxById("description", values(description))
+
+    if (maybeDetail(AdditionalInformationCode(itemId, heading)).isEmpty) {
+      store(AdditionalInformationHeading(itemId) -> Detail(""))
+    }
+
     store(
-      AdditionalInformationCode(itemId, values(sequenceId))        -> Detail(values(code)),
+      AdditionalInformationCode(itemId, values(sequenceId)) -> Detail(values(code)),
       AdditionalInformationDescription(itemId, values(sequenceId)) -> Detail(values(description))
     )
   }

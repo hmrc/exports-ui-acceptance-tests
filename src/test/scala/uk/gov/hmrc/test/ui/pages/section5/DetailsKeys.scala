@@ -32,6 +32,9 @@ object DetailsKeys {
   val AdditionalDocumentCodeLabel = "Document code"
   val NationalAdditionalCodeLabel = "National additional codes"
 
+  // itemId's from cache
+  val ItemIds = DetailKey("", section5, skipRowCheck = true)
+
   // /add-declaration-item
 
   // /items/[id]/procedure-codes
@@ -75,8 +78,6 @@ object DetailsKeys {
   // /items/[id]/statistical-value
   def StatisticalValue(itemId: String): DetailKey = DetailKey("Item value", section5, Some(itemId))
 
-  def NoPackageInformation(itemId: String): DetailKey = DetailKey("Packing details", section5, Some(itemId))
-
   // /items/[id]/package-information
   def PackageInformationType(itemId: String, sequenceId: String): DetailKey =
     DetailKey(PackageTypeLabel, section5, Some(itemId), Some(sequenceId))
@@ -103,6 +104,10 @@ object DetailsKeys {
     DetailKey("Additional information statement codes", section5, Some(itemId))
 
   // /items/[id]/additional-information
+
+  def AdditionalInformationHeading(itemId: String): DetailKey =
+    DetailKey("Additional information statement codes", section5, Some(itemId), skipRowCheck = true)
+
   def AdditionalInformationCode(itemId: String, sequenceId: String): DetailKey =
     DetailKey(AdditionalInformationCodeLabel, section5, Some(itemId), Some(sequenceId))
 

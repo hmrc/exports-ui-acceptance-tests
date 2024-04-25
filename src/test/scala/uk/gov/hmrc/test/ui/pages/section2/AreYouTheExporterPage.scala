@@ -43,4 +43,6 @@ object AreYouTheExporterPage extends BasePage {
     selectYesOrNoRadio(values(yesNo))
     store(ExporterYesNo -> Detail(values(yesNo)))
   }
+
+  def isExporter: Boolean = detail(ExporterYesNo) == "Yes"
 }

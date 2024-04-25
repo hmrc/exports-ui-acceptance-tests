@@ -17,17 +17,11 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section5
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section5.SupplementaryUnitsPage
+import uk.gov.hmrc.test.ui.pages.section5.FiscalReferencesRemovePage
 
-class SupplementaryUnitsStepDef extends BaseStepDef {
+class AdditionalFiscalReferencesRemoveStepDef extends BaseStepDef {
 
-  And("""^I should land on Supplementary-Units page""")(() => SupplementaryUnitsPage.checkPage())
+  And("""^I should land on Additional-Fiscal-References-Remove page""")(() => FiscalReferencesRemovePage.checkPage())
 
-  And("""^I select (.*) and enter (.*) as supplementary units""") { (yesNo: String, supplementaryUnits: String) =>
-    SupplementaryUnitsPage.fillPage(yesNo, supplementaryUnits)
-  }
-
-  And("""^I select (.*) to enter supplementary units""") { (yesNo: String) =>
-    SupplementaryUnitsPage.fillPage(yesNo)
-  }
+  And("""^I select (.*) to remove Fiscal References""")((yesNo: String) => FiscalReferencesRemovePage.fillPage(yesNo, "0"))
 }

@@ -56,6 +56,9 @@ object DetailKeys {
   // /representation-type-agreed
   val RepresentativeTypeAgreed: DetailKey = DetailKey("Type of representation", section2)
 
+  // /third-party-goods-transportation
+  val ThirdPartyGoodsTransportation: DetailKey = DetailKey("Third Party Transportation", section2, skipRowCheck = true)
+
   // /carrier-eori-number
   val CarrierEORI: DetailKey = DetailKey("Carrier or haulier’s EORI number", section2)
 
@@ -68,7 +71,8 @@ object DetailKeys {
   // /other-parties-involved
   val NoAdditionalPartiesInvolved: DetailKey = DetailKey("Additional parties involved", section2)
 
-  def AdditionalPartiesInvolvedType(sequenceId: String): DetailKey = DetailKey(AdditionalPartiesInvolvedTypeLabel, section2, Some(sequenceId))
+  def AdditionalPartiesInvolvedType(sequenceId: String): DetailKey =
+    DetailKey(AdditionalPartiesInvolvedTypeLabel, section2, Some(sequenceId))
   def AdditionalPartiesInvolvedEORI(sequenceId: String): DetailKey =
     DetailKey("Other parties’s EORI number", section2, Some(sequenceId), checkChangeLink = false)
 

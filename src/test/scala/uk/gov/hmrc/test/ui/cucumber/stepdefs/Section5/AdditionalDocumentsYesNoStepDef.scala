@@ -17,17 +17,13 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section5
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section5.SupplementaryUnitsPage
+import uk.gov.hmrc.test.ui.pages.section5.AdditionalDocumentsYesNoPage
 
-class SupplementaryUnitsStepDef extends BaseStepDef {
+class AdditionalDocumentsYesNoStepDef extends BaseStepDef {
 
-  And("""^I should land on Supplementary-Units page""")(() => SupplementaryUnitsPage.checkPage())
+  And("""^I should land on Additional-Documents-YesNo page""")(() => AdditionalDocumentsYesNoPage.checkPage())
 
-  And("""^I select (.*) and enter (.*) as supplementary units""") { (yesNo: String, supplementaryUnits: String) =>
-    SupplementaryUnitsPage.fillPage(yesNo, supplementaryUnits)
-  }
-
-  And("""^I select (.*) to enter supplementary units""") { (yesNo: String) =>
-    SupplementaryUnitsPage.fillPage(yesNo)
+  And("""^I select (.*) to add additional Documents""") { (yesNo: String) =>
+    AdditionalDocumentsYesNoPage.fillPage(yesNo)
   }
 }

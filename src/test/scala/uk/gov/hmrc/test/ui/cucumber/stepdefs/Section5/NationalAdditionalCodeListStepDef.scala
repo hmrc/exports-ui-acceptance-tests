@@ -26,4 +26,12 @@ class NationalAdditionalCodeListStepDef extends BaseStepDef {
   And("""^I select (.*) for adding another national code""") { (yesNo: String) =>
     NationalAdditionalCodesListPage.fillPage(yesNo)
   }
+
+  And("""^I click remove on NACT code List page""") { () =>
+    NationalAdditionalCodesListPage.removeNactCode(0)
+  }
+
+  And("""^I navigate to NACT code list page""") { () =>
+    NationalAdditionalCodesListPage.navigateToItemPage(NationalAdditionalCodesListPage.pageId)
+  }
 }

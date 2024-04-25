@@ -22,8 +22,9 @@ import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalFiscalReferences
 
 object FiscalReferencesListPage extends BasePage {
 
+  val pageId: String = "additional-fiscal-references-list"
   def backButtonHref: String = AdditionalProcedureCodesPage.path
-  def path: String = itemUrl("additional-fiscal-references-list")
+  def path: String = itemUrl(pageId)
 
   def title: String =
     details(AdditionalFiscalReferences(itemId)).size match {
@@ -37,4 +38,6 @@ object FiscalReferencesListPage extends BasePage {
   // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
+
+  def removeFiscalReferences(index: Int): Unit = clickByCssSelector(s"#additional_fiscal_references-row-$index-remove_button>a")
 }

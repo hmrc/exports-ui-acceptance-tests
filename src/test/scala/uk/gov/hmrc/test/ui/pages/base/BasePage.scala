@@ -25,7 +25,7 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.changeLinks
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.CountriesOfRouting
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodeLabel
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{ItemIds, NationalAdditionalCodeLabel}
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.SealLabel
 
 trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLogging {
@@ -104,7 +104,14 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
           findChildByClassName(webElement, "govuk-summary-list__value"),
           findChildByClassNameIfAny(webElement, "govuk-link")
         )
+      }.sortWith { case (e1, e2) =>
+        val p1 = e1.label.getLocation
+        val p2 = e2.label.getLocation
+        p1.getY < p2.getY || p1.getY == p2.getY && p1.getX < p2.getX
       }
+    print(s"\n:::::::::::::::::::::\n")
+    labelAndValueRows.foreach(row => print(s"${row.label.getText} (${row.label.getLocation.getY},${row.label.getLocation.getX})\n"))
+    print(s":::::::::::::::::::::\n\n")
 
     val cacheDetails = allSectionDetails(detailKey.sectionId)
 
@@ -151,6 +158,9 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
       }
     }
   }
+
+   def navigateToItemPage(partId: String, itemIdFromCache: String = details(ItemIds).head): Unit =
+     driver.navigate().to(s"$host$initPart/items/$itemIdFromCache/$partId")
 }
 
 object BasePage {

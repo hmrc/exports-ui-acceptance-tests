@@ -28,4 +28,8 @@ class ProcedureCodesStepDef extends BaseStepDef {
   And("""^I select (.*) as procedure code""") { (procedureCodeToSelect: String) =>
     ProcedureCodesPage.fillPage(procedureCodeToSelect)
   }
+
+  And("""^I navigate to Procedure codes page""") { () =>
+    ProcedureCodesPage.navigateToItemPage(ProcedureCodesPage.pageId)
+  }
 }

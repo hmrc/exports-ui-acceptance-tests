@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.section5.CommodityDetailsPage
 
 class CommodityDetailsStepDef extends BaseStepDef {
 
-  And("""^I should land on Commodity-Details page""")(() => CommodityDetailsPage.checkPage())
+   And("""^I should land on Commodity-Details page""")(() => CommodityDetailsPage.checkPage())
 
   And("""^I enter commodity details code as (.*) and description as (.*)""") { (commodityCode: String, description: String) =>
     CommodityDetailsPage.fillPage(commodityCode, description)
