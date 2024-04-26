@@ -113,11 +113,6 @@ Feature: Section5 Occasional Journey
     And I enter Aerosol as package type, 10 as number of packages and 1034 as shipping mark as first package info
     And I click continue
     Then I should land on Package-Information-List page
-
-    # clicking change Package-Information-List page  and update package information
-    And I click change to update package information
-    And I enter Basket as package type, 11 as number of packages and 1224 as shipping mark as first package info
-    And I click continue
     And I select No on package information list page
     And I click continue
     Then I should land on Additional-Information-YesNo page
@@ -127,22 +122,12 @@ Feature: Section5 Occasional Journey
     And I enter 00400 as code and EXPORTER as required information as first additional information
     And I click continue
     Then I should land on Additional-Information-List page
-
-    # clicking change Additional-Information-List page  and update Additional information
-    And I click change to update Additional Information
-    And I enter 00401 as code and IMPORTER as required information as first additional information
-    And I click continue
     And I select No on additional information list page
     And I click continue
     Then I should land on Licence-Required-YesNo page
     And I select Yes to check if the goods require a licence
     And I click continue
     Then I should land on Additional-Document page
-    And I enter X002 as code and GBAEOC717572504502801 as identifier as first additional document
-    And I click continue
-
-    # clicking change Additional-Documentation-List page  and update Additional Documents
-    And I click change to update Additional Documents
     And I enter X002 as code and GBAEOC717572504502801 as identifier as first additional document
     And I click continue
     Then I should land on Additional-Document-List page

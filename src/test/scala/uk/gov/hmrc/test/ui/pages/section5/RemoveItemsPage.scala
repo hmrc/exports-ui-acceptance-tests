@@ -16,27 +16,19 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import org.openqa.selenium.WebElement
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.Section5
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys._
 
-object SummarySection5Page extends BasePage {
+object RemoveItemsPage extends BasePage {
 
-  def backButtonHref: String = DeclarationItemsListPage.path
-  val path: String           = "/declaration/summary-section/5"
-  val title: String          = "Check your answers"
+  def backButtonHref: String = SummarySection5Page.path
+  val path: String = s"/declaration/remove-declaration-item/${details(ItemIds).head}"
+  val title: String = "Are you sure you want to remove declaration item 1?"
 
   override def checkExpanders(): Unit = ()
 
   // ex: fillPage()
 
-  override def fillPage(values: String*): Unit = checkSectionSummary(Section5)
-
-  def removeItem(): Unit = clickByCssSelector(".item-1-heading a")
-
-  def back(): Unit = clickById("back-link")
-
-  def addItemWarning(): WebElement = findElementByClassName("govuk-warning-text__text")
-
-  def addItem(): Unit = clickById("add-item")
+  override def fillPage(values: String*): Unit = if (selectYesOrNoRadio(values(yesNo))) clear(section5, details(ItemIds).headOption)
 }

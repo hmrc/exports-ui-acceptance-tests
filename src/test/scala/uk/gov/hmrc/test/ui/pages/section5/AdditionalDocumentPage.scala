@@ -16,25 +16,22 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, sequenceId}
-import uk.gov.hmrc.test.ui.pages.base.PageLinks.{
-  additionalDocumentsReferenceCodes, additionalDocumentsUnionCodes, additionalDocumentsUnitCodes
-}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalDocuments, itemsAdditionalDocumentsCL}
+import uk.gov.hmrc.test.ui.pages.base.Constants._
+import uk.gov.hmrc.test.ui.pages.base.PageLinks._
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, DetailKey}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section2.AuthorisationPage.hasCodesRequiringAdditionalDocuments
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{
-  AdditionalDocumentCode, AdditionalDocumentCodeLabel, AdditionalDocumentIdentifier, AdditionalDocuments
-}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys._
 import uk.gov.hmrc.test.ui.pages.section5.LicenseRequiredYesNoPage.isLicenseRequired
 
 object AdditionalDocumentPage extends BasePage {
 
   def backButtonHref: String =
     maybeDetail(AdditionalDocumentCode(itemId, "0")).fold {
-      if (isLicenseRequired || hasCodesRequiringAdditionalDocuments) LicenseRequiredYesNoPage.path
-      else AdditionalDocumentsYesNoPage.path
+      if (isLicenseRequired || !isClearance && hasCodesRequiringAdditionalDocuments) LicenseRequiredYesNoPage.path
+      else AdditionalDocumentsYesNoPage.backButtonHref
     }(_ => AdditionalDocumentListPage.path)
 
   override def changeLink: String = AdditionalDocumentListPage.path

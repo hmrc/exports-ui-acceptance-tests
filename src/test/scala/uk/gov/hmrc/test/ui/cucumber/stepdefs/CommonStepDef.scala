@@ -204,6 +204,10 @@ class CommonStepDef extends BaseStepDef {
     val keys = cacheKeysToDelete.split(", ").toList
     clear(detailKeys(keys: _*): _*)
   }
+
+  And("""^I remove one item from the declaration""") { () =>
+    SummarySection5Page.removeItem()
+  }
 }
 
 object CommonStepDef {

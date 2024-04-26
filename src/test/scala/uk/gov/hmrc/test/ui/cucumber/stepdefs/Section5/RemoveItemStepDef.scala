@@ -17,24 +17,14 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section5
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section5.DangerousGoodsCodePage
+import uk.gov.hmrc.test.ui.pages.section5._
 
-class DangerousGoodsCodeSteppDef extends BaseStepDef {
+class RemoveItemStepDef extends BaseStepDef {
 
-  And("""^I should land on Dangerous-Goods-Code page"""){ () =>
-    DangerousGoodsCodePage.checkPage()
-  }
+  And("""^I should land on Remove-Declaration-Item page""")(() => RemoveItemsPage.checkPage())
 
-  And("""^I select (.*) to enter the code (.*) as UN dangerous goods""") { (optionToSelect: String, code: String) =>
-    DangerousGoodsCodePage.fillPage(optionToSelect, code)
-  }
-
-  And("""^I select (.*) to enter UN dangerous goods""") { (optionToSelect: String) =>
-    DangerousGoodsCodePage.fillPage(optionToSelect)
-  }
-
-  And("""^I navigate to Dangerous Goods Code page""") { () =>
-    DangerousGoodsCodePage.navigateToItemPage(DangerousGoodsCodePage.pageId)
+  And("""^I select (.*) to remove item""") { (yesNo: String) =>
+    RemoveItemsPage.fillPage(yesNo)
   }
 
 }
