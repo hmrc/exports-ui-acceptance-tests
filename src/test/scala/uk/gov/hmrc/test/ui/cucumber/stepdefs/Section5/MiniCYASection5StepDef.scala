@@ -40,6 +40,6 @@ class MiniCYASection5StepDef extends BaseStepDef {
   }
 
   And("""^I click on Add Item link""") { () =>
-    SummarySection5Page.back()
+    SummarySection5Page.addItem()
   }
 }

@@ -70,7 +70,4 @@ object ProcedureCodesPage extends BasePage {
   def hasRestrictingZeroVatPC: Boolean = codesRestrictingZeroVat.contains(detail(ProcedureCode(itemId)))
 
   def isPermanentExportOfUKGoodsPC: Boolean        = detail(ProcedureCode(itemId)) == "1040"
-
-  def isProcedureCodeFiscal: Boolean        = detail(ProcedureCode(itemId)) == "1042"
-
 }
