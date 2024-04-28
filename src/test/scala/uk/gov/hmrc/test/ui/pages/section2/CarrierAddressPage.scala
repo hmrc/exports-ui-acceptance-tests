@@ -24,8 +24,11 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{CarrierDetails, addressHel
 object CarrierAddressPage extends BasePage {
 
   def backButtonHref: String = CarrierEORINumberPage.path
+
   override def changeLink: String = CarrierEORINumberPage.path
+
   val path: String = "/declaration/carrier-address"
+
   val title: String = "Carrier or haulier details"
 
   override val expanderHrefs: Map[String, Seq[String]] =

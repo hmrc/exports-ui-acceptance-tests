@@ -1,3 +1,4 @@
+@Regression
 Feature: Section5 Standard Journey
 
   Background:
@@ -211,9 +212,10 @@ Feature: Section5 Standard Journey
    # Additional Information and Additional Documents pages
    # 3. Checking Is Additional Documents Required Page is visible
 
+  @Section5 @StdDec
   Scenario: Complete Items section on Standard Arrived declaration journey and with answers No on various item pages
     Given I fill section1 for STANDARD,arrived declaration
-    And I fill section2 
+    And I fill section2
     And I fill section3
     And I fill section4
 
@@ -226,7 +228,7 @@ Feature: Section5 Standard Journey
     And I select Yes to declare authorisations
     And I click continue
     Then I should land on Authorisation-Required page
-    And I select first Authorisation code EXRR and enter eori GB123456789006
+    And I select first Authorisation code EXRR and enter eori as GB123456789006
     And I click continue
     Then I should navigate to Location Of Goods page
 

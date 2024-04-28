@@ -10,6 +10,7 @@ Feature: Section5 Supplementary Journey
      # 2. Adding Multiple Items
      # 3. validating Removal of items from Mini cya and Declaration Items List page
      # 4. Check Add Item link navigates to procedure code page
+
   @Section5 @SupDec
   Scenario: Complete Items section on Supplementary EIDR declaration journey
     Given I fill section1 for SUPPLEMENTARY,eidr declaration

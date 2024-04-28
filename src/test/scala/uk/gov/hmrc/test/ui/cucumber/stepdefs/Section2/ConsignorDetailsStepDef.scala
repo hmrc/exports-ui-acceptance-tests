@@ -17,19 +17,14 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
-import uk.gov.hmrc.test.ui.pages.base.Constants.none
-import uk.gov.hmrc.test.ui.pages.section2.OtherPartiesInvolvedPage
+import uk.gov.hmrc.test.ui.pages.base.Constants
+import uk.gov.hmrc.test.ui.pages.section2.ConsignorDetailsPage
 
-class OtherPartiesInvolvedStepDef extends BaseStepDef {
+class ConsignorDetailsStepDef extends BaseStepDef {
 
-  And("""^I should land on Other-Parties-Involved page""")(() => OtherPartiesInvolvedPage.checkPage())
+  And("""^I should land on Consingor-Address page""")(() => ConsignorDetailsPage.checkPage())
 
-  And("""^I select (.*) party (.*) and eori (.*) as the other party involved""") {
-    (seqId: String, party: String, eori: String) =>
-      OtherPartiesInvolvedPage.fillPage(genSequenceId(seqId), party, eori)
-  }
-  And("""^I select No for other parties are involved""") { () =>
-    OtherPartiesInvolvedPage.fillPage(none)
+  And("""^I provide consignor details""") { () =>
+    ConsignorDetailsPage.fillPage(Constants.Address: _*)
   }
 }

@@ -103,7 +103,6 @@ class CommonStepDef extends BaseStepDef {
       IsThisExsPage.fillPage("No"); continue()
     }
 
-
     OnBehalfOfAnotherAgentPage.fillPage(Constants.no); continue()
     RepresentativesEORINumberPage.fillPage("GB121012121212"); continue()
     RepresentationTypeAgreedPage.fillPage("Direct"); continue()
@@ -169,14 +168,34 @@ class CommonStepDef extends BaseStepDef {
     FiscalReferencesYesNoPage.fillPage(Constants.no); continue()
     CommodityDetailsPage.fillPage("4203400090", "Straw for bottles"); continue()
     DangerousGoodsCodePage.fillPage(Constants.no); continue()
-    NationalAdditionalCodesPage.fillPage(Constants.no); continue()
-    StatisticalValuePage.fillPage("1000"); continue()
+
+    if (isStandard) {
+      VatRatingPage.fillPage("Yes"); continue()
+    }
+
+    if (!isClearance) {
+      NationalAdditionalCodesPage.fillPage(Constants.no); continue()
+    }
+
+    if (isStandard || isSupplementary) {
+      StatisticalValuePage.fillPage("1000"); continue()
+    }
+
     PackageInformationPage.fillPage("1", "Aerosol", "20", "No shipping mark"); continue()
     PackageInformationListPage.fillPage(Constants.no); continue()
-    CommodityMeasurePage.fillPage("500", "700"); continue()
-    SupplementaryUnitsPage.fillPage(Constants.yes, "12"); continue()
+
+    if (isStandard || isSupplementary || isClearance) {
+      CommodityMeasurePage.fillPage("500", "700"); continue()
+    }
+    if (isStandard || isSupplementary) {
+      SupplementaryUnitsPage.fillPage(Constants.yes, "12"); continue()
+    }
+
     AdditionalInformationYesNoPage.fillPage(Constants.no); continue()
-    LicenseRequiredYesNoPage.fillPage(Constants.yes); continue()
+
+    if(!isClearance) {
+      LicenseRequiredYesNoPage.fillPage(Constants.yes); continue()
+    }
     AdditionalDocumentPage.fillPage("1", "C501", "GBAEOC717572504502801"); continue()
     AdditionalDocumentListPage.fillPage(Constants.no); continue()
     DeclarationItemsListPage.fillPage(Constants.no); continue()
@@ -202,19 +221,26 @@ class CommonStepDef extends BaseStepDef {
 
   And("""^I clear (.*) keys from cache""") { (cacheKeysToDelete: String) =>
     val keys = cacheKeysToDelete.split(", ").toList
-    clear(detailKeys(keys: _*): _*)
+    clear(detailKeys(keys:_*):_*)
   }
 
   And("""^I remove one item from the declaration""") { () =>
     SummarySection5Page.removeItem()
   }
-}
 
-object CommonStepDef {
-  def genSequenceId(seqId: String): String =
-    seqId match {
-      case "first"  => "0"
-      case "second" => "1"
-      case "third"  => "2"
-    }
+  And("""^I click change link for (.*) page""") { (pageName: String) =>
+    val changeLinkMap: Map[String, String] = Map(
+      "Authorisation Type" -> "authorisation-holder-1-type"
+    )
+
+    CommonPage.changeLinkOnCYA(changeLinkMap(pageName)).click()
+  }
+}
+  object CommonStepDef {
+    def genSequenceId(seqId: String): String =
+      seqId match {
+        case "first" => "0"
+        case "second" => "1"
+        case "third" => "2"
+      }
 }

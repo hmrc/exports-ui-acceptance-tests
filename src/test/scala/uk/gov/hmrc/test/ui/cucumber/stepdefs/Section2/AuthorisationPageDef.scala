@@ -24,7 +24,7 @@ class AuthorisationPageDef extends BaseStepDef {
 
   And("""^I should land on Authorisation-Required page""")(() => AuthorisationPage.checkPage())
 
-  And("""^I select (.*) Authorisation code (.*) and enter eori (.*)""") {
+  And("""^I select (.*) Authorisation code (.*) and enter eori as (.*)""") {
     (seqId: String, authCode: String, eori: String) =>
       AuthorisationPage.fillPage(genSequenceId(seqId), authCode, eori)
   }

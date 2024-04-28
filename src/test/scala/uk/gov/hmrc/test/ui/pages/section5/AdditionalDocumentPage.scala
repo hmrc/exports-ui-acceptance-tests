@@ -41,10 +41,10 @@ object AdditionalDocumentPage extends BasePage {
     (detail(DeclarationType), hasCodesRequiringAdditionalDocuments, isLicenseRequired) match {
       case (Clearance, true, _)  => "Declare each document code and authorisation number"
       case (Clearance, false, _) => "Declare each additional document required for this item"
-      case (_, true, true)       => "Enter licence details, authorisation numbers and any other document details" // done
-      case (_, false, true)      => "Enter licence details and any other document details"
-      case (_, true, false)      => "Enter authorisation numbers and any other document details" // done
-      case (_, false, false)     => "Enter any other document details" // done
+      case (_, true, true)   => "Enter licence details, authorisation numbers and any other document details" // done
+      case (_, false, true)  => "Enter licence details and any other document details"
+      case (_, true, false)  => "Enter authorisation numbers and any other document details" // done
+      case (_, false, false) => "Enter any other document details" // done
     }
 
   override val expanderHrefs: Map[String, Seq[String]] =
@@ -66,17 +66,24 @@ object AdditionalDocumentPage extends BasePage {
   override def fillPage(values: String*): Unit = {
     fillTextBoxById("documentTypeCode", values(code))
     fillTextBoxById("documentIdentifier", values(identifier))
+    fillTextBoxById("documentStatus", "AE")
+    fillTextBoxById("documentStatusReason", "Y902")
+    fillTextBoxById("issuingAuthorityName", "John")
+    fillTextBoxById("dateOfValidity_day", "20")
+    fillTextBoxById("dateOfValidity_month", "4")
+    fillTextBoxById("dateOfValidity_year", "2024")
+    fillTextBoxById("documentWriteOff_measurementUnit", "LTR")
+    fillTextBoxById("documentWriteOff_qualifier", "A")
+    fillTextBoxById("documentWriteOff_documentQuantity", "246")
 
     val keyAndValues: Seq[(DetailKey, Detail)] =
       List(
         if (itemDetailFor(itemId, AdditionalDocumentCodeLabel).nonEmpty) None
         else Some(AdditionalDocuments(itemId) -> Detail("value ignored")),
-
         Some(AdditionalDocumentCode(itemId, values(sequenceId)) -> Detail(values(code))),
-
         Some(AdditionalDocumentIdentifier(itemId, values(sequenceId)) -> Detail(values(identifier)))
       ).flatten
 
-    store(keyAndValues:_*)
+    store(keyAndValues: _*)
   }
 }

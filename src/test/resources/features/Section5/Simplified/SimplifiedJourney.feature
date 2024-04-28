@@ -1,3 +1,4 @@
+@Regression
 Feature: Section5 Simplified Journey
 
   Background:
@@ -86,7 +87,7 @@ Feature: Section5 Simplified Journey
     And I select Yes to remove authorisation
     And I click continue
     Then I should land on Authorisation-Required page
-    And I select first Authorisation code EXRR and enter eori GB123456789006
+    And I select first Authorisation code EXRR and enter eori as GB123456789006
     And I click continue
 
     Then I navigate to Add-Declaration-Item-1 page
@@ -100,7 +101,10 @@ Feature: Section5 Simplified Journey
 
 #   validate skipping of fiscal information , additional-fiscal-references
     Then I should land on Commodity-Details page
-    And I enter commodity details code as 9003400090 and description as St Andrews golf ball whisky
+    And I enter commodity details code as 2803400090 and description as St Andrews golf ball whisky
+    And I click continue
+    And I navigate to Dangerous Goods Code page
+    And I select Yes to enter the code 1204 as UN dangerous goods
     And I click continue
     Then I should land on Cus-Code page
     And I select Yes to enter the code 12345678 as CUS code

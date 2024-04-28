@@ -20,12 +20,23 @@ import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.PageLinks._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{NoAdditionalPartiesInvolved, ProcedureChoice}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{
+  EntryIntoDeclarantsRecords,
+  NoAdditionalPartiesInvolved,
+  ProcedureChoice
+}
 
 object ProcedureChoicePage extends BasePage {
 
-  def backButtonHref: String =
-    maybeDetail(NoAdditionalPartiesInvolved).fold(OtherPartiesInvolvedListPage.path)(_ => OtherPartiesInvolvedPage.path)
+  def backButtonHref: String = if (isClearance) {
+    if (detail(EntryIntoDeclarantsRecords).equals("Yes")) ConsigneeDetailsPage.path else ConsignorEORINumberPage.path
+  }
+  else
+    maybeDetail(NoAdditionalPartiesInvolved) match {
+      case Some(_) =>  maybeDetail(NoAdditionalPartiesInvolved).fold(OtherPartiesInvolvedPage.path)(_ => OtherPartiesInvolvedListPage.path)
+      case _    =>  maybeDetail(NoAdditionalPartiesInvolved).fold(OtherPartiesInvolvedListPage.path)(_ => OtherPartiesInvolvedPage.path)
+    }
 
   val path: String = "/declaration/authorisation-choice"
   val title: String = "Which export procedure are you using?"

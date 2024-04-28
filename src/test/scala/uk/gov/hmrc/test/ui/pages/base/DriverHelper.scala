@@ -158,6 +158,7 @@ trait DriverHelper {
       .ignoring(classOf[Exception])
       .until(condition)
   }
+
 }
 
 object DriverHelper extends LazyLogging {

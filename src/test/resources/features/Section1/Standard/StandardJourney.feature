@@ -1,5 +1,5 @@
 @Regression
-Feature: Example Feature file using Cucumber
+Feature: Standard Journey
 
   Background:
     Given I clear data in cache

@@ -17,19 +17,22 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
-import uk.gov.hmrc.test.ui.pages.base.Constants.none
-import uk.gov.hmrc.test.ui.pages.section2.OtherPartiesInvolvedPage
+import uk.gov.hmrc.test.ui.pages.section2.ConsignorEORINumberPage
 
-class OtherPartiesInvolvedStepDef extends BaseStepDef {
+class ConsignorEoriNumberStepDef extends BaseStepDef {
 
-  And("""^I should land on Other-Parties-Involved page""")(() => OtherPartiesInvolvedPage.checkPage())
+  And("""^I should land on Consingor-EORI-Number page""")(() => ConsignorEORINumberPage.checkPage())
 
-  And("""^I select (.*) party (.*) and eori (.*) as the other party involved""") {
-    (seqId: String, party: String, eori: String) =>
-      OtherPartiesInvolvedPage.fillPage(genSequenceId(seqId), party, eori)
-  }
-  And("""^I select No for other parties are involved""") { () =>
-    OtherPartiesInvolvedPage.fillPage(none)
+  And("""^I select (.*) to consignor eori number""")((consignorEoriChoice: String) =>
+    ConsignorEORINumberPage.fillPage(consignorEoriChoice)
+  )
+
+  And("""^I navigate to Consingor EORI Number page""")(() =>
+    ConsignorEORINumberPage.navigateToPage(ConsignorEORINumberPage.path)
+  )
+
+  And("""^I select (.*) on consignor eori number page and enter eori number as (.*)""") {
+    (yesNo: String, eori: String) =>
+      ConsignorEORINumberPage.fillPage(yesNo, eori)
   }
 }

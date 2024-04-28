@@ -1,3 +1,4 @@
+@Regression
 Feature: Section5 Occasional Journey
 
   Background:
@@ -8,7 +9,7 @@ Feature: Section5 Occasional Journey
     # 2. Fill Statistical page and Vat rating page when Additional Procedure code is 3LV
     # 3. Skipping Commodity Measurements and Supplementary Units page when dec type is Occasional
 
-  @Section5 @SimDec
+  @Section5 @OcaDec
   Scenario: Perform a Low Value Occasional Arrived Declaration
     Given I fill section1 for OCCASIONAL,arrived declaration
     And I fill section2
@@ -68,12 +69,12 @@ Feature: Section5 Occasional Journey
     And I check the MiniCYA page for Section-5
 
      ## Below scenario -
-    # 1. Checking Skipping of pages when procedure code is 1042 to 1040 for Occasional Journey
+    # 1. Checking Skipping of pages when procedure code is 1040 for Occasional Journey
     # 2. Skipping of Statistical page when declaration is not low value (using 000 additional procedure code)
     # 5. Change procedure code from 1040 to 1042 to check Fiscal-Information page of Occasional Journey
     # 6. Update details of Package Information, Additional Information and Additional Documents by clicking change link on list pages
 
-  @Section5 @SimDec
+  @Section5 @OcaDec
   Scenario: Complete Items section on with Low Value Occasional Prelodged declaration and check change link
             functionality on Package Information, Additional Information and Additional Documents list pages
     Given I fill section1 for SIMPLIFIED,prelodged declaration

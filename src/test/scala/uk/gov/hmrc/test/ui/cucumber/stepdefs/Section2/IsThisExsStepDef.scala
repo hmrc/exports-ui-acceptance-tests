@@ -17,19 +17,13 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
-import uk.gov.hmrc.test.ui.pages.base.Constants.none
-import uk.gov.hmrc.test.ui.pages.section2.OtherPartiesInvolvedPage
+import uk.gov.hmrc.test.ui.pages.section2.IsThisExsPage
 
-class OtherPartiesInvolvedStepDef extends BaseStepDef {
+class IsThisExsStepDef extends BaseStepDef {
 
-  And("""^I should land on Other-Parties-Involved page""")(() => OtherPartiesInvolvedPage.checkPage())
+  And("""^I should land on Is-This-Exs page""")(() => IsThisExsPage.checkPage())
 
-  And("""^I select (.*) party (.*) and eori (.*) as the other party involved""") {
-    (seqId: String, party: String, eori: String) =>
-      OtherPartiesInvolvedPage.fillPage(genSequenceId(seqId), party, eori)
-  }
-  And("""^I select No for other parties are involved""") { () =>
-    OtherPartiesInvolvedPage.fillPage(none)
-  }
+  And("""^I select (.*) to is this exs""")((isEidr: String) => IsThisExsPage.fillPage(isEidr))
+
+  And("""^I navigate to Is This EXS page""")(() => IsThisExsPage.navigateToPage(IsThisExsPage.path))
 }

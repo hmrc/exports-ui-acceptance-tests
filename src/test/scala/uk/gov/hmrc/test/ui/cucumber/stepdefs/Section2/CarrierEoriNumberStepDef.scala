@@ -26,4 +26,8 @@ class CarrierEoriNumberStepDef extends BaseStepDef {
   And("""^I select (.*) on carrier eori number page""") { yesNo: String =>
     CarrierEORINumberPage.fillPage(yesNo)
   }
+
+  And("""^I select (.*) on carrier eori number page and entered eori as (.*)""") {(yesNo: String , eori: String) =>
+    CarrierEORINumberPage.fillPage(yesNo,eori)
+  }
 }

@@ -23,7 +23,7 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.PersonPresentingGoods
 
 object PersonPresentingGoodsPage extends BasePage {
 
-  def backButtonHref: String = EIDRPage.path
+  def backButtonHref: String = EntryIntoDeclarantRecordsPage.path
   val path: String = "/declaration/person-presenting-goods"
   val title: String = "What is the EORI number of the person presenting the goods to customs?"
 

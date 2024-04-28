@@ -23,7 +23,7 @@ import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalFiscalReferences
 object FiscalReferencesListPage extends BasePage {
 
   val pageId: String = "additional-fiscal-references-list"
-  def backButtonHref: String = AdditionalProcedureCodesPage.path
+  def backButtonHref: String = FiscalReferencesYesNoPage.path
   def path: String = itemUrl(pageId)
 
   def title: String =

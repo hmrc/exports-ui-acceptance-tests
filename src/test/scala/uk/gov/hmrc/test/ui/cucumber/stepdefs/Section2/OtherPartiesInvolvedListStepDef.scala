@@ -23,5 +23,9 @@ class OtherPartiesInvolvedListStepDef extends BaseStepDef {
 
   And("""^I should land on Other-Parties-Involved-List page""")(() => OtherPartiesInvolvedListPage.checkPage())
 
+  And("""I navigate to Other-Parties-Involved-List page""")(() => OtherPartiesInvolvedListPage.navigateToPage(OtherPartiesInvolvedListPage.path))
+
   And("""^I select (.*) on other party involved list page""")((yesNo: String) => OtherPartiesInvolvedListPage.fillPage(yesNo))
+
+  And("""^I click on remove link to delete party (.*)""")((index: Int) => OtherPartiesInvolvedListPage.removeOtherPartiesInvolvedLink(index))
 }
