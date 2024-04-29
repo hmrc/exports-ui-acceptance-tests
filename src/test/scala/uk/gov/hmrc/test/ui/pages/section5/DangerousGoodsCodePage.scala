@@ -23,8 +23,9 @@ import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.DangerousGoodsCode
 
 object DangerousGoodsCodePage extends BasePage {
 
+  val pageId = "un-dangerous-goods-code"
   def backButtonHref: String = CommodityDetailsPage.path
-  def path: String           = itemUrl("un-dangerous-goods-code")
+  def path: String           = itemUrl(pageId)
   val title: String          = "Is there a UN dangerous goods code for this item?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(

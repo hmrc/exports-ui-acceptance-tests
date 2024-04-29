@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
+import org.openqa.selenium.WebElement
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.Section5
 
@@ -30,4 +31,12 @@ object SummarySection5Page extends BasePage {
   // ex: fillPage()
 
   override def fillPage(values: String*): Unit = checkSectionSummary(Section5)
+
+  def removeItem(): Unit = clickByCssSelector(".item-1-heading a")
+
+  def back(): Unit = clickById("back-link")
+
+  def addItemWarning(): WebElement = findElementByClassName("govuk-warning-text__text")
+
+  def addItem(): Unit = clickById("add-item")
 }

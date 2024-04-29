@@ -29,7 +29,7 @@ class NationalAdditionalCodeStepDef extends BaseStepDef {
     NationalAdditionalCodesPage.fillPage(yesNo, code)
   }
 
-  And("""^I enter (.*) as another national additional code""") { (code: String) =>
+  And("""^I select (.*) to enter national additional code""") { (code: String) =>
     NationalAdditionalCodesPage.fillPage(code)
   }
 }

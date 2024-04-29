@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section5
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section5.AdditionalProcedureCodesPage
+import uk.gov.hmrc.test.ui.pages.section5._
 
 class AdditionalProcedureCodeStepDef extends BaseStepDef {
 
@@ -25,5 +25,9 @@ class AdditionalProcedureCodeStepDef extends BaseStepDef {
 
   And("""^I select (.*) as additional procedure code""") { (additionalProcedureCodeToSelect: String) =>
     AdditionalProcedureCodesPage.fillPage(additionalProcedureCodeToSelect)
+  }
+
+  And("""^I navigate to additional procedure code page""") { () =>
+    AdditionalProcedureCodesPage.navigateToItemPage(AdditionalProcedureCodesPage.pageId)
   }
 }

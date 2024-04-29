@@ -16,12 +16,12 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{declarationItemsList, declarationItemsListCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, DetailKey}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 import uk.gov.hmrc.test.ui.pages.section4.SummarySection4Page
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{ProcedureCodeLabel, section5}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{section5, ProcedureCodeLabel}
 
 object DeclarationItemsListPage extends BasePage {
 
@@ -36,14 +36,15 @@ object DeclarationItemsListPage extends BasePage {
       case n => s"You have added $n items"
     }
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(declarationItemsList),
-    Clearance -> List(declarationItemsListCL)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] =
+    Map(Common -> List(declarationItemsList), Clearance -> List(declarationItemsListCL))
 
   // No  => fillPage(no)
   // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit =
     if (!isClearance) selectYesOrNoRadio(values(yesNo))
+
+  def changeItem(): Unit = clickById("item_0--change")
+  def removeItemFromListPage(): Unit = clickById("item_0--remove")
 }

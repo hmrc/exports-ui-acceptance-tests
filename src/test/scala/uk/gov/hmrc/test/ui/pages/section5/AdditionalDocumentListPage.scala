@@ -22,8 +22,9 @@ import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.AdditionalDocumentCodeLabe
 
 object AdditionalDocumentListPage extends BasePage {
 
+  val pageId = "additional-documentation-list"
   def backButtonHref: String = AdditionalDocumentsYesNoPage.backButtonHref
-  def path: String = itemUrl("additional-documentation-list")
+  def path: String = itemUrl(pageId)
 
   def title: String =
     itemDetailFor(itemId, AdditionalDocumentCodeLabel).size match {
@@ -37,4 +38,9 @@ object AdditionalDocumentListPage extends BasePage {
   // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
+
+  def removeAdditionalDocuments(index: Int): Unit = clickByCssSelector(s"#additional-documents-table-row$index-remove_button>a")
+
+  def changeAdditionalDocuments(index: Int): Unit = clickByCssSelector(s"#additional-documents-table-row$index-change_button>a")
+
 }

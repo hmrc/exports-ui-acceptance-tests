@@ -27,4 +27,19 @@ class MiniCYASection5StepDef extends BaseStepDef {
     SummarySection5Page.fillPage()
   }
 
+  And("""^I navigate to MiniCYA page for Section-5""") { () =>
+    SummarySection5Page.navigateToPage(SummarySection5Page.path)
+  }
+
+  And("""^I click back on MiniCya section 5""") { () =>
+    SummarySection5Page.back()
+  }
+
+  And("""^I should be displayed with a warning text to add items""") { () =>
+    SummarySection5Page.addItemWarning().getText should include("You need to add at least one item before submitting your declaration")
+  }
+
+  And("""^I click on Add Item link""") { () =>
+    SummarySection5Page.addItem()
+  }
 }

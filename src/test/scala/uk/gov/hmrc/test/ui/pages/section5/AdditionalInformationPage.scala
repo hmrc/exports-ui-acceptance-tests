@@ -19,27 +19,29 @@ package uk.gov.hmrc.test.ui.pages.section5
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, sequenceId}
 import uk.gov.hmrc.test.ui.pages.base.PageLinks.aiCodes
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalInformation, itemsAdditionalInformationCL}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalInformationCode, AdditionalInformationDescription}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, DetailKey}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{
+  AdditionalInformation, AdditionalInformationCode, AdditionalInformationCodeLabel, AdditionalInformationDescription
+}
 
 object AdditionalInformationPage extends BasePage {
 
   def backButtonHref: String =
-    maybeDetail(AdditionalInformationCode(itemId, "0")).fold(AdditionalInformationYesNoPage.path)(_ => AdditionalInformationListPage.path)
+    maybeDetail(AdditionalInformationCode(itemId, "0")).fold(AdditionalInformationYesNoPage.path)(_ =>
+      AdditionalInformationListPage.path
+    )
 
   def path: String = itemUrl("additional-information")
   val title: String = "Additional Information"
 
   override def changeLink: String = AdditionalInformationListPage.path
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(itemsAdditionalInformation),
-    Clearance -> List(itemsAdditionalInformationCL)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] =
+    Map(Common -> List(itemsAdditionalInformation), Clearance -> List(itemsAdditionalInformationCL))
 
   override val pageLinkHrefs: Seq[String] = super.pageLinkHrefs ++ List(aiCodes)
 
-  val code        = 1
+  val code = 1
   val description = 2
 
   // The 1st parameter is the sequenceId of the current "Additional Information" element: "0", "1", "2", ...
@@ -48,9 +50,17 @@ object AdditionalInformationPage extends BasePage {
   override def fillPage(values: String*): Unit = {
     fillTextBoxById("code", values(code))
     fillTextBoxById("description", values(description))
-    store(
-      AdditionalInformationCode(itemId, values(sequenceId))        -> Detail(values(code)),
-      AdditionalInformationDescription(itemId, values(sequenceId)) -> Detail(values(description))
-    )
+
+    val keyAndValues: Seq[(DetailKey, Detail)] =
+      List(
+        if (itemDetailFor(itemId, AdditionalInformationCodeLabel).nonEmpty) None
+        else Some(AdditionalInformation(itemId) -> Detail("value ignored")),
+
+        Some(AdditionalInformationCode(itemId, values(sequenceId)) -> Detail(values(code))),
+
+        Some(AdditionalInformationDescription(itemId, values(sequenceId)) -> Detail(values(description)))
+      ).flatten
+
+    store(keyAndValues:_*)
   }
 }

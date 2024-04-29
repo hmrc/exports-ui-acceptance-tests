@@ -25,7 +25,7 @@ import uk.gov.hmrc.test.ui.pages.section5.AdditionalProcedureCodesPage.isLowValu
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodes
 
 object NationalAdditionalCodesListPage extends BasePage {
-
+ val pageId= "national-additional-codes-list"
   def backButtonHref: String =
     detail(DeclarationType) match {
       case Occasional | Simplified => if (isLowValueDeclaration) VatRatingPage.path else VatRatingPage.backButtonHref
@@ -38,7 +38,7 @@ object NationalAdditionalCodesListPage extends BasePage {
         }
     }
 
-  def path: String = itemUrl("national-additional-codes-list")
+  def path: String = itemUrl(pageId)
 
   def title: String =
     details(NationalAdditionalCodes(itemId)).size match {
@@ -52,4 +52,7 @@ object NationalAdditionalCodesListPage extends BasePage {
   // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
+
+  def removeNactCode(index: Int): Unit = clickByCssSelector(s"#nactCode-table-row$index-remove_button>a")
+
 }

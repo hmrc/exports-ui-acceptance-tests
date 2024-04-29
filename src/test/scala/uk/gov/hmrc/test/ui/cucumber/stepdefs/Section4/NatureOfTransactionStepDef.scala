@@ -31,4 +31,5 @@ class NatureOfTransactionStepDef extends BaseStepDef {
   And("""^I navigate to Nature Of Transaction page""") { () =>
     NatureOfTransactionPage.navigateToPage(NatureOfTransactionPage.path)
   }
+
 }

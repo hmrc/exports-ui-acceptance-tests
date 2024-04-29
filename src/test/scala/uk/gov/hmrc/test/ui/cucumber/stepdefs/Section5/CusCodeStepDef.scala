@@ -26,4 +26,8 @@ class CusCodeStepDef extends BaseStepDef {
   And("""^I select (.*) to enter the code (.*) as CUS code""") { (optionToSelect: String, code: String) =>
     CusCodePage.fillPage(optionToSelect, code)
   }
+
+  And("""^I select (.*) to enter CUS code""") { (optionToSelect: String) =>
+    CusCodePage.fillPage(optionToSelect)
+  }
 }

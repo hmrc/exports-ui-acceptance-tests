@@ -16,6 +16,10 @@
 
 package uk.gov.hmrc.test.ui.pages.base
 
+import uk.gov.hmrc.test.ui.pages.base.BasePage.host
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.details
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.ItemIds
+
 import scala.util.matching.Regex
 
 trait PageHelper extends DriverHelper {
@@ -43,4 +47,11 @@ trait PageHelper extends DriverHelper {
 
   protected def removeUrl(partId: String, additionalPartId: String): String =
     s"$initPart/$partId/$elementId/$additionalPartId/$elementId/remove"
+
+  def navigateToItemPage(partId: String, itemIdFromCache: String = details(ItemIds).head): Unit =
+    driver.navigate().to(s"$host$initPart/items/$itemIdFromCache/$partId")
+
+  def navigateToPage(path: String): Unit = {
+    driver.navigate().to(s"$host$path")
+  }
 }

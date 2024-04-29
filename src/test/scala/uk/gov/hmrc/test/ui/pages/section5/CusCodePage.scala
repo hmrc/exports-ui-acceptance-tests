@@ -41,4 +41,5 @@ object CusCodePage extends BasePage {
     }
     else store(CusCode(itemId) -> Detail(Constants.no))
   }
+
 }

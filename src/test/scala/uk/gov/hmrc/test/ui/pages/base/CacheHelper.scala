@@ -26,7 +26,8 @@ trait CacheHelper {
 
   def clear(): Unit = cache.clear()
 
-  def clear(sectionId: Int): Cache = cache --= allSectionDetails(sectionId).keys
+  def clear(sectionId: Int, maybeId: Option[String] = None): Cache =
+    cache --= allSectionDetails(sectionId, maybeId).keys
 
   def clear(detailKeys: DetailKey*): Cache = cache --= detailKeys
 

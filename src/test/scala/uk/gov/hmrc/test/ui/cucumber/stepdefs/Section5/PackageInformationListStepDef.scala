@@ -26,4 +26,16 @@ class PackageInformationListStepDef extends BaseStepDef {
   And("""^I select (.*) on package information list page""") { (yesNo:String) =>
     PackageInformationListPage.fillPage(yesNo)
   }
+
+  And("""^I click remove on Package Information List page""") { () =>
+    PackageInformationListPage.removePackageInformation(0)
+  }
+
+  And("""^I click change to update package information""") { () =>
+    PackageInformationListPage.changePackageInformation(0)
+  }
+
+  And("""^I navigate to Package Information list page""") { () =>
+    PackageInformationListPage.navigateToItemPage(PackageInformationListPage.pageId)
+  }
 }

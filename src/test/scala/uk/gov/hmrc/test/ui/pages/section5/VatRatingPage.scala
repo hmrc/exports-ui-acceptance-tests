@@ -41,13 +41,11 @@ object VatRatingPage extends BasePage {
 
   override def fillPage(values: String*): Unit = {
     val value = values.head match {
-      case "Yes"         => "Yes"
-      case "VAT reduced" => "No, reduced"
-      case "VAT exempt"  => "No, exempt"
-      case "VAT paid"    => "No, paid"
+      case "Yes"         => clickById("VATZ"); "Yes"
+      case "VAT reduced" => clickById("VATR"); "No, reduced"
+      case "VAT exempt"  => clickById("VATE"); "No, exempt"
+      case "VAT paid"    => clickById("VAT_NO"); "No, paid"
     }
-
-    clickById(values.head)
     store(VatRating(itemId) -> Detail(value))
   }
 }

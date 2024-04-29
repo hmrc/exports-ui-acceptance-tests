@@ -21,9 +21,14 @@ import uk.gov.hmrc.test.ui.pages.section5.AddDeclarationItemPage
 
 class AddDeclarationItemStepDef extends BaseStepDef {
 
-  And("""^I should land on Add-Declaration-Item-1 page""")(() => AddDeclarationItemPage.checkPage())
+  And("""^I should land on Add-Declaration-Item-1 page"""){() =>
+    AddDeclarationItemPage.checkPage()}
 
   And("""^I select Add Item button""") { () =>
     AddDeclarationItemPage.fillPage()
+  }
+
+  And("""^I navigate to Add-Declaration-Item-1 page""") { () =>
+    AddDeclarationItemPage.navigateToPage(AddDeclarationItemPage.path)
   }
 }

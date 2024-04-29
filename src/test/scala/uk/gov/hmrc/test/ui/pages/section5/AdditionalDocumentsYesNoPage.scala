@@ -29,13 +29,15 @@ object AdditionalDocumentsYesNoPage extends BasePage {
     else if (itemDetailFor(itemId, AdditionalInformationCodeLabel).nonEmpty) AdditionalInformationListPage.path
     else AdditionalInformationYesNoPage.path
 
-  def path: String = itemUrl("is-additional-information-required")
+  def path: String = itemUrl("is-additional-documentation-required")
 
   val title: String =
     if (isClearance) "Do you need to declare any additional documents for this item?"
     else "Do you need to enter any other document details?"
 
   override def checkExpanders(): Unit = ()
+
+  override def changeLink: String = AdditionalDocumentListPage.path
 
   override def pageLinkHrefs: Seq[String] = {
     val commodityCode = detail(CommodityDetailsCode(itemId))

@@ -104,18 +104,31 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
           findChildByClassName(webElement, "govuk-summary-list__value"),
           findChildByClassNameIfAny(webElement, "govuk-link")
         )
+      }.sortWith { case (e1, e2) =>
+        val p1 = e1.label.getLocation
+        val p2 = e2.label.getLocation
+        p1.getY < p2.getY || p1.getY == p2.getY && p1.getX < p2.getX
       }
 
     val cacheDetails = allSectionDetails(detailKey.sectionId)
 
     cacheDetails.foldLeft(labelAndValueRows) { case (tailedLabelAndValueRows, (detailKey, details)) =>
+
+      // Remove the row that was just tested against from the sequence of rows.
+      // This is required for elements like, for instance "additional information" or
+      // "additional documents", which might have two or more rows with the same label.
+      val removeFromLabelAndValueRows =
+        (labelAndValueRow: LabelAndValueRow) => tailedLabelAndValueRows.diff(List(labelAndValueRow))
+
       // To remove (or comment in) after we are done with the happy-path scenarios for the 6 sections
       print(s"\n=========== ${detailKey.label} => \n")
-      tailedLabelAndValueRows.foreach(row => print(s"${row.label.getText}\n"))
+      tailedLabelAndValueRows.foreach(row => print(s"${row.label.getText} (${row.value.getText})\n"))
 
-      if (detailKey.skipRowCheck) tailedLabelAndValueRows
+      val maybeLabelAndValueRow = tailedLabelAndValueRows.find(_.label.getText == detailKey.label)
+
+      if (detailKey.skipRowCheck) maybeLabelAndValueRow.fold(tailedLabelAndValueRows)(removeFromLabelAndValueRows)
       else {
-        val labelAndValueRow = tailedLabelAndValueRows.find(_.label.getText == detailKey.label).get
+        val labelAndValueRow = maybeLabelAndValueRow.get
 
         if (!detailKey.skipValueCheck) {
           val values = details match {
@@ -144,10 +157,7 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
           s"$host${changeLinks(detailKey)}" mustBe href
         }
 
-        // Remove the row that was just tested against from the sequence of rows.
-        // This is required for elements like, for instance "additional information" or
-        // "additional documents", which might have two or more rows with the same label.
-        tailedLabelAndValueRows.diff(List(labelAndValueRow))
+        removeFromLabelAndValueRows(labelAndValueRow)
       }
     }
   }

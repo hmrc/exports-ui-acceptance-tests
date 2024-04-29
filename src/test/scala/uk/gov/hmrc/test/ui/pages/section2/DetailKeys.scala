@@ -71,7 +71,8 @@ object DetailKeys {
   // /other-parties-involved
   val NoAdditionalPartiesInvolved: DetailKey = DetailKey("Additional parties involved", section2)
 
-  def AdditionalPartiesInvolvedType(sequenceId: String): DetailKey = DetailKey(AdditionalPartiesInvolvedTypeLabel, section2, Some(sequenceId))
+  def AdditionalPartiesInvolvedType(sequenceId: String): DetailKey =
+    DetailKey(AdditionalPartiesInvolvedTypeLabel, section2, Some(sequenceId))
   def AdditionalPartiesInvolvedEORI(sequenceId: String): DetailKey =
     DetailKey("Other parties’s EORI number", section2, Some(sequenceId), checkChangeLink = false)
 

@@ -26,4 +26,16 @@ class AdditionalDocumentListPage extends BaseStepDef {
   And("""^I select (.*) on additional document list page""") { (yesNo: String) =>
     AdditionalDocumentListPage.fillPage(yesNo)
   }
+
+  And("""^I click remove on Additional Documents List page""") { () =>
+    AdditionalDocumentListPage.removeAdditionalDocuments(0)
+  }
+
+  And("""^I click change to update Additional Documents""") { () =>
+    AdditionalDocumentListPage.changeAdditionalDocuments(0)
+  }
+
+  And("""^I navigate to Additional Documents list page""") { () =>
+    AdditionalDocumentListPage.navigateToItemPage(AdditionalDocumentListPage.pageId)
+  }
 }

@@ -26,4 +26,8 @@ class SupplementaryUnitsStepDef extends BaseStepDef {
   And("""^I select (.*) and enter (.*) as supplementary units""") { (yesNo: String, supplementaryUnits: String) =>
     SupplementaryUnitsPage.fillPage(yesNo, supplementaryUnits)
   }
+
+  And("""^I select (.*) to enter supplementary units""") { (yesNo: String) =>
+    SupplementaryUnitsPage.fillPage(yesNo)
+  }
 }

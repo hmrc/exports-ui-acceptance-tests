@@ -17,15 +17,13 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section5
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
-import uk.gov.hmrc.test.ui.pages.section5.PackageInformationPage
+import uk.gov.hmrc.test.ui.pages.section5.AdditionalDocumentsYesNoPage
 
-class PackageInformationStepDef extends BaseStepDef {
+class AdditionalDocumentsYesNoStepDef extends BaseStepDef {
 
-  And("""^I should land on Package-Information page""")(() => PackageInformationPage.checkPage())
+  And("""^I should land on Additional-Documents-YesNo page""")(() => AdditionalDocumentsYesNoPage.checkPage())
 
-  And("""^I enter (.*) as package type, with (.*) packages and (.*) as shipping mark for (.*) package info""") {
-    (packageType: String, numberOfPackages: String, shippingMark: String, seqId: String) =>
-    PackageInformationPage.fillPage(genSequenceId(seqId), packageType, numberOfPackages, shippingMark)
+  And("""^I select (.*) to add additional Documents""") { (yesNo: String) =>
+    AdditionalDocumentsYesNoPage.fillPage(yesNo)
   }
 }

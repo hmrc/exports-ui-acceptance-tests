@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section5
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.PageLinks.tariffCommodities
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.itemsSupplementaryUnits
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{CommodityDetailsCode, SupplementaryUnits}
 
 object SupplementaryUnitsPage extends BasePage {
@@ -47,5 +47,4 @@ object SupplementaryUnitsPage extends BasePage {
       fillTextBoxById("supplementaryUnits", values(code))
       store(SupplementaryUnits(itemId) -> Detail(values(code)))
     }
-    else store(SupplementaryUnits(itemId) -> Detail(Constants.no))
 }

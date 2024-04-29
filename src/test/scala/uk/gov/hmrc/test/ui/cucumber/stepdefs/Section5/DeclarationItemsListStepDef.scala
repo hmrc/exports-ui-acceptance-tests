@@ -26,4 +26,12 @@ class DeclarationItemsListStepDef extends BaseStepDef {
   And("""^I select (.*) on declaration items list page""") { (yesNo:String) =>
     DeclarationItemsListPage.fillPage(yesNo)
   }
+
+  And("""^I change details of already added Item""") { () =>
+    DeclarationItemsListPage.changeItem()
+  }
+
+  And("""^I remove one item from declaration item list page""") { () =>
+    DeclarationItemsListPage.removeItemFromListPage()
+  }
 }

@@ -17,18 +17,21 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsCommodityDetails, itemsCommodityDetails1, itemsCommodityDetailsCL, itemsCommodityDetailsCL1}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{CommodityDetailsCode, CommodityDetailsDescription, FiscalInformationYesNo}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys._
 
 object CommodityDetailsPage extends BasePage {
 
-  def backButtonHref: String =
-    maybeDetail(FiscalInformationYesNo(itemId)).fold(AdditionalProcedureCodesPage.path) {
-      _ => s"${FiscalReferencesYesNoPage.path}?fastForward=true"
-    }
+  val pageId = "commodity-details"
 
-  def path: String = itemUrl("commodity-details")
+  def backButtonHref: String =
+      maybeDetail(FiscalInformationYesNo(itemId)).fold(AdditionalProcedureCodesPage.path) {
+        _ => FiscalReferencesPage.backButtonHref
+      }
+
+
+  def path: String = itemUrl(pageId)
   val title: String = "Commodity code and item details"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
@@ -48,5 +51,13 @@ object CommodityDetailsPage extends BasePage {
       CommodityDetailsCode(itemId) -> Detail(values(code)),
       CommodityDetailsDescription(itemId) -> Detail(values(description))
     )
+  }
+
+  private val chemicalCommodityCodes: Seq[String] =
+    List("28", "29", "38")
+
+  def hasChemicalCommodityCode: Boolean = {
+    val commodityDetail = detail(CommodityDetailsCode(itemId))
+    chemicalCommodityCodes.exists(_.startsWith(commodityDetail))
   }
 }

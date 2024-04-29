@@ -26,4 +26,12 @@ class AdditionalFiscalReferencesListStepDef extends BaseStepDef {
   And("""^I select (.*) for adding more VAT details""") { (optionToSelect: String) =>
     FiscalReferencesListPage.fillPage(optionToSelect)
   }
+
+  And("""^I navigate to Additional Fiscal References List page""") { () =>
+    FiscalReferencesListPage.navigateToItemPage(FiscalReferencesListPage.pageId)
+  }
+
+  And("""^I click remove on Additional Fiscal References List page""") { () =>
+    FiscalReferencesListPage.removeFiscalReferences(0)
+  }
 }

@@ -21,9 +21,20 @@ import uk.gov.hmrc.test.ui.pages.section5.DangerousGoodsCodePage
 
 class DangerousGoodsCodeSteppDef extends BaseStepDef {
 
-  And("""^I should land on Undangerous-Goods-Code page""")(() => DangerousGoodsCodePage.checkPage())
+  And("""^I should land on Dangerous-Goods-Code page"""){ () =>
+    DangerousGoodsCodePage.checkPage()
+  }
 
-  And("""^I select (.*) to enter the code (.*) as UN dangerous goods""") { (optionToSelect: String, code: String) =>
+  And("""^I select (.*) to enter the code (.*) as dangerous goods""") { (optionToSelect: String, code: String) =>
     DangerousGoodsCodePage.fillPage(optionToSelect, code)
   }
+
+  And("""^I select (.*) to enter dangerous goods""") { (optionToSelect: String) =>
+    DangerousGoodsCodePage.fillPage(optionToSelect)
+  }
+
+  And("""^I navigate to Dangerous Goods Code page""") { () =>
+    DangerousGoodsCodePage.navigateToItemPage(DangerousGoodsCodePage.pageId)
+  }
+
 }

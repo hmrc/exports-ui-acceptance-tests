@@ -28,4 +28,8 @@ class VatRatingStepDef extends BaseStepDef {
   And("""^I select (.*) option as goods being VAT zero-rated""") { (optionToSelect: String) =>
     VatRatingPage.fillPage(optionToSelect)
   }
+
+  And("""^I navigate to VAT Rating page""") { () =>
+    VatRatingPage.checkPage()
+  }
 }
