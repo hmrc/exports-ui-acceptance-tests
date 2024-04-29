@@ -52,17 +52,19 @@ trait DriverHelper {
 
   def elementByClassDoesNotExist(className: String, secondsToWaitFor: Int = 0): Boolean =
     if (secondsToWaitFor == 0) driver.findElements(By.className(className)).size() == 0
-    else Try(waitForClass(className, Presence, secondsToWaitFor)) match {
-      case Success(_) => false
-      case Failure(_) => true
-    }
+    else
+      Try(waitForClass(className, Presence, secondsToWaitFor)) match {
+        case Success(_) => false
+        case Failure(_) => true
+      }
 
   def elementByIdDoesNotExist(elementId: String, secondsToWaitFor: Int = 0): Boolean =
     if (secondsToWaitFor == 0) driver.findElements(By.id(elementId)).size() == 0
-    else Try(waitForId(elementId, Presence, secondsToWaitFor)) match {
-      case Success(_) => false
-      case Failure(_) => true
-    }
+    else
+      Try(waitForId(elementId, Presence, secondsToWaitFor)) match {
+        case Success(_) => false
+        case Failure(_) => true
+      }
 
   def findElementById(value: String): WebElement = driver.findElement(By.id(value))
   def findElementByXpath(value: String): WebElement = driver.findElement(By.xpath(value))
@@ -111,8 +113,9 @@ trait DriverHelper {
   }
 
   def fillTextBoxById(elementId: String, text: String): Unit = {
-    waitForId(elementId).clear()
-    waitForId(elementId).sendKeys(text)
+    val element = waitForId(elementId)
+    element.clear()
+    element.sendKeys(text)
   }
 
   def fillTextBoxByName(name: String, text: String): Unit =
@@ -130,7 +133,11 @@ trait DriverHelper {
       case Constants.no | _ => waitForId(no, Presence).click(); false
     }
 
-  def waitForClass(className: String, expectedCondition: ExpectedCondition = Visible, secondsToWaitFor: Int = 10): WebElement =
+  def waitForClass(
+    className: String,
+    expectedCondition: ExpectedCondition = Visible,
+    secondsToWaitFor: Int = 10
+  ): WebElement =
     Try(waitFor(By.className(className), expectedCondition, secondsToWaitFor)) match {
       case Success(element) => element
       case Failure(exception) =>
@@ -138,7 +145,11 @@ trait DriverHelper {
         throw new TestFailedException(message, exception)
     }
 
-  def waitForId(elementId: String, expectedCondition: ExpectedCondition = Visible, secondsToWaitFor: Int = 10): WebElement =
+  def waitForId(
+    elementId: String,
+    expectedCondition: ExpectedCondition = Visible,
+    secondsToWaitFor: Int = 10
+  ): WebElement =
     Try(waitFor(By.id(elementId), expectedCondition, secondsToWaitFor)) match {
       case Success(element) => element
       case Failure(exception) =>
@@ -163,7 +174,9 @@ trait DriverHelper {
 
 object DriverHelper extends LazyLogging {
 
-  logger.info(s"Instantiating Browser: ${sys.props.getOrElse("browser", "'browser' System property not set. This is required")}")
+  logger.info(
+    s"Instantiating Browser: ${sys.props.getOrElse("browser", "'browser' System property not set. This is required")}"
+  )
   implicit val driver: RemoteWebDriver = Driver.instance
 }
 

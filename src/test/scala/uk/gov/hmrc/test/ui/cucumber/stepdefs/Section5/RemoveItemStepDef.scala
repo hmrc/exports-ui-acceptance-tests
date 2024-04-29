@@ -17,14 +17,15 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section5
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
+import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
 import uk.gov.hmrc.test.ui.pages.section5._
 
 class RemoveItemStepDef extends BaseStepDef {
 
   And("""^I should land on Remove-Declaration-Item page""")(() => RemoveItemsPage.checkPage())
 
-  And("""^I select (.*) to remove item""") { (yesNo: String) =>
-    RemoveItemsPage.fillPage(yesNo)
+  And("""^I select (.*) to remove (.*) item""") { (yesNo: String, itemToRemove: String) =>
+    RemoveItemsPage.fillPage(yesNo, genSequenceId(itemToRemove))
   }
 
 }

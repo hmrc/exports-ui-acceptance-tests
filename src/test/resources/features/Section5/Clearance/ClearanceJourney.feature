@@ -27,7 +27,7 @@ Feature: Clearance Journey Section 5
     And I click continue
     # Skipping dangerous code page when isEXS is No
     Then I should land on Package-Information page
-    And I enter Cylinder as package type, 5 as number of packages and 67 as shipping mark as first package info
+    And I enter Cylinder as package type, with 5 packages and 67 as shipping mark for first package info
     And I click continue
     Then I should land on Package-Information-List page
     And I select No on package information list page
@@ -45,7 +45,7 @@ Feature: Clearance Journey Section 5
     And I select No on additional information list page
     And I click continue
     Then I should land on Additional-Document page
-    And I enter C676 as code and GBAEOC70057 as identifier as first additional document
+    And I enter C676 as code and GBAEOC70057 as identifier for first additional document
     And I click continue
     Then I should land on Additional-Document-List page
     And I select No on additional document list page
@@ -72,7 +72,7 @@ Feature: Clearance Journey Section 5
     And I navigate to Commodity-Details page
     And I click continue
     And I should land on Dangerous-Goods-Code page
-    And I select Yes to enter the code 1204 as UN dangerous goods
+    And I select Yes to enter the code 1204 as dangerous goods
     And I click continue
     And I navigate to MiniCYA page for Section-5
     And I check the MiniCYA page for Section-5
@@ -113,7 +113,7 @@ Feature: Clearance Journey Section 5
     And I click continue
     # missing dangerous code page when isEXS is No
     Then I should land on Package-Information page
-    And I enter Cylinder as package type, 5 as number of packages and 67 as shipping mark as first package info
+    And I enter Cylinder as package type, with 5 packages and 67 as shipping mark for first package info
     And I click continue
     Then I should land on Package-Information-List page
     And I select No on package information list page
@@ -125,7 +125,7 @@ Feature: Clearance Journey Section 5
     And I select No to add additional information
     And I click continue
     Then I should land on Additional-Document page
-    And I enter C676 as code and GBAEOC70057 as identifier as first additional document
+    And I enter C676 as code and GBAEOC70057 as identifier for first additional document
     And I click continue
     Then I should land on Additional-Document-List page
     And I select No on additional document list page

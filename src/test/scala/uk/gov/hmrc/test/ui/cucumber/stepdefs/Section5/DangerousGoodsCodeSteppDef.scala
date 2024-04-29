@@ -25,11 +25,11 @@ class DangerousGoodsCodeSteppDef extends BaseStepDef {
     DangerousGoodsCodePage.checkPage()
   }
 
-  And("""^I select (.*) to enter the code (.*) as UN dangerous goods""") { (optionToSelect: String, code: String) =>
+  And("""^I select (.*) to enter the code (.*) as dangerous goods""") { (optionToSelect: String, code: String) =>
     DangerousGoodsCodePage.fillPage(optionToSelect, code)
   }
 
-  And("""^I select (.*) to enter UN dangerous goods""") { (optionToSelect: String) =>
+  And("""^I select (.*) to enter dangerous goods""") { (optionToSelect: String) =>
     DangerousGoodsCodePage.fillPage(optionToSelect)
   }
 

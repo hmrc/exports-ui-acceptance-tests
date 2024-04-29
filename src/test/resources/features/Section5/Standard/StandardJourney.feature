@@ -38,7 +38,7 @@ Feature: Section5 Standard Journey
     And I enter commodity details code as 2803400090 and description as Old St Andrews golf ball whisky
     And I click continue
     Then I should land on Dangerous-Goods-Code page
-    And I select Yes to enter the code 1234 as UN dangerous goods
+    And I select Yes to enter the code 1234 as dangerous goods
     And I click continue
     Then I should land on Cus-Code page
     And I select Yes to enter the code 12345678 as CUS code
@@ -56,7 +56,7 @@ Feature: Section5 Standard Journey
     And I enter 1080 as statistical value
     And I click continue
     Then I should land on Package-Information page
-    And I enter Aerosol as package type, 20 as number of packages and 1234 as shipping mark as first package info
+    And I enter Aerosol as package type, with 20 packages and 1234 as shipping mark for first package info
     And I click continue
     Then I should land on Package-Information-List page
     And I select No on package information list page
@@ -81,7 +81,7 @@ Feature: Section5 Standard Journey
     And I click continue
     # skipping of documents required yes/no page and landing on addition documents page
     Then I should land on Additional-Document page
-    And I enter C501 as code and GBAEOC71757 as identifier as first additional document
+    And I enter C501 as code and GBAEOC71757 as identifier for first additional document
     And I click continue
     Then I should land on Additional-Document-List page
     And I select No on additional document list page
@@ -162,7 +162,7 @@ Feature: Section5 Standard Journey
     And I select option as House removal
     Then I click continue
     And I navigate to Dangerous Goods Code page
-    And I select Yes to enter the code 1234 as UN dangerous goods
+    And I select Yes to enter the code 1234 as dangerous goods
     And I click continue
    # skipping Cus Code Page when commodity details code doesnot end with 28,29,38 and VAT rating page when nature of transcation select option is not Goods being sold or Item purchased
     Then I should land on National-Additional-Code page
@@ -175,7 +175,7 @@ Feature: Section5 Standard Journey
     And I enter 1000 as statistical value
     And I click continue
     Then I should land on Package-Information page
-    And I enter Aerosol as package type, 20 as number of packages and 1234 as shipping mark as first package info
+    And I enter Aerosol as package type, with 5 packages and 67 as shipping mark for first package info
     And I click continue
     Then I should land on Package-Information-List page
     And I select No on package information list page
@@ -193,7 +193,7 @@ Feature: Section5 Standard Journey
     And I select No to check if the goods require a licence
     And I click continue
     Then I should land on Additional-Document page
-    And I enter C501 as code and GBAEOC71757 as identifier as first additional document
+    And I enter C501 as code and GBAEOC71757 as identifier for first additional document
     And I click continue
     Then I should land on Additional-Document-List page
     And I select No on additional document list page
@@ -248,7 +248,7 @@ Feature: Section5 Standard Journey
     And I enter commodity details code as 2803400090 and description as Old St Andrews golf ball whisky
     And I click continue
     Then I should land on Dangerous-Goods-Code page
-    And I select No to enter UN dangerous goods
+    And I select No to enter dangerous goods
     And I click continue
     Then I should land on Cus-Code page
     And I select No to enter CUS code
@@ -263,7 +263,7 @@ Feature: Section5 Standard Journey
     And I enter 2000 as statistical value
     And I click continue
     Then I should land on Package-Information page
-    And I enter Barrel as package type, 119 as number of packages and 1204 as shipping mark as first package info
+    And I enter Barrel as package type, with 119 packages and 1204 as shipping mark for first package info
     And I click continue
     Then I should land on Package-Information-List page
     And I select No on package information list page

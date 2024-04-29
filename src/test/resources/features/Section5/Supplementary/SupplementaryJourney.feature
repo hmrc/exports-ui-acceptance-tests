@@ -38,7 +38,7 @@ Feature: Section5 Supplementary Journey
     And I enter commodity details code as 2803400090 and description as Old St Andrews golf ball whisky
     And I click continue
     Then I should land on Dangerous-Goods-Code page
-    And I select Yes to enter the code 1234 as UN dangerous goods
+    And I select Yes to enter the code 1234 as dangerous goods
     And I click continue
     Then I should land on Cus-Code page
     And I select Yes to enter the code 12345678 as CUS code
@@ -54,7 +54,7 @@ Feature: Section5 Supplementary Journey
     And I enter 1080 as statistical value
     And I click continue
     Then I should land on Package-Information page
-    And I enter Aerosol as package type, 20 as number of packages and 1234 as shipping mark as first package info
+    And I enter Aerosol as package type, with 20 packages and 1234 as shipping mark for first package info
     And I click continue
     Then I should land on Package-Information-List page
     And I select No on package information list page
@@ -79,7 +79,7 @@ Feature: Section5 Supplementary Journey
     And I click continue
     # skipping of documents required yes/no page and landing on addition documents page
     Then I should land on Additional-Document page
-    And I enter C501 as code and GBAEOC71757 as identifier as first additional document
+    And I enter C501 as code and GBAEOC71757 as identifier for first additional document
     And I click continue
     Then I should land on Additional-Document-List page
     And I select No on additional document list page
@@ -100,7 +100,7 @@ Feature: Section5 Supplementary Journey
     And I enter commodity details code as 2803400090 and description as Old St Andrews golf ball whisky
     And I click continue
     Then I should land on Dangerous-Goods-Code page
-    And I select No to enter UN dangerous goods
+    And I select No to enter dangerous goods
     And I click continue
     Then I should land on Cus-Code page
     And I select No to enter CUS code
@@ -112,7 +112,7 @@ Feature: Section5 Supplementary Journey
     And I enter 2000 as statistical value
     And I click continue
     Then I should land on Package-Information page
-    And I enter Barrel as package type, 119 as number of packages and 1204 as shipping mark as first package info
+    And I enter Barrel as package type, with 119 packages and 1204 as shipping mark for first package info
     And I click continue
     Then I should land on Package-Information-List page
     And I select No on package information list page
@@ -130,7 +130,7 @@ Feature: Section5 Supplementary Journey
     And I select No to check if the goods require a licence
     And I click continue
     Then I should land on Additional-Document page
-    And I enter C401 as code and GBXEOC71757 as identifier as first additional document
+    And I enter C401 as code and GBXEOC71757 as identifier for first additional document
     And I click continue
     Then I should land on Additional-Document-List page
     And I select No on additional document list page
@@ -145,20 +145,20 @@ Feature: Section5 Supplementary Journey
     And I remove one item from the declaration
     Then I should land on Remove-Declaration-Item page
     # return back to mini cya page when selecting no
-    And I select No to remove item
+    And I select No to remove first item
     And I click continue
     Then I should land on MiniCYA-Section-5 page
     And I remove one item from the declaration
-    And I select Yes to remove item
+    And I select Yes to remove first item
     And I click continue
     Then I should land on MiniCYA-Section-5 page
     And I check the MiniCYA page for Section-5
 
-    # Deleting item from Declaration Item List page
+    # Deleting item from Declaration Items List page
     And I click back on MiniCya section 5
     Then I should land on Declaration-Items-List page
     And I remove one item from declaration item list page
-    And I select Yes to remove item
+    And I select Yes to remove first item
     And I click continue
     Then I should land on MiniCYA-Section-5 page
     And I should be displayed with a warning text to add items
@@ -189,7 +189,7 @@ Feature: Section5 Supplementary Journey
     And I enter commodity details code as 9003400090 and description as St Andrews golf ball whisky
     And I click continue
     And I navigate to Dangerous Goods Code page
-    And I select Yes to enter the code 1234 as UN dangerous goods
+    And I select Yes to enter the code 1234 as dangerous goods
     And I click continue
     Then I should land on National-Additional-Code page
     And I select Yes and enter A123 as national additional code
@@ -201,7 +201,7 @@ Feature: Section5 Supplementary Journey
     And I enter 1000 as statistical value
     And I click continue
     Then I should land on Package-Information page
-    And I enter Aerosol as package type, 20 as number of packages and 1234 as shipping mark as first package info
+    And I enter Aerosol as package type, with 20 packages and 1234 as shipping mark for first package info
     And I click continue
     Then I should land on Package-Information-List page
     And I select No on package information list page
@@ -225,7 +225,7 @@ Feature: Section5 Supplementary Journey
     And I select No to check if the goods require a licence
     And I click continue
     Then I should land on Additional-Document page
-    And I enter C501 as code and GBAEOC71757 as identifier as first additional document
+    And I enter C501 as code and GBAEOC71757 as identifier for first additional document
     And I click continue
     Then I should land on Additional-Document-List page
     And I select No on additional document list page
@@ -244,7 +244,7 @@ Feature: Section5 Supplementary Journey
     And I enter commodity details code as 9503400090 and description as Straw for bottles
     And I click continue
     And I navigate to Dangerous Goods Code page
-    And I select Yes to enter the code 1034 as UN dangerous goods
+    And I select Yes to enter the code 1034 as dangerous goods
     And I click continue
     Then I should land on National-Additional-Codes-List page
     And I select No for adding another national code
@@ -256,7 +256,7 @@ Feature: Section5 Supplementary Journey
     # clicking change Package-Information-List page  and update package information
     Then I should land on Package-Information-List page
     And I click change to update package information
-    And I enter Basket as package type, 11 as number of packages and 1224 as shipping mark as first package info
+    And I enter Basket as package type, with 11 packages and 456 as shipping mark for first package info
     And I click continue
     And I select No on package information list page
     And I click continue
@@ -281,7 +281,7 @@ Feature: Section5 Supplementary Journey
 
       # clicking change Additional-Documentation-List page  and update Additional Documents
     And I click change to update Additional Documents
-    And I enter 9104 as code and GBAEOC717992 as identifier as first additional document
+    And I enter 9104 as code and GBAEOC717992 as identifier for first additional document
     And I click continue
     Then I should land on Additional-Document-List page
     And I select No on additional document list page

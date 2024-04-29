@@ -28,7 +28,7 @@ Feature: Section5 Occasional Journey
     And I enter commodity details code as 8411110000 and description as Aircraft engine
     And I click continue
     And I navigate to Dangerous Goods Code page
-    And I select Yes to enter the code 1204 as UN dangerous goods
+    And I select Yes to enter the code 1204 as dangerous goods
     And I click continue
     Then I should land on VAT-Rating page
     Then I select Yes option as goods being VAT zero-rated
@@ -43,7 +43,7 @@ Feature: Section5 Occasional Journey
     And I enter 1300 as statistical value
     And I click continue
     Then I should land on Package-Information page
-    And I enter Basin as package type, 100 as number of packages and 104 as shipping mark as first package info
+    And I enter Basin as package type, with 100 packages and 104 as shipping mark for first package info
     And I click continue
     Then I should land on Package-Information-List page
     And I select No on package information list page
@@ -57,7 +57,7 @@ Feature: Section5 Occasional Journey
     And I click continue
     # skipped of documents required yes/no page
     Then I should land on Additional-Document page
-    And I enter X002 as code and GBAEOC717572504502801 as identifier as first additional document
+    And I enter X002 as code and GBAEOC717572504502801 as identifier for first additional document
     And I click continue
     Then I should land on Additional-Document-List page
     And I select No on additional document list page
@@ -95,7 +95,7 @@ Feature: Section5 Occasional Journey
     And I enter commodity details code as 2803400090 and description as St Andrews golf ball whisky
     And I click continue
     And I navigate to Dangerous Goods Code page
-    And I select Yes to enter the code 1204 as UN dangerous goods
+    And I select Yes to enter the code 1204 as dangerous goods
     And I click continue
     Then I should land on Cus-Code page
     And I select Yes to enter the code 12345678 as CUS code
@@ -111,7 +111,7 @@ Feature: Section5 Occasional Journey
 
   # Skipping Statistical-Value when additional procedure code is not a low value declaration "3LV"
     Then I should land on Package-Information page
-    And I enter Aerosol as package type, 10 as number of packages and 1034 as shipping mark as first package info
+    And I enter Aerosol as package type, with 10 packages and 1034 as shipping mark for first package info
     And I click continue
     Then I should land on Package-Information-List page
     And I select No on package information list page
@@ -129,7 +129,7 @@ Feature: Section5 Occasional Journey
     And I select Yes to check if the goods require a licence
     And I click continue
     Then I should land on Additional-Document page
-    And I enter X002 as code and GBAEOC717572504502801 as identifier as first additional document
+    And I enter X002 as code and GBAEOC717572504502801 as identifier for first additional document
     And I click continue
     Then I should land on Additional-Document-List page
     And I select No on additional document list page

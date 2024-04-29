@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys._
 
@@ -28,7 +28,14 @@ object RemoveItemsPage extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
-  // ex: fillPage()
+  // The 1st parameter is the sequenceId in ItemIds of the item to remove: "0", "1", "2", ...
+  // ex: fillPage("0")
 
-  override def fillPage(values: String*): Unit = if (selectYesOrNoRadio(values(yesNo))) clear(section5, details(ItemIds).headOption)
+  override def fillPage(values: String*): Unit =
+    if (selectYesOrNoRadio(values(yesNo))) {
+      val itemIds = details(ItemIds)
+      val itemId = itemIds(values(0).toInt)
+      clear(section5, Some(itemId))
+      store(ItemIds -> Details(itemIds.filterNot(_ == itemId)))
+    }
 }
