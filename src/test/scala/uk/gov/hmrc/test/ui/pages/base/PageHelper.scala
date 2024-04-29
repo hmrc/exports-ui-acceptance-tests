@@ -24,7 +24,7 @@ import scala.util.matching.Regex
 
 trait PageHelper extends DriverHelper {
 
-  protected val initPart: String = "/declaration"
+  private val initPart: String = "/declaration"
   private val elementId: String = "[0-9A-Za-z\\-\\.]+"
 
   private val containerIdPattern: Regex = s".+$initPart/containers/($elementId)/.+".r

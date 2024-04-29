@@ -48,7 +48,7 @@ object AdditionalDocumentPage extends BasePage {
     }
 
   override val expanderHrefs: Map[String, Seq[String]] =
-    Map(Common -> List(itemsAdditionalDocuments), Clearance -> List(itemsAdditionalDocumentsCL))F
+    Map(Common -> List(itemsAdditionalDocuments), Clearance -> List(itemsAdditionalDocumentsCL))
 
   override val pageLinkHrefs: Seq[String] =
     super.pageLinkHrefs ++ List(

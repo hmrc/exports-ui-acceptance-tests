@@ -58,9 +58,6 @@ object CommodityDetailsPage extends BasePage {
 
   def hasChemicalCommodityCode: Boolean = {
     val commodityDetail = detail(CommodityDetailsCode(itemId))
-    commodityDetail match {
-      case s: String => chemicalCommodityCodes.exists(_.startsWith(s))
-      case _ => false // handle non-String case appropriately
-    }
+    chemicalCommodityCodes.exists(_.startsWith(commodityDetail))
   }
 }
