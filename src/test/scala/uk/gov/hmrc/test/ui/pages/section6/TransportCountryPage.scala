@@ -19,12 +19,27 @@ package uk.gov.hmrc.test.ui.pages.section6
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.transportCountry
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{BorderTransport, TransportCountry, TransportLeavingBorder}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isSupplementary
+import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
+import uk.gov.hmrc.test.ui.pages.section3.DestinationCountryPage.isGuernseyOrJerseyDestination
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
+import uk.gov.hmrc.test.ui.pages.section6.InlandModeOfTransportPage.isFixedTransport
+import uk.gov.hmrc.test.ui.pages.section6.InlandOrBorderPage.isBorderLocation
+import uk.gov.hmrc.test.ui.pages.section6.TransportLeavingTheBorderPage.isPostalOrMail
 
 object TransportCountryPage extends BasePage {
 
-  def backButtonHref: String = maybeDetails(BorderTransport).fold(BorderTransportPage.backButtonHref)(_ => BorderTransportPage.path)
-  val path: String  = "/declaration/transport-country"
+  def backButtonHref: String =
+    if (gotoDepartureTransportPage) DepartureTransportPage.path
+    else if (maybeDetail(InlandOrBorder).nonEmpty) {
+      detail(InlandOrBorder) match {
+        case "Border location"             => InlandOrBorderPage.path
+        case "Customs controlled location" => BorderTransportPage.path
+      }
+    } else maybeDetails(BorderTransport).fold(BorderTransportPage.backButtonHref)(_ => BorderTransportPage.path)
+
+  val path: String = "/declaration/transport-country"
+
   def title: String = s"Select the country where the ${detail(TransportLeavingBorder).toLowerCase} is registered"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(transportCountry))
@@ -37,4 +52,8 @@ object TransportCountryPage extends BasePage {
     fillDropdown("transport-country", values(country))
     store(TransportCountry -> Detail(values(country)))
   }
+
+  def gotoDepartureTransportPage: Boolean =
+    (isStandard || isSupplementary) && ((!isFixedTransport || !isPostalOrMail || isGuernseyOrJerseyDestination) && isBorderLocation)
+
 }

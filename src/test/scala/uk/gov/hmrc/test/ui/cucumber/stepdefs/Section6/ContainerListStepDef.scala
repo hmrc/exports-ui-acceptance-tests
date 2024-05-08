@@ -23,6 +23,8 @@ class ContainerListStepDef extends BaseStepDef {
 
   And("""^I should land on Container-List page""")(() => ContainerListPage.checkPage())
 
+  And("""^I click remove Container (.*) on Container List page""")((index:Int) => ContainerListPage.removeContainer(index))
+
   And("""^I select (.*) to add another container""") { (yesNo: String) =>
     ContainerListPage.fillPage(yesNo)
   }

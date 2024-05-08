@@ -21,13 +21,20 @@ import uk.gov.hmrc.test.ui.generator.SupportGenerator.generateEORI
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.{clear, continue, continueOnMiniCya, detailKeys}
 import uk.gov.hmrc.test.ui.pages.base.Constants.yes
 import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isOccasional, isSimplified, isSupplementary}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{
+  isClearance,
+  isOccasional,
+  isSimplified,
+  isSupplementary
+}
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 import uk.gov.hmrc.test.ui.pages.section1._
 import uk.gov.hmrc.test.ui.pages.section2.AreYouTheExporterPage.isExporter
 import uk.gov.hmrc.test.ui.pages.section2._
 import uk.gov.hmrc.test.ui.pages.section3._
 import uk.gov.hmrc.test.ui.pages.section4._
+import uk.gov.hmrc.test.ui.pages.section5.AdditionalProcedureCodesPage.isNoOtherAdditionalProcedureCodeApplies
+import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.isSupervisingCustomsOfficePageVisiblePC
 import uk.gov.hmrc.test.ui.pages.section5._
 import uk.gov.hmrc.test.ui.pages.section6._
 
@@ -107,7 +114,7 @@ class CommonStepDef extends BaseStepDef {
     RepresentativesEORINumberPage.fillPage("GB121012121212"); continue()
     RepresentationTypeAgreedPage.fillPage("Direct"); continue()
 
-    if ((isStandard || isOccasional || isSimplified) && !isExporter){
+    if ((isStandard || isOccasional || isSimplified) && !isExporter) {
       ThirdPartyGoodsTransportationPage.fillPage("Yes"); continue()
     }
 
@@ -165,7 +172,10 @@ class CommonStepDef extends BaseStepDef {
     AddDeclarationItemPage.fillPage()
     ProcedureCodesPage.fillPage("1042"); continue()
     AdditionalProcedureCodesPage.fillPage("F75"); continue()
-    FiscalReferencesYesNoPage.fillPage(Constants.no); continue()
+    if (isSupervisingCustomsOfficePageVisiblePC && !isNoOtherAdditionalProcedureCodeApplies) {
+      FiscalReferencesYesNoPage.fillPage(Constants.no);
+      continue()
+    }
     CommodityDetailsPage.fillPage("4203400090", "Straw for bottles"); continue()
     DangerousGoodsCodePage.fillPage(Constants.no); continue()
 
@@ -173,9 +183,7 @@ class CommonStepDef extends BaseStepDef {
       VatRatingPage.fillPage("Yes"); continue()
     }
 
-    if (!isClearance) {
-      NationalAdditionalCodesPage.fillPage(Constants.no); continue()
-    }
+    NationalAdditionalCodesPage.fillPage(Constants.no); continue()
 
     if (isStandard || isSupplementary) {
       StatisticalValuePage.fillPage("1000"); continue()
@@ -193,7 +201,7 @@ class CommonStepDef extends BaseStepDef {
 
     AdditionalInformationYesNoPage.fillPage(Constants.no); continue()
 
-    if(!isClearance) {
+    if (!isClearance) {
       LicenseRequiredYesNoPage.fillPage(Constants.yes); continue()
     }
     AdditionalDocumentPage.fillPage("1", "C501", "GBAEOC717572504502801"); continue()
@@ -221,7 +229,7 @@ class CommonStepDef extends BaseStepDef {
 
   And("""^I clear (.*) keys from cache""") { (cacheKeysToDelete: String) =>
     val keys = cacheKeysToDelete.split(", ").toList
-    clear(detailKeys(keys:_*):_*)
+    clear(detailKeys(keys: _*): _*)
   }
 
   And("""^I remove one item from the declaration""") { () =>
@@ -229,18 +237,16 @@ class CommonStepDef extends BaseStepDef {
   }
 
   And("""^I click change link for (.*) page""") { (pageName: String) =>
-    val changeLinkMap: Map[String, String] = Map(
-      "Authorisation Type" -> "authorisation-holder-1-type"
-    )
+    val changeLinkMap: Map[String, String] = Map("Authorisation Type" -> "authorisation-holder-1-type")
 
     CommonPage.changeLinkOnCYA(changeLinkMap(pageName)).click()
   }
 }
-  object CommonStepDef {
-    def genSequenceId(seqId: String): String =
-      seqId match {
-        case "first" => "0"
-        case "second" => "1"
-        case "third" => "2"
-      }
+object CommonStepDef {
+  def genSequenceId(seqId: String): String =
+    seqId match {
+      case "first"  => "0"
+      case "second" => "1"
+      case "third"  => "2"
+    }
 }

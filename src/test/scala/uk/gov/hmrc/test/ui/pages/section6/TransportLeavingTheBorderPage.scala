@@ -40,16 +40,20 @@ object TransportLeavingTheBorderPage extends BasePage {
   override def fillPage(values: String*): Unit = {
     val elementId = values(transportType) match {
       case "Sea transport"                     => "Border_Sea"
-      case "Roll on roll off (RoRo) transport" => "Border_Ferry"
+      case "Roll on Roll off (RoRo)"           => "Border_Ferry"
       case "Rail transport"                    => "Border_Rail"
       case "Road transport"                    => "Border_Road"
       case "Air transport"                     => "Border_Air"
-      case "Postal"                            => "Border_PostalOrMail"
-      case "Fixed transport installation"      => "Border_FixedTransportInstallations"
+      case "Postal or mail"                    => "Border_PostalOrMail"
+      case "Fixed transport installations"      => "Border_FixedTransportInstallations"
       case "Inland waterway transport"         => "Border_InlandWaterway"
       case "Own propulsion"                    => "Border_Unknown"
     }
     clickById(elementId)
     store(TransportLeavingBorder -> Detail(values(transportType)))
   }
+
+  def isFixedTransport: Boolean = maybeDetail(TransportLeavingBorder).contains("Fixed transport installations")
+
+  def isPostalOrMail: Boolean = maybeDetail(TransportLeavingBorder).contains("Postal or mail")
 }

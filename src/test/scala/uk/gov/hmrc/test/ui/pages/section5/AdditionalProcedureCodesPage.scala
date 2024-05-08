@@ -62,4 +62,6 @@ object AdditionalProcedureCodesPage extends BasePage {
   }
 
   def isLowValueDeclaration: Boolean = detail(AdditionalProcedureCodes(itemId)).contains(lowValueDeclaration)
+
+  def isNoOtherAdditionalProcedureCodeApplies: Boolean = detail(AdditionalProcedureCodes(itemId)) == "000"
 }

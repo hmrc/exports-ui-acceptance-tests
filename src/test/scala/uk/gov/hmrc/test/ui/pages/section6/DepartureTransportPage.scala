@@ -19,35 +19,46 @@ package uk.gov.hmrc.test.ui.pages.section6
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{departureTransport, departureTransportCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{DepartureTransport, InlandModeOfTransport, TransportLeavingBorder}
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{
+  DepartureTransport,
+  InlandModeOfTransport,
+  InlandOrBorder,
+  TransportLeavingBorder
+}
 import uk.gov.hmrc.test.ui.pages.section6.InlandOrBorderPage.isBorderLocation
 
 object DepartureTransportPage extends BasePage {
 
-  def backButtonHref: String =
-    maybeDetail(InlandModeOfTransport).fold(InlandModeOfTransportPage.backButtonHref)( _=> InlandModeOfTransportPage.path)
+  def backButtonHref: String = if (maybeDetail(InlandOrBorder).nonEmpty) {
+    detail(InlandOrBorder) match {
+      case "Border location"             => InlandOrBorderPage.path
+      case "Customs controlled location" => InlandModeOfTransportPage.path
+    }
+  } else {
+    maybeDetail(InlandModeOfTransport).fold(InlandModeOfTransportPage.backButtonHref)(_ =>
+      InlandModeOfTransportPage.path
+    )
+  }
 
-  val path: String  = "/declaration/departure-transport"
+  val path: String = "/declaration/departure-transport"
   def title: String = {
     val (detailKey, prefix) =
       if (isBorderLocation) TransportLeavingBorder -> ""
       else InlandModeOfTransport -> "inland "
 
     val transportMode = detail(detailKey) match {
-      case "Road transport" => "road transport"
-      case "Rail transport" => "rail transport"
-      case "Sea transport" => "sea transport"
-      case "Air transport" => "air transport"
-      case "Inland waterway transport" => "inland waterway transport"
+      case "Road transport"                           => "road transport"
+      case "Rail transport"                           => "rail transport"
+      case "Sea transport"                            => "sea transport"
+      case "Air transport"                            => "air transport"
+      case "Inland waterway transport"                => "inland waterway transport"
       case "Mode unknown, for example own propulsion" => "own propulsion"
     }
     s"What are the details for the $prefix$transportMode?"
   }
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(departureTransport),
-    Clearance -> List(departureTransportCL)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] =
+    Map(Common -> List(departureTransport), Clearance -> List(departureTransportCL))
 
   private val departRef = 0
 
@@ -55,18 +66,18 @@ object DepartureTransportPage extends BasePage {
 
   override def fillPage(values: String*): Unit = {
     val (radioId, textboxId, textboxValue) = values.head match {
-      case "Ship IMO number"                                 => ("radio_ShipOrRoroImoNumber", "ShipOrRoroImoNumber", "123456")
-      case "Ship name"                                       => ("radio_NameOfVessel", "NameOfVessel", "Seraphim")
-      case "Eurotunnel or other rail details"                => ("radio_WagonNumber", "WagonNumber", "EuroTunnel")
-      case "Flight number and date of flight"                => ("radio_FlightNumber", "FlightNumber", "123456")
-      case "Aircraft registration number and date of flight" =>
+      case "Ship IMO number" => ("radio_ShipOrRoroImoNumber", "ShipOrRoroImoNumber", "123456")
+      case "Ship name"       => ("radio_NameOfVessel", "NameOfVessel", "Seraphim")
+      case "Train"           => ("radio_WagonNumber", "WagonNumber", "EuroTunnel")
+      case "Flight number"   => ("radio_FlightNumber", "FlightNumber", "123456")
+      case "Aircraft number" =>
         ("radio_AircraftRegistrationNumber", "AircraftRegistrationNumber", "123456")
 
-      case "European vessel identification (ENI) number"     =>
+      case "European vessel number (ENI)" =>
         ("radio_EuropeanVesselIDNumber", "EuropeanVesselIDNumber", "123456")
 
-      case "Inland vessel’s name"                            => ("radio_NameOfInlandWaterwayVessel", "NameOfVessel", "123456")
-      case "Vehicle registration number"                     => ("radio_VehicleRegistrationNumber", "NameOfVessel", "123456")
+      case "Inland vessel’s name" => ("radio_NameOfInlandWaterwayVessel", "NameOfVessel", "123456")
+      case "Vehicle registration" => ("radio_VehicleRegistrationNumber", "NameOfVessel", "123456")
     }
 
     fillRadioButton(radioId, textboxId, textboxValue)

@@ -77,7 +77,7 @@ Feature: Section5 Occasional Journey
   @Section5 @OcaDec
   Scenario: Complete Items section on with Low Value Occasional Prelodged declaration and check change link
             functionality on Package Information, Additional Information and Additional Documents list pages
-    Given I fill section1 for SIMPLIFIED,prelodged declaration
+    Given I fill section1 for OCCASIONAL,prelodged declaration
     And I fill section2
     And I fill section3
     And I fill section4

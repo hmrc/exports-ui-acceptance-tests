@@ -20,7 +20,7 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.Container
 
-object ContainerRemovePage extends BasePage {
+object RemoveContainerPage extends BasePage {
 
   def backButtonHref: String = ContainerListPage.path
   def path: String           = removeUrl("containers")

@@ -19,12 +19,15 @@ package uk.gov.hmrc.test.ui.pages.section6
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.inlandTransportDetails
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{InlandModeOfTransport, InlandOrBorder}
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{InlandModeOfTransport, InlandOrBorder, TransportLeavingBorder}
 
 object InlandModeOfTransportPage extends BasePage {
 
-  def backButtonHref: String = maybeDetail(InlandOrBorder).fold(InlandOrBorderPage.backButtonHref)(_ => InlandOrBorderPage.path)
-  val path: String  = "/declaration/inland-transport-details"
+  def backButtonHref: String = if (detail(TransportLeavingBorder).equals("Roll on Roll off (RoRo)"))
+    TransportLeavingTheBorderPage.path
+  else
+    maybeDetail(InlandOrBorder).fold(InlandOrBorderPage.backButtonHref)(_ => InlandOrBorderPage.path)
+  val path: String = "/declaration/inland-transport-details"
   val title: String = "How will the goods be transported to the UK border?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(inlandTransportDetails))
@@ -47,4 +50,8 @@ object InlandModeOfTransportPage extends BasePage {
     clickById(elementId)
     store(InlandModeOfTransport -> Detail(values(mode)))
   }
+
+  def isFixedTransport: Boolean = maybeDetail(InlandModeOfTransport).contains("Fixed transport installations")
+
+  def isPostalOrMail: Boolean = maybeDetail(InlandModeOfTransport).contains("Postal or mail")
 }

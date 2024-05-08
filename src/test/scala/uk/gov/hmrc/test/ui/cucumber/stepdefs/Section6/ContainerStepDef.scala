@@ -23,8 +23,14 @@ class ContainerStepDef extends BaseStepDef {
 
   And("""^I should land on Container page""")(() => ContainerPage.checkPage())
 
+  And("""I navigate to Container page""")(() => ContainerPage.navigateToPage(ContainerPage.path))
+
   And("""^I select (.*) to add (.*) as container""") { (yesNo: String, container: String) =>
     ContainerPage.fillPage(yesNo, container)
+  }
+
+  And("""^I select (.*) to add containers""") { (yesNo: String) =>
+    ContainerPage.fillPage(yesNo)
   }
 
   And("""^I enter (.*) container""") { (container: String) =>

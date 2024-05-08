@@ -19,18 +19,20 @@ package uk.gov.hmrc.test.ui.pages.section6
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{supervisingCustomsOffice, supervisingCustomsOfficeCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{SuperVisingCustomsOffice, WarehouseHouse}
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{SuperVisingCustomsOffice, TransportLeavingBorder, WarehouseHouse}
 
 object SupervisingCustomsOfficePage extends BasePage {
 
-  def backButtonHref: String = maybeDetail(WarehouseHouse).fold(WarehousePage.backButtonHref)(_ => WarehousePage.path)
-  val path: String  = "/declaration/supervising-customs-office"
+  def backButtonHref: String =
+    if (maybeDetail(TransportLeavingBorder).head.contentEquals("Roll on Roll off (RoRo)")) TransportLeavingTheBorderPage.path
+    else maybeDetail(WarehouseHouse).fold(WarehousePage.backButtonHref)(_ => WarehousePage.path)
+
+  val path: String = "/declaration/supervising-customs-office"
+
   val title: String = "Where is the HMRC supervising customs office (SPOFF)?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(supervisingCustomsOffice),
-    Clearance -> List(supervisingCustomsOfficeCL)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] =
+    Map(Common -> List(supervisingCustomsOffice), Clearance -> List(supervisingCustomsOfficeCL))
 
   private val officeCode = 0
 
