@@ -5,7 +5,7 @@ Feature: Section6 Standard Journey
     Given I clear data in cache
 
     ## Below scenario -
-     # 1. if procedure code is 1042 and Additional procedure code as 00
+     # 1. if procedure code is 1042 and Additional procedure code as 000
      # 2. The following page is visible
           # Supervising-Customs-Office
 
@@ -101,9 +101,11 @@ Feature: Section6 Standard Journey
 
      ## Below scenario -
      # 1. if procedure code is 1040 and Additional procedure code as 000
+          # RoRo as transport leaving the border
      # 2. The following page is skipped
-          # Supervising-Customs-Office
-     # And landing on Inland-Or-Border page
+         # Inland or border
+     # landing on Inland-Transport-details page
+
     And I clear Presenting to customs keys from cache
     And I navigate to Transport-Leaving-The-Border page
     Then I should land on Transport-Leaving-The-Border page
@@ -120,6 +122,7 @@ Feature: Section6 Standard Journey
      # 2. The following page is skipped
           # Inland-Transport-Details
      #3. it should land on landing on Departure-transport page
+
     And I clear Inland mode of transport, Transport leaving the border, Country of registration for the transport leaving the UK border keys from cache
     And I navigate to Transport-Leaving-The-Border page
     Then I should land on Transport-Leaving-The-Border page
@@ -133,14 +136,15 @@ Feature: Section6 Standard Journey
     Then I should land on MiniCYA-Section-6 page
     And I check the MiniCYA page for Section-6
 
-         ## Below scenario -
+     ## Below scenario -
      # 1. if procedure code is 1040 and Additional procedure code as 000
-          # and select Fixed Transport Installation as /transport-leaving-the-border
-          # and select Express Consignment as No
-     # 2. The following pages are skipped
+          # and select Fixed Transport Installation as transport-leaving-the-border
+     # 2. It should land on landing on Inland-or-border page
+     # 3. It navigates to Express-Consignment
+     # 4. The following pages are skipped
           # Departure Transport
           # Transport country
-    #3. it should land on landing on Inland-or-border page
+
     And I clear Presenting to customs, Transport details at the border, Method of payment for transport keys from cache
     And I navigate to Transport-Leaving-The-Border page
     Then I should land on Transport-Leaving-The-Border page
@@ -163,6 +167,7 @@ Feature: Section6 Standard Journey
           # Add Security seals page
           # You have added Security seals page (/containers/test/seals)
           # You have added Continer page (/containers)
+
     And I navigate to Transport-Leaving-The-Border page
     Then I should land on Transport-Leaving-The-Border page
     And I select Sea transport as mode of transport leaving the border
@@ -200,9 +205,10 @@ Feature: Section6 Standard Journey
 
 
      ## Below scenario -
-     # 1. if procedure code is 1042 and Additional procedure code as 00
+     # 1. if procedure code is 1042 and Additional procedure code as 000
      # 2. The following page is visible
           # Supervising-Customs-Office
+     # This is full arrived journey which cover all the pages.
 
   @Section6 @StdDec
   Scenario: standard arrived journey section-6
@@ -271,17 +277,3 @@ Feature: Section6 Standard Journey
     And I check the MiniCYA page for Section-6
     And I click continue on MiniCya
     Then I should land on Saved-Summary page
-
-
-
-
-
-
-
-
-
-
-
-
-
-

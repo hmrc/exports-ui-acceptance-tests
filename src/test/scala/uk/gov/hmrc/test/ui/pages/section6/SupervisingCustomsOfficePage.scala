@@ -19,12 +19,14 @@ package uk.gov.hmrc.test.ui.pages.section6
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{supervisingCustomsOffice, supervisingCustomsOfficeCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{SuperVisingCustomsOffice, TransportLeavingBorder, WarehouseHouse}
 
 object SupervisingCustomsOfficePage extends BasePage {
 
   def backButtonHref: String =
-    if (maybeDetail(TransportLeavingBorder).head.contentEquals("Roll on Roll off (RoRo)")) TransportLeavingTheBorderPage.path
+    if (maybeDetail(TransportLeavingBorder).head.contentEquals("Roll on Roll off (RoRo)") && !isClearance)
+      TransportLeavingTheBorderPage.path
     else maybeDetail(WarehouseHouse).fold(WarehousePage.backButtonHref)(_ => WarehousePage.path)
 
   val path: String = "/declaration/supervising-customs-office"

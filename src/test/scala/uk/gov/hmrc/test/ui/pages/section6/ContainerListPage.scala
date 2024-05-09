@@ -20,11 +20,13 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.{yes, yesNo}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isSupplementary
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{ContainerLabel, ExpressConsignment, section6}
+import uk.gov.hmrc.test.ui.pages.section6.InlandModeOfTransportPage.{isFixedTransport, isPostalOrMail}
 
 object ContainerListPage extends BasePage {
 
   def backButtonHref: String =
-    if (isSupplementary) ExpressConsignmentPage.backButtonHref
+    if (isSupplementary && (isFixedTransport || isPostalOrMail)) InlandModeOfTransportPage.path
+    else if (isSupplementary) ExpressConsignmentPage.backButtonHref
     else if (detail(ExpressConsignment) == yes) TransportPaymentPage.path
     else ExpressConsignmentPage.path
 

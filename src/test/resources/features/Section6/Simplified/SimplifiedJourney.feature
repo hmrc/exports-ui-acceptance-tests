@@ -4,7 +4,7 @@ Feature: Section6 Simplified Journey
     Given I clear data in cache
 
     ## Below scenario -
-     # 1. if procedure code is 1042 and Additional procedure code as 00
+     # 1. if procedure code is 1042 and Additional procedure code as 000
      # 2. The following page is visible
           # Supervising-Customs-Office
      # 3 The following page is skipped
@@ -103,13 +103,13 @@ Feature: Section6 Simplified Journey
      # 2. The following page is skipped
           # Supervising-Customs-Office
      # And landing on Inland-Or-Border page
-     # Note : For the following procedure codes (1007) and (3171) the navigation is
+     # Note : For the following procedure codes (1007) and (3171) the navigation has
                # /transport-leaving-the-border
-               # /warehouse-details is the next page
-     # For the procedure code (1040) the navigation is
+               # /warehouse-details pages
+     # For the procedure code (1040) the navigation has
               #  /transport-leaving-the-border
-              #   /Inland-or-border
-     # And for all other procedure codes use will see Supervising customs office and the navigation is
+              #   /Inland-or-border pages
+     # And for all other procedure codes user will see Supervising customs office and the navigation is
               #  /transport-leaving-the-border
               #   /supervising-customs-office
     And I clear Warehouse ID keys from cache
@@ -118,7 +118,7 @@ Feature: Section6 Simplified Journey
     And I select 1044 as procedure code
     And I click continue
     Then I should land on Additional-Procedure-Codes page
-    And I select 000 as additional procedure code
+    And I select 1CS as additional procedure code
     And I click continue
     And I navigate to Transport-Leaving-The-Border page
     Then I should land on Transport-Leaving-The-Border page
@@ -193,32 +193,9 @@ Feature: Section6 Simplified Journey
     And I select No to add another security seal
     And I click continue
     Then I should land on Container-List page
-    And I select Yes to add another container
-    And I click continue
-    And I enter Container2 container
-    And I click continue
-    Then I should land on Seal-YesNo page
-    And I select No to add security seal
-    And I click continue
-    Then I should land on Container-List page
     And I select No to add another container
     And I click continue
     Then I should land on MiniCYA-Section-6 page
     And I check the MiniCYA page for Section-6
     And I click continue on MiniCya
     Then I should land on Saved-Summary page
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

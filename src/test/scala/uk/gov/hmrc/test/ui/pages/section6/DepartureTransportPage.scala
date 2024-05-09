@@ -19,6 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section6
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{departureTransport, departureTransportCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{
   DepartureTransport,
   InlandModeOfTransport,
@@ -29,31 +30,39 @@ import uk.gov.hmrc.test.ui.pages.section6.InlandOrBorderPage.isBorderLocation
 
 object DepartureTransportPage extends BasePage {
 
-  def backButtonHref: String = if (maybeDetail(InlandOrBorder).nonEmpty) {
-    detail(InlandOrBorder) match {
-      case "Border location"             => InlandOrBorderPage.path
-      case "Customs controlled location" => InlandModeOfTransportPage.path
+  def backButtonHref: String =
+    if (maybeDetail(InlandOrBorder).nonEmpty) {
+      detail(InlandOrBorder) match {
+        case "Border location"             => InlandOrBorderPage.path
+        case "Customs controlled location" => InlandModeOfTransportPage.path
+      }
+    } else if (isClearance) SupervisingCustomsOfficePage.path
+    else {
+      maybeDetail(InlandModeOfTransport).fold(InlandModeOfTransportPage.backButtonHref)(_ =>
+        InlandModeOfTransportPage.path
+      )
     }
-  } else {
-    maybeDetail(InlandModeOfTransport).fold(InlandModeOfTransportPage.backButtonHref)(_ =>
-      InlandModeOfTransportPage.path
-    )
-  }
 
   val path: String = "/declaration/departure-transport"
+
   def title: String = {
     val (detailKey, prefix) =
-      if (isBorderLocation) TransportLeavingBorder -> ""
+      if (isBorderLocation || isClearance) TransportLeavingBorder -> ""
       else InlandModeOfTransport -> "inland "
 
     val transportMode = detail(detailKey) match {
       case "Road transport"                           => "road transport"
+      case "Roll on Roll off (RoRo)"                  => "Roll on roll off (RoRo) transport"
       case "Rail transport"                           => "rail transport"
       case "Sea transport"                            => "sea transport"
       case "Air transport"                            => "air transport"
+      case "Postal or mail"                           => "border_PostalOrMail"
+      case "Fixed transport installations"            => "fixed transport installations"
       case "Inland waterway transport"                => "inland waterway transport"
       case "Mode unknown, for example own propulsion" => "own propulsion"
+      case "I don’t know"                             => "own propulsion"
     }
+
     s"What are the details for the $prefix$transportMode?"
   }
 

@@ -266,3 +266,36 @@ This code is open source software licensed under the [Apache 2.0 License]("http:
 - User initiates a Clearance Prelodged Journey with IsEXS set to No in section 2, ensuring the skipping of the dangerous goods page, before updating IsEXS to Yes to validate the dangerous goods section.
 - User performs a Clearance Arrived Journey when IsEXS is No in section 2, and selects procedure codes when EIDR in section 2 is No on an arrived declaration.
 - Validate procedure codes when isEIDR is YES and NO
+
+## Section 6
+
+- **Standard**
+- User completes Standard Prelodged dec with procedure code as 1042 and Additional procedure code as 000, to naviagate through Supervising customs office
+- User completes Standard Prelodged dec with PC as 1040 and APC as 000, this will skip Supervising customs office and navigates through Inland Or Border page
+- User completes Standard Prelodged dec with PC as 1040 and APC as 000, with RoRo as transport leaving the border, this will skip the Inland or Border page 
+- User completes Standard prelodged dec with PC as 1040 and APC as 000 and Inland or Border as border, this will skip the Inland Transport Details page and includes Departure-Transport page
+- User completes Standard prelodged dec with PC as 1040 and APC as 000 and use Fixed Transport Installation as Transport-leaving the border, this will navigates to Express-consignment by skipping Departure Transport and Transport country
+- User completes Standard prelodged dec with PC as 1040 and APC as 000 and selects No for adding goods to container, this will skip all Container and Seals related pages
+- User completes Standard arrived dec with PC as 1042 and APC as 000, this will include Supervising-customs-office in the flow. 
+
+- **Occasional Journey**
+- User completes Occasional prelodged dec with Procedure code as 1042 and Additonal Procedure Code as 000, to navigate through Supervising Customs office. 
+- User completes Occastional prelodged dec with PC 1042 and APC 000, with destination country as Jersey and Inland and border as Border, this navigation flow will skip the Departure transport page.
+
+- **Simplified Journey**
+- User completes Simplified prelodged dec with Procedure Code as 1042 and Additional procedure code as 000, to navigate through Supervising customs office and for this declaration the navigation doesn't include Departure Transport page
+- User completes Simplified prelodged dec with PC as 1007 and APC as 000, this navigates through Warehouse Details, with Supervising customs office and Inland or Border pages
+- User completes Simplified prelodged dec with PC as 1044 and APC as 1CS, this navigates through Supervising customs office 
+- User completes Simplified arrived dec with PC as 3171 and APC as 000, this navigates through Warehouse, Supervising-customs-office, Inland or border with Inland Transport details 
+
+- **Supplementary Journey**
+- User completes Supplementary Eidr dec with PC as 1042 and APC as 000, this will navigates through Supervising-customs-office and skips Inland-or-border, Express-Consigment and Transport-Payment pages
+- User completes Supplementary Eidr dec with PC as 1042 and APC as 000, this by having Authorisation Code as EXRR and Transport leaving the border as RoRo then this will navigate to Supervising customs office
+- User completes Supplementary Eidr dec with PC as 1042 and APC as 000, with Authorisation code as EXRR and Postal or email is selected as Transport leaving the border and Mode of Inland transport, this will navigate to Supervising customs office and lands on Container page
+- User completes Supplementary Simplified dec with PC as 1040 and APC as 000, in this navigation Supervising Customs office, Express-consignment and Transport payment pages are skipped.
+- User completes Supplementary Simplified dec with Authorisation Code as FP and Destination Country as Guernsey, with PC as 3171 and APC as 1CS, this will navigates through Warehouse, Supervising Customs Office, Inland Transpprt details and Container pages.
+
+- **Clearance Journey**
+  - User completes Clearance prelodged dec with Procedure code as 1042 and APC as 000, this navigates through Warehouse and Supervising customs office page
+  - User completes Clearance prelodged dec with isEidr as yes, PC as 0017 and ASM as 16M this will skip Inland-transport-details and Border-transport page 
+  - User completes Clearance arrived dec with PC 1007 and APC as 1CS, this navigates through warehouse and Supervising Customs Office and skips Inland-Transport-details, Transport payment and Container pages 
