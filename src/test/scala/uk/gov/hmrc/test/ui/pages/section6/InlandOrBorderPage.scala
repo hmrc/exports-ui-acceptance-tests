@@ -19,16 +19,12 @@ package uk.gov.hmrc.test.ui.pages.section6
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.inlandOrBorder
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.hasPermanentExportOfUKGoodsPC
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{InlandOrBorder, SuperVisingCustomsOffice}
 
 object InlandOrBorderPage extends BasePage {
 
-  def backButtonHref: String = if (hasPermanentExportOfUKGoodsPC) TransportLeavingTheBorderPage.path
-  else
-    maybeDetail(SuperVisingCustomsOffice).fold(SupervisingCustomsOfficePage.backButtonHref)(_ =>
-      SupervisingCustomsOfficePage.path
-    )
+  def backButtonHref: String =
+    maybeDetail(SuperVisingCustomsOffice).fold(SupervisingCustomsOfficePage.backButtonHref)(_ => SupervisingCustomsOfficePage.path)
 
   val path: String = "/declaration/inland-or-border"
   val title: String = "Where are you presenting your goods to customs?"

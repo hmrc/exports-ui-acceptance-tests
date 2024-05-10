@@ -17,17 +17,11 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section6
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section6.SealsRemovePage
+import uk.gov.hmrc.test.ui.pages.section6.SealRemovePage
 
-class RemoveSealsStepDef extends BaseStepDef {
+class SealRemoveStepDef extends BaseStepDef {
 
-  And("""^I should land on Remove-This-Seal page""")(() => SealsRemovePage.checkPage())
+  And("""^I should land on Remove-This-Seal page""")(() => SealRemovePage.checkPage())
 
-  And("""^I click on remove link to delete seal""") { () =>
-    SealsRemovePage.removeAddedSeal(0)
-  }
-
-  And("""^I select (.*) to remove seal""")((yesNo:String) =>
-    SealsRemovePage.fillPage(yesNo)
-  )
+  And("""^I select (.*) to remove seal (.*)""")((yesNo: String, sealId: String) => SealRemovePage.fillPage(yesNo, sealId))
 }

@@ -97,21 +97,24 @@ Feature: Section6 Simplified Journey
     Then I should land on MiniCYA-Section-6 page
     And I check the MiniCYA page for Section-6
 
+     # Note : For the following procedure codes (1007) and (3171) the navigation has
+                   # /transport-leaving-the-border
+                   # /warehouse-details pages
+         # For the procedure code (1040) the navigation has
+                  #  /transport-leaving-the-border
+                  #   /Inland-or-border pages
+         # And for all other procedure codes user will see Supervising customs office and the navigation is
+                  #  /transport-leaving-the-border
+                  #   /supervising-customs-office
 
      ## Below scenario -
      # 1. if procedure code is 1040 and Additional procedure code as 000
      # 2. The following page is skipped
           # Supervising-Customs-Office
+          # Warehouse
      # And landing on Inland-Or-Border page
-     # Note : For the following procedure codes (1007) and (3171) the navigation has
-               # /transport-leaving-the-border
-               # /warehouse-details pages
-     # For the procedure code (1040) the navigation has
-              #  /transport-leaving-the-border
-              #   /Inland-or-border pages
-     # And for all other procedure codes user will see Supervising customs office and the navigation is
-              #  /transport-leaving-the-border
-              #   /supervising-customs-office
+
+    # As the procedure code is changing to 1044, this will skip warehouse, so we clear the warehouse from cache.
     And I clear Warehouse ID keys from cache
     And I navigate to Procedure codes page
     Then I should land on Procedure-codes page

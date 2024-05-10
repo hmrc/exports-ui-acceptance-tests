@@ -52,10 +52,4 @@ object TransportLeavingTheBorderPage extends BasePage {
     clickById(elementId)
     store(TransportLeavingBorder -> Detail(values(transportType)))
   }
-
-  def isFixedTransport: Boolean = detail(TransportLeavingBorder).contains("Fixed transport installations")
-
-  def isPostalOrMail: Boolean = detail(TransportLeavingBorder).contains("Postal or mail")
-
-  def isRoRo: Boolean = detail(TransportLeavingBorder) == "Roll on Roll off (RoRo)"
 }

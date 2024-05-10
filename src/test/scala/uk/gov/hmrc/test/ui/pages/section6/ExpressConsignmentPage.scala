@@ -19,9 +19,8 @@ package uk.gov.hmrc.test.ui.pages.section6
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{expressConsignment, expressConsignmentCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isSupplementary}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{DepartureTransport, ExpressConsignment, TransportCountry}
-import uk.gov.hmrc.test.ui.pages.section6.TransportLeavingTheBorderPage.{isFixedTransport, isPostalOrMail}
 
 object ExpressConsignmentPage extends BasePage {
 
@@ -47,8 +46,4 @@ object ExpressConsignmentPage extends BasePage {
     selectYesOrNoRadio(values(yesNo))
     store(ExpressConsignment -> Detail(values(yesNo)))
   }
-
-  def gotoInlandOrBorderPage: Boolean =
-    !isSupplementary && (isFixedTransport || isPostalOrMail)
-
 }

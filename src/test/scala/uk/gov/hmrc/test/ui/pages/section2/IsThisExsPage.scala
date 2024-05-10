@@ -39,7 +39,7 @@ object IsThisExsPage extends BasePage {
 
   override def fillPage(values: String*): Unit = {
     selectYesOrNoRadio(values(yesNo))
-      store(IsThisExs -> Detail(values(yesNo)))
+    store(IsThisExs -> Detail(values(yesNo)))
   }
 
   override def checkExpanders(): Unit = ()

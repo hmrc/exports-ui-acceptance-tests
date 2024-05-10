@@ -132,7 +132,7 @@ Feature: Section2 Standard Prelodged
   #    yes for third party goods transportation page and Temporary as Procedure Choice
   # 3. With the above combination the page Is-Authorisation-Required is skipped
 
-  @Smoke @Section2 @StdDec
+  @Section2 @Smoke @StdDec
   Scenario: Exports Standard Arrived Scenario with Temporary as export procedure code choice and No other
             parties are involved
     Given I fill section1 for STANDARD,arrived declaration

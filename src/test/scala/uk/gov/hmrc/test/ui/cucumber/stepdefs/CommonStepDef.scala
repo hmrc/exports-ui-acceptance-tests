@@ -25,11 +25,11 @@ import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, is
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 import uk.gov.hmrc.test.ui.pages.section1._
 import uk.gov.hmrc.test.ui.pages.section2.AreYouTheExporterPage.isExporter
+import uk.gov.hmrc.test.ui.pages.section2.IsThisExsPage.isThisExs
 import uk.gov.hmrc.test.ui.pages.section2._
 import uk.gov.hmrc.test.ui.pages.section3._
 import uk.gov.hmrc.test.ui.pages.section4._
-import uk.gov.hmrc.test.ui.pages.section5.AdditionalProcedureCodesPage.hasZeroAdditionalProcedureCode
-import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.hasSupervisingCustomsOfficePageVisiblePC
+import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.{goToWarehouse, hasSupervisingCustomsOfficePageVisiblePC}
 import uk.gov.hmrc.test.ui.pages.section5._
 import uk.gov.hmrc.test.ui.pages.section6._
 
@@ -167,12 +167,12 @@ class CommonStepDef extends BaseStepDef {
     AddDeclarationItemPage.fillPage()
     ProcedureCodesPage.fillPage("1042"); continue()
     AdditionalProcedureCodesPage.fillPage("F75"); continue()
-    if (hasSupervisingCustomsOfficePageVisiblePC && !hasZeroAdditionalProcedureCode) {
+    if (hasSupervisingCustomsOfficePageVisiblePC) {
       FiscalReferencesYesNoPage.fillPage(Constants.no);
       continue()
     }
     CommodityDetailsPage.fillPage("4203400090", "Straw for bottles"); continue()
-    if(!isClearance) {
+    if (!isClearance || isThisExs) {
       DangerousGoodsCodePage.fillPage(Constants.no); continue()
     }
     if (isStandard) {
@@ -204,7 +204,7 @@ class CommonStepDef extends BaseStepDef {
 
   And("""^I fill section6""") { () =>
     TransportLeavingTheBorderPage.fillPage("Sea transport"); continue()
-    if(isClearance){
+    if (isClearance || goToWarehouse) {
       WarehousePage.fillPage("yes", "R1234567GB");
     }
     SupervisingCustomsOfficePage.fillPage("GBBTH001"); continue()

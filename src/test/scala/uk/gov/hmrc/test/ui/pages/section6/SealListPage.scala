@@ -36,4 +36,6 @@ object SealListPage extends BasePage {
 
   override def fillPage(values: String*): Unit =
     selectYesOrNoRadio(values(yesNo))
+
+  def selectSealToRemove(index: Int): Unit = clickByCssSelector(s"#removable_elements-row$index-remove_button > a")
 }

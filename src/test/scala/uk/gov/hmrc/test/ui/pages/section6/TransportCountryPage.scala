@@ -19,12 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section6
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.transportCountry
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isSupplementary
-import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
-import uk.gov.hmrc.test.ui.pages.section3.DestinationCountryPage.isGuernseyOrJerseyDestination
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
-import uk.gov.hmrc.test.ui.pages.section6.InlandModeOfTransportPage.{isFixedTransport, isPostalOrMail}
-import uk.gov.hmrc.test.ui.pages.section6.InlandOrBorderPage.isBorderLocation
 
 object TransportCountryPage extends BasePage {
 
@@ -44,8 +39,4 @@ object TransportCountryPage extends BasePage {
     fillDropdown("transport-country", values(country))
     store(TransportCountry -> Detail(values(country)))
   }
-
-  def gotoDepartureTransportPage: Boolean =
-    (isStandard || isSupplementary) && ((!isFixedTransport || !isPostalOrMail || isGuernseyOrJerseyDestination) && isBorderLocation)
-
 }

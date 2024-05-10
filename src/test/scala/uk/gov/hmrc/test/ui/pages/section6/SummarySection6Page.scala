@@ -17,11 +17,13 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.Section6
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{ContainerLabel, Section6, section6}
 
 object SummarySection6Page extends BasePage {
 
-  def backButtonHref: String = ContainerListPage.path
+  def backButtonHref: String =
+    if (detailForLabel(section6, ContainerLabel).nonEmpty) ContainerListPage.path
+    else ContainerPage.path
 
   val path: String           = "/declaration/summary-section/6"
   val title: String          = "Check your answers"

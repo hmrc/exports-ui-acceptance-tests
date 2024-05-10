@@ -16,12 +16,11 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yes}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.PageLinks._
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsProcedureCodes, itemsProcedureCodesCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, Details}
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.EntryIntoDeclarantsRecords
+import uk.gov.hmrc.test.ui.pages.section2.EntryIntoDeclarantRecordsPage.isEidr
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{ItemIds, ProcedureCode, ProcedureCodeLabel}
 
 object ProcedureCodesPage extends BasePage {
@@ -35,7 +34,7 @@ object ProcedureCodesPage extends BasePage {
     Map(Common -> List(itemsProcedureCodes), Clearance -> List(itemsProcedureCodesCL))
 
   override def pageLinkHrefs: Seq[String] =
-    if (isClearance && detail(EntryIntoDeclarantsRecords) == yes) super.pageLinkHrefs
+    if (isEidr) super.pageLinkHrefs
     else
       super.pageLinkHrefs ++ List(
         endUseRelief,
@@ -74,7 +73,7 @@ object ProcedureCodesPage extends BasePage {
 
   private val codesToGoToWarehouse: Seq[String] = List("07", "71", "78")
 
-  def goToWareHouse: Boolean = {
+  def goToWarehouse: Boolean = {
     val procedureCode = detail(ProcedureCode(itemId))
     codesToGoToWarehouse.exists(procedureCode.endsWith)
   }

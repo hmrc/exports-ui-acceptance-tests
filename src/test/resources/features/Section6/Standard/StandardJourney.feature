@@ -169,11 +169,12 @@ Feature: Section6 Standard Journey
     Then I should land on Container-List page
     And I click remove Container 0 on Container List page
     Then I should land on Remove-This-Container page
-    And I select Yes to remove container 0
+    # Remove the container
+    And I select Yes to remove container Container1
     And I click continue
     And I click remove Container 0 on Container List page
     Then I should land on Remove-This-Container page
-    And I select Yes to remove container 0
+    And I select Yes to remove container Container2
     And I click continue
     Then I should land on Container page
     And I select No to add containers
@@ -231,9 +232,10 @@ Feature: Section6 Standard Journey
     And I enter Seal1 as seal
     And I click continue
     Then I should land on Seal-List page
-    And I click on remove link to delete seal
+    # Remove the seal
+    And I click on remove Seal 0 on Seal List page
     Then I should land on Remove-This-Seal page
-    And I select Yes to remove seal
+    And I select Yes to remove seal Seal1
     And I click continue
     Then I should land on Seal-YesNo page
     And I select No to add security seal

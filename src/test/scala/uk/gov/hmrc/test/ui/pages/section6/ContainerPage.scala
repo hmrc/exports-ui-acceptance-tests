@@ -19,16 +19,12 @@ package uk.gov.hmrc.test.ui.pages.section6
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{container, containerCL, containerCL1}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isSupplementary
-import uk.gov.hmrc.test.ui.pages.section3.DestinationCountryPage.isGuernseyOrJerseyDestination
-import uk.gov.hmrc.test.ui.pages.section6.InlandModeOfTransportPage.{isFixedTransport, isPostalOrMail}
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{Container, ContainerLabel, NoContainers, section6}
 
 object ContainerPage extends BasePage {
 
   def backButtonHref: String =
     if (detailForLabel(section6, ContainerLabel).nonEmpty) ContainerListPage.path
-    else if (gotoInlandTransportPage) InlandModeOfTransportPage.path
     else ContainerListPage.backButtonHref
 
   override def changeLink: String = ContainerListPage.path
@@ -58,7 +54,4 @@ object ContainerPage extends BasePage {
     if (elementByClassDoesNotExist("govuk-radios", 10)) storeContainer(values(additionalCode))
     else if (selectYesOrNoRadio(values(yesNo))) storeContainer(values(code))
     else store(NoContainers -> Detail(Constants.none))
-
-  def gotoInlandTransportPage: Boolean =
-    isSupplementary && (isFixedTransport || isPostalOrMail || isGuernseyOrJerseyDestination)
 }

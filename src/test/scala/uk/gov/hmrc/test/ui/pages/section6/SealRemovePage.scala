@@ -17,8 +17,10 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.section6
 
-object SealsRemovePage extends BasePage {
+object SealRemovePage extends BasePage {
 
   def path: String           = removeUrl("containers", "seals")
 
@@ -28,12 +30,11 @@ object SealsRemovePage extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
-  private val yesNo = 0
+  private val sealIdToBeRemoved = 1
 
   override def fillPage(values: String*): Unit =
-    selectYesOrNoRadio(values(yesNo))
-
-  def removeAddedSeal(index: Int): Unit = clickByCssSelector(
-    s"#removable_elements-row$index-remove_button > a"
-  )
+    if (selectYesOrNoRadio(values(yesNo))) {
+      val sealId = values(sealIdToBeRemoved)
+      clear(section6, Some(sealId))
+    }
 }
