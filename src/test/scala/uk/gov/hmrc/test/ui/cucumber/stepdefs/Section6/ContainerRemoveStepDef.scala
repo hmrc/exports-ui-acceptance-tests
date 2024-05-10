@@ -17,13 +17,13 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section6
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section6.RemoveContainerPage
+import uk.gov.hmrc.test.ui.pages.section6.ContainerRemovePage
 
-class RemoveContainerStepDef extends BaseStepDef {
+class ContainerRemoveStepDef extends BaseStepDef {
 
-  And("""^I should land on Remove-This-Container page""")(() => RemoveContainerPage.checkPage())
+  And("""^I should land on Remove-This-Container page""")(() => ContainerRemovePage.checkPage())
 
   And("""^I select (.*) to remove container (.*)""") { (yesNo: String, containerId: String) =>
-    RemoveContainerPage.fillPage(yesNo, containerId)
+    ContainerRemovePage.fillPage(yesNo, containerId)
   }
 }

@@ -20,28 +20,14 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{departureTransport, departureTransportCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{
-  DepartureTransport,
-  InlandModeOfTransport,
-  InlandOrBorder,
-  TransportLeavingBorder
-}
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{DepartureTransport, InlandModeOfTransport, TransportLeavingBorder}
 import uk.gov.hmrc.test.ui.pages.section6.InlandOrBorderPage.isBorderLocation
 
 object DepartureTransportPage extends BasePage {
 
   def backButtonHref: String =
-    if (maybeDetail(InlandOrBorder).nonEmpty) {
-      detail(InlandOrBorder) match {
-        case "Border location"             => InlandOrBorderPage.path
-        case "Customs controlled location" => InlandModeOfTransportPage.path
-      }
-    } else if (isClearance) SupervisingCustomsOfficePage.path
-    else {
-      maybeDetail(InlandModeOfTransport).fold(InlandModeOfTransportPage.backButtonHref)(_ =>
-        InlandModeOfTransportPage.path
-      )
-    }
+    if (isClearance) SupervisingCustomsOfficePage.path
+    else maybeDetail(InlandModeOfTransport).fold(InlandModeOfTransportPage.backButtonHref)( _=> InlandModeOfTransportPage.path)
 
   val path: String = "/declaration/departure-transport"
 

@@ -17,17 +17,17 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section6
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section6.ContainerListPage
+import uk.gov.hmrc.test.ui.pages.section6.SealsRemovePage
 
-class ContainerListStepDef extends BaseStepDef {
+class RemoveSealsStepDef extends BaseStepDef {
 
-  And("""^I should land on Container-List page""")(() => ContainerListPage.checkPage())
+  And("""^I should land on Remove-This-Seal page""")(() => SealsRemovePage.checkPage())
 
-  And("""^I click remove Container (.*) on Container List page""")((index:Int) => ContainerListPage.selectContainerToRemove(index))
-
-  And("""^I select (.*) to add another container""") { (yesNo: String) =>
-    ContainerListPage.fillPage(yesNo)
+  And("""^I click on remove link to delete seal""") { () =>
+    SealsRemovePage.removeAddedSeal(0)
   }
-  And("""^I navigate to Container List page""")(() => ContainerListPage.navigateToPage(ContainerListPage.path))
 
+  And("""^I select (.*) to remove seal""")((yesNo:String) =>
+    SealsRemovePage.fillPage(yesNo)
+  )
 }

@@ -24,7 +24,9 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.Seals
 object SealYesNoPage extends BasePage {
 
   def backButtonHref: String = ContainerListPage.path
+
   def path: String           = s"/declaration/containers/$containerId/seals"
+
   def title                  = s"Does container $containerId have any security seals?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(

@@ -28,10 +28,9 @@ import uk.gov.hmrc.test.ui.pages.section2.AreYouTheExporterPage.isExporter
 import uk.gov.hmrc.test.ui.pages.section2._
 import uk.gov.hmrc.test.ui.pages.section3._
 import uk.gov.hmrc.test.ui.pages.section4._
-import uk.gov.hmrc.test.ui.pages.section5.AdditionalProcedureCodesPage.isNoOtherAdditionalProcedureCodeApplies
-import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.isSupervisingCustomsOfficePageVisiblePC
+import uk.gov.hmrc.test.ui.pages.section5.AdditionalProcedureCodesPage.hasZeroAdditionalProcedureCode
+import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.hasSupervisingCustomsOfficePageVisiblePC
 import uk.gov.hmrc.test.ui.pages.section5._
-import uk.gov.hmrc.test.ui.pages.section6.InlandOrBorderPage.isBorderLocation
 import uk.gov.hmrc.test.ui.pages.section6._
 
 class CommonStepDef extends BaseStepDef {
@@ -168,7 +167,7 @@ class CommonStepDef extends BaseStepDef {
     AddDeclarationItemPage.fillPage()
     ProcedureCodesPage.fillPage("1042"); continue()
     AdditionalProcedureCodesPage.fillPage("F75"); continue()
-    if (isSupervisingCustomsOfficePageVisiblePC && !isNoOtherAdditionalProcedureCodeApplies) {
+    if (hasSupervisingCustomsOfficePageVisiblePC && !hasZeroAdditionalProcedureCode) {
       FiscalReferencesYesNoPage.fillPage(Constants.no);
       continue()
     }
@@ -208,13 +207,9 @@ class CommonStepDef extends BaseStepDef {
     if(isClearance){
       WarehousePage.fillPage("yes", "R1234567GB");
     }
-    if(isSupervisingCustomsOfficePageVisiblePC || isClearance){
-      SupervisingCustomsOfficePage.fillPage("GBBTH001"); continue()
-    }
+    SupervisingCustomsOfficePage.fillPage("GBBTH001"); continue()
     InlandOrBorderPage.fillPage("Customs controlled location"); continue()
-    if(!isBorderLocation) {
-      InlandModeOfTransportPage.fillPage("Postal or mail"); continue()
-    }
+    InlandModeOfTransportPage.fillPage("Postal or mail"); continue()
     DepartureTransportPage.fillPage("Flight number");continue()
     if(!isClearance) {
       TransportCountryPage.fillPage("Desirade - GP");continue()
@@ -234,6 +229,10 @@ class CommonStepDef extends BaseStepDef {
   And("""^I clear (.*) keys from cache""") { (cacheKeysToDelete: String) =>
     val keys = cacheKeysToDelete.split(", ").toList
     clear(detailKeys(keys: _*): _*)
+  }
+
+  And("""^I clear cache for section (.*)""") {(sectionId: Int) =>
+    clear(sectionId)
   }
 
   And("""^I remove one item from the declaration""") { () =>

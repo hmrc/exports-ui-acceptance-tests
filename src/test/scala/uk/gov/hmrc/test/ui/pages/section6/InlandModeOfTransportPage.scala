@@ -19,15 +19,11 @@ package uk.gov.hmrc.test.ui.pages.section6
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.inlandTransportDetails
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{InlandModeOfTransport, InlandOrBorder, TransportLeavingBorder}
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{InlandModeOfTransport, InlandOrBorder}
 
 object InlandModeOfTransportPage extends BasePage {
 
-  def backButtonHref: String =
-    if (detail(TransportLeavingBorder).equals("Roll on Roll off (RoRo)"))
-      TransportLeavingTheBorderPage.path
-    else
-      maybeDetail(InlandOrBorder).fold(InlandOrBorderPage.backButtonHref)(_ => InlandOrBorderPage.path)
+  def backButtonHref: String = maybeDetail(InlandOrBorder).fold(InlandOrBorderPage.backButtonHref)(_ => InlandOrBorderPage.path)
 
   val path: String = "/declaration/inland-transport-details"
 

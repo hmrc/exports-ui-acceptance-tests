@@ -68,7 +68,14 @@ object ProcedureCodesPage extends BasePage {
 
   def hasRestrictingZeroVatPC: Boolean = codesRestrictingZeroVat.contains(detail(ProcedureCode(itemId)))
 
-  def isPermanentExportOfUKGoodsPC: Boolean = listOfItemDetailFor(ProcedureCodeLabel).contains("1040")
+  def hasPermanentExportOfUKGoodsPC: Boolean = listOfItemDetailFor(ProcedureCodeLabel).contains("1040")
 
-  def isSupervisingCustomsOfficePageVisiblePC: Boolean = detail(ProcedureCode(itemId)) == "1042"
+  def hasSupervisingCustomsOfficePageVisiblePC: Boolean = detail(ProcedureCode(itemId)) == "1042"
+
+  private val codesToGoToWarehouse: Seq[String] = List("07", "71", "78")
+
+  def goToWareHouse: Boolean = {
+    val procedureCode = detail(ProcedureCode(itemId))
+    codesToGoToWarehouse.exists(procedureCode.endsWith)
+  }
 }

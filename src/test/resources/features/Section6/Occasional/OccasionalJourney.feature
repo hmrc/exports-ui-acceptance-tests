@@ -80,7 +80,7 @@ Feature: Section6 Occasional Journey
           # Container pages
      # 3. The following page is skipped
           # Departure Transport
-    Then I clear Customs supervising office, Presenting to customs, Inland mode of transport, Transport leaving the border, Country of registration for the transport leaving the UK border, Express consignment, Method of payment for transport, Container ID, Security seals keys from cache
+    Then I clear cache for section 6
     And I navigate to Destination Country page
     Then I should land on Destination-Country page
     And I select Jersey as the destination country
@@ -108,11 +108,14 @@ Feature: Section6 Occasional Journey
 
 
       ## Below scenario -
-     # 1. if procedure code is 1042 and Additional procedure code as 00
+     # 1. if procedure code is 1042 and Additional procedure code as 000
+#    and Inland or border as Border location
      # 2. The following page is visible
           # Supervising-Customs-Office
      # 3. The following page is skipped
           # Departure Transport
+          #  Inland transport details
+          #  Border transport
 
     @Section6 @OcaDec
     Scenario: Occasional arrived journey section-6
@@ -128,34 +131,22 @@ Feature: Section6 Occasional Journey
       And I select GBBTH001 as the customs office code
       And I click continue
       Then I should land on Inland-Or-Border page
-      And I select Customs controlled location for presenting the goods to customs
-      And I click continue
-      Then I should land on Inland-Transport-details page
-      And I select Air transport as mode of Inland transport
-      And I click continue
-      Then I should land on Border-Transport page
-      And I select Flight number as the border transport
+      And I select Border location for presenting the goods to customs
       And I click continue
       Then I should land on Transport-Country page
-      And I select Macao as the transport country
+      And I select France as the transport country
       And I click continue
       Then I should land on Express-Consignment page
       And I select Yes to confirm consignment as express
       And I click continue
       Then I should land on Transport-Payment page
-      And I select Payment in cash as the mode of payment
+      And I select Payment by cheque as the mode of payment
       And I click continue
       Then I should land on Container page
       And I select Yes to add Container1 as container
       And I click continue
       Then I should land on Seal-YesNo page
-      And I select Yes to add security seal
-      And I click continue
-      Then I should land on Seal page
-      And I enter Seal1 as seal
-      And I click continue
-      Then I should land on Seal-List page
-      And I select No to add another security seal
+      And I select No to add security seal
       And I click continue
       Then I should land on Container-List page
       And I select No to add another container

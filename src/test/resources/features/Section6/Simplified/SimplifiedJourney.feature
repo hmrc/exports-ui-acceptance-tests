@@ -140,7 +140,7 @@ Feature: Section6 Simplified Journey
           # Departure Transport
 
   @Section6 @SimDec
-  Scenario: simplified journey section-6
+  Scenario: simplified arrived journey section-6
     Given I fill section1 for SIMPLIFIED,arrived declaration
     And I fill section2
     And I fill section3
@@ -153,17 +153,15 @@ Feature: Section6 Simplified Journey
     Then I should land on Additional-Procedure-Codes page
     And I select 000 as additional procedure code
     And I click continue
+    And I navigate to Transport-Leaving-The-Border page
     Then I should land on Transport-Leaving-The-Border page
-    And I select Roll on Roll off (RoRo) as mode of transport leaving the border
+    And I select Inland waterway transport as mode of transport leaving the border
     And I click continue
     Then I should land on Warehouse page
     And I enter approved warehouse number
     And I click continue
     Then I should land on Supervising-Customs-Office page
     And I select GBBTH001 as the customs office code
-    And I click continue
-    Then I should land on Inland-Or-Border page
-    And I select Customs controlled location for presenting the goods to customs
     And I click continue
     Then I should land on Inland-Transport-details page
     And I select Sea transport as mode of Inland transport

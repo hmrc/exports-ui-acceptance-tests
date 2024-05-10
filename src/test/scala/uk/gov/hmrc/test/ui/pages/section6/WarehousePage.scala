@@ -50,9 +50,9 @@ object WarehousePage extends BasePage {
     if (!isClearance) {
       fillTextBoxById("identificationNumber", values(identifierOnNonClearance))
       store(WarehouseHouse -> Detail(values(identifierOnNonClearance)))
-    } else if (isClearance) {
-      selectYesOrNoRadio(values(yesNo))
+    } else if (selectYesOrNoRadio(values(yesNo))) {
       fillTextBoxById("identificationNumber", values(identifierOnClearance))
       store(WarehouseHouse -> Detail(values(identifierOnClearance)))
-    } else store(WarehouseHouse -> Detail(Constants.no))
+    } else
+      store(WarehouseHouse -> Detail(Constants.no))
 }

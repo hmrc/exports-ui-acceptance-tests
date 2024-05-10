@@ -23,20 +23,12 @@ import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isSupplementary
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 import uk.gov.hmrc.test.ui.pages.section3.DestinationCountryPage.isGuernseyOrJerseyDestination
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
-import uk.gov.hmrc.test.ui.pages.section6.InlandModeOfTransportPage.isFixedTransport
+import uk.gov.hmrc.test.ui.pages.section6.InlandModeOfTransportPage.{isFixedTransport, isPostalOrMail}
 import uk.gov.hmrc.test.ui.pages.section6.InlandOrBorderPage.isBorderLocation
-import uk.gov.hmrc.test.ui.pages.section6.TransportLeavingTheBorderPage.isPostalOrMail
 
 object TransportCountryPage extends BasePage {
 
-  def backButtonHref: String =
-    if (gotoDepartureTransportPage) DepartureTransportPage.path
-    else if (maybeDetail(InlandOrBorder).nonEmpty) {
-      detail(InlandOrBorder) match {
-        case "Border location"             => InlandOrBorderPage.path
-        case "Customs controlled location" => BorderTransportPage.path
-      }
-    } else maybeDetails(BorderTransport).fold(BorderTransportPage.backButtonHref)(_ => BorderTransportPage.path)
+  def backButtonHref: String = maybeDetails(BorderTransport).fold(BorderTransportPage.backButtonHref)(_ => BorderTransportPage.path)
 
   val path: String = "/declaration/transport-country"
 

@@ -21,11 +21,19 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage
 object SealsRemovePage extends BasePage {
 
   def path: String           = removeUrl("containers", "seals")
+
   def title                  = s"Are you sure you want to remove this security seal for container $containerId?"
-  def backButtonHref: String = ContainerListPage.path
+
+  def backButtonHref: String = SealYesNoPage.path
+
+  override def checkExpanders(): Unit = ()
 
   private val yesNo = 0
 
   override def fillPage(values: String*): Unit =
     selectYesOrNoRadio(values(yesNo))
+
+  def removeAddedSeal(index: Int): Unit = clickByCssSelector(
+    s"#removable_elements-row$index-remove_button > a"
+  )
 }

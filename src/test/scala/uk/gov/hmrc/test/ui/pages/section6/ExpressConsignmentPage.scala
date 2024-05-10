@@ -20,17 +20,18 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{expressConsignment, expressConsignmentCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isSupplementary}
-import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
-import uk.gov.hmrc.test.ui.pages.section2.EntryIntoDeclarantRecordsPage.isEidr
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{ExpressConsignment, TransportCountry}
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{DepartureTransport, ExpressConsignment, TransportCountry}
 import uk.gov.hmrc.test.ui.pages.section6.TransportLeavingTheBorderPage.{isFixedTransport, isPostalOrMail}
 
 object ExpressConsignmentPage extends BasePage {
 
-  def backButtonHref: String =
-    if (isClearance && isEidr && (isFixedTransport || isPostalOrMail)) SupervisingCustomsOfficePage.path
-    else if (gotoInlandOrBorderPage) InlandOrBorderPage.path
+  def backButtonHref: String = {
+    if (isClearance) {
+      if (maybeDetails(DepartureTransport).isEmpty) SupervisingCustomsOfficePage.path
+      else DepartureTransportPage.path
+    }
     else maybeDetail(TransportCountry).fold(TransportCountryPage.backButtonHref)(_ => TransportCountryPage.path)
+  }
 
   val path: String = "/declaration/express-consignment"
 
@@ -48,6 +49,6 @@ object ExpressConsignmentPage extends BasePage {
   }
 
   def gotoInlandOrBorderPage: Boolean =
-    (isStandard || !isSupplementary) && (isFixedTransport || isPostalOrMail)
+    !isSupplementary && (isFixedTransport || isPostalOrMail)
 
 }

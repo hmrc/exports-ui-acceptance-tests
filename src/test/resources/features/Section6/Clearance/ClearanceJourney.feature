@@ -70,8 +70,8 @@ Feature: Section6 Clearance Journey
          #  Inland-Transport-details
          #  Border-Transport
 
-    Then I navigate to Is This EXS page
-    And I select Yes to is this exs
+    Then I navigate to Entry Into Declarant Records page
+    And I select No to is this an entry into declarant records
     And I click continue
     Then I navigate to Procedure codes page
     And I select 0017 as procedure code
@@ -82,6 +82,8 @@ Feature: Section6 Clearance Journey
     And I navigate to Transport-Leaving-The-Border page
     Then I should land on Transport-Leaving-The-Border page
     And I select Fixed transport installations as mode of transport leaving the border
+    #Due to the fix transport installation we need to clear Departure transport
+    And I clear cache for section 6
     And I click continue
     Then I should land on Warehouse page
     And I select Yes and enter approved warehouse number
@@ -95,7 +97,7 @@ Feature: Section6 Clearance Journey
     Then I should land on Transport-Payment page
     And I select Payment in cash as the mode of payment
     And I click continue
-    Then I should land on Container-List page
+    Then I navigate to MiniCYA page for Section-6
     And I check the MiniCYA page for Section-6
     And I click continue on MiniCya
     Then I should land on Saved-Summary page
@@ -131,7 +133,7 @@ Feature: Section6 Clearance Journey
     Then I should land on Transport-Leaving-The-Border page
     And I select Roll on Roll off (RoRo) as mode of transport leaving the border
     And I click continue
-    Then I should land on Warehouse page //bug
+    Then I should land on Warehouse page
     And I select Yes and enter approved warehouse number
     And I click continue
     Then I should land on Supervising-Customs-Office page

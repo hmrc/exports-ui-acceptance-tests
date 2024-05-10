@@ -19,12 +19,12 @@ package uk.gov.hmrc.test.ui.pages.section6
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.inlandOrBorder
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.isPermanentExportOfUKGoodsPC
+import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.hasPermanentExportOfUKGoodsPC
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{InlandOrBorder, SuperVisingCustomsOffice}
 
 object InlandOrBorderPage extends BasePage {
 
-  def backButtonHref: String = if (isPermanentExportOfUKGoodsPC) TransportLeavingTheBorderPage.path
+  def backButtonHref: String = if (hasPermanentExportOfUKGoodsPC) TransportLeavingTheBorderPage.path
   else
     maybeDetail(SuperVisingCustomsOffice).fold(SupervisingCustomsOfficePage.backButtonHref)(_ =>
       SupervisingCustomsOfficePage.path
