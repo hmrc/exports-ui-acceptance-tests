@@ -121,6 +121,9 @@ trait DriverHelper {
   def fillTextBoxByName(name: String, text: String): Unit =
     findElementByName(name).sendKeys(text)
 
+  def reset(elementId: String): Unit = waitForId(elementId).clear()
+
+
   def selectRadioAndClick(elementId: String): Unit = {
     val actions = new Actions(driver)
     val element = findElementById(elementId)

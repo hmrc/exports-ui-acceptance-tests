@@ -17,16 +17,20 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section6
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section6.TransportLeavingTheBorderPage
+import uk.gov.hmrc.test.ui.pages.section6.WarehousePage
 
-class TransportLeavingTheBorderStepDef extends BaseStepDef {
+class WarehouseStepDef extends BaseStepDef {
 
-  And("""^I should land on Transport-Leaving-The-Border page""")(() => TransportLeavingTheBorderPage.checkPage())
+  And("""^I should land on Warehouse page""")(() => WarehousePage.checkPage())
 
-  And("""^I select (.*) as mode of transport leaving the border""") { (mode: String) =>
-    TransportLeavingTheBorderPage.fillPage(mode)
+  And("""^I enter approved warehouse number""") { () =>
+    WarehousePage.fillPage("R1234567GB")
   }
 
-  And("""^I navigate to Transport-Leaving-The-Border page""")(() => TransportLeavingTheBorderPage.navigateToPage(TransportLeavingTheBorderPage.path))
+  And("""^I select (.*) and enter approved warehouse number""") { (yesNo:String) =>
+    WarehousePage.fillPage(yesNo, "R1234567GB")
+  }
+
+  And("""^I navigate to Warehouse page""")(() => WarehousePage.navigateToPage(WarehousePage.path))
 
 }

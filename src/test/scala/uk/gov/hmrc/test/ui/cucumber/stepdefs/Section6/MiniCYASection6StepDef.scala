@@ -23,6 +23,10 @@ class MiniCYASection6StepDef extends BaseStepDef {
 
   And("""^I should land on MiniCYA-Section-6 page""")(() => SummarySection6Page.checkPage())
 
+  And("""^I navigate to MiniCYA page for Section-6""") { () =>
+    SummarySection6Page.navigateToPage(SummarySection6Page.path)
+  }
+
   And("""^I check the MiniCYA page for Section-6""") { () =>
     SummarySection6Page.fillPage()
   }

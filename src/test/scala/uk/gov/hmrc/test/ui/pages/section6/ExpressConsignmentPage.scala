@@ -19,18 +19,25 @@ package uk.gov.hmrc.test.ui.pages.section6
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{expressConsignment, expressConsignmentCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{ExpressConsignment, TransportCountry}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{DepartureTransport, ExpressConsignment, TransportCountry}
 
 object ExpressConsignmentPage extends BasePage {
 
-  def backButtonHref: String = maybeDetail(TransportCountry).fold(TransportCountryPage.backButtonHref)(_ => TransportCountryPage.path)
-  val path: String  = "/declaration/express-consignment"
+  def backButtonHref: String = {
+    if (isClearance) {
+      if (maybeDetails(DepartureTransport).isEmpty) SupervisingCustomsOfficePage.path
+      else DepartureTransportPage.path
+    }
+    else maybeDetail(TransportCountry).fold(TransportCountryPage.backButtonHref)(_ => TransportCountryPage.path)
+  }
+
+  val path: String = "/declaration/express-consignment"
+
   val title: String = "Is this an express consignment?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(expressConsignment),
-    Clearance -> List(expressConsignmentCL)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] =
+    Map(Common -> List(expressConsignment), Clearance -> List(expressConsignmentCL))
 
   // No  => fillPage(no)
   // Yes => fillPage(yes)

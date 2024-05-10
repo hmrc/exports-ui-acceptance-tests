@@ -1,6 +1,6 @@
 Feature: Full Standard Journey
 
-  @FullStandardJourney @StandardPrelodged
+  @FullStandardJourney @StandardPrelodged @All
   Scenario: Full Standard Journey
     Given I fill section1 for STANDARD, prelodged declaration
     And I fill section2

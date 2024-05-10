@@ -23,7 +23,7 @@ class IsThisExsStepDef extends BaseStepDef {
 
   And("""^I should land on Is-This-Exs page""")(() => IsThisExsPage.checkPage())
 
-  And("""^I select (.*) to is this exs""")((isEidr: String) => IsThisExsPage.fillPage(isEidr))
+  And("""^I select (.*) to is this exs""")((yesNo: String) => IsThisExsPage.fillPage(yesNo))
 
   And("""^I navigate to Is This EXS page""")(() => IsThisExsPage.navigateToPage(IsThisExsPage.path))
 }

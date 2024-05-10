@@ -37,6 +37,6 @@ object EntryIntoDeclarantRecordsPage extends BasePage {
     selectYesOrNoRadio(values(yesNo), "answer_yes", "answer_no")
     store(EntryIntoDeclarantsRecords -> Detail(values(yesNo)))
   }
-  def isEidr: Boolean = maybeDetail(EntryIntoDeclarantsRecords).fold(false)(_ == yes)
 
+  def isEidr: Boolean = maybeDetail(EntryIntoDeclarantsRecords).fold(false)(_ == yes)
 }

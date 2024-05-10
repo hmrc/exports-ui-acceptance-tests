@@ -26,7 +26,7 @@ object InlandOrBorderPage extends BasePage {
   def backButtonHref: String =
     maybeDetail(SuperVisingCustomsOffice).fold(SupervisingCustomsOfficePage.backButtonHref)(_ => SupervisingCustomsOfficePage.path)
 
-  val path: String  = "/declaration/inland-or-border"
+  val path: String = "/declaration/inland-or-border"
   val title: String = "Where are you presenting your goods to customs?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(inlandOrBorder))
@@ -37,11 +37,11 @@ object InlandOrBorderPage extends BasePage {
 
   override def fillPage(values: String*): Unit = {
     values(location) match {
-      case "Border Location"             => clickById("Border")
+      case "Border location"             => clickById("Border")
       case "Customs controlled location" => clickById("Inland")
     }
     store(InlandOrBorder -> Detail(values(location)))
   }
 
-  def isBorderLocation: Boolean = maybeDetail(InlandOrBorder).contains("Border Location")
+  def isBorderLocation: Boolean = maybeDetail(InlandOrBorder).contains("Border location")
 }

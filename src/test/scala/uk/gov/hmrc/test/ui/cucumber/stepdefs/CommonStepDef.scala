@@ -25,9 +25,11 @@ import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, is
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 import uk.gov.hmrc.test.ui.pages.section1._
 import uk.gov.hmrc.test.ui.pages.section2.AreYouTheExporterPage.isExporter
+import uk.gov.hmrc.test.ui.pages.section2.IsThisExsPage.isThisExs
 import uk.gov.hmrc.test.ui.pages.section2._
 import uk.gov.hmrc.test.ui.pages.section3._
 import uk.gov.hmrc.test.ui.pages.section4._
+import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.{goToWarehouse, hasSupervisingCustomsOfficePageVisiblePC}
 import uk.gov.hmrc.test.ui.pages.section5._
 import uk.gov.hmrc.test.ui.pages.section6._
 
@@ -107,7 +109,7 @@ class CommonStepDef extends BaseStepDef {
     RepresentativesEORINumberPage.fillPage("GB121012121212"); continue()
     RepresentationTypeAgreedPage.fillPage("Direct"); continue()
 
-    if ((isStandard || isOccasional || isSimplified) && !isExporter){
+    if ((isStandard || isOccasional || isSimplified) && !isExporter) {
       ThirdPartyGoodsTransportationPage.fillPage("Yes"); continue()
     }
 
@@ -165,35 +167,33 @@ class CommonStepDef extends BaseStepDef {
     AddDeclarationItemPage.fillPage()
     ProcedureCodesPage.fillPage("1042"); continue()
     AdditionalProcedureCodesPage.fillPage("F75"); continue()
-    FiscalReferencesYesNoPage.fillPage(Constants.no); continue()
+    if (hasSupervisingCustomsOfficePageVisiblePC) {
+      FiscalReferencesYesNoPage.fillPage(Constants.no);
+      continue()
+    }
     CommodityDetailsPage.fillPage("4203400090", "Straw for bottles"); continue()
-    DangerousGoodsCodePage.fillPage(Constants.no); continue()
-
+    if (!isClearance || isThisExs) {
+      DangerousGoodsCodePage.fillPage(Constants.no); continue()
+    }
     if (isStandard) {
       VatRatingPage.fillPage("Yes"); continue()
     }
-
-    if (!isClearance) {
+    if(!isClearance) {
       NationalAdditionalCodesPage.fillPage(Constants.no); continue()
     }
-
     if (isStandard || isSupplementary) {
       StatisticalValuePage.fillPage("1000"); continue()
     }
-
     PackageInformationPage.fillPage("1", "Aerosol", "20", "No shipping mark"); continue()
     PackageInformationListPage.fillPage(Constants.no); continue()
-
     if (isStandard || isSupplementary || isClearance) {
       CommodityMeasurePage.fillPage("500", "700"); continue()
     }
     if (isStandard || isSupplementary) {
       SupplementaryUnitsPage.fillPage(Constants.yes, "12"); continue()
     }
-
     AdditionalInformationYesNoPage.fillPage(Constants.no); continue()
-
-    if(!isClearance) {
+    if (!isClearance) {
       LicenseRequiredYesNoPage.fillPage(Constants.yes); continue()
     }
     AdditionalDocumentPage.fillPage("1", "C501", "GBAEOC717572504502801"); continue()
@@ -204,9 +204,16 @@ class CommonStepDef extends BaseStepDef {
 
   And("""^I fill section6""") { () =>
     TransportLeavingTheBorderPage.fillPage("Sea transport"); continue()
+    if (isClearance || goToWarehouse) {
+      WarehousePage.fillPage("yes", "R1234567GB");
+    }
     SupervisingCustomsOfficePage.fillPage("GBBTH001"); continue()
     InlandOrBorderPage.fillPage("Customs controlled location"); continue()
     InlandModeOfTransportPage.fillPage("Postal or mail"); continue()
+    DepartureTransportPage.fillPage("Flight number");continue()
+    if(!isClearance) {
+      TransportCountryPage.fillPage("Desirade - GP");continue()
+    }
     ExpressConsignmentPage.fillPage("Yes"); continue()
     TransportPaymentPage.fillPage("Payment in cash"); continue()
     ContainerPage.fillPage("Yes", "Container1"); continue()
@@ -221,7 +228,11 @@ class CommonStepDef extends BaseStepDef {
 
   And("""^I clear (.*) keys from cache""") { (cacheKeysToDelete: String) =>
     val keys = cacheKeysToDelete.split(", ").toList
-    clear(detailKeys(keys:_*):_*)
+    clear(detailKeys(keys: _*): _*)
+  }
+
+  And("""^I clear cache for section (.*)""") {(sectionId: Int) =>
+    clear(sectionId)
   }
 
   And("""^I remove one item from the declaration""") { () =>
@@ -229,18 +240,16 @@ class CommonStepDef extends BaseStepDef {
   }
 
   And("""^I click change link for (.*) page""") { (pageName: String) =>
-    val changeLinkMap: Map[String, String] = Map(
-      "Authorisation Type" -> "authorisation-holder-1-type"
-    )
+    val changeLinkMap: Map[String, String] = Map("Authorisation Type" -> "authorisation-holder-1-type")
 
     CommonPage.changeLinkOnCYA(changeLinkMap(pageName)).click()
   }
 }
-  object CommonStepDef {
-    def genSequenceId(seqId: String): String =
-      seqId match {
-        case "first" => "0"
-        case "second" => "1"
-        case "third" => "2"
-      }
+object CommonStepDef {
+  def genSequenceId(seqId: String): String =
+    seqId match {
+      case "first"  => "0"
+      case "second" => "1"
+      case "third"  => "2"
+    }
 }
