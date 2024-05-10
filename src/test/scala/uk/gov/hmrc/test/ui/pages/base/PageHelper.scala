@@ -25,7 +25,8 @@ import scala.util.matching.Regex
 trait PageHelper extends DriverHelper {
 
   private val initPart: String = "/declaration"
-  private val elementId: String = "[0-9A-Za-z\\-\\.]+"
+  val elementId: String = "[0-9A-Za-z\\-\\.]+"
+  val timelineLink = s"/submissions/$elementId/information".r
 
   private val containerIdPattern: Regex = s".+$initPart/containers/($elementId)/.+".r
   protected def containerId: String =
@@ -51,7 +52,5 @@ trait PageHelper extends DriverHelper {
   def navigateToItemPage(partId: String, itemIdFromCache: String = details(ItemIds).head): Unit =
     driver.navigate().to(s"$host$initPart/items/$itemIdFromCache/$partId")
 
-  def navigateToPage(path: String): Unit = {
-    driver.navigate().to(s"$host$path")
-  }
+  def navigateToPage(path: String): Unit = driver.navigate().to(s"$host$path")
 }

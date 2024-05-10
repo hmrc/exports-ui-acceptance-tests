@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,14 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.cucumber.stepdefs.section1
+package uk.gov.hmrc.test.ui.pages.common
 
-import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section1.ChoicePage
+import uk.gov.hmrc.test.ui.pages.base.DetailKey
 
-class ChoicePageStepDef extends BaseStepDef {
+object DetailKeys {
 
-  And("""^I should land on Choice page""")(() => ChoicePage.checkPage())
-
-  And("""^I select to (.*)""")((dec: String) => ChoicePage.fillPage(dec))
-
-  And("""^I navigate to Choice page""")(() => ChoicePage.navigateToPage(ChoicePage.path))
+  val sectionCommon = 7
+  // /authorisation-choice
+  val MrnOnDashboard: DetailKey = DetailKey("Mrn on Dashboard", sectionCommon, skipRowCheck = true)
+  val StatusOnDashboard: DetailKey = DetailKey("Status on Dashboard", sectionCommon, skipRowCheck = true)
 }

@@ -14,16 +14,20 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.cucumber.stepdefs.section1
+package uk.gov.hmrc.test.ui.cucumber.stepdefs.Dashboard
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section1.ChoicePage
+import uk.gov.hmrc.test.ui.pages.dashboard.DashboardPage
 
-class ChoicePageStepDef extends BaseStepDef {
+class DashboardPageStepDef extends BaseStepDef {
 
-  And("""^I should land on Choice page""")(() => ChoicePage.checkPage())
+  And("""^I should land on Dashboard page""")(() => DashboardPage.checkPage())
 
-  And("""^I select to (.*)""")((dec: String) => ChoicePage.fillPage(dec))
+  And("""^I validate declaration details on (.*) tab and check Status is (.*)""") { (tab: String, status: String) =>
+    DashboardPage.validateDashboard(tab, status)
+  }
 
-  And("""^I navigate to Choice page""")(() => ChoicePage.navigateToPage(ChoicePage.path))
+  And("""^I navigate to declaration information page after clicking on mrn link""") { () =>
+    DashboardPage.mrnLink.click()
+  }
 }
