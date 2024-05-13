@@ -34,7 +34,7 @@ object RemoveItemsPage extends BasePage {
   override def fillPage(values: String*): Unit =
     if (selectYesOrNoRadio(values(yesNo))) {
       val itemIds = details(ItemIds)
-      val itemId = itemIds(values(0).toInt)
+      val itemId = itemIds(values(1).toInt)
       clear(section5, Some(itemId))
       store(ItemIds -> Details(itemIds.filterNot(_ == itemId)))
     }

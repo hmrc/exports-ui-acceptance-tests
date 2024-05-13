@@ -231,11 +231,14 @@ Feature: Section6 Supplementary Journey
           # Supervising-Customs-Office
           # Inland Transport details and
           # Container
-     # 3. And the follwing pages are skipped
+     # 3. And the following pages are skipped
+          # Inland or Border
           # Departure Transport
+          # Transport country
           # Express-Consignment
           # Transport-Payment
 
+    Then I clear Presenting to customs, Transport details at the border, Transport leaving the border, Country of registration for the transport leaving the UK border keys from cache
     And I navigate to Authorisation Choice page
     And I select Permanent as export procedure choice
     And I click continue
@@ -275,6 +278,8 @@ Feature: Section6 Supplementary Journey
     And I select Postal or mail as mode of Inland transport
     And I click continue
     Then I should land on Container-List page
+    And I select No to add another container
+    And I click continue
     And I check the MiniCYA page for Section-6
     And I click continue on MiniCya
     Then I should land on Saved-Summary page

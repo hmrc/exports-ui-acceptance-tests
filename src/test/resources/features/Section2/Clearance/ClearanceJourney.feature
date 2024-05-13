@@ -102,7 +102,7 @@ Feature: Section2 Clearance Prelodged
     #            are-you-completing-this-declaration-on-behalf-of-another-agent
     #            representative-eori-number
     #            representation-type-agreed
-    And I clear Is this an EIDR?, Carrier or haulier’s EORI number, Exporter’s details, Consignor’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation, Carrier or haulier’s details keys from cache
+    And I clear Is this an EIDR?, Exporter’s details, Consignor’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation, Carrier or haulier’s details keys from cache
     And I navigate to Entry Into Declarant Records page
     And I select Yes to is this an entry into declarant records
     And I click continue

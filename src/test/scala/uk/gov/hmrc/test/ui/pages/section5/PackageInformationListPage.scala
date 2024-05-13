@@ -18,7 +18,7 @@ package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isSimplified}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isOccasional, isSimplified}
 import uk.gov.hmrc.test.ui.pages.section2.IsThisExsPage.isThisExs
 import uk.gov.hmrc.test.ui.pages.section5.AdditionalProcedureCodesPage.isLowValueDeclaration
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.PackageTypeLabel
@@ -27,7 +27,7 @@ object PackageInformationListPage extends BasePage {
 
   val pageId = "packages-list"
   def backButtonHref: String =  {
-    if (!isLowValueDeclaration && isSimplified) {NationalAdditionalCodesListPage.path}
+    if ((!isLowValueDeclaration && isSimplified) || (isOccasional && listOfItemDetailFor("Supplementary units").toList.nonEmpty)){NationalAdditionalCodesListPage.path}
     else if(isClearance && isThisExs) {DangerousGoodsCodePage.path}
     else if(isClearance) {CommodityDetailsPage.path}
     else {StatisticalValuePage.path}

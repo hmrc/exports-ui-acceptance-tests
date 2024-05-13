@@ -151,7 +151,7 @@ Feature: Section6 Standard Journey
           # You have added Continer page (/containers)
 
 
-    And I clear Presenting to customs, Transport details at the border, Method of payment for transport keys from cache
+    And I clear Presenting to customs, Transport details at the border, Method of payment for transport, Security seals keys from cache
     And I navigate to Transport-Leaving-The-Border page
     Then I should land on Transport-Leaving-The-Border page
     And I select Fixed transport installations as mode of transport leaving the border

@@ -1,7 +1,7 @@
 **This is a template README.md.  Be sure to update this with project specific content that describes your ui test project.**
 
 # exports-ui-acceptance-tests
-`<digital service name>` UI journey tests.  
+`Customs-declare-exports` UI journey tests.  
 
 ## Pre-requisites
 
@@ -16,71 +16,31 @@ docker run --rm -d -p 27017:27017 --name mongo mongo:4.4
 Start `<digital service name>` services as follows:
 
 ```bash
-sm2 --start <profile>
+sm2 --start CDS_EXPORTS_DECLARATION_ALL
 ```
-
-### Dockerized browser container(s)
-
-Start a browser Docker container as follows:
-
-* Argument `<browser>` must be `remote-chrome`, `remote-edge` or `remote-firefox`.
-
-```bash
-./run_browser_with_docker.sh <browser>
-```
-
-### Test inspection and debugging
-
-Connect to `127.0.0.1:5900` via a VNC client to inspect and debug test execution.
-
-If prompted for a password the default is `secret`.
 
 ## Tests
 
 Run tests as follows:
 
-* Argument `<browser>` must be `chrome`, `edge`, `firefox`, `remote-chrome`, `remote-edge` or `remote-firefox`.
-* Argument `<environment>` must be `local`, `dev`, `qa` or `staging`.
+* Argument `<browser>` must be `chrome`, `edge`, `firefox`.
+* Argument `<environment>` must be `local`, `dev`, `staging`. (QA is using real service, so we are not running tests by using QA as environment)
 
+### Running any individual test 
+Use the tag @Wip tag before the scenario and run the bash command below
 ```bash
 ./run_tests.sh <browser> <environment>
 ```
 
-### Running ZAP tests
-
-ZAP tests can be automated using the HMRC Dynamic Application Security Testing approach. Running 
-automated ZAP tests should not be considered a substitute for manual exploratory testing using OWASP ZAP.
-
-#### Tagging tests for ZAP
-
-It is not required to proxy every journey test via ZAP. The intention of proxying a test through ZAP is to expose all the
- relevant pages of an application to ZAP. So tagging a subset of the journey tests or creating a 
- single ZAP focused journey test is sufficient.
-
-#### Configuring the browser to proxy via ZAP 
-
-Setting the system property `zap.proxy=true` configures the browser specified in `browser` property to proxy via ZAP. 
-This is achieved using [webdriver-factory](https://github.com/hmrc/webdriver-factory#proxying-trafic-via-zap).
-
-#### Executing a ZAP test
-
-The shell script `run_zap_tests.sh` is available to execute ZAP tests. The script proxies a set of journey tests, 
-tagged as `ZapTests`, via ZAP.  
-
-For example, to execute ZAP tests locally using a Chrome browser
-
-```
-./run_zap_test.sh chrome local
+### Running Smoke tests
+```bash
+./run_smoke.sh <browser> <environment>
 ```
 
-To execute ZAP tests locally using a remote-chrome browser
-
+### Running Regression tests
+```bash
+./run_regression.sh <browser> <environment>
 ```
-./run_browser_with_docker.sh remote-chrome 
-./run_zap_test.sh remote-chrome local
-``` 
-
-`./run_browser_with_docker.sh` is **NOT** required when running in a CI environment.
 
 ### Running tests using BrowserStack
 If you would like to run your tests via BrowserStack from your local development environment please refer to the [webdriver-factory](https://github.com/hmrc/webdriver-factory/blob/main/README.md/#user-content-running-tests-using-browser-stack) project.
