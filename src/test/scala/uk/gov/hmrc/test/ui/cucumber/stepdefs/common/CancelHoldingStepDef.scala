@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.pages.common
+package uk.gov.hmrc.test.ui.cucumber.stepdefs.common
 
-import uk.gov.hmrc.test.ui.pages.base.DetailKey
+import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
+import uk.gov.hmrc.test.ui.pages.common.CancelHoldingPage
 
-object DetailKeys {
+class CancelHoldingStepDef extends BaseStepDef {
 
-  val sectionCommon = 7
-  // /authorisation-choice
-  val MrnOnDashboard: DetailKey = DetailKey("Mrn on Dashboard", sectionCommon, skipRowCheck = true)
-  val StatusOnDashboard: DetailKey = DetailKey("Status on Dashboard", sectionCommon, skipRowCheck = true)
-  val DeclarationInfoPath: DetailKey = DetailKey("Declaration Info Path", sectionCommon, skipRowCheck = true)
+  And("""^I should land on Cancel holding page and redirect to Cancellation result page""") { () =>
+    CancelHoldingPage.checkPage()
+    CancelHoldingPage.fillPage()
+  }
 }

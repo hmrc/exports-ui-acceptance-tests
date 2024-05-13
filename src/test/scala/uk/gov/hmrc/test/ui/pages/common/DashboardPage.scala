@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.pages.dashboard
+package uk.gov.hmrc.test.ui.pages.common
 
 import org.openqa.selenium.WebElement
 import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.common.DetailKeys._
 import uk.gov.hmrc.test.ui.pages.section1.ChoicePage
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys._
@@ -41,23 +41,32 @@ object DashboardPage extends BasePage {
 
   def validateDashboard(tab: String, status: String): Unit = {
     findElementByClassName("cds-exports-tabs__list-item--selected").getText mustBe tab
-    findElementByClassName("submission-tab-submitted-row0-ducr").getText mustBe detail(Ducr)
-    findElementByClassName("submission-tab-submitted-row0-lrn").getText mustBe detail(Lrn)
+    statusRefresh(status)
+    findElementByXpath("//tbody//tr[1]//td[2]").getText mustBe detail(Ducr)
+    findElementByXpath("//tbody//tr[1]//td[3]").getText mustBe detail(Lrn)
 
-    val decStatus = findElementByClassName("submission-tab-submitted-row0-status").getText
-    decStatus  mustBe status
-
-    assert(findElementByClassName("submission-tab-submitted-row0-updatedOn").isDisplayed)
-    val mrnValue = findElementByCssSelector(".submission-tab-submitted-row0-mrn span:first-child")
+    assert(findElementByXpath("//tbody//tr[1]//td[4]").isDisplayed)
+    val decStatus = findElementByXpath("//tbody//tr[1]//td[5]").getText
+    decStatus mustBe status
+    val mrnValue = findElementByXpath("//tbody//tr[1]//td[1]//span[1]")
     assert(mrnValue.isDisplayed)
 
     timelineLink.matches(mrnLink.getAttribute("href"))
     store(MrnOnDashboard -> Detail(mrnValue.getText))
+    clear(StatusOnDashboard)
     store(StatusOnDashboard -> Detail(decStatus))
   }
 
   def mrnLink: WebElement = {
-    val mrnCell = findElementByClassName("submission-tab-submitted-row0-mrn")
+    val mrnCell = findElementByXpath("//tbody//tr[1]//td[1]")
     findChildByClassName(mrnCell, "govuk-link")
   }
+
+  def clickOnTab(tab: String): Unit =
+    tab match {
+      case "Submitted"           => clickById("tab_submitted-submissions")
+      case "Action needed"       => clickById("tab_action-submissions")
+      case "Rejected"            => clickById("rejected-submissions")
+      case "Cancelled & expired" => clickById("tab_cancelled-submissions")
+    }
 }

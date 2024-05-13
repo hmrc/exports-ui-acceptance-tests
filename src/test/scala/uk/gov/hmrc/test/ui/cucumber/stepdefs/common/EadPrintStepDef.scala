@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 HM Revenue & Customs
+ * Copyright 2023 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,18 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.pages.common
+package uk.gov.hmrc.test.ui.cucumber.stepdefs.common
 
-import uk.gov.hmrc.test.ui.pages.base.DetailKey
+import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
+import uk.gov.hmrc.test.ui.pages.common.EadPrintPage
 
-object DetailKeys {
+class EadPrintStepDef extends BaseStepDef {
 
-  val sectionCommon = 7
-  // /authorisation-choice
-  val MrnOnDashboard: DetailKey = DetailKey("Mrn on Dashboard", sectionCommon, skipRowCheck = true)
-  val StatusOnDashboard: DetailKey = DetailKey("Status on Dashboard", sectionCommon, skipRowCheck = true)
-  val DeclarationInfoPath: DetailKey = DetailKey("Declaration Info Path", sectionCommon, skipRowCheck = true)
+  And("""^I should land on EAD print view page""")(() => EadPrintPage.checkPage())
+
+//  And("""^I validate details on EAD print view page""") { () =>
+//    EadPrintPage.checkPrintLink()
+//  }
+
+  And("""^I click on EAD print view link""")(() => EadPrintPage.viewEadPrintPage())
 }

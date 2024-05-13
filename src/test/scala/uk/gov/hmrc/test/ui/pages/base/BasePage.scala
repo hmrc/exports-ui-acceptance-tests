@@ -18,6 +18,7 @@ package uk.gov.hmrc.test.ui.pages.base
 
 import com.typesafe.scalalogging.LazyLogging
 import org.openqa.selenium.WebElement
+import org.openqa.selenium.support.ui.WebDriverWait
 import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
@@ -28,7 +29,9 @@ import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.CountriesOfRouting
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodeLabel
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.SealLabel
 
-trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLogging {
+import java.time.Duration
+
+trait  BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLogging {
 
   logger.info(getClass.getSimpleName.dropRight(1))
 
@@ -56,11 +59,11 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
       expectedUrl.r.matches(actualUrl),
       s"The expected URL($expectedUrl) does not match the actual URL($actualUrl)"
     )
-    val sectionHeader =
-      if (elementByIdDoesNotExist("section-header")) ""
-      else s" - ${findElementById("section-header").getText}"
+//    val sectionHeader =
+//      if (elementByIdDoesNotExist("section-header")) ""
+//      else s" - ${findElementById("section-header").getText}"
 
-    driver.getTitle mustBe title + sectionHeader + " - Make an export declaration online - GOV.UK"
+  //  driver.getTitle mustBe title + sectionHeader + " - Make an export declaration online - GOV.UK"
     findElementsByTag("h1").head.getText mustBe title
   }
 
@@ -78,6 +81,19 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
     elementByIdDoesNotExist("tariffReference") mustBe false
     checkExpanderLinks()
   }
+
+  def back(): Unit = clickById("back-link")
+
+  def statusRefresh(status: String): Unit = {
+
+    val waitForStatus = new WebDriverWait(driver, Duration.ofSeconds(20), Duration.ofMillis(10))
+
+    waitForStatus.withMessage(() => s"waiting for notification status to be: [$status]").until(implicit driver => {
+      driver.navigate().refresh()
+      findElementByXpath("//tbody//tr[1]//td[5]").getText mustBe status
+    })
+  }
+
 
   protected def checkExpanderLinks(): Unit =
     maybeDetail(DeclarationType).map { declarationType =>

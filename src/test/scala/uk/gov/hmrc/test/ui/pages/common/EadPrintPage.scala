@@ -16,13 +16,24 @@
 
 package uk.gov.hmrc.test.ui.pages.common
 
-import uk.gov.hmrc.test.ui.pages.base.DetailKey
+import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.common.DetailKeys._
 
-object DetailKeys {
+object EadPrintPage extends BasePage {
 
-  val sectionCommon = 7
-  // /authorisation-choice
-  val MrnOnDashboard: DetailKey = DetailKey("Mrn on Dashboard", sectionCommon, skipRowCheck = true)
-  val StatusOnDashboard: DetailKey = DetailKey("Status on Dashboard", sectionCommon, skipRowCheck = true)
-  val DeclarationInfoPath: DetailKey = DetailKey("Declaration Info Path", sectionCommon, skipRowCheck = true)
+  def backButtonHref: String = detail(DeclarationInfoPath)
+  val path: String = s"/ead-print-view/${detail(MrnOnDashboard)}"
+  val title: String = "Export accompanying document (EAD)"
+
+  override def checkBackButton(): Unit = ()
+
+  override def checkExpanders(): Unit = ()
+
+  // ex: fillPage()
+
+  override def fillPage(values: String*): Unit = ()
+
+  def viewEadPrintPage(): Unit = {
+    clickById("generate-ead")
+  }
 }

@@ -16,13 +16,19 @@
 
 package uk.gov.hmrc.test.ui.pages.common
 
-import uk.gov.hmrc.test.ui.pages.base.DetailKey
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Presence}
 
-object DetailKeys {
+object CancelHoldingPage extends BasePage {
 
-  val sectionCommon = 7
-  // /authorisation-choice
-  val MrnOnDashboard: DetailKey = DetailKey("Mrn on Dashboard", sectionCommon, skipRowCheck = true)
-  val StatusOnDashboard: DetailKey = DetailKey("Status on Dashboard", sectionCommon, skipRowCheck = true)
-  val DeclarationInfoPath: DetailKey = DetailKey("Declaration Info Path", sectionCommon, skipRowCheck = true)
+  val backButtonHref: String = ""
+  val path: String = "/cancellation-holding"
+  val title: String = "Cancel your declaration"
+
+  override def checkBackButton(): Unit = ()
+
+  override def checkExpanders(): Unit = ()
+
+  // ex: fillPage()
+
+  override def fillPage(values: String*): Unit = waitForId("back-to-choice", Presence)
 }

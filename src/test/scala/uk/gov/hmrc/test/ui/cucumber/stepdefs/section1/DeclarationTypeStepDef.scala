@@ -26,4 +26,8 @@ class DeclarationTypeStepDef extends BaseStepDef {
   And("""^I select a (.*) declaration type""") { (option: String) =>
     DeclarationTypePage.fillPage(option)
   }
+
+  And("""^I navigate to Declaration Type page""") { () =>
+    DeclarationTypePage.navigateToPage(DeclarationTypePage.path)
+  }
 }

@@ -44,6 +44,10 @@ object SummaryPage extends BasePage {
       val sectionTitle = s"Section ${index + 1} of 6: $expectedTitle"
       findChildByClassName(allCards(index), "govuk-summary-card__title").getText mustBe sectionTitle
     }
+    clickContinueOnSummary()
+  }
+
+  def clickContinueOnSummary(): Unit = {
     findElementsByClassName("govuk-button")
       .filter(_.getText == "Confirm and continue")
       .head

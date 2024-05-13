@@ -43,6 +43,8 @@ object SupportGenerator {
     stringBuilder.toString()
   }
 
+  def generateLrn(prefix: String): String =  s"$prefix${SupportGenerator.generateAlphaNumeric(1, 19)}"
+
   def generateDigits(min: Int = 1, max: Int): String = {
     val howMany       = min + random.nextInt((max - min) + 1)
     val stringBuilder = new StringBuilder(max)

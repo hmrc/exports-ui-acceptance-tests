@@ -14,17 +14,20 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.cucumber.stepdefs.Dashboard
+package uk.gov.hmrc.test.ui.cucumber.stepdefs.common
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.dashboard.DeclarationInformationPage
+import uk.gov.hmrc.test.ui.pages.common.EadPrintPage
 
-class DeclarationInformationStepDef extends BaseStepDef {
+class PrintOrViewStepDef extends BaseStepDef {
 
-  And("""^I should land on Declaration-Information page"""){() =>
-    DeclarationInformationPage.checkPage()}
+  And("""^I should land on print-or-view page""")(() => EadPrintPage.checkPage())
 
-  And("""^I validate links and (.*) status on declaration information""") { (status: String) =>
-    DeclarationInformationPage.validateTimelineDetails(status)
+  //  And("""^I validate details on EAD print view page""") { () =>
+  //    EadPrintPage.checkPrintLink()
+  //  }
+
+  And("""^I click on print or view link""") { () =>
+    EadPrintPage.viewEadPrintPage()
   }
 }

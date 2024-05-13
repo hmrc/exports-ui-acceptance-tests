@@ -34,8 +34,6 @@ object SummarySection5Page extends BasePage {
 
   def removeItem(): Unit = clickByCssSelector(".item-1-heading a")
 
-  def back(): Unit = clickById("back-link")
-
   def addItemWarning(): WebElement = findElementByClassName("govuk-warning-text__text")
 
   def addItem(): Unit = clickById("add-item")

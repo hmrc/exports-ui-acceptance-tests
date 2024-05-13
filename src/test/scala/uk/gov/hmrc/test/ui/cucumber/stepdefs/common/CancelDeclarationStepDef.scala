@@ -17,21 +17,15 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.common
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.common.SummaryPage
+import uk.gov.hmrc.test.ui.pages.common.CancelDeclarationPage
 
-class SummaryStepDef extends BaseStepDef {
+class CancelDeclarationStepDef extends BaseStepDef {
 
-  And("""^I should land on Saved-Summary page""")(() => SummaryPage.checkPage())
+  And("""^I should land on Cancel-Declaration page""")(() => CancelDeclarationPage.checkPage())
 
-  And("""^I check the sections' headings and click confirm and continue""") { () =>
-    SummaryPage.fillPage()
+  And("""^I select (.*) as the reason and enter description for cancellation""") { (reason: String) =>
+    CancelDeclarationPage.fillPage(reason)
   }
 
-  And("""^I click continue on summary""") { () =>
-    SummaryPage.clickContinueOnSummary()
-  }
-
-  And("""^I navigate to summary page""") { () =>
-    SummaryPage.navigateToPage(SummaryPage.path)
-  }
+  And("""^I click on cancel declaration link""")(() => CancelDeclarationPage.cancelDeclaration())
 }

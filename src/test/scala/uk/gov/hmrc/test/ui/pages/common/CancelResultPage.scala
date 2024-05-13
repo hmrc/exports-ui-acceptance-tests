@@ -16,13 +16,27 @@
 
 package uk.gov.hmrc.test.ui.pages.common
 
-import uk.gov.hmrc.test.ui.pages.base.DetailKey
+import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.Lrn
 
-object DetailKeys {
+object CancelResultPage extends BasePage {
 
-  val sectionCommon = 7
-  // /authorisation-choice
-  val MrnOnDashboard: DetailKey = DetailKey("Mrn on Dashboard", sectionCommon, skipRowCheck = true)
-  val StatusOnDashboard: DetailKey = DetailKey("Status on Dashboard", sectionCommon, skipRowCheck = true)
-  val DeclarationInfoPath: DetailKey = DetailKey("Declaration Info Path", sectionCommon, skipRowCheck = true)
+  val backButtonHref: String = ""
+  val path: String = "/cancellation-result"
+  def title: String =
+    if (detail(Lrn).startsWith("G1S")) "Your declaration has been cancelled"
+    else
+      "Your cancellation request has been denied"
+
+  override def checkExpanders(): Unit = ()
+
+  override def checkBackButton(): Unit = ()
+
+  val reason = 0
+
+  // ex: fillPage("No longer required")
+
+  override def fillPage(values: String*): Unit = ()
+
+  def backToChoicePage(): Unit = clickById("back-to-choice")
 }

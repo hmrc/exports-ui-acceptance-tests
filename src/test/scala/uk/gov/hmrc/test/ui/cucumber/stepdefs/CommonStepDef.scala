@@ -107,7 +107,7 @@ class CommonStepDef extends BaseStepDef {
     RepresentativesEORINumberPage.fillPage("GB121012121212"); continue()
     RepresentationTypeAgreedPage.fillPage("Direct"); continue()
 
-    if ((isStandard || isOccasional || isSimplified) && !isExporter){
+    if ((isStandard || isOccasional || isSimplified) && !isExporter) {
       ThirdPartyGoodsTransportationPage.fillPage("Yes"); continue()
     }
 
@@ -193,7 +193,7 @@ class CommonStepDef extends BaseStepDef {
 
     AdditionalInformationYesNoPage.fillPage(Constants.no); continue()
 
-    if(!isClearance) {
+    if (!isClearance) {
       LicenseRequiredYesNoPage.fillPage(Constants.yes); continue()
     }
     AdditionalDocumentPage.fillPage("1", "C501", "GBAEOC717572504502801"); continue()
@@ -221,26 +221,26 @@ class CommonStepDef extends BaseStepDef {
 
   And("""^I clear (.*) keys from cache""") { (cacheKeysToDelete: String) =>
     val keys = cacheKeysToDelete.split(", ").toList
-    clear(detailKeys(keys:_*):_*)
+    clear(detailKeys(keys: _*): _*)
   }
 
   And("""^I remove one item from the declaration""") { () =>
     SummarySection5Page.removeItem()
   }
 
+  And("""^I click back""")(() => CommonPage.back())
+
   And("""^I click change link for (.*) page""") { (pageName: String) =>
-    val changeLinkMap: Map[String, String] = Map(
-      "Authorisation Type" -> "authorisation-holder-1-type"
-    )
+    val changeLinkMap: Map[String, String] = Map("Authorisation Type" -> "authorisation-holder-1-type")
 
     CommonPage.changeLinkOnCYA(changeLinkMap(pageName)).click()
   }
 }
-  object CommonStepDef {
-    def genSequenceId(seqId: String): String =
-      seqId match {
-        case "first" => "0"
-        case "second" => "1"
-        case "third" => "2"
-      }
+object CommonStepDef {
+  def genSequenceId(seqId: String): String =
+    seqId match {
+      case "first"  => "0"
+      case "second" => "1"
+      case "third"  => "2"
+    }
 }
