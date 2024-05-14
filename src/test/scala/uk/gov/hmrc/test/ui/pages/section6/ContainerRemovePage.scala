@@ -18,7 +18,7 @@ package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.section6
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.Container
 
 object ContainerRemovePage extends BasePage {
 
@@ -36,6 +36,6 @@ object ContainerRemovePage extends BasePage {
   override def fillPage(values: String*): Unit =
     if (selectYesOrNoRadio(values(yesNo))) {
       val containerId = values(containerIdToBeRemoved)
-      clear(section6, Some(containerId))
+      clearIfAny(Container(containerId))
     }
 }

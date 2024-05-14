@@ -19,15 +19,15 @@ package uk.gov.hmrc.test.ui.conf
 import com.typesafe.config.{Config, ConfigFactory}
 
 object TestConfiguration {
-  val config: Config        = ConfigFactory.load()
-  val env: String           = config.getString("env")
+  val config: Config = ConfigFactory.load()
+  val env: String = config.getString("env")
   val defaultConfig: Config = config.getConfig("local")
-  val envConfig: Config     = config.getConfig(env).withFallback(defaultConfig)
+  val envConfig: Config = config.getConfig(env).withFallback(defaultConfig)
 
   def url(service: String): String = {
     val host = env match {
       case "local" => s"$environmentHost:${servicePort(service)}"
-      case _       => s"${envConfig.getString(s"services.host")}"
+      case _ => s"${envConfig.getString(s"services.host")}"
     }
     s"$host${serviceRoute(service)}"
   }
@@ -38,5 +38,6 @@ object TestConfiguration {
 
   def serviceRoute(serviceName: String): String = envConfig.getString(s"services.$serviceName.productionRoute")
 
-  def setBrowser(): String = System.setProperty("browser", "chrome")
+  def setBrowser(): Unit =
+    if (Option(System.getProperty("browser")).isEmpty) System.setProperty("browser", "chrome")
 }

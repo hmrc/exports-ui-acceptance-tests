@@ -46,11 +46,11 @@ object ConsignmentReferencesPage extends BasePage {
 
     if (isSimplifiedDeclaration) {
       fillTextBoxById("mrn", values(mrn))
-      clear(EidrDate)
+      clearIfAny(EidrDate)
       store(Ducr -> Detail(values(ducr)), Mrn -> Detail(values(mrn)), Lrn -> Detail(values(lrn)))
     } else {
       fillTextBoxById("eidrDateStamp", values(eidrDate))
-      clear(Mrn)
+      clearIfAny(Mrn)
       store(Ducr -> Detail(values(ducr)), EidrDate -> Detail(values(eidrDate)), Lrn -> Detail(values(lrn)))
     }
   }

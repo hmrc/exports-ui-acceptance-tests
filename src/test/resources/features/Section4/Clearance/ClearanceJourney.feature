@@ -40,12 +40,12 @@ Feature: Section4 Clearance Journey
 
      # check title on previous documents page when Entry Into Declarant records is No and skiping authorisation choice page
     And I navigate to Entry Into Declarant Records page
-    And I select No for Entry Into Declarant Records
+    And I select No to is this an entry into declarant records
     And I click continue
     And I navigate to Previous Documents page
     Then I should land on Previous-Document page
 
-  @Section4 @ClrDec
+  @Section4 @ClrDec @smoke
   Scenario: Complete Transactions section on Clearance Arrived declaration journey
     Given I fill section1 for CLEARANCE,arrived declaration
     And I fill section2

@@ -46,7 +46,7 @@ Feature: Section2 Supplementary Journey
     And I select Yes to remove other party
     And I click continue
     Then I should land on Other-Parties-Involved page
-    And I select second party Manufacturer and eori GB121212131313 as the other party involved
+    And I select first party Manufacturer and eori GB121212131313 as the other party involved
     And I click continue
     Then I should land on Other-Parties-Involved-List page
     And I select No on other party involved list page
@@ -54,8 +54,6 @@ Feature: Section2 Supplementary Journey
     Then I should land on Authorisation-Choice page
     And I select Permanent as export procedure choice
     And I click continue
-    Then I should land on Is-Authorisation-Required page
-    And I select Yes to declare authorisations
     Then I should land on Authorisation-Required page
     And I select first Authorisation code ACR and enter eori as GB123456789008
     And I click continue
@@ -63,8 +61,9 @@ Feature: Section2 Supplementary Journey
     And I click on remove link
     Then I should land on Authorisations-Remove page
     And I select Yes to remove authorisation
-    Then I should land on Is-Authorisation-Required page
-    And I select Yes to declare authorisations
+    Then I should land on Authorisations-Remove page
+    And I select Yes to remove authorisation
+    And I click continue
     Then I should land on Authorisation-Required page
     And I select first Authorisation code ACP and enter eori as GB123456789009
     And I click continue

@@ -49,4 +49,9 @@ object InlandModeOfTransportPage extends BasePage {
     clickById(elementId)
     store(InlandModeOfTransport -> Detail(values(mode)))
   }
+
+  def isFixedTransport: Boolean = maybeDetail(InlandModeOfTransport).contains("Fixed transport installations")
+
+  def isPostalOrMail: Boolean = maybeDetail(InlandModeOfTransport).contains("Postal or mail")
+
 }
