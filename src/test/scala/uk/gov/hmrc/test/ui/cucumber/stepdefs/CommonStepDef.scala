@@ -209,7 +209,7 @@ class CommonStepDef extends BaseStepDef {
       WarehousePage.fillPage("yes", "R1234567GB");
     }
 
-    if(hasSupervisingCustomsOfficePageVisiblePC)
+    if (hasSupervisingCustomsOfficePageVisiblePC)
       SupervisingCustomsOfficePage.fillPage("GBBTH001"); continue()
 
     InlandOrBorderPage.fillPage("Customs controlled location"); continue()

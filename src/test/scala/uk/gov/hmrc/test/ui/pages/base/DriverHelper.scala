@@ -16,12 +16,10 @@
 
 package uk.gov.hmrc.test.ui.pages.base
 
-import com.typesafe.scalalogging.LazyLogging
 import org.openqa.selenium.interactions.Actions
-import org.openqa.selenium.remote.RemoteWebDriver
 import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait}
 import org.openqa.selenium.{By, Keys, WebElement}
-import uk.gov.hmrc.selenium.webdriver.Driver
+import uk.gov.hmrc.test.ui.driver.BrowserDriver
 
 import java.time.Duration
 import scala.jdk.CollectionConverters.ListHasAsScala
@@ -33,9 +31,7 @@ case object Clickable extends ExpectedCondition
 case object Presence extends ExpectedCondition
 case object Visible extends ExpectedCondition
 
-trait DriverHelper {
-
-  protected val driver: RemoteWebDriver = uk.gov.hmrc.test.ui.pages.base.DriverHelper.driver
+trait DriverHelper extends BrowserDriver {
 
   def changeLinkOnCYA(row: String): WebElement = driver.findElement(By.cssSelector(s".$row .govuk-link"))
 
@@ -175,12 +171,12 @@ trait DriverHelper {
 
 }
 
-object DriverHelper extends LazyLogging {
+/*object DriverHelper extends LazyLogging {
 
   logger.info(
     s"Instantiating Browser: ${sys.props.getOrElse("browser", "'browser' System property not set. This is required")}"
   )
   implicit val driver: RemoteWebDriver = Driver.instance
-}
+}*/
 
 class TestFailedException(message: String, cause: Throwable) extends RuntimeException(message, cause)
