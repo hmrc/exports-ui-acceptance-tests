@@ -8,7 +8,7 @@ Feature: Section4 Simplified Journey
      # 1. checking prelodged and arrived type for section 4. Only we see previous documents page for section 4 on Simplified Declaration
      # 2. Validating Previous document page dynamic title changes
 
-  @Section4 @SimDec
+  @Section4 @Simplified
   Scenario Outline: Complete Transactions section on Simplified Prelodged declaration journey and validate dynamic title changes on previous documents page
     Given I fill section1 for SIMPLIFIED,<DecType> declaration
     And I fill section2

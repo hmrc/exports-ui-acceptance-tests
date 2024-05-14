@@ -9,7 +9,7 @@ Feature: Section6 Standard Journey
      # 2. The following page is visible
           # Supervising-Customs-Office
 
-  @Section6 @StdDec
+  @Section6 @Standard
   Scenario: standard journey section-6
     Given I fill section1 for STANDARD,prelodged declaration
     And I fill section2
@@ -188,7 +188,7 @@ Feature: Section6 Standard Journey
           # Supervising-Customs-Office
      # This is full arrived journey which cover all the pages, by adding a seal to the container and remove the seal
 
-  @Section6 @StdDec
+  @Section6 @Standard
   Scenario: standard arrived journey section-6
     Given I fill section1 for STANDARD,arrived declaration
     And I fill section2

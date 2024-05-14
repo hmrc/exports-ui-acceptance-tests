@@ -5,7 +5,7 @@ Feature: Simplified Journey
     Given I clear data in cache
 
   ## Below scenario - DoYouHaveADucr:[No], Confirm-Ducr:[No], Link-to-Mucr:[Yes]
-  @Section1 @SimDec
+  @Section1 @Simplified
   Scenario Outline: Fill Section 1 for a Simplified Prelodged and Arrived Declaration
     Given I enter EORI GB123456789006 on Login Page and click submit
     Then I should land on Choice page

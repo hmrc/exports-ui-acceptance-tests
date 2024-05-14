@@ -5,7 +5,7 @@ Feature: Simplified Journey Section 3
   Given I clear data in cache
 
   # Below scenario - RoutingCountries:[No] , LocationOfGoods: [No]
-  @Section3 @SimDec
+  @Section3 @Simplified
  Scenario: Complete Routes and Locations section on Simplified declaration journey
     Given I fill section1 for STANDARD,prelodged declaration
     And I fill section2
@@ -26,7 +26,7 @@ Feature: Simplified Journey Section 3
     And I click continue on MiniCya
 
     # Below scenario - RoutingCountries:[No] , LocationOfGoods: [Yes]
-  @Section3 @SimDec
+  @Section3 @Simplified
   Scenario: Complete Routes and Locations section on Simplified Arrived declaration journey
     Given I fill section1 for SIMPLIFIED,arrived declaration
     And I fill section2

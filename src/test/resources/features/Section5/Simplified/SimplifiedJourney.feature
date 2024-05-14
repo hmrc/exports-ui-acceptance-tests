@@ -9,7 +9,7 @@ Feature: Section5 Simplified Journey
     # 2. Fill Statistical page and Vat rating page when Additional Procedure code is 3LV
     # 3. Skipping Commodity Measurements and Supplementary Units page when dec type is Simplified
 
-  @Section5 @SimDec
+  @Section5 @Simplified
   Scenario: Perform a Low Value Simplified Arrived Declaration
     Given I fill section1 for SIMPLIFIED,arrived declaration
     And I fill section2
@@ -73,7 +73,7 @@ Feature: Section5 Simplified Journey
     # 4. Checking Additional Documents Dynamic title when Authorisation code required documents is [No] and isLicenseRequired is [Yes]
     # 5. Change procedure code from 1040 to 1042 to check Fiscal-Information page of simplified Journey
 
-  @Section5 @SimDec
+  @Section5 @Simplified
   Scenario: Complete Items section on Simplified Prelodged declaration journey when declaration is not Low Value (using 000 additional procedure code)
     Given I fill section1 for SIMPLIFIED,prelodged declaration
     And I fill section2

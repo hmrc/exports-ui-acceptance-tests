@@ -10,7 +10,7 @@ Feature: Section2 Occasional Journey Scenarios
   #    third party goods transportation page as Yes and Freight forwarder for Other parties involved
   # 3. Both journeys to cover maximum pages
 
-  @Section2 @OcaDec
+  @Section2 @Occasional
   Scenario Outline: Exports Occasional declaration (Prelodged and Arrived)
     Given I fill section1 for OCCASIONAL,<Type> declaration
     Then I should land on Are-You-The-Exporter page
