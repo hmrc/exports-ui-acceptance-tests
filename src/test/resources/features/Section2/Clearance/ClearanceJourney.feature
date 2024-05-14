@@ -9,7 +9,7 @@ Feature: Section2 Clearance Prelodged
   #    no for third party goods transportation page and Permanent as Procedure Choice
   # 3. The clearance journey doesn't contain other parties involved and list pages.
 
-  @Section2 @ClrDec
+  @Section2 @ClrDec @Wip
   Scenario: Exports Clearance Prelodged Scenario with possible scenarios
     Given I fill section1 for CLEARANCE,prelodged declaration
     Then I should land on Entry-Into-Declarant-Records page
@@ -102,7 +102,7 @@ Feature: Section2 Clearance Prelodged
     #            are-you-completing-this-declaration-on-behalf-of-another-agent
     #            representative-eori-number
     #            representation-type-agreed
-    And I clear Is this an EIDR?, Exporter’s details, Consignor’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation, Carrier or haulier’s details keys from cache
+    And I clear Is this an EIDR?, Exporter’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation keys from cache
     And I navigate to Entry Into Declarant Records page
     And I select Yes to is this an entry into declarant records
     And I click continue
@@ -110,7 +110,7 @@ Feature: Section2 Clearance Prelodged
     And I enter entered eori as GB123456789123
     And I click continue
     Then I should land on Exporter-Eori-Number page
-    And I select Yes on carrier eori number page and entered eori as GB171357178688000
+    And I select Yes on exporter eori number page and enter eori number as GB171357178688000
     And I click continue
     Then I should land on Is-This-Exs page
     And I select Yes to is this exs

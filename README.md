@@ -29,17 +29,32 @@ Run tests as follows:
 ### Running any individual test 
 Use the tag @Wip tag before the scenario and run the bash command below
 ```bash
-./run_tests.sh <browser> <environment>
+./run_tags.sh 
+```
+Then this will run the scenarios which are tagged with @Wip in feature files
+
+if you want to run the specific journey scenarios then use the script below 
+
+```bash
+./run_tags.sh  @Clrdec to run clearance journey scenarios
+./run_tags.sh  @OcaDec to run Occasional journey scenarios
+./run_tags.sh  @StdDec to run Standard journey scenarios
+./run_tags.sh  @SimDec to run Simplified journey scenarios
+./run_tags.sh  @SupDec to run Supplementary journey scenarios
+```
+if you want to use the specific browser then use the below script
+```bash
+./run_tags.sh @Clrdec firefox
 ```
 
 ### Running Smoke tests
 ```bash
-./run_smoke.sh <browser> <environment>
+./run_tags.sh @Smoke
 ```
 
 ### Running Regression tests
 ```bash
-./run_regression.sh <browser> <environment>
+./run_tags.sh @Regression
 ```
 
 ### Running tests using BrowserStack

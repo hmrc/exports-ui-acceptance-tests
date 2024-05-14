@@ -25,13 +25,13 @@ import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.PackageTypeLabel
 
 object PackageInformationListPage extends BasePage {
 
+  def backButtonHref: String =
+    if (!isLowValueDeclaration && (isSimplified || isOccasional)) NationalAdditionalCodesListPage.path
+    else if (isClearance && isThisExs) DangerousGoodsCodePage.path
+    else if (isClearance) CommodityDetailsPage.path
+    else StatisticalValuePage.path
+
   val pageId = "packages-list"
-  def backButtonHref: String =  {
-    if ((!isLowValueDeclaration && isSimplified) || (isOccasional && listOfItemDetailFor("Supplementary units").toList.nonEmpty)){NationalAdditionalCodesListPage.path}
-    else if(isClearance && isThisExs) {DangerousGoodsCodePage.path}
-    else if(isClearance) {CommodityDetailsPage.path}
-    else {StatisticalValuePage.path}
-  }
   def path: String = itemUrl(pageId)
 
   def title: String =

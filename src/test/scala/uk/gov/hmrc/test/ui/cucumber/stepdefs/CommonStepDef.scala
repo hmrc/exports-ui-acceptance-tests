@@ -31,6 +31,7 @@ import uk.gov.hmrc.test.ui.pages.section3._
 import uk.gov.hmrc.test.ui.pages.section4._
 import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.{goToWarehouse, hasSupervisingCustomsOfficePageVisiblePC}
 import uk.gov.hmrc.test.ui.pages.section5._
+import uk.gov.hmrc.test.ui.pages.section6.InlandModeOfTransportPage.{isFixedTransport, isPostalOrMail}
 import uk.gov.hmrc.test.ui.pages.section6._
 
 class CommonStepDef extends BaseStepDef {
@@ -207,11 +208,20 @@ class CommonStepDef extends BaseStepDef {
     if (isClearance || goToWarehouse) {
       WarehousePage.fillPage("yes", "R1234567GB");
     }
-    SupervisingCustomsOfficePage.fillPage("GBBTH001"); continue()
+
+    if(hasSupervisingCustomsOfficePageVisiblePC)
+      SupervisingCustomsOfficePage.fillPage("GBBTH001"); continue()
+
     InlandOrBorderPage.fillPage("Customs controlled location"); continue()
-    InlandModeOfTransportPage.fillPage("Postal or mail"); continue()
-    DepartureTransportPage.fillPage("Flight number");continue()
-    if(!isClearance) {
+    InlandModeOfTransportPage.fillPage("Road transport"); continue()
+
+    if ((!isSupplementary) && (!isFixedTransport && !isPostalOrMail)) {
+      DepartureTransportPage.fillPage("Flight number"); continue()
+    }
+    if(!isOccasional){
+      BorderTransportPage.fillPage("Ship IMO number"); continue()
+    }
+    if (!isClearance && (!isFixedTransport || !isPostalOrMail)) {
       TransportCountryPage.fillPage("Desirade - GP");continue()
     }
     ExpressConsignmentPage.fillPage("Yes"); continue()
