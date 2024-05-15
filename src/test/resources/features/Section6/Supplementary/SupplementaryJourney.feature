@@ -11,7 +11,7 @@ Feature: Section6 Supplementary Journey
           # Express-Consignment
           # Transport-Payment
 
-  @Section6 @SupDec
+  @Section6 @Supplementary
   Scenario: supplementary journey section-6
     Given I fill section1 for SUPPLEMENTARY,eidr declaration
     And I fill section2
@@ -101,7 +101,7 @@ Feature: Section6 Supplementary Journey
           # Express-Consignment
           # Transport-Payment
 
-  @Section6 @SupDec
+  @Section6 @Supplementary
   Scenario: supplementary journey simplified section-6
     Given I fill section1 for SUPPLEMENTARY,simplified declaration
     And I fill section2
@@ -175,7 +175,7 @@ Feature: Section6 Supplementary Journey
           # Express-Consignment
           # Transport-Payment
 
-  @Section6 @SupDec
+  @Section6 @Supplementary
   Scenario: supplementary simplified journey section-6
     Given I fill section1 for SUPPLEMENTARY,simplified declaration
     And I fill section2

@@ -5,7 +5,7 @@ Feature: Occasional Journey Section 3
     Given I clear data in cache
 
   # Below scenario - RoutingCountries:[Yes] , LocationOfGoods: [No], Number of countries Added: [1]
-  @Section3 @OcaDec @smoke
+  @Section3 @Occasional @smoke
   Scenario: Complete Routes and Locations section on Occasional Prelodged declaration journey
     Given I fill section1 for OCCASIONAL,prelodged declaration
     And I fill section2
@@ -29,7 +29,7 @@ Feature: Occasional Journey Section 3
     And I click continue on MiniCya
 
     # Below scenario - RoutingCountries:[Yes] , LocationOfGoods: [Yes], Number of countries Added: [1]
-  @Section3 @OcaDec
+  @Section3 @Occasional
   Scenario: Complete Routes and Locations section on Occasional Arrived declaration journey
     Given I fill section1 for OCCASIONAL,arrived declaration
     And I fill section2

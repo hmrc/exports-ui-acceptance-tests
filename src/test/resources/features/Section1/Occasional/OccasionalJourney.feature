@@ -5,7 +5,7 @@ Feature: Occasional Journey
     Given I clear data in cache
 
   ## Below scenario - DoYouHaveADucr:[No], Confirm-Ducr:[Yes], Link-to-Mucr:[No]
-  @Section1 @OcaDec
+  @Section1 @Occasional
   Scenario Outline: Fill Section 1 for a Occasional Prelodged and Arrived Declaration
     Given I enter EORI GB123456789016 on Login Page and click submit
     Then I should land on Choice page

@@ -1,66 +1,84 @@
-**This is a template README.md.  Be sure to update this with project specific content that describes your ui test project.**
 
 # exports-ui-acceptance-tests
-`Customs-declare-exports` UI journey tests.  
+Smoke and regression tests for the `customs-declare-exports-frontend` service.  
 
 ## Pre-requisites
 
-### Services
-
-Start Mongo Docker container as follows:
+Run a Mongo Docker container:
 
 ```bash
-docker run --rm -d -p 27017:27017 --name mongo mongo:4.4
+$ docker run --rm -d -p 27017:27017 --name mongo percona/percona-server-mongodb:5.0
 ```
 
-Start `<digital service name>` services as follows:
+Run the services for CDS Exports:
 
 ```bash
-sm2 --start CDS_EXPORTS_DECLARATION_ALL
+$ sm2 --start CDS_EXPORTS_DECLARATION_ALL
 ```
 
 ## Tests
-
 Run tests as follows:
+- Argument `<browser>` must be `chrome`, `edge`, or `firefox`.
+- Argument `<environment>` must be `local`, `dev` or `staging`.
 
-* Argument `<browser>` must be `chrome`, `edge`, `firefox`.
-* Argument `<environment>` must be `local`, `dev`, `staging`. (QA is using real service, so we are not running tests by using QA as environment)
-
-### Running any individual test 
-Use the tag @Wip tag before the scenario and run the bash command below
-```bash
-./run_tags.sh 
-```
-Then this will run the scenarios which are tagged with @Wip in feature files
-
-if you want to run the specific journey scenarios then use the script below 
+Note that the `QA` environment uses real upstream services, so we do not run the tests in that environment.
 
 ```bash
-./run_tags.sh  @Clrdec to run clearance journey scenarios
-./run_tags.sh  @OcaDec to run Occasional journey scenarios
-./run_tags.sh  @StdDec to run Standard journey scenarios
-./run_tags.sh  @SimDec to run Simplified journey scenarios
-./run_tags.sh  @SupDec to run Supplementary journey scenarios
-```
-if you want to use the specific browser then use the below script
-```bash
-./run_tags.sh @Clrdec firefox
+$ sbt clean \
+   -Dbrowser=$Browser \
+   -Denv=$Environment \
+   -Dcucumber.filter.tags=$Tag \
+   "testOnly uk.gov.hmrc.test.ui.cucumber.runner.Runner" testReport
+
 ```
 
-### Running Smoke tests
+### How to run Smoke tests only
 ```bash
-./run_tags.sh @Smoke
+$ ./run_tag.sh
+```
+You can also run the script with the following tag: 
+```bash
+$ ./run_tag.sh @Smoke
 ```
 
-### Running Regression tests
+### How to run Regression tests only
 ```bash
-./run_tags.sh @Regression
+$ ./run_tag.sh @Regression
+```
+
+### How to run specific tests
+Add the `@Wip` tag to the Scenarios to test and run:
+```bash
+$ ./run_tag.sh @Wip
+```
+
+To run Scenarios for specific journeys run the script with the following tags: 
+```bash
+$ ./run_tag.sh  @Clearance      # to run Clearance journey Scenarios
+$ ./run_tag.sh  @Occasional     # to run Occasional journey Scenarios
+$ ./run_tag.sh  @Standard       # to run Standard journey Scenarios
+$ ./run_tag.sh  @Simplified     # to run Simplified journey Scenarios
+$ ./run_tag.sh  @Supplementary  # to run Supplementary journey Scenarios
+```
+
+### Optional arguments of the `run_tag.sh` script:
+Note that the order of the arguments is not relevant.
+
+By default the script runs the Scenarios using the `chrome` browser. If you want to run the script on a different browser:
+```bash
+$ ./run_tag.sh firefox @Regression  # chrome, edge or firefox
+```
+
+if you want to run the script in a specific environment (by default: local):
+```bash
+ 
+$ ./run_tag.sh staging @Smoke firefox  # local, dev or staging
 ```
 
 ### Running tests using BrowserStack
 If you would like to run your tests via BrowserStack from your local development environment please refer to the [webdriver-factory](https://github.com/hmrc/webdriver-factory/blob/main/README.md/#user-content-running-tests-using-browser-stack) project.
 
-## Installing local driver binaries
+## Installing locally browser driver binaries
 
 This project supports UI test execution using Firefox (Geckodriver) and Chrome (Chromedriver) browsers. 
 

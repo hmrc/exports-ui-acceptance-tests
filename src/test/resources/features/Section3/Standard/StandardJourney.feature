@@ -4,7 +4,7 @@ Feature: Section3 Standard Journey
     Given I clear data in cache
 
    # Below scenario - RoutingCountries:[Yes] , LocationOfGoods: [Yes], Number of countries Added: [2]
-  @Section3 @StdDec @smoke
+  @Section3 @Standard @smoke
   Scenario: Complete Routes and Locations section on standard prelodged declaration journey
     Given I fill section1 for STANDARD,prelodged declaration
     And I fill section2
@@ -28,7 +28,7 @@ Feature: Section3 Standard Journey
     And I check the MiniCYA page for Section-3
     And I click continue on MiniCya
 
-  @Section3 @StdDec
+  @Section3 @Standard
   Scenario: Complete Routes and Locations section on standard arrived declaration and also validate dynamic title changes on location of goods page
     Given I fill section1 for STANDARD,arrived declaration
     And I fill section2

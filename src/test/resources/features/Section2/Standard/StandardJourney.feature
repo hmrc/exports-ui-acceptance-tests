@@ -10,7 +10,7 @@ Feature: Section2 Standard Prelodged
   #    yes for third party goods transportation page and Permanent as Procedure Choice
   # 3. With the above combination the navigation through Is-Authorisation-Required page
 
-  @Section2 @StdDec
+  @Section2 @Standard
   Scenario: Exports Standard Prelodged Scenario with Permanent as export procedure code choice, Consolidator and Manufacturer as other
             parties are involved
     Given I fill section1 for STANDARD,prelodged declaration
@@ -132,7 +132,7 @@ Feature: Section2 Standard Prelodged
   #    yes for third party goods transportation page and Temporary as Procedure Choice
   # 3. With the above combination the page Is-Authorisation-Required is skipped
 
-  @Section2 @Smoke @StdDec
+  @Section2 @Smoke @Standard
   Scenario: Exports Standard Arrived Scenario with Temporary as export procedure code choice and No other
             parties are involved
     Given I fill section1 for STANDARD,arrived declaration

@@ -8,7 +8,7 @@ Feature: Clearance Journey Section 5
      # 1. Clearance Prelodged Journey when IsEXS is No in section 2
      # 2. Changing IsEXS to Yes and validate dangerous goods page
 
-  @Section5 @ClrDec
+  @Section5 @Clearance
   Scenario: Complete Items section on Clearance PreLodged declaration journey
     Given I fill section1 for CLEARANCE,prelodged declaration
     And I fill section2
@@ -81,7 +81,7 @@ Feature: Clearance Journey Section 5
      # 1. Clearance Arrived Journey when IsEXS is No in section 2
      # 2. Selecting procedure codes when EIDR in section 2 is No on a arrived declaration
 
-  @Section5 @ClrDec
+  @Section5 @Clearance
   Scenario: Complete Items section on Clearance Arrived declaration journey
     Given I fill section1 for CLEARANCE,arrived declaration
     And I fill section2

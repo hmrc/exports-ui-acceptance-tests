@@ -7,7 +7,7 @@ Feature: Section4 Occasional Journey
     ## Below scenario -
      # 1. checking prelodged and arrived type for section 4. Only we see previous documents page for section 4 on Simplified Declaration
 
-  @Section4 @OcaDec
+  @Section4 @Occasional
   Scenario Outline: Complete Transactions section on Occasional Prelodged and Arrived declaration journey
     Given I fill section1 for OCCASIONAL,<DecType> declaration
     And I fill section2
