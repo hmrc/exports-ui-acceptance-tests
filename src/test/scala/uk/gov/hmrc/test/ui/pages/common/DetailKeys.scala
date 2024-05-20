@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.base.DetailKey
 object DetailKeys {
 
   val sectionCommon = 7
-  // /authorisation-choice
+
   val MrnOnDashboard: DetailKey = DetailKey("Mrn on Dashboard", sectionCommon, skipRowCheck = true)
   val StatusOnDashboard: DetailKey = DetailKey("Status on Dashboard", sectionCommon, skipRowCheck = true)
   val DeclarationInfoPath: DetailKey = DetailKey("Declaration Info Path", sectionCommon, skipRowCheck = true)

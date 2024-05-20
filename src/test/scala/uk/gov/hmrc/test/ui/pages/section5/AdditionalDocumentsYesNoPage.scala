@@ -31,7 +31,7 @@ object AdditionalDocumentsYesNoPage extends BasePage {
 
   def path: String = itemUrl("is-additional-documentation-required")
 
-  val title: String =
+  def title: String =
     if (isClearance) "Do you need to declare any additional documents for this item?"
     else "Do you need to enter any other document details?"
 

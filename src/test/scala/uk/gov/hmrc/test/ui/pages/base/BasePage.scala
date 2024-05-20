@@ -92,7 +92,7 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
       .withMessage(() => s"waiting for notification status to be: [$status]")
       .until { implicit driver =>
         driver.navigate().refresh()
-        findElementByXpath("//tbody//tr[1]//td[5]").getText mustBe status
+        findElementByCssSelector("tr:nth-child(1) > td:nth-child(5)").getText mustBe status
       }
   }
 

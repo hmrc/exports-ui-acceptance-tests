@@ -42,13 +42,14 @@ object DashboardPage extends BasePage {
   def validateDashboard(tab: String, status: String): Unit = {
     findElementByClassName("cds-exports-tabs__list-item--selected").getText mustBe tab
     statusRefresh(status)
-    findElementByXpath("//tbody//tr[1]//td[2]").getText mustBe detail(Ducr)
-    findElementByXpath("//tbody//tr[1]//td[3]").getText mustBe detail(Lrn)
+    findElementByCssSelector("tr:nth-child(1) > td:nth-child(2)").getText mustBe detail(Ducr)
+    findElementByCssSelector("tr:nth-child(1) > td:nth-child(3)").getText mustBe detail(Lrn)
 
-    assert(findElementByXpath("//tbody//tr[1]//td[4]").isDisplayed)
-    val decStatus = findElementByXpath("//tbody//tr[1]//td[5]").getText
+    assert(findElementByCssSelector("tr:nth-child(1) > td:nth-child(4)").isDisplayed)
+    val decStatus = findElementByCssSelector("tr:nth-child(1) > td:nth-child(5)").getText
     decStatus mustBe status
-    val mrnValue = findElementByXpath("//tbody//tr[1]//td[1]//span[1]")
+
+    val mrnValue = findElementByCssSelector("tr:nth-child(1) > td:nth-child(1) span:first-child")
     assert(mrnValue.isDisplayed)
 
     timelineLink.matches(mrnLink.getAttribute("href"))
@@ -57,7 +58,7 @@ object DashboardPage extends BasePage {
   }
 
   def mrnLink: WebElement = {
-    val mrnCell = findElementByXpath("//tbody//tr[1]//td[1]")
+    val mrnCell = findElementByCssSelector("tr:nth-child(1) > td:nth-child(1)")
     findChildByClassName(mrnCell, "govuk-link")
   }
 

@@ -23,9 +23,5 @@ class EadPrintStepDef extends BaseStepDef {
 
   And("""^I should land on EAD print view page""")(() => EadPrintPage.checkPage())
 
-//  And("""^I validate details on EAD print view page""") { () =>
-//    EadPrintPage.checkPrintLink()
-//  }
-
   And("""^I click on EAD print view link""")(() => EadPrintPage.viewEadPrintPage())
 }
