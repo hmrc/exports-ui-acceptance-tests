@@ -22,7 +22,7 @@ import uk.gov.hmrc.test.ui.pages.common.DetailKeys._
 object EadPrintPage extends BasePage {
 
   def backButtonHref: String = detail(DeclarationInfoPath)
-  val path: String = s"/ead-print-view/${detail(MrnOnDashboard)}"
+  def path: String = s"/ead-print-view/${detail(MrnOnDashboard)}"
   val title: String = "Export accompanying document (EAD)"
 
   override def checkBackButton(): Unit = ()
