@@ -32,10 +32,10 @@ object ChoicePage extends BasePage {
 
   override def fillPage(values: String*): Unit =
     values.head match {
-      case "create a declaration"                => clickById("create-declaration")
-      case "ManageDraftDeclaration"              => clickById("manage-draft-declarations")
-      case "ManageSubmitDeclaration"             => clickById("manage-submitted-declarations")
-      case "ManageMovementsDeclaration"          => clickById("movements")
-      case "ManageDocumentsByConnectingWithSFUS" => clickById("upload-documents")
+      case "create a declaration" => clickById("create-declaration")
+      case "Manage Draft Declaration" => clickById("manage-draft-declarations")
+      case "Manage Submit Declaration" => clickById("manage-submitted-declarations")
+      case "Manage Movements Declaration" => clickById("movements")
+      case "Manage Documents By Connecting With SFUS" => clickById("upload-documents")
     }
 }

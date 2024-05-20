@@ -32,10 +32,10 @@ object ConfirmationPage extends BasePage {
   override def title: String =
     detail(Lrn).take(1) match {
       case "C" if isArrivedDeclaration => "Declaration accepted, goods have permission to progress"
-      case "C" | "Q" | "X"             => "Your declaration is still being checked"
-      case "D" | "U"                   => "Your declaration needs documents attached"
-      case "R"                         => "Your declaration has been pre-lodged with HMRC"
-      case _                           => "Declaration accepted"
+      case "C" | "Q" | "X" | "I" | "J" | "L" | "K" | "P" | "N" => "Your declaration is still being checked"
+      case "D" | "U"                                           => "Your declaration needs documents attached"
+      case "R"                                                 => "Your declaration has been pre-lodged with HMRC"
+      case _                                                   => "Declaration accepted"
     }
 
   override def checkPage(): Unit = {
@@ -50,8 +50,8 @@ object ConfirmationPage extends BasePage {
 
   private def checkPrintLinkIfAny(): Unit = {
     val checkPresence = detail(Lrn).take(1) match {
-      case "C" | "Q" | "X" | "D" | "U" => false
-      case _                           => true
+      case "C" | "Q" | "X" | "D" | "U" | "I" | "J" | "L" | "K" | "P" | "N" => false
+      case _                                                               => true
     }
     if (checkPresence) {
       val elements = findChildrenByClassName(findElementById("main-content"), "ceds-print-link")
@@ -62,26 +62,23 @@ object ConfirmationPage extends BasePage {
 
   private def checkPageContent(): Unit =
     detail(Lrn).take(1) match {
-      case "C" if isArrivedDeclaration => checkPageWhenCleared()
-      case "C" | "Q" | "X"             => checkPageWhenStillUnderCheck()
-      case "D" | "U"                   => checkPageWhenDocumentsRequired()
-      case "R"                         => checkPageWhenReceived()
-      case _                           => checkPageWhenAccepted()
+      case "C" if isArrivedDeclaration                         => checkPageWhenCleared()
+      case "C" | "Q" | "X" | "I" | "J" | "L" | "K" | "P" | "N" => checkPageWhenStillUnderCheck()
+      case "D" | "U"                                           => checkPageWhenDocumentsRequired()
+      case "R"                                                 => checkPageWhenReceived()
+      case _                                                   => checkPageWhenAccepted()
     }
 
   private def checkPageWhenCleared(): Unit = {
-    println("\n========== Version of the Confirmation page: CLEARED ARRIVED ==========")
     checkTable()
     checkContentLinks(List(linkToMovements, linkToMovements, linkToTimeline, linkToFeedback, linkToSupport))
   }
 
   private def checkPageWhenStillUnderCheck(): Unit = {
-    println("\n========== Version of the Confirmation page: UNDERGOING PHYSICAL CHECK ==========")
     checkContentLinks(List(linkToDashboard, linkToSupport))
   }
 
   private def checkPageWhenDocumentsRequired(): Unit = {
-    println("\n========== Version of the Confirmation page: ADDITIONAL DOCUMENTS REQUIRED ==========")
     val elements = findChildrenByClassName(findElementById("main-content"), "govuk-warning-text")
     elements.size mustBe 1
     assert(elements.head.getText.endsWith("You need to upload documents ready for checking at customs."))
@@ -90,18 +87,33 @@ object ConfirmationPage extends BasePage {
   }
 
   private def checkPageWhenReceived(): Unit = {
-    println("\n========== Version of the Confirmation page: RECEIVED ==========")
     val mrn = checkTable()
-    checkContentLinks(List(
-      linkToTimeline, linkToClearanceHub, linkToMovements, linkToMovements, linkToTimeline, linkToSfus(mrn), linkToFeedback, linkToSupport
-    ))
+    checkContentLinks(
+      List(
+        linkToTimeline,
+        linkToClearanceHub,
+        linkToMovements,
+        linkToMovements,
+        linkToTimeline,
+        linkToSfus(mrn),
+        linkToFeedback,
+        linkToSupport
+      )
+    )
   }
 
   private def checkPageWhenAccepted(): Unit = {
-    println("\n========== Version of the Confirmation page: ACCEPTED ==========")
     checkTable()
-    checkContentLinks(List(
-      linkToTimeline, linkToTimeline, linkToClearanceHub, linkToMovements, linkToMovements, linkToFeedback, linkToSupport)
+    checkContentLinks(
+      List(
+        linkToTimeline,
+        linkToTimeline,
+        linkToClearanceHub,
+        linkToMovements,
+        linkToMovements,
+        linkToFeedback,
+        linkToSupport
+      )
     )
   }
 
@@ -113,21 +125,24 @@ object ConfirmationPage extends BasePage {
     cells(2).getText mustBe "LRN"
     cells(3).getText mustBe detail(Lrn)
     cells(4).getText mustBe "MRN"
-    cells(5).getText  // MRN value
+    cells(5).getText // MRN value
   }
 
   private def checkContentLinks(expectedLinks: Seq[Regex]): Unit = {
-    val actualLinks = findChildrenByTag(findElementById("main-content"), "a").flatMap(link => Option(link.getAttribute("href")))
+    val actualLinks =
+      findChildrenByTag(findElementById("main-content"), "a").flatMap(link => Option(link.getAttribute("href")))
     expectedLinks.zip(actualLinks).forall { case (expectedLink, actualLink) =>
       expectedLink.matches(actualLink)
     }
   }
 
   private val linkToSfus = (mrn: String) => (host + s"/customs-declare-exports/file-upload?mrn=$mrn").r
-  private val linkToClearanceHub = "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/national-clearance-hub".r
+  private val linkToClearanceHub =
+    "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/national-clearance-hub".r
   private val linkToDashboard = (host + "/customs-declare-exports/dashboard?page=1").r
   private val linkToFeedback = (host + "/feedback/customs-declare-exports-frontend").r
   private val linkToMovements = (host + "/customs-movements").r
-  private val linkToSupport = (host + "/contact/report-technical-problem?newTab=true&service=customs-declare-exports-frontend").r
+  private val linkToSupport =
+    (host + "/contact/report-technical-problem?newTab=true&service=customs-declare-exports-frontend").r
   private val linkToTimeline = (host + "/customs-declare-exports/submissions/\\w+/information").r
 }

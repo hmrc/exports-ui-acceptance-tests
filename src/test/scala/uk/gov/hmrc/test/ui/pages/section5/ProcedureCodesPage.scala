@@ -69,12 +69,12 @@ object ProcedureCodesPage extends BasePage {
 
   def hasPermanentExportOfUKGoodsPC: Boolean = listOfItemDetailFor(ProcedureCodeLabel).contains("1040")
 
-  def hasSupervisingCustomsOfficePageVisiblePC: Boolean = detail(ProcedureCode(itemId)) == "1042"
+  def hasSupervisingCustomsOfficePageVisiblePC: Boolean = listOfItemDetailFor(ProcedureCodeLabel).contains("1042")
 
   private val codesToGoToWarehouse: Seq[String] = List("07", "71", "78")
 
   def goToWarehouse: Boolean = {
-    val procedureCode = detail(ProcedureCode(itemId))
-    codesToGoToWarehouse.exists(procedureCode.endsWith)
+    val procedureCodes = listOfItemDetailFor(ProcedureCodeLabel)
+    procedureCodes.exists(procedureCode => codesToGoToWarehouse.exists(procedureCode.endsWith))
   }
 }

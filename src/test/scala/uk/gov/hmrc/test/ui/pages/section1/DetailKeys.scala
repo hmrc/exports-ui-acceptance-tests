@@ -52,5 +52,5 @@ object DetailKeys {
   val Mucr: DetailKey = DetailKey("MUCR", section1)
 
   // /entry-into-declarants-records
-  val Eidr: DetailKey = DetailKey("EIDR", section1, skipValueCheck = true, checkChangeLink = false)
+  val Eidr: DetailKey = DetailKey("MRN On DashBoard", section1, skipValueCheck = true, checkChangeLink = false)
 }

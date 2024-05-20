@@ -249,6 +249,8 @@ class CommonStepDef extends BaseStepDef {
     SummarySection5Page.removeItem()
   }
 
+  And("""^I click back""")(() => CommonPage.back())
+
   And("""^I click change link for (.*) page""") { (pageName: String) =>
     val changeLinkMap: Map[String, String] = Map("Authorisation Type" -> "authorisation-holder-1-type")
 

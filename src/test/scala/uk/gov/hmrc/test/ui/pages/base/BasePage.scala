@@ -18,6 +18,7 @@ package uk.gov.hmrc.test.ui.pages.base
 
 import com.typesafe.scalalogging.LazyLogging
 import org.openqa.selenium.WebElement
+import org.openqa.selenium.support.ui.WebDriverWait
 import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
@@ -27,6 +28,8 @@ import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.CountriesOfRouting
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodeLabel
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.SealLabel
+
+import java.time.Duration
 
 trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLogging {
 
@@ -79,6 +82,20 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
     checkExpanderLinks()
   }
 
+  def back(): Unit = clickById("back-link")
+
+  def statusRefresh(status: String): Unit = {
+
+    val waitForStatus = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(10))
+
+    waitForStatus
+      .withMessage(() => s"waiting for notification status to be: [$status]")
+      .until { implicit driver =>
+        driver.navigate().refresh()
+        findElementByCssSelector("tr:nth-child(1) > td:nth-child(5)").getText mustBe status
+      }
+  }
+
   protected def checkExpanderLinks(): Unit =
     maybeDetail(DeclarationType).map { declarationType =>
       // We could have link sets for a specific declaration type (e.g. Clearance or Supplementary)
@@ -113,7 +130,6 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
     val cacheDetails = allSectionDetails(detailKey.sectionId)
 
     cacheDetails.foldLeft(labelAndValueRows) { case (tailedLabelAndValueRows, (detailKey, details)) =>
-
       // Remove the row that was just tested against from the sequence of rows.
       // This is required for elements like, for instance "additional information" or
       // "additional documents", which might have two or more rows with the same label.

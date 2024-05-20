@@ -292,3 +292,13 @@ This code is open source software licensed under the [Apache 2.0 License]("http:
   - User completes Clearance prelodged dec with Procedure code as 1042 and APC as 000, this navigates through Warehouse and Supervising customs office page
   - User completes Clearance prelodged dec with isEidr as yes, PC as 0017 and ASM as 16M this will skip Inland-transport-details and Border-transport page 
   - User completes Clearance arrived dec with PC 1007 and APC as 1CS, this navigates through warehouse and Supervising Customs Office and skips Inland-Transport-details, Transport payment and Container pages 
+
+## DashBoard and Declaration Information
+
+- **DashBoard and Declaration Scenarios**
+  - Check various confirmation page titles and validates information on Dashboard and Declaration information pages
+  - Validate Information on Dashboard and Declaration Information Pages
+  - Validates View Print link and Ead Print link
+  - Checks successful and unsuccessful Copy of a Declaration
+  - Checks successful and unsuccessful Cancellation of a Declaration
+  - Check Saved Declaration and removal of draft declarations

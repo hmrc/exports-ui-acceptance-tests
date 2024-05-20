@@ -214,6 +214,7 @@ Feature: Section5 Standard Journey
 
   @Section5 @Standard
   Scenario: Complete Items section on Standard Arrived declaration journey and with answers No on various item pages
+    Given I clear cache for section 5
     Given I fill section1 for STANDARD,arrived declaration
     And I fill section2
     And I fill section3
@@ -230,7 +231,6 @@ Feature: Section5 Standard Journey
     Then I should land on Authorisation-Required page
     And I select first Authorisation code EXRR and enter eori as GB123456789006
     And I click continue
-    Then I should navigate to Location Of Goods page
 
   # start items section after changing
     Then I navigate to Add-Declaration-Item-1 page

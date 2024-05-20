@@ -17,21 +17,22 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.common
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.common.SummaryPage
+import uk.gov.hmrc.test.ui.pages.common.DashboardPage
 
-class SummaryStepDef extends BaseStepDef {
+class DashboardPageStepDef extends BaseStepDef {
 
-  And("""^I should land on Saved-Summary page""")(() => SummaryPage.checkPage())
+  And("""^I should land on Dashboard page""")(() => DashboardPage.checkPage())
 
-  And("""^I check the sections' headings and click confirm and continue""") { () =>
-    SummaryPage.fillPage()
+  And("""^I validate declaration details on (.*) tab and check Status is (.*)""") { (tab: String, status: String) =>
+    DashboardPage.validateDashboard(tab, status)
   }
 
-  And("""^I click continue on summary""") { () =>
-    SummaryPage.clickContinueOnSummary()
+  And("""^I navigate to declaration information page after clicking on mrn link""") { () =>
+    DashboardPage.mrnLink.click()
   }
 
-  And("""^I navigate to summary page""") { () =>
-    SummaryPage.navigateToPage(SummaryPage.path)
+  And("""^I click on (.*) tab""") { (tab: String) =>
+    DashboardPage.clickOnTab(tab)
   }
+
 }
