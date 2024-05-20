@@ -1,91 +1,84 @@
-**This is a template README.md.  Be sure to update this with project specific content that describes your ui test project.**
 
 # exports-ui-acceptance-tests
-`<digital service name>` UI journey tests.  
+Smoke and regression tests for the `customs-declare-exports-frontend` service.  
 
 ## Pre-requisites
 
-### Services
-
-Start Mongo Docker container as follows:
+Run a Mongo Docker container:
 
 ```bash
-docker run --rm -d -p 27017:27017 --name mongo mongo:4.4
+$ docker run --rm -d -p 27017:27017 --name mongo percona/percona-server-mongodb:5.0
 ```
 
-Start `<digital service name>` services as follows:
+Run the services for CDS Exports:
 
 ```bash
-sm2 --start <profile>
+$ sm2 --start CDS_EXPORTS_DECLARATION_ALL
 ```
-
-### Dockerized browser container(s)
-
-Start a browser Docker container as follows:
-
-* Argument `<browser>` must be `remote-chrome`, `remote-edge` or `remote-firefox`.
-
-```bash
-./run_browser_with_docker.sh <browser>
-```
-
-### Test inspection and debugging
-
-Connect to `127.0.0.1:5900` via a VNC client to inspect and debug test execution.
-
-If prompted for a password the default is `secret`.
 
 ## Tests
-
 Run tests as follows:
+- Argument `<browser>` must be `chrome`, `edge`, or `firefox`.
+- Argument `<environment>` must be `local`, `dev` or `staging`.
 
-* Argument `<browser>` must be `chrome`, `edge`, `firefox`, `remote-chrome`, `remote-edge` or `remote-firefox`.
-* Argument `<environment>` must be `local`, `dev`, `qa` or `staging`.
+Note that the `QA` environment uses real upstream services, so we do not run the tests in that environment.
 
 ```bash
-./run_tests.sh <browser> <environment>
-```
-
-### Running ZAP tests
-
-ZAP tests can be automated using the HMRC Dynamic Application Security Testing approach. Running 
-automated ZAP tests should not be considered a substitute for manual exploratory testing using OWASP ZAP.
-
-#### Tagging tests for ZAP
-
-It is not required to proxy every journey test via ZAP. The intention of proxying a test through ZAP is to expose all the
- relevant pages of an application to ZAP. So tagging a subset of the journey tests or creating a 
- single ZAP focused journey test is sufficient.
-
-#### Configuring the browser to proxy via ZAP 
-
-Setting the system property `zap.proxy=true` configures the browser specified in `browser` property to proxy via ZAP. 
-This is achieved using [webdriver-factory](https://github.com/hmrc/webdriver-factory#proxying-trafic-via-zap).
-
-#### Executing a ZAP test
-
-The shell script `run_zap_tests.sh` is available to execute ZAP tests. The script proxies a set of journey tests, 
-tagged as `ZapTests`, via ZAP.  
-
-For example, to execute ZAP tests locally using a Chrome browser
+$ sbt clean \
+   -Dbrowser=$Browser \
+   -Denv=$Environment \
+   -Dcucumber.filter.tags=$Tag \
+   "testOnly uk.gov.hmrc.test.ui.cucumber.runner.Runner" testReport
 
 ```
-./run_zap_test.sh chrome local
+
+### How to run Smoke tests only
+```bash
+$ ./run_tag.sh
+```
+You can also run the script with the following tag: 
+```bash
+$ ./run_tag.sh @Smoke
 ```
 
-To execute ZAP tests locally using a remote-chrome browser
-
+### How to run Regression tests only
+```bash
+$ ./run_tag.sh @Regression
 ```
-./run_browser_with_docker.sh remote-chrome 
-./run_zap_test.sh remote-chrome local
-``` 
 
-`./run_browser_with_docker.sh` is **NOT** required when running in a CI environment.
+### How to run specific tests
+Add the `@Wip` tag to the Scenarios to test and run:
+```bash
+$ ./run_tag.sh @Wip
+```
+
+To run Scenarios for specific journeys run the script with the following tags: 
+```bash
+$ ./run_tag.sh  @Clearance      # to run Clearance journey Scenarios
+$ ./run_tag.sh  @Occasional     # to run Occasional journey Scenarios
+$ ./run_tag.sh  @Standard       # to run Standard journey Scenarios
+$ ./run_tag.sh  @Simplified     # to run Simplified journey Scenarios
+$ ./run_tag.sh  @Supplementary  # to run Supplementary journey Scenarios
+```
+
+### Optional arguments of the `run_tag.sh` script:
+Note that the order of the arguments is not relevant.
+
+By default the script runs the Scenarios using the `chrome` browser. If you want to run the script on a different browser:
+```bash
+$ ./run_tag.sh firefox @Regression  # chrome, edge or firefox
+```
+
+if you want to run the script in a specific environment (by default: local):
+```bash
+ 
+$ ./run_tag.sh staging @Smoke firefox  # local, dev or staging
+```
 
 ### Running tests using BrowserStack
 If you would like to run your tests via BrowserStack from your local development environment please refer to the [webdriver-factory](https://github.com/hmrc/webdriver-factory/blob/main/README.md/#user-content-running-tests-using-browser-stack) project.
 
-## Installing local driver binaries
+## Installing locally browser driver binaries
 
 This project supports UI test execution using Firefox (Geckodriver) and Chrome (Chromedriver) browsers. 
 
@@ -299,3 +292,13 @@ This code is open source software licensed under the [Apache 2.0 License]("http:
   - User completes Clearance prelodged dec with Procedure code as 1042 and APC as 000, this navigates through Warehouse and Supervising customs office page
   - User completes Clearance prelodged dec with isEidr as yes, PC as 0017 and ASM as 16M this will skip Inland-transport-details and Border-transport page 
   - User completes Clearance arrived dec with PC 1007 and APC as 1CS, this navigates through warehouse and Supervising Customs Office and skips Inland-Transport-details, Transport payment and Container pages 
+
+## DashBoard and Declaration Information
+
+- **DashBoard and Declaration Scenarios**
+  - Check various confirmation page titles and validates information on Dashboard and Declaration information pages
+  - Validate Information on Dashboard and Declaration Information Pages
+  - Validates View Print link and Ead Print link
+  - Checks successful and unsuccessful Copy of a Declaration
+  - Checks successful and unsuccessful Cancellation of a Declaration
+  - Check Saved Declaration and removal of draft declarations

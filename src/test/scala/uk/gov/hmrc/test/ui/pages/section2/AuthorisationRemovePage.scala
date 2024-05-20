@@ -38,5 +38,5 @@ object AuthorisationRemovePage extends BasePage {
   // Yes => fillPage(yes, "{sequenceId}")
 
   override def fillPage(values: String*): Unit =
-    if (selectYesOrNoRadio(values(yesNo))) clear(AuthorisationType(values(authToBeRemoved)))
+    if (selectYesOrNoRadio(values(yesNo))) clearIfAny(AuthorisationType(values(authToBeRemoved)))
 }

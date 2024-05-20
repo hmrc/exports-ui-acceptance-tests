@@ -31,7 +31,8 @@ object OtherPartiesInvolvedPage extends BasePage {
 
   val path: String = "/declaration/other-parties-involved"
 
-  override def changeLink: String = maybeDetail(NoAdditionalPartiesInvolved).fold(OtherPartiesInvolvedListPage.path)(_ => path)
+  override def changeLink: String =
+    maybeDetail(NoAdditionalPartiesInvolved).fold(OtherPartiesInvolvedListPage.path)(_ => path)
 
   val title: String = "What are the EORI numbers of others involved in this export?"
 
@@ -52,10 +53,10 @@ object OtherPartiesInvolvedPage extends BasePage {
       clickById("no")
     } else {
       val id = values(choice) match {
-        case "Consolidator"      => "CS"
-        case "Manufacturer"      => "MF"
-        case "Freight forwarder" => "FW"
-        case "Warehouse keeper"  => "WH"
+        case "Consolidator"                 => "CS"
+        case "Manufacturer"                 => "MF"
+        case "Additional freight forwarder" => "FW"
+        case "Warehouse keeper"             => "WH"
       }
       clickById(id)
       fillTextBoxById(s"eori$id", values(EORI))

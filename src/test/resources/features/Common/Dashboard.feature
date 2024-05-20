@@ -1,3 +1,4 @@
+@Regression
 Feature: Validate Dashboard and Declaration Information
 
     # Below scenario -

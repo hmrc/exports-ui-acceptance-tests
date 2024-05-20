@@ -18,7 +18,7 @@ Feature: Section6 Occasional Journey
      # 3. The following page is skipped
           # Departure Transport
 
-  @Section6 @OcaDec
+  @Section6 @Occasional
   Scenario: Occasional journey section-6
     Given I fill section1 for OCCASIONAL,prelodged declaration
     And I fill section2
@@ -101,6 +101,14 @@ Feature: Section6 Occasional Journey
     Then I should land on Express-Consignment page
     And I select No to confirm consignment as express
     And I click continue
+    And I click remove Container 0 on Container List page
+    Then I should land on Remove-This-Container page
+    And I select Yes to remove container Container1
+    And I click continue
+    Then I should land on Container page
+    And I select No to add containers
+    And I click continue
+    Then I should land on MiniCYA-Section-6 page
     And I check the MiniCYA page for Section-6
     And I click continue on MiniCya
     Then I should land on Saved-Summary page
@@ -117,7 +125,7 @@ Feature: Section6 Occasional Journey
           #  Inland transport details
           #  Border transport
 
-    @Section6 @OcaDec
+    @Section6 @Occasional
     Scenario: Occasional arrived journey section-6
       Given I fill section1 for OCCASIONAL,arrived declaration
       And I fill section2

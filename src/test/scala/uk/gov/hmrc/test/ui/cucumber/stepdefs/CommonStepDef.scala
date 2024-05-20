@@ -21,12 +21,7 @@ import uk.gov.hmrc.test.ui.generator.SupportGenerator.generateEORI
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.{clear, continue, continueOnMiniCya, detailKeys}
 import uk.gov.hmrc.test.ui.pages.base.Constants.yes
 import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{
-  isClearance,
-  isOccasional,
-  isSimplified,
-  isSupplementary
-}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isOccasional, isSimplified, isSupplementary}
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 import uk.gov.hmrc.test.ui.pages.section1._
 import uk.gov.hmrc.test.ui.pages.section2.AreYouTheExporterPage.isExporter
@@ -36,6 +31,7 @@ import uk.gov.hmrc.test.ui.pages.section3._
 import uk.gov.hmrc.test.ui.pages.section4._
 import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.{goToWarehouse, hasSupervisingCustomsOfficePageVisiblePC}
 import uk.gov.hmrc.test.ui.pages.section5._
+import uk.gov.hmrc.test.ui.pages.section6.InlandModeOfTransportPage.{isFixedTransport, isPostalOrMail}
 import uk.gov.hmrc.test.ui.pages.section6._
 
 class CommonStepDef extends BaseStepDef {
@@ -183,7 +179,7 @@ class CommonStepDef extends BaseStepDef {
     if (isStandard) {
       VatRatingPage.fillPage("Yes"); continue()
     }
-    if (!isClearance) {
+    if(!isClearance) {
       NationalAdditionalCodesPage.fillPage(Constants.no); continue()
     }
     if (isStandard || isSupplementary) {
@@ -212,13 +208,21 @@ class CommonStepDef extends BaseStepDef {
     if (isClearance || goToWarehouse) {
       WarehousePage.fillPage("yes", "R1234567GB");
     }
-    SupervisingCustomsOfficePage.fillPage("GBBTH001"); continue()
+
+    if(hasSupervisingCustomsOfficePageVisiblePC)
+      SupervisingCustomsOfficePage.fillPage("GBBTH001"); continue()
+
     InlandOrBorderPage.fillPage("Customs controlled location"); continue()
     InlandModeOfTransportPage.fillPage("Road transport"); continue()
-    DepartureTransportPage.fillPage("Flight number"); continue()
-    BorderTransportPage.fillPage("Ship IMO number"); continue()
-    if (!isClearance) {
-      TransportCountryPage.fillPage("Desirade - GP"); continue()
+
+    if ((!isSupplementary) && (!isFixedTransport && !isPostalOrMail)) {
+      DepartureTransportPage.fillPage("Flight number"); continue()
+    }
+    if(!isOccasional){
+      BorderTransportPage.fillPage("Ship IMO number"); continue()
+    }
+    if (!isClearance && (!isFixedTransport || !isPostalOrMail)) {
+      TransportCountryPage.fillPage("Desirade - GP");continue()
     }
     ExpressConsignmentPage.fillPage("Yes"); continue()
     TransportPaymentPage.fillPage("Payment in cash"); continue()
@@ -237,7 +241,7 @@ class CommonStepDef extends BaseStepDef {
     clear(detailKeys(keys: _*): _*)
   }
 
-  And("""^I clear cache for section (.*)""") { (sectionId: Int) =>
+  And("""^I clear cache for section (.*)""") {(sectionId: Int) =>
     clear(sectionId)
   }
 
