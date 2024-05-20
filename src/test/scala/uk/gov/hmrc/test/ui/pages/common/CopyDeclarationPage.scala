@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.common
 
+import org.openqa.selenium.WebElement
 import uk.gov.hmrc.test.ui.generator.SupportGenerator
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.common.DetailKeys._
@@ -29,17 +30,24 @@ object CopyDeclarationPage extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
+  def lrnWarning(): WebElement = findElementByCssSelector(".govuk-error-summary__list a:first-child")
+
   val ducr = 0
   val lrnPrefix = 1
 
- //ex: fillPage("8GB123456469274-101SHIP1", "Q0")
+  // ex: fillPage("8GB123456469274-101SHIP1", "Q0")
+  // ex: fillPage("8GB123456469274-101SHIP1", "24")
 
   override def fillPage(values: String*): Unit = {
 
     val lrn = SupportGenerator.generateLrn(values(lrnPrefix)).toUpperCase
 
     fillTextBoxById("ducr_ducr", values(ducr))
-    fillTextBoxById("lrn", lrn)
+
+    if (values(1).equals("24"))
+      fillTextBoxById("lrn", detail(Lrn))
+    else
+      fillTextBoxById("lrn", lrn)
 
     store(Lrn -> Detail(lrn))
     store(Ducr -> Detail(values(ducr)))

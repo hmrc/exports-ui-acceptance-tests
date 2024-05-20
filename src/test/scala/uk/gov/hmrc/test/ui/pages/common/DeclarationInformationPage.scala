@@ -39,6 +39,9 @@ object DeclarationInformationPage extends BasePage {
   private val eadLink = "/ead-print-view"
   private val fileUploadLink = "/file-upload"
 
+  private val additionalLinks =
+    List(messageLink, movementsLink, cancelLink, amendLink, copyLink, viewPrintLink, eadLink, fileUploadLink)
+
   private def statusDetailsList: List[String] = {
     val additionalText = "If you already uploaded files"
     val originalList = List(
@@ -55,7 +58,7 @@ object DeclarationInformationPage extends BasePage {
     val modifiedList =
       if (detail(Lrn).startsWith("D") || detail(Lrn).startsWith("U")) {
         additionalText +: originalList
-      } else if (detail(Lrn).startsWith("R")) {
+      } else if (detail(Lrn).startsWith("R") || detail(Lrn).startsWith("P")) {
         originalList.filterNot(_ == "Information about ‘Re-arrivals’")
       } else {
         originalList
@@ -65,9 +68,6 @@ object DeclarationInformationPage extends BasePage {
   }
 
   override def pageLinkHrefs: Seq[String] = {
-    val additionalLinks =
-      List(messageLink, movementsLink, cancelLink, amendLink, copyLink, viewPrintLink, eadLink, fileUploadLink)
-
     super.pageLinkHrefs.filterNot(_ == exitAndCompleteLater) ++ additionalLinks
   }
 
@@ -78,7 +78,11 @@ object DeclarationInformationPage extends BasePage {
   def validateTimelineDetails(): Unit = {
     findElementByCssSelector(".submission-ducr dd").getText mustBe detail(Ducr)
     findElementByCssSelector(".submission-lrn dd").getText mustBe detail(Lrn)
-    findElementByClassName("submission-mrn").getText mustBe s"MRN: ${detail(MrnOnDashboard)}"
+    if (!detail(StatusOnDashboard).equals("Pending")) {
+      findElementByClassName("submission-mrn").getText mustBe s"MRN: ${detail(MrnOnDashboard)}"
+    } else {
+      elementByClassDoesNotExist("submission-mrn")
+    }
     findElementsByTag("details").zip(statusDetailsList) foreach { case (element, status) =>
       element.getText mustBe status
     }
@@ -100,5 +104,4 @@ object DeclarationInformationPage extends BasePage {
 
   def checkStatusOnTimeLine(): Unit =
     findElementByCssSelector(".hmrc-timeline__event:first-child h2").getText mustBe "Cancellation request denied"
-
 }

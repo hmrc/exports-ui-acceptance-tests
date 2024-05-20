@@ -21,13 +21,20 @@ import uk.gov.hmrc.test.ui.generator.SupportGenerator.generateEORI
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.{clear, continue, continueOnMiniCya, detailKeys}
 import uk.gov.hmrc.test.ui.pages.base.Constants.yes
 import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isOccasional, isSimplified, isSupplementary}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{
+  isClearance,
+  isOccasional,
+  isSimplified,
+  isSupplementary
+}
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 import uk.gov.hmrc.test.ui.pages.section1._
 import uk.gov.hmrc.test.ui.pages.section2.AreYouTheExporterPage.isExporter
+import uk.gov.hmrc.test.ui.pages.section2.IsThisExsPage.isThisExs
 import uk.gov.hmrc.test.ui.pages.section2._
 import uk.gov.hmrc.test.ui.pages.section3._
 import uk.gov.hmrc.test.ui.pages.section4._
+import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.{goToWarehouse, hasSupervisingCustomsOfficePageVisiblePC}
 import uk.gov.hmrc.test.ui.pages.section5._
 import uk.gov.hmrc.test.ui.pages.section6._
 
@@ -165,34 +172,32 @@ class CommonStepDef extends BaseStepDef {
     AddDeclarationItemPage.fillPage()
     ProcedureCodesPage.fillPage("1042"); continue()
     AdditionalProcedureCodesPage.fillPage("F75"); continue()
-    FiscalReferencesYesNoPage.fillPage(Constants.no); continue()
+    if (hasSupervisingCustomsOfficePageVisiblePC) {
+      FiscalReferencesYesNoPage.fillPage(Constants.no);
+      continue()
+    }
     CommodityDetailsPage.fillPage("4203400090", "Straw for bottles"); continue()
-    DangerousGoodsCodePage.fillPage(Constants.no); continue()
-
+    if (!isClearance || isThisExs) {
+      DangerousGoodsCodePage.fillPage(Constants.no); continue()
+    }
     if (isStandard) {
       VatRatingPage.fillPage("Yes"); continue()
     }
-
     if (!isClearance) {
       NationalAdditionalCodesPage.fillPage(Constants.no); continue()
     }
-
     if (isStandard || isSupplementary) {
       StatisticalValuePage.fillPage("1000"); continue()
     }
-
     PackageInformationPage.fillPage("1", "Aerosol", "20", "No shipping mark"); continue()
     PackageInformationListPage.fillPage(Constants.no); continue()
-
     if (isStandard || isSupplementary || isClearance) {
       CommodityMeasurePage.fillPage("500", "700"); continue()
     }
     if (isStandard || isSupplementary) {
       SupplementaryUnitsPage.fillPage(Constants.yes, "12"); continue()
     }
-
     AdditionalInformationYesNoPage.fillPage(Constants.no); continue()
-
     if (!isClearance) {
       LicenseRequiredYesNoPage.fillPage(Constants.yes); continue()
     }
@@ -204,9 +209,17 @@ class CommonStepDef extends BaseStepDef {
 
   And("""^I fill section6""") { () =>
     TransportLeavingTheBorderPage.fillPage("Sea transport"); continue()
+    if (isClearance || goToWarehouse) {
+      WarehousePage.fillPage("yes", "R1234567GB");
+    }
     SupervisingCustomsOfficePage.fillPage("GBBTH001"); continue()
     InlandOrBorderPage.fillPage("Customs controlled location"); continue()
-    InlandModeOfTransportPage.fillPage("Postal or mail"); continue()
+    InlandModeOfTransportPage.fillPage("Road transport"); continue()
+    DepartureTransportPage.fillPage("Flight number"); continue()
+    BorderTransportPage.fillPage("Ship IMO number"); continue()
+    if (!isClearance) {
+      TransportCountryPage.fillPage("Desirade - GP"); continue()
+    }
     ExpressConsignmentPage.fillPage("Yes"); continue()
     TransportPaymentPage.fillPage("Payment in cash"); continue()
     ContainerPage.fillPage("Yes", "Container1"); continue()
@@ -222,6 +235,10 @@ class CommonStepDef extends BaseStepDef {
   And("""^I clear (.*) keys from cache""") { (cacheKeysToDelete: String) =>
     val keys = cacheKeysToDelete.split(", ").toList
     clear(detailKeys(keys: _*): _*)
+  }
+
+  And("""^I clear cache for section (.*)""") { (sectionId: Int) =>
+    clear(sectionId)
   }
 
   And("""^I remove one item from the declaration""") { () =>

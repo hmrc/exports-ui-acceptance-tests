@@ -42,4 +42,6 @@ object ContainerListPage extends BasePage {
   // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
+
+  def selectContainerToRemove(index: Int): Unit = clickByCssSelector(s"#containers-row$index-remove_button > a")
 }

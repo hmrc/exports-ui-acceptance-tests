@@ -31,7 +31,7 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.SealLabel
 
 import java.time.Duration
 
-trait  BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLogging {
+trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLogging {
 
   logger.info(getClass.getSimpleName.dropRight(1))
 
@@ -59,11 +59,11 @@ trait  BasePage extends CacheHelper with DriverHelper with PageHelper with LazyL
       expectedUrl.r.matches(actualUrl),
       s"The expected URL($expectedUrl) does not match the actual URL($actualUrl)"
     )
-//    val sectionHeader =
-//      if (elementByIdDoesNotExist("section-header")) ""
-//      else s" - ${findElementById("section-header").getText}"
+    val sectionHeader =
+      if (elementByIdDoesNotExist("section-header")) ""
+      else s" - ${findElementById("section-header").getText}"
 
-  //  driver.getTitle mustBe title + sectionHeader + " - Make an export declaration online - GOV.UK"
+    driver.getTitle mustBe title + sectionHeader + " - Make an export declaration online - GOV.UK"
     findElementsByTag("h1").head.getText mustBe title
   }
 
@@ -86,14 +86,15 @@ trait  BasePage extends CacheHelper with DriverHelper with PageHelper with LazyL
 
   def statusRefresh(status: String): Unit = {
 
-    val waitForStatus = new WebDriverWait(driver, Duration.ofSeconds(20), Duration.ofMillis(10))
+    val waitForStatus = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(10))
 
-    waitForStatus.withMessage(() => s"waiting for notification status to be: [$status]").until(implicit driver => {
-      driver.navigate().refresh()
-      findElementByXpath("//tbody//tr[1]//td[5]").getText mustBe status
-    })
+    waitForStatus
+      .withMessage(() => s"waiting for notification status to be: [$status]")
+      .until { implicit driver =>
+        driver.navigate().refresh()
+        findElementByXpath("//tbody//tr[1]//td[5]").getText mustBe status
+      }
   }
-
 
   protected def checkExpanderLinks(): Unit =
     maybeDetail(DeclarationType).map { declarationType =>
@@ -129,7 +130,6 @@ trait  BasePage extends CacheHelper with DriverHelper with PageHelper with LazyL
     val cacheDetails = allSectionDetails(detailKey.sectionId)
 
     cacheDetails.foldLeft(labelAndValueRows) { case (tailedLabelAndValueRows, (detailKey, details)) =>
-
       // Remove the row that was just tested against from the sequence of rows.
       // This is required for elements like, for instance "additional information" or
       // "additional documents", which might have two or more rows with the same label.

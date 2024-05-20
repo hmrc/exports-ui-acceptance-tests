@@ -37,7 +37,7 @@ object FiscalReferencesYesNoPage extends BasePage {
   // No  => fillPage("No")
 
   override def fillPage(values: String*): Unit = {
-    if (!selectYesOrNoRadio(values(yesNo), "Yes", "No")) clear(AdditionalFiscalReferences(itemId))
+    if (!selectYesOrNoRadio(values(yesNo), "Yes", "No")) clearIfAny(AdditionalFiscalReferences(itemId))
     store(FiscalInformationYesNo(itemId) -> Detail(values.head))
   }
 }

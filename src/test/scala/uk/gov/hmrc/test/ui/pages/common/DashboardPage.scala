@@ -53,7 +53,6 @@ object DashboardPage extends BasePage {
 
     timelineLink.matches(mrnLink.getAttribute("href"))
     store(MrnOnDashboard -> Detail(mrnValue.getText))
-    clear(StatusOnDashboard)
     store(StatusOnDashboard -> Detail(decStatus))
   }
 

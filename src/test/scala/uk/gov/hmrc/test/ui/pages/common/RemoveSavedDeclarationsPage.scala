@@ -17,23 +17,24 @@
 package uk.gov.hmrc.test.ui.pages.common
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.common.DetailKeys._
+import uk.gov.hmrc.test.ui.pages.base.BasePage.exitAndCompleteLater
 
-object PrintOrViewPage extends BasePage {
+object RemoveSavedDeclarationsPage extends BasePage {
 
-  def backButtonHref: String = detail(DeclarationInfoPath)
-
-  def path: String = detail(DeclarationInfoPath).replace("information", "view")
-
-  val title: String = "Submitted declaration"
-
-  override def checkBackButton(): Unit = ()
+  val backButtonHref: String = "/saved-declarations"
+  val path: String = removeSavedDecLink.toString()
+  val title: String = "Are you sure you want to remove this declaration?"
 
   override def checkExpanders(): Unit = ()
 
-  // ex: fillPage()
+  override def pageLinkHrefs: Seq[String] = {
+    super.pageLinkHrefs.filterNot(_ == exitAndCompleteLater)
+  }
 
-  override def fillPage(values: String*): Unit = ()
+  // fillPage("Yes")
+  override def fillPage(values: String*): Unit = {
+    selectRadioAndClick(values(0))
+  }
 
-  def viewOrPrintLink(): Unit = clickById("view-declaration")
+
 }

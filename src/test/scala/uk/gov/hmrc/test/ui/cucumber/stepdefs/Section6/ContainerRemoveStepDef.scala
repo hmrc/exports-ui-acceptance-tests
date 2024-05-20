@@ -17,16 +17,13 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section6
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.section6.TransportLeavingTheBorderPage
+import uk.gov.hmrc.test.ui.pages.section6.ContainerRemovePage
 
-class TransportLeavingTheBorderStepDef extends BaseStepDef {
+class ContainerRemoveStepDef extends BaseStepDef {
 
-  And("""^I should land on Transport-Leaving-The-Border page""")(() => TransportLeavingTheBorderPage.checkPage())
+  And("""^I should land on Remove-This-Container page""")(() => ContainerRemovePage.checkPage())
 
-  And("""^I select (.*) as mode of transport leaving the border""") { (mode: String) =>
-    TransportLeavingTheBorderPage.fillPage(mode)
+  And("""^I select (.*) to remove container (.*)""") {
+    (yesNo: String, containerId: String) => ContainerRemovePage.fillPage(yesNo, containerId)
   }
-
-  And("""^I navigate to Transport-Leaving-The-Border page""")(() => TransportLeavingTheBorderPage.navigateToPage(TransportLeavingTheBorderPage.path))
-
 }

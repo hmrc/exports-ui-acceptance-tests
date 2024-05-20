@@ -18,7 +18,7 @@ package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.Container
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.section6
 
 object ContainerRemovePage extends BasePage {
 
@@ -28,7 +28,7 @@ object ContainerRemovePage extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
-  val containerIdToBeRemoved = 1
+  private val containerIdToBeRemoved = 1
 
   // No  => fillPage(no)
   // Yes => fillPage(yes, "ContainerId")
@@ -36,9 +36,6 @@ object ContainerRemovePage extends BasePage {
   override def fillPage(values: String*): Unit =
     if (selectYesOrNoRadio(values(yesNo))) {
       val containerId = values(containerIdToBeRemoved)
-      clear(
-        Container(containerId)
-        // Container's Seals, if any, to remove
-      )
+      clear(section6, Some(containerId))
     }
 }

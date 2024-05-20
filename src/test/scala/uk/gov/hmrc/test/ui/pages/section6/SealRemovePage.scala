@@ -17,25 +17,24 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.section6
 
-object SealListPage extends BasePage {
+object SealRemovePage extends BasePage {
 
-  def backButtonHref: String = ContainerListPage.path
-  def path: String           = s"/declaration/containers/$containerId/seals"
+  def path: String           = removeUrl("containers", "seals")
 
-  def title: String =
-    details(Seals(containerId)).size match {
-      case 1 => s"You have added 1 security seal for container $containerId"
-      case n => s"You have added $n security seals for container $containerId"
-    }
+  def title                  = s"Are you sure you want to remove this security seal for container $containerId?"
+
+  def backButtonHref: String = SealYesNoPage.path
 
   override def checkExpanders(): Unit = ()
 
-  private val yesNo = 0
+  private val sealIdToBeRemoved = 1
 
   override def fillPage(values: String*): Unit =
-    selectYesOrNoRadio(values(yesNo))
-
-  def selectSealToRemove(index: Int): Unit = clickByCssSelector(s"#removable_elements-row$index-remove_button > a")
+    if (selectYesOrNoRadio(values(yesNo))) {
+      val sealId = values(sealIdToBeRemoved)
+      clear(section6, Some(sealId))
+    }
 }

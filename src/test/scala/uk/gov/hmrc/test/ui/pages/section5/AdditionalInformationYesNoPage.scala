@@ -23,7 +23,7 @@ import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{NoAdditionalInformation, PackageInformationType}
-import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.isPermanentExportOfUKGoodsPC
+import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.hasPermanentExportOfUKGoodsPC
 
 object AdditionalInformationYesNoPage extends BasePage {
 
@@ -48,7 +48,7 @@ object AdditionalInformationYesNoPage extends BasePage {
   override def pageLinkHrefs: Seq[String] =
     super.pageLinkHrefs ++ List(
       aiCodes,
-      if (isClearance || isPermanentExportOfUKGoodsPC) aiCodesForContainers
+      if (isClearance || hasPermanentExportOfUKGoodsPC) aiCodesForContainers
       else previousProcedureCodes
     )
 
