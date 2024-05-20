@@ -70,18 +70,15 @@ object ConfirmationPage extends BasePage {
     }
 
   private def checkPageWhenCleared(): Unit = {
-    println("\n========== Version of the Confirmation page: CLEARED ARRIVED ==========")
     checkTable()
     checkContentLinks(List(linkToMovements, linkToMovements, linkToTimeline, linkToFeedback, linkToSupport))
   }
 
   private def checkPageWhenStillUnderCheck(): Unit = {
-    println("\n========== Version of the Confirmation page: UNDERGOING PHYSICAL CHECK ==========")
     checkContentLinks(List(linkToDashboard, linkToSupport))
   }
 
   private def checkPageWhenDocumentsRequired(): Unit = {
-    println("\n========== Version of the Confirmation page: ADDITIONAL DOCUMENTS REQUIRED ==========")
     val elements = findChildrenByClassName(findElementById("main-content"), "govuk-warning-text")
     elements.size mustBe 1
     assert(elements.head.getText.endsWith("You need to upload documents ready for checking at customs."))
@@ -90,7 +87,6 @@ object ConfirmationPage extends BasePage {
   }
 
   private def checkPageWhenReceived(): Unit = {
-    println("\n========== Version of the Confirmation page: RECEIVED ==========")
     val mrn = checkTable()
     checkContentLinks(
       List(
@@ -107,7 +103,6 @@ object ConfirmationPage extends BasePage {
   }
 
   private def checkPageWhenAccepted(): Unit = {
-    println("\n========== Version of the Confirmation page: ACCEPTED ==========")
     checkTable()
     checkContentLinks(
       List(
