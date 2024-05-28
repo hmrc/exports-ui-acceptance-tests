@@ -17,22 +17,17 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.common
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.common.DashboardPage
+import uk.gov.hmrc.test.ui.pages.common.AmendmentDetails
 
-class DashboardPageStepDef extends BaseStepDef {
+class AmendmentDetailsStepDef extends BaseStepDef {
 
-  And("""^I should land on Dashboard page""")(() => DashboardPage.checkPage())
+  And("""^I should land on Amendment-Details page""")(() => AmendmentDetails.checkPage())
 
-  And("""^I validate declaration details on (.*) tab and check Status is (.*)""") { (tab: String, status: String) =>
-    DashboardPage.validateDashboard(tab, status)
+  And("""^I click view details link on timeline page to view the amended details""") { () =>
+    AmendmentDetails.clickViewDetailsLink()
   }
 
-  And("""^I navigate to declaration information page after clicking on mrn link""") { () =>
-    DashboardPage.mrnLink.click()
+  And("""^I validate amended details""") { () =>
+    AmendmentDetails.fillPage()
   }
-
-  And("""^I click on (.*) tab""") { (tab: String) =>
-    DashboardPage.clickOnTab(tab)
-  }
-
 }

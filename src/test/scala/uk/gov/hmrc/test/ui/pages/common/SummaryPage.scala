@@ -16,14 +16,17 @@
 
 package uk.gov.hmrc.test.ui.pages.common
 
-import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
-import uk.gov.hmrc.test.ui.pages.base.BasePage
+import org.openqa.selenium.WebElement
+import org.scalatest.Assertion
+import org.scalatest.matchers.must.Matchers.{be, convertToAnyMustWrapper}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, DetailKey}
+import uk.gov.hmrc.test.ui.pages.common.DetailKeys.DeclarationInfoPath
 
 object SummaryPage extends BasePage {
 
-  val backButtonHref: String = "/saved-declarations"
+  def backButtonHref: String = if (isAmendmentMode) detail(DeclarationInfoPath) else "/saved-declarations"
   val path: String = "/declaration/saved-summary"
-  val title: String = "Check your answers"
+  def title: String = if (isAmendmentMode) "Amend your declaration" else "Check your answers"
 
   override def checkExpanders(): Unit = ()
 
@@ -53,4 +56,22 @@ object SummaryPage extends BasePage {
       .head
       .click()
   }
+
+  def checkChangeLinkIsNotPresentFor(changeLinks:String): Assertion = {
+    elementBySelectorDoesNotExist("a[href*="+changeLinks+"]") must be (true)
+  }
+
+  def checkChangeLinks(detailKey:DetailKey): Any = {
+    if (detailKey.checkChangeLink) {
+     // val href = maybeLabelAndValueRow.get.changeLink.head.getAttribute("href")
+     // s"$host${changeLinks(detailKey)}" mustBe href
+    }
+  }
+
+  def removeItemLink(itemIndex : Int): WebElement = {
+    findElementByCssSelector(".item-"+itemIndex+"-heading > dd.govuk-summary-list__actions > a")
+  }
+
+
+
 }

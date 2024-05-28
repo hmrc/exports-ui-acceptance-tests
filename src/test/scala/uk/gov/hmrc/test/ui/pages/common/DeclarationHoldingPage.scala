@@ -22,8 +22,8 @@ object DeclarationHoldingPage extends BasePage {
 
   val backButtonHref: String = ""
 
-  val path: String = "/declaration/holding"
-  val title: String = "Submitting your declaration"
+  def path: String = if (isAmendmentMode) "/declaration/amendment-holding\\?isCancellation=false" else "/declaration/holding"
+  def title: String = if (isAmendmentMode) "Submitting amendment request" else "Submitting your declaration"
 
   override def checkBackButton(): Unit = ()
 
@@ -31,5 +31,5 @@ object DeclarationHoldingPage extends BasePage {
 
   // ex: fillPage()
 
-  override def fillPage(values: String*): Unit = waitForClass("confirmation-content", Presence)
+  override def fillPage(values: String*): Unit = if (isAmendmentMode) waitForClass("govuk-panel__title", Presence) else waitForClass("confirmation-content", Presence)
 }

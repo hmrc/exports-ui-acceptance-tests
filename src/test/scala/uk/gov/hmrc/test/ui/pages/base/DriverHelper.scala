@@ -41,6 +41,8 @@ trait DriverHelper {
 
   def continue(): Unit = clickById("submit")
 
+  def saveAndReturnToSummary(): Unit = clickById("save_and_return_to_summary")
+
   def continueOnMiniCya(): Unit = clickByXpath("//*[@role='button']")
 
   def clickById(value: String): Unit = findElementById(value).click()
@@ -66,6 +68,15 @@ trait DriverHelper {
         case Failure(_) => true
       }
 
+  def elementBySelectorDoesNotExist(selector: String, secondsToWaitFor: Int = 0): Boolean =
+    if (secondsToWaitFor == 0) driver.findElements(By.cssSelector(selector)).size() == 0
+    else
+      Try(waitForClass(selector, Presence, secondsToWaitFor)) match {
+        case Success(_) => false
+        case Failure(_) => true
+      }
+
+
   def findElementById(value: String): WebElement = driver.findElement(By.id(value))
   def findElementByXpath(value: String): WebElement = driver.findElement(By.xpath(value))
   def findElementByLinkText(value: String): WebElement = driver.findElement(By.linkText(value))
@@ -81,6 +92,9 @@ trait DriverHelper {
   def findChildByClassName(parent: WebElement, className: String): WebElement =
     parent.findElement(By.className(className))
 
+  def findChildByCssSelector(parent: WebElement, className: String): WebElement =
+    parent.findElement(By.cssSelector(className))
+
   def findChildByClassNameIfAny(parent: WebElement, className: String): Option[WebElement] = {
     val elements = parent.findElements(By.className(className))
     if (elements.isEmpty) None else Some(elements.get(0))
@@ -88,6 +102,9 @@ trait DriverHelper {
 
   def findChildrenByClassName(parent: WebElement, className: String): Seq[WebElement] =
     parent.findElements(By.className(className)).asScala.toList
+
+  def findChildrenByCssSelector(parent: WebElement, className: String): Seq[WebElement] =
+    parent.findElements(By.cssSelector(className)).asScala.toList
 
   def findChildrenByTag(parent: WebElement, tag: String): Seq[WebElement] =
     parent.findElements(By.tagName(tag)).asScala.toList

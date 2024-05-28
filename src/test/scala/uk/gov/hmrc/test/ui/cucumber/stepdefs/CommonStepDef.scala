@@ -21,7 +21,12 @@ import uk.gov.hmrc.test.ui.generator.SupportGenerator.generateEORI
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.{clear, continue, continueOnMiniCya, detailKeys}
 import uk.gov.hmrc.test.ui.pages.base.Constants.yes
 import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isOccasional, isSimplified, isSupplementary}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{
+  isClearance,
+  isOccasional,
+  isSimplified,
+  isSupplementary
+}
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 import uk.gov.hmrc.test.ui.pages.section1._
 import uk.gov.hmrc.test.ui.pages.section2.AreYouTheExporterPage.isExporter
@@ -231,9 +236,16 @@ class CommonStepDef extends BaseStepDef {
   And("""^I click back""")(() => CommonPage.back())
 
   And("""^I click change link for (.*) page""") { (pageName: String) =>
-    val changeLinkMap: Map[String, String] = Map("Authorisation Type" -> "authorisation-holder-1-type")
+    val changeLinkMap: Map[String, String] = Map(
+      "Authorisation Type"    -> "authorisation-holder-1-type",
+      "Are you the exporter"  -> "declarant-is-exporter",
+      "Exporter’s details"    -> "exporter-address"
+    )
 
     CommonPage.changeLinkOnCYA(changeLinkMap(pageName)).click()
+  }
+  And("""^I click save and return to summary""") { () =>
+    CommonPage.saveAndReturnToSummary()
   }
 }
 object CommonStepDef {

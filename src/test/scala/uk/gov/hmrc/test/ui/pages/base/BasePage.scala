@@ -177,6 +177,60 @@ trait  BasePage extends CacheHelper with DriverHelper with PageHelper with LazyL
       }
     }
   }
+
+
+  private case class LabelAndValueRowForAmend(label: WebElement, previousValue: WebElement, amendedValue: WebElement)
+
+  protected def checkAmendSectionSummary(): Unit = {
+    val allCardRows = findElementsByClassName("govuk-summary-card")
+      .flatMap(findChildrenByCssSelector(_, ".govuk-table__body .govuk-table__row"))
+
+    val labelAndValueRows: Seq[LabelAndValueRowForAmend] =
+      allCardRows.map { webElement =>
+        LabelAndValueRowForAmend(
+          findChildByCssSelector(webElement, ".govuk-table__cell:nth-child(1)"),
+          findChildByCssSelector(webElement, ".govuk-table__cell:nth-child(2)"),
+          findChildByCssSelector(webElement, ".govuk-table__cell:nth-child(3)")
+        )
+      }.sortWith { case (e1, e2) =>
+        val p1 = e1.label.getLocation
+        val p2 = e2.label.getLocation
+        p1.getY < p2.getY || p1.getY == p2.getY && p1.getX < p2.getX
+      }
+
+
+   // val cacheAmendedDetails = allSectionAmendedDetails(detailKey.sectionId)
+    val cacheAmendedDetails = allAmendedDetails()
+    val cacheDetails = allSectionDetails()
+
+    labelAndValueRows.foreach(eachRow => {
+      println(eachRow.previousValue.getText)
+      println(eachRow.amendedValue.getText)
+
+      cacheAmendedDetails.foreach { case (key, value) =>
+        if (cacheDetails.contains(key)) {
+          val actualDetail = cacheDetails(key)
+          val actualValues = actualDetail match {
+            case detail: Detail => Seq(detail.value)
+            case detail: Details => detail.values
+
+            // It cannot happen. Just for silencing the compiler emitting "match may not be exhaustive".
+            case ign => assert(false, s"Not a 'Detail' or 'Details' value ?? ($ign)"); List.empty
+          }
+          println(actualValues.contains(eachRow.previousValue.getText))
+
+          val amendValues = value match {
+            case detail: Detail => Seq(detail.value)
+            case detail: Details => detail.values
+
+            // It cannot happen. Just for silencing the compiler emitting "match may not be exhaustive".
+            case ign => assert(false, s"Not a 'Detail' or 'Details' value ?? ($ign)"); List.empty
+          }
+          println(amendValues.contains(eachRow.amendedValue.getText))
+        }
+      }
+    })
+  }
 }
 
 object BasePage {

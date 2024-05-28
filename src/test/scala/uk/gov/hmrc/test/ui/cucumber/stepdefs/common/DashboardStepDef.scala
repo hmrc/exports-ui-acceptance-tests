@@ -14,21 +14,25 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
+package uk.gov.hmrc.test.ui.cucumber.stepdefs.common
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.base.Constants
-import uk.gov.hmrc.test.ui.pages.section2.ConsigneeDetailsPage
+import uk.gov.hmrc.test.ui.pages.common.DashboardPage
 
-class ConsigneeDetailsStepDef extends BaseStepDef {
+class DashboardStepDef extends BaseStepDef {
 
-  And("""^I should land on Consignee-Details page""")(() => ConsigneeDetailsPage.checkPage())
+  And("""^I should land on Dashboard page""")(() => DashboardPage.checkPage())
 
-  And("""^I provide consignee details""") { () =>
-    ConsigneeDetailsPage.fillPage(Constants.Address: _*)
+  And("""^I validate declaration details on (.*) tab and check Status is (.*)""") { (tab: String, status: String) =>
+    DashboardPage.validateDashboard(tab, status)
   }
 
-  And("""^I provide amended consignee details""") { () =>
-    ConsigneeDetailsPage.fillPage(Constants.AmendedAddress: _*)
+  And("""^I navigate to declaration information page after clicking on mrn link""") { () =>
+    DashboardPage.mrnLink.click()
   }
+
+  And("""^I click on (.*) tab""") { (tab: String) =>
+    DashboardPage.clickOnTab(tab)
+  }
+
 }

@@ -16,15 +16,24 @@
 
 package uk.gov.hmrc.test.ui.pages.common
 
-import uk.gov.hmrc.test.ui.pages.base.DetailKey
+import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.common.DetailKeys.DeclarationInfoPath
 
-object DetailKeys {
+object AmendmentDetails extends BasePage {
 
-  val sectionCommon = 7
-  // /authorisation-choice
-  val MrnOnDashboard: DetailKey = DetailKey("Mrn on Dashboard", sectionCommon, skipRowCheck = true)
-  var StatusOnDashboard: DetailKey = DetailKey("Status on Dashboard", sectionCommon, skipRowCheck = true)
-  val DeclarationInfoPath: DetailKey = DetailKey("Declaration Info Path", sectionCommon, skipRowCheck = true)
+  def backButtonHref: String = ""
+  val path: String = detail(DeclarationInfoPath)
+  val title: String = "Amendment details"
 
-  val AmendmentModeOnOff: DetailKey = DetailKey("Amendment Mode", sectionCommon, skipRowCheck = true)
+  override def checkExpanders(): Unit = ()
+
+  // ex: fillPage()
+
+  override def fillPage(values: String*): Unit = {
+    checkAmendSectionSummary()
+  }
+
+  def clickViewDetailsLink(): Unit = {
+    clickByCssSelector("li:nth-child(2) > div > a")
+  }
 }

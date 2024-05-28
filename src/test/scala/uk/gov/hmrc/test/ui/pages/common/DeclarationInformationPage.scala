@@ -18,6 +18,7 @@ package uk.gov.hmrc.test.ui.pages.common
 
 import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.cacheForAmendments
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.common.DetailKeys._
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys._
@@ -96,6 +97,11 @@ object DeclarationInformationPage extends BasePage {
 
   def copyDeclaration(): Unit = {
     clickById("copy-declaration")
+  }
+
+  def amendDeclaration(): Unit = {
+    clickById("amend-declaration")
+    cacheForAmendments.put(AmendmentModeOnOff, Detail("true"))
   }
 
   def checkStatusOnTimeLine(): Unit =

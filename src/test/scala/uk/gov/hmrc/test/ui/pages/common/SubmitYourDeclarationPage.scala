@@ -21,17 +21,19 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage
 object SubmitYourDeclarationPage extends BasePage {
 
   def backButtonHref: String = SummaryPage.path
-  val path: String = "/declaration/submit-your-declaration"
-  val title: String = "Submit your declaration"
+  def path: String = if (isAmendmentMode) "/declaration/submit-your-amendment" else "/declaration/submit-your-declaration"
+
+  def title: String = if (isAmendmentMode) "Submit amendment request" else "Submit your declaration"
 
   override def checkExpanders(): Unit = ()
 
   // ex: fillPage()
 
   override def fillPage(values: String*): Unit = {
-    fillTextBoxById("fullName","Test Name")
-    fillTextBoxById("jobRole","Test Role")
-    fillTextBoxById("email","test@email.com")
+    fillTextBoxById("fullName", "Test Name")
+    fillTextBoxById("jobRole", "Test Role")
+    fillTextBoxById("email", "test@email.com")
+    if (isAmendmentMode) fillTextBoxById("reason", "Some reason for amendment")
     clickById("confirmation")
     clickById("submit")
   }

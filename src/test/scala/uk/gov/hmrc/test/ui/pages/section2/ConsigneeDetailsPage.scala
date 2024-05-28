@@ -34,12 +34,14 @@ object ConsigneeDetailsPage extends BasePage {
     ThirdPartyGoodsTransportationPage.path
   else if (isClearance && !isExporter)
     RepresentationTypeAgreedPage.path
-  else {
+  else if (isAmendmentMode)
+    CarrierEORINumberPage.path
+  else
     maybeDetail(CarrierEORI) match {
       case Some(_) => CarrierEORINumberPage.path
       case None    => CarrierAddressPage.path
     }
-  }
+
 
   val path: String = "/declaration/consignee-details"
   val title: String = "Where will the goods be delivered?"

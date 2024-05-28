@@ -27,7 +27,7 @@ import scala.util.matching.Regex
 object ConfirmationPage extends BasePage {
 
   val backButtonHref: String = ""
-  val path: String = "/declaration/confirmation"
+  def path: String = if (isAmendmentMode) "/declaration/amendment-outcome" else "/declaration/confirmation"
 
   override def title: String =
     detail(Lrn).take(1) match {
@@ -35,7 +35,7 @@ object ConfirmationPage extends BasePage {
       case "C" | "Q" | "X"             => "Your declaration is still being checked"
       case "D" | "U"                   => "Your declaration needs documents attached"
       case "R"                         => "Your declaration has been pre-lodged with HMRC"
-      case _                           => "Declaration accepted"
+      case _                           => if (isAmendmentMode) "Amendment request accepted" else "Declaration accepted"
     }
 
   override def checkPage(): Unit = {
@@ -121,6 +121,10 @@ object ConfirmationPage extends BasePage {
     expectedLinks.zip(actualLinks).forall { case (expectedLink, actualLink) =>
       expectedLink.matches(actualLink)
     }
+  }
+
+  def clickDeclarationStatusLink(): Unit ={
+    clickByCssSelector("p:nth-child(5) > a")
   }
 
   private val linkToSfus = (mrn: String) => (host + s"/customs-declare-exports/file-upload?mrn=$mrn").r

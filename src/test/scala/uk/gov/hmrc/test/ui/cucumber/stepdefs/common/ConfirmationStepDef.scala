@@ -22,4 +22,9 @@ import uk.gov.hmrc.test.ui.pages.common.ConfirmationPage
 class ConfirmationStepDef extends BaseStepDef {
 
   And("""^I should land on Confirmation page""")(() => ConfirmationPage.checkPage())
+
+  And("""^I click on Declaration status link on Confirmation page""") {() =>
+    ConfirmationPage.clickDeclarationStatusLink()
+  }
+
 }

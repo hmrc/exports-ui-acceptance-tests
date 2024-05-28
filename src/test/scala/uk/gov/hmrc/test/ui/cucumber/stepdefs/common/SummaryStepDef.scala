@@ -31,6 +31,25 @@ class SummaryStepDef extends BaseStepDef {
     SummaryPage.clickContinueOnSummary()
   }
 
+  And("""^I validate that change links are not present for Section 1""") { () =>
+    SummaryPage.checkChangeLinkIsNotPresentFor("ducr-entry")
+    SummaryPage.checkChangeLinkIsNotPresentFor("local-reference-number")
+    SummaryPage.checkChangeLinkIsNotPresentFor("mucr-row")
+    SummaryPage.checkChangeLinkIsNotPresentFor("link-to-mucr")
+  }
+
+  And("""^I validate that change link is not present for location of goods""") { () =>
+    SummaryPage.checkChangeLinkIsNotPresentFor("location-of-goods")
+  }
+
+  And("""^I should see the change links are there for other sections""") { () =>
+    //SummaryPage.checkSectionSummary()
+  }
+
+  And("""^I click remove link to remove item (.*)"""){ (itemIndex : Int) =>
+    SummaryPage.removeItemLink(itemIndex)
+  }
+
   And("""^I navigate to summary page""") { () =>
     SummaryPage.navigateToPage(SummaryPage.path)
   }

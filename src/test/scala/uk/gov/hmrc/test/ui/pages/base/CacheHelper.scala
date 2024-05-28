@@ -16,7 +16,8 @@
 
 package uk.gov.hmrc.test.ui.pages.base
 
-import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{Cache, cache, changeLinks}
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{Cache, cache, cacheForAmendments, changeLinks}
+import uk.gov.hmrc.test.ui.pages.common.DetailKeys.AmendmentModeOnOff
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.section5
 
 trait CacheHelper {
@@ -39,6 +40,14 @@ trait CacheHelper {
       case detail: Detail => detail.value
       case _ => assert(false, s"Cache does not contain a value for $detailKey"); ""
     }
+
+  // Use a detailKey to retrieve the value of a Detail (a Detail corresponds to a single value)
+  def detailOnAmendment(detailKey: DetailKey): String =
+    cacheForAmendments(detailKey) match {
+      case detail: Detail => detail.value
+      case _ => assert(false, s"Cache for amendments does not contain a value for $detailKey"); ""
+    }
+
 
   // Use a detailKey to retrieve the values of a Details (a Details corresponds to a list of values)
   def details(detailKey: DetailKey): Seq[String] =
@@ -65,6 +74,17 @@ trait CacheHelper {
         detailKey.sectionId == sectionId && detailKey.id.contains(id)
       }
     }
+
+  /*
+  * To get all previous value section details while amending declaration
+  * */
+  def allSectionDetails(): Cache = cache
+
+
+  /*
+  * To get all the amended section details
+  * */
+  def allAmendedDetails(): Cache = cacheForAmendments
 
   def detailForLabel(sectionId: Int, label: String): Seq[String] =
     allSectionDetails(sectionId).filter(_._1.label == label).values.flatMap {
@@ -102,9 +122,17 @@ trait CacheHelper {
       case _                => None
     }.toList
 
+  def isAmendmentMode: Boolean = detailOnAmendment(AmendmentModeOnOff) == "true"
+
   def store(elements: (DetailKey, DeclarationDetails)*): Cache = {
-    cache.addAll(elements)
-    elements.foreach(element => if (element._1.checkChangeLink) changeLinks += (element._1 -> changeLink))
-    cache
+    if (isAmendmentMode) {
+      cacheForAmendments.addAll(elements)
+      cacheForAmendments
+    }
+    else {
+      cache.addAll(elements)
+      elements.foreach(element => if (element._1.checkChangeLink) changeLinks += (element._1 -> changeLink))
+      cache
+    }
   }
 }
