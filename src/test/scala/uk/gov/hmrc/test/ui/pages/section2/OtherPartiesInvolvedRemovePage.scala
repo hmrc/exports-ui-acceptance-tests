@@ -39,5 +39,5 @@ object OtherPartiesInvolvedRemovePage extends BasePage {
   // Yes => fillPage(yes, "{sequenceId}")
 
   override def fillPage(values: String*): Unit =
-    if (selectYesOrNoRadio(values(yesNo))) clear(AdditionalPartiesInvolvedType(values(partyToBeRemoved)))
+    if (selectYesOrNoRadio(values(yesNo))) clearIfAny(AdditionalPartiesInvolvedType(values(partyToBeRemoved)))
 }

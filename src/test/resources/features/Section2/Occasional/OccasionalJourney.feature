@@ -10,7 +10,7 @@ Feature: Section2 Occasional Journey Scenarios
   #    third party goods transportation page as Yes and Freight forwarder for Other parties involved
   # 3. Both journeys to cover maximum pages
 
-  @Section2 @OcaDec
+  @Section2 @Occasional
   Scenario Outline: Exports Occasional declaration (Prelodged and Arrived)
     Given I fill section1 for OCCASIONAL,<Type> declaration
     Then I should land on Are-You-The-Exporter page
@@ -41,7 +41,7 @@ Feature: Section2 Occasional Journey Scenarios
     And I provide consignee details
     And I click continue
     Then I should land on Other-Parties-Involved page
-    And I select first party Freight forwarder and eori GB121212121212 as the other party involved
+    And I select first party Additional freight forwarder and eori GB121212121212 as the other party involved
     And I click continue
     Then I should land on Other-Parties-Involved-List page
     And I select No on other party involved list page

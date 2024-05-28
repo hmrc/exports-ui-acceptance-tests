@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.cucumber.runner
+package uk.gov.hmrc.test.ui.cucumber.stepdefs.common
 
-import io.cucumber.junit.{Cucumber, CucumberOptions}
-import org.junit.runner.RunWith
+import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
+import uk.gov.hmrc.test.ui.pages.common.RemoveSavedDeclarationsPage
 
-@RunWith(classOf[Cucumber])
-@CucumberOptions(
-  features = Array("src/test/resources/features"),
-  glue = Array("uk.gov.hmrc.test.ui.cucumber.stepdefs"),
-  plugin =
-    Array("pretty", "html:target/cucumber.html", "json:target/cucumber.json", "junit:target/test-reports/Runner.xml"),
-  tags = "@Smoke"
-)
-class Smoke {}
+class RemoveSavedDeclarationStepDef extends BaseStepDef {
+
+  And("""^I should land on Remove-Saved-Declaration page""")(() => RemoveSavedDeclarationsPage.checkPage())
+
+  And("""^I select (.*) to remove saved declaration""")((yesNo: String) => RemoveSavedDeclarationsPage.fillPage(yesNo))
+}

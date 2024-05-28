@@ -24,13 +24,13 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{SuperVisingCustomsOffice, 
 object SupervisingCustomsOfficePage extends BasePage {
 
   def backButtonHref: String = maybeDetail(WarehouseHouse).fold(WarehousePage.backButtonHref)(_ => WarehousePage.path)
-  val path: String  = "/declaration/supervising-customs-office"
+
+  val path: String = "/declaration/supervising-customs-office"
+
   val title: String = "Where is the HMRC supervising customs office (SPOFF)?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(supervisingCustomsOffice),
-    Clearance -> List(supervisingCustomsOfficeCL)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] =
+    Map(Common -> List(supervisingCustomsOffice), Clearance -> List(supervisingCustomsOfficeCL))
 
   private val officeCode = 0
 

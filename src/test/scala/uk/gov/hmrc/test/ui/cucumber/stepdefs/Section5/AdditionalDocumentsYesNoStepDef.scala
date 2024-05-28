@@ -21,7 +21,9 @@ import uk.gov.hmrc.test.ui.pages.section5.AdditionalDocumentsYesNoPage
 
 class AdditionalDocumentsYesNoStepDef extends BaseStepDef {
 
-  And("""^I should land on Additional-Documents-YesNo page""")(() => AdditionalDocumentsYesNoPage.checkPage())
+  And("""^I should land on Additional-Documents-YesNo page""") { () =>
+    AdditionalDocumentsYesNoPage.checkPage()
+  }
 
   And("""^I select (.*) to add additional Documents""") { (yesNo: String) =>
     AdditionalDocumentsYesNoPage.fillPage(yesNo)

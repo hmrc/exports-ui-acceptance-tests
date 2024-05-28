@@ -37,4 +37,6 @@ object SummarySection5Page extends BasePage {
   def addItemWarning(): WebElement = findElementByClassName("govuk-warning-text__text")
 
   def addItem(): Unit = clickById("add-item")
+
+  def exitAndComeBackLater(): Unit = clickById("exit-and-complete-later")
 }

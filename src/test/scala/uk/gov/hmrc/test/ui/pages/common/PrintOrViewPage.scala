@@ -34,4 +34,6 @@ object PrintOrViewPage extends BasePage {
   // ex: fillPage()
 
   override def fillPage(values: String*): Unit = ()
+
+  def viewOrPrintLink(): Unit = clickById("view-declaration")
 }

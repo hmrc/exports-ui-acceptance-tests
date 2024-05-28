@@ -30,7 +30,19 @@ trait CacheHelper {
   def clear(sectionId: Int, maybeId: Option[String] = None): Cache =
     cache --= allSectionDetails(sectionId, maybeId).keys
 
-  def clear(detailKeys: DetailKey*): Cache = cache --= detailKeys
+  // To use when the detailKeys provided are expected to be in the cache
+  def clear(detailKeys: DetailKey*): Cache = {
+    val size = cache.size
+    cache --= detailKeys
+    assert(
+      cache.size == size - detailKeys.size,
+      s"One or more of the DetailKey(s) to clear were not found in the cache"
+    )
+    cache
+  }
+
+  // To use when the detailKeys provided can also not be in the cache
+  def clearIfAny(detailKeys: DetailKey*): Cache = cache --= detailKeys
 
   def detailKeys(labels: String*): Seq[DetailKey] = cache.filter(kv => labels.contains(kv._1.label)).keys.toList
 

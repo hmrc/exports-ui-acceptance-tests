@@ -16,37 +16,35 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yes}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.PageLinks._
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsProcedureCodes, itemsProcedureCodesCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, Details}
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.EntryIntoDeclarantsRecords
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{ItemIds, ProcedureCode}
+import uk.gov.hmrc.test.ui.pages.section2.EntryIntoDeclarantRecordsPage.isEidr
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{ItemIds, ProcedureCode, ProcedureCodeLabel}
 
 object ProcedureCodesPage extends BasePage {
 
   val pageId = "procedure-codes"
   def backButtonHref: String = DeclarationItemsListPage.path
-  def path: String           = itemUrl("procedure-codes")
-  val title: String          = "What is the procedure code for this item?"
+  def path: String = itemUrl("procedure-codes")
+  val title: String = "What is the procedure code for this item?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(itemsProcedureCodes),
-    Clearance -> List(itemsProcedureCodesCL)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] =
+    Map(Common -> List(itemsProcedureCodes), Clearance -> List(itemsProcedureCodesCL))
 
   override def pageLinkHrefs: Seq[String] =
-    if (isClearance && detail(EntryIntoDeclarantsRecords) == yes) super.pageLinkHrefs
-    else super.pageLinkHrefs ++ List(
-      endUseRelief,
-      inwardProcessing,
-      outwardProcessing,
-      onwardSupplyRelief,
-      reExportFollowingSpecialProcedure,
-      removalOfGoodsFromExciseWarehouse,
-      temporaryExport
-    )
+    if (isEidr) super.pageLinkHrefs
+    else
+      super.pageLinkHrefs ++ List(
+        endUseRelief,
+        inwardProcessing,
+        outwardProcessing,
+        onwardSupplyRelief,
+        reExportFollowingSpecialProcedure,
+        removalOfGoodsFromExciseWarehouse,
+        temporaryExport
+      )
 
   // ex: fillPage("1040")
 
@@ -69,5 +67,14 @@ object ProcedureCodesPage extends BasePage {
 
   def hasRestrictingZeroVatPC: Boolean = codesRestrictingZeroVat.contains(detail(ProcedureCode(itemId)))
 
-  def isPermanentExportOfUKGoodsPC: Boolean        = detail(ProcedureCode(itemId)) == "1040"
+  def hasPermanentExportOfUKGoodsPC: Boolean = listOfItemDetailFor(ProcedureCodeLabel).contains("1040")
+
+  def hasSupervisingCustomsOfficePageVisiblePC: Boolean = listOfItemDetailFor(ProcedureCodeLabel).contains("1042")
+
+  private val codesToGoToWarehouse: Seq[String] = List("07", "71", "78")
+
+  def goToWarehouse: Boolean = {
+    val procedureCodes = listOfItemDetailFor(ProcedureCodeLabel)
+    procedureCodes.exists(procedureCode => codesToGoToWarehouse.exists(procedureCode.endsWith))
+  }
 }

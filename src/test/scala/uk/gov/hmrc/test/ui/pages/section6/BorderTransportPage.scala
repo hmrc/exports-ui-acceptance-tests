@@ -24,7 +24,9 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{BorderTransport, Departure
 object BorderTransportPage extends BasePage {
 
   def backButtonHref: String = maybeDetails(DepartureTransport).fold(DepartureTransportPage.backButtonHref)(_ => DepartureTransportPage.path)
+
   val path: String  = "/declaration/border-transport"
+
   def title: String = s"What are the details for the ${detail(TransportLeavingBorder).toLowerCase}?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(borderTransport))
@@ -35,25 +37,25 @@ object BorderTransportPage extends BasePage {
 
   override def fillPage(values: String*): Unit = {
     val data = values.head match {
-      case "Ship or RoRo ferry IMO number" =>
+      case "Ship IMO number" =>
         BorderTransportData("radio_ShipOrRoroImoNumber", "ShipOrRoroImoNumber", "123456", "Ship IMO number")
 
-      case "Ship or RoRo ferry name" =>
+      case "Ship name" =>
         BorderTransportData("radio_NameOfVessel", "NameOfVessel", "Seraphim", "Ship name")
 
-      case "Eurotunnel or other rail details" =>
+      case "Train" =>
         BorderTransportData("radio_WagonNumber", "WagonNumber", "EuroTunnel", "Train")
 
-      case "Vehicle registration number" =>
+      case "Vehicle registration" =>
         BorderTransportData("radio_VehicleRegistrationNumber", "VehicleRegistrationNumber", "123456", "Vehicle registration")
 
-      case "Flight number and date of flight" =>
+      case "Flight number" =>
         BorderTransportData("radio_FlightNumber", "FlightNumber", "123456", "Flight number")
 
-      case "Aircraft registration number and date of flight" =>
+      case "Aircraft number" =>
         BorderTransportData("radio_AircraftRegistrationNumber", "AircraftRegistrationNumber", "123456", "Aircraft number")
 
-      case "European vessel identification (ENI) number" =>
+      case "European vessel number (ENI)" =>
         BorderTransportData("radio_EuropeanVesselIDNumber", "EuropeanVesselIDNumber", "123456", "European vessel number (ENI)")
 
       case "Inland vessel’s name" =>

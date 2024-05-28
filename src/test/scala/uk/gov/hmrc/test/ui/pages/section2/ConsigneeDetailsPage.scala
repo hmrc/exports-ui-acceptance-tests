@@ -26,22 +26,21 @@ import uk.gov.hmrc.test.ui.pages.section2.IsThisExsPage.isThisExs
 
 object ConsigneeDetailsPage extends BasePage {
 
-  def backButtonHref: String = if (isSupplementary && !isExporter)
-    RepresentationTypeAgreedPage.path
-  else if (isSupplementary && isExporter)
-    AreYouTheExporterPage.path
-  else if (isThisExs)
-    ThirdPartyGoodsTransportationPage.path
-  else if (isClearance && !isExporter)
-    RepresentationTypeAgreedPage.path
-  else if (isAmendmentMode)
-    CarrierEORINumberPage.path
-  else
-    maybeDetail(CarrierEORI) match {
-      case Some(_) => CarrierEORINumberPage.path
-      case None    => CarrierAddressPage.path
+  def backButtonHref: String =
+    if (isSupplementary && !isExporter)
+      RepresentationTypeAgreedPage.path
+    else if (isSupplementary && isExporter)
+      AreYouTheExporterPage.path
+    else if (isExporter || isThisExs)
+      ThirdPartyGoodsTransportationPage.path
+    else if (isClearance && !isExporter)
+      RepresentationTypeAgreedPage.path
+    else {
+      maybeDetail(CarrierEORI) match {
+        case Some(_) => CarrierEORINumberPage.path
+        case None    => CarrierAddressPage.path
+      }
     }
-
 
   val path: String = "/declaration/consignee-details"
   val title: String = "Where will the goods be delivered?"

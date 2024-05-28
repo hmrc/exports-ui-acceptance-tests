@@ -9,7 +9,7 @@ Feature: Section5 Occasional Journey
     # 2. Fill Statistical page and Vat rating page when Additional Procedure code is 3LV
     # 3. Skipping Commodity Measurements and Supplementary Units page when dec type is Occasional
 
-  @Section5 @OcaDec
+  @Section5 @Occasional
   Scenario: Perform a Low Value Occasional Arrived Declaration
     Given I fill section1 for OCCASIONAL,arrived declaration
     And I fill section2
@@ -74,10 +74,10 @@ Feature: Section5 Occasional Journey
     # 5. Change procedure code from 1040 to 1042 to check Fiscal-Information page of Occasional Journey
     # 6. Update details of Package Information, Additional Information and Additional Documents by clicking change link on list pages
 
-  @Section5 @OcaDec
+  @Section5 @Occasional
   Scenario: Complete Items section on with Low Value Occasional Prelodged declaration and check change link
             functionality on Package Information, Additional Information and Additional Documents list pages
-    Given I fill section1 for SIMPLIFIED,prelodged declaration
+    Given I fill section1 for OCCASIONAL,prelodged declaration
     And I fill section2
     And I fill section3
     And I fill section4

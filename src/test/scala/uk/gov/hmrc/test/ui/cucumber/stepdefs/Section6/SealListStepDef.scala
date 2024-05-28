@@ -23,7 +23,7 @@ class SealListStepDef extends BaseStepDef {
 
   And("""^I should land on Seal-List page""")(() => SealListPage.checkPage())
 
-  And("""^I select (.*) to add another security seal""") { (yesNo: String) =>
-    SealListPage.fillPage(yesNo)
-  }
+  And("""^I click on remove Seal (.*) on Seal List page""")(index => SealListPage.selectSealToRemove(index))
+
+  And("""^I select (.*) to add another security seal""")((yesNo: String) => SealListPage.fillPage(yesNo))
 }

@@ -28,7 +28,7 @@ object ContainerRemovePage extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
-  val containerIdToBeRemoved = 1
+  private val containerIdToBeRemoved = 1
 
   // No  => fillPage(no)
   // Yes => fillPage(yes, "ContainerId")
@@ -36,9 +36,6 @@ object ContainerRemovePage extends BasePage {
   override def fillPage(values: String*): Unit =
     if (selectYesOrNoRadio(values(yesNo))) {
       val containerId = values(containerIdToBeRemoved)
-      clear(
-        Container(containerId)
-        // Container's Seals, if any, to remove
-      )
+      clearIfAny(Container(containerId))
     }
 }

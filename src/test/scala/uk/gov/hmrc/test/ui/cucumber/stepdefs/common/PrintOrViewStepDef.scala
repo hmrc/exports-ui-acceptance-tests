@@ -17,17 +17,13 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.common
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.common.EadPrintPage
+import uk.gov.hmrc.test.ui.pages.common.PrintOrViewPage
 
 class PrintOrViewStepDef extends BaseStepDef {
 
-  And("""^I should land on print-or-view page""")(() => EadPrintPage.checkPage())
-
-  //  And("""^I validate details on EAD print view page""") { () =>
-  //    EadPrintPage.checkPrintLink()
-  //  }
+  And("""^I should land on print-or-view page""")(() => PrintOrViewPage.checkPage())
 
   And("""^I click on print or view link""") { () =>
-    EadPrintPage.viewEadPrintPage()
+    PrintOrViewPage.viewOrPrintLink()
   }
 }

@@ -14,18 +14,27 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.pages.section6
+package uk.gov.hmrc.test.ui.pages.common
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.base.BasePage.exitAndCompleteLater
 
-object SealsRemovePage extends BasePage {
+object RemoveSavedDeclarationsPage extends BasePage {
 
-  def path: String           = removeUrl("containers", "seals")
-  def title                  = s"Are you sure you want to remove this security seal for container $containerId?"
-  def backButtonHref: String = ContainerListPage.path
+  val backButtonHref: String = "/saved-declarations"
+  val path: String = removeSavedDecLink.toString()
+  val title: String = "Are you sure you want to remove this declaration?"
 
-  private val yesNo = 0
+  override def checkExpanders(): Unit = ()
 
-  override def fillPage(values: String*): Unit =
-    selectYesOrNoRadio(values(yesNo))
+  override def pageLinkHrefs: Seq[String] = {
+    super.pageLinkHrefs.filterNot(_ == exitAndCompleteLater)
+  }
+
+  // fillPage("Yes")
+  override def fillPage(values: String*): Unit = {
+    selectRadioAndClick(values(0))
+  }
+
+
 }
