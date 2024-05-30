@@ -1,4 +1,4 @@
-@Regression @Wip
+@Regression
 Feature: Clearance Journey Section 5
 
   Background:

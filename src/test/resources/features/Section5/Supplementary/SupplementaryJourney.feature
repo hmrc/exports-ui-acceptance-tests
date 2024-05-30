@@ -1,4 +1,4 @@
-@Regression @Wip
+@Regression
 Feature: Section5 Supplementary Journey
 
   Background:

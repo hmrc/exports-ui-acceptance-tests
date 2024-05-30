@@ -17,9 +17,7 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.common
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.common.CancelDeclarationPage.detail
 import uk.gov.hmrc.test.ui.pages.common.DeclarationInformationPage
-import uk.gov.hmrc.test.ui.pages.common.DetailKeys.DeclarationInfoPath
 
 class DeclarationInformationStepDef extends BaseStepDef {
 
@@ -34,7 +32,7 @@ class DeclarationInformationStepDef extends BaseStepDef {
 
   And("""^I fix errors on the declaration""")(() => DeclarationInformationPage.fixErrors())
 
-  And("""^I validate (.*) status on timeline""") { () =>
-    DeclarationInformationPage.navigateToPage(detail(DeclarationInfoPath))
+  And("""^I validate Cancellation request denied status on timeline""") { () =>
+    DeclarationInformationPage.checkStatusOnTimeLine()
   }
 }
