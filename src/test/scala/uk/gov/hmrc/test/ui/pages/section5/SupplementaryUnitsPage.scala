@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Common, yesNo}
-import uk.gov.hmrc.test.ui.pages.base.PageLinks.tariffCommodities
+import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Common}
+import uk.gov.hmrc.test.ui.pages.base.PageLinks.{tariffCommodities, tariffSection}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.itemsSupplementaryUnits
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{CommodityDetailsCode, SupplementaryUnits}
@@ -26,13 +26,14 @@ object SupplementaryUnitsPage extends BasePage {
 
   def backButtonHref: String = CommodityMeasurePage.path
   def path: String = itemUrl("supplementary-units")
-  def title: String = findElementByTag("h1").getText
+  val title: String = "Do you need to add supplementary units?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(itemsSupplementaryUnits))
 
   override def pageLinkHrefs: Seq[String] =
-    if (title != "Do you need to add supplementary units?") super.pageLinkHrefs
-    else {
+    if (detail(CommodityDetailsCode(itemId)) == "None") {
+      super.pageLinkHrefs :+ tariffSection
+    } else {
       val commodityCode = detail(CommodityDetailsCode(itemId))
       super.pageLinkHrefs :+ s"$tariffCommodities$commodityCode}"
     }

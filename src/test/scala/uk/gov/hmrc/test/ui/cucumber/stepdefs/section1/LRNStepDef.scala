@@ -26,4 +26,8 @@ class LRNStepDef extends BaseStepDef {
   And("""^I enter LRN (.*)""") { (lrn: String) =>
     LrnPage.fillPage(lrn)
   }
+
+  And("""^I navigate to Lrn page""") { () =>
+    LrnPage.navigateToPage(LrnPage.path)
+  }
 }

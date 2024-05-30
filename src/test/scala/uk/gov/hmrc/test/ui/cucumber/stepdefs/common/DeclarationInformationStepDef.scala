@@ -32,7 +32,9 @@ class DeclarationInformationStepDef extends BaseStepDef {
 
   And("""^I click on copy link""")(() => DeclarationInformationPage.copyDeclaration())
 
-  And("""^I validate (.*) status on timeline""") { (status: String) =>
+  And("""^I fix errors on the declaration""")(() => DeclarationInformationPage.fixErrors())
+
+  And("""^I validate (.*) status on timeline""") { () =>
     DeclarationInformationPage.navigateToPage(detail(DeclarationInfoPath))
   }
 }

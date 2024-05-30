@@ -1,4 +1,4 @@
-@Regression
+@Regression @Wip
 Feature: Clearance Journey Section 5
 
   Background:
@@ -23,7 +23,7 @@ Feature: Clearance Journey Section 5
     And I select F44 as additional procedure code
     And I click continue
     Then I should land on Commodity-Details page
-    And I enter commodity details code as 42034000 and description as Clothes
+    And I skip entering commodity code and enter description as Old St Andrews golf ball whisky
     And I click continue
     # Skipping dangerous code page when isEXS is No
     Then I should land on Package-Information page

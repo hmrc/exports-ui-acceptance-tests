@@ -1,4 +1,4 @@
-@Regression
+@Regression @Wip
 Feature: Section5 Supplementary Journey
 
   Background:
@@ -10,6 +10,7 @@ Feature: Section5 Supplementary Journey
      # 2. Adding Multiple Items
      # 3. validating Removal of items from Mini cya and Declaration Items List page
      # 4. Check Add Item link navigates to procedure code page
+     # 5. Provide only commodity description
 
   @Section5 @Supplementary
   Scenario: Complete Items section on Supplementary EIDR declaration journey
@@ -35,14 +36,12 @@ Feature: Section5 Supplementary Journey
     And I select No for adding more VAT details
     And I click continue
     Then I should land on Commodity-Details page
-    And I enter commodity details code as 2803400090 and description as Old St Andrews golf ball whisky
+    And I skip entering commodity code and enter description as Old St Andrews golf ball whisky
     And I click continue
     Then I should land on Dangerous-Goods-Code page
     And I select Yes to enter the code 1234 as dangerous goods
     And I click continue
-    Then I should land on Cus-Code page
-    And I select Yes to enter the code 12345678 as CUS code
-    And I click continue
+
     # skipped Vat rating page
     Then I should land on National-Additional-Code page
     And I select Yes and enter A123 as national additional code
