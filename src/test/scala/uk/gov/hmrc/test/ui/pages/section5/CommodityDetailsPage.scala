@@ -26,10 +26,9 @@ object CommodityDetailsPage extends BasePage {
   val pageId = "commodity-details"
 
   def backButtonHref: String =
-      maybeDetail(FiscalInformationYesNo(itemId)).fold(AdditionalProcedureCodesPage.path) {
-        _ => FiscalReferencesPage.backButtonHref
-      }
-
+    maybeDetail(FiscalInformationYesNo(itemId)).fold(AdditionalProcedureCodesPage.path) { _ =>
+      FiscalReferencesPage.backButtonHref
+    }
 
   def path: String = itemUrl(pageId)
   val title: String = "Commodity code and item details"
@@ -41,17 +40,26 @@ object CommodityDetailsPage extends BasePage {
 
   val code = 0
   val description = 1
+  val descriptionOnly = 0
 
   // ex: fillPage("4203400090", "Straw for bottles")
+  // ex: fillPage("Straw for bottles")
 
-  override def fillPage(values: String*): Unit = {
-    fillTextBoxById("combinedNomenclatureCode", values(code))
-    fillTextBoxById("descriptionOfGoods", values(description))
-    store(
-      CommodityDetailsCode(itemId) -> Detail(values(code)),
-      CommodityDetailsDescription(itemId) -> Detail(values(description))
-    )
-  }
+  override def fillPage(values: String*): Unit =
+    if (values.size == 2) {
+      fillTextBoxById("combinedNomenclatureCode", values(code))
+      fillTextBoxById("descriptionOfGoods", values(description))
+      store(
+        CommodityDetailsCode(itemId) -> Detail(values(code)),
+        CommodityDetailsDescription(itemId) -> Detail(values(description))
+      )
+    } else {
+      fillTextBoxById("descriptionOfGoods", values(descriptionOnly))
+      store(
+        CommodityDetailsCode(itemId) -> Detail("None"),
+        CommodityDetailsDescription(itemId) -> Detail(values(descriptionOnly))
+      )
+    }
 
   private val chemicalCommodityCodes: Seq[String] =
     List("28", "29", "38")

@@ -17,12 +17,13 @@
 package uk.gov.hmrc.test.ui.pages.common
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.common.SummaryPage.isRejectedMode
 
 object SubmitYourDeclarationPage extends BasePage {
 
   def backButtonHref: String = SummaryPage.path
   val path: String = "/declaration/submit-your-declaration"
-  val title: String = "Submit your declaration"
+  def title: String = if (isRejectedMode) "Resubmit your declaration" else "Submit your declaration"
 
   override def checkExpanders(): Unit = ()
 

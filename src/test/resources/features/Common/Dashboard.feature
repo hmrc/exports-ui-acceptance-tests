@@ -373,7 +373,7 @@ Feature: Validate Dashboard and Declaration Information
     And I click on Cancelled & expired tab
     And I validate declaration details on Cancelled & expired tab and check Status is Cancelled
     And I navigate to declaration information page after clicking on mrn link
-    Then I validate Cancellation status on timeline
+    Then I validate details on declaration information page
 
     # Below scenario -
     # 1.Checks saved draft declaration and removal of draft declaration

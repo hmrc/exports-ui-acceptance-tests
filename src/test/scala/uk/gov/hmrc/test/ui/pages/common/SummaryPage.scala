@@ -18,12 +18,19 @@ package uk.gov.hmrc.test.ui.pages.common
 
 import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.common.DetailKeys.IsDeclarationRejected
 
 object SummaryPage extends BasePage {
 
-  val backButtonHref: String = "/saved-declarations"
   val path: String = "/declaration/saved-summary"
-  val title: String = "Check your answers"
+
+  def backButtonHref: String =
+    if (isRejectedMode) "/dashboard?page=1" else "/saved-declarations"
+
+  def title: String =
+    if (isRejectedMode) "Check your answers before resubmitting" else "Check your answers"
+
+  def isRejectedMode: Boolean = maybeDetail(IsDeclarationRejected).isDefined
 
   override def checkExpanders(): Unit = ()
 
@@ -47,10 +54,9 @@ object SummaryPage extends BasePage {
     clickContinueOnSummary()
   }
 
-  def clickContinueOnSummary(): Unit = {
+  def clickContinueOnSummary(): Unit =
     findElementsByClassName("govuk-button")
       .filter(_.getText == "Confirm and continue")
       .head
       .click()
-  }
 }
