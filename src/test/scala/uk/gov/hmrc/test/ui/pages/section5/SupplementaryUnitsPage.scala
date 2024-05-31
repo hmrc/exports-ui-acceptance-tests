@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Common}
-import uk.gov.hmrc.test.ui.pages.base.PageLinks.{tariffCommodities, tariffSection}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Common, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.PageLinks.{supplementaryCommodityTariffLink, tariffCommodities}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.itemsSupplementaryUnits
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{CommodityDetailsCode, SupplementaryUnits}
@@ -32,7 +32,7 @@ object SupplementaryUnitsPage extends BasePage {
 
   override def pageLinkHrefs: Seq[String] =
     if (detail(CommodityDetailsCode(itemId)) == "None") {
-      super.pageLinkHrefs :+ tariffSection
+      super.pageLinkHrefs :+ supplementaryCommodityTariffLink
     } else {
       val commodityCode = detail(CommodityDetailsCode(itemId))
       super.pageLinkHrefs :+ s"$tariffCommodities$commodityCode}"

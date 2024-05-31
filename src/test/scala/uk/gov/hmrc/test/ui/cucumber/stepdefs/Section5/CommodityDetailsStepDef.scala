@@ -27,7 +27,7 @@ class CommodityDetailsStepDef extends BaseStepDef {
     CommodityDetailsPage.fillPage(commodityCode, description)
   }
 
-  And("""^I skip entering commodity code and enter description as (.*)""") { (description: String) =>
+  And("""^I enter only description as (.*) on commodity details page""") { (description: String) =>
     CommodityDetailsPage.fillPage(description)
   }
 

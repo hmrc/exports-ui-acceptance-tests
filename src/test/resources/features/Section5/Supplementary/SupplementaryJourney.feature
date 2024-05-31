@@ -36,7 +36,7 @@ Feature: Section5 Supplementary Journey
     And I select No for adding more VAT details
     And I click continue
     Then I should land on Commodity-Details page
-    And I skip entering commodity code and enter description as Old St Andrews golf ball whisky
+    And I enter only description as Old St Andrews golf ball whisky on commodity details page
     And I click continue
     Then I should land on Dangerous-Goods-Code page
     And I select Yes to enter the code 1234 as dangerous goods
