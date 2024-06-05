@@ -61,17 +61,8 @@ object SummaryPage extends BasePage {
     elementBySelectorDoesNotExist("a[href*="+changeLinks+"]") must be (true)
   }
 
-  def checkChangeLinks(detailKey:DetailKey): Any = {
-    if (detailKey.checkChangeLink) {
-     // val href = maybeLabelAndValueRow.get.changeLink.head.getAttribute("href")
-     // s"$host${changeLinks(detailKey)}" mustBe href
-    }
-  }
-
   def removeItemLink(itemIndex : Int): WebElement = {
     findElementByCssSelector(".item-"+itemIndex+"-heading > dd.govuk-summary-list__actions > a")
   }
-
-
 
 }
