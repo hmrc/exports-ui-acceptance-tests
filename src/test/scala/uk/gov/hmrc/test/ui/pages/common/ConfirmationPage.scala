@@ -34,19 +34,26 @@ object ConfirmationPage extends BasePage {
 
   val declationStatus = maybeDetails(BorderTransport)
   var rejectedDeclaration = false
+  var cancelDeclaration = false
+  var pendingDeclaration = false
 
-   if(declationStatus.head.contains("REJECTED"))
-      rejectedDeclaration = true
+  if (declationStatus.head.contains("REJECTED"))
+    rejectedDeclaration = true
+  cancelDeclaration = true
+  if (declationStatus.head.contains("PENDING"))
+    pendingDeclaration = true
 
   override def title: String =
     detail(Lrn).take(1) match {
       case "C" if isArrivedDeclaration => "Declaration accepted, goods have permission to progress"
       case "C" | "Q" | "X" | "I" | "J" | "L" | "K" | "P" | "N" => "Your declaration is still being checked"
-      case "D" | "U" => "Your declaration needs documents attached"
-      case "R" => "Your declaration has been pre-lodged with HMRC"
-      case _ => if (isAmendmentMode && rejectedDeclaration) "Amendment request rejected"
-                else if (isAmendmentMode)"Amendment request accepted"
-                else "Declaration accepted"
+      case "D" | "U"                                           => "Your declaration needs documents attached"
+      case "R"                                                 => "Your declaration has been pre-lodged with HMRC"
+      case _ =>
+        if (isAmendmentMode && rejectedDeclaration) "Amendment request rejected"
+        else if (isAmendmentMode && cancelDeclaration) "Your amendment cancellation has been accepted"
+        else if (isAmendmentMode && pendingDeclaration) "Your amendment request is still being processed"
+        else "Declaration accepted"
     }
 
   override def checkPage(): Unit = {
@@ -62,7 +69,7 @@ object ConfirmationPage extends BasePage {
   private def checkPrintLinkIfAny(): Unit = {
     val checkPresence = detail(Lrn).take(1) match {
       case "C" | "Q" | "X" | "D" | "U" | "I" | "J" | "L" | "K" | "P" | "N" => false
-      case _ => true
+      case _                                                               => true
     }
     if (checkPresence) {
       val elements = findChildrenByClassName(findElementById("main-content"), "ceds-print-link")
@@ -73,11 +80,11 @@ object ConfirmationPage extends BasePage {
 
   private def checkPageContent(): Unit =
     detail(Lrn).take(1) match {
-      case "C" if isArrivedDeclaration => checkPageWhenCleared()
+      case "C" if isArrivedDeclaration                         => checkPageWhenCleared()
       case "C" | "Q" | "X" | "I" | "J" | "L" | "K" | "P" | "N" => checkPageWhenStillUnderCheck()
-      case "D" | "U" => checkPageWhenDocumentsRequired()
-      case "R" => checkPageWhenReceived()
-      case _ => checkPageWhenAccepted()
+      case "D" | "U"                                           => checkPageWhenDocumentsRequired()
+      case "R"                                                 => checkPageWhenReceived()
+      case _                                                   => checkPageWhenAccepted()
     }
 
   private def checkPageWhenCleared(): Unit = {
@@ -85,9 +92,8 @@ object ConfirmationPage extends BasePage {
     checkContentLinks(List(linkToMovements, linkToMovements, linkToTimeline, linkToFeedback, linkToSupport))
   }
 
-  private def checkPageWhenStillUnderCheck(): Unit = {
+  private def checkPageWhenStillUnderCheck(): Unit =
     checkContentLinks(List(linkToDashboard, linkToSupport))
-  }
 
   private def checkPageWhenDocumentsRequired(): Unit = {
     val elements = findChildrenByClassName(findElementById("main-content"), "govuk-warning-text")
@@ -167,7 +173,6 @@ object ConfirmationPage extends BasePage {
     resultBuilder.toString()
   }
 
-
   private def checkContentLinks(expectedLinks: Seq[Regex]): Unit = {
     val actualLinks =
       findChildrenByTag(findElementById("main-content"), "a").flatMap(link => Option(link.getAttribute("href")))
@@ -176,9 +181,8 @@ object ConfirmationPage extends BasePage {
     }
   }
 
-  def clickDeclarationStatusLink(): Unit ={
+  def clickDeclarationStatusLink(): Unit =
     clickByCssSelector("p:nth-child(5) > a")
-  }
 
   private val linkToSfus = (mrn: String) => (host + s"/customs-declare-exports/file-upload?mrn=$mrn").r
   private val linkToClearanceHub =

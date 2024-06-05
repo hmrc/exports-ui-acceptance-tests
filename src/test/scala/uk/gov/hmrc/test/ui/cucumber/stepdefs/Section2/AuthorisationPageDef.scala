@@ -38,6 +38,4 @@ class AuthorisationPageDef extends BaseStepDef {
   And("""^I click remove link to remove already added authorisation""") { () =>
     AuthorisationPage.removeAuthorisation(0)
   }
-
-
 }

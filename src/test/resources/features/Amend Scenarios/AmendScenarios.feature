@@ -24,7 +24,6 @@ Feature: Amend Scenarios
     Then I should land on Saved-Summary page
     And I validate that change links are not present for Section 1
     And I validate that change link is not present for location of goods
-    And I should see the change links are there for other sections
 
 #    Section-2 amending Are you the exporter details to No
     Then I clear Are you the exporter?,Carrier or haulier’s EORI number,Authorisation type  keys from cache
@@ -139,7 +138,7 @@ Feature: Amend Scenarios
     And I select No on declaration items list page
     And I click continue
     Then I should land on MiniCYA-Section-5 page
-#    And I check the MiniCYA page for Section-5
+    # And I check the MiniCYA page for Section-5 (At the moment we can able to validate one item, need to extend this to check two or more)
 
     Then I navigate to summary page
     And I check the sections' headings and click confirm and continue
@@ -279,14 +278,3 @@ Feature: Amend Scenarios
     And I validate declaration details on Action needed tab and check Status is On hold
     And I navigate to declaration information page after clicking on mrn link
     Then I validate Amendment requested status on timeline
-
-
-
-
-
-
-
-
-
-
-

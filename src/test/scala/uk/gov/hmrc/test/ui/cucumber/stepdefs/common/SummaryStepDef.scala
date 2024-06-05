@@ -42,10 +42,6 @@ class SummaryStepDef extends BaseStepDef {
     SummaryPage.checkChangeLinkIsNotPresentFor("location-of-goods")
   }
 
-  And("""^I should see the change links are there for other sections""") { () =>
-    //SummaryPage.checkSectionSummary()
-  }
-
   And("""^I click remove link to remove item (.*)"""){ (itemIndex : Int) =>
     SummaryPage.removeItemLink(itemIndex).click()
   }
