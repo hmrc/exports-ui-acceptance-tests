@@ -47,7 +47,7 @@ class SummaryStepDef extends BaseStepDef {
   }
 
   And("""^I click remove link to remove item (.*)"""){ (itemIndex : Int) =>
-    SummaryPage.removeItemLink(itemIndex)
+    SummaryPage.removeItemLink(itemIndex).click()
   }
 
   And("""^I navigate to summary page""") { () =>

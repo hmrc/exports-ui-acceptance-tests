@@ -30,7 +30,7 @@ object AmendmentDetails extends BasePage {
   // ex: fillPage()
 
   override def fillPage(values: String*): Unit = {
-    checkAmendSectionSummary()
+    checkAmendedDetails()
   }
 
   def clickViewDetailsLink(): Unit = {

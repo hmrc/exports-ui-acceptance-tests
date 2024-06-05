@@ -31,5 +31,7 @@ object DeclarationHoldingPage extends BasePage {
 
   // ex: fillPage()
 
-  override def fillPage(values: String*): Unit = if (isAmendmentMode) waitForClass("govuk-panel__title", Presence) else waitForClass("confirmation-content", Presence)
+  override def fillPage(values: String*): Unit =
+    if (isAmendmentMode) waitForClass("govuk-panel__title", Presence)
+    else waitForClass("confirmation-content", Presence)
 }

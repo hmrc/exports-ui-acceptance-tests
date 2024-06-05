@@ -26,9 +26,7 @@ class ExporterAddressStepDef extends BaseStepDef {
   And("""^I should land on Exporter-Address page""")(() => ExporterAddressPage.checkPage())
 
   And("""^I provide Exporter Address Details""") { () =>
-    if (isAmendmentMode)
-      ExporterAddressPage.fillPage(Constants.AmendedAddress: _*)
-      else
-      ExporterAddressPage.fillPage(Constants.Address: _*)
+    val address = if (isAmendmentMode) Constants.AmendedAddress else Constants.Address
+    ExporterAddressPage.fillPage(address:_*)
   }
 }

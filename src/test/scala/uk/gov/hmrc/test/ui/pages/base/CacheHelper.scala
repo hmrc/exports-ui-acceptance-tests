@@ -16,8 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.base
 
-import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{Cache, cache, cacheForAmendments, changeLinks}
-import uk.gov.hmrc.test.ui.pages.common.DetailKeys.AmendmentModeOnOff
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{cache, cacheForAmendments, changeLinks, Cache}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.section5
 
 trait CacheHelper {
@@ -25,126 +24,134 @@ trait CacheHelper {
   protected def path: String
   protected def changeLink: String = path
 
-  def clear(): Unit = cache.clear()
+  def startAmendmentMode() : Unit = cacheForAmendments.addAll(cache.iterator)
+
+  def isAmendmentMode: Boolean = cacheForAmendments.nonEmpty
+
+  def getCache: Cache =
+    if (isAmendmentMode) cacheForAmendments else cache
+
+  def clear(): Unit = getCache.clear()
 
   def clear(sectionId: Int, maybeId: Option[String] = None): Cache =
-    cache --= allSectionDetails(sectionId, maybeId).keys
+    getCache --= allSectionDetails(sectionId, maybeId).keys
 
   // To use when the detailKeys provided are expected to be in the cache
   def clear(detailKeys: DetailKey*): Cache = {
-    val size = cache.size
-    cache --= detailKeys
+    val size = getCache.size
+    getCache --= detailKeys
     assert(
-      cache.size == size - detailKeys.size,
+      getCache.size == size - detailKeys.size,
       s"One or more of the DetailKey(s) to clear were not found in the cache"
     )
-    cache
+    getCache
   }
 
   // To use when the detailKeys provided can also not be in the cache
-  def clearIfAny(detailKeys: DetailKey*): Cache = cache --= detailKeys
+  def clearIfAny(detailKeys: DetailKey*): Cache = getCache --= detailKeys
 
-  def detailKeys(labels: String*): Seq[DetailKey] = cache.filter(kv => labels.contains(kv._1.label)).keys.toList
+  def detailKeys(labels: String*): Seq[DetailKey] = getCache.filter(kv => labels.contains(kv._1.label)).keys.toList
 
   // Use a detailKey to retrieve the value of a Detail (a Detail corresponds to a single value)
   def detail(detailKey: DetailKey): String =
-    cache(detailKey) match {
+    getCache(detailKey) match {
       case detail: Detail => detail.value
-      case _ => assert(false, s"Cache does not contain a value for $detailKey"); ""
+      case _              => assert(false, s"Cache does not contain a value for $detailKey"); ""
     }
-
-  // Use a detailKey to retrieve the value of a Detail (a Detail corresponds to a single value)
-  def detailOnAmendment(detailKey: DetailKey): String =
-    cacheForAmendments(detailKey) match {
-      case detail: Detail => detail.value
-      case _ => assert(false, s"Cache for amendments does not contain a value for $detailKey"); ""
-    }
-
 
   // Use a detailKey to retrieve the values of a Details (a Details corresponds to a list of values)
   def details(detailKey: DetailKey): Seq[String] =
-    cache(detailKey) match {
+    getCache(detailKey) match {
       case details: Details => details.values
-      case _ => assert(false, s"Cache does not contain a value for $detailKey"); List.empty
+      case _                => assert(false, s"Cache does not contain a value for $detailKey"); List.empty
     }
 
   def maybeDetail(detailKey: DetailKey): Option[String] =
-    cache.get(detailKey) match {
+    getCache.get(detailKey) match {
       case Some(detail: Detail) => Some(detail.value)
-      case _                   => None
+      case _                    => None
     }
 
   def maybeDetails(detailKey: DetailKey): Option[Seq[String]] =
-    cache.get(detailKey) match {
+    getCache.get(detailKey) match {
       case Some(details: Details) => Some(details.values)
-      case _                     => None
+      case _                      => None
     }
 
   def allSectionDetails(sectionId: Int, maybeId: Option[String] = None): Cache =
-    maybeId.fold(cache.filter(_._1.sectionId == sectionId)) { id =>
-      cache.filter { case (detailKey: DetailKey, _) =>
+    maybeId.fold(getCache.filter(_._1.sectionId == sectionId)) { id =>
+      getCache.filter { case (detailKey: DetailKey, _) =>
         detailKey.sectionId == sectionId && detailKey.id.contains(id)
       }
     }
 
-  /*
-  * To get all previous value section details while amending declaration
-  * */
-  def allSectionDetails(): Cache = cache
-
-
-  /*
-  * To get all the amended section details
-  * */
-  def allAmendedDetails(): Cache = cacheForAmendments
-
   def detailForLabel(sectionId: Int, label: String): Seq[String] =
-    allSectionDetails(sectionId).filter(_._1.label == label).values.flatMap {
-      case detail: Detail => Some(detail.value)
-      case _              => None
-    }.toList
+    allSectionDetails(sectionId)
+      .filter(_._1.label == label)
+      .values
+      .flatMap {
+        case detail: Detail => Some(detail.value)
+        case _              => None
+      }
+      .toList
 
   def detailsForLabel(sectionId: Int, label: String): Seq[Seq[String]] =
-    allSectionDetails(sectionId).filter(_._1.label == label).values.flatMap {
-      case details: Details => Some(details.values)
-      case _              => None
-    }.toList
+    allSectionDetails(sectionId)
+      .filter(_._1.label == label)
+      .values
+      .flatMap {
+        case details: Details => Some(details.values)
+        case _                => None
+      }
+      .toList
 
   def itemDetailFor(itemId: String, label: String): Seq[String] =
-    allSectionDetails(section5, Some(itemId)).filter(_._1.label == label).values.flatMap {
-      case detail: Detail => Some(detail.value)
-      case _              => None
-    }.toList
+    allSectionDetails(section5, Some(itemId))
+      .filter(_._1.label == label)
+      .values
+      .flatMap {
+        case detail: Detail => Some(detail.value)
+        case _              => None
+      }
+      .toList
 
   def itemDetailsFor(itemId: String, label: String): Seq[Seq[String]] =
-    allSectionDetails(section5, Some(itemId)).filter(_._1.label == label).values.flatMap {
-      case details: Details => Some(details.values)
-      case _              => None
-    }.toList
+    allSectionDetails(section5, Some(itemId))
+      .filter(_._1.label == label)
+      .values
+      .flatMap {
+        case details: Details => Some(details.values)
+        case _                => None
+      }
+      .toList
 
   def listOfItemDetailFor(label: String): Seq[String] =
-    allSectionDetails(section5).filter(_._1.label == label).values.flatMap {
-      case detail: Detail => Some(detail.value)
-      case _              => None
-    }.toList
+    allSectionDetails(section5)
+      .filter(_._1.label == label)
+      .values
+      .flatMap {
+        case detail: Detail => Some(detail.value)
+        case _              => None
+      }
+      .toList
 
   def listOfItemDetailsFor(label: String): Seq[Seq[String]] =
-    allSectionDetails(section5).filter(_._1.label == label).values.flatMap {
-      case details: Details => Some(details.values)
-      case _                => None
-    }.toList
+    allSectionDetails(section5)
+      .filter(_._1.label == label)
+      .values
+      .flatMap {
+        case details: Details => Some(details.values)
+        case _                => None
+      }
+      .toList
 
-  def isAmendmentMode: Boolean = detailOnAmendment(AmendmentModeOnOff) == "true"
-
-  def store(elements: (DetailKey, DeclarationDetails)*): Cache = {
+  def store(elements: (DetailKey, DeclarationDetails)*): Cache =
     if (isAmendmentMode) {
       cacheForAmendments.addAll(elements)
       cacheForAmendments
-    }
-    else {
+    } else {
       cache.addAll(elements)
       elements.foreach(element => if (element._1.checkChangeLink) changeLinks += (element._1 -> changeLink))
       cache
     }
-  }
 }

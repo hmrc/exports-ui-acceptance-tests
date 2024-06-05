@@ -16,9 +16,10 @@
 
 package uk.gov.hmrc.test.ui.pages.common
 
-import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
+import org.openqa.selenium.{By, WebDriver, WebElement}
+import org.scalatest.matchers.must.Matchers.{be, convertToAnyMustWrapper, include}
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
-import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.cacheForAmendments
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{cache, cacheForAmendments}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.common.DetailKeys._
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys._
@@ -68,9 +69,8 @@ object DeclarationInformationPage extends BasePage {
     modifiedList
   }
 
-  override def pageLinkHrefs: Seq[String] = {
+  override def pageLinkHrefs: Seq[String] =
     super.pageLinkHrefs.filterNot(_ == exitAndCompleteLater) ++ additionalLinks
-  }
 
   override def fillPage(values: String*): Unit = ()
 
@@ -96,18 +96,40 @@ object DeclarationInformationPage extends BasePage {
 
     // store url for checking back navigation on cancel and copy declaration
     val url = driver.getCurrentUrl
-    store(DeclarationInfoPath -> Detail(driver.getCurrentUrl.substring(url.indexOf("/submissions"))))
+    val declarationInfoPath = Detail(driver.getCurrentUrl.substring(url.indexOf("/submissions")))
+    cache.put(DeclarationInfoPath, declarationInfoPath)
+    cacheForAmendments.put(DeclarationInfoPath, declarationInfoPath)
   }
 
-  def copyDeclaration(): Unit = {
+  def copyDeclaration(): Unit =
     clickById("copy-declaration")
-  }
 
   def amendDeclaration(): Unit = {
     clickById("amend-declaration")
-    cacheForAmendments.put(AmendmentModeOnOff, Detail("true"))
+    startAmendmentMode()
   }
 
-  def checkStatusOnTimeLine(): Unit =
-    findElementByCssSelector(".hmrc-timeline__event:first-child h2").getText mustBe "Cancellation request denied"
+  def cancelLinkOnRejectedAmendment(): WebElement = driver.findElement(By.id("cancel-amendment"))
+
+  def notificationActionButton(int: Int): WebElement = driver.findElements(By.cssSelector(".govuk-button")).get(int)
+
+  def validateAmendRejectedStatusLinks(errors: String): Unit = {
+
+    notificationActionButton(0).getText must be(errors)
+    notificationActionButton(0).getAttribute("href") must include("/unaccepted-amendment")
+  }
+
+  def validateAmendCancelledStatusLinks(errors: String): Unit = {
+
+    notificationActionButton(0).getText must be(errors)
+    notificationActionButton(0).getAttribute("href") must include("/resubmit-your-amendment")
+  }
+
+  def checkStatusOnTimeLine(notificationEventStatusOnTimeLine: String): Unit = {
+    if (notificationEventStatusOnTimeLine == "Amendment rejected")
+      validateAmendRejectedStatusLinks("Fix errors")
+    else if(notificationEventStatusOnTimeLine == "Amendment failed")
+      validateAmendCancelledStatusLinks("Resubmit")
+    findElementByCssSelector(".hmrc-timeline__event:first-child h2").getText mustBe notificationEventStatusOnTimeLine
+  }
 }

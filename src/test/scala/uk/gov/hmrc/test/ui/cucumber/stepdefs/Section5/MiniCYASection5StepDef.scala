@@ -43,7 +43,4 @@ class MiniCYASection5StepDef extends BaseStepDef {
     SummarySection5Page.addItem()
   }
 
-  And("""^I click on Exit and comeback later link""") { () =>
-    SummarySection5Page.exitAndComeBackLater()
-  }
 }

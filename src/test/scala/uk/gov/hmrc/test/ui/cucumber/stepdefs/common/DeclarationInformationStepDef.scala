@@ -23,8 +23,9 @@ import uk.gov.hmrc.test.ui.pages.common.DetailKeys.DeclarationInfoPath
 
 class DeclarationInformationStepDef extends BaseStepDef {
 
-  And("""^I should land on Declaration-Information page"""){() =>
-    DeclarationInformationPage.checkPage()}
+  And("""^I should land on Declaration-Information page""") { () =>
+    DeclarationInformationPage.checkPage()
+  }
 
   And("""^I validate details on declaration information page""") { () =>
     DeclarationInformationPage.validateTimelineDetails()
@@ -35,6 +36,11 @@ class DeclarationInformationStepDef extends BaseStepDef {
   And("""^I click Amend declaration link""")(() => DeclarationInformationPage.amendDeclaration())
 
   And("""^I validate (.*) status on timeline""") { (status: String) =>
-    DeclarationInformationPage.navigateToPage(detail(DeclarationInfoPath))
+    DeclarationInformationPage.checkStatusOnTimeLine(status)
   }
+
+  And("""^I click on cancel link on rejected amendment""") { ()
+    DeclarationInformationPage.cancelLinkOnRejectedAmendment().click()
+  }
+
 }

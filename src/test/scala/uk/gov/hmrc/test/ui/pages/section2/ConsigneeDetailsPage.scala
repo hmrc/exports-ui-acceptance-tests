@@ -20,27 +20,28 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{consigneeDetails, consigneeDetailsCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isSupplementary}
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationEori
 import uk.gov.hmrc.test.ui.pages.section2.AreYouTheExporterPage.isExporter
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{CarrierEORI, ConsigneeDetails, addressHelper}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{addressHelper, CarrierEORI, ConsigneeDetails}
 import uk.gov.hmrc.test.ui.pages.section2.IsThisExsPage.isThisExs
 
 object ConsigneeDetailsPage extends BasePage {
 
-  def backButtonHref: String =
-    if (isSupplementary && !isExporter)
-      RepresentationTypeAgreedPage.path
-    else if (isSupplementary && isExporter)
-      AreYouTheExporterPage.path
-    else if (isExporter || isThisExs)
-      ThirdPartyGoodsTransportationPage.path
-    else if (isClearance && !isExporter)
-      RepresentationTypeAgreedPage.path
-    else {
-      maybeDetail(CarrierEORI) match {
-        case Some(_) => CarrierEORINumberPage.path
-        case None    => CarrierAddressPage.path
-      }
+  def backButtonHref: String = {
+    def isUsingOwnTransport: Boolean =
+      maybeDetail(CarrierEORI).fold(false)(_ == detail(DeclarationEori))
+
+    def carrierPath: String = maybeDetail(CarrierEORI).fold(CarrierAddressPage.path)(_ => CarrierEORINumberPage.path)
+
+    if (isSupplementary) {
+      if (isExporter) AreYouTheExporterPage.path else RepresentationTypeAgreedPage.path
     }
+    else if (isUsingOwnTransport) ThirdPartyGoodsTransportationPage.path
+    else if (!isClearance) carrierPath
+    else if (isThisExs) carrierPath
+    else if (isExporter) IsThisExsPage.path
+    else RepresentationTypeAgreedPage.path
+  }
 
   val path: String = "/declaration/consignee-details"
   val title: String = "Where will the goods be delivered?"

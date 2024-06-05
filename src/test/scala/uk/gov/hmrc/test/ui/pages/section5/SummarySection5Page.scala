@@ -38,5 +38,4 @@ object SummarySection5Page extends BasePage {
 
   def addItem(): Unit = clickById("add-item")
 
-  def exitAndComeBackLater(): Unit = clickById("exit-and-complete-later")
 }

@@ -43,6 +43,8 @@ trait DriverHelper {
 
   def saveAndReturnToSummary(): Unit = clickById("save_and_return_to_summary")
 
+  def exitAndComeBackLater(): Unit = clickById("exit-and-complete-later")
+
   def continueOnMiniCya(): Unit = clickByXpath("//*[@role='button']")
 
   def clickById(value: String): Unit = findElementById(value).click()

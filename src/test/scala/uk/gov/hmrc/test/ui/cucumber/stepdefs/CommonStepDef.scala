@@ -260,13 +260,19 @@ class CommonStepDef extends BaseStepDef {
     val changeLinkMap: Map[String, String] = Map(
       "Authorisation Type"    -> "authorisation-holder-1-type",
       "Are you the exporter"  -> "declarant-is-exporter",
-      "Exporter’s details"    -> "exporter-address"
+      "Exporter’s details"    -> "exporter-address",
+      "Office of exit"        -> "office-of-exit",
+      "Border transport"      -> "border-transport"
     )
 
     CommonPage.changeLinkOnCYA(changeLinkMap(pageName)).click()
   }
   And("""^I click save and return to summary""") { () =>
     CommonPage.saveAndReturnToSummary()
+  }
+
+  And("""^I click on Exit and comeback later link""") { () =>
+    CommonPage.exitAndComeBackLater()
   }
 }
 object CommonStepDef {
