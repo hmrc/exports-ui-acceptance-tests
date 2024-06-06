@@ -198,13 +198,14 @@ Feature: Amend Scenarios
     And I navigate to Choice page
     And I select to Manage Submit Declaration
     Then I should land on Dashboard page
-    And I click on Submitted tab
+    And I click on Action needed tab
     And I validate declaration details on Action needed tab and check Status is On hold
     And I navigate to declaration information page after clicking on mrn link
     Then I validate Amendment rejected status on timeline
 
     # To verify amendment cancellation on rejected amendments on Timeline page
     And I click back
+    And I navigate to declaration information page after clicking on mrn link
     And I click Amend declaration link
     Then I should land on Saved-Summary page
     And I click change link for Border transport page
@@ -219,7 +220,7 @@ Feature: Amend Scenarios
     And I navigate to Choice page
     And I select to Manage Submit Declaration
     Then I should land on Dashboard page
-    And I click on Submitted tab
+    And I click on Action needed tab
     And I validate declaration details on Action needed tab and check Status is On hold
     And I navigate to declaration information page after clicking on mrn link
     Then I validate Amendment rejected status on timeline
@@ -239,6 +240,7 @@ Feature: Amend Scenarios
 
     # To verify Failed Amendment in Timeline page
     And I click back
+    And I navigate to declaration information page after clicking on mrn link
     And I click Amend declaration link
     Then I should land on Saved-Summary page
     And I click change link for Border transport page

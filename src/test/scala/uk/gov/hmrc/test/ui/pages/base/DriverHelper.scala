@@ -128,6 +128,7 @@ trait DriverHelper {
 
   def fillRadioButton(elementId: String, refSelector: String, refText: String): Unit = {
     clickById(elementId)
+    findElementById(refSelector).clear()
     findElementById(refSelector).sendKeys(refText)
   }
 

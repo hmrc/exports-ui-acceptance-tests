@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.common
 
-import org.openqa.selenium.{By, WebDriver, WebElement}
+import org.openqa.selenium.{By, WebElement}
 import org.scalatest.matchers.must.Matchers.{be, convertToAnyMustWrapper, include}
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
 import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{cache, cacheForAmendments}
@@ -31,6 +31,7 @@ object DeclarationInformationPage extends BasePage {
   def title = s"Declaration status: ${detail(StatusOnDashboard)}"
 
   override def checkExpanders(): Unit = ()
+  var isCancelDeclaration = false
 
   private val messageLink = "/messages"
   private val movementsLink = "/customs-movements"
@@ -109,7 +110,9 @@ object DeclarationInformationPage extends BasePage {
     startAmendmentMode()
   }
 
-  def cancelLinkOnRejectedAmendment(): WebElement = driver.findElement(By.id("cancel-amendment"))
+  def clickCancelLinkOnRejectedAmendment(): Unit = {clickById("cancel-amendment")
+    isCancelDeclaration = true
+  }
 
   def notificationActionButton(int: Int): WebElement = driver.findElements(By.cssSelector(".govuk-button")).get(int)
 

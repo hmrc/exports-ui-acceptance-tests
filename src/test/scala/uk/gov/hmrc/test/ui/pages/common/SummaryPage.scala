@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.common
 import org.openqa.selenium.WebElement
 import org.scalatest.Assertion
 import org.scalatest.matchers.must.Matchers.{be, convertToAnyMustWrapper}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, DetailKey}
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.common.DetailKeys.DeclarationInfoPath
 
 object SummaryPage extends BasePage {

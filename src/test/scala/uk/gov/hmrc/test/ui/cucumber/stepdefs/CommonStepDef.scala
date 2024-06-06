@@ -262,7 +262,7 @@ class CommonStepDef extends BaseStepDef {
       "Are you the exporter"  -> "declarant-is-exporter",
       "Exporter’s details"    -> "exporter-address",
       "Office of exit"        -> "office-of-exit",
-      "Border transport"      -> "border-transport"
+      "Border transport"      -> "active-transport-type"
     )
 
     CommonPage.changeLinkOnCYA(changeLinkMap(pageName)).click()

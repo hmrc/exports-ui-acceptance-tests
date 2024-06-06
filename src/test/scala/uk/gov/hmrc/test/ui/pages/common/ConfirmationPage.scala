@@ -20,6 +20,7 @@ import org.openqa.selenium.WebElement
 import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.BasePage.host
+import uk.gov.hmrc.test.ui.pages.common.DeclarationInformationPage.isCancelDeclaration
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage.isArrivedDeclaration
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{AdditionalDeclarationType, Ducr, Lrn}
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.BorderTransport
@@ -32,16 +33,22 @@ object ConfirmationPage extends BasePage {
 
   def path: String = if (isAmendmentMode) "/declaration/amendment-outcome" else "/declaration/confirmation"
 
-  val declationStatus = maybeDetails(BorderTransport)
+  def declarationStatus = maybeDetails(BorderTransport).head
+
+/*  // Initialize the status flags
   var rejectedDeclaration = false
   var cancelDeclaration = false
   var pendingDeclaration = false
 
-  if (declationStatus.head.contains("REJECTED"))
+  // Check for declaration status and set flags accordingly
+  if (declarationStatus.contains("REJECTED"))
     rejectedDeclaration = true
-  cancelDeclaration = true
-  if (declationStatus.head.contains("PENDING"))
-    pendingDeclaration = true
+  else (declarationStatus.contains("REJECTED") && isCancelDeclaration)
+    rejectedDeclaration = true
+    cancelDeclaration = true
+
+  if(declarationStatus.contains("PENDING"))
+    pendingDeclaration = true*/
 
   override def title: String =
     detail(Lrn).take(1) match {
@@ -50,10 +57,14 @@ object ConfirmationPage extends BasePage {
       case "D" | "U"                                           => "Your declaration needs documents attached"
       case "R"                                                 => "Your declaration has been pre-lodged with HMRC"
       case _ =>
-        if (isAmendmentMode && rejectedDeclaration) "Amendment request rejected"
-        else if (isAmendmentMode && cancelDeclaration) "Your amendment cancellation has been accepted"
-        else if (isAmendmentMode && pendingDeclaration) "Your amendment request is still being processed"
-        else "Declaration accepted"
+        if (isAmendmentMode) {
+          if (declarationStatus.contains("REJECTED")) "Amendment request rejected"
+          else if (declarationStatus.contains("REJECTED") && isCancelDeclaration) "Your amendment cancellation has been accepted"
+          else if (declarationStatus.contains("PENDING")) "Your amendment request is still being processed"
+          else "Amendment request accepted"
+        } else {
+          "Declaration accepted"
+        }
     }
 
   override def checkPage(): Unit = {
