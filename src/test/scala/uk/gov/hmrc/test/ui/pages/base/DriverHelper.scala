@@ -180,6 +180,18 @@ trait DriverHelper {
         throw new TestFailedException(message, exception)
     }
 
+  def waitForLinkText(
+                 text: String,
+                 expectedCondition: ExpectedCondition = Visible,
+                 secondsToWaitFor: Int = 10
+               ): WebElement =
+    Try(waitFor(By.linkText(text), expectedCondition, secondsToWaitFor)) match {
+      case Success(element) => element
+      case Failure(exception) =>
+        val message = s"Was waiting for an element with link text ($text) while on page ${driver.getCurrentUrl}"
+        throw new TestFailedException(message, exception)
+    }
+
   private def waitFor(locator: By, expectedCondition: ExpectedCondition, secondsToWaitFor: Int): WebElement = {
     val condition = expectedCondition match {
       case Clickable   => ExpectedConditions.elementToBeClickable(locator)
@@ -192,7 +204,6 @@ trait DriverHelper {
       .ignoring(classOf[Exception])
       .until(condition)
   }
-
 }
 
 object DriverHelper extends LazyLogging {

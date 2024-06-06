@@ -302,3 +302,14 @@ This code is open source software licensed under the [Apache 2.0 License]("http:
   - Checks successful and unsuccessful Copy of a Declaration
   - Checks successful and unsuccessful Cancellation of a Declaration
   - Check Saved Declaration and removal of draft declarations
+
+## Amend Scenarios
+  - Amending complete section-2 Scenario.
+  - Checking the error message while removing declaration item for submitted declaration.
+  - Amending the declaration and adding a new item in Section-5
+  - Exit and come back later and resuming the saved declaration
+  - To verify rejected amend on Timeline page
+  - To verify amendment cancellation on rejected amendments on Timeline page
+  - To verify Failed Amendment in Timeline page
+  - To verify Pending Amend declaration with Amendment requested notification on Timeline page
+

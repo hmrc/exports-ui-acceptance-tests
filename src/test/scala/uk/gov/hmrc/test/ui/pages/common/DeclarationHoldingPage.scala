@@ -32,6 +32,7 @@ object DeclarationHoldingPage extends BasePage {
   // ex: fillPage()
 
   override def fillPage(values: String*): Unit = {
-    waitForClass("govuk-table", Presence)
+    waitForLinkText("Declaration status", Presence)
+
   }
 }

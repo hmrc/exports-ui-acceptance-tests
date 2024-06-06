@@ -35,21 +35,6 @@ object ConfirmationPage extends BasePage {
 
   def declarationStatus = maybeDetails(BorderTransport).head
 
-/*  // Initialize the status flags
-  var rejectedDeclaration = false
-  var cancelDeclaration = false
-  var pendingDeclaration = false
-
-  // Check for declaration status and set flags accordingly
-  if (declarationStatus.contains("REJECTED"))
-    rejectedDeclaration = true
-  else (declarationStatus.contains("REJECTED") && isCancelDeclaration)
-    rejectedDeclaration = true
-    cancelDeclaration = true
-
-  if(declarationStatus.contains("PENDING"))
-    pendingDeclaration = true*/
-
   override def title: String =
     detail(Lrn).take(1) match {
       case "C" if isArrivedDeclaration => "Declaration accepted, goods have permission to progress"
@@ -59,6 +44,7 @@ object ConfirmationPage extends BasePage {
       case _ =>
         if (isAmendmentMode) {
           if (declarationStatus.contains("REJECTED")) "Amendment request rejected"
+          else if (declarationStatus.contains("DENIED")) "Amendment request failed"
           else if (declarationStatus.contains("REJECTED") && isCancelDeclaration) "Your amendment cancellation has been accepted"
           else if (declarationStatus.contains("PENDING")) "Your amendment request is still being processed"
           else "Amendment request accepted"

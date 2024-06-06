@@ -47,7 +47,7 @@ object BorderTransportPage extends BasePage {
         BorderTransportData("radio_WagonNumber", "WagonNumber", if (isAmendmentMode) "PENDING" else "EuroTunnel", "Train")
 
       case "Vehicle registration" =>
-        BorderTransportData("radio_VehicleRegistrationNumber", "VehicleRegistrationNumber", "123456", "Vehicle registration")
+        BorderTransportData("radio_VehicleRegistrationNumber", "VehicleRegistrationNumber", "EXTERNAL AMEND", "Vehicle registration")
 
       case "Flight number" =>
         BorderTransportData("radio_FlightNumber", "FlightNumber", "123456", "Flight number")

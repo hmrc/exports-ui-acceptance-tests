@@ -41,4 +41,8 @@ class DeclarationInformationStepDef extends BaseStepDef {
     DeclarationInformationPage.clickCancelLinkOnRejectedAmendment()
   }
 
+ And("""^I validate that the Amend declaration link is not displayed and Copy declaration link is displayed""") { ()
+   DeclarationInformationPage.validateCopyAndAmendDeclarationLinks()
+ }
+
 }

@@ -32,10 +32,8 @@ class SummaryStepDef extends BaseStepDef {
   }
 
   And("""^I validate that change links are not present for Section 1""") { () =>
-    SummaryPage.checkChangeLinkIsNotPresentFor("ducr-entry")
-    SummaryPage.checkChangeLinkIsNotPresentFor("local-reference-number")
-    SummaryPage.checkChangeLinkIsNotPresentFor("mucr-row")
-    SummaryPage.checkChangeLinkIsNotPresentFor("link-to-mucr")
+    val fieldsToCheck = Seq("ducr-entry", "local-reference-number", "mucr-row", "link-to-mucr")
+    fieldsToCheck.foreach(SummaryPage.checkChangeLinkIsNotPresentFor)
   }
 
   And("""^I validate that change link is not present for location of goods""") { () =>

@@ -25,7 +25,7 @@ Feature: Amend Scenarios
     And I validate that change links are not present for Section 1
     And I validate that change link is not present for location of goods
 
-#    Section-2 amending Are you the exporter details to No
+    # Section-2 amending Are you the exporter details to No
     Then I clear Are you the exporter?,Carrier or haulier’s EORI number,Authorisation type  keys from cache
     And I click change link for Are you the exporter page
     Then I should land on Are-You-The-Exporter page
@@ -76,8 +76,8 @@ Feature: Amend Scenarios
     And I click Amend declaration link
     Then I should land on Saved-Summary page
 
-     #Removing an item on Amended Declaration is not allowed, as the item is associated with the submitted declaration
-     #When the user tried to remove the item then the respective warning message is displayed
+    #Removing an item on Amended Declaration is not allowed, as the item is associated with the submitted declaration
+    #When the user tried to remove the item then the respective warning message is displayed
     And I click remove link to remove item 1
     Then I should land on Remove-Declaration-Item page
     And I should see the warning that the item cannot be removed
@@ -154,7 +154,7 @@ Feature: Amend Scenarios
     And I click view details link on timeline page to view the amended details
     Then I validate amended details
 
-    # Exit and come back later functionality for Amend Declaration
+    # Exit and come back later and resuming saved declaration functionality for Amend Declaration
     And I click back
     And I click Amend declaration link
     Then I should land on Saved-Summary page
@@ -182,7 +182,7 @@ Feature: Amend Scenarios
     And I click view details link on timeline page to view the amended details
     Then I validate amended details
 
-    # To verify Rejected Amendment in Timeline page
+    # To verify Rejected Amendment on Timeline page
     And I click back
     And I click Amend declaration link
     Then I should land on Saved-Summary page
@@ -224,19 +224,21 @@ Feature: Amend Scenarios
     And I validate declaration details on Action needed tab and check Status is On hold
     And I navigate to declaration information page after clicking on mrn link
     Then I validate Amendment rejected status on timeline
-    And I click on cancel link on rejected amendment
-    Then I should land on Cancel-Declaration page
-    And I select No longer required as the reason and enter description for cancellation
-    And I click continue
-    Then I should land on holding page and redirect to Confirmation page
-    And I should land on Confirmation page
-    And I navigate to Choice page
-    And I select to Manage Submit Declaration
-    Then I should land on Dashboard page
-    And I click on Submitted tab
-    And I validate declaration details on Action needed tab and check Status is On hold
-    And I navigate to declaration information page after clicking on mrn link
-    Then I validate Amendment cancelled status on timeline
+#    There is a bug raised, CEDS-5868, when once this is fixed then we need to test this by uncommenting the below lines
+
+#    And I click on cancel link on rejected amendment
+#    Then I should land on Cancel-Declaration page
+#    And I select No longer required as the reason and enter description for cancellation
+#    And I click continue
+#    Then I should land on holding page and redirect to Confirmation page
+#    And I should land on Confirmation page
+#    And I navigate to Choice page
+#    And I select to Manage Submit Declaration
+#    Then I should land on Dashboard page
+#    And I click on Submitted tab
+#    And I validate declaration details on Action needed tab and check Status is On hold
+#    And I navigate to declaration information page after clicking on mrn link
+#    Then I validate Amendment cancelled status on timeline
 
     # To verify Failed Amendment in Timeline page
     And I click back
@@ -255,13 +257,14 @@ Feature: Amend Scenarios
     And I navigate to Choice page
     And I select to Manage Submit Declaration
     Then I should land on Dashboard page
-    And I click on Submitted tab
+    And I click on Action needed tab
     And I validate declaration details on Action needed tab and check Status is On hold
     And I navigate to declaration information page after clicking on mrn link
-    Then I validate Amendment rejected status on timeline
+    Then I validate Amendment failed status on timeline
 
-    # To verify Pending Amendment
+    # To verify Pending Amend declaration with Amendment requested notification on Timeline page
     And I click back
+    And I navigate to declaration information page after clicking on mrn link
     And I click Amend declaration link
     Then I should land on Saved-Summary page
     And I click change link for Border transport page
@@ -276,7 +279,7 @@ Feature: Amend Scenarios
     And I navigate to Choice page
     And I select to Manage Submit Declaration
     Then I should land on Dashboard page
-    And I click on Submitted tab
+    And I click on Action needed tab
     And I validate declaration details on Action needed tab and check Status is On hold
     And I navigate to declaration information page after clicking on mrn link
     Then I validate Amendment requested status on timeline

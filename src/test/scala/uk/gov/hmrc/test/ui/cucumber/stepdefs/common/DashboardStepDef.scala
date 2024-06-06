@@ -24,6 +24,7 @@ class DashboardStepDef extends BaseStepDef {
   And("""^I should land on Dashboard page""")(() => DashboardPage.checkPage())
 
   And("""^I validate declaration details on (.*) tab and check Status is (.*)""") { (tab: String, status: String) =>
+    DashboardPage.refreshPage()
     DashboardPage.validateDashboard(tab, status)
   }
 

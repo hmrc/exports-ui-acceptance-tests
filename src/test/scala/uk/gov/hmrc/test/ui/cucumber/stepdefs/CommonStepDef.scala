@@ -184,7 +184,7 @@ class CommonStepDef extends BaseStepDef {
     if (isStandard) {
       VatRatingPage.fillPage("Yes"); continue()
     }
-    if(!isClearance) {
+    if (!isClearance) {
       NationalAdditionalCodesPage.fillPage(Constants.no); continue()
     }
     if (isStandard || isSupplementary) {
@@ -214,7 +214,7 @@ class CommonStepDef extends BaseStepDef {
       WarehousePage.fillPage("yes", "R1234567GB");
     }
 
-    if(hasSupervisingCustomsOfficePageVisiblePC)
+    if (hasSupervisingCustomsOfficePageVisiblePC)
       SupervisingCustomsOfficePage.fillPage("GBBTH001"); continue()
 
     InlandOrBorderPage.fillPage("Customs controlled location"); continue()
@@ -223,11 +223,11 @@ class CommonStepDef extends BaseStepDef {
     if ((!isSupplementary) && (!isFixedTransport && !isPostalOrMail)) {
       DepartureTransportPage.fillPage("Flight number"); continue()
     }
-    if(!isOccasional){
+    if (!isOccasional) {
       BorderTransportPage.fillPage("Ship IMO number"); continue()
     }
     if (!isClearance && (!isFixedTransport || !isPostalOrMail)) {
-      TransportCountryPage.fillPage("Desirade - GP");continue()
+      TransportCountryPage.fillPage("Desirade - GP"); continue()
     }
     ExpressConsignmentPage.fillPage("Yes"); continue()
     TransportPaymentPage.fillPage("Payment in cash"); continue()
@@ -246,7 +246,7 @@ class CommonStepDef extends BaseStepDef {
     clear(detailKeys(keys: _*): _*)
   }
 
-  And("""^I clear cache for section (.*)""") {(sectionId: Int) =>
+  And("""^I clear cache for section (.*)""") { (sectionId: Int) =>
     clear(sectionId)
   }
 
@@ -258,11 +258,12 @@ class CommonStepDef extends BaseStepDef {
 
   And("""^I click change link for (.*) page""") { (pageName: String) =>
     val changeLinkMap: Map[String, String] = Map(
-      "Authorisation Type"    -> "authorisation-holder-1-type",
-      "Are you the exporter"  -> "declarant-is-exporter",
-      "Exporter’s details"    -> "exporter-address",
-      "Office of exit"        -> "office-of-exit",
-      "Border transport"      -> "active-transport-type"
+      "LRN"                  -> "lrn",
+      "Authorisation Type"   -> "authorisation-holder-1-type",
+      "Are you the exporter" -> "declarant-is-exporter",
+      "Exporter’s details"   -> "exporter-address",
+      "Office of exit"       -> "office-of-exit",
+      "Border transport"     -> "active-transport-type"
     )
 
     CommonPage.changeLinkOnCYA(changeLinkMap(pageName)).click()

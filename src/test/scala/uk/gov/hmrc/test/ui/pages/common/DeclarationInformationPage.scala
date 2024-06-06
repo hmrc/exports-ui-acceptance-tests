@@ -110,6 +110,11 @@ object DeclarationInformationPage extends BasePage {
     startAmendmentMode()
   }
 
+  def validateCopyAndAmendDeclarationLinks(): Unit = {
+    findElementById("copy-declaration").isDisplayed
+    elementByIdDoesNotExist("amend-declaration")
+  }
+
   def clickCancelLinkOnRejectedAmendment(): Unit = {clickById("cancel-amendment")
     isCancelDeclaration = true
   }
