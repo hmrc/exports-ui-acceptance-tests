@@ -76,7 +76,7 @@ Feature: Section2 Clearance Prelodged
     #                On-Behalf-Of-Another-Agent page
     #                representative-eori page
     #                representative-type-agreed page
-    And I clear Exporter’s details, Consignor’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation, Carrier or haulier’s details keys from cache
+    And I clear Exporter’s details, Consignor’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation, Carrier or haulier’s details, Carrier or haulier’s EORI number keys from cache
     Then I navigate to Is This EXS page
     And I select No to is this exs
     And I click continue

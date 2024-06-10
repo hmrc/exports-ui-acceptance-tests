@@ -19,7 +19,6 @@ package uk.gov.hmrc.test.ui.pages.common
 import org.openqa.selenium.{By, WebElement}
 import org.scalatest.matchers.must.Matchers.{be, convertToAnyMustWrapper, include}
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
-import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{cache, cacheForAmendments}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.common.DetailKeys._
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys._
@@ -98,8 +97,8 @@ object DeclarationInformationPage extends BasePage {
     // store url for checking back navigation on cancel and copy declaration
     val url = driver.getCurrentUrl
     val declarationInfoPath = Detail(driver.getCurrentUrl.substring(url.indexOf("/submissions")))
-    cache.put(DeclarationInfoPath, declarationInfoPath)
-    cacheForAmendments.put(DeclarationInfoPath, declarationInfoPath)
+    storeOne(DeclarationInfoPath -> declarationInfoPath)
+   // cacheForAmendments.put(DeclarationInfoPath, declarationInfoPath)
   }
 
   def copyDeclaration(): Unit =

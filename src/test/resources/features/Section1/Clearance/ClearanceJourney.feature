@@ -1,4 +1,4 @@
-@Regression
+@Regression1
 Feature: Clearance Journey
 
   # Below scenario - DoYouHaveADucr:[Yes]

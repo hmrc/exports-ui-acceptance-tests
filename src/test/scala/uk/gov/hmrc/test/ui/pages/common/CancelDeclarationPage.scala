@@ -28,14 +28,13 @@ object CancelDeclarationPage extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
-  val govUKWarningText: WebElement = findElementByCssSelector("div.govuk-warning-text > strong")
-
   val reason = 0
 
   // ex: fillPage("No longer required")
 
   override def fillPage(values: String*): Unit = {
     if (isAmendmentMode) {
+      val govUKWarningText: WebElement = findElementByCssSelector("div.govuk-warning-text > strong")
       govUKWarningText.isDisplayed
        fillTextBoxById("fullName", "User Name")
        fillTextBoxById("jobRole", "Job Role")

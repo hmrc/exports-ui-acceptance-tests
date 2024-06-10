@@ -22,7 +22,7 @@ import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isSupplementary}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationEori
 import uk.gov.hmrc.test.ui.pages.section2.AreYouTheExporterPage.isExporter
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{addressHelper, CarrierEORI, ConsigneeDetails}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{CarrierEORI, ConsigneeDetails, addressHelper}
 import uk.gov.hmrc.test.ui.pages.section2.IsThisExsPage.isThisExs
 
 object ConsigneeDetailsPage extends BasePage {
@@ -36,6 +36,7 @@ object ConsigneeDetailsPage extends BasePage {
     if (isSupplementary) {
       if (isExporter) AreYouTheExporterPage.path else RepresentationTypeAgreedPage.path
     }
+    else if (!isThisExs) RepresentationTypeAgreedPage.path
     else if (isUsingOwnTransport) ThirdPartyGoodsTransportationPage.path
     else if (!isClearance) carrierPath
     else if (isThisExs) carrierPath

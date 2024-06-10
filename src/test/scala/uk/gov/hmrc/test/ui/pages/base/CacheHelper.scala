@@ -24,7 +24,7 @@ trait CacheHelper {
   protected def path: String
   protected def changeLink: String = path
 
-  def startAmendmentMode() : Unit = cacheForAmendments.addAll(cache.iterator)
+  def startAmendmentMode(): Unit = cacheForAmendments.addAll(cache.iterator)
 
   def isAmendmentMode: Boolean = cacheForAmendments.nonEmpty
 
@@ -152,6 +152,17 @@ trait CacheHelper {
     } else {
       cache.addAll(elements)
       elements.foreach(element => if (element._1.checkChangeLink) changeLinks += (element._1 -> changeLink))
+      cache
+    }
+
+  def storeOne(element: (DetailKey, DeclarationDetails), maybeChangeLink: Option[String] = None): Cache =
+    if (isAmendmentMode) {
+      cacheForAmendments.put(element._1, element._2)
+      cacheForAmendments
+    }
+    else {
+      cache.put(element._1, element._2)
+      maybeChangeLink.map(changeLink => changeLinks += (element._1 -> changeLink))
       cache
     }
 }
