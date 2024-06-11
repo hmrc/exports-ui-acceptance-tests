@@ -23,7 +23,7 @@ class SummaryStepDef extends BaseStepDef {
 
   And("""^I should land on Saved-Summary page""")(() => SummaryPage.checkPage())
 
-  And("""^I check the sections' headings and click confirm and continue""") { () =>
+  And("""^I check the sections headings and click confirm and continue""") { () =>
     SummaryPage.fillPage()
   }
 

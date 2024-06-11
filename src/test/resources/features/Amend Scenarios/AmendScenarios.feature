@@ -9,7 +9,7 @@ Feature: Amend Scenarios
     And I fill section5
     And I fill section6
     Then I should land on Saved-Summary page
-    And I check the sections' headings and click confirm and continue
+    And I check the sections headings and click confirm and continue
     Then I should land on Submit-Your-Declaration page
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
@@ -60,7 +60,7 @@ Feature: Amend Scenarios
     And I click continue
     Then I should land on MiniCYA-Section-2 page
     And I navigate to summary page
-    And I check the sections' headings and click confirm and continue
+    And I check the sections headings and click confirm and continue
     Then I should land on Submit-Your-Declaration page
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
@@ -142,7 +142,7 @@ Feature: Amend Scenarios
     # And I check the MiniCYA page for Section-5 (At the moment we can able to validate one item, need to extend this to check two or more)
 
     Then I navigate to summary page
-    And I check the sections' headings and click confirm and continue
+    And I check the sections headings and click confirm and continue
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
     And I should land on Confirmation page
@@ -170,7 +170,7 @@ Feature: Amend Scenarios
     Then I should land on Saved-Declarations page
     And I validate details on saved declarations page and check status is Amendment
     And I click on DUCR link for amended declaration
-    And I check the sections' headings and click confirm and continue
+    And I check the sections headings and click confirm and continue
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
     And I should land on Confirmation page
@@ -192,7 +192,7 @@ Feature: Amend Scenarios
     And I select Ship IMO number as the border transport
     And I click save and return to summary
     Then I should land on Saved-Summary page
-    And I check the sections' headings and click confirm and continue
+    And I check the sections headings and click confirm and continue
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
     And I should land on Confirmation page
@@ -214,7 +214,7 @@ Feature: Amend Scenarios
     And I select Ship IMO number as the border transport
     And I click save and return to summary
     Then I should land on Saved-Summary page
-    And I check the sections' headings and click confirm and continue
+    And I check the sections headings and click confirm and continue
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
     And I should land on Confirmation page
@@ -251,7 +251,7 @@ Feature: Amend Scenarios
     And I select Ship name as the border transport
     And I click save and return to summary
     Then I should land on Saved-Summary page
-    And I check the sections' headings and click confirm and continue
+    And I check the sections headings and click confirm and continue
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
     And I should land on Confirmation page
@@ -273,7 +273,7 @@ Feature: Amend Scenarios
     And I select Train as the border transport
     And I click save and return to summary
     Then I should land on Saved-Summary page
-    And I check the sections' headings and click confirm and continue
+    And I check the sections headings and click confirm and continue
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
     And I should land on Confirmation page

@@ -15,7 +15,7 @@ Feature: Validate Dashboard and Declaration Information
     And I fill section5
     And I fill section6
     Then I should land on Saved-Summary page
-    And I check the sections' headings and click confirm and continue
+    And I check the sections headings and click confirm and continue
     Then I should land on Submit-Your-Declaration page
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page

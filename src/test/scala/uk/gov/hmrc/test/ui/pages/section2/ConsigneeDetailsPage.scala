@@ -36,7 +36,6 @@ object ConsigneeDetailsPage extends BasePage {
     if (isSupplementary) {
       if (isExporter) AreYouTheExporterPage.path else RepresentationTypeAgreedPage.path
     }
-    else if (!isThisExs) RepresentationTypeAgreedPage.path
     else if (isUsingOwnTransport) ThirdPartyGoodsTransportationPage.path
     else if (!isClearance) carrierPath
     else if (isThisExs) carrierPath

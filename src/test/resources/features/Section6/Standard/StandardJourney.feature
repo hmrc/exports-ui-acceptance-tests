@@ -248,9 +248,10 @@ Feature: Section6 Standard Journey
     Then I should land on Saved-Summary page
     And I click change link for LRN page
     Then I should land on Lrn page
+    # Scenario to cover External Amend functionality
     And I enter LRN U0LRN813131
     And I click save and return to summary
-    And I check the sections' headings and click confirm and continue
+    And I check the sections headings and click confirm and continue
     Then I should land on Submit-Your-Declaration page
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page

@@ -70,6 +70,10 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
   protected def checkBackButton(): Unit =
     findElementById("back-link").getAttribute("href") mustBe host + backButtonHref
 
+  def saveAndReturnToSummary(): Unit = clickById("save_and_return_to_summary")
+
+  def exitAndComeBackLater(): Unit = clickById("exit-and-complete-later")
+
   protected def checkPageLinks(): Unit = {
     val links = findElementsByTag("a")
     pageLinkHrefs.forall { href =>

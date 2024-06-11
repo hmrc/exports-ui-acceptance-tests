@@ -74,8 +74,6 @@ object DeclarationInformationPage extends BasePage {
 
   override def fillPage(values: String*): Unit = ()
 
-  // validateDashboard("Submitted", "Declaration submitted")
-
   def validateTimelineDetails(): Unit = {
     findElementByCssSelector(".submission-ducr dd").getText mustBe detail(Ducr)
     findElementByCssSelector(".submission-lrn dd").getText mustBe detail(Lrn)
@@ -98,7 +96,6 @@ object DeclarationInformationPage extends BasePage {
     val url = driver.getCurrentUrl
     val declarationInfoPath = Detail(driver.getCurrentUrl.substring(url.indexOf("/submissions")))
     storeOne(DeclarationInfoPath -> declarationInfoPath)
-   // cacheForAmendments.put(DeclarationInfoPath, declarationInfoPath)
   }
 
   def copyDeclaration(): Unit =
