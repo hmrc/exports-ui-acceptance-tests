@@ -20,25 +20,21 @@ import org.openqa.selenium.WebElement
 import org.scalatest.Assertion
 import org.scalatest.matchers.must.Matchers.{be, convertToAnyMustWrapper}
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.base.CommonPage.{elementBySelectorDoesNotExist, findElementByCssSelector}
-import uk.gov.hmrc.test.ui.pages.common.DetailKeys.IsDeclarationRejected
-import uk.gov.hmrc.test.ui.pages.common.DetailKeys.DeclarationInfoPath
+import uk.gov.hmrc.test.ui.pages.common.DetailKeys.{DeclarationInfoPath, IsDeclarationRejected}
 
 object SummaryPage extends BasePage {
 
   def backButtonHref: String = if (isAmendmentMode) detail(DeclarationInfoPath)
-                               else if (isRejectedMode) "/dashboard?page=1"
-                                else "/saved-declarations"
+  else if (isRejectedMode) "/dashboard?page=1"
+  else "/saved-declarations"
+
   val path: String = "/declaration/saved-summary"
-
-  def backButtonHref: String =
-
 
   def isRejectedMode: Boolean = maybeDetail(IsDeclarationRejected).isDefined
 
   def title: String = if (isAmendmentMode) "Amend your declaration"
-                      else if (isRejectedMode) "Check your answers before resubmitting"
-                     else "Check your answers"
+  else if (isRejectedMode) "Check your answers before resubmitting"
+  else "Check your answers"
 
   override def checkExpanders(): Unit = ()
 
@@ -67,14 +63,12 @@ object SummaryPage extends BasePage {
       .filter(_.getText == "Confirm and continue")
       .head
       .click()
+
+  def checkChangeLinkIsNotPresentFor(changeLinks: String): Assertion = {
+    elementBySelectorDoesNotExist("a[href*=" + changeLinks + "]") must be(true)
   }
 
-  def checkChangeLinkIsNotPresentFor(changeLinks:String): Assertion = {
-    elementBySelectorDoesNotExist("a[href*="+changeLinks+"]") must be (true)
+  def removeItemLink(itemIndex: Int): WebElement = {
+    findElementByCssSelector(".item-" + itemIndex + "-heading > dd.govuk-summary-list__actions > a")
   }
-
-  def removeItemLink(itemIndex : Int): WebElement = {
-    findElementByCssSelector(".item-"+itemIndex+"-heading > dd.govuk-summary-list__actions > a")
-  }
-
 }
