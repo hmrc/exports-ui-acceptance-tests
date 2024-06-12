@@ -17,6 +17,7 @@
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.isAmendmentMode
 import uk.gov.hmrc.test.ui.pages.base.Constants
 import uk.gov.hmrc.test.ui.pages.section2.ExporterAddressPage
 
@@ -25,6 +26,7 @@ class ExporterAddressStepDef extends BaseStepDef {
   And("""^I should land on Exporter-Address page""")(() => ExporterAddressPage.checkPage())
 
   And("""^I provide Exporter Address Details""") { () =>
-    ExporterAddressPage.fillPage(Constants.Address: _*)
+    val address = if (isAmendmentMode) Constants.AmendedAddress else Constants.Address
+    ExporterAddressPage.fillPage(address:_*)
   }
 }

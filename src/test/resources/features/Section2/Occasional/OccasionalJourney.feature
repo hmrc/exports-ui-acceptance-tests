@@ -1,4 +1,4 @@
-@Regression
+@Regression1
 Feature: Section2 Occasional Journey Scenarios
 
   Background:

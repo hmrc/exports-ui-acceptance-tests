@@ -65,6 +65,15 @@ trait DriverHelper {
         case Failure(_) => true
       }
 
+  def elementBySelectorDoesNotExist(selector: String, secondsToWaitFor: Int = 0): Boolean =
+    if (secondsToWaitFor == 0) driver.findElements(By.cssSelector(selector)).size() == 0
+    else
+      Try(waitForClass(selector, Presence, secondsToWaitFor)) match {
+        case Success(_) => false
+        case Failure(_) => true
+      }
+
+
   def findElementById(value: String): WebElement = driver.findElement(By.id(value))
   def findElementByXpath(value: String): WebElement = driver.findElement(By.xpath(value))
   def findElementByLinkText(value: String): WebElement = driver.findElement(By.linkText(value))
@@ -80,6 +89,9 @@ trait DriverHelper {
   def findChildByClassName(parent: WebElement, className: String): WebElement =
     parent.findElement(By.className(className))
 
+  def findChildByCssSelector(parent: WebElement, className: String): WebElement =
+    parent.findElement(By.cssSelector(className))
+
   def findChildByClassNameIfAny(parent: WebElement, className: String): Option[WebElement] = {
     val elements = parent.findElements(By.className(className))
     if (elements.isEmpty) None else Some(elements.get(0))
@@ -87,6 +99,9 @@ trait DriverHelper {
 
   def findChildrenByClassName(parent: WebElement, className: String): Seq[WebElement] =
     parent.findElements(By.className(className)).asScala.toList
+
+  def findChildrenByCssSelector(parent: WebElement, className: String): Seq[WebElement] =
+    parent.findElements(By.cssSelector(className)).asScala.toList
 
   def findChildrenByTag(parent: WebElement, tag: String): Seq[WebElement] =
     parent.findElements(By.tagName(tag)).asScala.toList
@@ -108,6 +123,7 @@ trait DriverHelper {
 
   def fillRadioButton(elementId: String, refSelector: String, refText: String): Unit = {
     clickById(elementId)
+    findElementById(refSelector).clear()
     findElementById(refSelector).sendKeys(refText)
   }
 
@@ -159,6 +175,18 @@ trait DriverHelper {
         throw new TestFailedException(message, exception)
     }
 
+  def waitForLinkText(
+                 text: String,
+                 expectedCondition: ExpectedCondition = Visible,
+                 secondsToWaitFor: Int = 10
+               ): WebElement =
+    Try(waitFor(By.linkText(text), expectedCondition, secondsToWaitFor)) match {
+      case Success(element) => element
+      case Failure(exception) =>
+        val message = s"Was waiting for an element with link text ($text) while on page ${driver.getCurrentUrl}"
+        throw new TestFailedException(message, exception)
+    }
+
   private def waitFor(locator: By, expectedCondition: ExpectedCondition, secondsToWaitFor: Int): WebElement = {
     val condition = expectedCondition match {
       case Clickable   => ExpectedConditions.elementToBeClickable(locator)
@@ -171,7 +199,6 @@ trait DriverHelper {
       .ignoring(classOf[Exception])
       .until(condition)
   }
-
 }
 
 object DriverHelper extends LazyLogging {

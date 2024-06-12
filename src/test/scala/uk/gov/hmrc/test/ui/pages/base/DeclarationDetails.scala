@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.base
 
+
 import scala.collection.mutable
 
 case class DetailKey(
@@ -41,6 +42,8 @@ object DeclarationDetails {
   type Cache = mutable.Map[DetailKey, DeclarationDetails]
 
   val cache: Cache = mutable.LinkedHashMap.empty[DetailKey, DeclarationDetails]
+
+  val cacheForAmendments: Cache = mutable.LinkedHashMap.empty[DetailKey, DeclarationDetails]
 
   val changeLinks = mutable.Map.empty[DetailKey, String]
 }

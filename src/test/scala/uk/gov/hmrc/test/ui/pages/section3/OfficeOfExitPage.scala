@@ -23,7 +23,7 @@ import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.OfficeOfExit
 
 object OfficeOfExitPage extends BasePage {
 
-  def backButtonHref: String = LocationOfGoodsPage.path
+  def backButtonHref: String = if (isAmendmentMode) CountriesOfRoutingPage.path else LocationOfGoodsPage.path
   val path: String = "/declaration/office-of-exit"
   val title = "Where is the customs office of exit?"
 

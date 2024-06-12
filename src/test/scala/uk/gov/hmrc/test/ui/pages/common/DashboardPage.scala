@@ -62,6 +62,10 @@ object DashboardPage extends BasePage {
     findChildByClassName(mrnCell, "govuk-link")
   }
 
+  def refreshPage(): Unit = {
+    driver.navigate().refresh()
+  }
+
   def clickOnTab(tab: String): Unit =
     tab match {
       case "Submitted"           => clickById("tab_submitted-submissions")

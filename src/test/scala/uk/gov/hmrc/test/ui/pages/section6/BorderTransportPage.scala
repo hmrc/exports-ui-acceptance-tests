@@ -38,16 +38,16 @@ object BorderTransportPage extends BasePage {
   override def fillPage(values: String*): Unit = {
     val data = values.head match {
       case "Ship IMO number" =>
-        BorderTransportData("radio_ShipOrRoroImoNumber", "ShipOrRoroImoNumber", "123456", "Ship IMO number")
+          BorderTransportData("radio_ShipOrRoroImoNumber", "ShipOrRoroImoNumber", if (isAmendmentMode) "REJECTED" else "123456", "Ship IMO number")
 
       case "Ship name" =>
-        BorderTransportData("radio_NameOfVessel", "NameOfVessel", "Seraphim", "Ship name")
+        BorderTransportData("radio_NameOfVessel", "NameOfVessel", if (isAmendmentMode) "DENIED" else "Seraphim", "Ship name")
 
       case "Train" =>
-        BorderTransportData("radio_WagonNumber", "WagonNumber", "EuroTunnel", "Train")
+        BorderTransportData("radio_WagonNumber", "WagonNumber", if (isAmendmentMode) "PENDING" else "EuroTunnel", "Train")
 
       case "Vehicle registration" =>
-        BorderTransportData("radio_VehicleRegistrationNumber", "VehicleRegistrationNumber", "123456", "Vehicle registration")
+        BorderTransportData("radio_VehicleRegistrationNumber", "VehicleRegistrationNumber", "EXTERNAL AMEND", "Vehicle registration")
 
       case "Flight number" =>
         BorderTransportData("radio_FlightNumber", "FlightNumber", "123456", "Flight number")

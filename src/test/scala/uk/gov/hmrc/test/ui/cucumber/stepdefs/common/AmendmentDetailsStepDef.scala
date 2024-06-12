@@ -14,21 +14,20 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.ui.cucumber.stepdefs.Section2
+package uk.gov.hmrc.test.ui.cucumber.stepdefs.common
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
-import uk.gov.hmrc.test.ui.pages.base.Constants
-import uk.gov.hmrc.test.ui.pages.section2.ConsigneeDetailsPage
+import uk.gov.hmrc.test.ui.pages.common.AmendmentDetails
 
-class ConsigneeDetailsStepDef extends BaseStepDef {
+class AmendmentDetailsStepDef extends BaseStepDef {
 
-  And("""^I should land on Consignee-Details page""")(() => ConsigneeDetailsPage.checkPage())
+  And("""^I should land on Amendment-Details page""")(() => AmendmentDetails.checkPage())
 
-  And("""^I provide consignee details""") { () =>
-    ConsigneeDetailsPage.fillPage(Constants.Address: _*)
+  And("""^I click view details link on timeline page to view the amended details""") { () =>
+    AmendmentDetails.clickViewDetailsLink()
   }
 
-  And("""^I provide amended consignee details""") { () =>
-    ConsigneeDetailsPage.fillPage(Constants.AmendedAddress: _*)
+  And("""^I validate amended details""") { () =>
+    AmendmentDetails.fillPage()
   }
 }

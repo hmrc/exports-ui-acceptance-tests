@@ -16,14 +16,15 @@
 
 package uk.gov.hmrc.test.ui.pages.common
 
+import org.openqa.selenium.WebElement
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.common.DetailKeys._
 
 object CancelDeclarationPage extends BasePage {
 
   def backButtonHref: String = detail(DeclarationInfoPath)
-  val path: String = "/cancel-declaration"
-  val title: String = "Cancel declaration"
+  val path: String = if (isAmendmentMode) "/cancel-your-amendment" else "/cancel-declaration"
+  val title: String = if(isAmendmentMode) "Cancel amendment request" else "Cancel declaration"
 
   override def checkExpanders(): Unit = ()
 
@@ -32,13 +33,24 @@ object CancelDeclarationPage extends BasePage {
   // ex: fillPage("No longer required")
 
   override def fillPage(values: String*): Unit = {
-    val reasonToSelect = values(reason) match {
-      case "No longer required" => "noLongerRequired"
-      case "Duplication"        => "duplication"
-      case "Other reason"       => "otherReason"
+    if (isAmendmentMode) {
+      val govUKWarningText: WebElement = findElementByCssSelector("div.govuk-warning-text > strong")
+      govUKWarningText.isDisplayed
+       fillTextBoxById("fullName", "User Name")
+       fillTextBoxById("jobRole", "Job Role")
+       fillTextBoxById("email", "test@mail.com")
+       fillTextBoxById("reason", values(reason))
+      clickById("confirmation")
     }
-    clickById(reasonToSelect)
-    fillTextBoxById("statementDescription", "no longer needed")
+    else {
+      val reasonToSelect = values(reason) match {
+        case "No longer required" => "noLongerRequired"
+        case "Duplication" => "duplication"
+        case "Other reason" => "otherReason"
+      }
+      clickById(reasonToSelect)
+      fillTextBoxById("statementDescription", "no longer needed")
+    }
   }
 
   def cancelDeclaration(): Unit = clickById("cancel-declaration")

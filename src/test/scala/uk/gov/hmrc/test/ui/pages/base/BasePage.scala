@@ -23,7 +23,7 @@ import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
-import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.changeLinks
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{cache, cacheForAmendments, changeLinks}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.CountriesOfRouting
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodeLabel
@@ -69,6 +69,10 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
 
   protected def checkBackButton(): Unit =
     findElementById("back-link").getAttribute("href") mustBe host + backButtonHref
+
+  def saveAndReturnToSummary(): Unit = clickById("save_and_return_to_summary")
+
+  def exitAndComeBackLater(): Unit = clickById("exit-and-complete-later")
 
   protected def checkPageLinks(): Unit = {
     val links = findElementsByTag("a")
@@ -176,6 +180,55 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
         }
 
         removeFromLabelAndValueRows(labelAndValueRow)
+      }
+    }
+  }
+
+  private case class LabelAndValueRowForAmend(label: WebElement, previousValue: WebElement, amendedValue: WebElement)
+
+  protected def checkAmendedDetails(): Unit = {
+    val allCardRows = findElementsByClassName("govuk-summary-card")
+      .flatMap(findChildrenByCssSelector(_, ".govuk-table__body .govuk-table__row"))
+
+    val labelAndValueRows: Seq[LabelAndValueRowForAmend] =
+      allCardRows.map { webElement =>
+        LabelAndValueRowForAmend(
+          findChildByCssSelector(webElement, ".govuk-table__cell:nth-child(1)"),
+          findChildByCssSelector(webElement, ".govuk-table__cell:nth-child(2)"),
+          findChildByCssSelector(webElement, ".govuk-table__cell:nth-child(3)")
+        )
+      }.sortWith { case (e1, e2) =>
+        val p1 = e1.label.getLocation
+        val p2 = e2.label.getLocation
+        p1.getY < p2.getY || p1.getY == p2.getY && p1.getX < p2.getX
+      }
+
+    labelAndValueRows.foreach { eachRow =>
+      eachRow.previousValue.getText
+      eachRow.amendedValue.getText
+
+      cacheForAmendments.foreach { case (key, value) =>
+        if (cache.contains(key)) {
+          val actualDetail = cache(key)
+
+          val actualValues = actualDetail match {
+            case detail: Detail  => Seq(detail.value)
+            case detail: Details => detail.values
+
+            // It cannot happen. Just for silencing the compiler emitting "match may not be exhaustive".
+            case ign => assert(assertion = false, s"Not a 'Detail' or 'Details' value ?? ($ign)"); List.empty
+          }
+          assert(assertion = true, actualValues.contains(eachRow.previousValue.getText))
+
+          val amendValues = value match {
+            case detail: Detail  => Seq(detail.value)
+            case detail: Details => detail.values
+
+            // It cannot happen. Just for silencing the compiler emitting "match may not be exhaustive".
+            case ign => assert(assertion = false, s"Not a 'Detail' or 'Details' value ?? ($ign)"); List.empty
+          }
+          assert(assertion = true, amendValues.contains(eachRow.amendedValue.getText))
+        }
       }
     }
   }

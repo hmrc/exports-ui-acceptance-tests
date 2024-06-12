@@ -28,4 +28,12 @@ class RemoveItemStepDef extends BaseStepDef {
     RemoveItemsPage.fillPage(yesNo, genSequenceId(itemToRemove))
   }
 
+  And("""^I should see the warning that the item cannot be removed""") { () =>
+    RemoveItemsPage.displayWarning
+  }
+
+  And("""^I click cancel button to naviagate back to Amend Summary page""") { () =>
+    RemoveItemsPage.clickCancelButton()
+  }
+
 }

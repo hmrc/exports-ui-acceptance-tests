@@ -27,7 +27,7 @@ object SavedDeclarationsPage extends BasePage {
 
   val backButtonHref: String = "/choice"
   val path: String = "/saved-declarations"
-  val title: String = "Your saved declarations"
+  val title: String = if(isAmendmentMode) "Your saved declarations and amendments" else "Your saved declarations"
 
   override def checkExpanders(): Unit = ()
 
@@ -39,6 +39,8 @@ object SavedDeclarationsPage extends BasePage {
 
   def removeLink(): WebElement = findElementByCssSelector("tr:nth-child(1)>td:nth-child(4)>a")
 
+  def dUCRLink(): WebElement = findElementByCssSelector("tr:nth-child(1)>td:nth-child(2)>a")
+
   def validateSavedDeclarations(status: String): Unit = {
     assert(findElementByCssSelector("tr:nth-child(1)>td:nth-child(1)").isDisplayed)
     findElementByCssSelector("tr:nth-child(1)>td:nth-child(2) span:first-child").getText mustBe detail(Ducr)
@@ -47,5 +49,7 @@ object SavedDeclarationsPage extends BasePage {
   }
 
   def removeDraftDec(): Unit = removeLink().click()
+
+  def clickDUCRLinkForAmendedDeclaration(): Unit = dUCRLink().click()
 
 }

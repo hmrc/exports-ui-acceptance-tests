@@ -48,5 +48,7 @@ object Constants {
   val enteredValue = 0
   val storedValue = 1
 
-  val Address = List("XYZ Carrier", "School Road", "London", "WS1 2AB", "Ukraine")
+  val Address: Seq[String] = List("XYZ Carrier", "School Road", "London", "WS1 2AB", "Ukraine")
+
+  val AmendedAddress: Seq[String] = List("Amended Carrier", "Amended School Road", "London", "WS1 2AB", "Iraq")
 }

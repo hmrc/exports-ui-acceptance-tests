@@ -16,18 +16,24 @@
 
 package uk.gov.hmrc.test.ui.pages.common
 
+import org.openqa.selenium.WebElement
 import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.BasePage.host
+import uk.gov.hmrc.test.ui.pages.common.DeclarationInformationPage.isCancelDeclaration
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage.isArrivedDeclaration
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{Ducr, Lrn}
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{AdditionalDeclarationType, Ducr, Lrn}
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.BorderTransport
 
 import scala.util.matching.Regex
 
 object ConfirmationPage extends BasePage {
 
   val backButtonHref: String = ""
-  val path: String = "/declaration/confirmation"
+
+  def path: String = if (isAmendmentMode) "/declaration/amendment-outcome" else "/declaration/confirmation"
+
+  def declarationStatus = maybeDetails(BorderTransport).head
 
   override def title: String =
     detail(Lrn).take(1) match {
@@ -35,7 +41,16 @@ object ConfirmationPage extends BasePage {
       case "C" | "Q" | "X" | "I" | "J" | "L" | "K" | "P" | "N" => "Your declaration is still being checked"
       case "D" | "U"                                           => "Your declaration needs documents attached"
       case "R"                                                 => "Your declaration has been pre-lodged with HMRC"
-      case _                                                   => "Declaration accepted"
+      case _ =>
+        if (isAmendmentMode) {
+          if (declarationStatus.contains("REJECTED")) "Amendment request rejected"
+          else if (declarationStatus.contains("DENIED")) "Amendment request failed"
+          else if (declarationStatus.contains("REJECTED") && isCancelDeclaration) "Your amendment cancellation has been accepted"
+          else if (declarationStatus.contains("PENDING")) "Your amendment request is still being processed"
+          else "Amendment request accepted"
+        } else {
+          "Declaration accepted"
+        }
     }
 
   override def checkPage(): Unit = {
@@ -74,9 +89,8 @@ object ConfirmationPage extends BasePage {
     checkContentLinks(List(linkToMovements, linkToMovements, linkToTimeline, linkToFeedback, linkToSupport))
   }
 
-  private def checkPageWhenStillUnderCheck(): Unit = {
+  private def checkPageWhenStillUnderCheck(): Unit =
     checkContentLinks(List(linkToDashboard, linkToSupport))
-  }
 
   private def checkPageWhenDocumentsRequired(): Unit = {
     val elements = findChildrenByClassName(findElementById("main-content"), "govuk-warning-text")
@@ -120,12 +134,40 @@ object ConfirmationPage extends BasePage {
   private def checkTable(): String = {
     val table = findElementByClassName("govuk-table")
     val cells = findChildrenByClassName(table, "govuk-table__cell")
-    cells(0).getText mustBe "DUCR"
-    cells(1).getText mustBe detail(Ducr)
-    cells(2).getText mustBe "LRN"
-    cells(3).getText mustBe detail(Lrn)
-    cells(4).getText mustBe "MRN"
-    cells(5).getText // MRN value
+    // Variable to collect the results
+    val resultBuilder = new StringBuilder
+
+    // Helper method to check a cell and append the result to the builder
+    def checkCell(cell: WebElement, expectedText: String, index: Int): Unit = {
+      val actualText = cell.getText
+      if (actualText == expectedText) {
+        resultBuilder.append(s"Cell $index check passed. Expected and found: '$expectedText'.\n")
+      } else {
+        resultBuilder.append(s"Cell $index check failed. Expected: '$expectedText', but found: '$actualText'.\n")
+      }
+    }
+
+    // Check the contents of each cell
+    if (isAmendmentMode) {
+      checkCell(cells.head, "Type of declaration", 0)
+      checkCell(cells(1), detail(AdditionalDeclarationType), 1)
+      checkCell(cells(2), "DUCR", 2)
+      checkCell(cells(3), detail(Ducr), 3)
+      checkCell(cells(4), "LRN", 4)
+      checkCell(cells(5), detail(Lrn), 5)
+      checkCell(cells(6), "MRN", 6)
+      resultBuilder.append(s"MRN value: ${cells(7).getText}\n")
+    } else {
+      checkCell(cells.head, "DUCR", 0)
+      checkCell(cells(1), detail(Ducr), 1)
+      checkCell(cells(2), "LRN", 2)
+      checkCell(cells(3), detail(Lrn), 3)
+      checkCell(cells(4), "MRN", 4)
+      resultBuilder.append(s"MRN value: ${cells(5).getText}\n")
+    }
+
+    // Return the final result
+    resultBuilder.toString()
   }
 
   private def checkContentLinks(expectedLinks: Seq[Regex]): Unit = {
@@ -135,6 +177,9 @@ object ConfirmationPage extends BasePage {
       expectedLink.matches(actualLink)
     }
   }
+
+  def clickDeclarationStatusLink(): Unit =
+    clickByCssSelector("p:nth-child(5) > a")
 
   private val linkToSfus = (mrn: String) => (host + s"/customs-declare-exports/file-upload?mrn=$mrn").r
   private val linkToClearanceHub =

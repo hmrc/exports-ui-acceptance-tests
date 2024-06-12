@@ -26,5 +26,10 @@ class SavedDeclarationsStepDef extends BaseStepDef {
   And("""^I validate details on saved declarations page and check status is (.*)""")((status: String) => SavedDeclarationsPage.validateSavedDeclarations(status))
 
   And("""^I remove saved Declaration"""){() =>
-    SavedDeclarationsPage.removeDraftDec()}
+    SavedDeclarationsPage.removeDraftDec()
+  }
+
+  And("""^I click on DUCR link for amended declaration"""){() =>
+    SavedDeclarationsPage.clickDUCRLinkForAmendedDeclaration()
+  }
 }

@@ -34,4 +34,8 @@ class AuthorisationPageDef extends BaseStepDef {
       AuthorisationPage.fillPage(seqid.toString, authcode, eori)
     }
   }
+
+  And("""^I click remove link to remove already added authorisation""") { () =>
+    AuthorisationPage.removeAuthorisation(0)
+  }
 }

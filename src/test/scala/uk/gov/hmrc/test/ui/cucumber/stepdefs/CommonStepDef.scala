@@ -21,7 +21,12 @@ import uk.gov.hmrc.test.ui.generator.SupportGenerator.generateEORI
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.{clear, continue, continueOnMiniCya, detailKeys}
 import uk.gov.hmrc.test.ui.pages.base.Constants.yes
 import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isOccasional, isSimplified, isSupplementary}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{
+  isClearance,
+  isOccasional,
+  isSimplified,
+  isSupplementary
+}
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 import uk.gov.hmrc.test.ui.pages.section1._
 import uk.gov.hmrc.test.ui.pages.section2.AreYouTheExporterPage.isExporter
@@ -179,7 +184,7 @@ class CommonStepDef extends BaseStepDef {
     if (isStandard) {
       VatRatingPage.fillPage("Yes"); continue()
     }
-    if(!isClearance) {
+    if (!isClearance) {
       NationalAdditionalCodesPage.fillPage(Constants.no); continue()
     }
     if (isStandard || isSupplementary) {
@@ -209,7 +214,7 @@ class CommonStepDef extends BaseStepDef {
       WarehousePage.fillPage("yes", "R1234567GB");
     }
 
-    if(hasSupervisingCustomsOfficePageVisiblePC)
+    if (hasSupervisingCustomsOfficePageVisiblePC)
       SupervisingCustomsOfficePage.fillPage("GBBTH001"); continue()
 
     InlandOrBorderPage.fillPage("Customs controlled location"); continue()
@@ -218,11 +223,11 @@ class CommonStepDef extends BaseStepDef {
     if ((!isSupplementary) && (!isFixedTransport && !isPostalOrMail)) {
       DepartureTransportPage.fillPage("Flight number"); continue()
     }
-    if(!isOccasional){
+    if (!isOccasional) {
       BorderTransportPage.fillPage("Ship IMO number"); continue()
     }
     if (!isClearance && (!isFixedTransport || !isPostalOrMail)) {
-      TransportCountryPage.fillPage("Desirade - GP");continue()
+      TransportCountryPage.fillPage("Desirade - GP"); continue()
     }
     ExpressConsignmentPage.fillPage("Yes"); continue()
     TransportPaymentPage.fillPage("Payment in cash"); continue()
@@ -241,7 +246,7 @@ class CommonStepDef extends BaseStepDef {
     clear(detailKeys(keys: _*): _*)
   }
 
-  And("""^I clear cache for section (.*)""") {(sectionId: Int) =>
+  And("""^I clear cache for section (.*)""") { (sectionId: Int) =>
     clear(sectionId)
   }
 
@@ -255,9 +260,23 @@ class CommonStepDef extends BaseStepDef {
     CommonPage.saveAndReturnToErrors()}
 
   And("""^I click change link for (.*) page""") { (pageName: String) =>
-    val changeLinkMap: Map[String, String] = Map("Authorisation Type" -> "authorisation-holder-1-type")
+    val changeLinkMap: Map[String, String] = Map(
+      "LRN"                  -> "lrn",
+      "Authorisation Type"   -> "authorisation-holder-1-type",
+      "Are you the exporter" -> "declarant-is-exporter",
+      "Exporter’s details"   -> "exporter-address",
+      "Office of exit"       -> "office-of-exit",
+      "Border transport"     -> "active-transport-type"
+    )
 
     CommonPage.changeLinkOnCYA(changeLinkMap(pageName)).click()
+  }
+  And("""^I click save and return to summary""") { () =>
+    CommonPage.saveAndReturnToSummary()
+  }
+
+  And("""^I click on Exit and comeback later link""") { () =>
+    CommonPage.exitAndComeBackLater()
   }
 }
 object CommonStepDef {

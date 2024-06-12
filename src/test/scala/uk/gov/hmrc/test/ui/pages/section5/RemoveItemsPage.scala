@@ -16,15 +16,16 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
+import uk.gov.hmrc.test.ui.pages.common.SummaryPage
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys._
 
 object RemoveItemsPage extends BasePage {
 
-  def backButtonHref: String = SummarySection5Page.path
+  def backButtonHref: String = if (isAmendmentMode) SummaryPage.path else SummarySection5Page.path
   val path: String = s"/declaration/remove-declaration-item/${details(ItemIds).head}"
-  val title: String = "Are you sure you want to remove declaration item 1?"
+  def title: String = if (isAmendmentMode) "Remove item" else "Are you sure you want to remove declaration item 1?"
 
   override def checkExpanders(): Unit = ()
 
@@ -38,4 +39,9 @@ object RemoveItemsPage extends BasePage {
       clear(section5, Some(itemId))
       store(ItemIds -> Details(itemIds.filterNot(_ == itemId)))
     }
+
+  def displayWarning: Boolean = findElementByCssSelector("div.govuk-warning-text > strong").isDisplayed
+
+  def clickCancelButton(): Unit = clickByXpath("//*[@role='button']")
+
 }

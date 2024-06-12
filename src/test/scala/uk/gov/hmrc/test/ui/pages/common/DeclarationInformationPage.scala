@@ -16,7 +16,8 @@
 
 package uk.gov.hmrc.test.ui.pages.common
 
-import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
+import org.openqa.selenium.{By, WebElement}
+import org.scalatest.matchers.must.Matchers.{be, convertToAnyMustWrapper, include}
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.common.DetailKeys._
@@ -29,6 +30,7 @@ object DeclarationInformationPage extends BasePage {
   def title = s"Declaration status: ${detail(StatusOnDashboard)}"
 
   override def checkExpanders(): Unit = ()
+  var isCancelDeclaration = false
 
   private val messageLink = "/messages"
   private val movementsLink = "/customs-movements"
@@ -81,8 +83,6 @@ object DeclarationInformationPage extends BasePage {
 
   override def fillPage(values: String*): Unit = ()
 
-  // validateDashboard("Submitted", "Declaration submitted")
-
   def validateTimelineDetails(): Unit = {
     findElementByCssSelector(".submission-ducr dd").getText mustBe detail(Ducr)
     findElementByCssSelector(".submission-lrn dd").getText mustBe detail(Lrn)
@@ -103,7 +103,8 @@ object DeclarationInformationPage extends BasePage {
 
     // store url for checking back navigation on cancel and copy declaration
     val url = driver.getCurrentUrl
-    store(DeclarationInfoPath -> Detail(driver.getCurrentUrl.substring(url.indexOf("/submissions"))))
+    val declarationInfoPath = Detail(driver.getCurrentUrl.substring(url.indexOf("/submissions")))
+    storeOne(DeclarationInfoPath -> declarationInfoPath)
   }
 
   def copyDeclaration(): Unit =
@@ -112,6 +113,39 @@ object DeclarationInformationPage extends BasePage {
   def fixErrors(): Unit =
     clickByCssSelector(".hmrc-timeline__event-content a")
 
-  def checkStatusOnTimeLine(): Unit =
-    findElementByCssSelector(".hmrc-timeline__event:first-child h2").getText mustBe "Cancellation request denied"
+  def amendDeclaration(): Unit = {
+    clickById("amend-declaration")
+    startAmendmentMode()
+  }
+
+  def validateCopyAndAmendDeclarationLinks(): Unit = {
+    findElementById("copy-declaration").isDisplayed
+    elementByIdDoesNotExist("amend-declaration")
+  }
+
+  def clickCancelLinkOnRejectedAmendment(): Unit = {clickById("cancel-amendment")
+    isCancelDeclaration = true
+  }
+
+  def notificationActionButton(int: Int): WebElement = driver.findElements(By.cssSelector(".govuk-button")).get(int)
+
+  def validateAmendRejectedStatusLinks(errors: String): Unit = {
+
+    notificationActionButton(0).getText must be(errors)
+    notificationActionButton(0).getAttribute("href") must include("/unaccepted-amendment")
+  }
+
+  def validateAmendCancelledStatusLinks(errors: String): Unit = {
+
+    notificationActionButton(0).getText must be(errors)
+    notificationActionButton(0).getAttribute("href") must include("/resubmit-your-amendment")
+  }
+
+  def checkStatusOnTimeLine(notificationEventStatusOnTimeLine: String): Unit = {
+    if (notificationEventStatusOnTimeLine == "Amendment rejected")
+      validateAmendRejectedStatusLinks("Fix errors")
+    else if(notificationEventStatusOnTimeLine == "Amendment failed")
+      validateAmendCancelledStatusLinks("Resubmit")
+    findElementByCssSelector(".hmrc-timeline__event:first-child h2").getText mustBe notificationEventStatusOnTimeLine
+  }
 }

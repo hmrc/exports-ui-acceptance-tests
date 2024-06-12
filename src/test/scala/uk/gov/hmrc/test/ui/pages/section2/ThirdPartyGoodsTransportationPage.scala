@@ -16,15 +16,12 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{yes, yesNo, Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yes, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{
-  EntryIntoDeclarantsRecords,
-  ExporterYesNo,
-  ThirdPartyGoodsTransportation
-}
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationEori
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{CarrierEORI, EntryIntoDeclarantsRecords, ExporterYesNo, ThirdPartyGoodsTransportation}
 
 object ThirdPartyGoodsTransportationPage extends BasePage {
 
@@ -46,7 +43,7 @@ object ThirdPartyGoodsTransportationPage extends BasePage {
   // Yes => fillPage(yes)
 
   override def fillPage(values: String*): Unit = {
-    selectYesOrNoRadio(values(yesNo))
+    if (!selectYesOrNoRadio(values(yesNo))) storeOne(CarrierEORI -> Detail(detail(DeclarationEori)), Some(CarrierEORINumberPage.path))
     store(ThirdPartyGoodsTransportation -> Detail(values(yesNo)))
   }
 

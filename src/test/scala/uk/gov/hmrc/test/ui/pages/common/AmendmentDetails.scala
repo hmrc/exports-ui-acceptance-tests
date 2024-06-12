@@ -17,27 +17,23 @@
 package uk.gov.hmrc.test.ui.pages.common
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.common.SummaryPage.isRejectedMode
+import uk.gov.hmrc.test.ui.pages.common.DetailKeys.DeclarationInfoPath
 
-object SubmitYourDeclarationPage extends BasePage {
+object AmendmentDetails extends BasePage {
 
-  def backButtonHref: String = SummaryPage.path
-  def path: String = if (isAmendmentMode) "/declaration/submit-your-amendment" else "/declaration/submit-your-declaration"
-
-  def title: String = if (isAmendmentMode) "Submit amendment request"
-                      else if (isRejectedMode) "Resubmit your declaration"
-                      else "Submit your declaration"
+  def backButtonHref: String = ""
+  val path: String = detail(DeclarationInfoPath)
+  val title: String = "Amendment details"
 
   override def checkExpanders(): Unit = ()
 
   // ex: fillPage()
 
   override def fillPage(values: String*): Unit = {
-    fillTextBoxById("fullName", "Test Name")
-    fillTextBoxById("jobRole", "Test Role")
-    fillTextBoxById("email", "test@email.com")
-    if (isAmendmentMode) fillTextBoxById("reason", "Some reason for amendment")
-    clickById("confirmation")
-    clickById("submit")
+    checkAmendedDetails()
+  }
+
+  def clickViewDetailsLink(): Unit = {
+    clickByCssSelector("li:nth-child(2) > div > a")
   }
 }

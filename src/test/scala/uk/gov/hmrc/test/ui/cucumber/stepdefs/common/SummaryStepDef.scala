@@ -24,12 +24,25 @@ class SummaryStepDef extends BaseStepDef {
   And("""^I should land on Saved-Summary page"""){() =>
     SummaryPage.checkPage()}
 
-  And("""^I check the sections' headings and click confirm and continue""") { () =>
+  And("""^I check the sections headings and click confirm and continue""") { () =>
     SummaryPage.fillPage()
   }
 
   And("""^I click continue on summary""") { () =>
     SummaryPage.clickContinueOnSummary()
+  }
+
+  And("""^I validate that change links are not present for Section 1""") { () =>
+    val fieldsToCheck = Seq("ducr-entry", "local-reference-number", "mucr-row", "link-to-mucr")
+    fieldsToCheck.foreach(SummaryPage.checkChangeLinkIsNotPresentFor)
+  }
+
+  And("""^I validate that change link is not present for location of goods""") { () =>
+    SummaryPage.checkChangeLinkIsNotPresentFor("location-of-goods")
+  }
+
+  And("""^I click remove link to remove item (.*)"""){ (itemIndex : Int) =>
+    SummaryPage.removeItemLink(itemIndex).click()
   }
 
   And("""^I navigate to summary page""") { () =>

@@ -17,13 +17,16 @@
 package uk.gov.hmrc.test.ui.pages.common
 
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Presence}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage.{isEIDR, isPrelodgedDeclaration}
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.Lrn
 
 object DeclarationHoldingPage extends BasePage {
 
   val backButtonHref: String = ""
 
-  val path: String = "/declaration/holding"
-  val title: String = "Submitting your declaration"
+  def path: String =
+    if (isAmendmentMode) "/declaration/amendment-holding\\?isCancellation=false" else "/declaration/holding"
+  def title: String = if (isAmendmentMode) "Submitting amendment request" else "Submitting your declaration"
 
   override def checkBackButton(): Unit = ()
 
@@ -31,5 +34,22 @@ object DeclarationHoldingPage extends BasePage {
 
   // ex: fillPage()
 
-  override def fillPage(values: String*): Unit = waitForClass("confirmation-content", Presence)
+  override def fillPage(values: String*): Unit = {
+    val obtainedLrn = maybeDetail(Lrn).get
+
+    // Set of characters that should trigger the first condition
+    val triggerChars: Set[Char] = Set('Q', 'X', 'I', 'L', 'K', 'P', 'J', 'N')
+
+    // Check if the obtainedLrn starts with any of the characters in triggerChars
+    val startsWithTriggerChar: Boolean = triggerChars.contains(obtainedLrn.charAt(0))
+
+    // Check if the obtainedLrn starts with 'C' and one of the additional conditions is true
+    val startsWithCAndCondition: Boolean = obtainedLrn.startsWith("C") && (isPrelodgedDeclaration || isEIDR)
+
+    if (startsWithTriggerChar || startsWithCAndCondition) {
+      waitForLinkText("Your declarations")
+    } else {
+      waitForLinkText("Declaration status", Presence)
+    }
+  }
 }

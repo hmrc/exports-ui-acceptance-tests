@@ -1,4 +1,4 @@
-@Regression
+@Regression2
 Feature: Section6 Standard Journey
 
   Background:
@@ -246,3 +246,23 @@ Feature: Section6 Standard Journey
     And I check the MiniCYA page for Section-6
     And I click continue on MiniCya
     Then I should land on Saved-Summary page
+    And I click change link for LRN page
+    Then I should land on Lrn page
+    # Scenario to cover External Amend functionality
+    And I enter LRN U0LRN813131
+    And I click save and return to summary
+    And I check the sections headings and click confirm and continue
+    Then I should land on Submit-Your-Declaration page
+    And I submit the declaration
+    Then I should land on holding page and redirect to Confirmation page
+    And I should land on Confirmation page
+    And I navigate to Choice page
+    And I select to Manage Submit Declaration
+    Then I should land on Dashboard page
+    And I validate declaration details on Submitted tab and check Status is Amended
+    And I navigate to declaration information page after clicking on mrn link
+    Then I should land on Declaration-Information page
+    And I validate details on declaration information page
+   # For external amended declaration we are not displaying Amend link to user to Amend the declaration
+   # Now we are showing copy declaration link to allow user to copy the External amend declaration
+   And I validate that the Amend declaration link is not displayed and Copy declaration link is displayed

@@ -1,4 +1,4 @@
-@Regression
+@Regression1
 Feature: Validate Dashboard and Declaration Information
 
     # Below scenario -
@@ -15,7 +15,7 @@ Feature: Validate Dashboard and Declaration Information
     And I fill section5
     And I fill section6
     Then I should land on Saved-Summary page
-    And I check the sections' headings and click confirm and continue
+    And I check the sections headings and click confirm and continue
     Then I should land on Submit-Your-Declaration page
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
@@ -52,7 +52,7 @@ Feature: Validate Dashboard and Declaration Information
     Then I should land on Declaration-Information page
     And I validate details on declaration information page
 
-    # Submit a Prelodged declaration with LRN starting with C to check Query raised status
+    # Submit a Prelodged declaration with LRN starting with C to check
     And I click on copy link
     Then I should land on copy declaration page
     And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with C0 prefix
@@ -373,7 +373,7 @@ Feature: Validate Dashboard and Declaration Information
     And I click on Cancelled & expired tab
     And I validate declaration details on Cancelled & expired tab and check Status is Cancelled
     And I navigate to declaration information page after clicking on mrn link
-    Then I validate details on declaration information page
+    Then I validate Cancelled status on timeline
 
     # Below scenario -
     # 1.Checks saved draft declaration and removal of draft declaration
