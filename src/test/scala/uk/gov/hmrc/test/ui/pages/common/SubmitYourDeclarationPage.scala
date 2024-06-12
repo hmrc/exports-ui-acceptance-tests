@@ -17,6 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.common
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.common.SummaryPage.isRejectedMode
 
 object SubmitYourDeclarationPage extends BasePage {
 
@@ -24,6 +25,8 @@ object SubmitYourDeclarationPage extends BasePage {
   def path: String = if (isAmendmentMode) "/declaration/submit-your-amendment" else "/declaration/submit-your-declaration"
 
   def title: String = if (isAmendmentMode) "Submit amendment request" else "Submit your declaration"
+  val path: String = "/declaration/submit-your-declaration"
+  def title: String = if (isRejectedMode) "Resubmit your declaration" else "Submit your declaration"
 
   override def checkExpanders(): Unit = ()
 

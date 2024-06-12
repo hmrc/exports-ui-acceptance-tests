@@ -167,6 +167,8 @@ object PageLinks {
 
   val tariffCommodities =                 "https://www.trade-tariff.service.gov.uk/commodities/"
 
+  val supplementaryCommodityTariffLink =   "https://www.trade-tariff.service.gov.uk/sections"
+
   val previousProcedureCodes =            "https://www.gov.uk/government/publications/appendix-1-de-110-requested-and-previous-procedure-codes"
   val vatOnGoodsExportedFromUK =          "https://www.gov.uk/guidance/vat-on-goods-exported-from-the-uk-notice-703"
 

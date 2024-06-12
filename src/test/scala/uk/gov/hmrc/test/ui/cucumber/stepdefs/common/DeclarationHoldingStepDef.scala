@@ -25,4 +25,9 @@ class DeclarationHoldingStepDef extends BaseStepDef {
     DeclarationHoldingPage.checkPage()
     DeclarationHoldingPage.fillPage()
   }
+
+  And("""^I should land on holding page and redirect to rejected notification page""") { () =>
+    DeclarationHoldingPage.checkPage()
+    DeclarationHoldingPage.waitForClass("govuk-warning-text__text")
+  }
 }

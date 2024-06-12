@@ -26,8 +26,9 @@ trait PageHelper extends DriverHelper {
 
   private val initPart: String = "/declaration"
   val elementId: String = "[0-9A-Za-z\\-\\.]+"
-  val timelineLink: Regex = s"/submissions/$elementId/information".r
-  val removeSavedDecLink: Regex = s"/saved-declarations/$elementId/remove".r
+  val timelineLink = s"/submissions/$elementId/information".r
+  val rejectedNotificationLink = s"/submissions/$elementId/rejected-notifications".r
+  val removeSavedDecLink = s"/saved-declarations/$elementId/remove".r
 
   private val containerIdPattern: Regex = s".+$initPart/containers/($elementId)/.+".r
   protected def containerId: String =

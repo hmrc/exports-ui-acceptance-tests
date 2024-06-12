@@ -20,13 +20,25 @@ import org.openqa.selenium.WebElement
 import org.scalatest.Assertion
 import org.scalatest.matchers.must.Matchers.{be, convertToAnyMustWrapper}
 import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.{elementBySelectorDoesNotExist, findElementByCssSelector}
+import uk.gov.hmrc.test.ui.pages.common.DetailKeys.IsDeclarationRejected
 import uk.gov.hmrc.test.ui.pages.common.DetailKeys.DeclarationInfoPath
 
 object SummaryPage extends BasePage {
 
-  def backButtonHref: String = if (isAmendmentMode) detail(DeclarationInfoPath) else "/saved-declarations"
+  def backButtonHref: String = if (isAmendmentMode) detail(DeclarationInfoPath)
+                               else if (isRejectedMode) "/dashboard?page=1"
+                                else "/saved-declarations"
   val path: String = "/declaration/saved-summary"
-  def title: String = if (isAmendmentMode) "Amend your declaration" else "Check your answers"
+
+  def backButtonHref: String =
+
+
+  def isRejectedMode: Boolean = maybeDetail(IsDeclarationRejected).isDefined
+
+  def title: String = if (isAmendmentMode) "Amend your declaration"
+                      else if (isRejectedMode) "Check your answers before resubmitting"
+                     else "Check your answers"
 
   override def checkExpanders(): Unit = ()
 
@@ -50,7 +62,7 @@ object SummaryPage extends BasePage {
     clickContinueOnSummary()
   }
 
-  def clickContinueOnSummary(): Unit = {
+  def clickContinueOnSummary(): Unit =
     findElementsByClassName("govuk-button")
       .filter(_.getText == "Confirm and continue")
       .head

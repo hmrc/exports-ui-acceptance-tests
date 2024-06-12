@@ -256,6 +256,9 @@ class CommonStepDef extends BaseStepDef {
 
   And("""^I click back""")(() => CommonPage.back())
 
+  And("""^I return back to errors page"""){() =>
+    CommonPage.saveAndReturnToErrors()}
+
   And("""^I click change link for (.*) page""") { (pageName: String) =>
     val changeLinkMap: Map[String, String] = Map(
       "LRN"                  -> "lrn",

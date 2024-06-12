@@ -44,6 +44,8 @@ object DeclarationInformationPage extends BasePage {
   private val additionalLinks =
     List(messageLink, movementsLink, cancelLink, amendLink, copyLink, viewPrintLink, eadLink, fileUploadLink)
 
+  private val additionalLinksForRejection = List(movementsLink, cancelLink)
+
   private def statusDetailsList: List[String] = {
     val additionalText = "If you already uploaded files"
     val originalList = List(
@@ -60,7 +62,7 @@ object DeclarationInformationPage extends BasePage {
     val modifiedList =
       if (detail(Lrn).startsWith("D") || detail(Lrn).startsWith("U")) {
         additionalText +: originalList
-      } else if (detail(Lrn).startsWith("R") || detail(Lrn).startsWith("P")) {
+      } else if (detail(Lrn).startsWith("R") || detail(Lrn).startsWith("P") || detail(Lrn).startsWith("B")) {
         originalList.filterNot(_ == "Information about ‘Re-arrivals’")
       } else {
         originalList
@@ -69,8 +71,15 @@ object DeclarationInformationPage extends BasePage {
     modifiedList
   }
 
-  override def pageLinkHrefs: Seq[String] =
-    super.pageLinkHrefs.filterNot(_ == exitAndCompleteLater) ++ additionalLinks
+  override def pageLinkHrefs: Seq[String] = {
+    val baseLinks = super.pageLinkHrefs.filterNot(_ == exitAndCompleteLater)
+    val detailLinks = if (detail(Lrn).startsWith("BCDSCOM")) {
+      additionalLinksForRejection
+    } else {
+      additionalLinks
+    }
+    baseLinks ++ detailLinks
+  }
 
   override def fillPage(values: String*): Unit = ()
 
@@ -100,6 +109,9 @@ object DeclarationInformationPage extends BasePage {
 
   def copyDeclaration(): Unit =
     clickById("copy-declaration")
+
+  def fixErrors(): Unit =
+    clickByCssSelector(".hmrc-timeline__event-content a")
 
   def amendDeclaration(): Unit = {
     clickById("amend-declaration")

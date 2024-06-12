@@ -26,4 +26,5 @@ object DetailKeys {
   val StatusOnDashboard: DetailKey = DetailKey("Status on Dashboard", sectionCommon, skipRowCheck = true)
   val DeclarationInfoPath: DetailKey = DetailKey("Declaration Info Path", sectionCommon, skipRowCheck = true)
   val RemoveSavedDecLink: DetailKey = DetailKey("Remove Saved Dec Link", sectionCommon, skipRowCheck = true)
+  val IsDeclarationRejected: DetailKey = DetailKey("Declaration Rejected", sectionCommon, skipRowCheck = true)
 }

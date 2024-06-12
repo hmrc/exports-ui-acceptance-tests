@@ -88,6 +88,8 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
 
   def back(): Unit = clickById("back-link")
 
+  def saveAndReturnToErrors(): Unit = clickById("save_and_return_to_errors")
+
   def statusRefresh(status: String): Unit = {
 
     val waitForStatus = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(10))
