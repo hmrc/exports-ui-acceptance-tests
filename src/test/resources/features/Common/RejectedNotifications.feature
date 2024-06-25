@@ -1,4 +1,4 @@
-@Regression
+@Regression @Smoke
 Feature: Validate Rejected Notifications
 
   Scenario: Fix a rejected declaration and submit the declaration
@@ -13,7 +13,7 @@ Feature: Validate Rejected Notifications
     And I click continue
     And I navigate to summary page
     Then I should land on Saved-Summary page
-    And I check the sections' headings and click confirm and continue
+    And I check the section headings and click confirm and continue
     Then I should land on Submit-Your-Declaration page
     And I submit the declaration
     Then I should land on holding page and redirect to rejected notification page
@@ -35,7 +35,7 @@ Feature: Validate Rejected Notifications
     And I check updated Lrn error details on rejected notifications
     And I navigate to check you answer from rejected notification page
     Then I should land on Saved-Summary page
-    And I check the sections' headings and click confirm and continue
+    And I check the section headings and click confirm and continue
     Then I should land on Submit-Your-Declaration page
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page

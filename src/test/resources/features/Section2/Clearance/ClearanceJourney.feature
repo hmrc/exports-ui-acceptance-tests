@@ -30,10 +30,10 @@ Feature: Section2 Clearance Prelodged
     Then I should land on Is-This-Exs page
     And I select Yes to is this exs
     And I click continue
-    Then I should land on Consingor-EORI-Number page
+    Then I should land on Consignor-EORI-Number page
     And I select No to consignor eori number
     And I click continue
-    Then I should land on Consingor-Address page
+    Then I should land on Consignor-Address page
     And I provide consignor details
     And I click continue
     Then I should land on Third-Party-Goods-Transportation page
@@ -115,7 +115,7 @@ Feature: Section2 Clearance Prelodged
     Then I should land on Is-This-Exs page
     And I select Yes to is this exs
     And I click continue
-    Then I should land on Consingor-EORI-Number page
+    Then I should land on Consignor-EORI-Number page
     And I select Yes on consignor eori number page and enter eori number as GB123456789124
     And I click continue
     Then I should land on Third-Party-Goods-Transportation page
@@ -156,10 +156,10 @@ Feature: Section2 Clearance Prelodged
     Then I should land on Is-This-Exs page
     And I select Yes to is this exs
     And I click continue
-    Then I should land on Consingor-EORI-Number page
+    Then I should land on Consignor-EORI-Number page
     And I select No to consignor eori number
     And I click continue
-    Then I should land on Consingor-Address page
+    Then I should land on Consignor-Address page
     And I provide consignor details
     And I click continue
     Then I should land on Third-Party-Goods-Transportation page

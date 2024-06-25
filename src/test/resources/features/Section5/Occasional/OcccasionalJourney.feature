@@ -74,7 +74,7 @@ Feature: Section5 Occasional Journey
     # 5. Change procedure code from 1040 to 1042 to check Fiscal-Information page of Occasional Journey
     # 6. Update details of Package Information, Additional Information and Additional Documents by clicking change link on list pages
 
-  @Section5 @Occasional
+  @Section5 @Occasional @Smoke
   Scenario: Complete Items section on with Low Value Occasional Prelodged declaration and check change link
             functionality on Package Information, Additional Information and Additional Documents list pages
     Given I fill section1 for OCCASIONAL,prelodged declaration

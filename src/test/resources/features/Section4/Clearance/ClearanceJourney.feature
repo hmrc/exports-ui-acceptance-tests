@@ -45,7 +45,7 @@ Feature: Section4 Clearance Journey
     And I navigate to Previous Documents page
     Then I should land on Previous-Document page
 
-  @Section4 @Clearance @smoke
+  @Section4 @Clearance @Smoke
   Scenario: Complete Transactions section on Clearance Arrived declaration journey
     Given I fill section1 for CLEARANCE,arrived declaration
     And I fill section2

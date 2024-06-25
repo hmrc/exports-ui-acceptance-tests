@@ -10,7 +10,7 @@ Feature: Section2 Supplementary Journey
   # 3. Third party goods transportation page is not visible in Supplementary (Simplified and EDR) journeys
   # 4. To check the remove functionality for Authorisation choice and Other parties involved
 
-  @Section2 @Supplementary
+  @Section2 @Supplementary @Smoke
   Scenario Outline: Exports Supplementary SDP and eidr Scenarios
 
     Given I fill section1 for SUPPLEMENTARY,<DecType> declaration

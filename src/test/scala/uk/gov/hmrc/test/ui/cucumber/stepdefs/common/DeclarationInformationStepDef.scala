@@ -33,10 +33,6 @@ class DeclarationInformationStepDef extends BaseStepDef {
 
   And("""^I fix errors on the declaration""")(() => DeclarationInformationPage.fixErrors())
 
-  And("""^I validate Cancellation request denied status on timeline""") { () =>
-    DeclarationInformationPage.checkStatusOnTimeLine("")
-  }
-
   And("""^I click Amend declaration link""")(() => DeclarationInformationPage.amendDeclaration())
 
   And("""^I validate (.*) status on timeline""") { (status: String) =>

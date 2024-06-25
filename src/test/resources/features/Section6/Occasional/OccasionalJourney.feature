@@ -18,7 +18,7 @@ Feature: Section6 Occasional Journey
      # 3. The following page is skipped
           # Departure Transport
 
-  @Section6 @Occasional
+  @Section6 @Occasional @Smoke
   Scenario: Occasional journey section-6
     Given I fill section1 for OCCASIONAL,prelodged declaration
     And I fill section2

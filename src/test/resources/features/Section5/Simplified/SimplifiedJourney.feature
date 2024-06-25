@@ -9,7 +9,7 @@ Feature: Section5 Simplified Journey
     # 2. Fill Statistical page and Vat rating page when Additional Procedure code is 3LV
     # 3. Skipping Commodity Measurements and Supplementary Units page when dec type is Simplified
 
-  @Section5 @Simplified
+  @Section5 @Simplified @Smoke
   Scenario: Perform a Low Value Simplified Arrived Declaration
     Given I fill section1 for SIMPLIFIED,arrived declaration
     And I fill section2

@@ -1,4 +1,4 @@
-@Regression2
+@Regression2 @Smoke
 Feature: Amend Scenarios
 
   Scenario: Full Standard Amend Journey and view declaration in submission dashboard
@@ -9,7 +9,7 @@ Feature: Amend Scenarios
     And I fill section5
     And I fill section6
     Then I should land on Saved-Summary page
-    And I check the sections headings and click confirm and continue
+    And I check the section headings and click confirm and continue
     Then I should land on Submit-Your-Declaration page
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
@@ -60,7 +60,7 @@ Feature: Amend Scenarios
     And I click continue
     Then I should land on MiniCYA-Section-2 page
     And I navigate to summary page
-    And I check the sections headings and click confirm and continue
+    And I check the section headings and click confirm and continue
     Then I should land on Submit-Your-Declaration page
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
@@ -142,7 +142,7 @@ Feature: Amend Scenarios
     # And I check the MiniCYA page for Section-5 (At the moment we can able to validate one item, need to extend this to check two or more)
 
     Then I navigate to summary page
-    And I check the sections headings and click confirm and continue
+    And I check the section headings and click confirm and continue
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
     And I should land on Confirmation page
@@ -170,7 +170,7 @@ Feature: Amend Scenarios
     Then I should land on Saved-Declarations page
     And I validate details on saved declarations page and check status is Amendment
     And I click on DUCR link for amended declaration
-    And I check the sections headings and click confirm and continue
+    And I check the section headings and click confirm and continue
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
     And I should land on Confirmation page
@@ -192,7 +192,7 @@ Feature: Amend Scenarios
     And I select Ship IMO number as the border transport
     And I click save and return to summary
     Then I should land on Saved-Summary page
-    And I check the sections headings and click confirm and continue
+    And I check the section headings and click confirm and continue
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
     And I should land on Confirmation page
@@ -214,7 +214,7 @@ Feature: Amend Scenarios
     And I select Ship IMO number as the border transport
     And I click save and return to summary
     Then I should land on Saved-Summary page
-    And I check the sections headings and click confirm and continue
+    And I check the section headings and click confirm and continue
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
     And I should land on Confirmation page
@@ -225,21 +225,20 @@ Feature: Amend Scenarios
     And I validate declaration details on Action needed tab and check Status is On hold
     And I navigate to declaration information page after clicking on mrn link
     Then I validate Amendment rejected status on timeline
-#    There is a bug raised, CEDS-5868, when once this is fixed then we need to test this by uncommenting the below lines
 
-#    And I click on cancel link on rejected amendment
-#    Then I should land on Cancel-Declaration page
-#    And I select No longer required as the reason and enter description for cancellation
-#    And I click continue
-#    Then I should land on holding page and redirect to Confirmation page
-#    And I should land on Confirmation page
-#    And I navigate to Choice page
-#    And I select to Manage Submit Declaration
-#    Then I should land on Dashboard page
-#    And I click on Submitted tab
-#    And I validate declaration details on Action needed tab and check Status is On hold
-#    And I navigate to declaration information page after clicking on mrn link
-#    Then I validate Amendment cancelled status on timeline
+    And I click on cancel link on rejected amendment
+    Then I should land on Cancel-Declaration page
+    And I select No longer required as the reason and enter description for cancellation
+    And I click continue
+    Then I should land on holding page and redirect to Confirmation page
+    And I should land on Confirmation page
+    And I navigate to Choice page
+    And I select to Manage Submit Declaration
+    Then I should land on Dashboard page
+    And I click on Action needed tab
+    And I validate declaration details on Action needed tab and check Status is On hold
+    And I navigate to declaration information page after clicking on mrn link
+    Then I validate Amendment cancelled status on timeline
 
     # To verify Failed Amendment in Timeline page
     And I click back
@@ -251,7 +250,7 @@ Feature: Amend Scenarios
     And I select Ship name as the border transport
     And I click save and return to summary
     Then I should land on Saved-Summary page
-    And I check the sections headings and click confirm and continue
+    And I check the section headings and click confirm and continue
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
     And I should land on Confirmation page
@@ -273,7 +272,7 @@ Feature: Amend Scenarios
     And I select Train as the border transport
     And I click save and return to summary
     Then I should land on Saved-Summary page
-    And I check the sections headings and click confirm and continue
+    And I check the section headings and click confirm and continue
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
     And I should land on Confirmation page

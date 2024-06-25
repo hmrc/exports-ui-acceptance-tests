@@ -21,13 +21,13 @@ import uk.gov.hmrc.test.ui.pages.section2.ConsignorEORINumberPage
 
 class ConsignorEoriNumberStepDef extends BaseStepDef {
 
-  And("""^I should land on Consingor-EORI-Number page""")(() => ConsignorEORINumberPage.checkPage())
+  And("""^I should land on Consignor-EORI-Number page""")(() => ConsignorEORINumberPage.checkPage())
 
   And("""^I select (.*) to consignor eori number""")((consignorEoriChoice: String) =>
     ConsignorEORINumberPage.fillPage(consignorEoriChoice)
   )
 
-  And("""^I navigate to Consingor EORI Number page""")(() =>
+  And("""^I navigate to Consignor EORI Number page""")(() =>
     ConsignorEORINumberPage.navigateToPage(ConsignorEORINumberPage.path)
   )
 
