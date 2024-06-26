@@ -1,6 +1,9 @@
 @Regression3
 Feature: Validate Dashboard and Declaration Information
 
+  Background:
+    Given I clear data in cache
+
     # Below scenario -
     # 1. Check various confirmation page titles and validates information on Dashboard and Declaration information pages
     # 2. Validates View Print link

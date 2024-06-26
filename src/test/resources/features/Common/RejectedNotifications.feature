@@ -1,6 +1,9 @@
 @Regression3 @Smoke
 Feature: Validate Rejected Notifications
 
+  Background:
+    Given I clear data in cache
+
   Scenario: Fix a rejected declaration and submit the declaration
     Given I fill section1 for STANDARD, prelodged declaration
     And I fill section2
