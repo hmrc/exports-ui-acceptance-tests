@@ -1,11 +1,10 @@
-@Regression3 @Smoke
+@Regression1 @Smoke
 Feature: Amend Scenarios
 
   Background:
     Given I clear data in cache
 
   Scenario: Full Standard Amend Journey and view declaration in submission dashboard
-    Given I clear data in cache
     Given I fill section1 for STANDARD, prelodged declaration
     And I fill section2
     And I fill section3
