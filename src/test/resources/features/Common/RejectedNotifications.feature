@@ -1,4 +1,4 @@
-@Regression @Smoke
+@Regression3 @Smoke
 Feature: Validate Rejected Notifications
 
   Scenario: Fix a rejected declaration and submit the declaration

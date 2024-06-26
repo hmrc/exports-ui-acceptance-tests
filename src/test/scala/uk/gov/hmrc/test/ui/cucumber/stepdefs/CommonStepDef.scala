@@ -177,7 +177,7 @@ class CommonStepDef extends BaseStepDef {
       FiscalReferencesYesNoPage.fillPage(Constants.no);
       continue()
     }
-    CommodityDetailsPage.fillPage("4203400090", "Straw for bottles"); continue()
+    CommodityDetailsPage.fillPage("42034000", "Straw for bottles"); continue()
     if (!isClearance || isThisExs) {
       DangerousGoodsCodePage.fillPage(Constants.no); continue()
     }

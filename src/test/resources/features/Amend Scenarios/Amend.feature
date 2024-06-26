@@ -1,4 +1,4 @@
-@Regression2 @Smoke
+@Regression3 @Smoke
 Feature: Amend Scenarios
 
   Scenario: Full Standard Amend Journey and view declaration in submission dashboard

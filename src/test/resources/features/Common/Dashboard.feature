@@ -1,4 +1,4 @@
-@Regression1
+@Regression3
 Feature: Validate Dashboard and Declaration Information
 
     # Below scenario -
