@@ -91,7 +91,7 @@ Feature: Section2 Standard Prelodged
     #  the Carrier EORI Number field should be skipped
     Then I navigate to Are You The Exporter page
     And I select Yes to I am the Exporter
-    And I clear Exporter’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation, Carrier or haulier’s details keys from cache
+    And I clear Exporter’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation keys from cache
     And I click continue
     Then I should land on Third-Party-Goods-Transportation page
     And I select No on third party goods transportation page

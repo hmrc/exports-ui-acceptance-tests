@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.common
 
+import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.detail
 import uk.gov.hmrc.test.ui.pages.common.RejectedNotificationPage
@@ -27,8 +28,8 @@ class RejectedNotificationsStepDef extends BaseStepDef {
     RejectedNotificationPage.checkPage()
   }
 
-  And("""^I click on Lrn change link to fix error""") { () =>
-    RejectedNotificationPage.FixErrorsAndValidateWarning()
+  And("""^I click on (.*) change link to fix error""") { (link:String) =>
+    RejectedNotificationPage.FixErrorsAndValidateWarning(link)
   }
 
   And("""^I validate Lrn error details on rejected notifications""") { () =>
@@ -37,6 +38,10 @@ class RejectedNotificationsStepDef extends BaseStepDef {
 
   And("""^I check updated Lrn error details on rejected notifications""") { () =>
     RejectedNotificationPage.validateUpdatedErrorDetails(detail(Lrn))
+  }
+
+  And("""^I validate ducr warning on rejected notifications page""") { () =>
+    RejectedNotificationPage.duplicateDucrWarning().getText must include("DUCR previously used within the last 12 months.")
   }
 
   And("""^I navigate to check you answer from rejected notification page""") { () =>

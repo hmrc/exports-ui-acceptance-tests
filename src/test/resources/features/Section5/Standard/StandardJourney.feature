@@ -35,7 +35,7 @@ Feature: Section5 Standard Journey
     And I select No for adding more VAT details
     And I click continue
     Then I should land on Commodity-Details page
-    And I enter commodity details code as 2803400090 and description as Old St Andrews golf ball whisky
+    And I enter commodity details code as 28034000 and description as Old St Andrews golf ball whisky
     And I click continue
     Then I should land on Dangerous-Goods-Code page
     And I select Yes to enter the code 1234 as dangerous goods
@@ -154,7 +154,7 @@ Feature: Section5 Standard Journey
     And I click continue
 #   validate skipping of fiscal information , additional-fiscal-references
     Then I should land on Commodity-Details page
-    And I enter commodity details code as 9003400090 and description as St Andrews golf ball whisky
+    And I enter commodity details code as 90034000 and description as St Andrews golf ball whisky
     And I click continue
 
   # skipping Cus Code Page when commodity details code doesnot end with 28,29,38 and VAT rating page when nature of transcation select option is not Goods being sold or Item purchased
@@ -245,7 +245,7 @@ Feature: Section5 Standard Journey
     And I select No for Onward supply relief
     And I click continue
     Then I should land on Commodity-Details page
-    And I enter commodity details code as 2803400090 and description as Old St Andrews golf ball whisky
+    And I enter commodity details code as 28034000 and description as Old St Andrews golf ball whisky
     And I click continue
     Then I should land on Dangerous-Goods-Code page
     And I select No to enter dangerous goods

@@ -94,7 +94,7 @@ Feature: Amend Scenarios
     And I select 000 as additional procedure code
     And I click continue
     Then I should land on Commodity-Details page
-    And I enter commodity details code as 2803400091 and description as St Andrews Whisky
+    And I enter commodity details code as 28034001 and description as St Andrews Whisky
     And I click continue
     Then I should land on Dangerous-Goods-Code page
     And I select No to enter dangerous goods

@@ -39,3 +39,21 @@ Feature: Validate Rejected Notifications
     Then I should land on Submit-Your-Declaration page
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
+    And I should land on Confirmation page
+    And I navigate to Choice page
+    And I select to Manage Submit Declaration
+    Then I should land on Dashboard page
+    And I validate declaration details on Submitted tab and check Status is Arrived and accepted
+    And I navigate to declaration information page after clicking on mrn link
+    Then I should land on Declaration-Information page
+
+    # Duplicate ducr warning messages check
+    And I click on copy link
+    And I enter ducr 8GB123456469274-101SHIP1 and a rejected lrn
+    And I click continue
+    And I click continue on summary
+    And I submit the declaration
+    Then I should land on holding page and redirect to rejected notification page
+    And I validate ducr warning on rejected notifications page
+    Then I click on Ducr change link to fix error
+    And I validate duplicate ducr warning on ducr entry page
