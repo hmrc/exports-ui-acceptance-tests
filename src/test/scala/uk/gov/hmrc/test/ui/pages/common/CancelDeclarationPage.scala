@@ -24,7 +24,7 @@ object CancelDeclarationPage extends BasePage {
 
   def backButtonHref: String = detail(DeclarationInfoPath)
   val path: String = if (isAmendmentMode) "/declaration/cancel-your-amendment" else "/cancel-declaration"
-  val title: String = if(isAmendmentMode) "Cancel amendment request" else "Cancel declaration"
+  val title: String = if (isAmendmentMode) "Cancel amendment request" else "Cancel declaration"
 
   override def checkExpanders(): Unit = ()
 

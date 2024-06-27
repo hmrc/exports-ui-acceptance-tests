@@ -23,6 +23,7 @@ import uk.gov.hmrc.selenium.webdriver.{Browser, Driver}
 import uk.gov.hmrc.test.ui.conf.TestConfiguration.setBrowser
 
 import java.io.File
+import java.nio.file.{Files, Paths, StandardCopyOption}
 
 object Hooks extends ScalaDsl with EN with Browser {
 
@@ -32,24 +33,30 @@ object Hooks extends ScalaDsl with EN with Browser {
     Driver.instance.manage().deleteAllCookies()
   }
 
-  private def captureScreenshot(screenshotName: String, screenshotDirectory: String): Unit = {
-    val tmpFile = Driver.instance.asInstanceOf[TakesScreenshot].getScreenshotAs(OutputType.FILE)
+  private def captureScreenshot(screenshotName: String, screenshotDirectory: String): String = {
+    val tmpFile = Driver.asInstanceOf[TakesScreenshot].getScreenshotAs(OutputType.FILE)
     val screenshotFile = new File(screenshotDirectory, screenshotName)
 
-    createDir(new File(screenshotDirectory))
-    copy(tmpFile, screenshotFile)
+    // Ensure the directory exists
+    if (!screenshotFile.getParentFile.exists()) {
+      screenshotFile.getParentFile.mkdirs()
+    }
+
+    // Copy the temporary file to the desired location
+    Files.copy(tmpFile.toPath, screenshotFile.toPath, StandardCopyOption.REPLACE_EXISTING)
+    screenshotFile.getAbsolutePath
   }
 
   After { scenario: Scenario =>
-//    logger.info(s"After scenario -> ${scenario.getName}")
     if (scenario.isFailed) {
       val testName = scenario.getName.replaceAll(" ", "-").replaceAll(":", "")
       val screenshotName = testName + ".png"
-      val screenshotDirectory = "./target/screenshots/"
-      captureScreenshot(screenshotName, screenshotDirectory)
-      scenario.attach(screenshotName, "image/png", testName)
+      val screenshotDirectory = "target/screenshots/"
+      val screenshotPath = captureScreenshot(screenshotName, screenshotDirectory)
+      scenario.attach(Files.readAllBytes(Paths.get(screenshotPath)), "image/png", testName)
     }
   }
+
 
 
   AfterAll {

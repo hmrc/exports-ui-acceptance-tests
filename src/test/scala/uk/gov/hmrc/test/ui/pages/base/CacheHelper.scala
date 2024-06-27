@@ -33,6 +33,11 @@ trait CacheHelper {
 
   def clear(): Unit = getCache.clear()
 
+  def clearAllCaches(): Unit = {
+    cache.clear()
+    cacheForAmendments.clear()
+  }
+
   def clear(sectionId: Int, maybeId: Option[String] = None): Cache =
     getCache --= allSectionDetails(sectionId, maybeId).keys
 
