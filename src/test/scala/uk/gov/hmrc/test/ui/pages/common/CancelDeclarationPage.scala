@@ -23,8 +23,8 @@ import uk.gov.hmrc.test.ui.pages.common.DetailKeys._
 object CancelDeclarationPage extends BasePage {
 
   def backButtonHref: String = detail(DeclarationInfoPath)
-  val path: String = if (isAmendmentMode) "/declaration/cancel-your-amendment" else "/cancel-declaration"
-  val title: String = if (isAmendmentMode) "Cancel amendment request" else "Cancel declaration"
+  def path: String = if (isAmendmentMode) "/declaration/cancel-your-amendment" else "/cancel-declaration"
+  def title: String = if (isAmendmentMode) "Cancel amendment request" else "Cancel declaration"
 
   override def checkExpanders(): Unit = ()
 
