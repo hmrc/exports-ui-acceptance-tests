@@ -6,7 +6,7 @@ Feature: Amend Scenarios
 
   Scenario: Full Standard Amend Journey and view declaration in submission dashboard
     Given I fill section1 for STANDARD, prelodged declaration
-#    And I fill section2
+    And I fill section2
     And I fill section3
     And I fill section4
     And I fill section5

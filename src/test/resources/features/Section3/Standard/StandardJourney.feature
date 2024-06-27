@@ -1,4 +1,4 @@
-@Regression1
+@Regression2
 Feature: Section3 Standard Journey
 
   Background:
