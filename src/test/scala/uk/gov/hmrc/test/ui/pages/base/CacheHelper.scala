@@ -33,7 +33,7 @@ trait CacheHelper {
 
   def clear(): Unit = getCache.clear()
 
-  def clearAllCaches(): Unit = {
+  def clearAllCache(): Unit = {
     cache.clear()
     cacheForAmendments.clear()
   }
