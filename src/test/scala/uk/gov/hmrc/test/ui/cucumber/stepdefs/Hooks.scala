@@ -33,7 +33,7 @@ object Hooks extends ScalaDsl with EN with Browser {
   }
 
   private def captureScreenshot(screenshotName: String, screenshotDirectory: String): String = {
-    val tmpFile = Driver.asInstanceOf[TakesScreenshot].getScreenshotAs(OutputType.FILE)
+    val tmpFile = Driver.instance.asInstanceOf[TakesScreenshot].getScreenshotAs(OutputType.FILE)
     val screenshotFile = new File(screenshotDirectory, screenshotName)
 
     // Ensure the directory exists
