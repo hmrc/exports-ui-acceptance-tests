@@ -24,7 +24,7 @@ import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys._
 object RemoveItemsPage extends BasePage {
 
   def backButtonHref: String = if (isAmendmentMode) SummaryPage.path else SummarySection5Page.path
-  val path: String = s"/declaration/remove-declaration-item/${details(ItemIds).head}"
+  def path: String = s"/declaration/remove-declaration-item/${details(ItemIds).head}"
   def title: String = if (isAmendmentMode) "Remove item" else "Are you sure you want to remove declaration item 1?"
 
   override def checkExpanders(): Unit = ()
