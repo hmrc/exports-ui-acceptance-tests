@@ -1,4 +1,4 @@
-@Regression1 @Smoke
+@Regression3 @Smoke
 Feature: Amend Scenarios
 
   Background:

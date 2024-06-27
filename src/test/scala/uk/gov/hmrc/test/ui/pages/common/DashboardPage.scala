@@ -38,6 +38,8 @@ object DashboardPage extends BasePage {
 
   // validateDashboard("Submitted", "Declaration submitted")
 
+  def mrnValue: WebElement = findElementByCssSelector("tr:nth-child(1) > td:nth-child(1) span:first-child")
+
   def validateDashboard(tab: String, status: String): Unit = {
     findElementByCssSelector(".selected-status-group").getText mustBe tab
     statusRefresh(status)
@@ -48,7 +50,6 @@ object DashboardPage extends BasePage {
     val decStatus = findElementByCssSelector("tr:nth-child(1) > td:nth-child(5)").getText
     decStatus mustBe status
 
-    val mrnValue = findElementByCssSelector("tr:nth-child(1) > td:nth-child(1) span:first-child")
     assert(mrnValue.isDisplayed)
 
     timelineLink.matches(mrnLink.getAttribute("href"))

@@ -35,6 +35,6 @@ object AmendmentDetails extends BasePage {
 
   def clickViewDetailsLink(): Unit = {
     waitForLinkText("View details")
-    clickByCssSelector("li:nth-child(2) > div > a")
+    clickByCssSelector("a[href*='amendment-details']")
   }
 }

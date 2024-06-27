@@ -70,7 +70,7 @@ Feature: Validate Dashboard and Declaration Information
     And I select to Manage Submit Declaration
     Then I should land on Dashboard page
     And I click on Submitted tab
-    And I validate declaration details on Submitted tab and check Status is Arrived and accepted
+    And I validate declaration details on Submitted tab and check Status is Declaration cleared
     And I navigate to declaration information page after clicking on mrn link
     Then I should land on Declaration-Information page
     And I validate details on declaration information page
