@@ -30,7 +30,7 @@ object DeclarationInformationPage extends BasePage {
   def title = s"Declaration status: ${detail(StatusOnDashboard)}"
 
   override def checkExpanders(): Unit = ()
-  var isCancelDeclaration = false
+  var isCancelDeclaration: Boolean = false
 
   private val messageLink = "/messages"
   private val movementsLink = "/customs-movements"
@@ -116,6 +116,7 @@ object DeclarationInformationPage extends BasePage {
   def amendDeclaration(): Unit = {
     clickById("amend-declaration")
     startAmendmentMode()
+    isCancelDeclaration = false
   }
 
   def validateCopyAndAmendDeclarationLinks(): Unit = {

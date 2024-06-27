@@ -96,7 +96,7 @@ Feature: Section5 Supplementary Journey
     And I select 000 as additional procedure code
     And I click continue
     Then I should land on Commodity-Details page
-    And I enter commodity details code as 2803400090 and description as Old St Andrews golf ball whisky
+    And I enter commodity details code as 28034008 and description as Old St Andrews golf ball whisky
     And I click continue
     Then I should land on Dangerous-Goods-Code page
     And I select No to enter dangerous goods
@@ -170,7 +170,7 @@ Feature: Section5 Supplementary Journey
     # 1. Finishing a Supplementary simplified Declaration
     # 2. Change Item details by clicking change link on declaration-items-list page after completing an item
 
-  @Section5 @Supplementary
+  @Section5 @Supplementary @Smoke
   Scenario: Complete Items section on Supplementary Simplified declaration journey and Validate Changing Item Details
     Given I fill section1 for SUPPLEMENTARY,simplified declaration
     And I fill section2
@@ -185,7 +185,7 @@ Feature: Section5 Supplementary Journey
     And I select 000 as additional procedure code
     And I click continue
     Then I should land on Commodity-Details page
-    And I enter commodity details code as 9003400090 and description as St Andrews golf ball whisky
+    And I enter commodity details code as 90034003 and description as St Andrews golf ball whisky
     And I click continue
     And I navigate to Dangerous Goods Code page
     And I select Yes to enter the code 1234 as dangerous goods
@@ -240,7 +240,7 @@ Feature: Section5 Supplementary Journey
     And I select 1SW as additional procedure code
     And I click continue
     Then I should land on Commodity-Details page
-    And I enter commodity details code as 9503400090 and description as Straw for bottles
+    And I enter commodity details code as 95034005 and description as Straw for bottles
     And I click continue
     And I navigate to Dangerous Goods Code page
     And I select Yes to enter the code 1034 as dangerous goods

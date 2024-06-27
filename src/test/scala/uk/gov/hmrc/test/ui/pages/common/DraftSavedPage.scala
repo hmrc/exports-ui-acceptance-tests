@@ -23,7 +23,7 @@ object DraftSavedPage extends BasePage {
 
   val backButtonHref: String = ""
   val path: String = "/declaration/draft-saved"
-  val title: String = "Your declaration has been saved"
+  val title: String = "Your draft declaration will be saved for 30 days"
 
   override def checkExpanders(): Unit = ()
   override def checkBackButton(): Unit = ()

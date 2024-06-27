@@ -25,7 +25,7 @@ Feature: Section5 Occasional Journey
     And I select 3LV as additional procedure code
     And I click continue
     Then I should land on Commodity-Details page
-    And I enter commodity details code as 8411110000 and description as Aircraft engine
+    And I enter commodity details code as 84111100 and description as Aircraft engine
     And I click continue
     And I navigate to Dangerous Goods Code page
     And I select Yes to enter the code 1204 as dangerous goods
@@ -74,7 +74,7 @@ Feature: Section5 Occasional Journey
     # 5. Change procedure code from 1040 to 1042 to check Fiscal-Information page of Occasional Journey
     # 6. Update details of Package Information, Additional Information and Additional Documents by clicking change link on list pages
 
-  @Section5 @Occasional
+  @Section5 @Occasional @Smoke
   Scenario: Complete Items section on with Low Value Occasional Prelodged declaration and check change link
             functionality on Package Information, Additional Information and Additional Documents list pages
     Given I fill section1 for OCCASIONAL,prelodged declaration
@@ -92,7 +92,7 @@ Feature: Section5 Occasional Journey
     And I click continue
     # skipped fiscal information , additional-fiscal-references
     Then I should land on Commodity-Details page
-    And I enter commodity details code as 2803400090 and description as St Andrews golf ball whisky
+    And I enter commodity details code as 28034005 and description as St Andrews golf ball whisky
     And I click continue
     And I navigate to Dangerous Goods Code page
     And I select Yes to enter the code 1204 as dangerous goods

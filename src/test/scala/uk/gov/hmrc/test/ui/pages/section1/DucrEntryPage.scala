@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section1
 
+import org.openqa.selenium.WebElement
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{ducr, ducrCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
@@ -37,6 +38,7 @@ object DucrEntryPage extends BasePage {
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> Seq(ducr), Clearance -> Seq(ducrCL))
 
   def ducrPrefix: String = s"${LocalDate.now.getYear.toString.last}${detail(DeclarationEori).toUpperCase}-"
+  def ducrWarning: WebElement = findElementByCssSelector(".govuk-error-summary__list a")
 
   // ex: fillPage("8GB123456183182-101SHIP1")
 

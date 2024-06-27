@@ -22,7 +22,7 @@ import uk.gov.hmrc.test.ui.pages.section2.ConsignorDetailsPage
 
 class ConsignorDetailsStepDef extends BaseStepDef {
 
-  And("""^I should land on Consingor-Address page""")(() => ConsignorDetailsPage.checkPage())
+  And("""^I should land on Consignor-Address page""")(() => ConsignorDetailsPage.checkPage())
 
   And("""^I provide consignor details""") { () =>
     ConsignorDetailsPage.fillPage(Constants.Address: _*)

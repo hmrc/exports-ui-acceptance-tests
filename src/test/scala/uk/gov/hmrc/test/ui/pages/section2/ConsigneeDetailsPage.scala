@@ -20,16 +20,15 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{consigneeDetails, consigneeDetailsCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isSupplementary}
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationEori
 import uk.gov.hmrc.test.ui.pages.section2.AreYouTheExporterPage.isExporter
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{CarrierEORI, ConsigneeDetails, addressHelper}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{CarrierDetails, CarrierEORI, ConsigneeDetails, addressHelper}
 import uk.gov.hmrc.test.ui.pages.section2.IsThisExsPage.isThisExs
 
 object ConsigneeDetailsPage extends BasePage {
 
   def backButtonHref: String = {
     def isUsingOwnTransport: Boolean =
-      maybeDetail(CarrierEORI).fold(false)(_ == detail(DeclarationEori))
+      maybeDetail(CarrierEORI).isEmpty && maybeDetails(CarrierDetails).isEmpty
 
     def carrierPath: String = maybeDetail(CarrierEORI).fold(CarrierAddressPage.path)(_ => CarrierEORINumberPage.path)
 

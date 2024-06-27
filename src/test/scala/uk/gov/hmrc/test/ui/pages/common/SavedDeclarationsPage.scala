@@ -27,7 +27,7 @@ object SavedDeclarationsPage extends BasePage {
 
   val backButtonHref: String = "/choice"
   val path: String = "/saved-declarations"
-  val title: String = if(isAmendmentMode) "Your saved declarations and amendments" else "Your saved declarations"
+  def title: String = if(isAmendmentMode) "Your saved declarations and amendments" else "Your saved declarations"
 
   override def checkExpanders(): Unit = ()
 

@@ -1,4 +1,4 @@
-@Regression1
+@Regression2
 Feature: Simplified Journey Section 3
 
   Background:

@@ -18,15 +18,10 @@ package uk.gov.hmrc.test.ui.cucumber.stepdefs
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
 import uk.gov.hmrc.test.ui.generator.SupportGenerator.generateEORI
-import uk.gov.hmrc.test.ui.pages.base.CommonPage.{clear, continue, continueOnMiniCya, detailKeys}
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.{clear, clearAllCache, continue, continueOnMiniCya, detailKeys}
 import uk.gov.hmrc.test.ui.pages.base.Constants.yes
 import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{
-  isClearance,
-  isOccasional,
-  isSimplified,
-  isSupplementary
-}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isOccasional, isSimplified, isSupplementary}
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 import uk.gov.hmrc.test.ui.pages.section1._
 import uk.gov.hmrc.test.ui.pages.section2.AreYouTheExporterPage.isExporter
@@ -177,7 +172,7 @@ class CommonStepDef extends BaseStepDef {
       FiscalReferencesYesNoPage.fillPage(Constants.no);
       continue()
     }
-    CommodityDetailsPage.fillPage("4203400090", "Straw for bottles"); continue()
+    CommodityDetailsPage.fillPage("42034000", "Straw for bottles"); continue()
     if (!isClearance || isThisExs) {
       DangerousGoodsCodePage.fillPage(Constants.no); continue()
     }
@@ -238,7 +233,7 @@ class CommonStepDef extends BaseStepDef {
   }
 
   And("""^I clear data in cache""") { () =>
-    clear()
+    clearAllCache()
   }
 
   And("""^I clear (.*) keys from cache""") { (cacheKeysToDelete: String) =>

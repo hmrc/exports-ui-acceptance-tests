@@ -9,7 +9,7 @@ Feature: Section5 Simplified Journey
     # 2. Fill Statistical page and Vat rating page when Additional Procedure code is 3LV
     # 3. Skipping Commodity Measurements and Supplementary Units page when dec type is Simplified
 
-  @Section5 @Simplified
+  @Section5 @Simplified @Smoke
   Scenario: Perform a Low Value Simplified Arrived Declaration
     Given I fill section1 for SIMPLIFIED,arrived declaration
     And I fill section2
@@ -25,7 +25,7 @@ Feature: Section5 Simplified Journey
     And I select 3LV as additional procedure code
     And I click continue
     Then I should land on Commodity-Details page
-    And I enter commodity details code as 9003400090 and description as St Andrews golf ball whisky
+    And I enter commodity details code as 90034008 and description as St Andrews golf ball whisky
     And I click continue
     And I navigate to Dangerous Goods Code page
     And I select Yes to enter the code 1204 as dangerous goods
@@ -101,7 +101,7 @@ Feature: Section5 Simplified Journey
 
 #   validate skipping of fiscal information , additional-fiscal-references
     Then I should land on Commodity-Details page
-    And I enter commodity details code as 2803400090 and description as St Andrews golf ball whisky
+    And I enter commodity details code as 28034007 and description as St Andrews golf ball whisky
     And I click continue
     And I navigate to Dangerous Goods Code page
     And I select Yes to enter the code 1204 as dangerous goods
