@@ -32,7 +32,7 @@ object Hooks extends ScalaDsl with EN with Browser {
     Driver.instance.manage().deleteAllCookies()
   }
 
-  private def captureScreenshot(screenshotName: String, screenshotDirectory: String): Unit = {
+   def captureScreenshot(screenshotName: String, screenshotDirectory: String): Unit = {
     val tmpFile = Driver.instance.asInstanceOf[TakesScreenshot].getScreenshotAs(OutputType.FILE)
     val screenshotFile = new File(screenshotDirectory, screenshotName)
 
