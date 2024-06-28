@@ -70,7 +70,7 @@ class CommonStepDef extends BaseStepDef {
       // Fill Ducr, Lrn details
       DoYouHaveADucrPage.fillPage(yes); continue()
       DucrEntryPage.fillPage("3GB986007773125-INVOICE123"); continue()
-      LrnPage.fillPage("MSLRN813111"); continue()
+      LrnPage.fillPage("M9LRN813111"); continue()
       LinkMucrPage.fillPage(yes); continue()
       EnterAMucrPage.fillPage("GB/AZ09-B12345"); continue()
     }
