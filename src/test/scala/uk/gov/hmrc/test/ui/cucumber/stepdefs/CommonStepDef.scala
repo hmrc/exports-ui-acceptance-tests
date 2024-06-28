@@ -77,10 +77,10 @@ class CommonStepDef extends BaseStepDef {
     // Fill Consignment References Page
     if (isSupplementary) {
       if (AdditionalDecType == "simplified") {
-        ConsignmentReferencesPage.fillPage("3GB986007773125-INVOICE123", "20GB46J8TMJ4RF1207", "MSLRN813111")
+        ConsignmentReferencesPage.fillPage("3GB986007773125-INVOICE123", "20GB46J8TMJ4RF1207", "M9LRN813111")
         continue()
       } else {
-        ConsignmentReferencesPage.fillPage("3GB986007773125-INVOICE123", "20230401", "MSLRN813112")
+        ConsignmentReferencesPage.fillPage("3GB986007773125-INVOICE123", "20230401", "M9LRN813112")
         continue()
       }
     }

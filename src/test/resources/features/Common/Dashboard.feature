@@ -38,7 +38,7 @@ Feature: Validate Dashboard and Declaration Information
     And I enter ducr 8GB123406469274-101SHIP1 and lrn used within 24 hours
     And I click continue
     Then I am displayed with a lrn warning message
-    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with Q0 prefix
+    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with Q9 prefix
     And I click continue
     Then I should land on Saved-Summary page
     And I click continue on summary
@@ -58,7 +58,7 @@ Feature: Validate Dashboard and Declaration Information
     # Submit a Prelodged declaration with LRN starting with C to check
     And I click on copy link
     Then I should land on copy declaration page
-    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with C0 prefix
+    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with C9 prefix
     And I click continue
     Then I should land on Saved-Summary page
     And I click continue on summary
@@ -78,7 +78,7 @@ Feature: Validate Dashboard and Declaration Information
     # Submit a declaration with LRN starting with X to check Goods have exited the UK status
     And I click on copy link
     Then I should land on copy declaration page
-    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with X0 prefix
+    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with X9 prefix
     And I click continue
     Then I should land on Saved-Summary page
     And I click continue on summary
@@ -98,7 +98,7 @@ Feature: Validate Dashboard and Declaration Information
     # Submit a declaration with LRN starting with D to check Documents required status
     And I click on copy link
     Then I should land on copy declaration page
-    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with D0 prefix
+    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with D9 prefix
     And I click continue
     Then I should land on Saved-Summary page
     And I click continue on summary
@@ -118,7 +118,7 @@ Feature: Validate Dashboard and Declaration Information
    # Submit a declaration with LRN starting with R to check Declaration submitted status
     And I click on copy link
     Then I should land on copy declaration page
-    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with R0 prefix
+    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with R9 prefix
     And I click continue
     Then I should land on Saved-Summary page
     And I click continue on summary
@@ -139,7 +139,7 @@ Feature: Validate Dashboard and Declaration Information
    # Submit a declaration with LRN starting with U to check Goods being examined
     And I click on copy link
     Then I should land on copy declaration page
-    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with U0 prefix
+    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with U9 prefix
     And I click continue
     Then I should land on Saved-Summary page
     And I click continue on summary
@@ -159,7 +159,7 @@ Feature: Validate Dashboard and Declaration Information
    # Submit a arrived declaration with LRN starting with C to check Declaration cleared status
     And I click on copy link
     Then I should land on copy declaration page
-    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with C0 prefix
+    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with C9 prefix
     And I click continue
     Then I should land on Saved-Summary page
     And I navigate to Declaration Type page
@@ -183,7 +183,7 @@ Feature: Validate Dashboard and Declaration Information
     # Submit a arrived declaration with LRN starting with I to check Awaiting Exit Results status
     And I click on copy link
     Then I should land on copy declaration page
-    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with I0 prefix
+    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with I9 prefix
     And I click continue
     Then I should land on Saved-Summary page
     And I navigate to Declaration Type page
@@ -207,7 +207,7 @@ Feature: Validate Dashboard and Declaration Information
      # Submit a arrived declaration with LRN starting with L to check Declaration expired on departure status
     And I click on copy link
     Then I should land on copy declaration page
-    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with L0 prefix
+    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with L9 prefix
     And I click continue
     Then I should land on Saved-Summary page
     And I navigate to Declaration Type page
@@ -231,7 +231,7 @@ Feature: Validate Dashboard and Declaration Information
      # Submit a arrived declaration with LRN starting with K to check Declaration expired on arrived status
     And I click on copy link
     Then I should land on copy declaration page
-    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with K0 prefix
+    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with K9 prefix
     And I click continue
     Then I should land on Saved-Summary page
     And I navigate to Declaration Type page
@@ -255,7 +255,7 @@ Feature: Validate Dashboard and Declaration Information
     # Submit a arrived declaration with LRN starting with P to check Pending status
     And I click on copy link
     Then I should land on copy declaration page
-    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with P0 prefix
+    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with P9 prefix
     And I click continue
     Then I should land on Saved-Summary page
     And I navigate to Declaration Type page
@@ -279,7 +279,7 @@ Feature: Validate Dashboard and Declaration Information
      # Submit a arrived declaration with LRN starting with I to check Declaration Handled Externally status
     And I click on copy link
     Then I should land on copy declaration page
-    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with J0 prefix
+    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with J9 prefix
     And I click continue
     Then I should land on Saved-Summary page
     And I navigate to Declaration Type page
@@ -303,7 +303,7 @@ Feature: Validate Dashboard and Declaration Information
      # Submit a arrived declaration with LRN starting with N to check Released status
     And I click on copy link
     Then I should land on copy declaration page
-    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with N0 prefix
+    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with N9 prefix
     And I click continue
     Then I should land on Saved-Summary page
     And I navigate to Declaration Type page
@@ -348,7 +348,7 @@ Feature: Validate Dashboard and Declaration Information
     # Cancellation - successful cancellation
     And I click on copy link
     Then I should land on copy declaration page
-    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with G1S prefix
+    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with G9S prefix
     And I click continue
     Then I should land on Saved-Summary page
     And I click continue on summary
