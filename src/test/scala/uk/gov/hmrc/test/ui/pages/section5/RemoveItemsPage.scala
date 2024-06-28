@@ -37,7 +37,9 @@ object RemoveItemsPage extends BasePage {
       val itemIds = details(ItemIds)
       val itemId = itemIds(values(1).toInt)
       clear(section5, Some(itemId))
-      store(ItemIds -> Details(itemIds.filterNot(_ == itemId)))
+      if (itemIds.size > 1) {
+        store(ItemIds -> Details(itemIds.filterNot(_ == itemId)))
+      }
     }
 
   def displayWarning: Boolean = findElementByCssSelector("div.govuk-warning-text > strong").isDisplayed
