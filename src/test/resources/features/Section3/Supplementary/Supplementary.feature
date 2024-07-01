@@ -1,4 +1,4 @@
-@Regression2
+@Regression1
 Feature: Supplementary Journey For Section 3
 
   Background:

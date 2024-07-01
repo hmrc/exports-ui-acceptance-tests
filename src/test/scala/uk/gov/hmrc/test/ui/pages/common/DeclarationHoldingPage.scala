@@ -33,8 +33,6 @@ object DeclarationHoldingPage extends BasePage {
     }
   }
 
-//  def title: String = if (isAmendmentMode) "Submitting amendment request" else "Submitting your declaration"
-
   def title: String = {
     (isAmendmentMode, isCancelDeclaration) match {
       case (true, false) => "Submitting amendment request"

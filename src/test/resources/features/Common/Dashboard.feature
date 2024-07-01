@@ -1,4 +1,4 @@
-@Regression3
+@Regression3 @FailedTest
 Feature: Validate Dashboard and Declaration Information
 
   Background:
@@ -380,7 +380,7 @@ Feature: Validate Dashboard and Declaration Information
 
     # Below scenario -
     # 1.Checks saved draft declaration and removal of draft declaration
-
+@Smoke
   Scenario: Check partial declarations saved on Saved Declarations and remove saved declaration
     Given I fill section1 for STANDARD, prelodged declaration
     And I click on Exit and comeback later link
