@@ -9,7 +9,7 @@ Feature: Section2 Clearance Prelodged
   #    no for third party goods transportation page and Permanent as Procedure Choice
   # 3. The clearance journey doesn't contain other parties involved and list pages.
 
-  @Section2 @Clearance
+  @Section2 @Clearance @Smoke
   Scenario: Exports Clearance Prelodged Scenario with possible scenarios
     Given I fill section1 for CLEARANCE,prelodged declaration
     Then I should land on Entry-Into-Declarant-Records page

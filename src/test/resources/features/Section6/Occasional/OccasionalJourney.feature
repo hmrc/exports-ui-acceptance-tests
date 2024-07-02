@@ -125,7 +125,7 @@ Feature: Section6 Occasional Journey
           #  Inland transport details
           #  Border transport
 
-    @Section6 @Occasional @Smoke
+    @Section6 @Occasional
     Scenario: Occasional arrived journey section-6
       Given I fill section1 for OCCASIONAL,arrived declaration
       And I fill section2

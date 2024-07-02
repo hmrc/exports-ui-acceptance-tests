@@ -11,7 +11,7 @@ Feature: Section6 Simplified Journey
      # 3 The following page is skipped
           # Departure Transport
 
-  @Section6 @Simplified @Smoke
+  @Section6 @Simplified
   Scenario: simplified journey section-6
     Given I fill section1 for SIMPLIFIED,Prelodged declaration
     And I fill section2

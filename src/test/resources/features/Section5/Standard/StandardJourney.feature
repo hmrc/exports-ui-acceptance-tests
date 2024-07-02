@@ -11,7 +11,7 @@ Feature: Section5 Standard Journey
      # 4. skipping of documents required yes/no page
      # 5. Checking Additional Documents Dynamic title when Authorisation code required documents is [Yes] and isLicenseRequired is [Yes]
 
-  @Section5 @Standard
+  @Section5 @Standard @Smoke
   Scenario: Complete Items section on Standard Prelodged declaration journey and remove information on all list page
     Given I fill section1 for STANDARD,prelodged declaration
     And I fill section2
