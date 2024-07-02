@@ -1,4 +1,4 @@
-@Regression2
+@Regression3
 Feature: Section6 Supplementary Journey
 
   Background:
@@ -12,7 +12,7 @@ Feature: Section6 Supplementary Journey
           # Express-Consignment
           # Transport-Payment
 
-  @Section6 @Supplementary
+  @Section6 @Supplementary @Smoke
   Scenario: supplementary journey section-6
     Given I fill section1 for SUPPLEMENTARY,eidr declaration
     And I fill section2
@@ -65,7 +65,7 @@ Feature: Section6 Supplementary Journey
      # 5. The following pages are skipped in this navigation
           # Departure transport
           # Transport Country
-
+    And I clear Country of registration for the transport leaving the UK border, Transport leaving the border, Transport details at the border keys from cache
     And I navigate to Authorisation Choice page
     And I select Permanent as export procedure choice
     And I click continue
@@ -91,6 +91,8 @@ Feature: Section6 Supplementary Journey
     And I select Postal or mail as mode of Inland transport
     And I click continue
     Then I should land on Container-List page
+    And I select No to add another container
+    And I click continue
     And I navigate to MiniCYA page for Section-6
     And I click continue on MiniCya
     Then I should land on Saved-Summary page

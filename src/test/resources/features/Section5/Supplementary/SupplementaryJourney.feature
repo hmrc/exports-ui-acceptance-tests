@@ -96,7 +96,7 @@ Feature: Section5 Supplementary Journey
     And I select 000 as additional procedure code
     And I click continue
     Then I should land on Commodity-Details page
-    And I enter commodity details code as 2803400090 and description as Old St Andrews golf ball whisky
+    And I enter commodity details code as 28034008 and description as Old St Andrews golf ball whisky
     And I click continue
     Then I should land on Dangerous-Goods-Code page
     And I select No to enter dangerous goods
@@ -185,7 +185,7 @@ Feature: Section5 Supplementary Journey
     And I select 000 as additional procedure code
     And I click continue
     Then I should land on Commodity-Details page
-    And I enter commodity details code as 9003400090 and description as St Andrews golf ball whisky
+    And I enter commodity details code as 90034003 and description as St Andrews golf ball whisky
     And I click continue
     And I navigate to Dangerous Goods Code page
     And I select Yes to enter the code 1234 as dangerous goods
@@ -240,7 +240,7 @@ Feature: Section5 Supplementary Journey
     And I select 1SW as additional procedure code
     And I click continue
     Then I should land on Commodity-Details page
-    And I enter commodity details code as 9503400090 and description as Straw for bottles
+    And I enter commodity details code as 95034005 and description as Straw for bottles
     And I click continue
     And I navigate to Dangerous Goods Code page
     And I select Yes to enter the code 1034 as dangerous goods

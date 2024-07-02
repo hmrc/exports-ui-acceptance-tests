@@ -1,4 +1,4 @@
-@Regression2
+@Regression3
 Feature: Section6 Standard Journey
 
   Background:
@@ -9,7 +9,7 @@ Feature: Section6 Standard Journey
      # 2. The following page is visible
           # Supervising-Customs-Office
 
-  @Section6 @Standard
+  @Section6 @Standard @Smoke
   Scenario: standard journey section-6
     Given I fill section1 for STANDARD,prelodged declaration
     And I fill section2
@@ -251,7 +251,7 @@ Feature: Section6 Standard Journey
     # Scenario to cover External Amend functionality
     And I enter LRN U0LRN813131
     And I click save and return to summary
-    And I check the sections headings and click confirm and continue
+    And I check the section headings and click confirm and continue
     Then I should land on Submit-Your-Declaration page
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
@@ -259,7 +259,7 @@ Feature: Section6 Standard Journey
     And I navigate to Choice page
     And I select to Manage Submit Declaration
     Then I should land on Dashboard page
-    And I validate declaration details on Submitted tab and check Status is Amended
+    And I validate declaration details on Submitted tab and check Status is Goods being examined
     And I navigate to declaration information page after clicking on mrn link
     Then I should land on Declaration-Information page
     And I validate details on declaration information page

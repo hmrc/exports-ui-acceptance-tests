@@ -5,7 +5,7 @@ Feature: Occasional Journey Section 3
     Given I clear data in cache
 
   # Below scenario - RoutingCountries:[Yes] , LocationOfGoods: [No], Number of countries Added: [1]
-  @Section3 @Occasional @smoke
+  @Section3 @Occasional
   Scenario: Complete Routes and Locations section on Occasional Prelodged declaration journey
     Given I fill section1 for OCCASIONAL,prelodged declaration
     And I fill section2

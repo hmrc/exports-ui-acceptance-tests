@@ -77,7 +77,7 @@ Feature: Section4 Standard Journey
      # 2. Check removal of Previous Documents
      # 3. Validating skipping Total-Package-Quantity page when destination country is Guernsey Or Jersey
 
-  @Section4 @Standard
+  @Section4 @Standard @Smoke
   Scenario: Complete Transactions section on standard arrived declaration journey
     Given I fill section1 for STANDARD,arrived declaration
     And I fill section2

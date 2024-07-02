@@ -10,7 +10,7 @@ Feature: Section2 Standard Prelodged
   #    yes for third party goods transportation page and Permanent as Procedure Choice
   # 3. With the above combination the navigation through Is-Authorisation-Required page
 
-  @Section2 @Standard
+  @Section2 @Standard @Smoke
   Scenario: Exports Standard Prelodged Scenario with Permanent as export procedure code choice, Consolidator and Manufacturer as other
             parties are involved
     Given I fill section1 for STANDARD,prelodged declaration
@@ -91,7 +91,7 @@ Feature: Section2 Standard Prelodged
     #  the Carrier EORI Number field should be skipped
     Then I navigate to Are You The Exporter page
     And I select Yes to I am the Exporter
-    And I clear Exporter’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation, Carrier or haulier’s details keys from cache
+    And I clear Exporter’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation keys from cache
     And I click continue
     Then I should land on Third-Party-Goods-Transportation page
     And I select No on third party goods transportation page
@@ -132,7 +132,7 @@ Feature: Section2 Standard Prelodged
   #    yes for third party goods transportation page and Temporary as Procedure Choice
   # 3. With the above combination the page Is-Authorisation-Required is skipped
 
-  @Section2 @Smoke @Standard
+  @Section2 @Standard
   Scenario: Exports Standard Arrived Scenario with Temporary as export procedure code choice and No other
             parties are involved
     Given I fill section1 for STANDARD,arrived declaration

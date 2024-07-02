@@ -24,7 +24,7 @@ object CancelResultPage extends BasePage {
   val backButtonHref: String = ""
   val path: String = "/cancellation-result"
   def title: String =
-    if (detail(Lrn).startsWith("G1S")) "Your declaration has been cancelled"
+    if (detail(Lrn).startsWith("G9S")) "Your declaration has been cancelled"
     else
       "Your cancellation request has been denied"
 

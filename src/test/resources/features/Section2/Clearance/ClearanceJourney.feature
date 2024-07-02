@@ -1,4 +1,4 @@
-@Regression
+@Regression1
 Feature: Section2 Clearance Prelodged
 
   Background:
@@ -9,7 +9,7 @@ Feature: Section2 Clearance Prelodged
   #    no for third party goods transportation page and Permanent as Procedure Choice
   # 3. The clearance journey doesn't contain other parties involved and list pages.
 
-  @Section2 @Clearance
+  @Section2 @Clearance @Smoke
   Scenario: Exports Clearance Prelodged Scenario with possible scenarios
     Given I fill section1 for CLEARANCE,prelodged declaration
     Then I should land on Entry-Into-Declarant-Records page
@@ -30,10 +30,10 @@ Feature: Section2 Clearance Prelodged
     Then I should land on Is-This-Exs page
     And I select Yes to is this exs
     And I click continue
-    Then I should land on Consingor-EORI-Number page
+    Then I should land on Consignor-EORI-Number page
     And I select No to consignor eori number
     And I click continue
-    Then I should land on Consingor-Address page
+    Then I should land on Consignor-Address page
     And I provide consignor details
     And I click continue
     Then I should land on Third-Party-Goods-Transportation page
@@ -115,7 +115,7 @@ Feature: Section2 Clearance Prelodged
     Then I should land on Is-This-Exs page
     And I select Yes to is this exs
     And I click continue
-    Then I should land on Consingor-EORI-Number page
+    Then I should land on Consignor-EORI-Number page
     And I select Yes on consignor eori number page and enter eori number as GB123456789124
     And I click continue
     Then I should land on Third-Party-Goods-Transportation page
@@ -135,7 +135,7 @@ Feature: Section2 Clearance Prelodged
   #    no for third party goods transportation page and Permanent as Procedure Choice
   # 3. The clearance journey doesn't contain other parties invloved and list pages.
 
-  @Section2 @Smoke @Clearance
+  @Section2 @Clearance
   Scenario: Exports Clearance Arrived Scenario which covers maximum number of pages
     Given I fill section1 for CLEARANCE,arrived declaration
     Then I should land on Entry-Into-Declarant-Records page
@@ -156,10 +156,10 @@ Feature: Section2 Clearance Prelodged
     Then I should land on Is-This-Exs page
     And I select Yes to is this exs
     And I click continue
-    Then I should land on Consingor-EORI-Number page
+    Then I should land on Consignor-EORI-Number page
     And I select No to consignor eori number
     And I click continue
-    Then I should land on Consingor-Address page
+    Then I should land on Consignor-Address page
     And I provide consignor details
     And I click continue
     Then I should land on Third-Party-Goods-Transportation page

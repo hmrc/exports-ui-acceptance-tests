@@ -43,7 +43,7 @@ object ConfirmationPage extends BasePage {
       case "R"                                                 => "Your declaration has been pre-lodged with HMRC"
       case _ =>
         if (isAmendmentMode) {
-          if (declarationStatus.contains("REJECTED")) "Amendment request rejected"
+          if (declarationStatus.contains("REJECTED") && !isCancelDeclaration) "Amendment request rejected"
           else if (declarationStatus.contains("DENIED")) "Amendment request failed"
           else if (declarationStatus.contains("REJECTED") && isCancelDeclaration) "Your amendment cancellation has been accepted"
           else if (declarationStatus.contains("PENDING")) "Your amendment request is still being processed"

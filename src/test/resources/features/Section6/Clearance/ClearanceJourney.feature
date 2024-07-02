@@ -1,4 +1,4 @@
-@Regression2
+@Regression3
 Feature: Section6 Clearance Journey
 
   Background:
@@ -15,6 +15,7 @@ Feature: Section6 Clearance Journey
 
   @Section6 @Clearance
   Scenario: clearance journey section-6
+    Given I clear data in cache
     Given I fill section1 for CLEARANCE,prelodged declaration
     And I fill section2
     And I fill section3
@@ -117,6 +118,7 @@ Feature: Section6 Clearance Journey
 
   @Section6 @Clearance
   Scenario: clearance arrived journey section-6
+    Given I clear data in cache
     Given I fill section1 for CLEARANCE,arrived declaration
     And I fill section2
     And I fill section3

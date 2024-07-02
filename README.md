@@ -121,6 +121,31 @@ This code is open source software licensed under the [Apache 2.0 License]("http:
 
 ## Testing Scenarios Coverage
 
+# Smoke Test
+
+## Section 1
+
+- **Running Standard Journey**: Covers all pages except supplementary ones.
+- **Running Supplementary Journey**: Necessary because the consignment page is different from the rest of the journeys.
+
+## Section 2
+
+- **Running Standard Journey**: Covers all pages except for Clearance.
+- **Running Clearance Journey**: Necessary because it includes the Entry into Declarant Record and IsExs pages, which are not part of other journeys.
+
+## Sections 3 to 6
+
+- **Running Standard Journey**: Covers all the pages.
+
+## Common Journeys
+
+- **Running Amend Journey**: Includes checking the Dashboard, Saved Declarations, and Amend Functionality.
+- **Running DashBoard Journey**: Covers scenarios related Cancel declaration and Print link
+- **Running Rejected Notification Journey**: Covers scenarios related to notification rejections.
+
+
+## Regression
+
 ## Section 1
 
  **Standard & Clearance Journey** -
