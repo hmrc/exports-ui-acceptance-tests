@@ -1,4 +1,4 @@
-@Regression3
+@Regression3 @Smoke
 Feature: Section6 Supplementary Journey
 
   Background:
