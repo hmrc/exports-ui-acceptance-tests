@@ -324,6 +324,31 @@ Feature: Validate Dashboard and Declaration Information
     Then I should land on Declaration-Information page
     And I validate details on declaration information page
 
+  # Below scenario -
+    # 1. Validates View Print link
+    # 2. Checks successful and unsuccessful Cancellation of a Declaration
+  @Smoke
+  Scenario: check Cancellation of declaration and validate print link
+    Given I fill section1 for STANDARD, prelodged declaration
+    And I fill section2
+    And I fill section3
+    And I fill section4
+    And I fill section5
+    And I fill section6
+    Then I should land on Saved-Summary page
+    And I check the section headings and click confirm and continue
+    Then I should land on Submit-Your-Declaration page
+    And I submit the declaration
+    Then I should land on holding page and redirect to Confirmation page
+    And I should land on Confirmation page
+    And I navigate to Choice page
+    And I select to Manage Submit Declaration
+    Then I should land on Dashboard page
+    And I validate declaration details on Submitted tab and check Status is Arrived and accepted
+    And I navigate to declaration information page after clicking on mrn link
+    Then I should land on Declaration-Information page
+    And I validate details on declaration information page
+
     # Print and View - Validate View or Print declaration page
     And I click on print or view link
     Then I should land on print-or-view page
@@ -341,7 +366,7 @@ Feature: Validate Dashboard and Declaration Information
     And I select to Manage Submit Declaration
     Then I should land on Dashboard page
     And I click on Submitted tab
-    And I validate declaration details on Submitted tab and check Status is Released
+    And I validate declaration details on Submitted tab and check Status is Arrived and accepted
     And I navigate to declaration information page after clicking on mrn link
     Then I validate Cancellation request denied status on timeline
 
