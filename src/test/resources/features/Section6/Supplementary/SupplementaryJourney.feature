@@ -1,4 +1,4 @@
-@Regression3 @Smoke
+@Regression3
 Feature: Section6 Supplementary Journey
 
   Background:
@@ -12,7 +12,7 @@ Feature: Section6 Supplementary Journey
           # Express-Consignment
           # Transport-Payment
 
-  @Section6 @Supplementary
+  @Section6 @Supplementary @Smoke
   Scenario: supplementary journey section-6
     Given I fill section1 for SUPPLEMENTARY,eidr declaration
     And I fill section2

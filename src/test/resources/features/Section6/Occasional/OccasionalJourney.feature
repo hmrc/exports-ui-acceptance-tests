@@ -1,4 +1,4 @@
-@Regression3 @Smoke
+@Regression3
 Feature: Section6 Occasional Journey
 
   Background:
@@ -125,7 +125,7 @@ Feature: Section6 Occasional Journey
           #  Inland transport details
           #  Border transport
 
-    @Section6 @Occasional
+    @Section6 @Occasional @Smoke
     Scenario: Occasional arrived journey section-6
       Given I fill section1 for OCCASIONAL,arrived declaration
       And I fill section2

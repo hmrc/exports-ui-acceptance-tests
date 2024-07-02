@@ -1,4 +1,4 @@
-@Regression3 @Smoke
+@Regression3
 Feature: Section6 Clearance Journey
 
   Background:
@@ -13,7 +13,7 @@ Feature: Section6 Clearance Journey
          #  Inland-Transport-details
          #  Border-Transport
 
-  @Section6 @Clearance
+  @Section6 @Clearance @Smoke
   Scenario: clearance journey section-6
     Given I clear data in cache
     Given I fill section1 for CLEARANCE,prelodged declaration

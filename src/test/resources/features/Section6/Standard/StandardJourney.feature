@@ -1,4 +1,4 @@
-@Regression3 @Smoke
+@Regression3
 Feature: Section6 Standard Journey
 
   Background:
@@ -9,7 +9,7 @@ Feature: Section6 Standard Journey
      # 2. The following page is visible
           # Supervising-Customs-Office
 
-  @Section6 @Standard
+  @Section6 @Standard @Smoke
   Scenario: standard journey section-6
     Given I fill section1 for STANDARD,prelodged declaration
     And I fill section2

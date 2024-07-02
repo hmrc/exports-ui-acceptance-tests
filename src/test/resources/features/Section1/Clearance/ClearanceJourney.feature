@@ -1,4 +1,4 @@
-@Regression1
+@Regression1 @Smoke
 Feature: Clearance Journey
 
   Background:
