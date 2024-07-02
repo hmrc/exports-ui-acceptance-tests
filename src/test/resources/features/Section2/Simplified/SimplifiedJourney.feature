@@ -10,7 +10,7 @@ Feature: Section2 Simplified Journey Scenarios
   #    yes for third party goods transportation page and Temporary as Procedure Choice
   # 3. With the above combination the journey is not navigated through Is-Authorisation-Required
 
-  @Section2 @Simplified @Smoke
+  @Section2 @Simplified
     Scenario Outline: Exports Simplified Declaration (
     Given I fill section1 for SIMPLIFIED,<Type> declaration
     Then I should land on Are-You-The-Exporter page

@@ -135,7 +135,7 @@ Feature: Section2 Clearance Prelodged
   #    no for third party goods transportation page and Permanent as Procedure Choice
   # 3. The clearance journey doesn't contain other parties invloved and list pages.
 
-  @Section2 @Smoke @Clearance
+  @Section2 @Clearance
   Scenario: Exports Clearance Arrived Scenario which covers maximum number of pages
     Given I fill section1 for CLEARANCE,arrived declaration
     Then I should land on Entry-Into-Declarant-Records page

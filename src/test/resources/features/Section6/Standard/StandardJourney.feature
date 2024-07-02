@@ -188,7 +188,7 @@ Feature: Section6 Standard Journey
           # Supervising-Customs-Office
      # This is full arrived journey which cover all the pages, by adding a seal to the container and remove the seal
 
-  @Section6 @Standard @Smoke
+  @Section6 @Standard
   Scenario: standard arrived journey section-6
     Given I fill section1 for STANDARD,arrived declaration
     And I fill section2

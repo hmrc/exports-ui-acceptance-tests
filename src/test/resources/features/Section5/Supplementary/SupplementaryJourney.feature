@@ -170,7 +170,7 @@ Feature: Section5 Supplementary Journey
     # 1. Finishing a Supplementary simplified Declaration
     # 2. Change Item details by clicking change link on declaration-items-list page after completing an item
 
-  @Section5 @Supplementary @Smoke
+  @Section5 @Supplementary
   Scenario: Complete Items section on Supplementary Simplified declaration journey and Validate Changing Item Details
     Given I fill section1 for SUPPLEMENTARY,simplified declaration
     And I fill section2

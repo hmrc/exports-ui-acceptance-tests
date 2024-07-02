@@ -23,7 +23,7 @@ Feature: Supplementary Journey For Section 3
     And I click continue on MiniCya
 
   # Below scenario - No routing and countries of routing pages, LocationOfGoods: [Yes], Number of countries Added: [1]
-  @Section3 @Supplementary @Smoke
+  @Section3 @Supplementary
   Scenario: Complete Routes and Locations section on Supplementary Edir declaration journey
     Given I fill section1 for SUPPLEMENTARY,eidr declaration
     And I fill section2

@@ -9,7 +9,7 @@ Feature: Section4 Standard Journey
      # 2. Check title on previous documents page when authorisation choice is Permanent
      # 3. Validating skipping Total-Package-Quantity page when destination country is Guernsey Or Jersey
 
-  @Section4 @Standard @Smoke
+  @Section4 @Standard
   Scenario: Complete Transactions section on standard prelodged declaration journey and validate dynamic title changes on previous documents page
     Given I fill section1 for STANDARD,prelodged declaration
     And I fill section2

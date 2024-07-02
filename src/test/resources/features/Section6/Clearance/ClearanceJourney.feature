@@ -13,7 +13,7 @@ Feature: Section6 Clearance Journey
          #  Inland-Transport-details
          #  Border-Transport
 
-  @Section6 @Clearance @Smoke
+  @Section6 @Clearance
   Scenario: clearance journey section-6
     Given I clear data in cache
     Given I fill section1 for CLEARANCE,prelodged declaration
