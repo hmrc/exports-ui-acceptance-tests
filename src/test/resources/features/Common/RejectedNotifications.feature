@@ -1,5 +1,8 @@
-@Regression
+@Regression3 @Smoke
 Feature: Validate Rejected Notifications
+
+  Background:
+    Given I clear data in cache
 
   Scenario: Fix a rejected declaration and submit the declaration
     Given I fill section1 for STANDARD, prelodged declaration
@@ -13,7 +16,7 @@ Feature: Validate Rejected Notifications
     And I click continue
     And I navigate to summary page
     Then I should land on Saved-Summary page
-    And I check the sections' headings and click confirm and continue
+    And I check the section headings and click confirm and continue
     Then I should land on Submit-Your-Declaration page
     And I submit the declaration
     Then I should land on holding page and redirect to rejected notification page
@@ -35,7 +38,25 @@ Feature: Validate Rejected Notifications
     And I check updated Lrn error details on rejected notifications
     And I navigate to check you answer from rejected notification page
     Then I should land on Saved-Summary page
-    And I check the sections' headings and click confirm and continue
+    And I check the section headings and click confirm and continue
     Then I should land on Submit-Your-Declaration page
     And I submit the declaration
     Then I should land on holding page and redirect to Confirmation page
+    And I should land on Confirmation page
+    And I navigate to Choice page
+    And I select to Manage Submit Declaration
+    Then I should land on Dashboard page
+    And I validate declaration details on Submitted tab and check Status is Arrived and accepted
+    And I navigate to declaration information page after clicking on mrn link
+    Then I should land on Declaration-Information page
+
+    # Duplicate ducr warning messages check
+    And I click on copy link
+    And I enter ducr 8GB123456469274-101SHIP1 and a rejected lrn
+    And I click continue
+    And I click continue on summary
+    And I submit the declaration
+    Then I should land on holding page and redirect to rejected notification page
+    And I validate ducr warning on rejected notifications page
+    Then I click on Ducr change link to fix error
+    And I validate duplicate ducr warning on ducr entry page

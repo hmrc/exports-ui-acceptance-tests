@@ -17,6 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.common
 
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Presence}
+import uk.gov.hmrc.test.ui.pages.common.DeclarationInformationPage.isCancelDeclaration
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage.{isEIDR, isPrelodgedDeclaration}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.Lrn
 
@@ -24,9 +25,21 @@ object DeclarationHoldingPage extends BasePage {
 
   val backButtonHref: String = ""
 
-  def path: String =
-    if (isAmendmentMode) "/declaration/amendment-holding\\?isCancellation=false" else "/declaration/holding"
-  def title: String = if (isAmendmentMode) "Submitting amendment request" else "Submitting your declaration"
+  def path: String = {
+    (isAmendmentMode, isCancelDeclaration) match {
+      case (true, false) => "/declaration/amendment-holding\\?isCancellation=false"
+      case (true, true) => "/declaration/amendment-holding\\?isCancellation=true"
+      case _ => "/declaration/holding"
+    }
+  }
+
+  def title: String = {
+    (isAmendmentMode, isCancelDeclaration) match {
+      case (true, false) => "Submitting amendment request"
+      case (true, true) => "Submitting amendment cancellation request"
+      case _ => "Submitting your declaration"
+    }
+  }
 
   override def checkBackButton(): Unit = ()
 
@@ -48,6 +61,8 @@ object DeclarationHoldingPage extends BasePage {
 
     if (startsWithTriggerChar || startsWithCAndCondition) {
       waitForLinkText("Your declarations")
+    } else if (isCancelDeclaration) {
+      waitForLinkText("View declaration details")
     } else {
       waitForLinkText("Declaration status", Presence)
     }

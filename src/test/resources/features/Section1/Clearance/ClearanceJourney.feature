@@ -1,6 +1,9 @@
 @Regression1
 Feature: Clearance Journey
 
+  Background:
+    Given I clear data in cache
+
   # Below scenario - DoYouHaveADucr:[Yes]
   @Section1 @Clearance
   Scenario Outline: Fill Section 1 for a Clearance Prelodged and Arrived Declaration

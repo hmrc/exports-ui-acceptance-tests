@@ -5,7 +5,7 @@ Feature: Clearance Journey Section 3
     Given I clear data in cache
 
   # Below scenario - No routing and countries of routing pages, LocationOfGoods: [No], Number of countries Added: [1]
-  @Section1 @Clearance
+  @Section3 @Clearance
   Scenario: Complete Routes and Locations section on Clearance prelodged declaration journey
     Given I fill section1 for CLEARANCE,prelodged declaration
     And I fill section2
@@ -23,7 +23,7 @@ Feature: Clearance Journey Section 3
     And I click continue on MiniCya
 
       # Below scenario - No routing and countries of routing pages, LocationOfGoods: [Yes], Number of countries Added: [1]
-  @Section1 @Clearance @smoke
+  @Section3 @Clearance
   Scenario: Complete Routes and Locations section on Clearance arrived declaration journey
     Given I fill section1 for CLEARANCE,arrived declaration
     And I fill section2

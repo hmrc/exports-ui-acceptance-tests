@@ -31,7 +31,7 @@ object CommodityDetailsPage extends BasePage {
     }
 
   def path: String = itemUrl(pageId)
-  val title: String = "Commodity code and item details"
+  val title: String = "Enter a commodity code and item details"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common -> List(itemsCommodityDetails, itemsCommodityDetails1),

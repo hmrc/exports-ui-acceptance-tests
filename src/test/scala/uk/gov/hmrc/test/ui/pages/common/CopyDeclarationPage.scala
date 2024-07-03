@@ -46,6 +46,8 @@ object CopyDeclarationPage extends BasePage {
 
     if (values(1).equals("24"))
       fillTextBoxById("lrn", detail(Lrn))
+    else if (values(1).equals("rejected"))
+      fillTextBoxById("lrn", "BCDS12062")
     else
       fillTextBoxById("lrn", lrn)
 

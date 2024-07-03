@@ -9,7 +9,7 @@ Feature: Section4 Supplementary Journey
      # 2. Check title on previous documents page when authorisation choice is Permanent
      # 3. Validating skipping Total-Package-Quantity page when destination country is Guernsey Or Jersey
 
-  @Section4 @Standard
+  @Section4 @Supplementary
   Scenario: Complete Transactions section on Supplementary simplified declaration journey and validate dynamic title changes on previous documents page
     Given I fill section1 for SUPPLEMENTARY,simplified declaration
     And I fill section2
@@ -76,7 +76,7 @@ Feature: Section4 Supplementary Journey
      # 1. Invoices-And-Exchange-Rate-Choice:[No], Exchange Rate:[No], Previous Documents Added:[1]
      # 3. Validating skipping Total-Package-Quantity page when destination country is Guernsey Or Jersey
 
-  @Section4 @Standard
+  @Section4 @Supplementary
   Scenario: Complete Transactions section on Supplementary eidr declaration journey
     Given I fill section1 for SUPPLEMENTARY,eidr declaration
     And I fill section2

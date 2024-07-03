@@ -16,6 +16,7 @@
 
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.section1
 
+import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
 import uk.gov.hmrc.test.ui.pages.section1._
 
@@ -25,5 +26,9 @@ class DucrEntryStepDef extends BaseStepDef {
 
   And("""^I enter Ducr (.*)""") { (ducr: String) =>
     DucrEntryPage.fillPage(ducr)
+  }
+
+  And("""^I validate duplicate ducr warning on ducr entry page""") { () =>
+    DucrEntryPage.ducrWarning.getText must be("DUCR reference is a duplication or is invalid")
   }
 }
