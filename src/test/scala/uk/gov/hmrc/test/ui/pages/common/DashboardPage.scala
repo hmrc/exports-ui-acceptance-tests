@@ -28,7 +28,19 @@ object DashboardPage extends BasePage {
 
   def backButtonHref: String = ChoicePage.path
   val path: String = "/dashboard\\?page=1"
-  val title = "Your declarations"
+  def title: String = {
+
+    val cancelledPressed = cancelledTab.getAttribute("aria-pressed").equals("true")
+    val rejectedPressed = rejectedTab.getAttribute("aria-pressed").equals("true")
+    val actionNeededPressed = actionTab.getAttribute("aria-pressed").equals("true")
+
+    (cancelledPressed, rejectedPressed, actionNeededPressed) match {
+      case (true, _, _) => "Your cancelled and expired declarations"
+      case (_, true, _) => "Your rejected declarations"
+      case (_, _, true) => "Action needed on your declarations"
+      case _ => "Your submitted declarations"
+    }
+  }
 
   override def checkExpanders(): Unit = ()
 
@@ -36,9 +48,14 @@ object DashboardPage extends BasePage {
 
   override def fillPage(values: String*): Unit = ()
 
-  // validateDashboard("Submitted", "Declaration submitted")
-
   def mrnValue: WebElement = findElementByCssSelector("tr:nth-child(1) > td:nth-child(1) span:first-child")
+
+  def rejectedTab: WebElement = findElementByCssSelector("#rejected-submissions-button")
+  def submittedTab: WebElement = findElementByCssSelector("#submitted-submissions-button")
+  def actionTab: WebElement = findElementByCssSelector("#action-submissions-button")
+  def cancelledTab: WebElement = findElementByCssSelector("#cancelled-submissions-button")
+
+   // ex: validateDashboard("Submitted", "Declaration submitted")
 
   def validateDashboard(tab: String, status: String): Unit = {
     findElementByCssSelector(".selected-status-group").getText mustBe tab
