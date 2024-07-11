@@ -22,7 +22,7 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage.exitAndCompleteLater
 object DraftSavedPage extends BasePage {
 
   val backButtonHref: String = ""
-  val path: String = "/declaration/draft-saved"
+  val path: String = "/draft-saved"
   val title: String = "Your draft declaration will be saved for 30 days"
 
   override def checkExpanders(): Unit = ()
