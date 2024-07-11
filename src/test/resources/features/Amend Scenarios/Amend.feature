@@ -1,4 +1,4 @@
-@Regression3 @Smoke @FailedTest
+@Regression3 @Smoke @FailedTest @Regression
 Feature: Amend Scenarios
 
   Background:

@@ -1,4 +1,4 @@
-@Regression2
+@Regression2 @Regression
 Feature: Clearance Journey Section 5
 
   Background:

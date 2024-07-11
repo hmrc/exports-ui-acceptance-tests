@@ -43,22 +43,31 @@ $ ./run_tag.sh @Smoke
 
 ### How to run Regression tests only
 ```bash
-$ ./run_tag.sh @Regression
-```
+1. To run all regression scenarios:
+   ./run_tag.sh @Regression
+
+2. To run regression scenarios for Sections 1, 2, and 3:
+   ./run_tag.sh @Regression1
+
+3. To run regression scenarios for Sections 4 and 5:
+   ./run_tag.sh @Regression2
+
+4. To run regression scenarios for Section 6, Amend, Dashboard, and Rejected Notifications:
+   ./run_tag.sh @Regression3```
 
 ### How to run specific tests
 Add the `@Wip` tag to the Scenarios to test and run:
 ```bash
-$ ./run_tag.sh @Wip
+  ./run_tag.sh @Wip
 ```
 
 To run Scenarios for specific journeys run the script with the following tags: 
 ```bash
-$ ./run_tag.sh  @Clearance      # to run Clearance journey Scenarios
-$ ./run_tag.sh  @Occasional     # to run Occasional journey Scenarios
-$ ./run_tag.sh  @Standard       # to run Standard journey Scenarios
-$ ./run_tag.sh  @Simplified     # to run Simplified journey Scenarios
-$ ./run_tag.sh  @Supplementary  # to run Supplementary journey Scenarios
+ ./run_tag.sh  @Clearance      # to run Clearance journey Scenarios
+ ./run_tag.sh  @Occasional     # to run Occasional journey Scenarios
+ ./run_tag.sh  @Standard       # to run Standard journey Scenarios
+ ./run_tag.sh  @Simplified     # to run Simplified journey Scenarios
+ ./run_tag.sh  @Supplementary  # to run Supplementary journey Scenarios
 ```
 
 ### Optional arguments of the `run_tag.sh` script:

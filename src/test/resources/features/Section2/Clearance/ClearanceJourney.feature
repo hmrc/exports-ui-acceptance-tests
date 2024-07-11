@@ -1,4 +1,4 @@
-@Regression1
+@Regression1 @Regression
 Feature: Section2 Clearance Prelodged
 
   Background:
