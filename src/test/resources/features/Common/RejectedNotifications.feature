@@ -1,4 +1,4 @@
-@Regression3 @Smoke
+@Regression3 @Smoke @Regression
 Feature: Validate Rejected Notifications
 
   Background:
