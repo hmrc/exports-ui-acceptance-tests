@@ -62,7 +62,7 @@ Feature: Section5 Standard Journey
     And I select No on package information list page
     And I click continue
     Then I should land on Commodity-Measure page
-    And I enter gross weight as 500 and net weight as 710
+    And I enter gross weight as 50000000.000 and net weight as 71000000.000
     And I click continue
     Then I should land on Supplementary-Units page
     And I select Yes and enter 30 as supplementary units
