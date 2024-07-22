@@ -33,7 +33,7 @@ object ConfirmationPage extends BasePage {
 
   def path: String = if (isAmendmentMode) "/declaration/amendment-outcome" else "/declaration/confirmation"
 
-  def declarationStatus = maybeDetails(BorderTransport).head
+  def declarationStatus: Seq[String] = maybeDetails(BorderTransport).head
 
   override def title: String =
     detail(Lrn).take(1) match {
@@ -80,7 +80,6 @@ object ConfirmationPage extends BasePage {
       case "C" if isArrivedDeclaration                         => checkPageWhenCleared()
       case "C" | "Q" | "X" | "I" | "J" | "L" | "K" | "P" | "N" => checkPageWhenStillUnderCheck()
       case "D" | "U"                                           => checkPageWhenDocumentsRequired()
-      case "R"                                                 => checkPageWhenReceived()
       case _                                                   => checkPageWhenAccepted()
     }
 
@@ -100,21 +99,6 @@ object ConfirmationPage extends BasePage {
     checkContentLinks(List(linkToTimeline, linkToSupport))
   }
 
-  private def checkPageWhenReceived(): Unit = {
-    val mrn = checkTable()
-    checkContentLinks(
-      List(
-        linkToTimeline,
-        linkToClearanceHub,
-        linkToMovements,
-        linkToMovements,
-        linkToTimeline,
-        linkToSfus(mrn),
-        linkToFeedback,
-        linkToSupport
-      )
-    )
-  }
 
   private def checkPageWhenAccepted(): Unit = {
     checkTable()
@@ -181,7 +165,6 @@ object ConfirmationPage extends BasePage {
   def clickDeclarationStatusLink(): Unit =
     clickByCssSelector("p:nth-child(5) > a")
 
-  private val linkToSfus = (mrn: String) => (host + s"/customs-declare-exports/file-upload?mrn=$mrn").r
   private val linkToClearanceHub =
     "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/national-clearance-hub".r
   private val linkToDashboard = (host + "/customs-declare-exports/dashboard?page=1").r

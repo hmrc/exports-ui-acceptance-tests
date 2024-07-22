@@ -77,6 +77,7 @@ object DashboardPage extends BasePage {
   def mrnLink: WebElement = {
     val mrnCell = findElementByCssSelector("tr:nth-child(1) > td:nth-child(1)")
     findChildByClassName(mrnCell, "govuk-link")
+    waitForLinkText(mrnCell.getText)
   }
 
   def refreshPage(): Unit = {
@@ -90,4 +91,8 @@ object DashboardPage extends BasePage {
       case "Rejected" => clickById("rejected-submissions-button")
       case "Cancelled & expired" => clickById("cancelled-submissions-button")
     }
+
+  def viewPaginationComponent(): Unit = {
+    findElementByCssSelector("#submitted-submissions > div > nav").isDisplayed
+  }
 }

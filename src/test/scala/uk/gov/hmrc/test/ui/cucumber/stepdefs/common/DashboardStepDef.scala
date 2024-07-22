@@ -36,4 +36,8 @@ class DashboardStepDef extends BaseStepDef {
     DashboardPage.clickOnTab(tab)
   }
 
+  Then("""^I should see the pagination component""") { () =>
+    DashboardPage.viewPaginationComponent()
+  }
+
 }

@@ -5,10 +5,8 @@ Feature: Validate Dashboard and Declaration Information
     Given I clear data in cache
 
     # Below scenario -
-    # 1. Check various confirmation page titles and validates information on Dashboard and Declaration information pages
-    # 2. Validates View Print link
-    # 3. Checks successful and unsuccessful Copy of a Declaration
-    # 4. Checks successful and unsuccessful Cancellation of a Declaration
+    # 1. creates the number of declarations that we want by passing the number from step def
+    # 2. Submit the created declarations and validates the pagination component is present
 
   Scenario: Full Standard Journey and view declaration in submission dashboard
     Given I fill section1 for STANDARD, prelodged declaration
@@ -30,3 +28,5 @@ Feature: Validate Dashboard and Declaration Information
     And I navigate to declaration information page after clicking on mrn link
     Then I should land on Declaration-Information page
     And I create 30 draft declarations
+    And I click on back to your declarations link
+    Then I should see the pagination component

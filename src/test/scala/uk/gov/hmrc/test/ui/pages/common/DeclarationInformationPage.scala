@@ -107,6 +107,10 @@ object DeclarationInformationPage extends BasePage {
     storeOne(DeclarationInfoPath -> declarationInfoPath)
   }
 
+  def backToYourDeclarationsLink(): Unit = {
+     clickByXpath("//*[@id='back-link']/text()")
+  }
+
   def copyDeclaration(): Unit =
     clickById("copy-declaration")
 
