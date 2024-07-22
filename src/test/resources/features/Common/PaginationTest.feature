@@ -29,4 +29,4 @@ Feature: Validate Dashboard and Declaration Information
     Then I should land on Declaration-Information page
     And I create 30 draft declarations
     And I click on back to your declarations link
-    Then I should see the pagination component
+    Then I should validate the functionality of pagination component
