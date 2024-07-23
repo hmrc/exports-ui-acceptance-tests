@@ -109,9 +109,8 @@ object DashboardPage extends BasePage {
 
     for (pageNum <- 1 until totalPages-1) {
 
-        val paginationControls: WebElement = wait.until(
-          ExpectedConditions.presenceOfElementLocated(By.className("ceds-pagination__controls"))
-        )
+
+        val paginationControls: WebElement = waitForClass("ceds-pagination__controls")
 
         // Locate the pagination items
         val paginationItems: List[WebElement] = paginationControls.findElements(By.className("ceds-pagination__link")).asScala.toList
@@ -121,9 +120,7 @@ object DashboardPage extends BasePage {
           .getOrElse(throw new NoSuchElementException(s"Page ${pageNum + 1} link not found"))
 
         // Check if the "Next" link is displayed before clicking the second page
-        val nextLinkDisplayed = wait.until(
-          ExpectedConditions.presenceOfElementLocated(By.cssSelector("li.ceds-pagination__item.ceds-pagination__item--next > a"))
-        ).isDisplayed
+        val nextLinkDisplayed =  waitForCssSelector("li.ceds-pagination__item.ceds-pagination__item--next > a").isDisplayed
 
         assert(nextLinkDisplayed, "Next link displays on the first page")
 
@@ -131,16 +128,12 @@ object DashboardPage extends BasePage {
         nextPageLink.click()
 
         // Check if the "Previous" link is displayed from the next page
-        val previousLinkDisplayed = wait.until(
-          ExpectedConditions.presenceOfElementLocated(By.cssSelector("li.ceds-pagination__item.ceds-pagination__item--prev > a"))
-        ).isDisplayed
+        val previousLinkDisplayed = waitForCssSelector("li.ceds-pagination__item.ceds-pagination__item--prev > a").isDisplayed
 
         assert(previousLinkDisplayed, "Previous link displays from the next page")
 
         // Verify the content of the page
-        val activePage: WebElement = wait.until(
-          ExpectedConditions.presenceOfElementLocated(By.className("ceds-pagination__item--active"))
-        )
+        val activePage: WebElement = waitForClass("ceds-pagination__item--active")
         println(s"Current Page: ${activePage.getText}")
       }
     }
