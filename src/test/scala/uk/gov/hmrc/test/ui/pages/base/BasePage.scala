@@ -63,7 +63,7 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
       if (elementByIdDoesNotExist("section-header")) ""
       else s" - ${findElementById("section-header").getText}"
 
-    driver.getTitle mustBe title + sectionHeader + " - Make an export declaration online - GOV.UK"
+    driver.getTitle mustBe title + sectionHeader + " - Make and manage an export declaration online - GOV.UK"
     findElementsByTag("h1").head.getText mustBe title
   }
 
