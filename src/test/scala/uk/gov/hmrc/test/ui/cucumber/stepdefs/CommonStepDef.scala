@@ -21,6 +21,7 @@ import uk.gov.hmrc.test.ui.generator.SupportGenerator.generateEORI
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.{clear, clearAllCache, continue, continueOnMiniCya, detailKeys}
 import uk.gov.hmrc.test.ui.pages.base.Constants.yes
 import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
+import uk.gov.hmrc.test.ui.pages.common._
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isOccasional, isSimplified, isSupplementary}
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 import uk.gov.hmrc.test.ui.pages.section1._
@@ -272,6 +273,31 @@ class CommonStepDef extends BaseStepDef {
 
   And("""^I click on Exit and comeback later link""") { () =>
     CommonPage.exitAndComeBackLater()
+  }
+
+  And("""^I click on back to your declarations link""") { () =>
+    DeclarationInformationPage.backToYourDeclarationsLink()
+  }
+
+  And("""^I create (.*) draft declarations""") { (numberOfDeclarations:Int) =>
+    for (i <- 1 to numberOfDeclarations) {
+      DeclarationInformationPage.copyDeclaration()
+      val ducr = f"8GB123456469274-${101 + i}SHIP1"
+      val reference = f"M${8 + i}"
+      CopyDeclarationPage.fillPage(ducr, reference)
+      CommonPage.continue()
+      SummaryPage.checkPage()
+      SummaryPage.clickContinueOnSummary()
+      SubmitYourDeclarationPage.checkPage()
+      SubmitYourDeclarationPage.fillPage()
+      DeclarationHoldingPage.checkPage()
+      DeclarationHoldingPage.fillPage()
+      ConfirmationPage.checkPage()
+      ChoicePage.navigateToPage(ChoicePage.path)
+      ChoicePage.fillPage("Manage Submit Declaration")
+      DashboardPage.checkPage()
+      DashboardPage.mrnLink.click()
+    }
   }
 }
 object CommonStepDef {

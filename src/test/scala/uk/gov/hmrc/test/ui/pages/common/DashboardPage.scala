@@ -16,13 +16,17 @@
 
 package uk.gov.hmrc.test.ui.pages.common
 
-import org.openqa.selenium.WebElement
+import org.openqa.selenium.support.ui.{ExpectedConditions, WebDriverWait}
+import org.openqa.selenium.{By, WebElement}
 import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.common.DetailKeys._
 import uk.gov.hmrc.test.ui.pages.section1.ChoicePage
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys._
+
+import java.time.Duration
+import scala.jdk.CollectionConverters.CollectionHasAsScala
 
 object DashboardPage extends BasePage {
 
@@ -77,6 +81,7 @@ object DashboardPage extends BasePage {
   def mrnLink: WebElement = {
     val mrnCell = findElementByCssSelector("tr:nth-child(1) > td:nth-child(1)")
     findChildByClassName(mrnCell, "govuk-link")
+    waitForLinkText(mrnCell.getText)
   }
 
   def refreshPage(): Unit = {
@@ -89,5 +94,47 @@ object DashboardPage extends BasePage {
       case "Action needed" => clickById("action-submissions-button")
       case "Rejected" => clickById("rejected-submissions-button")
       case "Cancelled & expired" => clickById("cancelled-submissions-button")
+    }
+
+  def viewPaginationComponent(): Unit = {
+    findElementByCssSelector("#submitted-submissions > div > nav").isDisplayed
+
+      // WebDriverWait to wait for elements to be present
+      val wait = new WebDriverWait(driver, Duration.ofSeconds(10))
+
+      // Get the total number of pages from the pagination controls
+      val totalPages: Int = wait.until(
+        ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(".ceds-pagination__controls .ceds-pagination__item"))
+      ).size()
+
+    for (pageNum <- 1 until totalPages-1) {
+
+
+        val paginationControls: WebElement = waitForClass("ceds-pagination__controls")
+
+        // Locate the pagination items
+        val paginationItems: List[WebElement] = paginationControls.findElements(By.className("ceds-pagination__link")).asScala.toList
+
+        // Find the link for the current page number + 1 and click it
+        val nextPageLink: WebElement = paginationItems.find(_.getText == (pageNum + 1).toString)
+          .getOrElse(throw new NoSuchElementException(s"Page ${pageNum + 1} link not found"))
+
+        // Check if the "Next" link is displayed before clicking the second page
+        val nextLinkDisplayed =  waitForCssSelector("li.ceds-pagination__item.ceds-pagination__item--next > a").isDisplayed
+
+        assert(nextLinkDisplayed, "Next link displays on the first page")
+
+        // Click the next page link
+        nextPageLink.click()
+
+        // Check if the "Previous" link is displayed from the next page
+        val previousLinkDisplayed = waitForCssSelector("li.ceds-pagination__item.ceds-pagination__item--prev > a").isDisplayed
+
+        assert(previousLinkDisplayed, "Previous link displays from the next page")
+
+        // Verify the content of the page
+        val activePage: WebElement = waitForClass("ceds-pagination__item--active")
+        println(s"Current Page: ${activePage.getText}")
+      }
     }
 }
