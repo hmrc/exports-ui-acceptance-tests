@@ -44,8 +44,7 @@ Feature: Section3 Standard Journey
     And I add Czech Republic : Czech Republic as a routing country
     And I click continue
     Then I should land on Location-Of-Goods page
-    And I click continue
-    And I select Yes to provide location as GBCUASDDOVAPF
+    And I select Dover as the location
     And I click continue
     Then I should land on Office-Of-Exit page
     And I select Aberdeen with code GB000434 as the office of exit
@@ -55,6 +54,7 @@ Feature: Section3 Standard Journey
 
     # change authorisation code to test dynamic title changes on location of goods page
     # check title on location of goods page when auth code is CSE
+    And I clear Additional Information code keys from cache
     Then I navigate to authorisations required list page
     And I click on remove link
     Then I should land on Authorisations-Remove page
@@ -66,8 +66,17 @@ Feature: Section3 Standard Journey
     And I select first Authorisation code CSE and enter eori as GB123456789006
     And I click continue
     Then I should navigate to Location Of Goods page
+    And I select Yes to provide location as GBBUBHMLDJCSE
+    And I click continue
+    Then I should land on Office-Of-Exit page
+    And I select Aberdeen with code GB000434 as the office of exit
+    And I click continue
+    Then I should land on MiniCYA-Section-3 page
+    And I check the MiniCYA page for Section-3
+
 
     # check title on location of goods page when auth code is EXRR
+    # select GVMS codes on different version of location page when auth code is EXRR and Additional Declaration type is 'Arrived'
     Then I navigate to authorisations required list page
     And I click on remove link
     Then I should land on Authorisations-Remove page
@@ -78,10 +87,19 @@ Feature: Section3 Standard Journey
     Then I should land on Authorisation-Required page
     And I select first Authorisation code EXRR and enter eori as GB123456789016
     And I click continue
+    And I should navigate to Location Of Goods page
+    Then I should land on Location-Of-Goods page
+    And I select Holyhead as the location
+    And I click continue
+    Then I should land on Office-Of-Exit page
+    And I select Aberdeen with code GB000434 as the office of exit
+    And I click continue
+    Then I should land on MiniCYA-Section-3 page
+    And I check the MiniCYA page for Section-3
 
-    Then I should navigate to Location Of Goods page
 
-    # check title on location of goods page when auth code is MIB
+  # select GVMS codes on different version of location page when auth code is ACP and Additional Declaration type is 'Arrived'
+    And I clear Additional Information code keys from cache
     Then I navigate to authorisations required list page
     And I click on remove link
     Then I should land on Authorisations-Remove page
@@ -90,9 +108,16 @@ Feature: Section3 Standard Journey
     And I select Yes to declare authorisations
     And I click continue
     Then I should land on Authorisation-Required page
-    And I select first Authorisation code MIB and enter eori as GB123456789206
+    And I select first Authorisation code ACP and enter eori as GB123456789206
     And I click continue
     Then I should navigate to Location Of Goods page
+    And I select User Choice to provide location as GBCUASDDOVAPF
+    And I click continue
+    Then I should land on Office-Of-Exit page
+    And I select Aberdeen with code GB000434 as the office of exit
+    And I click continue
+    Then I should land on MiniCYA-Section-3 page
+    And I check the MiniCYA page for Section-3
 
 
 

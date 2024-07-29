@@ -205,6 +205,8 @@ This code is open source software licensed under the [Apache 2.0 License]("http:
 **Standard** -
 - User select RoutingCountries as Yes, Adds multiple countries and selects LocationOfGoods as Yes to complete section3 for prelodged declaration
 - User completes section for arrived declaration and validate dynamic title changes on location of goods page
+- validate different version of location of goods page.
+
 
 **Occasional Journey & Simplified Journey** -
 -  User select RoutingCountries as Yes, Adds one country and selects LocationOfGoods as No to complete section3 for prelodged declaration

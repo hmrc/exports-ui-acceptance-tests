@@ -23,11 +23,13 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.yes
 import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
 import uk.gov.hmrc.test.ui.pages.common._
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isOccasional, isSimplified, isSupplementary}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage.isArrivedDeclaration
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 import uk.gov.hmrc.test.ui.pages.section1._
 import uk.gov.hmrc.test.ui.pages.section2.AreYouTheExporterPage.isExporter
 import uk.gov.hmrc.test.ui.pages.section2.IsThisExsPage.isThisExs
 import uk.gov.hmrc.test.ui.pages.section2._
+import uk.gov.hmrc.test.ui.pages.section3.LocationOfGoodsPage.hasAuthorisationType
 import uk.gov.hmrc.test.ui.pages.section3._
 import uk.gov.hmrc.test.ui.pages.section4._
 import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.{goToWarehouse, hasSupervisingCustomsOfficePageVisiblePC}
@@ -148,7 +150,14 @@ class CommonStepDef extends BaseStepDef {
       CountryOfRoutingPage.fillPage(Constants.no); continue()
     }
 
-    LocationOfGoodsPage.fillPage(Constants.no, "GBAUNHVNHVNHVVVM"); continue()
+    if (isArrivedDeclaration && !(hasAuthorisationType("MIB") && hasAuthorisationType("CSE")) && !isSupplementary) {
+      LocationOfGoodsPage.fillPage("User Choice", "GBCUASDDOVAPF")
+      continue()
+    } else {
+      LocationOfGoodsPage.fillPage(Constants.no, "GBAUNHVNHVNHVVVM");
+      continue()
+    }
+
     OfficeOfExitPage.fillPage("Folkestone", "GB000041"); continue()
     continueOnMiniCya()
   }

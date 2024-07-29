@@ -31,7 +31,7 @@ Feature: Clearance Journey Section 3
     And I select Ukraine as the destination country
     And I click continue
     Then I should land on Location-Of-Goods page
-    And I select Yes to provide location as GBCUASDDOVAPF
+    And I select Pembroke Docks as the location
     And I click continue
     Then I should land on Office-Of-Exit page
     And I select Aberdeen with code GB000434 as the office of exit
