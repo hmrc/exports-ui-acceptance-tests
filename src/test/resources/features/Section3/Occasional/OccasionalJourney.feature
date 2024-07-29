@@ -43,7 +43,7 @@ Feature: Occasional Journey Section 3
     And I add Argentina  : Argentina as a routing country
     And I click continue
     Then I should land on Location-Of-Goods page
-    And I select Yes to provide location as GBCUASDDOVAPF
+    And I select Fishguard as the location
     And I click continue
     Then I should land on Office-Of-Exit page
     And I select Aberdeen with code GB000434 as the office of exit

@@ -21,7 +21,9 @@ import uk.gov.hmrc.test.ui.pages.section3.DestinationCountryPage
 
 class DestinationCountryStepDef extends BaseStepDef {
 
-  And("""^I should land on Destination-Country page""")(() => DestinationCountryPage.checkPage())
+  And("""^I should land on Destination-Country page"""){ () =>
+    DestinationCountryPage.checkPage()
+  }
 
   And("""^I select (.*) as the destination country""") { country: String =>
     DestinationCountryPage.fillPage(country)
