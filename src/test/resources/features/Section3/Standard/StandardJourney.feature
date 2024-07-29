@@ -76,6 +76,7 @@ Feature: Section3 Standard Journey
 
 
     # check title on location of goods page when auth code is EXRR
+    # select GVMS codes on different version of location page when auth code is EXRR and Additional Declaration type is 'Arrived'
     Then I navigate to authorisations required list page
     And I click on remove link
     Then I should land on Authorisations-Remove page
@@ -97,7 +98,7 @@ Feature: Section3 Standard Journey
     And I check the MiniCYA page for Section-3
 
 
-    # check title on location of goods page when auth code is MIB
+  # select GVMS codes on different version of location page when auth code is ACP and Additional Declaration type is 'Arrived'
     And I clear Additional Information code keys from cache
     Then I navigate to authorisations required list page
     And I click on remove link
@@ -107,7 +108,7 @@ Feature: Section3 Standard Journey
     And I select Yes to declare authorisations
     And I click continue
     Then I should land on Authorisation-Required page
-    And I select first Authorisation code MIB and enter eori as GB123456789206
+    And I select first Authorisation code ACP and enter eori as GB123456789206
     And I click continue
     Then I should navigate to Location Of Goods page
     And I select User Choice to provide location as GBCUASDDOVAPF
