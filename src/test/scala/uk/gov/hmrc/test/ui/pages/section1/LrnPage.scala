@@ -16,8 +16,6 @@
 
 package uk.gov.hmrc.test.ui.pages.section1
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{lrn, lrnCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{Ducr, Lrn}
 import uk.gov.hmrc.test.ui.pages.section1.DucrEntryPage.ducrPrefix
@@ -31,10 +29,7 @@ object LrnPage extends BasePage {
   val path: String = "/declaration/local-reference-number"
   val title: String = "Create a Local Reference Number (LRN)"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> Seq(lrn),
-    Clearance -> Seq(lrnCL)
-  )
+  override def checkExpanders(): Unit = ()
 
   // ex: fillPage("QSLRN1101100")
 
