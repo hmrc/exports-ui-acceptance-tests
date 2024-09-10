@@ -17,8 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section1
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{declarantDetails, declarantDetailsCL}
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationEori
 import uk.gov.hmrc.test.ui.pages.section2.EntryIntoDeclarantRecordsPage
@@ -29,10 +28,7 @@ object DeclarantDetailsPage extends BasePage {
   val path: String = "/declaration/declarant-details"
   def title: String = s"Is your EORI number ${detail(DeclarationEori)}?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> Seq(declarantDetails),
-    Clearance -> Seq(declarantDetailsCL)
-  )
+  override def checkExpanders(): Unit = ()
 
   // No  => fillPage(no)
   // Yes => fillPage(yes)
