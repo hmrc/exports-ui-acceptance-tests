@@ -28,7 +28,7 @@ object TraderReferencePage extends BasePage {
   def backButtonHref: String = DoYouHaveADucrPage.path
   override def changeLink: String = DucrEntryPage.path
   val path: String = "/declaration/trader-reference"
-  val title: String = "Enter a reference"
+  val title: String = "Enter a trader reference"
 
   override val expanderHrefs: Map[String, Seq[String]] =
     Map(Common -> Seq(traderReference), Clearance -> Seq(traderReferenceCL))
