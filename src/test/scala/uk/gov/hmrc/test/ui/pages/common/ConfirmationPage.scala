@@ -37,10 +37,9 @@ object ConfirmationPage extends BasePage {
 
   override def title: String =
     detail(Lrn).take(1) match {
-      case "C" if isArrivedDeclaration => "Declaration accepted, goods have permission to progress"
-      case "C" | "Q" | "X" | "I" | "J" | "L" | "K" | "P" | "N" => "Your declaration is still being checked"
-      case "D" | "U"                                           => "Your declaration needs documents attached"
-      case "R"                                                 => "Your declaration has been pre-lodged with HMRC"
+      case "C" if isArrivedDeclaration => "Your declaration has been submitted"
+      case "C" | "Q" | "X" | "I" | "J" | "L" | "K" | "P" | "N" => "Your submitted declaration is still being checked"
+      case "D" | "U"                                           => "Your declaration has been submitted - action is required"
       case _ =>
         if (isAmendmentMode) {
           if (declarationStatus.contains("REJECTED") && !isCancelDeclaration) "Amendment request rejected"
@@ -49,7 +48,7 @@ object ConfirmationPage extends BasePage {
           else if (declarationStatus.contains("PENDING")) "Your amendment request is still being processed"
           else "Amendment request accepted"
         } else {
-          "Declaration accepted"
+          "Your declaration has been submitted"
         }
     }
 
@@ -75,44 +74,9 @@ object ConfirmationPage extends BasePage {
     }
   }
 
-  private def checkPageContent(): Unit =
-    detail(Lrn).take(1) match {
-      case "C" if isArrivedDeclaration                         => checkPageWhenCleared()
-      case "C" | "Q" | "X" | "I" | "J" | "L" | "K" | "P" | "N" => checkPageWhenStillUnderCheck()
-      case "D" | "U"                                           => checkPageWhenDocumentsRequired()
-      case _                                                   => checkPageWhenAccepted()
-    }
-
-  private def checkPageWhenCleared(): Unit = {
+  private def checkPageContent(): Unit = {
     checkTable()
-    checkContentLinks(List(linkToMovements, linkToMovements, linkToTimeline, linkToFeedback, linkToSupport))
-  }
-
-  private def checkPageWhenStillUnderCheck(): Unit =
-    checkContentLinks(List(linkToDashboard, linkToSupport))
-
-  private def checkPageWhenDocumentsRequired(): Unit = {
-    val elements = findChildrenByClassName(findElementById("main-content"), "govuk-warning-text")
-    elements.size mustBe 1
-    assert(elements.head.getText.endsWith("You need to upload documents ready for checking at customs."))
-
-    checkContentLinks(List(linkToTimeline, linkToSupport))
-  }
-
-
-  private def checkPageWhenAccepted(): Unit = {
-    checkTable()
-    checkContentLinks(
-      List(
-        linkToTimeline,
-        linkToTimeline,
-        linkToClearanceHub,
-        linkToMovements,
-        linkToMovements,
-        linkToFeedback,
-        linkToSupport
-      )
-    )
+    checkContentLinks(List(linkToTimeline, linkToFeedback, linkToSupport))
   }
 
   private def checkTable(): String = {
@@ -164,12 +128,7 @@ object ConfirmationPage extends BasePage {
 
   def clickDeclarationStatusLink(): Unit =
     clickByCssSelector("p:nth-child(5) > a")
-
-  private val linkToClearanceHub =
-    "https://www.gov.uk/government/organisations/hm-revenue-customs/contact/national-clearance-hub".r
-  private val linkToDashboard = (host + "/customs-declare-exports/dashboard?page=1").r
   private val linkToFeedback = (host + "/feedback/customs-declare-exports-frontend").r
-  private val linkToMovements = (host + "/customs-movements").r
   private val linkToSupport =
     (host + "/contact/report-technical-problem?newTab=true&service=customs-declare-exports-frontend").r
   private val linkToTimeline = (host + "/customs-declare-exports/submissions/\\w+/information").r
