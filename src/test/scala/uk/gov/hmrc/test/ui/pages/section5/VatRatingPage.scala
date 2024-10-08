@@ -27,7 +27,7 @@ object VatRatingPage extends BasePage {
 
   def backButtonHref: String = maybeDetail(CusCode(itemId)).fold(DangerousGoodsCodePage.path)(_ => CusCodePage.path)
   def path: String = itemUrl("vat-rating")
-  val title: String = "Are these goods being zero-rated for VAT?"
+  val title: String = "What is the VAT rating for these goods?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(itemsZeroRatedForVat))
 
