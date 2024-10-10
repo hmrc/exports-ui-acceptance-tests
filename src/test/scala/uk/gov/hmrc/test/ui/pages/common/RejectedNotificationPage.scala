@@ -38,7 +38,7 @@ object RejectedNotificationPage extends BasePage {
   def header(row: String): WebElement = findElementByCssSelector(s".$row > td:nth-child(1)")
   def rejectedOldValue(row: String): WebElement = findElementByCssSelector(s".$row > td:nth-child(2)")
   def rejectedNewValue(row: String): WebElement = findElementByCssSelector(s".$row > td:nth-child(3)")
-  def duplicateDucrWarning(): WebElement = findElementByCssSelector(".govuk-summary-card__content dl")
+  def duplicateDucrWarning(): WebElement = findElementByCssSelector(".govuk-summary-card__content div")
 
   def checkYourAnswer(): Unit = {
     clickById("check-your-answers")
