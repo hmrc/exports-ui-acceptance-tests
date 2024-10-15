@@ -32,7 +32,7 @@ Feature: Section5 Simplified Journey
     And I click continue
     # skipping cus code page
     Then I should land on VAT-Rating page
-    Then I select VAT paid option as goods being VAT zero-rated
+    Then I select A 20% VAT rate will be paid in the UK option as goods being VAT zero-rated
     And I click continue
     Then I should land on National-Additional-Code page
     And I select Yes and enter D193 as national additional code

@@ -44,7 +44,7 @@ Feature: Section5 Standard Journey
     And I select Yes to enter the code 12345678 as CUS code
     And I click continue
     Then I should land on VAT-Rating page
-    Then I select VAT reduced option as goods being VAT zero-rated
+    Then I select The goods are zero-rated option as goods being VAT zero-rated
     And I click continue
     Then I should land on National-Additional-Code page
     And I select Yes and enter A123 as national additional code
@@ -254,7 +254,7 @@ Feature: Section5 Standard Journey
     And I select No to enter CUS code
     And I click continue
     Then I should land on VAT-Rating page
-    Then I select VAT exempt option as goods being VAT zero-rated
+    Then I select Report VAT rating after this declaration has been submitted option as goods being VAT zero-rated
     And I click continue
     Then I should land on National-Additional-Code page
     And I select No to enter national additional code

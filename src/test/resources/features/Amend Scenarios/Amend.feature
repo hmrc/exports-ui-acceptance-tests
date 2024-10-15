@@ -106,7 +106,7 @@ Feature: Amend Scenarios
     And I select No to enter CUS code
     And I click continue
     Then I should land on VAT-Rating page
-    Then I select VAT exempt option as goods being VAT zero-rated
+    Then I select The goods are VAT exempt in the UK option as goods being VAT zero-rated
     And I click continue
     Then I should land on National-Additional-Code page
     And I select No to enter national additional code
