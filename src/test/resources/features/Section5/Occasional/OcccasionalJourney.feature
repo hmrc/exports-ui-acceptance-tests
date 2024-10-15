@@ -31,7 +31,7 @@ Feature: Section5 Occasional Journey
     And I select Yes to enter the code 1204 as dangerous goods
     And I click continue
     Then I should land on VAT-Rating page
-    Then I select Yes option as goods being VAT zero-rated
+    Then I select The goods are zero-rated option as goods being VAT zero-rated
     And I click continue
     Then I should land on National-Additional-Code page
     And I select Yes and enter A103 as national additional code

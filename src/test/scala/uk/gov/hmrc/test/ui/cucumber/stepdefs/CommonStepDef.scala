@@ -187,7 +187,7 @@ class CommonStepDef extends BaseStepDef {
       DangerousGoodsCodePage.fillPage(Constants.no); continue()
     }
     if (isStandard) {
-      VatRatingPage.fillPage("Yes"); continue()
+      VatRatingPage.fillPage("The goods are zero-rated"); continue()
     }
     if (!isClearance) {
       NationalAdditionalCodesPage.fillPage(Constants.no); continue()

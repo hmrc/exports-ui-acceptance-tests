@@ -27,24 +27,27 @@ object VatRatingPage extends BasePage {
 
   def backButtonHref: String = maybeDetail(CusCode(itemId)).fold(DangerousGoodsCodePage.path)(_ => CusCodePage.path)
   def path: String = itemUrl("vat-rating")
-  val title: String = "Are these goods being zero-rated for VAT?"
+  val title: String = "What is the VAT rating for these goods?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(itemsZeroRatedForVat))
 
   override def pageLinkHrefs: Seq[String] =
     super.pageLinkHrefs ++ List(if (hasRestrictingZeroVatPC) previousProcedureCodes else vatOnGoodsExportedFromUK)
 
-  // fillPage("Yes")         => "Yes"
-  // fillPage("VAT reduced") => "No, a reduced VAT 5% duty rate applies in the UK and is being paid"
-  // fillPage("VAT exempt")  => "No, the goods are VAT exempt in the UK anyway"
-  // fillPage("VAT paid")    => "No, 20% VAT is being paid in the UK on these goods"
+  // fillPage('Report VAT rating after this declaration has been submitted')
+  // fillPage("The goods are zero-rated")
+  // fillPage("The goods are VAT exempt in the UK")
+  // fillPage("A 20% VAT rate will be paid in the UK")
+  // fillPage("A reduced 5% VAT duty rate will be paid in the UK")
 
   override def fillPage(values: String*): Unit = {
     val value = values.head match {
-      case "Yes"         => clickById("VATZ"); "Yes"
-      case "VAT reduced" => clickById("VATR"); "No, reduced"
-      case "VAT exempt"  => clickById("VATE"); "No, exempt"
-      case "VAT paid"    => clickById("VAT_NO"); "No, paid"
+      case "Report VAT rating after this declaration has been submitted" =>
+        clickById("VAT_RAD"); "Report VAT rating after this declaration has been submitted"
+      case "The goods are zero-rated"                          => clickById("VATZ"); "Yes"
+      case "The goods are VAT exempt in the UK"                => clickById("VATE"); "No, exempt"
+      case "A 20% VAT rate will be paid in the UK"             => clickById("VAT_NO"); "No, paid"
+      case "A reduced 5% VAT duty rate will be paid in the UK" => clickById("VATR"); "No, reduced"
     }
     store(VatRating(itemId) -> Detail(value))
   }
