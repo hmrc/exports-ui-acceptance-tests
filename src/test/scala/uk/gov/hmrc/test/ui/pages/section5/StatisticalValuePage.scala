@@ -17,15 +17,19 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsStatisticalValue, itemsStatisticalValue1, itemsStatisticalValue2}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{
+  itemsStatisticalValue,
+  itemsStatisticalValue1,
+  itemsStatisticalValue2
+}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.StatisticalValue
 
 object StatisticalValuePage extends BasePage {
 
   def backButtonHref: String = NationalAdditionalCodesListPage.path
-  def path: String           = itemUrl("statistical-value")
-  val title: String          = "The statistical value of this item in pounds"
+  def path: String = itemUrl("statistical-value")
+  val title: String = "What is the statistical value of this item in pounds?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(
     Common -> List(itemsStatisticalValue, itemsStatisticalValue1, itemsStatisticalValue2)
@@ -34,7 +38,12 @@ object StatisticalValuePage extends BasePage {
   // ex: fillPage("1000")
 
   override def fillPage(values: String*): Unit = {
+
     fillTextBoxById("statisticalValue", values.head)
-    store(StatisticalValue(itemId) -> Detail(values.head))
+
+    if (values.head.isEmpty)
+      store(StatisticalValue(itemId) -> Detail("None"))
+    else
+      store(StatisticalValue(itemId) -> Detail(values.head))
   }
 }
