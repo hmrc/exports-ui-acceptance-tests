@@ -53,7 +53,7 @@ Feature: Section5 Standard Journey
     And I select No for adding another national code
     And I click continue
     Then I should land on Statistical-Value page
-    And I enter 1080 as statistical value
+   # submit statistical value page without any value
     And I click continue
     Then I should land on Package-Information page
     And I enter Aerosol as package type, with 20 packages and 1234 as shipping mark for first package info
