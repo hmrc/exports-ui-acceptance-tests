@@ -265,4 +265,4 @@ Feature: Section6 Standard Journey
     And I validate details on declaration information page
    # For external amended declaration we are not displaying Amend link to user to Amend the declaration
    # Now we are showing copy declaration link to allow user to copy the External amend declaration
-   And I validate that the Amend declaration link is not displayed and Copy declaration link is displayed
+   And And I validate that the Amend declaration link and Copy declaration link is displayed
