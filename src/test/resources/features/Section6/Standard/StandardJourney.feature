@@ -263,6 +263,5 @@ Feature: Section6 Standard Journey
     And I navigate to declaration information page after clicking on mrn link
     Then I should land on Declaration-Information page
     And I validate details on declaration information page
-   # For external amended declaration we are not displaying Amend link to user to Amend the declaration
-   # Now we are showing copy declaration link to allow user to copy the External amend declaration
+   # validate amend and copy declaration link are visible for External amend declaration
    And And I validate that the Amend declaration link and Copy declaration link is displayed
