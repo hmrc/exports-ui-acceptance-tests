@@ -405,11 +405,22 @@ Feature: Validate Dashboard and Declaration Information
 
     # Below scenario -
     # 1.Checks saved draft declaration and removal of draft declaration
+   #  2.Checks if view declaration summary is missing and present
 
   Scenario: Check partial declarations saved on Saved Declarations and remove saved declaration
     Given I fill section1 for STANDARD, prelodged declaration
+
+    # validate view declaration summary link is missing because user has not visited summary page
+    And I validate view declaration link is missing
     And I click on Exit and comeback later link
     Then I should land on saved draft declaration page
+
+     # validate view declaration summary link is present as user has visited summary page
+    And I click on View Your Declaration Summary link
+    And I click continue to resume saved declaration
+    And I validate view declaration link is present
+
+    And I click on Exit and comeback later link
     And I navigate to saved declarations
     Then I should land on Saved-Declarations page
     And I validate details on saved declarations page and check status is Draft
