@@ -18,7 +18,7 @@ package uk.gov.hmrc.test.ui.cucumber.stepdefs
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
 import uk.gov.hmrc.test.ui.generator.SupportGenerator.generateEORI
-import uk.gov.hmrc.test.ui.pages.base.CommonPage.{clear, clearAllCache, continue, continueOnMiniCya, detailKeys}
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.{clear, clearAllCache, continue, continueOnMiniCya, detailKeys, elementByIdDoesNotExist, viewDeclarationLink}
 import uk.gov.hmrc.test.ui.pages.base.Constants.yes
 import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
 import uk.gov.hmrc.test.ui.pages.common._
@@ -282,6 +282,22 @@ class CommonStepDef extends BaseStepDef {
 
   And("""^I click on Exit and comeback later link""") { () =>
     CommonPage.exitAndComeBackLater()
+  }
+
+  And("""^I click on View Your Declaration Summary link""") { () =>
+    CommonPage.viewDeclarationSummary()
+  }
+
+  And("""^I click continue to resume saved declaration""") { () =>
+    CommonPage.continueSavedDeclaration()
+  }
+
+  And("""^I validate view declaration link is (.*)""") { (linkPresent: String) =>
+
+    if (linkPresent.equals("missing"))
+      elementByIdDoesNotExist(viewDeclarationLink)
+    else
+      CommonPage.findElementById(viewDeclarationLink).isDisplayed
   }
 
   And("""^I click on back to your declarations link""") { () =>

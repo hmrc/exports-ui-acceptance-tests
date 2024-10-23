@@ -86,7 +86,13 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
     checkExpanderLinks()
   }
 
+  val viewDeclarationLink = "view_declaration_summary"
+
   def back(): Unit = clickById("back-link")
+
+  def viewDeclarationSummary(): Unit = clickById(viewDeclarationLink)
+
+  def continueSavedDeclaration(): Unit = clickById("continue-saved-declaration")
 
   def saveAndReturnToErrors(): Unit = clickById("save_and_return_to_errors")
 
