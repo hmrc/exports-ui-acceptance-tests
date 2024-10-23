@@ -18,7 +18,7 @@ package uk.gov.hmrc.test.ui.cucumber.stepdefs
 
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
 import uk.gov.hmrc.test.ui.generator.SupportGenerator.generateEORI
-import uk.gov.hmrc.test.ui.pages.base.CommonPage.{clear, clearAllCache, continue, continueOnMiniCya, detailKeys, elementByIdDoesNotExist, viewDeclarationLink}
+import uk.gov.hmrc.test.ui.pages.base.CommonPage._
 import uk.gov.hmrc.test.ui.pages.base.Constants.yes
 import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
 import uk.gov.hmrc.test.ui.pages.common._

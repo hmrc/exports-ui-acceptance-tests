@@ -16,8 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, sequenceId}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{addAuthorisationRequired, addAuthorisationRequiredCL}
+import uk.gov.hmrc.test.ui.pages.base.Constants.sequenceId
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isSimplified, isSupplementary}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationEori
@@ -42,8 +41,7 @@ object AuthorisationPage extends BasePage {
 
   val title: String = "Add any authorisations for this export"
 
-  override val expanderHrefs: Map[String, Seq[String]] =
-    Map(Common -> List(addAuthorisationRequired), Clearance -> List(addAuthorisationRequiredCL))
+  override def checkExpanders(): Unit = ()
 
   val typeIndex = 1
   val EORI = 2

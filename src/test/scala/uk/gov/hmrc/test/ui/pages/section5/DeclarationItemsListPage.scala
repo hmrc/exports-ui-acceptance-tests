@@ -16,12 +16,12 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Clearance, Common}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{declarationItemsList, declarationItemsListCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, DetailKey}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 import uk.gov.hmrc.test.ui.pages.section4.SummarySection4Page
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{section5, ProcedureCodeLabel}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{ProcedureCodeLabel, section5}
 
 object DeclarationItemsListPage extends BasePage {
 

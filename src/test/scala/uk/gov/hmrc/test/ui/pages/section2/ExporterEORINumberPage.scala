@@ -30,7 +30,7 @@ object ExporterEORINumberPage extends BasePage {
 
   val title: String = "Does the exporter have an EORI number?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = AreYouTheExporterPage.expanderHrefs
+  override def checkExpanders(): Unit = ()
 
   // No  => fillPage(no)
   // Yes => fillPage(yes, "GB121212121212")

@@ -16,14 +16,9 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{none, sequenceId, Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.otherPartiesInvolved
+import uk.gov.hmrc.test.ui.pages.base.Constants.{none, sequenceId}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{
-  AdditionalPartiesInvolvedEORI,
-  AdditionalPartiesInvolvedType,
-  NoAdditionalPartiesInvolved
-}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AdditionalPartiesInvolvedEORI, AdditionalPartiesInvolvedType, NoAdditionalPartiesInvolved}
 
 object OtherPartiesInvolvedPage extends BasePage {
 
@@ -36,8 +31,7 @@ object OtherPartiesInvolvedPage extends BasePage {
 
   val title: String = "What are the EORI numbers of others involved in this export?"
 
-  override val expanderHrefs: Map[String, Seq[String]] =
-    Map(Common -> List(otherPartiesInvolved), Clearance -> List(otherPartiesInvolved))
+  override def checkExpanders(): Unit = ()
 
   val choice = 1
   val EORI = 2

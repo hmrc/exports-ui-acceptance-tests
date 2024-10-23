@@ -20,8 +20,8 @@ import uk.gov.hmrc.test.ui.pages.base.Constants._
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage._
-import uk.gov.hmrc.test.ui.pages.section2.EntryIntoDeclarantRecordsPage.isEidr
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
+import uk.gov.hmrc.test.ui.pages.section2.EntryIntoDeclarantRecordsPage.isEidr
 import uk.gov.hmrc.test.ui.pages.section2.ProcedureChoicePage._
 import uk.gov.hmrc.test.ui.pages.section4.DetailKeys._
 

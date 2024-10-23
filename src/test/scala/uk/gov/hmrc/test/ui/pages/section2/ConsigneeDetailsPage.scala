@@ -16,8 +16,6 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{consigneeDetails, consigneeDetailsCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isSupplementary}
 import uk.gov.hmrc.test.ui.pages.section2.AreYouTheExporterPage.isExporter
@@ -45,8 +43,7 @@ object ConsigneeDetailsPage extends BasePage {
   val path: String = "/declaration/consignee-details"
   val title: String = "Where will the goods be delivered?"
 
-  override val expanderHrefs: Map[String, Seq[String]] =
-    Map(Common -> List(consigneeDetails), Clearance -> List(consigneeDetailsCL))
+  override def checkExpanders(): Unit = ()
 
   // ex: fillPage(Constants.Address)
 

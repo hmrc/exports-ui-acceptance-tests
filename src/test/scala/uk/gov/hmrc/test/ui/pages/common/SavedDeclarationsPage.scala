@@ -18,8 +18,8 @@ package uk.gov.hmrc.test.ui.pages.common
 
 import org.openqa.selenium.WebElement
 import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.base.BasePage.exitAndCompleteLater
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.common.DetailKeys.RemoveSavedDecLink
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys._
 

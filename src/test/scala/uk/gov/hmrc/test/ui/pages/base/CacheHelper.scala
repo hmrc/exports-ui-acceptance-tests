@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.base
 
-import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{cache, cacheForAmendments, changeLinks, Cache}
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{Cache, cache, cacheForAmendments, changeLinks}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.section5
 
 trait CacheHelper {
