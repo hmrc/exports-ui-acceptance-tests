@@ -16,11 +16,10 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yes, yesNo}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
+import uk.gov.hmrc.test.ui.pages.base.Constants.{yes, yesNo}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{CarrierDetails, CarrierEORI, EntryIntoDeclarantsRecords, ExporterYesNo, ThirdPartyGoodsTransportation}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys._
 
 object ThirdPartyGoodsTransportationPage extends BasePage {
 
@@ -33,10 +32,7 @@ object ThirdPartyGoodsTransportationPage extends BasePage {
 
   val title: String = "Will the goods be moved by a third party carrier or haulier?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common -> List(thirdPartyGoodsTransportation1, thirdPartyGoodsTransportation2),
-    Clearance -> List(thirdPartyGoodsTransportationCL1, thirdPartyGoodsTransportationCL2)
-  )
+  override def checkExpanders(): Unit = ()
 
   // No  => fillPage(no)
   // Yes => fillPage(yes)

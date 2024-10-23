@@ -16,8 +16,6 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{representationTypeAgreed, representationTypeAgreedCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{RepresentativeTypeAgreed, onBehalfOfOtherAgentYesNo}
 
@@ -31,8 +29,7 @@ object RepresentationTypeAgreedPage extends BasePage {
   val path: String = "/declaration/representation-type-agreed"
   val title: String = "What type of representation will be used?"
 
-  override val expanderHrefs: Map[String, Seq[String]] =
-    Map(Common -> List(representationTypeAgreed), Clearance -> List(representationTypeAgreedCL))
+  override def checkExpanders(): Unit = ()
 
   val representationType = 0
 
