@@ -418,6 +418,7 @@ Feature: Validate Dashboard and Declaration Information
      # validate view declaration summary link is present as user has visited summary page
     And I click on View Your Declaration Summary link
     And I click continue to resume saved declaration
+    Then I navigate to Are You The Exporter page
     And I validate view declaration link is present
 
     And I click on Exit and comeback later link
