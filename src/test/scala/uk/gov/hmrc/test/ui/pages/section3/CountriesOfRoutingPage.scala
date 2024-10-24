@@ -16,8 +16,6 @@
 
 package uk.gov.hmrc.test.ui.pages.section3
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.Common
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.countryOfRouting
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{CountriesOfRouting, DestinationCountry}
 
@@ -27,7 +25,7 @@ object CountriesOfRoutingPage extends BasePage {
   val path: String = "/declaration/countries-of-routing"
   def title = s"Add the countries of routing between Great Britain and ${detail(DestinationCountry)}"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(countryOfRouting))
+  override def checkExpanders(): Unit = ()
 
   // ex: fillPage("United States of America", "The United States of America", "China", "China")
   // ex: fillPage("China", "China")

@@ -16,8 +16,6 @@
 
 package uk.gov.hmrc.test.ui.pages.section3
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{officeOfExit, officeOfExitCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.OfficeOfExit
 
@@ -27,8 +25,7 @@ object OfficeOfExitPage extends BasePage {
   val path: String = "/declaration/office-of-exit"
   val title = "Where is the customs office of exit?"
 
-  override val expanderHrefs: Map[String, Seq[String]] =
-    Map(Common -> List(officeOfExit), Clearance -> List(officeOfExitCL))
+  override def checkExpanders(): Unit = ()
 
   val place = 0
   val code = 1

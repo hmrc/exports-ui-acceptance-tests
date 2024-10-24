@@ -16,8 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section3
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Common, yesNo}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.countryOfRouting
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Details}
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.{CountriesOfRouting, DestinationCountry}
 
@@ -28,7 +27,7 @@ object CountryOfRoutingPage extends BasePage {
   val path: String = "/declaration/country-of-routing"
   def title = s"Will the goods pass through any other countries before arriving in ${detail(DestinationCountry)}?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(countryOfRouting))
+  override def checkExpanders(): Unit = ()
 
   // No  => fillPage(no)
   // Yes => fillPage(yes)
