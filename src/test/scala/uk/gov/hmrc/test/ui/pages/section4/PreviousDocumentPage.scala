@@ -55,8 +55,7 @@ object PreviousDocumentPage extends BasePage {
     else if (isOccasional) { "Details for each document that supports this declaration" }
     else { "Details for each document that supports this declaration" }
 
-  override val expanderHrefs: Map[String, Seq[String]] =
-    Map(Common -> List(addPreviousDocument), Clearance -> List(addPreviousDocumentCL))
+  override def checkExpanders(): Unit = ()
 
   val documentCode = 1
   val documentReference = 2
