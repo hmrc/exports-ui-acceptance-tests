@@ -29,6 +29,8 @@ object StandardOrOtherPage extends BasePage {
 
   override val pageLinkHrefs: Seq[String] = super.pageLinkHrefs ++ List(fullExportDeclaration)
 
+  override def checkExpanders(): Unit = ()
+
   // ex: fillPage("STANDARD")
   // ex: fillPage("Other")
 

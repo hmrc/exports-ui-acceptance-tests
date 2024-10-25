@@ -16,8 +16,6 @@
 
 package uk.gov.hmrc.test.ui.pages.section1
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{traderReference, traderReferenceCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{DeclarationEori, Ducr}
 
@@ -30,8 +28,7 @@ object TraderReferencePage extends BasePage {
   val path: String = "/declaration/trader-reference"
   val title: String = "Enter a trader reference"
 
-  override val expanderHrefs: Map[String, Seq[String]] =
-    Map(Common -> Seq(traderReference), Clearance -> Seq(traderReferenceCL))
+  override def checkExpanders(): Unit = ()
 
   // ex: fillPage("101SHIP1")
 
