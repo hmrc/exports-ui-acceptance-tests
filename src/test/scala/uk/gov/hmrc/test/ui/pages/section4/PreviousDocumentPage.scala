@@ -17,7 +17,6 @@
 package uk.gov.hmrc.test.ui.pages.section4
 
 import uk.gov.hmrc.test.ui.pages.base.Constants._
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage._
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
@@ -55,8 +54,7 @@ object PreviousDocumentPage extends BasePage {
     else if (isOccasional) { "Details for each document that supports this declaration" }
     else { "Details for each document that supports this declaration" }
 
-  override val expanderHrefs: Map[String, Seq[String]] =
-    Map(Common -> List(addPreviousDocument), Clearance -> List(addPreviousDocumentCL))
+  override def checkExpanders(): Unit = ()
 
   val documentCode = 1
   val documentReference = 2
