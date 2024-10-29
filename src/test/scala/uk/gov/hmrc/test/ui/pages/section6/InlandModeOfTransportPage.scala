@@ -16,8 +16,6 @@
 
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.Common
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.inlandTransportDetails
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{InlandModeOfTransport, InlandOrBorder}
 
@@ -29,7 +27,7 @@ object InlandModeOfTransportPage extends BasePage {
 
   val title: String = "How will the goods be transported to the UK border?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(inlandTransportDetails))
+  override def checkExpanders(): Unit = ()
 
   private val mode = 0
 

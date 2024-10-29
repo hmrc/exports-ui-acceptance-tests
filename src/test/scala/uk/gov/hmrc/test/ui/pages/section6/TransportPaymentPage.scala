@@ -16,8 +16,6 @@
 
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{transportPayment, transportPaymentCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.TransportPayment
 
@@ -27,10 +25,7 @@ object TransportPaymentPage extends BasePage {
   val path: String           = "/declaration/transport-payment"
   val title                  = "How did you pay for the express transport?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(transportPayment),
-    Clearance -> List(transportPaymentCL)
-  )
+  override def checkExpanders(): Unit = ()
 
   private val paymentType = 0
 
