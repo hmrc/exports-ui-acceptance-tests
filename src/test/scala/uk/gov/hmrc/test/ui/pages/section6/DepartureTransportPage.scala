@@ -16,8 +16,6 @@
 
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{departureTransport, departureTransportCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{DepartureTransport, InlandModeOfTransport, TransportLeavingBorder}
@@ -52,8 +50,7 @@ object DepartureTransportPage extends BasePage {
     s"What are the details for the $prefix$transportMode?"
   }
 
-  override val expanderHrefs: Map[String, Seq[String]] =
-    Map(Common -> List(departureTransport), Clearance -> List(departureTransportCL))
+  override def checkExpanders(): Unit = ()
 
   private val departRef = 0
 

@@ -16,8 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{expressConsignment, expressConsignmentCL}
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{DepartureTransport, ExpressConsignment, TransportCountry}
@@ -36,8 +35,7 @@ object ExpressConsignmentPage extends BasePage {
 
   val title: String = "Is this an express consignment?"
 
-  override val expanderHrefs: Map[String, Seq[String]] =
-    Map(Common -> List(expressConsignment), Clearance -> List(expressConsignmentCL))
+  override def checkExpanders(): Unit = ()
 
   // No  => fillPage(no)
   // Yes => fillPage(yes)

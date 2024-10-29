@@ -16,8 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{container, containerCL, containerCL1}
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{Container, ContainerLabel, NoContainers, section6}
 
@@ -35,8 +34,7 @@ object ContainerPage extends BasePage {
     if (elementByIdDoesNotExist("code_yes")) "What is the container ID?"
     else "Are the goods in a container or containers?"
 
-  override val expanderHrefs: Map[String, Seq[String]] =
-    Map(Common -> List(container), Clearance -> List(containerCL, containerCL1))
+  override def checkExpanders(): Unit = ()
 
   private val additionalCode = 0
   private val code = 1

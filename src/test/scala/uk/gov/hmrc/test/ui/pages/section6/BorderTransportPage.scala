@@ -16,8 +16,6 @@
 
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.Common
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.borderTransport
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{BorderTransport, DepartureTransport, TransportLeavingBorder}
 
@@ -29,7 +27,7 @@ object BorderTransportPage extends BasePage {
 
   def title: String = s"What are the details for the ${detail(TransportLeavingBorder).toLowerCase}?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(borderTransport))
+  override def checkExpanders(): Unit = ()
 
   case class BorderTransportData(radioId: String, textboxId: String, textboxValue: String, summaryValue: String)
 
