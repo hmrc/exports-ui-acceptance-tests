@@ -3,7 +3,7 @@
 usage() { printf "\nUsage: $0 [@<tag-id>]  [chrome | edge | firefox]  [local | dev | staging]\n\n" 1>&2; exit 1; }
 
 Tag="@Smoke"
-Browser="firefox"
+Browser="chrome"
 Environment="local"
 
 for arg in "$@"; do

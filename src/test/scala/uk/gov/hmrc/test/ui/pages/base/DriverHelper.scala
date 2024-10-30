@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.base
 
 import com.typesafe.scalalogging.LazyLogging
-//import org.openqa.selenium.interactions.Actions
+import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait}
 import org.openqa.selenium.{By, Keys, WebDriver, WebElement}
 import uk.gov.hmrc.selenium.webdriver.Driver
@@ -117,7 +117,7 @@ trait DriverHelper {
       text
     }
     element.sendKeys(Keys.ARROW_DOWN)
-    driver.switchTo().activeElement().sendKeys(Keys.ENTER)
+    element.sendKeys(Keys.TAB)
     selection
   }
 
@@ -140,9 +140,9 @@ trait DriverHelper {
 
 
   def selectRadioAndClick(elementId: String): Unit = {
-    //val actions = new Actions(driver)
+    val actions = new Actions(driver)
     val element = findElementById(elementId)
-    element.click()
+    actions.moveToElement(element).click().perform()
   }
 
   def selectYesOrNoRadio(option: String, yes: String = "code_yes", no: String = "code_no"): Boolean =
