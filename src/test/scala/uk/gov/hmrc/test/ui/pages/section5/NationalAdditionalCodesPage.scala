@@ -16,8 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Common, yesNo}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.itemsNationalAdditionalCode
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Details}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodes
 
@@ -35,7 +34,7 @@ object NationalAdditionalCodesPage extends BasePage {
     if (elementByIdDoesNotExist("code_yes")) "What is the next national additional code?"
     else "Do you need to add a national additional code?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(itemsNationalAdditionalCode))
+  override def checkExpanders(): Unit = ()
 
   val code = 1
   val anotherNationalCode = 0

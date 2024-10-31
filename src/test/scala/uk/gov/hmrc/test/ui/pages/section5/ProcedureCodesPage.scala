@@ -16,9 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.PageLinks._
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsProcedureCodes, itemsProcedureCodesCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, Details}
 import uk.gov.hmrc.test.ui.pages.section2.EntryIntoDeclarantRecordsPage.isEidr
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{ItemIds, ProcedureCode, ProcedureCodeLabel}
@@ -30,8 +28,7 @@ object ProcedureCodesPage extends BasePage {
   def path: String = itemUrl("procedure-codes")
   val title: String = "What is the procedure code for this item?"
 
-  override val expanderHrefs: Map[String, Seq[String]] =
-    Map(Common -> List(itemsProcedureCodes), Clearance -> List(itemsProcedureCodesCL))
+  override def checkExpanders(): Unit = ()
 
   override def pageLinkHrefs: Seq[String] =
     if (isEidr) super.pageLinkHrefs

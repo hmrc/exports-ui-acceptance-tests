@@ -17,18 +17,9 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{
-  itemsAdditionalProcedureCodes,
-  itemsAdditionalProcedureCodes1,
-  itemsAdditionalProcedureCodes2,
-  itemsAdditionalProcedureCodesCL
-}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalProcedureCodes, itemsAdditionalProcedureCodes1, itemsAdditionalProcedureCodes2, itemsAdditionalProcedureCodesCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{
-  AdditionalProcedureCodeLabel,
-  AdditionalProcedureCodes,
-  ProcedureCode
-}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalProcedureCodeLabel, AdditionalProcedureCodes, ProcedureCode}
 
 object AdditionalProcedureCodesPage extends BasePage {
 

@@ -16,8 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{declarationItemsList, declarationItemsListCL}
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, DetailKey}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 import uk.gov.hmrc.test.ui.pages.section4.SummarySection4Page
@@ -36,8 +35,7 @@ object DeclarationItemsListPage extends BasePage {
       case n => s"You have added $n items"
     }
 
-  override val expanderHrefs: Map[String, Seq[String]] =
-    Map(Common -> List(declarationItemsList), Clearance -> List(declarationItemsListCL))
+  override def checkExpanders(): Unit = ()
 
   // No  => fillPage(no)
   // Yes => fillPage(yes)
