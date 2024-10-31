@@ -16,8 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsUnDangerousGoodsCode, itemsUnDangerousGoodsCodeCL}
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.DangerousGoodsCode
 
@@ -28,10 +27,7 @@ object DangerousGoodsCodePage extends BasePage {
   def path: String           = itemUrl(pageId)
   val title: String          = "Is there a UN dangerous goods code for this item?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(itemsUnDangerousGoodsCode),
-    Clearance -> List(itemsUnDangerousGoodsCodeCL)
-  )
+  override def checkExpanders(): Unit = ()
 
   val code  = 1
 
