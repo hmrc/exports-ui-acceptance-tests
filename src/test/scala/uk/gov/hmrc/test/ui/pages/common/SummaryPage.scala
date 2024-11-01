@@ -59,10 +59,10 @@ object SummaryPage extends BasePage {
   }
 
   def clickContinueOnSummary(): Unit =
-    findElementsByClassName("govuk-button")
-      .filter(_.getText == "Confirm and continue")
-      .head
-      .click()
+//    findElementsByClassName("govuk-button")
+//      .filter(_.getText == "Confirm and continue")
+//      .head
+      findElementByCssSelector("a[role='button']").click()
 
   def checkChangeLinkIsNotPresentFor(changeLinks: String): Assertion = {
     elementBySelectorDoesNotExist("a[href*=" + changeLinks + "]") must be(true)
