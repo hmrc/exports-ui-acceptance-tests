@@ -18,19 +18,15 @@ package uk.gov.hmrc.test.ui.pages.section1
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants._
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.Ducr
 
 object ConfirmDucrPage extends BasePage {
 
   def backButtonHref: String = TraderReferencePage.path
-  val path: String           = "/declaration/confirm-ducr"
-  val title: String          = "Do you want to use this DUCR?"
+  val path: String = "/declaration/confirm-ducr"
+  val title: String = "Do you want to use this DUCR?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> Seq(traderReference),
-    Clearance -> Seq(traderReferenceCL)
-  )
+  override def checkExpanders(): Unit = ()
 
   // No  => fillPage(no)
   // Yes => fillPage(yes)

@@ -17,8 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section1
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{ducr, ducrCL}
+import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 
 object DoYouHaveADucrPage extends BasePage {
@@ -27,7 +26,7 @@ object DoYouHaveADucrPage extends BasePage {
   val path: String = "/declaration/do-you-have-ducr"
   val title: String = "Do you have a Declaration Unique Consignment Reference Number (DUCR)?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> Seq(ducr), Clearance -> Seq(ducrCL))
+  override def checkExpanders(): Unit = ()
 
   // No  => fillPage(no)
   // Yes => fillPage(yes)
