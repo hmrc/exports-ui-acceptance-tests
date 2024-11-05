@@ -30,5 +30,8 @@ object SummarySection6Page extends BasePage {
 
   // ex: fillPage()
 
-  override def fillPage(values: String*): Unit = checkSectionSummary(Section6)
+  override def fillPage(values: String*): Unit = {
+    waitForCssSelector(".govuk-summary-card__title")
+    checkSectionSummary(Section6)
+  }
 }
