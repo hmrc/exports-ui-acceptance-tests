@@ -85,7 +85,6 @@ trait DriverHelper {
 
   def findElementsByClassName(value: String): Seq[WebElement] = driver.findElements(By.className(value)).asScala.toList
   def findElementsByTag(tag: String): Seq[WebElement] = driver.findElements(By.tagName(tag)).asScala.toList
-  def findElementsByCssSelectorName(value: String): Seq[WebElement] = driver.findElements(By.cssSelector(value)).asScala.toList
 
   def findChildByClassName(parent: WebElement, className: String): WebElement =
     parent.findElement(By.className(className))
