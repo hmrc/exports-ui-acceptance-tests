@@ -51,10 +51,10 @@ object SummaryPage extends BasePage {
 
   override def fillPage(values: String*): Unit = {
     waitForCssSelector(".govuk-summary-card__title")
-  val allTitles = findElementsByCssSelectorName(".govuk-summary-card__title")
+    val allCards = findElementsByClassName("govuk-summary-card")
     titles.zipWithIndex.foreach { case (expectedTitle, index) =>
       val sectionTitle = s"Section ${index + 1} of 6: $expectedTitle"
-      allTitles(index).getText mustBe sectionTitle
+      findChildByClassName(allCards(index), "govuk-summary-card__title").getText mustBe sectionTitle
     }
     clickContinueOnSummary()
   }
