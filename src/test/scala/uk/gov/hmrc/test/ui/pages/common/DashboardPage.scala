@@ -52,7 +52,7 @@ object DashboardPage extends BasePage {
 
   override def fillPage(values: String*): Unit = ()
 
-  def mrnValue: WebElement = findElementByCssSelector("tr:nth-child(1) > td:nth-child(1) span:first-child")
+  def mrnValue: WebElement = findElementByCssSelector("tr:nth-child(1) > td:nth-child(1)")
 
   def rejectedTab: WebElement = findElementByCssSelector("#rejected-submissions-button")
   def submittedTab: WebElement = findElementByCssSelector("#submitted-submissions-button")
