@@ -67,6 +67,6 @@ object SummaryPage extends BasePage {
   }
 
   def removeItemLink(itemIndex: Int): WebElement = {
-    findElementByCssSelector(".item-" + itemIndex + "-heading > dd.govuk-summary-list__actions > a")
+    findElementByCssSelector(".item-" + itemIndex + "-heading .remove-item-link> a")
   }
 }
