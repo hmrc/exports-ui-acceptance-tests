@@ -175,6 +175,18 @@ trait DriverHelper {
         throw new TestFailedException(message, exception)
     }
 
+  def waitForXpathSelector(
+                          xpathSelector: String,
+                          expectedCondition: ExpectedCondition = Visible,
+                          secondsToWaitFor: Int = 10
+                        ): WebElement =
+    Try(waitFor(By.cssSelector(xpathSelector), expectedCondition, secondsToWaitFor)) match {
+      case Success(element) => element
+      case Failure(exception) =>
+        val message = s"Was waiting for an element with class($xpathSelector) while on page ${driver.getCurrentUrl}"
+        throw new TestFailedException(message, exception)
+    }
+
   def waitForId(
     elementId: String,
     expectedCondition: ExpectedCondition = Visible,
