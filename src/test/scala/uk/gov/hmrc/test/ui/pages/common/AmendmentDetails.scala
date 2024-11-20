@@ -34,7 +34,8 @@ object AmendmentDetails extends BasePage {
   }
 
   def clickViewDetailsLink(): Unit = {
-    waitForLinkText("View details")
-    clickByCssSelector("a[href*='amendment-details']")
+    val amendSelector = "a[href*='amendment-details']"
+    waitForCssSelector(amendSelector)
+    clickByCssSelector(amendSelector)
   }
 }
