@@ -18,7 +18,7 @@ package uk.gov.hmrc.test.ui.pages.common
 
 import org.openqa.selenium.WebElement
 import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
-import uk.gov.hmrc.test.ui.pages.base.BasePage.exitAndCompleteLater
+import uk.gov.hmrc.test.ui.pages.base.BasePage.{exitAndCompleteLater, host}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.common.DetailKeys.RemoveSavedDecLink
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys._
@@ -52,4 +52,21 @@ object SavedDeclarationsPage extends BasePage {
 
   def clickDUCRLinkForAmendedDeclaration(): Unit = dUCRLink().click()
 
+  def checkSavedDeclarationsPage(): Unit = {
+    checkUrlAndTitleSavedDeclarationsPage()
+    checkBackButton()
+    checkPageLinks()
+    checkExpanders()
+  }
+
+  def checkUrlAndTitleSavedDeclarationsPage(): Unit = {
+    val expectedUrl = host + path
+    val actualUrl = driver.getCurrentUrl
+    assert(
+      expectedUrl.r.matches(actualUrl),
+      s"The expected URL($expectedUrl) does not match the actual URL($actualUrl)"
+    )
+    driver.getTitle mustBe title + " - Page 1 of 1" + " - Make and manage an export declaration online - GOV.UK"
+    findElementsByTag("h1").head.getText mustBe title
+  }
 }

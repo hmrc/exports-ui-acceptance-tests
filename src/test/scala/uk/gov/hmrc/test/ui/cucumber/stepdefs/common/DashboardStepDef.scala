@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.common.DashboardPage
 
 class DashboardStepDef extends BaseStepDef {
 
-  And("""^I should land on Dashboard page""")(() => DashboardPage.checkPage())
+  And("""^I should land on Dashboard page""")(() => DashboardPage.checkDashboardPage())
 
   And("""^I validate declaration details on (.*) tab and check Status is (.*)""") { (tab: String, status: String) =>
    DashboardPage.refreshPage()

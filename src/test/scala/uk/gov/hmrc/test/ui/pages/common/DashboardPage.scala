@@ -137,4 +137,22 @@ object DashboardPage extends BasePage {
         println(s"Current Page: ${activePage.getText}")
       }
     }
+
+  def checkDashboardPage(): Unit = {
+    checkUrlAndTitleDashboardPage()
+    checkBackButton()
+    checkPageLinks()
+    checkExpanders()
+  }
+
+  def checkUrlAndTitleDashboardPage(): Unit = {
+    val expectedUrl = host + path
+    val actualUrl = driver.getCurrentUrl
+    assert(
+      expectedUrl.r.matches(actualUrl),
+      s"The expected URL($expectedUrl) does not match the actual URL($actualUrl)"
+    )
+    driver.getTitle mustBe title + " - Page 1 of 1" + " - Make and manage an export declaration online - GOV.UK"
+    findElementsByTag("h1").head.getText mustBe title
+  }
 }
