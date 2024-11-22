@@ -119,7 +119,14 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
       }
     }
 
-  private case class LabelAndValueRow(label: WebElement, value: WebElement, changeLink: Option[WebElement])
+  private case class LabelAndValueRow(label: WebElement, value: WebElement, changeLink: Option[WebElement]) {
+    override def toString: String = {
+      val l = s"""${label.getText}(${label.getAttribute("class")})"""
+      val v = s"""${value.getText}(${value.getAttribute("class")})"""
+      val c = changeLink.fold("")(cl => s"""${cl.getText}(${cl.getAttribute("class")}) -> ${cl.getAttribute("href")}""")
+      s"$l, $v, $c"
+    }
+  }
 
   protected def checkSectionSummary(detailKey: DetailKey): Unit = {
     val allCardRows = findElementsByClassName("govuk-summary-card")
@@ -152,7 +159,9 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
       print(s"\n=========== ${detailKey.label} => \n")
       tailedLabelAndValueRows.foreach(row => print(s"${row.label.getText} (${row.value.getText})\n"))
 
-      val maybeLabelAndValueRow = tailedLabelAndValueRows.find(_.label.getText == detailKey.label)
+      val maybeLabelAndValueRow = tailedLabelAndValueRows.find{result =>
+        result.label.getText == detailKey.label
+      }
 
       if (detailKey.skipRowCheck) maybeLabelAndValueRow.fold(tailedLabelAndValueRows)(removeFromLabelAndValueRows)
       else {

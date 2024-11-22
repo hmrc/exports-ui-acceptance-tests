@@ -78,8 +78,6 @@ object AdditionalDocumentPage extends BasePage {
 
     val keyAndValues: Seq[(DetailKey, Detail)] =
       List(
-        if (itemDetailFor(itemId, AdditionalDocumentCodeLabel).nonEmpty) None
-        else Some(AdditionalDocuments(itemId) -> Detail("value ignored")),
         Some(AdditionalDocumentCode(itemId, values(sequenceId)) -> Detail(values(code))),
         Some(AdditionalDocumentIdentifier(itemId, values(sequenceId)) -> Detail(values(identifier)))
       ).flatten
