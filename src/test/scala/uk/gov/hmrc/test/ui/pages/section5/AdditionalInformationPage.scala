@@ -20,7 +20,7 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, sequenceId}
 import uk.gov.hmrc.test.ui.pages.base.PageLinks.aiCodes
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalInformation, itemsAdditionalInformationCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, DetailKey}
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalInformation, AdditionalInformationCode, AdditionalInformationCodeLabel, AdditionalInformationDescription}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalInformationCode, AdditionalInformationDescription}
 
 object AdditionalInformationPage extends BasePage {
 
@@ -51,11 +51,7 @@ object AdditionalInformationPage extends BasePage {
 
     val keyAndValues: Seq[(DetailKey, Detail)] =
       List(
-        if (itemDetailFor(itemId, AdditionalInformationCodeLabel).nonEmpty) None
-        else Some(AdditionalInformation(itemId) -> Detail("value ignored")),
-
         Some(AdditionalInformationCode(itemId, values(sequenceId)) -> Detail(values(code))),
-
         Some(AdditionalInformationDescription(itemId, values(sequenceId)) -> Detail(values(description)))
       ).flatten
 
