@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.common.SavedDeclarationsPage
 
 class SavedDeclarationsStepDef extends BaseStepDef {
 
-  And("""^I should land on Saved-Declarations page""")(() => SavedDeclarationsPage.checkSavedDeclarationsPage())
+  And("""^I should land on Saved-Declarations page""")(() => SavedDeclarationsPage.checkPage())
 
   And("""^I validate details on saved declarations page and check status is (.*)""")((status: String) => SavedDeclarationsPage.validateSavedDeclarations(status))
 
