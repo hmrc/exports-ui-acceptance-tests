@@ -51,5 +51,4 @@ object SavedDeclarationsPage extends BasePage {
   def removeDraftDec(): Unit = removeLink().click()
 
   def clickDUCRLinkForAmendedDeclaration(): Unit = dUCRLink().click()
-
 }
