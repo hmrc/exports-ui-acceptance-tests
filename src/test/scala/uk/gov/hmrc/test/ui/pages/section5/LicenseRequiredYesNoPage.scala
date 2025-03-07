@@ -30,7 +30,7 @@ object LicenseRequiredYesNoPage extends BasePage {
     else AdditionalInformationYesNoPage.path
 
   def path: String = itemUrl("is-licence-required")
-  val title: String = "Do these goods require a licence?"
+  val title: String = "Do the goods require a reference or code relating to a licence or certificate?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(itemsIsLicenceRequired))
 
@@ -46,6 +46,8 @@ object LicenseRequiredYesNoPage extends BasePage {
     selectYesOrNoRadio(values(yesNo))
     store(IsLicenceRequired(itemId) -> Detail(values(yesNo)))
   }
+
+  override def checkExpanders(): Unit = ()
 
   def isLicenseRequired: Boolean = detail(DeclarationType) != Clearance && detail(IsLicenceRequired(itemId)) == yes
 }
