@@ -4,12 +4,6 @@ Smoke and regression tests for the `customs-declare-exports-frontend` service.
 
 ## Pre-requisites
 
-Run a Mongo Docker container:
-
-```bash
-$ docker run --rm -d -p 27017:27017 --name mongo percona/percona-server-mongodb:5.0
-```
-
 Run the services for CDS Exports:
 
 ```bash
