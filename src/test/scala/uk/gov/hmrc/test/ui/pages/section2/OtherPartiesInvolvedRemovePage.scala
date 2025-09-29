@@ -32,7 +32,6 @@ object OtherPartiesInvolvedRemovePage extends BasePage {
 
   val partyToBeRemoved = 0
 
-
   // No  => fillPage(no)
 
   // The 2nd parameter is the sequenceId of the current "Other Party" element: "0", "1", "2", ...

@@ -73,7 +73,6 @@ trait DriverHelper {
         case Failure(_) => true
       }
 
-
   def findElementById(value: String): WebElement = driver.findElement(By.id(value))
   def findElementByXpath(value: String): WebElement = driver.findElement(By.xpath(value))
   def findElementByLinkText(value: String): WebElement = driver.findElement(By.linkText(value))
@@ -138,7 +137,6 @@ trait DriverHelper {
 
   def reset(elementId: String): Unit = waitForId(elementId).clear()
 
-
   def selectRadioAndClick(elementId: String): Unit = {
     val actions = new Actions(driver)
     val element = findElementById(elementId)
@@ -164,10 +162,10 @@ trait DriverHelper {
     }
 
   def waitForCssSelector(
-                    cssSelector: String,
-                    expectedCondition: ExpectedCondition = Visible,
-                    secondsToWaitFor: Int = 10
-                  ): WebElement =
+    cssSelector: String,
+    expectedCondition: ExpectedCondition = Visible,
+    secondsToWaitFor: Int = 10
+  ): WebElement =
     Try(waitFor(By.cssSelector(cssSelector), expectedCondition, secondsToWaitFor)) match {
       case Success(element) => element
       case Failure(exception) =>
@@ -188,10 +186,10 @@ trait DriverHelper {
     }
 
   def waitForLinkText(
-                 text: String,
-                 expectedCondition: ExpectedCondition = Visible,
-                 secondsToWaitFor: Int = 10
-               ): WebElement =
+    text: String,
+    expectedCondition: ExpectedCondition = Visible,
+    secondsToWaitFor: Int = 10
+  ): WebElement =
     Try(waitFor(By.linkText(text), expectedCondition, secondsToWaitFor)) match {
       case Success(element) => element
       case Failure(exception) =>

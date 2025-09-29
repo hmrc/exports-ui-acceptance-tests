@@ -23,5 +23,7 @@ class PackageInformationRemoveStepDef extends BaseStepDef {
 
   And("""^I should land on Package-Information-Remove page""")(() => PackageInformationRemovePage.checkPage())
 
-  And("""^I select (.*) to remove Package Information""")((yesNo: String) => PackageInformationRemovePage.fillPage(yesNo, "0"))
+  And("""^I select (.*) to remove Package Information""")((yesNo: String) =>
+    PackageInformationRemovePage.fillPage(yesNo, "0")
+  )
 }

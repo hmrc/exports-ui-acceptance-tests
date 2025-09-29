@@ -29,5 +29,5 @@ object PackageInformationChangePage extends BasePage {
   // The 1st parameter is the sequenceId of the "Packing Details" element to change: "0", "1", "2", ...
   // ex: fillPage(2, "Aerosol", "10", "Shipping mark change")
 
-  override def fillPage(values: String*): Unit = PackageInformationPage.fillPage(values:_*)
+  override def fillPage(values: String*): Unit = PackageInformationPage.fillPage(values: _*)
 }

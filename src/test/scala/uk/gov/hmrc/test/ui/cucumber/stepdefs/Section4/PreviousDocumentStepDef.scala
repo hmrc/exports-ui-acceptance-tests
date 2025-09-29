@@ -22,14 +22,16 @@ import uk.gov.hmrc.test.ui.pages.section4.PreviousDocumentPage
 
 class PreviousDocumentStepDef extends BaseStepDef {
 
-  And("""^I should land on Previous-Document page"""){() =>
-    PreviousDocumentPage.checkPage()}
+  And("""^I should land on Previous-Document page""") { () =>
+    PreviousDocumentPage.checkPage()
+  }
 
   And("""^I select as (.*) Document (.*) as code and (.*) as reference""") {
     (seqId: String, documentType: String, documentReference: String) =>
-    PreviousDocumentPage.fillPage(genSequenceId(seqId), documentType, documentReference)
+      PreviousDocumentPage.fillPage(genSequenceId(seqId), documentType, documentReference)
   }
 
-  And("""^I navigate to Previous Documents page"""){() =>
-    PreviousDocumentPage.navigateToPage(PreviousDocumentPage.path)}
+  And("""^I navigate to Previous Documents page""") { () =>
+    PreviousDocumentPage.navigateToPage(PreviousDocumentPage.path)
+  }
 }

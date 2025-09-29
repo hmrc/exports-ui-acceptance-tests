@@ -21,7 +21,8 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{NoAuthorisationRequired, S
 
 object SummarySection2Page extends BasePage {
 
-  def backButtonHref: String = maybeDetail(NoAuthorisationRequired).fold(AuthorisationsListPage.path)(_ => AuthorisationsYesNoPage.path)
+  def backButtonHref: String =
+    maybeDetail(NoAuthorisationRequired).fold(AuthorisationsListPage.path)(_ => AuthorisationsYesNoPage.path)
   val path: String = "/declaration/summary-section/2"
   val title: String = "Check your answers"
 

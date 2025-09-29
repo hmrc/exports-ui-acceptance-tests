@@ -21,7 +21,11 @@ import uk.gov.hmrc.test.ui.pages.section2.ThirdPartyGoodsTransportationPage
 
 class ThirdPartyGoodsTransportationStepDef extends BaseStepDef {
 
-  And("""^I should land on Third-Party-Goods-Transportation page""")(() => ThirdPartyGoodsTransportationPage.checkPage())
+  And("""^I should land on Third-Party-Goods-Transportation page""")(() =>
+    ThirdPartyGoodsTransportationPage.checkPage()
+  )
 
-  And("""^I select (.*) on third party goods transportation page""")((yesNo: String) => ThirdPartyGoodsTransportationPage.fillPage(yesNo))
+  And("""^I select (.*) on third party goods transportation page""")((yesNo: String) =>
+    ThirdPartyGoodsTransportationPage.fillPage(yesNo)
+  )
 }

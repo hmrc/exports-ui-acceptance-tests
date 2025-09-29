@@ -39,12 +39,14 @@ class DeclarationInformationStepDef extends BaseStepDef {
     DeclarationInformationPage.checkStatusOnTimeLine(status)
   }
 
-  And("""^I click on cancel link on rejected amendment""") { ()
+  And("""^I click on cancel link on rejected amendment""") {
+    ()
     DeclarationInformationPage.clickCancelLinkOnRejectedAmendment()
   }
 
- And("""^And I validate that the Amend declaration link and Copy declaration link is displayed""") { ()
-   DeclarationInformationPage.validateCopyAndAmendDeclarationLinks()
- }
+  And("""^And I validate that the Amend declaration link and Copy declaration link is displayed""") {
+    ()
+    DeclarationInformationPage.validateCopyAndAmendDeclarationLinks()
+  }
 
 }

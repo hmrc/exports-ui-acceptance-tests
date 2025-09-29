@@ -66,8 +66,7 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
     if (actualUrl.contains("/dashboard") || actualUrl.endsWith("/saved-declarations")) {
       driver.getTitle mustBe title + " - Page 1 of 1" + " - Make and manage an export declaration online - GOV.UK"
       findElementsByTag("h1").head.getText mustBe title
-    }
-    else {
+    } else {
       driver.getTitle mustBe title + sectionHeader + " - Make and manage an export declaration online - GOV.UK"
       findElementsByTag("h1").head.getText mustBe title
     }
@@ -165,7 +164,7 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
       print(s"\n=========== ${detailKey.label} => \n")
       tailedLabelAndValueRows.foreach(row => print(s"${row.label.getText} (${row.value.getText})\n"))
 
-      val maybeLabelAndValueRow = tailedLabelAndValueRows.find{result =>
+      val maybeLabelAndValueRow = tailedLabelAndValueRows.find { result =>
         result.label.getText == detailKey.label
       }
 

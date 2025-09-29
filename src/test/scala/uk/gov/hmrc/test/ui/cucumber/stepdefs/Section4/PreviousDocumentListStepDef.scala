@@ -27,7 +27,9 @@ class PreviousDocumentListStepDef extends BaseStepDef {
     PreviousDocumentListPage.fillPage(yesNo)
   }
 
-  And("""^I navigate to Previous Documents List page""")(() => PreviousDocumentListPage.navigateToPage(PreviousDocumentListPage.path))
+  And("""^I navigate to Previous Documents List page""")(() =>
+    PreviousDocumentListPage.navigateToPage(PreviousDocumentListPage.path)
+  )
 
   And("""^I remove previous document""") { () =>
     PreviousDocumentListPage.removePreviousDoc(0)

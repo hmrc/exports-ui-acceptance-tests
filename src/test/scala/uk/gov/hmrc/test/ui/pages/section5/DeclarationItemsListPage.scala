@@ -20,7 +20,7 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, DetailKey}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 import uk.gov.hmrc.test.ui.pages.section4.SummarySection4Page
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{ProcedureCodeLabel, section5}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{section5, ProcedureCodeLabel}
 
 object DeclarationItemsListPage extends BasePage {
 

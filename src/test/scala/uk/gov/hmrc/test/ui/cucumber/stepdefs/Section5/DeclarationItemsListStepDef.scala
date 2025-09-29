@@ -23,7 +23,7 @@ class DeclarationItemsListStepDef extends BaseStepDef {
 
   And("""^I should land on Declaration-Items-List page""")(() => DeclarationItemsListPage.checkPage())
 
-  And("""^I select (.*) on declaration items list page""") { (yesNo:String) =>
+  And("""^I select (.*) on declaration items list page""") { (yesNo: String) =>
     DeclarationItemsListPage.fillPage(yesNo)
   }
 

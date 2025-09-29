@@ -18,7 +18,7 @@ package uk.gov.hmrc.test.ui.pages.section2
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AdditionalPartiesInvolvedTypeLabel, section2}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{section2, AdditionalPartiesInvolvedTypeLabel}
 
 object OtherPartiesInvolvedListPage extends BasePage {
 
@@ -38,6 +38,8 @@ object OtherPartiesInvolvedListPage extends BasePage {
 
   override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
 
-  def removeOtherPartiesInvolvedLink(index: Int): Unit = clickByCssSelector(s"#actor-table-row$index-remove_button > a ")
+  def removeOtherPartiesInvolvedLink(index: Int): Unit = clickByCssSelector(
+    s"#actor-table-row$index-remove_button > a "
+  )
 
 }

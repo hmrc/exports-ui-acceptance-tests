@@ -70,8 +70,9 @@ object AuthorisationPage extends BasePage {
     )
   }
 
-  def removeAuthorisation(index: Int): Unit = clickByCssSelector(s"#holder-table-row"+index+"-remove_button > a > span:nth-child(1)")
-
+  def removeAuthorisation(index: Int): Unit = clickByCssSelector(
+    s"#holder-table-row" + index + "-remove_button > a > span:nth-child(1)"
+  )
 
   private val codesRequiringAdditionalDocuments = List(
     "ACE",

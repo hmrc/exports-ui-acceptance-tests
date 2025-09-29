@@ -48,7 +48,8 @@ object DetailKeys {
   val BorderTransport: DetailKey = DetailKey("Transport leaving the border", section6)
 
   // /transport-country
-  val TransportCountry: DetailKey = DetailKey("Country of registration for the transport leaving the UK border", section6)
+  val TransportCountry: DetailKey =
+    DetailKey("Country of registration for the transport leaving the UK border", section6)
 
   // /express-consignment
   val ExpressConsignment: DetailKey = DetailKey("Express consignment", section6)

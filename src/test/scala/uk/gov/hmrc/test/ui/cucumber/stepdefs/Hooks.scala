@@ -56,7 +56,6 @@ object Hooks extends ScalaDsl with EN with Browser {
     }
   }
 
-
   AfterAll {
     quitBrowser()
   }

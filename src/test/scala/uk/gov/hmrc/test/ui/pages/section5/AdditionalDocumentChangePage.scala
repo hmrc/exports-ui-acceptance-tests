@@ -31,5 +31,5 @@ object AdditionalDocumentChangePage extends BasePage {
   // The 1st parameter is the sequenceId of the "Additional Document" element to change: "0", "1", "2", ...
   // ex: fillPage("2", "C501", "GBAEOC717572504502801")
 
-  override def fillPage(values: String*): Unit = AdditionalDocumentPage.fillPage(values:_*)
+  override def fillPage(values: String*): Unit = AdditionalDocumentPage.fillPage(values: _*)
 }

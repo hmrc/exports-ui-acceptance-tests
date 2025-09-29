@@ -18,7 +18,7 @@ package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{Container, ContainerLabel, NoContainers, section6}
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{section6, Container, ContainerLabel, NoContainers}
 
 object ContainerPage extends BasePage {
 

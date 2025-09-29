@@ -24,21 +24,19 @@ object DangerousGoodsCodePage extends BasePage {
 
   val pageId = "un-dangerous-goods-code"
   def backButtonHref: String = CommodityDetailsPage.path
-  def path: String           = itemUrl(pageId)
-  val title: String          = "Is there a UN dangerous goods code for this item?"
+  def path: String = itemUrl(pageId)
+  val title: String = "Is there a UN dangerous goods code for this item?"
 
   override def checkExpanders(): Unit = ()
 
-  val code  = 1
+  val code = 1
 
   // No  => fillPage(no)
   // Yes => fillPage(yes, "1234")
 
-  override def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit =
     if (selectYesOrNoRadio(values(yesNo))) {
       fillTextBoxById("dangerousGoodsCode", values(code))
       store(DangerousGoodsCode(itemId) -> Detail(values(code)))
-    }
-    else store(DangerousGoodsCode(itemId) -> Detail(Constants.no))
-  }
+    } else store(DangerousGoodsCode(itemId) -> Detail(Constants.no))
 }

@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.test.ui.pages.base
 
-
 import scala.collection.mutable
 
 case class DetailKey(

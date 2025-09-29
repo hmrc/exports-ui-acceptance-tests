@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section2
 import uk.gov.hmrc.test.ui.pages.base.Constants.Clearance
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.consignorAddressCL
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{ConsignorDetails, addressHelper}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{addressHelper, ConsignorDetails}
 
 object ConsignorDetailsPage extends BasePage {
 

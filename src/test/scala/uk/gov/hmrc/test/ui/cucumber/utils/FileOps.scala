@@ -25,7 +25,7 @@ object FileOps extends LazyLogging {
 
   def fileAsString(fileName: String): String = {
 
-    val source       = scala.io.Source.fromFile(fileName)
+    val source = scala.io.Source.fromFile(fileName)
     val jsonAsString = source.mkString
     source.close()
 
@@ -35,7 +35,7 @@ object FileOps extends LazyLogging {
   def readFile(filename: String): Seq[String] = {
 
     val bufferedSource = Source.fromFile(filename)
-    val lines          = bufferedSource.getLines().toSeq
+    val lines = bufferedSource.getLines().toSeq
     bufferedSource.close()
 
     lines
@@ -47,7 +47,7 @@ object FileOps extends LazyLogging {
 
     for {
       files <- Option(new File(folder).listFiles)
-      file  <- files if file.getName.endsWith(extension)
+      file <- files if file.getName.endsWith(extension)
     } file.delete()
   }
 }

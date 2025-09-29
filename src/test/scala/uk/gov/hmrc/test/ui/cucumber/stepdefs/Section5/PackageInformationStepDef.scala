@@ -26,6 +26,6 @@ class PackageInformationStepDef extends BaseStepDef {
 
   And("""^I enter (.*) as package type, with (.*) packages and (.*) as shipping mark for (.*) package info""") {
     (packageType: String, numberOfPackages: String, shippingMark: String, seqId: String) =>
-    PackageInformationPage.fillPage(genSequenceId(seqId), packageType, numberOfPackages, shippingMark)
+      PackageInformationPage.fillPage(genSequenceId(seqId), packageType, numberOfPackages, shippingMark)
   }
 }

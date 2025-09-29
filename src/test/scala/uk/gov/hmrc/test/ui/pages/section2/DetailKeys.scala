@@ -50,7 +50,7 @@ object DetailKeys {
   // /are-you-completing-this-declaration-on-behalf-of-another-agent
   val onBehalfOfOtherAgentYesNo: DetailKey = DetailKey("Hold the contract with the exporter", section2)
 
-  //Transportation Of Goods
+  // Transportation Of Goods
   val ThirdPartyGoodsTransportation: DetailKey = DetailKey("Third Party Transportation", section2, skipRowCheck = true)
 
   // /representatives-eori-number

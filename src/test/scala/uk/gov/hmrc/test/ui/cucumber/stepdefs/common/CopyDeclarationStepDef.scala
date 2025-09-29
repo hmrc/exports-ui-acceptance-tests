@@ -37,6 +37,8 @@ class CopyDeclarationStepDef extends BaseStepDef {
   }
 
   And("""^I am displayed with a lrn warning message""") { () =>
-    CopyDeclarationPage.lrnWarning().getText mustBe "You already submitted a declaration with this LRN in the past 48 hours. If you are resubmitting after correcting an error or updating information, add a version number at the end."
+    CopyDeclarationPage
+      .lrnWarning()
+      .getText mustBe "You already submitted a declaration with this LRN in the past 48 hours. If you are resubmitting after correcting an error or updating information, add a version number at the end."
   }
 }

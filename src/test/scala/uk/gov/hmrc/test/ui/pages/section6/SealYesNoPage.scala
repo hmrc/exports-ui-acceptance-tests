@@ -25,14 +25,12 @@ object SealYesNoPage extends BasePage {
 
   def backButtonHref: String = ContainerListPage.path
 
-  def path: String           = s"/declaration/containers/$containerId/seals"
+  def path: String = s"/declaration/containers/$containerId/seals"
 
-  def title                  = s"Does container $containerId have any security seals?"
+  def title = s"Does container $containerId have any security seals?"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> List(containersSeals),
-    Clearance -> List(containersSealsCL)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] =
+    Map(Common -> List(containersSeals), Clearance -> List(containersSealsCL))
 
   private val yesNo = 0
 

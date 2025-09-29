@@ -22,7 +22,12 @@ import uk.gov.hmrc.test.ui.pages.base.CommonPage._
 import uk.gov.hmrc.test.ui.pages.base.Constants.yes
 import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
 import uk.gov.hmrc.test.ui.pages.common._
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isOccasional, isSimplified, isSupplementary}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{
+  isClearance,
+  isOccasional,
+  isSimplified,
+  isSupplementary
+}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage.isArrivedDeclaration
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 import uk.gov.hmrc.test.ui.pages.section1._
@@ -261,17 +266,18 @@ class CommonStepDef extends BaseStepDef {
 
   And("""^I click back""")(() => CommonPage.back())
 
-  And("""^I return back to errors page"""){() =>
-    CommonPage.saveAndReturnToErrors()}
+  And("""^I return back to errors page""") { () =>
+    CommonPage.saveAndReturnToErrors()
+  }
 
   And("""^I click change link for (.*) page""") { (pageName: String) =>
     val changeLinkMap: Map[String, String] = Map(
-      "LRN"                  -> "lrn",
-      "Authorisation Type"   -> "authorisation-holder-1-type",
+      "LRN" -> "lrn",
+      "Authorisation Type" -> "authorisation-holder-1-type",
       "Are you the exporter" -> "declarant-is-exporter",
-      "Exporter’s details"   -> "exporter-address",
-      "Office of exit"       -> "office-of-exit",
-      "Border transport"     -> "active-transport-type"
+      "Exporter’s details" -> "exporter-address",
+      "Office of exit" -> "office-of-exit",
+      "Border transport" -> "active-transport-type"
     )
 
     CommonPage.changeLinkOnCYA(changeLinkMap(pageName)).click()
@@ -293,7 +299,6 @@ class CommonStepDef extends BaseStepDef {
   }
 
   And("""^I validate view declaration link is (.*)""") { (linkPresent: String) =>
-
     if (linkPresent.equals("missing"))
       elementByIdDoesNotExist(viewDeclarationLink)
     else
@@ -304,7 +309,7 @@ class CommonStepDef extends BaseStepDef {
     DeclarationInformationPage.backToYourDeclarationsLink()
   }
 
-  And("""^I create (.*) draft declarations""") { (numberOfDeclarations:Int) =>
+  And("""^I create (.*) draft declarations""") { (numberOfDeclarations: Int) =>
     for (i <- 1 to numberOfDeclarations) {
       DeclarationInformationPage.copyDeclaration()
       val ducr = f"8GB123456469274-${101 + i}SHIP1"

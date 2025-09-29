@@ -60,13 +60,11 @@ object SummaryPage extends BasePage {
   }
 
   def clickContinueOnSummary(): Unit =
-     findElementByCssSelector("a[role='button']").click()
+    findElementByCssSelector("a[role='button']").click()
 
-  def checkChangeLinkIsNotPresentFor(changeLinks: String): Assertion = {
+  def checkChangeLinkIsNotPresentFor(changeLinks: String): Assertion =
     elementBySelectorDoesNotExist("a[href*=" + changeLinks + "]") must be(true)
-  }
 
-  def removeItemLink(itemIndex: Int): WebElement = {
+  def removeItemLink(itemIndex: Int): WebElement =
     findElementByCssSelector(".item-" + itemIndex + "-heading .remove-item-link> a")
-  }
 }

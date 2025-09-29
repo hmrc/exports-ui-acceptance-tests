@@ -23,5 +23,7 @@ class AdditionalInformationRemoveStepDef extends BaseStepDef {
 
   And("""^I should land on Additional-Information-Remove page""")(() => AdditionalInformationRemovePage.checkPage())
 
-  And("""^I select (.*) to remove Additional Information""")((yesNo: String) => AdditionalInformationRemovePage.fillPage(yesNo, "0"))
+  And("""^I select (.*) to remove Additional Information""")((yesNo: String) =>
+    AdditionalInformationRemovePage.fillPage(yesNo, "0")
+  )
 }

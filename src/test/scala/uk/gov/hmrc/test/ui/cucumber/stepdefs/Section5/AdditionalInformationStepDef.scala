@@ -24,7 +24,8 @@ class AdditionalInformationStepDef extends BaseStepDef {
 
   And("""^I should land on Additional-Information page""")(() => AdditionalInformationPage.checkPage())
 
-  And("""^I enter (.*) as code and (.*) as required information as (.*) additional information""") { (code: String, description: String, seqId: String) =>
-    AdditionalInformationPage.fillPage(genSequenceId(seqId), code, description)
+  And("""^I enter (.*) as code and (.*) as required information as (.*) additional information""") {
+    (code: String, description: String, seqId: String) =>
+      AdditionalInformationPage.fillPage(genSequenceId(seqId), code, description)
   }
 }

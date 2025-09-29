@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Clearance}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.consignorEoriNumberCL
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{ConsignorEORI, EORI}

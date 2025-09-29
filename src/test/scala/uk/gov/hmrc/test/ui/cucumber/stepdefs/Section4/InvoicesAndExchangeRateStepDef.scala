@@ -25,6 +25,6 @@ class InvoicesAndExchangeRateStepDef extends BaseStepDef {
 
   And("""^I select currency code as (.*) and Total amount as (.*) with an exchange rate as (.*)""") {
     (currency: String, totalAmount: String, exchangeRate: String) =>
-    InvoicesAndExchangeRatePage.fillPage(currency,totalAmount,exchangeRate)
+      InvoicesAndExchangeRatePage.fillPage(currency, totalAmount, exchangeRate)
   }
 }

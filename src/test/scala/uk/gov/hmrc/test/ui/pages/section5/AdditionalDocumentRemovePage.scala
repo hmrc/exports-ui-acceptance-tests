@@ -23,8 +23,8 @@ import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalDocumentCode, A
 object AdditionalDocumentRemovePage extends BasePage {
 
   def backButtonHref: String = AdditionalDocumentListPage.path
-  def path: String           = removeUrl("items", "additional-documentation")
-  val title: String          = "Are you sure you want to remove this document or reference?"
+  def path: String = removeUrl("items", "additional-documentation")
+  val title: String = "Are you sure you want to remove this document or reference?"
 
   override def checkExpanders(): Unit = ()
 
@@ -38,9 +38,6 @@ object AdditionalDocumentRemovePage extends BasePage {
   override def fillPage(values: String*): Unit =
     if (selectYesOrNoRadio(values(yesNo))) {
       val seqId = values(additionalDocumentToBeRemoved)
-      clear(
-        AdditionalDocumentCode(itemId, seqId),
-        AdditionalDocumentIdentifier(itemId, seqId)
-      )
+      clear(AdditionalDocumentCode(itemId, seqId), AdditionalDocumentIdentifier(itemId, seqId))
     }
 }

@@ -23,5 +23,7 @@ class NationalAdditionalCodeRemoveStepDef extends BaseStepDef {
 
   And("""^I should land on National-Additional-Code-Remove page""")(() => NationalAdditionalCodeRemovePage.checkPage())
 
-  And("""^I select (.*) to remove National Additional Code""")((yesNo: String) => NationalAdditionalCodeRemovePage.fillPage(yesNo, "0"))
+  And("""^I select (.*) to remove National Additional Code""")((yesNo: String) =>
+    NationalAdditionalCodeRemovePage.fillPage(yesNo, "0")
+  )
 }

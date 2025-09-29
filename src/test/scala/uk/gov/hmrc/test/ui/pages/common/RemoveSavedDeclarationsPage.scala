@@ -27,14 +27,11 @@ object RemoveSavedDeclarationsPage extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
-  override def pageLinkHrefs: Seq[String] = {
+  override def pageLinkHrefs: Seq[String] =
     super.pageLinkHrefs.filterNot(_ == exitAndCompleteLater)
-  }
 
   // fillPage("Yes")
-  override def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit =
     selectRadioAndClick(values(0))
-  }
-
 
 }

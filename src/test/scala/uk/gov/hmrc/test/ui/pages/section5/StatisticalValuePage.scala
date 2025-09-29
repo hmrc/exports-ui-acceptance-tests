@@ -17,7 +17,11 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsStatisticalValue, itemsStatisticalValue1, itemsStatisticalValue2}
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{
+  itemsStatisticalValue,
+  itemsStatisticalValue1,
+  itemsStatisticalValue2
+}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.StatisticalValue
 

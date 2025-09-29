@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{carrierEoriNumber, carrierEoriNumberCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{CarrierEORI, EORI, ExporterYesNo}
@@ -24,8 +24,8 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{CarrierEORI, EORI, Exporte
 object CarrierEORINumberPage extends BasePage {
 
   def backButtonHref: String = maybeDetail(ExporterYesNo) match {
-    case Some(_) =>  ThirdPartyGoodsTransportationPage.path
-    case None    =>  AreYouTheExporterPage.path
+    case Some(_) => ThirdPartyGoodsTransportationPage.path
+    case None    => AreYouTheExporterPage.path
   }
 
   val path: String = "/declaration/carrier-eori-number"

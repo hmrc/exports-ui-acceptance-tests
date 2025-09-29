@@ -22,7 +22,7 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
 object SealListPage extends BasePage {
 
   def backButtonHref: String = ContainerListPage.path
-  def path: String           = s"/declaration/containers/$containerId/seals"
+  def path: String = s"/declaration/containers/$containerId/seals"
 
   def title: String =
     details(Seals(containerId)).size match {

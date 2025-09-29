@@ -27,6 +27,6 @@ class ExporterAddressStepDef extends BaseStepDef {
 
   And("""^I provide Exporter Address Details""") { () =>
     val address = if (isAmendmentMode) Constants.AmendedAddress else Constants.Address
-    ExporterAddressPage.fillPage(address:_*)
+    ExporterAddressPage.fillPage(address: _*)
   }
 }

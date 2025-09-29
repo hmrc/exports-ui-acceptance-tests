@@ -23,7 +23,7 @@ class PersonPresentingGoodsStepDef extends BaseStepDef {
 
   And("""^I should land on Person-Presenting-Goods page""")(() => PersonPresentingGoodsPage.checkPage())
 
-  And("""^I enter entered eori as (.*)""") {(eori: String) =>
+  And("""^I enter entered eori as (.*)""") { (eori: String) =>
     PersonPresentingGoodsPage.fillPage(eori)
   }
 }

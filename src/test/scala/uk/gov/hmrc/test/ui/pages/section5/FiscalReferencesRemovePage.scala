@@ -35,8 +35,7 @@ object FiscalReferencesRemovePage extends BasePage {
   // Yes => fillPage(yes, "2")
 
   override def fillPage(values: String*): Unit =
-    if (selectYesOrNoRadio(values(yesNo)))
-    {
+    if (selectYesOrNoRadio(values(yesNo))) {
       val detailKey = AdditionalFiscalReferences(itemId)
       val vatDetailsToRemove = values.head
       val result = details(detailKey).filter(_ == vatDetailsToRemove)

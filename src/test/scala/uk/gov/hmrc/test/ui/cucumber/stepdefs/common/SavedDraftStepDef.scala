@@ -25,5 +25,4 @@ class SavedDraftStepDef extends BaseStepDef {
 
   And("""^I navigate to saved declarations""")(() => DraftSavedPage.viewSavedDec())
 
-
 }

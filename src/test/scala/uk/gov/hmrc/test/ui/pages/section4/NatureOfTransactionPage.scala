@@ -28,13 +28,14 @@ object NatureOfTransactionPage extends BasePage {
   val Sale = "Goods being sold"
   val BusinessPurchase = "Item purchased new in the UK for business use"
 
-  def backButtonHref: String = {
-   detail(DeclarationType) match {
-      case Standard | Supplementary if isGuernseyOrJerseyDestination && detail(TotalAmountInvoiced) == "Less than £100,000" => InvoicesAndExchangeRateChoicePage.path
+  def backButtonHref: String =
+    detail(DeclarationType) match {
+      case Standard | Supplementary
+          if isGuernseyOrJerseyDestination && detail(TotalAmountInvoiced) == "Less than £100,000" =>
+        InvoicesAndExchangeRateChoicePage.path
       case Standard | Supplementary if isGuernseyOrJerseyDestination => InvoicesAndExchangeRatePage.path
-      case _ => TotalPackageQuantityPage.path
+      case _                                                         => TotalPackageQuantityPage.path
     }
-  }
 
   val path: String = "/declaration/nature-of-transaction"
   val title = "What sort of export is it?"

@@ -23,7 +23,7 @@ class PackageInformationListStepDef extends BaseStepDef {
 
   And("""^I should land on Package-Information-List page""")(() => PackageInformationListPage.checkPage())
 
-  And("""^I select (.*) on package information list page""") { (yesNo:String) =>
+  And("""^I select (.*) on package information list page""") { (yesNo: String) =>
     PackageInformationListPage.fillPage(yesNo)
   }
 
