@@ -29,9 +29,8 @@ object AmendmentDetails extends BasePage {
 
   // ex: fillPage()
 
-  override def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit =
     checkAmendedDetails()
-  }
 
   def clickViewDetailsLink(): Unit = {
     val amendSelector = "a[href*='amendment-details']"

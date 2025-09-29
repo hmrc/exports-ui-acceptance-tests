@@ -25,16 +25,16 @@ import uk.gov.hmrc.test.ui.pages.section5.AdditionalProcedureCodesPage.isLowValu
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodes
 
 object NationalAdditionalCodesListPage extends BasePage {
- val pageId= "national-additional-codes-list"
+  val pageId = "national-additional-codes-list"
   def backButtonHref: String =
     detail(DeclarationType) match {
       case Occasional | Simplified => if (isLowValueDeclaration) VatRatingPage.path else VatRatingPage.backButtonHref
       case Supplementary           => VatRatingPage.backButtonHref
 
-      case Standard | _=>
+      case Standard | _ =>
         detail(NatureOfTransaction) match {
           case Sale | BusinessPurchase => VatRatingPage.path
-          case _ => VatRatingPage.backButtonHref
+          case _                       => VatRatingPage.backButtonHref
         }
     }
 

@@ -23,8 +23,8 @@ import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.Section5
 object SummarySection5Page extends BasePage {
 
   def backButtonHref: String = DeclarationItemsListPage.path
-  val path: String           = "/declaration/summary-section/5"
-  val title: String          = "Check your answers"
+  val path: String = "/declaration/summary-section/5"
+  val title: String = "Check your answers"
 
   override def checkExpanders(): Unit = ()
 

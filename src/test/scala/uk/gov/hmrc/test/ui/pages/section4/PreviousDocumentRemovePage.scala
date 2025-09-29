@@ -28,7 +28,7 @@ object PreviousDocumentRemovePage extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
-  val documentToRemove  = 1
+  val documentToRemove = 1
 
   // No  => fillPage(no)
 

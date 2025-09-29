@@ -18,13 +18,17 @@ package uk.gov.hmrc.test.ui.pages.section5
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{PackageInformationNumber, PackageInformationShippingMark, PackageInformationType}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{
+  PackageInformationNumber,
+  PackageInformationShippingMark,
+  PackageInformationType
+}
 
 object PackageInformationRemovePage extends BasePage {
 
   def backButtonHref: String = PackageInformationListPage.path
-  def path: String           = removeUrl("items", "package-information")
-  val title: String          = "Are you sure you want to remove this package type?"
+  def path: String = removeUrl("items", "package-information")
+  val title: String = "Are you sure you want to remove this package type?"
 
   override def checkExpanders(): Unit = ()
 

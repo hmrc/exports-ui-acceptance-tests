@@ -21,8 +21,9 @@ import uk.gov.hmrc.test.ui.pages.section3.LocationOfGoodsPage
 
 class LocationOfGoodsStepDef extends BaseStepDef {
 
-  And("""^I should land on Location-Of-Goods page"""){() =>
-    LocationOfGoodsPage.checkPage()}
+  And("""^I should land on Location-Of-Goods page""") { () =>
+    LocationOfGoodsPage.checkPage()
+  }
 
   And("""^I select (.*) to provide location as (.*)""") { (yesNo: String, code: String) =>
     LocationOfGoodsPage.fillPage(yesNo, code)
@@ -33,5 +34,6 @@ class LocationOfGoodsStepDef extends BaseStepDef {
   }
 
   And("""^I should navigate to Location Of Goods page""")(() =>
-    LocationOfGoodsPage.navigateToPage(LocationOfGoodsPage.path))
+    LocationOfGoodsPage.navigateToPage(LocationOfGoodsPage.path)
+  )
 }

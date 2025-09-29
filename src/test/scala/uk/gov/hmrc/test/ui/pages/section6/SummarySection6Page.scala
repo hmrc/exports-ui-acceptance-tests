@@ -23,8 +23,8 @@ object SummarySection6Page extends BasePage {
 
   def backButtonHref: String = ContainerListPage.path
 
-  val path: String           = "/declaration/summary-section/6"
-  val title: String          = "Check your answers"
+  val path: String = "/declaration/summary-section/6"
+  val title: String = "Check your answers"
 
   override def checkExpanders(): Unit = ()
 

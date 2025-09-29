@@ -97,7 +97,8 @@ object DetailsKeys {
   // /items/[id]/package-information/[packageId]/remove
 
   // /items/[id]/commodity-measure
-  def CommodityMeasureNet(itemId: String): DetailKey = DetailKey("Net weight in kilograms", section5, Some(itemId), checkChangeLink = false)
+  def CommodityMeasureNet(itemId: String): DetailKey =
+    DetailKey("Net weight in kilograms", section5, Some(itemId), checkChangeLink = false)
   def CommodityMeasureGross(itemId: String): DetailKey = DetailKey("Gross weight in kilograms", section5, Some(itemId))
 
   // /items/[id]/supplementary-units

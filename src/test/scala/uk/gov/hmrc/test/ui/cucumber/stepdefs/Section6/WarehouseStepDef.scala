@@ -27,7 +27,7 @@ class WarehouseStepDef extends BaseStepDef {
     WarehousePage.fillPage("R1234567GB")
   }
 
-  And("""^I select (.*) and enter approved warehouse number""") { (yesNo:String) =>
+  And("""^I select (.*) and enter approved warehouse number""") { (yesNo: String) =>
     WarehousePage.fillPage(yesNo, "R1234567GB")
   }
 

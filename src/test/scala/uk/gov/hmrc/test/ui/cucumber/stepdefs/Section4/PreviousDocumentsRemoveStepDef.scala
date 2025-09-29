@@ -23,5 +23,7 @@ class PreviousDocumentsRemoveStepDef extends BaseStepDef {
 
   And("""^I should land on Previous-Documents-Remove page""")(() => PreviousDocumentRemovePage.checkPage())
 
-  And("""^I select (.*) to remove Previous Documents""")((yesNo: String) => PreviousDocumentRemovePage.fillPage(yesNo, "0"))
+  And("""^I select (.*) to remove Previous Documents""")((yesNo: String) =>
+    PreviousDocumentRemovePage.fillPage(yesNo, "0")
+  )
 }

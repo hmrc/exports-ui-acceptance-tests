@@ -107,9 +107,8 @@ object DeclarationInformationPage extends BasePage {
     storeOne(DeclarationInfoPath -> declarationInfoPath)
   }
 
-  def backToYourDeclarationsLink(): Unit = {
-     clickByXpath("//*[@id='back-link']")
-  }
+  def backToYourDeclarationsLink(): Unit =
+    clickByXpath("//*[@id='back-link']")
 
   def copyDeclaration(): Unit =
     clickById("copy-declaration")
@@ -128,7 +127,8 @@ object DeclarationInformationPage extends BasePage {
     findElementById("amend-declaration").isDisplayed
   }
 
-  def clickCancelLinkOnRejectedAmendment(): Unit = {clickById("cancel-amendment")
+  def clickCancelLinkOnRejectedAmendment(): Unit = {
+    clickById("cancel-amendment")
     isCancelDeclaration = true
   }
 
@@ -146,13 +146,12 @@ object DeclarationInformationPage extends BasePage {
     notificationActionButton(0).getAttribute("href") must include("/resubmit-your-amendment")
   }
 
-  def checkStatusOnTimeLine(notificationEventStatusOnTimeLine: String): Unit = {
+  def checkStatusOnTimeLine(notificationEventStatusOnTimeLine: String): Unit =
     if (notificationEventStatusOnTimeLine == "Amendment rejected")
       validateAmendRejectedStatusLinks("Fix errors")
-    else if(notificationEventStatusOnTimeLine == "Amendment failed")
+    else if (notificationEventStatusOnTimeLine == "Amendment failed")
       validateAmendCancelledStatusLinks("Resubmit")
 
-    // uncomment this line when CEDS-5922 is fixed
- //   findElementByCssSelector(".hmrc-timeline__event:first-child h2").getText mustBe notificationEventStatusOnTimeLine
-  }
+  // uncomment this line when CEDS-5922 is fixed
+  //   findElementByCssSelector(".hmrc-timeline__event:first-child h2").getText mustBe notificationEventStatusOnTimeLine
 }

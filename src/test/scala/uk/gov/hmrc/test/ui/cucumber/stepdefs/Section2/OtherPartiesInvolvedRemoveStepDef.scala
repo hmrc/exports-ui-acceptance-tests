@@ -23,6 +23,8 @@ class OtherPartiesInvolvedRemoveStepDef extends BaseStepDef {
 
   And("""^I should land on Other-Parties-Involved-Remove page""")(() => OtherPartiesInvolvedRemovePage.checkPage())
 
-  And("""^I select (.*) to remove other party""")((yesNo: String) => OtherPartiesInvolvedRemovePage.fillPage(yesNo,"0"))
+  And("""^I select (.*) to remove other party""")((yesNo: String) =>
+    OtherPartiesInvolvedRemovePage.fillPage(yesNo, "0")
+  )
 
 }

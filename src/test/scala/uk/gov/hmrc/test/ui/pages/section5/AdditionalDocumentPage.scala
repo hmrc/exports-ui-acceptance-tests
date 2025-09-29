@@ -41,10 +41,10 @@ object AdditionalDocumentPage extends BasePage {
     (detail(DeclarationType), hasCodesRequiringAdditionalDocuments, isLicenseRequired) match {
       case (Clearance, true, _)  => "Declare each document code and authorisation number"
       case (Clearance, false, _) => "Declare each additional document required for this item"
-      case (_, true, true)   => "Enter licence details, authorisation numbers and any other document details"
-      case (_, false, true)  => "Enter licence details and any other document details"
-      case (_, true, false)  => "Enter authorisation numbers and any other document details"
-      case (_, false, false) => "Enter any other document details"
+      case (_, true, true)       => "Enter licence details, authorisation numbers and any other document details"
+      case (_, false, true)      => "Enter licence details and any other document details"
+      case (_, true, false)      => "Enter authorisation numbers and any other document details"
+      case (_, false, false)     => "Enter any other document details"
     }
 
   override val expanderHrefs: Map[String, Seq[String]] =

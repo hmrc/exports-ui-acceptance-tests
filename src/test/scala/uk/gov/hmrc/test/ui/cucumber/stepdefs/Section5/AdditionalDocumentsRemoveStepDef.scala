@@ -23,5 +23,7 @@ class AdditionalDocumentsRemoveStepDef extends BaseStepDef {
 
   And("""^I should land on Additional-Documents-Remove page""")(() => AdditionalDocumentRemovePage.checkPage())
 
-  And("""^I select (.*) to remove Additional Documents""")((yesNo: String) => AdditionalDocumentRemovePage.fillPage(yesNo, "0"))
+  And("""^I select (.*) to remove Additional Documents""")((yesNo: String) =>
+    AdditionalDocumentRemovePage.fillPage(yesNo, "0")
+  )
 }

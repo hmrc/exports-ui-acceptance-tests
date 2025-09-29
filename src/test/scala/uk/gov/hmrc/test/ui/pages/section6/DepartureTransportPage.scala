@@ -25,7 +25,10 @@ object DepartureTransportPage extends BasePage {
 
   def backButtonHref: String =
     if (isClearance) SupervisingCustomsOfficePage.path
-    else maybeDetail(InlandModeOfTransport).fold(InlandModeOfTransportPage.backButtonHref)( _=> InlandModeOfTransportPage.path)
+    else
+      maybeDetail(InlandModeOfTransport).fold(InlandModeOfTransportPage.backButtonHref)(_ =>
+        InlandModeOfTransportPage.path
+      )
 
   val path: String = "/declaration/departure-transport"
 

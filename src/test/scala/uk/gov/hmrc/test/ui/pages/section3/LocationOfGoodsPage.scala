@@ -65,7 +65,7 @@ object LocationOfGoodsPage extends BasePage {
   val selection = 0
   val code = 1
 
-  def handleUserChoice(location:String): Unit = {
+  def handleUserChoice(location: String): Unit = {
     selectRadioAndClick("radio-userChoice")
     fillTextBoxById("userChoice", location)
     store(LocationOfGoods -> Detail(location))

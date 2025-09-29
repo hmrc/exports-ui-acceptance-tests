@@ -27,5 +27,7 @@ class ProcedureChoiceStepDef extends BaseStepDef {
     ProcedureChoicePage.fillPage(code)
   }
 
-  And("""^I navigate to Authorisation Choice page""")(() => ProcedureChoicePage.navigateToPage(ProcedureChoicePage.path))
+  And("""^I navigate to Authorisation Choice page""")(() =>
+    ProcedureChoicePage.navigateToPage(ProcedureChoicePage.path)
+  )
 }

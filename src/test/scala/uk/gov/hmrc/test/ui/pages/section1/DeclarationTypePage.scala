@@ -64,5 +64,4 @@ object DeclarationTypePage extends BasePage {
   def isSimplifiedDeclaration: Boolean =
     detail(AdditionalDeclarationType).startsWith("Simplified -")
 
-
 }

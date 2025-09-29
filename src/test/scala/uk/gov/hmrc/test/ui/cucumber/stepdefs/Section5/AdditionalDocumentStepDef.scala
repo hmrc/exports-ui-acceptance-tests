@@ -24,7 +24,8 @@ class AdditionalDocumentStepDef extends BaseStepDef {
 
   And("""^I should land on Additional-Document page""")(() => AdditionalDocumentPage.checkPage())
 
-  And("""^I enter (.*) as code and (.*) as identifier for (.*) additional document""") { (code: String, identifier: String, seqId: String) =>
-    AdditionalDocumentPage.fillPage(genSequenceId(seqId), code, identifier)
+  And("""^I enter (.*) as code and (.*) as identifier for (.*) additional document""") {
+    (code: String, identifier: String, seqId: String) =>
+      AdditionalDocumentPage.fillPage(genSequenceId(seqId), code, identifier)
   }
 }

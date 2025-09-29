@@ -25,6 +25,7 @@ class ChoicePageStepDef extends BaseStepDef {
 
   And("""^I select to (.*)""")((dec: String) => ChoicePage.fillPage(dec))
 
-  And("""^I navigate to Choice page"""){() =>
-    ChoicePage.navigateToPage(ChoicePage.path)}
+  And("""^I navigate to Choice page""") { () =>
+    ChoicePage.navigateToPage(ChoicePage.path)
+  }
 }

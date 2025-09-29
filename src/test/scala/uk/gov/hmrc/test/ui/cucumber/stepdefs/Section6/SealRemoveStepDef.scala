@@ -23,5 +23,7 @@ class SealRemoveStepDef extends BaseStepDef {
 
   And("""^I should land on Remove-This-Seal page""")(() => SealRemovePage.checkPage())
 
-  And("""^I select (.*) to remove seal (.*)""")((yesNo: String, sealId: String) => SealRemovePage.fillPage(yesNo, sealId))
+  And("""^I select (.*) to remove seal (.*)""")((yesNo: String, sealId: String) =>
+    SealRemovePage.fillPage(yesNo, sealId)
+  )
 }

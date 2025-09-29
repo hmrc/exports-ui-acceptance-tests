@@ -19,8 +19,8 @@ package uk.gov.hmrc.test.ui.pages.base
 object CommonPage extends BasePage {
 
   val backButtonHref: String = ""
-  val path: String           = ""
-  val title                  = ""
+  val path: String = ""
+  val title = ""
 
   override def checkBackButton(): Unit = ()
 

@@ -21,9 +21,10 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{BorderTransport, Departure
 
 object BorderTransportPage extends BasePage {
 
-  def backButtonHref: String = maybeDetails(DepartureTransport).fold(DepartureTransportPage.backButtonHref)(_ => DepartureTransportPage.path)
+  def backButtonHref: String =
+    maybeDetails(DepartureTransport).fold(DepartureTransportPage.backButtonHref)(_ => DepartureTransportPage.path)
 
-  val path: String  = "/declaration/border-transport"
+  val path: String = "/declaration/border-transport"
 
   def title: String = s"What are the details for the ${detail(TransportLeavingBorder).toLowerCase}?"
 
@@ -36,28 +37,63 @@ object BorderTransportPage extends BasePage {
   override def fillPage(values: String*): Unit = {
     val data = values.head match {
       case "Ship IMO number" =>
-          BorderTransportData("radio_ShipOrRoroImoNumber", "ShipOrRoroImoNumber", if (isAmendmentMode) "REJECTED" else "123456", "Ship IMO number")
+        BorderTransportData(
+          "radio_ShipOrRoroImoNumber",
+          "ShipOrRoroImoNumber",
+          if (isAmendmentMode) "REJECTED" else "123456",
+          "Ship IMO number"
+        )
 
       case "Ship name" =>
-        BorderTransportData("radio_NameOfVessel", "NameOfVessel", if (isAmendmentMode) "DENIED" else "Seraphim", "Ship name")
+        BorderTransportData(
+          "radio_NameOfVessel",
+          "NameOfVessel",
+          if (isAmendmentMode) "DENIED" else "Seraphim",
+          "Ship name"
+        )
 
       case "Train" =>
-        BorderTransportData("radio_WagonNumber", "WagonNumber", if (isAmendmentMode) "PENDING" else "EuroTunnel", "Train")
+        BorderTransportData(
+          "radio_WagonNumber",
+          "WagonNumber",
+          if (isAmendmentMode) "PENDING" else "EuroTunnel",
+          "Train"
+        )
 
       case "Vehicle registration" =>
-        BorderTransportData("radio_VehicleRegistrationNumber", "VehicleRegistrationNumber", "EXTERNAL AMEND", "Vehicle registration")
+        BorderTransportData(
+          "radio_VehicleRegistrationNumber",
+          "VehicleRegistrationNumber",
+          "EXTERNAL AMEND",
+          "Vehicle registration"
+        )
 
       case "Flight number" =>
         BorderTransportData("radio_FlightNumber", "FlightNumber", "123456", "Flight number")
 
       case "Aircraft number" =>
-        BorderTransportData("radio_AircraftRegistrationNumber", "AircraftRegistrationNumber", "123456", "Aircraft number")
+        BorderTransportData(
+          "radio_AircraftRegistrationNumber",
+          "AircraftRegistrationNumber",
+          "123456",
+          "Aircraft number"
+        )
 
       case "European vessel number (ENI)" =>
-        BorderTransportData("radio_EuropeanVesselIDNumber", "EuropeanVesselIDNumber", "123456", "European vessel number (ENI)")
+        BorderTransportData(
+          "radio_EuropeanVesselIDNumber",
+          "EuropeanVesselIDNumber",
+          "123456",
+          "European vessel number (ENI)"
+        )
 
       case "Inland vessel’s name" =>
-        BorderTransportData("radio_NameOfInlandWaterwayVessel", "NameOfInlandWaterwayVessel", "123456", "Inland vessel’s name")
+        BorderTransportData(
+          "radio_NameOfInlandWaterwayVessel",
+          "NameOfInlandWaterwayVessel",
+          "123456",
+          "Inland vessel’s name"
+        )
     }
 
     fillRadioButton(data.radioId, data.textboxId, data.textboxValue)

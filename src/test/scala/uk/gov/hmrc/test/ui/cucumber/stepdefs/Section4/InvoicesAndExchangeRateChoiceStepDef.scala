@@ -21,7 +21,9 @@ import uk.gov.hmrc.test.ui.pages.section4.InvoicesAndExchangeRateChoicePage
 
 class InvoicesAndExchangeRateChoiceStepDef extends BaseStepDef {
 
-  And("""^I should land on Invoices-And-Exchange-Rate-Choice page""")(() => InvoicesAndExchangeRateChoicePage.checkPage())
+  And("""^I should land on Invoices-And-Exchange-Rate-Choice page""")(() =>
+    InvoicesAndExchangeRateChoicePage.checkPage()
+  )
 
   And("""^I select (.*) on invoices and exchange rate choice page""") { (yesOrNo: String) =>
     InvoicesAndExchangeRateChoicePage.fillPage(yesOrNo)

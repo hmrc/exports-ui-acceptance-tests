@@ -21,7 +21,7 @@ import uk.gov.hmrc.test.ui.pages.section5.DangerousGoodsCodePage
 
 class DangerousGoodsCodeSteppDef extends BaseStepDef {
 
-  And("""^I should land on Dangerous-Goods-Code page"""){ () =>
+  And("""^I should land on Dangerous-Goods-Code page""") { () =>
     DangerousGoodsCodePage.checkPage()
   }
 

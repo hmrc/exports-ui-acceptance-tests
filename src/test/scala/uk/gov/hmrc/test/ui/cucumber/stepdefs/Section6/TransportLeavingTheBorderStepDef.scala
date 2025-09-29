@@ -27,6 +27,8 @@ class TransportLeavingTheBorderStepDef extends BaseStepDef {
     TransportLeavingTheBorderPage.fillPage(mode)
   }
 
-  And("""^I navigate to Transport-Leaving-The-Border page""")(() => TransportLeavingTheBorderPage.navigateToPage(TransportLeavingTheBorderPage.path))
+  And("""^I navigate to Transport-Leaving-The-Border page""")(() =>
+    TransportLeavingTheBorderPage.navigateToPage(TransportLeavingTheBorderPage.path)
+  )
 
 }

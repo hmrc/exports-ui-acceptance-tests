@@ -24,7 +24,9 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{InlandOrBorder, SuperVisin
 object InlandOrBorderPage extends BasePage {
 
   def backButtonHref: String =
-    maybeDetail(SuperVisingCustomsOffice).fold(SupervisingCustomsOfficePage.backButtonHref)(_ => SupervisingCustomsOfficePage.path)
+    maybeDetail(SuperVisingCustomsOffice).fold(SupervisingCustomsOfficePage.backButtonHref)(_ =>
+      SupervisingCustomsOfficePage.path
+    )
 
   val path: String = "/declaration/inland-or-border"
   val title: String = "Where are you presenting your goods to customs?"

@@ -23,8 +23,9 @@ import uk.gov.hmrc.test.ui.pages.section4.SummarySection4Page
 object AddDeclarationItemPage extends BasePage {
 
   def backButtonHref: String = SummarySection4Page.path
-  val path: String           = "/declaration/add-declaration-item"
-  def title: String = if(isClearance) "Add the declaration item" else "Add the details of one or more declaration items"
+  val path: String = "/declaration/add-declaration-item"
+  def title: String =
+    if (isClearance) "Add the declaration item" else "Add the details of one or more declaration items"
 
   override def checkExpanders(): Unit = ()
 

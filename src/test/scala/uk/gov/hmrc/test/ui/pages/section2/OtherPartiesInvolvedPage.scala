@@ -18,7 +18,11 @@ package uk.gov.hmrc.test.ui.pages.section2
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.{none, sequenceId}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AdditionalPartiesInvolvedEORI, AdditionalPartiesInvolvedType, NoAdditionalPartiesInvolved}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{
+  AdditionalPartiesInvolvedEORI,
+  AdditionalPartiesInvolvedType,
+  NoAdditionalPartiesInvolved
+}
 
 object OtherPartiesInvolvedPage extends BasePage {
 

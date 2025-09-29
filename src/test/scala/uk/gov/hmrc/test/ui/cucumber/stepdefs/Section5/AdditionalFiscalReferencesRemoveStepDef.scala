@@ -23,5 +23,7 @@ class AdditionalFiscalReferencesRemoveStepDef extends BaseStepDef {
 
   And("""^I should land on Additional-Fiscal-References-Remove page""")(() => FiscalReferencesRemovePage.checkPage())
 
-  And("""^I select (.*) to remove Fiscal References""")((yesNo: String) => FiscalReferencesRemovePage.fillPage(yesNo, "0"))
+  And("""^I select (.*) to remove Fiscal References""")((yesNo: String) =>
+    FiscalReferencesRemovePage.fillPage(yesNo, "0")
+  )
 }

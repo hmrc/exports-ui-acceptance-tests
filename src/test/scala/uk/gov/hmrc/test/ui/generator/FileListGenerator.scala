@@ -23,10 +23,5 @@ class FileListGenerator {
   def errorMessageOneFileTest(filename: String): List[String] = Seq(s"$filename").toList
 
   def fourFiles(): List[String] =
-    Seq(
-      "example.PDF",
-      "example.png",
-      "example.jpg",
-      "exampleTextFile.txT"
-    ).toList
+    Seq("example.PDF", "example.png", "example.jpg", "exampleTextFile.txT").toList
 }

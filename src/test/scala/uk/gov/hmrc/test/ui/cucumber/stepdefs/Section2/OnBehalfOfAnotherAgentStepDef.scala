@@ -27,7 +27,7 @@ class OnBehalfOfAnotherAgentStepDef extends BaseStepDef {
     OnBehalfOfAnotherAgentPage.fillPage(yesNo)
   }
 
-  And("""I navigate to On-Behalf-Of-Another-Agent page"""){() =>
+  And("""I navigate to On-Behalf-Of-Another-Agent page""") { () =>
     OnBehalfOfAnotherAgentPage.navigateToPage(OnBehalfOfAnotherAgentPage.path)
   }
 }

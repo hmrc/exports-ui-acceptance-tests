@@ -23,7 +23,7 @@ class ContainerRemoveStepDef extends BaseStepDef {
 
   And("""^I should land on Remove-This-Container page""")(() => ContainerRemovePage.checkPage())
 
-  And("""^I select (.*) to remove container (.*)""") {
-    (yesNo: String, containerId: String) => ContainerRemovePage.fillPage(yesNo, containerId)
+  And("""^I select (.*) to remove container (.*)""") { (yesNo: String, containerId: String) =>
+    ContainerRemovePage.fillPage(yesNo, containerId)
   }
 }

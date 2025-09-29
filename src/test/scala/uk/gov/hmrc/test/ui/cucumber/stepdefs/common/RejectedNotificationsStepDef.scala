@@ -28,7 +28,7 @@ class RejectedNotificationsStepDef extends BaseStepDef {
     RejectedNotificationPage.checkPage()
   }
 
-  And("""^I click on (.*) change link to fix error""") { (link:String) =>
+  And("""^I click on (.*) change link to fix error""") { (link: String) =>
     RejectedNotificationPage.FixErrorsAndValidateWarning(link)
   }
 
@@ -41,7 +41,9 @@ class RejectedNotificationsStepDef extends BaseStepDef {
   }
 
   And("""^I validate ducr warning on rejected notifications page""") { () =>
-    RejectedNotificationPage.duplicateDucrWarning().getText must include("DUCR previously used within the last 12 months.")
+    RejectedNotificationPage.duplicateDucrWarning().getText must include(
+      "DUCR previously used within the last 12 months."
+    )
   }
 
   And("""^I navigate to check you answer from rejected notification page""") { () =>

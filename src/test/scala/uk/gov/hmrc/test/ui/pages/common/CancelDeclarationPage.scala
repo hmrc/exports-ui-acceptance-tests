@@ -24,7 +24,7 @@ object CancelDeclarationPage extends BasePage {
 
   def backButtonHref: String = detail(DeclarationInfoPath)
   def path: String = if (isAmendmentMode) "/declaration/cancel-your-amendment" else "/cancel-declaration"
-  def title: String = if(isAmendmentMode) "Cancel amendment request" else "Cancel declaration"
+  def title: String = if (isAmendmentMode) "Cancel amendment request" else "Cancel declaration"
 
   override def checkExpanders(): Unit = ()
 
@@ -32,26 +32,24 @@ object CancelDeclarationPage extends BasePage {
 
   // ex: fillPage("No longer required")
 
-  override def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit =
     if (isAmendmentMode) {
       val govUKWarningText: WebElement = findElementByCssSelector("div.govuk-warning-text > strong")
       govUKWarningText.isDisplayed
-       fillTextBoxById("fullName", "User Name")
-       fillTextBoxById("jobRole", "Job Role")
-       fillTextBoxById("email", "test@mail.com")
-       fillTextBoxById("reason", values(reason))
+      fillTextBoxById("fullName", "User Name")
+      fillTextBoxById("jobRole", "Job Role")
+      fillTextBoxById("email", "test@mail.com")
+      fillTextBoxById("reason", values(reason))
       clickById("confirmation")
-    }
-    else {
+    } else {
       val reasonToSelect = values(reason) match {
         case "No longer required" => "noLongerRequired"
-        case "Duplication" => "duplication"
-        case "Other reason" => "otherReason"
+        case "Duplication"        => "duplication"
+        case "Other reason"       => "otherReason"
       }
       clickById(reasonToSelect)
       fillTextBoxById("statementDescription", "no longer needed")
     }
-  }
 
   def cancelDeclaration(): Unit = clickById("cancel-declaration")
 }

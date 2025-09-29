@@ -22,8 +22,8 @@ import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.Section4
 object SummarySection4Page extends BasePage {
 
   def backButtonHref: String = PreviousDocumentListPage.path
-  val path: String           = "/declaration/summary-section/4"
-  val title: String          = "Check your answers"
+  val path: String = "/declaration/summary-section/4"
+  val title: String = "Check your answers"
 
   override def checkExpanders(): Unit = ()
 

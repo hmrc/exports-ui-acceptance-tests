@@ -44,7 +44,6 @@ object DeclarationHoldingPage extends BasePage {
   // ex: fillPage()
 
   override def fillPage(values: String*): Unit =
-
     if (isCancelDeclaration) {
       waitForLinkText("View declaration details")
     } else if (isAmendmentMode) {

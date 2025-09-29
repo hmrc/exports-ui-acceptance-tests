@@ -36,7 +36,9 @@ class MiniCYASection5StepDef extends BaseStepDef {
   }
 
   And("""^I should be displayed with a warning text to add items""") { () =>
-    SummarySection5Page.addItemWarning().getText should include("You need to add at least one item before submitting your declaration")
+    SummarySection5Page.addItemWarning().getText should include(
+      "You need to add at least one item before submitting your declaration"
+    )
   }
 
   And("""^I click on Add Item link""") { () =>

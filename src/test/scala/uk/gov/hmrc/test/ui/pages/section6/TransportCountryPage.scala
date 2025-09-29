@@ -23,7 +23,8 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys._
 
 object TransportCountryPage extends BasePage {
 
-  def backButtonHref: String = maybeDetails(BorderTransport).fold(BorderTransportPage.backButtonHref)(_ => BorderTransportPage.path)
+  def backButtonHref: String =
+    maybeDetails(BorderTransport).fold(BorderTransportPage.backButtonHref)(_ => BorderTransportPage.path)
 
   val path: String = "/declaration/transport-country"
 

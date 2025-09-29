@@ -39,5 +39,7 @@ object FiscalReferencesListPage extends BasePage {
 
   override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
 
-  def removeFiscalReferences(index: Int): Unit = clickByCssSelector(s"#additional_fiscal_references-row-$index-remove_button>a")
+  def removeFiscalReferences(index: Int): Unit = clickByCssSelector(
+    s"#additional_fiscal_references-row-$index-remove_button>a"
+  )
 }

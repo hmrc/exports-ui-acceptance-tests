@@ -22,11 +22,12 @@ import uk.gov.hmrc.test.ui.pages.common.SummaryPage.isRejectedMode
 object SubmitYourDeclarationPage extends BasePage {
 
   def backButtonHref: String = SummaryPage.path
-  def path: String = if (isAmendmentMode) "/declaration/submit-your-amendment" else "/declaration/submit-your-declaration"
+  def path: String =
+    if (isAmendmentMode) "/declaration/submit-your-amendment" else "/declaration/submit-your-declaration"
 
   def title: String = if (isAmendmentMode) "Submit amendment request"
-                      else if (isRejectedMode) "Resubmit your declaration"
-                      else "Submit your declaration"
+  else if (isRejectedMode) "Resubmit your declaration"
+  else "Submit your declaration"
 
   override def checkExpanders(): Unit = ()
 
