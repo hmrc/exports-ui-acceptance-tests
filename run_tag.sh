@@ -20,4 +20,5 @@ sbt clean \
    -Denv=$Environment \
    -Dcucumber.filter.tags=$Tag \
    -Dbrowser.option.headless=true \
+   -Dbrowser.usePreviousVersion=true \
    "testOnly uk.gov.hmrc.test.ui.cucumber.runner.Runner" testReport
