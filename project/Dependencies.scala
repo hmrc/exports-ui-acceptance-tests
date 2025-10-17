@@ -7,7 +7,7 @@ object Dependencies {
     "com.vladsch.flexmark"  % "flexmark-all"    % "0.64.8"    % Test,
     "org.scalatest"         %% "scalatest"      % "3.2.19"    % Test,
     "org.scalatestplus"     %% "selenium-4-12"  % "3.2.17.0"  % Test,
-    "io.cucumber"           %% "cucumber-scala" % "8.28.0"    % Test,
+    "io.cucumber"           %% "cucumber-scala" % "8.23.0"    % Test,
     "io.cucumber"           % "cucumber-junit"  % "7.18.0"    % Test,
     "junit"                 % "junit"           % "4.13.2"    % Test,
     "com.novocode"          % "junit-interface" % "0.11"      % Test,
