@@ -82,10 +82,7 @@ object ConfirmationPage extends BasePage {
   private def checkSummaryList(): String = {
     val summaryList = findElementByClassName("govuk-summary-list")
     val rows = findChildrenByClassName(summaryList, "govuk-summary-list__row")
-
     val resultBuilder = new StringBuilder
-
-    // Helper method to check a row and append the result to the builder
     def checkRow(row: WebElement, expectedKey: String, expectedValue: String, index: Int): Unit = {
       val actualKey =
         row.findElement(By.className("govuk-summary-list__key")).getText
@@ -109,8 +106,6 @@ object ConfirmationPage extends BasePage {
       checkRow(rows.head, "Type of declaration", detail(AdditionalDeclarationType), 0)
       checkRow(rows(1), "DUCR", detail(Ducr), 1)
       checkRow(rows(2), "LRN", detail(Lrn), 2)
-
-      // MRN may be optional – log value as before
       val mrnRow = rows(3)
       val mrnValue =
         mrnRow.findElement(By.className("govuk-summary-list__value")).getText
@@ -118,13 +113,11 @@ object ConfirmationPage extends BasePage {
     } else {
       checkRow(rows.head, "DUCR", detail(Ducr), 0)
       checkRow(rows(1), "LRN", detail(Lrn), 1)
-
       val mrnRow = rows(2)
       val mrnValue =
         mrnRow.findElement(By.className("govuk-summary-list__value")).getText
       resultBuilder.append(s"MRN value: $mrnValue\n")
     }
-
     resultBuilder.toString()
   }
 
