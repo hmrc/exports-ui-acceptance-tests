@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.common
 
-import org.openqa.selenium.WebElement
+import org.openqa.selenium.{By, WebElement}
 import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.BasePage.host
@@ -75,48 +75,52 @@ object ConfirmationPage extends BasePage {
   }
 
   private def checkPageContent(): Unit = {
-    checkTable()
+    checkSummaryList()
     checkContentLinks(List(linkToTimeline, linkToFeedback, linkToSupport))
   }
 
-  private def checkTable(): String = {
-    val table = findElementByClassName("govuk-table")
-    val cells = findChildrenByClassName(table, "govuk-table__cell")
-    // Variable to collect the results
+  private def checkSummaryList(): String = {
+    val summaryList = findElementByClassName("govuk-summary-list")
+    val rows = findChildrenByClassName(summaryList, "govuk-summary-list__row")
     val resultBuilder = new StringBuilder
+    def checkRow(row: WebElement, expectedKey: String, expectedValue: String, index: Int): Unit = {
+      val actualKey =
+        row.findElement(By.className("govuk-summary-list__key")).getText
+      val actualValue =
+        row.findElement(By.className("govuk-summary-list__value")).getText
 
-    // Helper method to check a cell and append the result to the builder
-    def checkCell(cell: WebElement, expectedText: String, index: Int): Unit = {
-      val actualText = cell.getText
-      if (actualText == expectedText) {
-        resultBuilder.append(s"Cell $index check passed. Expected and found: '$expectedText'.\n")
+      if (actualKey == expectedKey && actualValue == expectedValue) {
+        resultBuilder.append(
+          s"Row $index check passed. Expected and found: '$expectedKey' -> '$expectedValue'.\n"
+        )
       } else {
-        resultBuilder.append(s"Cell $index check failed. Expected: '$expectedText', but found: '$actualText'.\n")
+        resultBuilder.append(
+          s"Row $index check failed. " +
+            s"Expected: '$expectedKey' -> '$expectedValue', " +
+            s"but found: '$actualKey' -> '$actualValue'.\n"
+        )
       }
     }
 
-    // Check the contents of each cell
     if (isAmendmentMode) {
-      checkCell(cells.head, "Type of declaration", 0)
-      checkCell(cells(1), detail(AdditionalDeclarationType), 1)
-      checkCell(cells(2), "DUCR", 2)
-      checkCell(cells(3), detail(Ducr), 3)
-      checkCell(cells(4), "LRN", 4)
-      checkCell(cells(5), detail(Lrn), 5)
-      checkCell(cells(6), "MRN", 6)
-      resultBuilder.append(s"MRN value: ${cells(7).getText}\n")
+      checkRow(rows.head, "Type of declaration", detail(AdditionalDeclarationType), 0)
+      checkRow(rows(1), "DUCR", detail(Ducr), 1)
+      checkRow(rows(2), "LRN", detail(Lrn), 2)
+      val mrnRow = rows(3)
+      val mrnValue =
+        mrnRow.findElement(By.className("govuk-summary-list__value")).getText
+      resultBuilder.append(s"MRN value: $mrnValue\n")
     } else {
-      checkCell(cells.head, "DUCR", 0)
-      checkCell(cells(1), detail(Ducr), 1)
-      checkCell(cells(2), "LRN", 2)
-      checkCell(cells(3), detail(Lrn), 3)
-      checkCell(cells(4), "MRN", 4)
-      resultBuilder.append(s"MRN value: ${cells(5).getText}\n")
+      checkRow(rows.head, "DUCR", detail(Ducr), 0)
+      checkRow(rows(1), "LRN", detail(Lrn), 1)
+      val mrnRow = rows(2)
+      val mrnValue =
+        mrnRow.findElement(By.className("govuk-summary-list__value")).getText
+      resultBuilder.append(s"MRN value: $mrnValue\n")
     }
-
-    // Return the final result
     resultBuilder.toString()
   }
+
 
   private def checkContentLinks(expectedLinks: Seq[Regex]): Unit = {
     val actualLinks =
