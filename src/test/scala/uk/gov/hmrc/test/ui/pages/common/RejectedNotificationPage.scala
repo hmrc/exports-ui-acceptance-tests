@@ -22,7 +22,6 @@ import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.common.DetailKeys._
 import org.scalatest.matchers.must.Matchers._
 
-
 object RejectedNotificationPage extends BasePage {
 
   def backButtonHref: String = detail(DeclarationInfoPath)
