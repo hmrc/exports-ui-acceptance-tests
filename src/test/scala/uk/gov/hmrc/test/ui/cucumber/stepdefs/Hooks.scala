@@ -46,7 +46,7 @@ object Hooks extends ScalaDsl with EN with Browser {
     screenshotFile.getAbsolutePath
   }
 
-  After { scenario: Scenario =>
+  After { (scenario: Scenario) =>
     if (scenario.isFailed) {
       val testName = scenario.getName.replaceAll(" ", "-").replaceAll(":", "")
       val screenshotName = testName + ".png"
@@ -55,7 +55,6 @@ object Hooks extends ScalaDsl with EN with Browser {
       scenario.attach(Files.readAllBytes(Paths.get(screenshotPath)), "image/png", testName)
     }
   }
-
 
   AfterAll {
     quitBrowser()

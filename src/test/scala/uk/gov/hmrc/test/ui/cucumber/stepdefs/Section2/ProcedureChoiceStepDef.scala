@@ -23,7 +23,7 @@ class ProcedureChoiceStepDef extends BaseStepDef {
 
   And("""^I should land on Authorisation-Choice page""")(() => ProcedureChoicePage.checkPage())
 
-  And("""^I select (.*) as export procedure choice""") { code: String =>
+  And("""^I select (.*) as export procedure choice""") { (code: String) =>
     ProcedureChoicePage.fillPage(code)
   }
 

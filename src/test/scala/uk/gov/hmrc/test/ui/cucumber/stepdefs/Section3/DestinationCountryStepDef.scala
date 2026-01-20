@@ -25,7 +25,7 @@ class DestinationCountryStepDef extends BaseStepDef {
     DestinationCountryPage.checkPage()
   }
 
-  And("""^I select (.*) as the destination country""") { country: String =>
+  And("""^I select (.*) as the destination country""") { (country: String) =>
     DestinationCountryPage.fillPage(country)
   }
 

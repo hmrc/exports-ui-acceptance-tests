@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
+import org.scalatest.matchers.must.Matchers._
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.PageLinks._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
@@ -56,8 +56,6 @@ object ProcedureChoicePage extends BasePage {
   }
 
   val exportProcedure = 0
-
-  // ex: fillPage("Permanent with excise")
 
   override def fillPage(values: String*): Unit = {
     values(exportProcedure) match {

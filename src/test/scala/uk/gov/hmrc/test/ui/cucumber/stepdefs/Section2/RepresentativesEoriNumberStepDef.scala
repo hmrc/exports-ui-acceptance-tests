@@ -23,7 +23,7 @@ class RepresentativesEoriNumberStepDef extends BaseStepDef {
 
   And("""^I should land on Representatives-Eori-Number page""")(() => RepresentativesEORINumberPage.checkPage())
 
-  And("""^I provide Representatives Eori as (.*)""") { eori: String =>
+  And("""^I provide Representatives Eori as (.*)""") { (eori: String) =>
     RepresentativesEORINumberPage.fillPage(eori)
   }
 }

@@ -23,7 +23,7 @@ class OnBehalfOfAnotherAgentStepDef extends BaseStepDef {
 
   And("""^I should land on On-Behalf-Of-Another-Agent page""")(() => OnBehalfOfAnotherAgentPage.checkPage())
 
-  And("""^I select (.*) to hold the contract""") { yesNo: String =>
+  And("""^I select (.*) to hold the contract""") { (yesNo: String) =>
     OnBehalfOfAnotherAgentPage.fillPage(yesNo)
   }
 

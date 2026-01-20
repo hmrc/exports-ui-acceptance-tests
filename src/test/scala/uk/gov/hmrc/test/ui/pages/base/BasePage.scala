@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.base
 import com.typesafe.scalalogging.LazyLogging
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.support.ui.WebDriverWait
-import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
+import org.scalatest.matchers.must.Matchers._
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
@@ -237,18 +237,18 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
             case detail: Details => detail.values
 
             // It cannot happen. Just for silencing the compiler emitting "match may not be exhaustive".
-            case ign => assert(assertion = false, s"Not a 'Detail' or 'Details' value ?? ($ign)"); List.empty
+            case ign => assert(condition = false, s"Not a 'Detail' or 'Details' value ?? ($ign)"); List.empty
           }
-          assert(assertion = true, actualValues.contains(eachRow.previousValue.getText))
+          assert(condition = true, actualValues.contains(eachRow.previousValue.getText))
 
           val amendValues = value match {
             case detail: Detail  => Seq(detail.value)
             case detail: Details => detail.values
 
             // It cannot happen. Just for silencing the compiler emitting "match may not be exhaustive".
-            case ign => assert(assertion = false, s"Not a 'Detail' or 'Details' value ?? ($ign)"); List.empty
+            case ign => assert(condition = false, s"Not a 'Detail' or 'Details' value ?? ($ign)"); List.empty;
           }
-          assert(assertion = true, amendValues.contains(eachRow.amendedValue.getText))
+          assert(condition = true, amendValues.contains(eachRow.amendedValue.getText))
         }
       }
     }

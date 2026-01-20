@@ -17,7 +17,8 @@
 package uk.gov.hmrc.test.ui.pages.common
 
 import org.openqa.selenium.{By, WebElement}
-import org.scalatest.matchers.must.Matchers.{be, convertToAnyMustWrapper, include}
+import org.scalatest.matchers.must.Matchers.{be, include}
+import org.scalatest.matchers.must.Matchers._
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.common.DetailKeys._
