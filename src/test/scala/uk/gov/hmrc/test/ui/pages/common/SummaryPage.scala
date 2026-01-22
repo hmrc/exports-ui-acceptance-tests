@@ -18,7 +18,7 @@ package uk.gov.hmrc.test.ui.pages.common
 
 import org.openqa.selenium.WebElement
 import org.scalatest.Assertion
-import org.scalatest.matchers.must.Matchers.{be, convertToAnyMustWrapper}
+import org.scalatest.matchers.must.Matchers.mustBe
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.common.DetailKeys.{DeclarationInfoPath, IsDeclarationRejected}
 
@@ -37,8 +37,6 @@ object SummaryPage extends BasePage {
   else "Check your answers"
 
   override def checkExpanders(): Unit = ()
-
-  // ex: fillPage()
 
   private val titles = List(
     "Declaration details",
@@ -63,7 +61,7 @@ object SummaryPage extends BasePage {
      findElementByCssSelector("a[role='button']").click()
 
   def checkChangeLinkIsNotPresentFor(changeLinks: String): Assertion = {
-    elementBySelectorDoesNotExist("a[href*=" + changeLinks + "]") must be(true)
+    elementBySelectorDoesNotExist("a[href*=" + changeLinks + "]") mustBe true
   }
 
   def removeItemLink(itemIndex: Int): WebElement = {

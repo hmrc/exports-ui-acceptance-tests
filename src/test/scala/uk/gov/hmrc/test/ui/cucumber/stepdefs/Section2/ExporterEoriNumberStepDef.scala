@@ -23,7 +23,7 @@ class ExporterEoriNumberStepDef extends BaseStepDef {
 
   And("""^I should land on Exporter-Eori-Number page""")(() => ExporterEORINumberPage.checkPage())
 
-  And("""^I select (.*) on exporter eori number page""") { yesNo: String =>
+  And("""^I select (.*) on exporter eori number page""") { (yesNo: String) =>
     ExporterEORINumberPage.fillPage(yesNo)
   }
 

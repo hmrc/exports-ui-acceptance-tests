@@ -15,8 +15,7 @@
  */
 
 package uk.gov.hmrc.test.ui.cucumber.stepdefs.common
-
-import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
+import org.scalatest.matchers.must.Matchers._
 import uk.gov.hmrc.test.ui.cucumber.stepdefs.BaseStepDef
 import uk.gov.hmrc.test.ui.pages.common.CopyDeclarationPage
 

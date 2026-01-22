@@ -23,7 +23,7 @@ class CarrierEoriNumberStepDef extends BaseStepDef {
 
   And("""^I should land on Carrier-Eori-Number page""")(() => CarrierEORINumberPage.checkPage())
 
-  And("""^I select (.*) on carrier eori number page""") { yesNo: String =>
+  And("""^I select (.*) on carrier eori number page""") { (yesNo: String) =>
     CarrierEORINumberPage.fillPage(yesNo)
   }
 

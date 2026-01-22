@@ -17,10 +17,10 @@
 package uk.gov.hmrc.test.ui.pages.common
 
 import org.openqa.selenium.WebElement
-import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
 import uk.gov.hmrc.test.ui.pages.base.BasePage._
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.common.DetailKeys._
+import org.scalatest.matchers.must.Matchers._
 
 object RejectedNotificationPage extends BasePage {
 

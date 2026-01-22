@@ -11,11 +11,11 @@ object Dependencies {
     "io.cucumber"           % "cucumber-junit"  % "7.18.0"    % Test,
     "junit"                 % "junit"           % "4.13.2"    % Test,
     "com.novocode"          % "junit-interface" % "0.11"      % Test,
-    "uk.gov.hmrc"           %% "ui-test-runner" % "0.50.0"    % Test,
+    "uk.gov.hmrc"           %% "ui-test-runner" % "0.52.0"    % Test,
     "junit"                 % "junit"           % "4.13.2"    % Test,
     "com.novocode"          % "junit-interface" % "0.11"      % Test,
-    "org.slf4j"             % "slf4j-simple"    % "2.0.13"    % Test,
-    "ch.qos.logback"        % "logback-classic" % "1.5.6"     % Test
+    "org.slf4j"             % "slf4j-simple"    % "2.0.17"    % Test,
+    "ch.qos.logback"        % "logback-classic" % "1.5.25"     % Test
   )
 
 }

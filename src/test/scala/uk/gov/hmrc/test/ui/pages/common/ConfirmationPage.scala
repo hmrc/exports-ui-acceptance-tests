@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.common
 
 import org.openqa.selenium.{By, WebElement}
-import org.scalatest.matchers.must.Matchers.convertToAnyMustWrapper
+import org.scalatest.matchers.must.Matchers._
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.BasePage.host
 import uk.gov.hmrc.test.ui.pages.common.DeclarationInformationPage.isCancelDeclaration

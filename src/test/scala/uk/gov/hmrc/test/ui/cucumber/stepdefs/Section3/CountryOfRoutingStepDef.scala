@@ -23,7 +23,7 @@ class CountryOfRoutingStepDef extends BaseStepDef {
 
   And("""^I should land on Country-Of-Routing page""")(() => CountryOfRoutingPage.checkPage())
 
-  And("""^I select (.*) to provide routing countries""") { yesNo: String =>
+  And("""^I select (.*) to provide routing countries""") { (yesNo: String) =>
     CountryOfRoutingPage.fillPage(yesNo)
   }
 }

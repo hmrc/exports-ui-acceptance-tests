@@ -23,7 +23,7 @@ class AuthorisationYesNoStepDef extends BaseStepDef {
 
   And("""^I should land on Is-Authorisation-Required page""")(() => AuthorisationsYesNoPage.checkPage())
 
-  And("""^I select (.*) to declare authorisations""") { yesNo: String =>
+  And("""^I select (.*) to declare authorisations""") { (yesNo: String) =>
     AuthorisationsYesNoPage.fillPage(yesNo)
   }
 }
