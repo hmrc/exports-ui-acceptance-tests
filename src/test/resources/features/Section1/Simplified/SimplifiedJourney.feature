@@ -1,4 +1,4 @@
-@Regression1 @Regression
+@Regression1 @Regression @Tom
 Feature: Simplified Journey
 
   Background:
