@@ -18,13 +18,12 @@ package uk.gov.hmrc.test.ui.pages.section1
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isSupplementary
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{HasDucr, Mucr, Section1}
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{Mucr, Section1}
 
 object SummarySection1Page extends BasePage {
 
   def backButtonHref: String =
     if (isSupplementary) ConsignmentReferencesPage.path
-    else if (maybeDetail(HasDucr).contains("No")) TraderReferencePage.path
     else if (maybeDetail(Mucr).isDefined) EnterAMucrPage.path
     else LinkMucrPage.path
 
