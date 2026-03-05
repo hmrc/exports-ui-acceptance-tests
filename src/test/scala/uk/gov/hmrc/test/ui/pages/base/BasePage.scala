@@ -24,8 +24,8 @@ import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.pages.base.BasePage.*
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
 import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{cache, cacheForAmendments, changeLinks}
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
-import uk.gov.hmrc.test.ui.pages.section1.DoYouHaveADucrPage
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{DeclarationType, Ducr, HasDucr}
+import uk.gov.hmrc.test.ui.pages.section1.TraderReferencePage
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.CountriesOfRouting
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodeLabel
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.SealLabel
@@ -198,16 +198,9 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
 
         if (detailKey.checkChangeLink) {
           val href = labelAndValueRow.changeLink.head.getAttribute("href")
-          if (detailKey.label == "DUCR") {
-            val ducrSelection = DoYouHaveADucrPage.ducrValue
-            if (ducrSelection == "No") {
-              changeLinks(detailKey) = "/declaration/trader-reference"
-            }
-            else {
-              changeLinks(detailKey)
-            }
+          if (detailKey == Ducr && maybeDetail(HasDucr).contains("No")) {
+            changeLinks(detailKey) = TraderReferencePage.path
           }
-
           s"$host${changeLinks(detailKey)}" mustBe href
         }
 
