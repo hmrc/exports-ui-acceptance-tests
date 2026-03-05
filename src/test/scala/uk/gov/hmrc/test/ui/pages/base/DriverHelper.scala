@@ -19,8 +19,9 @@ package uk.gov.hmrc.test.ui.pages.base
 import com.typesafe.scalalogging.LazyLogging
 import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait}
-import org.openqa.selenium.{By, Keys, WebDriver, WebElement}
+import org.openqa.selenium.{By, Keys, StaleElementReferenceException, WebDriver, WebElement}
 import uk.gov.hmrc.selenium.webdriver.Driver
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.fluentWait
 
 import java.time.Duration
 import scala.jdk.CollectionConverters.ListHasAsScala
@@ -36,9 +37,13 @@ trait DriverHelper {
 
   protected val driver: WebDriver = uk.gov.hmrc.test.ui.pages.base.DriverHelper.driver
 
-  def changeLinkOnCYA(row: String): WebElement = driver.findElement(By.cssSelector(s".$row .govuk-link"))
+  def changeLinkOnCYA(row: String): WebElement =
+    waitFor(By.cssSelector(s".$row .govuk-link"), Clickable, 10)
 
-  def continue(): Unit = clickById("submit")
+  def continue(): Unit = {
+    fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.id("submit")))
+    clickById("submit")
+  }
 
   def continueOnMiniCya(): Unit = clickByXpath("//*[@role='button']")
 
@@ -73,15 +78,14 @@ trait DriverHelper {
         case Failure(_) => true
       }
 
-
-  def findElementById(value: String): WebElement = driver.findElement(By.id(value))
-  def findElementByXpath(value: String): WebElement = driver.findElement(By.xpath(value))
-  def findElementByLinkText(value: String): WebElement = driver.findElement(By.linkText(value))
-  def findElementByPartialLink(value: String): WebElement = driver.findElement(By.partialLinkText(value))
-  def findElementByCssSelector(value: String): WebElement = driver.findElement(By.cssSelector(value))
-  def findElementByClassName(value: String): WebElement = driver.findElement(By.className(value))
-  def findElementByName(value: String): WebElement = driver.findElement(By.name(value))
-  def findElementByTag(tag: String): WebElement = driver.findElement(By.tagName(tag))
+  def findElementById(value: String): WebElement = waitFor(By.id(value), Presence, 30)
+  def findElementByXpath(value: String): WebElement = waitFor(By.xpath(value), Presence, 30)
+  def findElementByLinkText(value: String): WebElement = waitFor(By.linkText(value), Presence, 30)
+  def findElementByPartialLink(value: String): WebElement = waitFor(By.partialLinkText(value), Presence, 30)
+  def findElementByCssSelector(value: String): WebElement = waitFor(By.cssSelector(value), Presence, 30)
+  def findElementByClassName(value: String): WebElement = waitFor(By.className(value), Presence, 30)
+  def findElementByName(value: String): WebElement = waitFor(By.name(value), Presence, 30)
+  def findElementByTag(tag: String): WebElement = waitFor(By.tagName(tag), Presence, 30)
 
   def findElementsByClassName(value: String): Seq[WebElement] = driver.findElements(By.className(value)).asScala.toList
   def findElementsByTag(tag: String): Seq[WebElement] = driver.findElements(By.tagName(tag)).asScala.toList
@@ -138,7 +142,6 @@ trait DriverHelper {
 
   def reset(elementId: String): Unit = waitForId(elementId).clear()
 
-
   def selectRadioAndClick(elementId: String): Unit = {
     val actions = new Actions(driver)
     val element = findElementById(elementId)
@@ -147,8 +150,10 @@ trait DriverHelper {
 
   def selectYesOrNoRadio(option: String, yes: String = "code_yes", no: String = "code_no"): Boolean =
     option match {
-      case Constants.yes    => waitForId(yes, Presence).click(); true
-      case Constants.no | _ => waitForId(no, Presence).click(); false
+      case Constants.yes    => waitForId(yes, Presence).click()
+        true
+      case Constants.no | _ => waitForId(no, Presence).click()
+        false
     }
 
   def waitForClass(
@@ -164,10 +169,10 @@ trait DriverHelper {
     }
 
   def waitForCssSelector(
-                    cssSelector: String,
-                    expectedCondition: ExpectedCondition = Visible,
-                    secondsToWaitFor: Int = 10
-                  ): WebElement =
+    cssSelector: String,
+    expectedCondition: ExpectedCondition = Visible,
+    secondsToWaitFor: Int = 10
+  ): WebElement =
     Try(waitFor(By.cssSelector(cssSelector), expectedCondition, secondsToWaitFor)) match {
       case Success(element) => element
       case Failure(exception) =>
@@ -175,23 +180,25 @@ trait DriverHelper {
         throw new TestFailedException(message, exception)
     }
 
-  def waitForId(
-    elementId: String,
+  def waitForId(elementId: String, expectedCondition: ExpectedCondition = Visible, secondsToWaitFor: Int = 40): WebElement = {
+    def attempt(): WebElement = {
+      Try(waitFor(By.id(elementId), expectedCondition, secondsToWaitFor)) match {
+        case Success(element) => element
+        case Failure(_: StaleElementReferenceException) =>
+          waitFor(By.id(elementId), expectedCondition, secondsToWaitFor)
+        case Failure(exception) =>
+          val message = s"Was waiting for an element with id($elementId) while on page ${driver.getCurrentUrl}"
+          throw new TestFailedException(message, exception)
+           }
+    }
+    attempt()
+  }
+
+  def waitForLinkText(
+    text: String,
     expectedCondition: ExpectedCondition = Visible,
     secondsToWaitFor: Int = 10
   ): WebElement =
-    Try(waitFor(By.id(elementId), expectedCondition, secondsToWaitFor)) match {
-      case Success(element) => element
-      case Failure(exception) =>
-        val message = s"Was waiting for an element with id($elementId) while on page ${driver.getCurrentUrl}"
-        throw new TestFailedException(message, exception)
-    }
-
-  def waitForLinkText(
-                 text: String,
-                 expectedCondition: ExpectedCondition = Visible,
-                 secondsToWaitFor: Int = 10
-               ): WebElement =
     Try(waitFor(By.linkText(text), expectedCondition, secondsToWaitFor)) match {
       case Success(element) => element
       case Failure(exception) =>
@@ -209,6 +216,7 @@ trait DriverHelper {
       .withTimeout(Duration.ofSeconds(secondsToWaitFor))
       .pollingEvery(Duration.ofMillis(500L))
       .ignoring(classOf[Exception])
+      .ignoring(classOf[StaleElementReferenceException])
       .until(condition)
   }
 }

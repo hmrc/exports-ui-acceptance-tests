@@ -16,14 +16,15 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants._
-import uk.gov.hmrc.test.ui.pages.base.PageLinks._
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
+import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
+import uk.gov.hmrc.test.ui.pages.base.Constants.*
+import uk.gov.hmrc.test.ui.pages.base.PageLinks.*
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.*
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, DetailKey}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section2.AuthorisationPage.hasCodesRequiringAdditionalDocuments
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys._
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.*
 import uk.gov.hmrc.test.ui.pages.section5.LicenseRequiredYesNoPage.isLicenseRequired
 
 object AdditionalDocumentPage extends BasePage {
@@ -83,5 +84,9 @@ object AdditionalDocumentPage extends BasePage {
       ).flatten
 
     store(keyAndValues: _*)
+  }
+
+  def fillAdditionalDocument(code: String, identifier: String, seqId: String):Unit={
+    AdditionalDocumentPage.fillPage(genSequenceId(seqId), code, identifier)
   }
 }

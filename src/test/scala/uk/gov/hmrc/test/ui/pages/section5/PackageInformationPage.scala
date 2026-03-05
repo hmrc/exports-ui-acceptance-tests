@@ -16,8 +16,9 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants._
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.CommonStepPage.genSequenceId
+import uk.gov.hmrc.test.ui.pages.base.Constants.*
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.*
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section2.IsThisExsPage.isThisExs
@@ -62,4 +63,8 @@ object PackageInformationPage extends BasePage {
       PackageInformationShippingMark(itemId, values(sequenceId)) -> Detail(values(shippingMark))
     )
   }
+   def enterPackageInfo(packageType: String, numberOfPackages: String, shippingMark: String, seqId: String): Unit = {
+     PackageInformationPage.fillPage(genSequenceId(seqId), packageType, numberOfPackages, shippingMark)
+   }
+  
 }

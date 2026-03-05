@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section2
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, yesNo}
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section1.{DeclarantDetailsPage, SummarySection1Page}
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.ExporterYesNo

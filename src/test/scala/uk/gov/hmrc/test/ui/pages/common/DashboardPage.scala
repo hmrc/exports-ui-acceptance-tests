@@ -18,12 +18,13 @@ package uk.gov.hmrc.test.ui.pages.common
 
 import org.openqa.selenium.support.ui.{ExpectedConditions, WebDriverWait}
 import org.openqa.selenium.{By, WebElement}
-import org.scalatest.matchers.must.Matchers._
-import uk.gov.hmrc.test.ui.pages.base.BasePage._
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.common.DetailKeys._
-import uk.gov.hmrc.test.ui.pages.section1.ChoicePage
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys._
+import org.scalatest.matchers.must.Matchers.*
+import uk.gov.hmrc.test.ui.pages.base.BasePage.*
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.landOnHoldingPageAndRedirectedToConfirmationPage
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, CommonPage, Detail}
+import uk.gov.hmrc.test.ui.pages.common.DetailKeys.*
+import uk.gov.hmrc.test.ui.pages.section1.{ChoicePage, DeclarationTypePage}
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.*
 
 import java.time.Duration
 import scala.jdk.CollectionConverters.CollectionHasAsScala
@@ -137,4 +138,135 @@ object DashboardPage extends BasePage {
         println(s"Current Page: ${activePage.getText}")
       }
     }
+  def entersDucrAndValidateDetails():Unit={
+    CommonPage.continue()
+    SummaryPage.checkPage()
+    SummaryPage.clickContinueOnSummary()
+    SubmitYourDeclarationPage.checkPage()
+    SubmitYourDeclarationPage.fillPage()
+    landOnHoldingPageAndRedirectedToConfirmationPage()
+    ConfirmationPage.checkPage()
+    ChoicePage.navigateToPage(ChoicePage.path)
+    ChoicePage.fillPage("Manage Submit Declaration")
+    DashboardPage.checkPage()
+  }
+  def submitArrivedDeclarationNavigateToDashboardPage():Unit={
+    CommonPage.continue()
+    SummaryPage.checkPage()
+    DeclarationTypePage.navigateToPage(DeclarationTypePage.path)
+    DeclarationTypePage.fillPage("arrived")
+    CommonPage.continue()
+    SummaryPage.navigateToPage(SummaryPage.path)
+    SummaryPage.clickContinueOnSummary()
+    SubmitYourDeclarationPage.checkPage()
+    SubmitYourDeclarationPage.fillPage()
+    DeclarationHoldingPage.checkPage()
+    DeclarationHoldingPage.fillPage()
+    ConfirmationPage.checkPage()
+    ChoicePage.navigateToPage(ChoicePage.path)
+    ChoicePage.fillPage("Manage Submit Declaration")
+    DashboardPage.checkPage()
+  }
+
+  def validateDashboardQueryRaised():Unit={
+    DashboardPage.clickOnTab("Action needed")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Action needed", "Query raised")
+  }
+
+  def validateDashboardDeclarationCleared(): Unit = {
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted", "Declaration cleared")
+  }
+
+  def validateDashboardGoodsHaveExitedUK(): Unit = {
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted","Goods have exited the UK")
+  }
+
+  def validateDashboardDocumentsRequired(): Unit = {
+    DashboardPage.clickOnTab("Action needed")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Action needed","Documents required")
+  }
+
+  def validateDashboardDeclarationSubmitted(): Unit = {
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted","Declaration submitted")
+  }
+
+  def validateDashboardOnHold(): Unit = {
+    DashboardPage.clickOnTab("Action needed")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Action needed", "On hold")
+  }
+
+  def validateDashboardGoodsBeingExamined():Unit={
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted", "Goods being examined")
+  }
+
+  def validateDashboardAwaitingExit(): Unit = {
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted", "Awaiting exit results")
+  }
+
+  def validateDashboardDeclarationExpiredOnDeparture():Unit={
+    DashboardPage.clickOnTab("Cancelled & expired")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Cancelled & expired", "Declaration expired (no departure)")
+  }
+  def validateDashboardDeclarationExpiredOnArrival(): Unit = {
+    DashboardPage.clickOnTab("Cancelled & expired")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Cancelled & expired", "Declaration expired (no arrival)")
+  }
+
+  def validateDashboardPending():Unit={
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted", "Pending")
+  }
+  
+  def validateDashboardArrivedAndAccepted():Unit={
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted", "Arrived and accepted")
+  }
+  def validateDashboardDeclarationHandledExternally():Unit={
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted", "Declaration handled externally")
+  }
+  
+  def validateDashboardReleased():Unit={
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted", "Released")
+  }
+  
+  def validateDashboardCancelled():Unit={
+    DashboardPage.clickOnTab("Cancelled & expired")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Cancelled & expired", "Cancelled")
+  }
+  
+  def validateDeclarationDetailsOnDeclarationInformationPage():Unit={
+    DashboardPage.mrnLink.click()
+    DeclarationInformationPage.checkPage()
+    DeclarationInformationPage.validateTimelineDetails()
+  }
+  
+  def validateViewDeclarationLinkIsMissing(linkPresent: String):Unit={
+    if (linkPresent.equals("missing"))
+      elementByIdDoesNotExist(viewDeclarationLink)
+    else
+      CommonPage.findElementById(viewDeclarationLink).isDisplayed
+  }
+
 }

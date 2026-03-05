@@ -29,11 +29,11 @@ object AuthorisationsListPage extends BasePage {
 
   val path: String = "/declaration/authorisations-required"
 
-  def title: String =
-    allSectionDetails(section2).count(_._1.label == AuthorisationTypeLabel) match {
-      case 1 => "You have added 1 authorisation"
-      case n => s"You have added $n authorisations"
-    }
+  def title: String = {
+    val count = allSectionDetails(section2).count(_._1.label == AuthorisationTypeLabel)
+    if (count == 1) "You have added 1 authorisation"
+    else s"You have added $count authorisations"
+  }
 
   override def checkExpanders(): Unit = ()
 

@@ -17,14 +17,17 @@
 package uk.gov.hmrc.test.ui.pages.base
 
 import com.typesafe.scalalogging.LazyLogging
-import org.openqa.selenium.WebElement
-import org.openqa.selenium.support.ui.WebDriverWait
-import org.scalatest.matchers.must.Matchers._
+import org.openqa.selenium.support.ui.{FluentWait, WebDriverWait}
+import org.openqa.selenium.{StaleElementReferenceException, WebDriver, WebElement}
+import org.scalatest.matchers.must.Matchers.*
+import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
-import uk.gov.hmrc.test.ui.pages.base.BasePage._
+import uk.gov.hmrc.test.ui.pages.base.BasePage.*
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
+import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.changeLinks.*
 import uk.gov.hmrc.test.ui.pages.base.DeclarationDetails.{cache, cacheForAmendments, changeLinks}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
+import uk.gov.hmrc.test.ui.pages.section1.DoYouHaveADucrPage
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.CountriesOfRouting
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.NationalAdditionalCodeLabel
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.SealLabel
@@ -42,6 +45,12 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
     checkExpanders()
   }
 
+  def fluentWait: FluentWait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
+    .withTimeout(Duration.ofSeconds(30))
+    .pollingEvery(Duration.ofMillis(500))
+    .ignoring(classOf[NoSuchElementException])
+    .ignoring(classOf[StaleElementReferenceException])
+
   def fillPage(values: String*): Unit
 
   protected def backButtonHref: String
@@ -54,6 +63,7 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
 
   protected def checkUrlAndTitle(): Unit = {
     val expectedUrl = host + path
+    fluentWait.until { driver => driver.getCurrentUrl.matches(expectedUrl) }
     val actualUrl = driver.getCurrentUrl
     assert(
       expectedUrl.r.matches(actualUrl),
@@ -197,6 +207,15 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
 
         if (detailKey.checkChangeLink) {
           val href = labelAndValueRow.changeLink.head.getAttribute("href")
+          if(detailKey.label=="DUCR") {
+            val ducrSelection= DoYouHaveADucrPage.ducrValue
+            if(ducrSelection=="No"){
+              changeLinks(detailKey) = "/declaration/trader-reference"
+            }
+            else{
+              changeLinks(detailKey)= "/declaration/ducr-entry"
+            }
+          }
           s"$host${changeLinks(detailKey)}" mustBe href
         }
 
@@ -264,5 +283,5 @@ object BasePage {
   val signOut = "/customs-declare-exports/sign-out?"
   val technicalIssue = "/contact/report-technical-problem?"
 
-  val host = TestConfiguration.url("exports-frontend")
+  val host: String = TestConfiguration.url("exports-frontend")
 }
