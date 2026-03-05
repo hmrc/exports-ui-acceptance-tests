@@ -28,8 +28,11 @@ object DoYouHaveADucrPage extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
-  // No  => fillPage(no)
-  // Yes => fillPage(yes)
+  var ducrValue: String = ""
 
-  override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
+  override def fillPage(values: String*): Unit = {
+    val ducrValueYseNo = values.head
+    ducrValue = ducrValueYseNo
+    selectYesOrNoRadio(values(yesNo))
+  }
 }
