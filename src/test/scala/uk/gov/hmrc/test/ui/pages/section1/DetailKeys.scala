@@ -35,6 +35,9 @@ object DetailKeys {
   // /type
   val AdditionalDeclarationType: DetailKey = DetailKey("Type of declaration", section1, checkChangeLink = false)
 
+  // /do-you-have-ducr
+  val HasDucr: DetailKey = DetailKey("Do you have a DUCR", section1, skipRowCheck = true, checkChangeLink = false)
+
   // /trader-reference & /ducr-entry
   val Ducr: DetailKey = DetailKey("DUCR", section1)
 

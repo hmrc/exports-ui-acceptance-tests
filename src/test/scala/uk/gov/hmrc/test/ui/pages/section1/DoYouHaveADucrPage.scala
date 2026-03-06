@@ -16,9 +16,10 @@
 
 package uk.gov.hmrc.test.ui.pages.section1
 
-import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.HasDucr
 
 object DoYouHaveADucrPage extends BasePage {
 
@@ -28,8 +29,8 @@ object DoYouHaveADucrPage extends BasePage {
 
   override def checkExpanders(): Unit = ()
 
-  // No  => fillPage(no)
-  // Yes => fillPage(yes)
-
-  override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
+  override def fillPage(values: String*): Unit = {
+    store(HasDucr -> Detail(values.head))
+    selectYesOrNoRadio(values(yesNo))
+  }
 }

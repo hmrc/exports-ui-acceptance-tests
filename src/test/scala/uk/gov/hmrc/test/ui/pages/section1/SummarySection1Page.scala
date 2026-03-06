@@ -23,13 +23,9 @@ import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{Mucr, Section1}
 object SummarySection1Page extends BasePage {
 
   def backButtonHref: String =
-    if (isSupplementary) {
-      ConsignmentReferencesPage.path
-    } else if (maybeDetail(Mucr).isDefined) {
-      EnterAMucrPage.path
-    } else {
-      LinkMucrPage.path
-    }
+    if (isSupplementary) ConsignmentReferencesPage.path
+    else if (maybeDetail(Mucr).isDefined) EnterAMucrPage.path
+    else LinkMucrPage.path
 
   val path: String = "/declaration/summary-section/1"
   val title: String = "Check your answers"
