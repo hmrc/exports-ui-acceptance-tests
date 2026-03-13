@@ -324,6 +324,30 @@ Feature: Validate Dashboard and Declaration Information
     Then I should land on Declaration-Information page
     And I validate details on declaration information page
 
+    # Submit a arrived declaration with LRN starting with V to check Detained status
+    And I click on copy link
+    Then I should land on copy declaration page
+    And I enter ducr 8GB123456469274-101SHIP1 and lrn starting with V9 prefix
+    And I click continue
+    Then I should land on Saved-Summary page
+    And I navigate to Declaration Type page
+    And I select a arrived declaration type
+    And I click continue
+    And I navigate to summary page
+    And I click continue on summary
+    Then I should land on Submit-Your-Declaration page
+    And I submit the declaration
+    Then I should land on holding page and redirect to Confirmation page
+    And I should land on Confirmation page
+    And I navigate to Choice page
+    And I select to Manage Submit Declaration
+    Then I should land on Dashboard page
+    And I click on Submitted tab
+    And I validate declaration details on Submitted tab and check Status is Detained
+    And I navigate to declaration information page after clicking on mrn link
+    Then I should land on Declaration-Information page
+    And I validate details on declaration information page
+
   # Below scenario -
     # 1. Validates View Print link
     # 2. Checks successful and unsuccessful Cancellation of a Declaration
