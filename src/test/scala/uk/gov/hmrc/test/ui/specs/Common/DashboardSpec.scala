@@ -30,8 +30,15 @@ import uk.gov.hmrc.test.ui.pages.section2.AreYouTheExporterPage
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 
 class DashboardSpec
-    extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
-    with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
+    extends AnyFeatureSpec 
+      with BaseSpec 
+      with GivenWhenThen
+      with ShouldVerb 
+      with BeforeAndAfterAll
+      with BeforeAndAfterEach 
+      with Browser 
+      with TableDrivenPropertyChecks 
+      with ScreenshotOnFailure {
   Feature("Validate Dashboard and Declaration Information") {
     /* Below scenario -
     1. Check various confirmation page titles and validates information on Dashboard and Declaration information pages
