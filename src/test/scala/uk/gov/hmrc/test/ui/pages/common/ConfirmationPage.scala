@@ -38,7 +38,7 @@ object ConfirmationPage extends BasePage {
   override def title: String =
     detail(Lrn).take(1) match {
       case "C" if isArrivedDeclaration => "Your declaration has been submitted"
-      case "C" | "Q" | "X" | "I" | "J" | "L" | "K" | "P" | "N" => "Your submitted declaration is still being checked"
+      case "C" | "Q" | "X" | "I" | "J" | "L" | "K" | "P" | "N" | "V" => "Your submitted declaration is still being checked"
       case "D" | "U"                                           => "Your declaration has been submitted - action is required"
       case _ =>
         if (isAmendmentMode) {
