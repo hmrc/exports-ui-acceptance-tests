@@ -1,4 +1,4 @@
-@Regression3 @FailedTest @Regression @Dashboard
+@Regression3 @FailedTest @Regression
 Feature: Validate Dashboard and Declaration Information
 
   Background:
