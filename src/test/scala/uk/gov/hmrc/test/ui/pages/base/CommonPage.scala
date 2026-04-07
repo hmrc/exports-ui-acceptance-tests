@@ -294,6 +294,27 @@ object CommonPage extends BasePage {
     continueOnMiniCya()
   }
 
+  def createDraftDeclarations(numberOfDeclarations:Int): Unit = {
+    for (i <- 1 to numberOfDeclarations) {
+      DeclarationInformationPage.copyDeclaration()
+      val ducr = f"8GB123456469274-${101 + i}SHIP1"
+      val reference = f"M${8 + i}"
+      CopyDeclarationPage.fillPage(ducr, reference)
+      CommonPage.continue()
+      SummaryPage.checkPage()
+      SummaryPage.clickContinueOnSummary()
+      SubmitYourDeclarationPage.checkPage()
+      SubmitYourDeclarationPage.fillPage()
+      DeclarationHoldingPage.checkPage()
+      DeclarationHoldingPage.fillPage()
+      ConfirmationPage.checkPage()
+      ChoicePage.navigateToPage(ChoicePage.path)
+      ChoicePage.fillPage("Manage Submit Declaration")
+      DashboardPage.checkPage()
+      DashboardPage.mrnLink.click()
+    }
+  }
+
   def fillSection6ForDeclaration(): Unit = {
     TransportLeavingTheBorderPage.fillPage("Sea transport")
     continue()

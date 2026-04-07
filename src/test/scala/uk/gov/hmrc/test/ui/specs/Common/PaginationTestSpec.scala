@@ -21,7 +21,8 @@ import org.scalatest.featurespec.AnyFeatureSpec
 import org.scalatest.prop.TableDrivenPropertyChecks
 import org.scalatest.verbs.ShouldVerb
 import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
-import uk.gov.hmrc.test.ui.pages.base.CommonPage._
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.*
+import uk.gov.hmrc.test.ui.pages.common.{DashboardPage, DeclarationInformationPage}
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 
 class PaginationTestSpec  extends AnyFeatureSpec
@@ -41,47 +42,16 @@ Feature("Validate Dashboard and Declaration Information"){
   Scenario("Full Standard Journey and view declaration in submission dashboard"){
     Given("the user clears data in cache")
     background()
-    Given("User fills Section 1 for STANDARD with a pre-lodged declaration")
-
-    Given("User fills Section 2")
-
-    Given("User fills Section 3")
-
-    Given("User fills Section 4")
-
-    Given("User fills Section 5")
-
-    Given("User fills Section 6")
-
-    Then("User should land on the Saved Summary page")
-
-    Then("User verifies the section headings and selects Confirm and Continue")
-
-    Then("User should land on the Submit Your Declaration page")
-
-    Given("User submits the declaration")
-
-    Then("User should land on the holding page and be redirected to the Confirmation page")
-
-    Then("User should land on the Confirmation page")
-
-    Given("User navigates to the Choice page")
-
-    Given("User selects Manage Submitted Declarations")
-
-    Then("User should land on the Dashboard page")
-
-    Then("User validates the declaration details in the Submitted tab and checks the status is \"Arrived and accepted\"")
-
-    Given("User navigates to the Declaration Information page by clicking the MRN link")
-
-    Then("User should land on the Declaration Information page")
-
-    Given("User creates 30 draft declarations")
-
-    Given("User clicks the Back to Your Declarations link")
-
+    When("User fills all sections of the declaration and submits the declaration to land on Saved-Summary page")
+    fillAllSectionsForDeclaration("STANDARD", "prelodged")
+    Then("User checks the section headings and continue to validate details on declaration information page")
+    checksTheSectionHeadingsAndContinueToValidateDetails()
+    When("User creates 30 draft declarations")
+    createDraftDeclarations(30)
+    And("User clicks the Back to Your Declarations link")
+    DeclarationInformationPage.backToYourDeclarationsLink()
     Then("User validates the functionality of the pagination component")
+    DashboardPage.viewPaginationComponent()
   }
 }
 }
