@@ -98,46 +98,58 @@ object DashboardPage extends BasePage {
     }
 
   def viewPaginationComponent(): Unit = {
-    findElementByCssSelector("#submitted-submissions > div > nav").isDisplayed
+    findElementByCssSelector("#submitted-submissions").isDisplayed
 
       // WebDriverWait to wait for elements to be present
       val wait = new WebDriverWait(driver, Duration.ofSeconds(10))
 
       // Get the total number of pages from the pagination controls
-      val totalPages: Int = wait.until(
-        ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(".ceds-pagination__controls .ceds-pagination__item"))
-      ).size()
+      // Get total pages from pagination items
+      val pageNumbers = wait.until(
+        ExpectedConditions.presenceOfAllElementsLocatedBy(
+          By.cssSelector(".govuk-pagination__item a")
+        )).asScala.toList
 
-    for (pageNum <- 1 until totalPages-1) {
+    val totalPages = pageNumbers.flatMap(e => e.getText.trim.toIntOption).max
+
+    for (pageNum <- 1 until totalPages) {
+
+      val paginationItems = wait.until(
+        ExpectedConditions.presenceOfElementLocated(By.cssSelector(".govuk-pagination"))
+      )
 
 
-        val paginationControls: WebElement = waitForClass("ceds-pagination__controls")
+      val items = paginationItems.findElements(By.cssSelector(".govuk-pagination__item a, .govuk-pagination__item span")).asScala.toList
 
-        // Locate the pagination items
-        val paginationItems: List[WebElement] = paginationControls.findElements(By.className("ceds-pagination__link")).asScala.toList
+      // Click next page number
+      val nextPage = items.find(_.getText == (pageNum + 1).toString)
+        .getOrElse(throw new NoSuchElementException(s"Page ${pageNum + 1} not found"))
 
-        // Find the link for the current page number + 1 and click it
-        val nextPageLink: WebElement = paginationItems.find(_.getText == (pageNum + 1).toString)
-          .getOrElse(throw new NoSuchElementException(s"Page ${pageNum + 1} link not found"))
-
-        // Check if the "Next" link is displayed before clicking the second page
-        val nextLinkDisplayed =  waitForCssSelector("li.ceds-pagination__item.ceds-pagination__item--next > a").isDisplayed
-
-        assert(nextLinkDisplayed, "Next link displays on the first page")
-
-        // Click the next page link
-        nextPageLink.click()
-
-        // Check if the "Previous" link is displayed from the next page
-        val previousLinkDisplayed = waitForCssSelector("li.ceds-pagination__item.ceds-pagination__item--prev > a").isDisplayed
-
-        assert(previousLinkDisplayed, "Previous link displays from the next page")
-
-        // Verify the content of the page
-        val activePage: WebElement = waitForClass("ceds-pagination__item--active")
-        println(s"Current Page: ${activePage.getText}")
+      // Validate NEXT link on first page
+      if (pageNum == 1) {
+        val nextLink = driver.findElement(By.cssSelector(".govuk-pagination__next a"))
+        assert(nextLink.isDisplayed, "Next link should be visible on page 1")
       }
+
+      nextPage.click()
+
+      // Validate PREVIOUS link appears after page 1
+      if (pageNum >= 1) {
+        val prevLink = wait.until(
+          ExpectedConditions.presenceOfElementLocated(By.cssSelector(".govuk-pagination__prev a"))
+        )
+        assert(prevLink.isDisplayed, "Previous link should be visible after page 1")
+      }
+
+      // Validate active page
+      val activePage = wait.until(
+        ExpectedConditions.presenceOfElementLocated(By.cssSelector(".govuk-pagination__item--current"))
+      )
+
+      println(s"Current Page: ${activePage.getText}")
     }
+    }
+
   def entersDucrAndValidateDetails():Unit={
     CommonPage.continue()
     SummaryPage.checkPage()

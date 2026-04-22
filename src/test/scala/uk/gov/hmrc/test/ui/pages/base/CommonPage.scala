@@ -49,6 +49,10 @@ object CommonPage extends BasePage {
 
   override def fillPage(values: String*): Unit = ()
   
+  def clearCacheForSection(sectionId: Int):Unit={
+    clear(sectionId)
+  }
+  
   def fillAllSectionsForDeclaration(decType: String, AdditionalDecType: String): Unit = {
     fillSection1ForDeclaration(decType, AdditionalDecType)
     fillSection2ForDeclaration()

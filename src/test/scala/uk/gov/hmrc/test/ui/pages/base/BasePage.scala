@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.base
 import com.typesafe.scalalogging.LazyLogging
 import org.openqa.selenium.{StaleElementReferenceException, WebDriver, WebElement}
 import org.openqa.selenium.support.ui.{FluentWait, WebDriverWait}
-import org.scalatest.matchers.must.Matchers.*
+import org.scalatest.matchers.must.Matchers._
 import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.pages.base.BasePage.*
@@ -73,7 +73,8 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
       else s" - ${findElementById("section-header").getText}"
 
     if (actualUrl.contains("/dashboard") || actualUrl.endsWith("/saved-declarations")) {
-      driver.getTitle mustBe title + " - Page 1 of 1" + " - Make and manage an export declaration online - GOV.UK"
+      driver.getTitle must fullyMatch regex (
+        s"${title} - Page \\d+ of \\d+ - Make and manage an export declaration online - GOV.UK")
       findElementsByTag("h1").head.getText mustBe title
     }
     else {

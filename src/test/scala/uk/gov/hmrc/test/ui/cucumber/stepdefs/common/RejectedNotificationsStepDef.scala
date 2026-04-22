@@ -46,7 +46,6 @@ class RejectedNotificationsStepDef extends BaseStepDef {
 
   And("""^I navigate to check you answer from rejected notification page""") { () =>
     RejectedNotificationPage.checkYourAnswer()
-
   }
 
 }

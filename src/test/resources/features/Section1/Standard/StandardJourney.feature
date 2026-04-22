@@ -6,7 +6,7 @@ Feature: Standard Journey
 
   # Below scenario - DoYouHaveADucr:[Yes]
   @Section1 @StandardPrelodged
-  Scenario Outline: Fill Section 1 for a Standard Prelodged and Arrived Declaration
+  Scenario Outline: Fill Section 1 for a Standard Prelodged and Arrived Declaration `
     Given I enter EORI GB123456789006 on Login Page and click submit
     Then I should land on Choice page
     And I select to create a declaration

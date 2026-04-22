@@ -213,6 +213,7 @@ Feature: Section6 Standard Journey
     Then I should land on Border-Transport page
     And I select Vehicle registration as the border transport
     And I click continue
+    
     Then I should land on Transport-Country page
     And I select Macao as the transport country
     And I click continue

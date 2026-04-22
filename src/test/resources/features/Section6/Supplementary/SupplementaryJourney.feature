@@ -197,6 +197,7 @@ Feature: Section6 Supplementary Journey
     Then I should land on Inland-Transport-details page
     And I select Sea transport as mode of Inland transport
     And I click continue
+    
     Then I should land on Departure-Transport page
     And I select Ship IMO number as the departure transport
     And I click continue

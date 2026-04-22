@@ -16,12 +16,17 @@
 
 package uk.gov.hmrc.test.ui.specs.Common
 
-import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
 import org.scalatest.featurespec.AnyFeatureSpec
+import org.scalatest.matchers.must.Matchers.must
 import org.scalatest.prop.TableDrivenPropertyChecks
 import org.scalatest.verbs.ShouldVerb
+import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
 import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
-import uk.gov.hmrc.test.ui.pages.base.CommonPage._
+import uk.gov.hmrc.test.ui.pages.base.CommonPage
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.*
+import uk.gov.hmrc.test.ui.pages.common.{CopyDeclarationPage, DashboardPage, DeclarationHoldingPage, DeclarationInformationPage, RejectedNotificationPage, SubmitYourDeclarationPage, SummaryPage}
+import uk.gov.hmrc.test.ui.pages.common.RejectedNotificationPage.*
+import uk.gov.hmrc.test.ui.pages.section1.DucrEntryPage
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 
 class RejectedNotificationsSpec extends AnyFeatureSpec
@@ -37,111 +42,38 @@ class RejectedNotificationsSpec extends AnyFeatureSpec
     Scenario("Fix a rejected declaration and submit the declaration"){
       Given("the user clears data in cache")
       background()
-      Given("User fills section1 for STANDARD, prelodged declaration")
-
-      And("User fills section2")
-
-      And("User fills section3")
-
-      And("User fills section4")
-
-      And("User fills section5")
-
-      And("User fills section6")
-
-      And("User navigates to Lrn page")
-
-      And("User enters LRN BCDSCOM02")
-
-      And("User clicks continue")
-
-      And("User navigates to summary page")
-
-      Then("User should land on Saved-Summary page")
-
-      And("User checks the section headings and clicks confirm and continue")
-
-      Then("User should land on Submit-Your-Declaration page")
-
-      And("User submits the declaration")
-
-      Then("User should land on holding page and redirect to rejected notification page")
-
-      And("User navigates to Choice page")
-
-      And("User selects to Manage Submit Declaration")
-
-      Then("User should land on Dashboard page")
-
-      And("User validates declaration details on Rejected tab and checks Status is Declaration rejected")
-
-      And("User navigates to declaration information page after clicking on mrn link")
-
-      Then("User should land on Declaration-Information page")
-
-      And("User validates details on declaration information page")
-
-      And("User fixes errors on the declaration")
-
-      And("User should land on Rejected-Notifications page")
-
-      //validate Lrn Page
-
-      And("User validates Lrn error details on rejected notifications")
-
-      Then("User clicks on Lrn change link to fix error")
-
-      And("User enters LRN MCDSCOM06")
-
-      And("User returns back to errors page")
-
-      And("User checks updated Lrn error details on rejected notifications")
-
-      And("User navigates to check you answer from rejected notification page")
-
-      Then("User should land on Saved-Summary page")
-
-      And("User checks the section headings and clicks confirm and continue")
-
-      Then("User should land on Submit-Your-Declaration page")
-
-      And("User submits the declaration")
-
-      Then("User should land on holding page and redirect to Confirmation page")
-
-      And("User should land on Confirmation page")
-
-      And("User navigates to Choice page")
-
-      And("User selects to Manage Submit Declaration")
-
-      Then("User should land on Dashboard page")
-
-      And("User validates declaration details on Submitted tab and checks Status is Arrived and accepted")
-
-      And("User navigates to declaration information page after clicking on mrn link")
-
-      Then("User should land on Declaration-Information page")
-
+      When("User fills all sections of the declaration and submits the declaration to land on Saved-Summary page")
+      fillAllSectionEnterLRNContinueToSummaryPage("STANDARD", "prelodged")
+      And("User checks the section headings and continue to submit declaration")
+      confirmAndContinueToSubmitDeclaration()
+      And("User navigates to Choice page to Dashboard page")
+      navigateFromChoicePageToDashboardPage()
+      Then("User validates declaration details on Rejected tab and checks Status is Declaration rejected")
+      DashboardPage.refreshPage()
+      DashboardPage.validateDashboard("Rejected", "Declaration rejected")
+      When("User navigates to declaration information page after clicking on mrn link to fix errors on the declaration")
+      clickMRNLinkToFixErrors()
+      And("User clicks on Lrn change link to fix error and submits the declaration then land on Dashboard page")
+      clickLRNLinkToFixErrors()
+      Then("User validates declaration details on Submitted tab and checks Status is Arrived and accepted then lands on Declaration-Information page")
+      validateDeclarationDetailsLandOnDecInfoPage()
       //Duplicate ducr warning messages check
 
-      And("User clicks on copy link")
-
-      And("User enters ducr 8GB123456469274-101SHIP1 and a rejected lrn")
-
-      And("User clicks continue")
-
-      And("User clicks continue on summary")
-
-      And("User submits the declaration")
-
-      Then("User should land on holding page and redirect to rejected notification page")
-
-      And("User validates ducr warning on rejected notifications page")
-
-      Then("User clicks on Ducr change link to fix error")
-
-      And("User validates duplicate ducr warning on ducr entry page")
+      When("User clicks on copy link and continues by entering ducr 8GB123456469274-101SHIP1 and a rejected lrn")
+      DeclarationInformationPage.copyDeclaration()
+      CopyDeclarationPage.fillPage("8GB123456469274-101SHIP1", "rejected")
+      CommonPage.continue()
+      SummaryPage.clickContinueOnSummary()
+      And("User submits the declaration and land on holding page and redirect to rejected notification page")
+      SubmitYourDeclarationPage.fillPage()
+      DeclarationHoldingPage.checkPage()
+      DeclarationHoldingPage.waitForClass("govuk-warning-text__text")
+      Then("User validates ducr warning on rejected notifications page")
+      RejectedNotificationPage.duplicateDucrWarning().getText must include("DUCR previously used within the last 12 months.")
+      When("User clicks on Ducr change link to fix error")
+      RejectedNotificationPage.FixErrorsAndValidateWarning("Ducr")
+      Then("User validates duplicate ducr warning on ducr entry page")
+      DucrEntryPage.ducrWarning.getText must be("DUCR reference is a duplication or is invalid")
     }
   }
 

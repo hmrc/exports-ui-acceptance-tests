@@ -16,7 +16,11 @@
 
 package uk.gov.hmrc.test.ui.pages.section4
 
-import uk.gov.hmrc.test.ui.pages.base.BasePage
+import org.openqa.selenium.By
+import org.scalatest.matchers.must.Matchers.mustBe
+import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.{fillSection2ForDeclaration, fillSection3ForDeclaration}
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, CommonPage}
 import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.Section4
 
 object SummarySection4Page extends BasePage {
@@ -30,4 +34,29 @@ object SummarySection4Page extends BasePage {
   // ex: fillPage()
 
   override def fillPage(values: String*): Unit = checkSectionSummary(Section4)
+  
+  def section4Journey1():Unit={
+    fillSection2ForDeclaration()
+    fillSection3ForDeclaration()
+    PreviousDocumentPage.checkPage()
+    PreviousDocumentPage.fillPage(genSequenceId("first"), "Commercial Invoice", "9GB123456782317-BH1433A61")
+    CommonPage.continue()
+    PreviousDocumentListPage.checkPage()
+    PreviousDocumentListPage.fillPage("No")
+    CommonPage.continue()
+  }
+
+  def section4Journey2():Unit={
+    fillSection2ForDeclaration()
+    fillSection3ForDeclaration()
+    InvoicesAndExchangeRateChoicePage.checkPage()
+    InvoicesAndExchangeRateChoicePage.fillPage("No")
+    CommonPage.continue()
+    InvoicesAndExchangeRatePage.checkPage()
+  }
+
+  def assertTitle(expected: String): Unit = {
+    val titleText = driver.findElement(By.xpath("//*[@id='title']")).getText
+    titleText mustBe expected
+  }
 }
