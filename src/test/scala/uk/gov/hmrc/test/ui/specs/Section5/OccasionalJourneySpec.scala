@@ -1,3 +1,19 @@
+/*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.gov.hmrc.test.ui.specs.Section5
 
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
@@ -11,16 +27,17 @@ import uk.gov.hmrc.test.ui.pages.base.CommonPage.{background, fillSection1ForDec
 import uk.gov.hmrc.test.ui.pages.section5.*
 import uk.gov.hmrc.test.ui.pages.section5.SummarySection5Page.section5Journey1
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class OccasionalJourneySpec
     extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
     with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section5 Occasional Journey") {
-    Scenario("Perform a Low Value Occasional Arrived Declaration") {
+    Scenario("Perform a Low Value Occasional Arrived Declaration",Regression2,Regression,Section5,Occasional) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for Occasional, arrived declaration")
-      fillSection1ForDeclaration("Occasional", "arrived")
+      fillSection1ForDeclaration("OCCASIONAL", "arrived")
       And("User fills section2/3/4 and continues their journey to Procedure-codes page")
       section5Journey1()
       And("User selects 1040 as procedure code and continues")
@@ -92,6 +109,7 @@ class OccasionalJourneySpec
       AdditionalDocumentListPage.checkPage()
       And("User selects No on additional document list page and continues")
       AdditionalDocumentListPage.fillPage("No")
+      CommonPage.continue()
       And("User lands on Declaration-Items-List page")
       DeclarationItemsListPage.checkPage()
       And("User selects No on declaration items list page and continues")
@@ -104,7 +122,7 @@ class OccasionalJourneySpec
     }
     
     Scenario(
-      "Complete Items section on with Low Value Occasional Prelodged declaration and check change link functionality on Package Information, Additional Information and Additional Documents list pages"
+      "Complete Items section on with Low Value Occasional Prelodged declaration and check change link functionality on Package Information, Additional Information and Additional Documents list pages",Regression2,Regression,Section5,Occasional
     ) {
       Given("the user clears data in cache")
       background()

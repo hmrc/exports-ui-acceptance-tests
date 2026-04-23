@@ -28,6 +28,7 @@ import uk.gov.hmrc.test.ui.pages.common.DashboardPage.*
 import uk.gov.hmrc.test.ui.pages.section1.ChoicePage
 import uk.gov.hmrc.test.ui.pages.section2.AreYouTheExporterPage
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class DashboardSpec
     extends AnyFeatureSpec 
@@ -45,7 +46,7 @@ class DashboardSpec
     2. Validates View Print link
     3. Checks successful and unsuccessful Copy of a Declaration
     4. Checks successful and unsuccessful Cancellation of a Declaration */
-    Scenario("Full Standard Journey and view declaration in submission dashboard") {
+    Scenario("Full Standard Journey and view declaration in submission dashboard",Regression3,Regression) {
       Given("the user clears data in cache")
       background()
       When("User fills all sections of the declaration and submits the declaration to land on Saved-Summary page")
@@ -232,7 +233,7 @@ class DashboardSpec
     # 1. Validates View Print link
     # 2. Checks successful and unsuccessful Cancellation of a Declaration*/
 
-    Scenario("check Cancellation of declaration and validate print link") {
+    Scenario("check Cancellation of declaration and validate print link",Smoke,Regression3,Regression) {
       Given("the user clears data in cache")
       background()
       When("User fills all sections of the declaration and submits the declaration to land on Saved-Summary page")
@@ -313,7 +314,7 @@ class DashboardSpec
    /*Below scenario -
       1.Checks saved draft declaration and removal of draft declaration
       2.Checks if view declaration summary is missing and present*/
-    Scenario("Check partial declarations saved on Saved Declarations and remove saved declaration") {
+    Scenario("Check partial declarations saved on Saved Declarations and remove saved declaration",Regression3,Regression) {
       Given("User fills section1 for STANDARD, prelodged declaration")
         fillSection1ForDeclaration("STANDARD", "prelodged")
       And("User validates view declaration link is missing")

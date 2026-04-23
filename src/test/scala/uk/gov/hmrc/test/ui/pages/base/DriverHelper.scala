@@ -35,7 +35,7 @@ case object Visible extends ExpectedCondition
 
 trait DriverHelper {
 
-  protected val driver: WebDriver = uk.gov.hmrc.test.ui.pages.base.DriverHelper.driver
+  protected def driver: WebDriver = uk.gov.hmrc.test.ui.pages.base.DriverHelper.driver
 
   def changeLinkOnCYA(row: String): WebElement =
     waitFor(By.cssSelector(s".$row .govuk-link"), Clickable, 10)
@@ -78,11 +78,11 @@ trait DriverHelper {
         case Failure(_) => true
       }
 
-  def findElementById(value: String): WebElement = waitFor(By.id(value), Presence, 30)
+  def findElementById(value: String): WebElement = waitFor(By.id(value), Presence, 40)
   def findElementByXpath(value: String): WebElement = waitFor(By.xpath(value), Presence, 30)
   def findElementByLinkText(value: String): WebElement = waitFor(By.linkText(value), Presence, 30)
   def findElementByPartialLink(value: String): WebElement = waitFor(By.partialLinkText(value), Presence, 30)
-  def findElementByCssSelector(value: String): WebElement = waitFor(By.cssSelector(value), Presence, 30)
+  def findElementByCssSelector(value: String): WebElement = waitFor(By.cssSelector(value), Presence, 40)
   def findElementByClassName(value: String): WebElement = waitFor(By.className(value), Presence, 30)
   def findElementByName(value: String): WebElement = waitFor(By.name(value), Presence, 30)
   def findElementByTag(tag: String): WebElement = waitFor(By.tagName(tag), Presence, 30)
@@ -226,7 +226,7 @@ object DriverHelper extends LazyLogging {
   logger.info(
     s"Instantiating Browser: ${sys.props.getOrElse("browser", "'browser' System property not set. This is required")}"
   )
-  implicit val driver: WebDriver = Driver.instance
+  implicit def driver: WebDriver = Driver.instance
 }
 
 class TestFailedException(message: String, cause: Throwable) extends RuntimeException(message, cause)

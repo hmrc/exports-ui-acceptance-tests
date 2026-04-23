@@ -24,6 +24,7 @@ import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.*
 import uk.gov.hmrc.test.ui.pages.common.{DashboardPage, DeclarationInformationPage}
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.Pagination
 
 class PaginationTestSpec  extends AnyFeatureSpec
   with BaseSpec
@@ -39,7 +40,7 @@ Feature("Validate Dashboard and Declaration Information"){
   1. creates the number of declarations that we want by passing the number from step def
   2. Submit the created declarations and validates the pagination component is present
    */
-  Scenario("Full Standard Journey and view declaration in submission dashboard"){
+  Scenario("Full Standard Journey and view declaration in submission dashboard",Pagination){
     Given("the user clears data in cache")
     background()
     When("User fills all sections of the declaration and submits the declaration to land on Saved-Summary page")

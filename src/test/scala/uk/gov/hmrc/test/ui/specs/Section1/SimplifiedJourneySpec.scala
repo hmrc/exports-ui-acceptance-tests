@@ -25,6 +25,7 @@ import uk.gov.hmrc.test.ui.pages.base.CommonPage
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.background
 import uk.gov.hmrc.test.ui.pages.section1.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class SimplifiedJourneySpec extends AnyFeatureSpec
   with BaseSpec
@@ -38,7 +39,7 @@ class SimplifiedJourneySpec extends AnyFeatureSpec
 
   Feature("Simplified Journey"){
     // Below scenario - DoYouHaveADucr:[No], Confirm-Ducr:[No], Link-to-Mucr:[Yes]//
-    Scenario("Fill Section 1 for a Simplified Prelodged and Arrived Declaration"){
+    Scenario("Fill Section 1 for a Simplified Prelodged and Arrived Declaration",Regression,Regression1,Section1,Simplified){
       forAll(
         Table("DecType", "prelodged", "arrived")) { DecType =>
         Given("User clears data in cache")

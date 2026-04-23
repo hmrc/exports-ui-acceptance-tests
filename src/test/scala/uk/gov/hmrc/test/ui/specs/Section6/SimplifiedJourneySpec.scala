@@ -1,3 +1,19 @@
+/*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.gov.hmrc.test.ui.specs.Section6
 
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
@@ -12,6 +28,7 @@ import uk.gov.hmrc.test.ui.pages.section5.{AdditionalProcedureCodesPage, Procedu
 import uk.gov.hmrc.test.ui.pages.section6.{BorderTransportPage, ContainerListPage, ContainerPage, ExpressConsignmentPage, InlandModeOfTransportPage, SealListPage, SealPage, SealYesNoPage, SummarySection6Page, SupervisingCustomsOfficePage, TransportCountryPage, TransportLeavingTheBorderPage, TransportPaymentPage, WarehousePage}
 import uk.gov.hmrc.test.ui.pages.section6.SummarySection6Page.{fillAllForSections6, section6CommonJourney1, section6SimplifiedJourney1Cont}
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class SimplifiedJourneySpec
     extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
@@ -23,7 +40,7 @@ class SimplifiedJourneySpec
           # Supervising-Customs-Office
       3 The following page is skipped
           # Departure Transport*/
-    Scenario("simplified journey section-6") {
+    Scenario("simplified journey section-6",Regression3,Regression,Section6,Simplified) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1/2/3/4/5 for SIMPLIFIED, Prelodged declaration")
@@ -114,7 +131,7 @@ class SimplifiedJourneySpec
      /*Scenario: If procedure code = 3171 and additional procedure code = 000,the Warehouse and Supervising
                  Customs Office pages are shown.
                 - The Departure Transport page is skipped.*/
-    Scenario("simplified arrived journey section-6") {
+    Scenario("simplified arrived journey section-6",Regression3,Regression,Section6,Simplified) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1/2/3/4/5 for SIMPLIFIED, arrived declaration")

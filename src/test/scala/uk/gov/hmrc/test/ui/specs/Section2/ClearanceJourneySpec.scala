@@ -26,6 +26,7 @@ import uk.gov.hmrc.test.ui.pages.base.CommonPage.{background, fillSection1ForDec
 import uk.gov.hmrc.test.ui.pages.section2.{ExporterEORINumberPage, PersonPresentingGoodsPage, SummarySection2Page}
 import uk.gov.hmrc.test.ui.pages.section2.SummarySection2Page.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class ClearanceJourneySpec
     extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
@@ -33,7 +34,7 @@ class ClearanceJourneySpec
 
   Feature("Section2 Clearance Prelodged") {
     // Clearance Prelodged Declaration//
-    Scenario("Exports Clearance Prelodged Scenario with possible scenarios") {
+    Scenario("Exports Clearance Prelodged Scenario with possible scenarios",Regression1,Regression,Section2,Clearance,Smoke) {
       Given("the user clears data in cache")
       background()
       When("User fills section1 for CLEARANCE, prelodged declaration")
@@ -79,7 +80,7 @@ class ClearanceJourneySpec
       SummarySection2Page.fillPage()
     }
     // Clearance Arrived Declaration//
-    Scenario("Exports Clearance Arrived Scenario which covers maximum number of pages") {
+    Scenario("Exports Clearance Arrived Scenario which covers maximum number of pages",Regression1,Regression,Section2,Clearance) {
       Given("the user clears data in cache")
       background()
       When("User fills section1 for CLEARANCE, arrived declaration")

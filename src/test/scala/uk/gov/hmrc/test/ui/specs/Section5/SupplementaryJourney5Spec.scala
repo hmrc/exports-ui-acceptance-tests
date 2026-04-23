@@ -1,3 +1,19 @@
+/*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.gov.hmrc.test.ui.specs.Section5
 
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
@@ -11,11 +27,15 @@ import uk.gov.hmrc.test.ui.pages.base.CommonPage.{background, fillSection1ForDec
 import uk.gov.hmrc.test.ui.pages.section5.*
 import uk.gov.hmrc.test.ui.pages.section5.SummarySection5Page.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class SupplementaryJourney5Spec extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
   with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section5 Supplementary Journey") {
-    Scenario("Complete Items section on Supplementary EIDR declaration journey") {
+    /*Validates supplementary EIDR journey and VAT‑page skipping.
+     # Covers adding multiple items and removing them from Mini‑CYA and declaration list.
+     # Ensures Add‑Item link routes correctly to the procedure‑code page.*/
+    Scenario("Complete Items section on Supplementary EIDR declaration journey",Regression2,Regression,Section5,Supplementary) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for SUPPLEMENTARY, eidr declaration")
@@ -45,7 +65,7 @@ class SupplementaryJourney5Spec extends AnyFeatureSpec with BaseSpec with GivenW
 
       //Deleting item from minicya section-5 page//
       And("User removes one item from the declaration")
-      //clearKeysFromCache()
+      SummarySection5Page.removeItem()
       And("User lands on Remove-Declaration-Item page")
       RemoveItemsPage.checkPage()
       And("User selects No to remove first item and continues")
@@ -56,7 +76,7 @@ class SupplementaryJourney5Spec extends AnyFeatureSpec with BaseSpec with GivenW
       And("User removes one item from the declaration")
       SummarySection5Page.removeItem()
       And("User selects Yes to remove first item and continues")
-      RemoveItemsPage.fillPage("Yes", genSequenceId("Yes"))
+      RemoveItemsPage.fillPage("Yes", genSequenceId("first"))
       CommonPage.continue()
       Then("User should land on MiniCYA-Section-5 page")
       SummarySection5Page.checkPage()
@@ -82,8 +102,10 @@ class SupplementaryJourney5Spec extends AnyFeatureSpec with BaseSpec with GivenW
       And("User lands on Add-Declaration-Item-1 page")
       AddDeclarationItemPage.checkPage()
     }
+     /*Completes a Supplementary Simplified Declaration end‑to‑end.
+      # Verifies ability to amend item details via the Change link on the declaration‑items‑list page after item completion.*/
     Scenario(
-      "Complete Items section on Supplementary Simplified declaration journey and Validate Changing Item Details"
+      "Complete Items section on Supplementary Simplified declaration journey and Validate Changing Item Details",Regression2,Regression,Section5,Supplementary
     ) {
       Given("the user clears data in cache")
       background()

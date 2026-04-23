@@ -26,6 +26,7 @@ import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.{background, fillSection1ForDeclaration}
 import uk.gov.hmrc.test.ui.pages.section2.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class SimplifiedJourneySpec extends AnyFeatureSpec
   with BaseSpec
@@ -37,7 +38,7 @@ class SimplifiedJourneySpec extends AnyFeatureSpec
   with TableDrivenPropertyChecks
   with ScreenshotOnFailure {
   Feature("Section2 Simplified Journey Scenarios"){
-    Scenario("Fill Section 1 for a Simplified Prelodged and Arrived Declaration"){
+    Scenario("Fill Section 1 for a Simplified Prelodged and Arrived Declaration",Regression1,Regression,Section2,Simplified){
       forAll(Table("Type", "preloged", "arrived")) { Type =>
         Given("the user clears data in cache")
         background()

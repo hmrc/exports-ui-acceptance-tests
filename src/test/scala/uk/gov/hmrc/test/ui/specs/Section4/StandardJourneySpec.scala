@@ -1,3 +1,19 @@
+/*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.gov.hmrc.test.ui.specs.Section4
 
 import org.scalatest.featurespec.AnyFeatureSpec
@@ -12,13 +28,14 @@ import uk.gov.hmrc.test.ui.pages.section3.DestinationCountryPage
 import uk.gov.hmrc.test.ui.pages.section4.*
 import uk.gov.hmrc.test.ui.pages.section4.SummarySection4Page.section4Journey2
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class StandardJourneySpec
     extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
     with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section4 Standard Journey") {
     Scenario(
-      "Complete Transactions section on standard prelodged declaration journey and validate dynamic title changes on previous documents page"
+      "Complete Transactions section on standard prelodged declaration journey and validate dynamic title changes on previous documents page",Regression2,Regression,Section4,Standard
     ) {
       Given("the user clears data in cache")
       background()
@@ -90,7 +107,7 @@ class StandardJourneySpec
       NatureOfTransactionPage.checkPage()
     }
 
-    Scenario("Complete Transactions section on standard arrived declaration journey") {
+    Scenario("Complete Transactions section on standard arrived declaration journey",Regression2,Regression,Section4,Standard,Smoke) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for STANDARD, arrived declaration")

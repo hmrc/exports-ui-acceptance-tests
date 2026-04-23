@@ -1,3 +1,19 @@
+/*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.gov.hmrc.test.ui.specs.Section3
 
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
@@ -9,6 +25,7 @@ import uk.gov.hmrc.test.ui.pages.base.CommonPage
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.*
 import uk.gov.hmrc.test.ui.pages.section3.{DestinationCountryPage, LocationOfGoodsPage, OfficeOfExitPage, SummarySection3Page}
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class ClearanceJourneySpec
     extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
@@ -16,7 +33,7 @@ class ClearanceJourneySpec
   Feature("Section4 Clearance Journey") {
     //No routing and countries of routing pages, LocationOfGoods: [No], Number of countries Added: [1]//
     Scenario(
-      "Complete Transactions section on Clearance Prelodged declaration journey and validate dynamic title changes on previous documents page"
+      "Complete Transactions section on Clearance Prelodged declaration journey and validate dynamic title changes on previous documents page",Regression1,Regression,Section3,Clearance
     ) {
       Given("the user clears data in cache")
       background()
@@ -47,7 +64,7 @@ class ClearanceJourneySpec
       CommonPage.continueOnMiniCya()
     }
     //No routing and countries of routing pages, LocationOfGoods: [Yes], Number of countries Added: [1]//
-    Scenario("Complete Routes and Locations section on Clearance arrived declaration journey") {
+    Scenario("Complete Routes and Locations section on Clearance arrived declaration journey",Regression1,Regression,Section3,Clearance) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for CLEARANCE, arrived declaration")

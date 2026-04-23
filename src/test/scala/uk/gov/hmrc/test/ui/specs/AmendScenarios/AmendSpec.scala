@@ -25,10 +25,11 @@ import uk.gov.hmrc.test.ui.pages.base.CommonPage
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.*
 import uk.gov.hmrc.test.ui.pages.common.*
 import uk.gov.hmrc.test.ui.pages.common.AmendmentDetails.*
-import uk.gov.hmrc.test.ui.pages.common.DashboardPage._
+import uk.gov.hmrc.test.ui.pages.common.DashboardPage.*
 import uk.gov.hmrc.test.ui.pages.section5.*
 import uk.gov.hmrc.test.ui.pages.section5.RemoveItemsPage.removeLinkForItem1
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class AmendSpec
   extends AnyFeatureSpec
@@ -42,7 +43,7 @@ class AmendSpec
     with ScreenshotOnFailure {
 
   Feature("Amend Scenarios") {
-    Scenario("Full Standard Amend Journey and view declaration in submission dashboard") {
+    Scenario("Full Standard Amend Journey and view declaration in submission dashboard",Regression3,Smoke,Regression) {
       Given("the user clears data in cache")
       background()
       When("User fills all sections of the declaration and submits the declaration to land on Saved-Summary page")

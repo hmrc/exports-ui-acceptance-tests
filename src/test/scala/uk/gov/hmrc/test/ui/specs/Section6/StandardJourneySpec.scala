@@ -1,3 +1,19 @@
+/*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.gov.hmrc.test.ui.specs.Section6
 
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
@@ -13,12 +29,13 @@ import uk.gov.hmrc.test.ui.pages.section5.{AdditionalProcedureCodesPage, Procedu
 import uk.gov.hmrc.test.ui.pages.section6.*
 import uk.gov.hmrc.test.ui.pages.section6.SummarySection6Page.{fillAllForSections6, section6CommonJourney1, section6StandardJourney1}
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class StandardJourneySpec
     extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
     with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section6 Standard Journey") {
-    Scenario("standard journey section-6") {
+    Scenario("standard journey section-6",Regression3,Regression,Section6,Standard,Smoke) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1/2/3/4/5 for STANDARD, prelodged declaration")
@@ -187,7 +204,7 @@ class StandardJourneySpec
     /*Scenario:- If procedure code = 1042 and additional procedure code = 000, the Supervising Customs Office page is shown.
       -This is a full arrived‑journey flow, covering all pages,including adding a seal to the container and then removing the seal.*/
     
-    Scenario("standard arrived journey section-6") {
+    Scenario("standard arrived journey section-6",Regression3,Regression,Section6,Standard) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1/2/3/4/5 for STANDARD, arrived declaration")

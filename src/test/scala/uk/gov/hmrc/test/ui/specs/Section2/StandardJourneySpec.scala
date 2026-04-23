@@ -26,15 +26,16 @@ import uk.gov.hmrc.test.ui.pages.base.CommonPage.CommonStepPage.genSequenceId
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.{background, fillSection1ForDeclaration}
 import uk.gov.hmrc.test.ui.pages.base.Constants.none
 import uk.gov.hmrc.test.ui.pages.section2.*
-import uk.gov.hmrc.test.ui.pages.section2.SummarySection2Page._
+import uk.gov.hmrc.test.ui.pages.section2.SummarySection2Page.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class StandardJourneySpec
     extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
     with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section2 Standard Prelodged") {
     Scenario(
-      "Exports Standard Prelodged Scenario with Permanent as export procedure code choice, Consolidator and Manufacturer as other parties are involved"
+      "Exports Standard Prelodged Scenario with Permanent as export procedure code choice, Consolidator and Manufacturer as other parties are involved",Regression1,Regression,Section2,Standard,Smoke
     ) {
       Given("the user clears data in cache")
       background()
@@ -143,7 +144,7 @@ class StandardJourneySpec
     }
 
     Scenario(
-      "Exports Standard Arrived Scenario with Temporary as export procedure code choice and No other parties are involved"
+      "Exports Standard Arrived Scenario with Temporary as export procedure code choice and No other parties are involved",Regression1,Regression,Section2,Standard
     ) {
       Given("the user clears data in cache")
       background()

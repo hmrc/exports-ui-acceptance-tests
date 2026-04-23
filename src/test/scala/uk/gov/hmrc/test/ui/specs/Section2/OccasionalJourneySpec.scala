@@ -26,6 +26,7 @@ import uk.gov.hmrc.test.ui.pages.base.{CommonPage, Constants}
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.{background, fillSection1ForDeclaration}
 import uk.gov.hmrc.test.ui.pages.section2.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class OccasionalJourneySpec extends AnyFeatureSpec
   with BaseSpec 
@@ -37,7 +38,7 @@ class OccasionalJourneySpec extends AnyFeatureSpec
   with TableDrivenPropertyChecks
   with ScreenshotOnFailure {
   Feature("Section2 Occasional Journey Scenarios") {
-    Scenario("Exports Occasional declaration (Prelodged and Arrived)") {
+    Scenario("Exports Occasional declaration (Prelodged and Arrived)",Regression1,Regression,Section2,Occasional) {
       forAll(Table ("Type", "arrived", "prelodged")) { Type =>
         Given("the user clears data in cache")
         background()

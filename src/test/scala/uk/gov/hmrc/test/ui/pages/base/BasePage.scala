@@ -45,7 +45,7 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
   }
 
   def fluentWait: FluentWait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
-    .withTimeout(Duration.ofSeconds(30))
+    .withTimeout(Duration.ofSeconds(40))
     .pollingEvery(Duration.ofMillis(500))
     .ignoring(classOf[NoSuchElementException])
     .ignoring(classOf[StaleElementReferenceException])

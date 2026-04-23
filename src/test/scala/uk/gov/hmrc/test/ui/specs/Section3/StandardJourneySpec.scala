@@ -1,3 +1,19 @@
+/*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.gov.hmrc.test.ui.specs.Section3
 
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
@@ -12,6 +28,7 @@ import uk.gov.hmrc.test.ui.pages.section2.{AuthorisationPage, AuthorisationRemov
 import uk.gov.hmrc.test.ui.pages.section3.*
 import uk.gov.hmrc.test.ui.pages.section3.SummarySection3Page.completeSection3Standard
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class StandardJourneySpec extends AnyFeatureSpec
   with BaseSpec
@@ -23,7 +40,7 @@ class StandardJourneySpec extends AnyFeatureSpec
   with TableDrivenPropertyChecks
   with ScreenshotOnFailure{
   Feature("Section3 Standard Journey") {
-    Scenario("Complete Routes and Locations section on standard prelodged declaration journey") {
+    Scenario("Complete Routes and Locations section on standard prelodged declaration journey",Regression1,Regression,Section3,Standard,Smoke) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for STANDARD, prelodged declaration")
@@ -47,7 +64,7 @@ class StandardJourneySpec extends AnyFeatureSpec
       And("User clicks continue on MiniCya")
       CommonPage.continueOnMiniCya()
     }
-    Scenario("Complete Routes and Locations section on standard arrived declaration and also validate dynamic title changes on location of goods page") {
+    Scenario("Complete Routes and Locations section on standard arrived declaration and also validate dynamic title changes on location of goods page",Regression1,Regression,Section3,Standard) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for STANDARD, arrived declaration")

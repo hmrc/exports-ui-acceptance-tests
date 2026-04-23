@@ -1,3 +1,19 @@
+/*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.gov.hmrc.test.ui.specs.Section5
 
 import org.scalatest.featurespec.AnyFeatureSpec
@@ -11,6 +27,7 @@ import uk.gov.hmrc.test.ui.pages.base.CommonPage.{background, clearCacheForSecti
 import uk.gov.hmrc.test.ui.pages.section5.*
 import uk.gov.hmrc.test.ui.pages.section5.SummarySection5Page.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class StandardJourneySpec
     extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
@@ -22,7 +39,7 @@ class StandardJourneySpec
      4. skipping of documents required yes/no page
      5. Checking Additional Documents Dynamic title when Authorisation code required documents is [Yes] and isLicenseRequired is [Yes]*/
     Scenario(
-      "Complete Items section on Standard Prelodged declaration journey and remove information on all list page"
+      "Complete Items section on Standard Prelodged declaration journey and remove information on all list page",Regression2,Regression,Section5,Standard,Smoke
     ) {
       Given("the user clears data in cache")
       background()
@@ -202,9 +219,12 @@ class StandardJourneySpec
       And("User checks the MiniCYA page for Section-5")
       SummarySection5Page.fillPage()
     }
-
+    
+    /*Below scenario -
+     1. Checking Skipping of pages when procedure code is 1042 to 1040
+     1. Checking Additional Documents Dynamic title when Authorisation code required documents is [Yes] and isLicenseRequired is [No]*/
     Scenario(
-      "Complete Items section on Standard Prelodged declaration journey and validate different page skipping scenarios"
+      "Complete Items section on Standard Prelodged declaration journey and validate different page skipping scenarios",Regression2,Regression,Section5,Standard
     ) {
       Given("the user clears data in cache")
       background()
@@ -243,7 +263,7 @@ class StandardJourneySpec
        Additional Information and Additional Documents pages
        3. Checking Is Additional Documents Required Page is visible*/
     Scenario(
-      "Complete Items section on Standard Arrived declaration journey and with answers No on various item pages"
+      "Complete Items section on Standard Arrived declaration journey and with answers No on various item pages",Regression2,Regression,Section5,Standard
     ) {
       Given("the user clears data in cache")
       background()

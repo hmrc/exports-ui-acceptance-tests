@@ -25,6 +25,7 @@ import uk.gov.hmrc.test.ui.pages.base.CommonPage
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.background
 import uk.gov.hmrc.test.ui.pages.section1.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class StandardJourneySpec extends AnyFeatureSpec
   with BaseSpec
@@ -37,7 +38,7 @@ class StandardJourneySpec extends AnyFeatureSpec
   with ScreenshotOnFailure{
   Feature("Standard Journey") {
     //Below scenario - DoYouHaveADucr:[Yes]//
-    Scenario("Fill Section 1 for a Standard Prelodged and Arrived Declaration") {
+    Scenario("Fill Section 1 for a Standard Prelodged and Arrived Declaration",Regression1,Regression,Smoke,Section1,Standard) {
       forAll(
         Table("DecType", "prelodged", "arrived")) { DecType =>
         Given("the user clears data in cache")

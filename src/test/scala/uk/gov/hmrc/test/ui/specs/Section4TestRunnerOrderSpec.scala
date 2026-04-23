@@ -16,24 +16,13 @@
 
 package uk.gov.hmrc.test.ui.specs
 
-import org.scalatest.featurespec.AnyFeatureSpec
-import org.scalatest.matchers.should.Matchers
-import org.scalatest.{BeforeAndAfterEach, GivenWhenThen}
-import uk.gov.hmrc.selenium.webdriver.{Browser, Driver, ScreenshotOnFailure}
-import uk.gov.hmrc.test.ui.conf.TestConfiguration.setBrowser
+import org.scalatest.Suites
+import uk.gov.hmrc.test.ui.specs.Section4.{ClearanceJourneySpec as Clearance4, OccasionalJourneySpec as Occasional4, SimplifiedJourneySpec as Simplified4, StandardJourneySpec as Standard4, SupplementaryJourneySpec as Supplementary4}
 
-
-trait BaseSpec
-    extends AnyFeatureSpec with GivenWhenThen with Matchers with BeforeAndAfterEach with Browser
-    with ScreenshotOnFailure {
-
-  override def beforeEach(): Unit = {
-    setBrowser()
-    startBrowser()
-    Driver.instance.manage().deleteAllCookies()
-  }
-  
-  override def afterEach(): Unit =
-    quitBrowser()
-
-}
+class Section4TestRunnerOrderSpec extends Suites(
+  new Clearance4,
+  new Occasional4,
+  new Simplified4,
+  new Standard4,
+  new Supplementary4
+)

@@ -1,3 +1,19 @@
+/*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.gov.hmrc.test.ui.specs.Section6
 
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
@@ -8,9 +24,10 @@ import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
 import uk.gov.hmrc.test.ui.pages.base.CommonPage
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.background
 import uk.gov.hmrc.test.ui.pages.common.SummaryPage
-import uk.gov.hmrc.test.ui.pages.section6._
-import uk.gov.hmrc.test.ui.pages.section6.SummarySection6Page.{fillAllForSections6, section6OccasionalJourney1, section6OccasionalJourney2}
+import uk.gov.hmrc.test.ui.pages.section6.*
+import uk.gov.hmrc.test.ui.pages.section6.SummarySection6Page.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class OccasionalJourneySpec extends AnyFeatureSpec
   with BaseSpec
@@ -35,7 +52,7 @@ class OccasionalJourneySpec extends AnyFeatureSpec
           #    and all Container pages
     3. The following page is skipped
           # Departure Transport*/
-    Scenario("Occasional journey section-6") {
+    Scenario("Occasional journey section-6",Regression3,Regression,Section6,Occasional) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1/2/3/4/5 for OCCASIONAL, prelodged declaration")
@@ -82,7 +99,7 @@ class OccasionalJourneySpec extends AnyFeatureSpec
           # Departure Transport
           #  Inland transport details
           #  Border transport*/
-    Scenario("Occasional arrived journey section-6"){
+    Scenario("Occasional arrived journey section-6",Regression3,Regression,Section6,Occasional){
       Given("the user clears data in cache")
       background()
       When("User fills Section1/2/3/4/5 for OCCASIONAL, arrived declaration")

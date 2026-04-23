@@ -1,3 +1,19 @@
+/*
+ * Copyright 2026 HM Revenue & Customs
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package uk.gov.hmrc.test.ui.specs.Section3
 
 import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
@@ -9,6 +25,7 @@ import uk.gov.hmrc.test.ui.pages.base.CommonPage
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.*
 import uk.gov.hmrc.test.ui.pages.section3.{CountriesOfRoutingPage, CountryOfRoutingPage, DestinationCountryPage, LocationOfGoodsPage, OfficeOfExitPage, SummarySection3Page}
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class OccasionalJourneySpec extends AnyFeatureSpec
   with BaseSpec
@@ -21,7 +38,7 @@ class OccasionalJourneySpec extends AnyFeatureSpec
   with ScreenshotOnFailure{
   Feature("Occasional Journey Section 3") {
 
-    Scenario("Complete Routes and Locations section on Occasional Prelodged declaration journey") {
+    Scenario("Complete Routes and Locations section on Occasional Prelodged declaration journey",Regression1,Regression,Section3,Occasional) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for OCCASIONAL, prelodged declaration")
@@ -62,7 +79,7 @@ class OccasionalJourneySpec extends AnyFeatureSpec
       CommonPage.continueOnMiniCya()
     }
 
-    Scenario("Complete Routes and Locations section on Occasional Arrived declaration journey") {
+    Scenario("Complete Routes and Locations section on Occasional Arrived declaration journey",Regression1,Regression,Section3,Occasional) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for OCCASIONAL, arrived declaration")

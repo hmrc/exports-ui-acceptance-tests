@@ -26,6 +26,7 @@ import uk.gov.hmrc.test.ui.pages.base.CommonPage.{background, clearKeysFromCache
 import uk.gov.hmrc.test.ui.pages.section2.*
 import uk.gov.hmrc.test.ui.pages.section2.SummarySection2Page.completeSection2Supplementary
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class SupplementaryJourneySpec
     extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
@@ -35,7 +36,7 @@ class SupplementaryJourneySpec
     * Select No for exporter, no for exporter eori, No to hold the contract, no to carrier EORI
     * Third party goods transportation page is not visible in Supplementary (Simplified and EDR) journeys
     * To check the remove functionality for Authorisation choice and Other parties involved*/
-    Scenario("Exports Supplementary SDP and eidr Scenarios") {
+    Scenario("Exports Supplementary SDP and eidr Scenarios",Regression1,Regression,Section2,Supplementary) {
       forAll(Table("DecType", "simplified", "eidr")) { decType =>
         Given("the user clears data in cache")
         background()

@@ -28,6 +28,7 @@ import uk.gov.hmrc.test.ui.pages.common.{CopyDeclarationPage, DashboardPage, Dec
 import uk.gov.hmrc.test.ui.pages.common.RejectedNotificationPage.*
 import uk.gov.hmrc.test.ui.pages.section1.DucrEntryPage
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class RejectedNotificationsSpec extends AnyFeatureSpec
   with BaseSpec
@@ -39,7 +40,7 @@ class RejectedNotificationsSpec extends AnyFeatureSpec
   with TableDrivenPropertyChecks
   with ScreenshotOnFailure{
   Feature("Validate Rejected Notifications"){
-    Scenario("Fix a rejected declaration and submit the declaration"){
+    Scenario("Fix a rejected declaration and submit the declaration",Regression3,Smoke,Regression){
       Given("the user clears data in cache")
       background()
       When("User fills all sections of the declaration and submits the declaration to land on Saved-Summary page")

@@ -23,15 +23,16 @@ import org.scalatest.verbs.ShouldVerb
 import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
 import uk.gov.hmrc.test.ui.pages.base.CommonPage
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.background
-import uk.gov.hmrc.test.ui.pages.section1.{ChoicePage, DeclarationChoicePage, DeclarationTypePage, DoYouHaveADucrPage, DucrEntryPage, EnterAMucrPage, LinkMucrPage, LoginPage, LrnPage, StandardOrOtherPage, SummarySection1Page}
+import uk.gov.hmrc.test.ui.pages.section1.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class ClearanceJourneySpec
     extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
     with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Clearance Journey") {
     // Below scenario - DoYouHaveADucr:[Yes]//
-    Scenario("Fill Section 1 for a Clearance Prelodged and Arrived Declaration") {
+    Scenario("Fill Section 1 for a Clearance Prelodged and Arrived Declaration",Regression,Regression1,Section1,Clearance) {
       forAll(Table("DecType", "prelodged", "arrived")) { DecType =>
         Given("User clears data in cache")
         background()

@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.CommonStepPage.genSequenceId
 import uk.gov.hmrc.test.ui.pages.base.Constants.*
 import uk.gov.hmrc.test.ui.pages.base.PageLinks.*
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.*

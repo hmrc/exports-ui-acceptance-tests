@@ -17,7 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section5
 
 import org.openqa.selenium.WebElement
-import uk.gov.hmrc.test.ui.cucumber.stepdefs.CommonStepDef.genSequenceId
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.CommonStepPage.genSequenceId
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, CommonPage}
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.{fillSection2ForDeclaration, fillSection3ForDeclaration, fillSection4ForDeclaration}
 import uk.gov.hmrc.test.ui.pages.section2.{AuthorisationPage, AuthorisationRemovePage, AuthorisationsListPage, AuthorisationsYesNoPage}

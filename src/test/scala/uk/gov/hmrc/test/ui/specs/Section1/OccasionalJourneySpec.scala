@@ -23,8 +23,9 @@ import org.scalatest.verbs.ShouldVerb
 import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
 import uk.gov.hmrc.test.ui.pages.base.CommonPage
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.background
-import uk.gov.hmrc.test.ui.pages.section1._
+import uk.gov.hmrc.test.ui.pages.section1.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class OccasionalJourneySpec extends AnyFeatureSpec
   with BaseSpec
@@ -37,7 +38,7 @@ class OccasionalJourneySpec extends AnyFeatureSpec
   with ScreenshotOnFailure{
   Feature("Occasional Journey") {
     //Below scenario - DoYouHaveADucr:[No], Confirm-Ducr:[Yes], Link-to-Mucr:[No]//
-    Scenario("Fill Section 1 for a Occasional Prelodged and Arrived Declaration") {
+    Scenario("Fill Section 1 for a Occasional Prelodged and Arrived Declaration",Regression,Regression1,Section1,Occasional) {
       forAll(
         Table("DecType", "prelodged", "arrived")) { DecType =>
         Given("the user clears data in cache")

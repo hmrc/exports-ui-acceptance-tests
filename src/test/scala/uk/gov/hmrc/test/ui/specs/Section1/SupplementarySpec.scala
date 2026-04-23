@@ -25,6 +25,7 @@ import uk.gov.hmrc.test.ui.pages.base.CommonPage
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.background
 import uk.gov.hmrc.test.ui.pages.section1.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
+import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class SupplementarySpec extends AnyFeatureSpec
   with BaseSpec
@@ -37,7 +38,7 @@ class SupplementarySpec extends AnyFeatureSpec
   with ScreenshotOnFailure{
   Feature("Supplementary Journey") {
     //Below scenario - DoYouHaveADucr:[Yes]//
-    Scenario("Fill Section 1 for a Supplementary Non Eidr and Eidr") {
+    Scenario("Fill Section 1 for a Supplementary Non Eidr and Eidr",Regression1,Smoke,Regression,Section1,Supplementary) {
       val examples =
         Table(
           ("DecType", "dateOrMrn"),
@@ -58,7 +59,7 @@ class SupplementarySpec extends AnyFeatureSpec
         Then("User should land on Standard-Or-Other page")
         StandardOrOtherPage.checkPage()
         And("User selects the OTHER declaration option")
-        StandardOrOtherPage.fillPage("STANDARD")
+        StandardOrOtherPage.fillPage("OTHER")
         And("User clicks continue")
         CommonPage.continue()
         And("User should land on Declaration-Choice page")
