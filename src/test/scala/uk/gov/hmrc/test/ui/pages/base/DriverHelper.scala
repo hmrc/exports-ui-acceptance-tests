@@ -78,7 +78,7 @@ trait DriverHelper {
         case Failure(_) => true
       }
 
-  def findElementById(value: String): WebElement = waitFor(By.id(value), Presence, 40)
+  def findElementById(value: String): WebElement = waitFor(By.id(value), Presence, 30)
   def findElementByXpath(value: String): WebElement = waitFor(By.xpath(value), Presence, 30)
   def findElementByLinkText(value: String): WebElement = waitFor(By.linkText(value), Presence, 30)
   def findElementByPartialLink(value: String): WebElement = waitFor(By.partialLinkText(value), Presence, 30)

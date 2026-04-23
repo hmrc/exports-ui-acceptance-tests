@@ -17,9 +17,9 @@
 package uk.gov.hmrc.test.ui.pages.base
 
 import com.typesafe.scalalogging.LazyLogging
-import org.openqa.selenium.{StaleElementReferenceException, WebDriver, WebElement}
+import org.openqa.selenium.{By, StaleElementReferenceException, WebDriver, WebElement}
 import org.openqa.selenium.support.ui.{FluentWait, WebDriverWait}
-import org.scalatest.matchers.must.Matchers._
+import org.scalatest.matchers.must.Matchers.*
 import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.pages.base.BasePage.*
@@ -45,7 +45,7 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
   }
 
   def fluentWait: FluentWait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
-    .withTimeout(Duration.ofSeconds(40))
+    .withTimeout(Duration.ofSeconds(30))
     .pollingEvery(Duration.ofMillis(500))
     .ignoring(classOf[NoSuchElementException])
     .ignoring(classOf[StaleElementReferenceException])
@@ -113,14 +113,14 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
   def saveAndReturnToErrors(): Unit = clickById("save_and_return_to_errors")
 
   def statusRefresh(status: String): Unit = {
-
     val waitForStatus = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(10))
 
     waitForStatus
       .withMessage(() => s"waiting for notification status to be: [$status]")
       .until { implicit driver =>
         driver.navigate().refresh()
-        findElementByCssSelector("tr:nth-child(1) > td:nth-child(5)").getText mustBe status
+        val cells = driver.findElements(By.cssSelector("tr:nth-child(1) > td:nth-child(5)"))
+        !cells.isEmpty && cells.get(0).getText == status
       }
   }
 

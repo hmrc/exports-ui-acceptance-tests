@@ -264,7 +264,7 @@ object DashboardPage extends BasePage {
   
   def validateDashboardCancelled():Unit={
     DashboardPage.clickOnTab("Cancelled & expired")
-    DashboardPage.refreshPage()
+     DashboardPage.refreshPage()
     DashboardPage.validateDashboard("Cancelled & expired", "Cancelled")
   }
   
