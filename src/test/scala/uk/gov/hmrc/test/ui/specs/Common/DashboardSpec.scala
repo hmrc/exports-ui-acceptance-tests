@@ -228,6 +228,19 @@ class DashboardSpec
       validateDashboardReleased()
       And("User validate details on declaration information page")
       validateDeclarationDetailsOnDeclarationInformationPage()
+
+      //Submit a arrived declaration with LRN starting with V to check Detained status//
+      When("User clicks on copy link and land on copy declaration page")
+      DeclarationInformationPage.copyDeclaration()
+      CopyDeclarationPage.checkPage()
+      And("User enters ducr 8GB123456469274-101SHIP1 and lrn starting with V9 prefix")
+      CopyDeclarationPage.fillPage("8GB123456469274-101SHIP1", "V9")
+      And("User continues their journey to Dashboard page")
+      submitArrivedDeclarationNavigateToDashboardPage()
+      Then("User validate declaration details on Submitted tab and check Status is Declaration detained")
+      validateDashboardDeclarationDetained()
+      And("User validate details on declaration information page")
+      validateDeclarationDetailsOnDeclarationInformationPage()
     }
     /* Below scenario -
     # 1. Validates View Print link

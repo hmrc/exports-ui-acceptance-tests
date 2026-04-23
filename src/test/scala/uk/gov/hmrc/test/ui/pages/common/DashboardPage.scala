@@ -261,7 +261,12 @@ object DashboardPage extends BasePage {
     DashboardPage.refreshPage()
     DashboardPage.validateDashboard("Submitted", "Released")
   }
-  
+  def validateDashboardDeclarationDetained():Unit={
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted", "Declaration detained")
+  }
+
   def validateDashboardCancelled():Unit={
     DashboardPage.clickOnTab("Cancelled & expired")
      DashboardPage.refreshPage()
