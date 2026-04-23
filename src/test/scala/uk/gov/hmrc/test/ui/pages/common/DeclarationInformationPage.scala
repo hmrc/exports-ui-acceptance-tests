@@ -57,7 +57,8 @@ object DeclarationInformationPage extends BasePage {
       "Status of ‘Arrived and accepted’",
       "Status of ‘Documents required’",
       "Status of ‘Query raised’",
-      "Status of ‘Goods being examined’"
+      "Status of ‘Goods being examined’",
+      "Status of ‘Declaration detained’"
     )
 
     val modifiedList =
