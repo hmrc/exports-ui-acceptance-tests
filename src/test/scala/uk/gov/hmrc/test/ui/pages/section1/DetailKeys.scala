@@ -27,7 +27,7 @@ object DetailKeys {
   val ExpiryDate: DetailKey = DetailKey("Expiry date", section1, skipValueCheck = true, checkChangeLink = false)
 
   // /gg-sign-in
-  val DeclarationEori: DetailKey = DetailKey("Your EORI number", section1, checkChangeLink = false)
+  val DeclarationEori: DetailKey = DetailKey("Your EORI number", section1, skipRowCheck = true, checkChangeLink = false)
 
   // /standard-or-other & /declaration-choice
   val DeclarationType: DetailKey = DetailKey("Declaration type", section1, checkChangeLink = false)

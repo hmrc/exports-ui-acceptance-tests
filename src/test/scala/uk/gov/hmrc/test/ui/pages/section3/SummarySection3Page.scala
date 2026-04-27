@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section3
 
-import uk.gov.hmrc.test.ui.pages.base.BasePage
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, CommonPage}
 import uk.gov.hmrc.test.ui.pages.section3.DetailKeys.Section3
 
 object SummarySection3Page extends BasePage {
@@ -30,4 +30,20 @@ object SummarySection3Page extends BasePage {
   // ex: fillPage()
 
   override def fillPage(values: String*): Unit = checkSectionSummary(Section3)
+
+  def completeSection3Standard():Unit={
+    DestinationCountryPage.checkPage()
+    DestinationCountryPage.fillPage("Mauritania")
+    CommonPage.continue()
+    CountryOfRoutingPage.checkPage()
+    CountryOfRoutingPage.fillPage("Yes")
+    CommonPage.continue()
+    CountriesOfRoutingPage.checkPage()
+    CountriesOfRoutingPage.fillPage("Brazil")
+    CountriesOfRoutingPage.storeCountry("Brazil")
+    CountriesOfRoutingPage.fillPage("Czech Republic")
+    CountriesOfRoutingPage.storeCountry("Czech Republic")
+    CommonPage.continue()
+    LocationOfGoodsPage.checkPage()
+  }
 }

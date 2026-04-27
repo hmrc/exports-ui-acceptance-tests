@@ -17,10 +17,13 @@
 package uk.gov.hmrc.test.ui.pages.common
 
 import org.openqa.selenium.WebElement
-import uk.gov.hmrc.test.ui.pages.base.BasePage._
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.common.DetailKeys._
-import org.scalatest.matchers.must.Matchers._
+import uk.gov.hmrc.test.ui.pages.base.BasePage.*
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, CommonPage, Detail}
+import uk.gov.hmrc.test.ui.pages.common.DetailKeys.*
+import org.scalatest.matchers.must.Matchers.*
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.{detail, *}
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.Lrn
+import uk.gov.hmrc.test.ui.pages.section1.{ChoicePage, LrnPage}
 
 object RejectedNotificationPage extends BasePage {
 
@@ -69,6 +72,67 @@ object RejectedNotificationPage extends BasePage {
     rejectedOldValue(lrnSelector).getText mustBe oldValue
   }
 
+  def fillAllSectionEnterLRNContinueToSummaryPage(decType: String, AdditionalDecType: String):Unit={
+    fillSection1ForDeclaration(decType, AdditionalDecType)
+    fillSection2ForDeclaration()
+    fillSection3ForDeclaration()
+    fillSection4ForDeclaration()
+    fillSection5ForDeclaration()
+    fillSection6ForDeclaration()
+    LrnPage.navigateToPage(LrnPage.path)
+    LrnPage.fillPage("BCDSCOM02")
+    CommonPage.continue()
+    SummaryPage.navigateToPage(SummaryPage.path)
+    SummaryPage.checkPage()
+  }
+
+  def confirmAndContinueToSubmitDeclaration():Unit={
+    SummaryPage.fillPage()
+    SubmitYourDeclarationPage.checkPage()
+    SubmitYourDeclarationPage.fillPage()
+    DeclarationHoldingPage.checkPage()
+    DeclarationHoldingPage.waitForClass("govuk-warning-text__text")
+  }
+
+  def navigateFromChoicePageToDashboardPage():Unit={
+    ChoicePage.navigateToPage(ChoicePage.path)
+    ChoicePage.fillPage("Manage Submit Declaration")
+    DashboardPage.checkPage()
+  }
+
+  def clickMRNLinkToFixErrors():Unit={
+    DashboardPage.mrnLink.click()
+    DeclarationInformationPage.checkPage()
+    DeclarationInformationPage.validateTimelineDetails()
+    DeclarationInformationPage.fixErrors()
+    RejectedNotificationPage.checkPage()
+  }
+
+  def clickLRNLinkToFixErrors():Unit={
+    RejectedNotificationPage.validateErrorDetails(detail(Lrn))
+    RejectedNotificationPage.FixErrorsAndValidateWarning("Lrn")
+    LrnPage.fillPage("MCDSCOM06")
+    CommonPage.saveAndReturnToErrors()
+    RejectedNotificationPage.validateUpdatedErrorDetails(detail(Lrn))
+    RejectedNotificationPage.checkYourAnswer()
+    SummaryPage.checkPage()
+    SummaryPage.fillPage()
+    SubmitYourDeclarationPage.checkPage()
+    SubmitYourDeclarationPage.fillPage()
+    DeclarationHoldingPage.checkPage()
+    DeclarationHoldingPage.fillPage()
+    ConfirmationPage.checkPage()
+    ChoicePage.navigateToPage(ChoicePage.path)
+    ChoicePage.fillPage("Manage Submit Declaration")
+    DashboardPage.checkPage()
+  }
+   def validateDeclarationDetailsLandOnDecInfoPage():Unit={
+     DashboardPage.refreshPage()
+     DashboardPage.validateDashboard("Submitted", "Arrived and accepted")
+     DashboardPage.mrnLink.click()
+     DeclarationInformationPage.checkPage()
+    }
+   
   def validateUpdatedErrorDetails(updatedValue: String): Unit =
     rejectedNewValue(lrnSelector).getText mustBe updatedValue.trim
 }

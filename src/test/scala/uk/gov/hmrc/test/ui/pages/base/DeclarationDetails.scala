@@ -44,6 +44,6 @@ object DeclarationDetails {
   val cache: Cache = mutable.LinkedHashMap.empty[DetailKey, DeclarationDetails]
 
   val cacheForAmendments: Cache = mutable.LinkedHashMap.empty[DetailKey, DeclarationDetails]
-
+ 
   val changeLinks = mutable.Map.empty[DetailKey, String]
 }

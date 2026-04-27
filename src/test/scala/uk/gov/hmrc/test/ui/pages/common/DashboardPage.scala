@@ -18,12 +18,13 @@ package uk.gov.hmrc.test.ui.pages.common
 
 import org.openqa.selenium.support.ui.{ExpectedConditions, WebDriverWait}
 import org.openqa.selenium.{By, WebElement}
-import org.scalatest.matchers.must.Matchers._
-import uk.gov.hmrc.test.ui.pages.base.BasePage._
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.common.DetailKeys._
-import uk.gov.hmrc.test.ui.pages.section1.ChoicePage
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys._
+import org.scalatest.matchers.must.Matchers.*
+import uk.gov.hmrc.test.ui.pages.base.BasePage.*
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.landOnHoldingPageAndRedirectedToConfirmationPage
+import uk.gov.hmrc.test.ui.pages.base.{BasePage, CommonPage, Detail}
+import uk.gov.hmrc.test.ui.pages.common.DetailKeys.*
+import uk.gov.hmrc.test.ui.pages.section1.{ChoicePage, DeclarationTypePage}
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.*
 
 import java.time.Duration
 import scala.jdk.CollectionConverters.CollectionHasAsScala
@@ -97,44 +98,192 @@ object DashboardPage extends BasePage {
     }
 
   def viewPaginationComponent(): Unit = {
-    findElementByCssSelector("#submitted-submissions > div > nav").isDisplayed
+    findElementByCssSelector("#submitted-submissions").isDisplayed
 
       // WebDriverWait to wait for elements to be present
       val wait = new WebDriverWait(driver, Duration.ofSeconds(10))
 
       // Get the total number of pages from the pagination controls
-      val totalPages: Int = wait.until(
-        ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(".ceds-pagination__controls .ceds-pagination__item"))
-      ).size()
+      // Get total pages from pagination items
+      val pageNumbers = wait.until(
+        ExpectedConditions.presenceOfAllElementsLocatedBy(
+          By.cssSelector(".govuk-pagination__item a")
+        )).asScala.toList
 
-    for (pageNum <- 1 until totalPages-1) {
+    val totalPages = pageNumbers.flatMap(e => e.getText.trim.toIntOption).max
+
+    for (pageNum <- 1 until totalPages) {
+
+      val paginationItems = wait.until(
+        ExpectedConditions.presenceOfElementLocated(By.cssSelector(".govuk-pagination"))
+      )
 
 
-        val paginationControls: WebElement = waitForClass("ceds-pagination__controls")
+      val items = paginationItems.findElements(By.cssSelector(".govuk-pagination__item a, .govuk-pagination__item span")).asScala.toList
 
-        // Locate the pagination items
-        val paginationItems: List[WebElement] = paginationControls.findElements(By.className("ceds-pagination__link")).asScala.toList
+      // Click next page number
+      val nextPage = items.find(_.getText == (pageNum + 1).toString)
+        .getOrElse(throw new NoSuchElementException(s"Page ${pageNum + 1} not found"))
 
-        // Find the link for the current page number + 1 and click it
-        val nextPageLink: WebElement = paginationItems.find(_.getText == (pageNum + 1).toString)
-          .getOrElse(throw new NoSuchElementException(s"Page ${pageNum + 1} link not found"))
-
-        // Check if the "Next" link is displayed before clicking the second page
-        val nextLinkDisplayed =  waitForCssSelector("li.ceds-pagination__item.ceds-pagination__item--next > a").isDisplayed
-
-        assert(nextLinkDisplayed, "Next link displays on the first page")
-
-        // Click the next page link
-        nextPageLink.click()
-
-        // Check if the "Previous" link is displayed from the next page
-        val previousLinkDisplayed = waitForCssSelector("li.ceds-pagination__item.ceds-pagination__item--prev > a").isDisplayed
-
-        assert(previousLinkDisplayed, "Previous link displays from the next page")
-
-        // Verify the content of the page
-        val activePage: WebElement = waitForClass("ceds-pagination__item--active")
-        println(s"Current Page: ${activePage.getText}")
+      // Validate NEXT link on first page
+      if (pageNum == 1) {
+        val nextLink = driver.findElement(By.cssSelector(".govuk-pagination__next a"))
+        assert(nextLink.isDisplayed, "Next link should be visible on page 1")
       }
+
+      nextPage.click()
+
+      // Validate PREVIOUS link appears after page 1
+      if (pageNum >= 1) {
+        val prevLink = wait.until(
+          ExpectedConditions.presenceOfElementLocated(By.cssSelector(".govuk-pagination__prev a"))
+        )
+        assert(prevLink.isDisplayed, "Previous link should be visible after page 1")
+      }
+
+      // Validate active page
+      val activePage = wait.until(
+        ExpectedConditions.presenceOfElementLocated(By.cssSelector(".govuk-pagination__item--current"))
+      )
+
+      println(s"Current Page: ${activePage.getText}")
     }
+    }
+
+  def entersDucrAndValidateDetails():Unit={
+    CommonPage.continue()
+    SummaryPage.checkPage()
+    SummaryPage.clickContinueOnSummary()
+    SubmitYourDeclarationPage.checkPage()
+    SubmitYourDeclarationPage.fillPage()
+    landOnHoldingPageAndRedirectedToConfirmationPage()
+    ConfirmationPage.checkPage()
+    ChoicePage.navigateToPage(ChoicePage.path)
+    ChoicePage.fillPage("Manage Submit Declaration")
+    DashboardPage.checkPage()
+  }
+  def submitArrivedDeclarationNavigateToDashboardPage():Unit={
+    CommonPage.continue()
+    SummaryPage.checkPage()
+    DeclarationTypePage.navigateToPage(DeclarationTypePage.path)
+    DeclarationTypePage.fillPage("arrived")
+    CommonPage.continue()
+    SummaryPage.navigateToPage(SummaryPage.path)
+    SummaryPage.clickContinueOnSummary()
+    SubmitYourDeclarationPage.checkPage()
+    SubmitYourDeclarationPage.fillPage()
+    DeclarationHoldingPage.checkPage()
+    DeclarationHoldingPage.fillPage()
+    ConfirmationPage.checkPage()
+    ChoicePage.navigateToPage(ChoicePage.path)
+    ChoicePage.fillPage("Manage Submit Declaration")
+    DashboardPage.checkPage()
+  }
+
+  def validateDashboardQueryRaised():Unit={
+    DashboardPage.clickOnTab("Action needed")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Action needed", "Query raised")
+  }
+
+  def validateDashboardDeclarationCleared(): Unit = {
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted", "Declaration cleared")
+  }
+
+  def validateDashboardGoodsHaveExitedUK(): Unit = {
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted","Goods have exited the UK")
+  }
+
+  def validateDashboardDocumentsRequired(): Unit = {
+    DashboardPage.clickOnTab("Action needed")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Action needed","Documents required")
+  }
+
+  def validateDashboardDeclarationSubmitted(): Unit = {
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted","Declaration submitted")
+  }
+
+  def validateDashboardOnHold(): Unit = {
+    DashboardPage.clickOnTab("Action needed")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Action needed", "On hold")
+  }
+
+  def validateDashboardGoodsBeingExamined():Unit={
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted", "Goods being examined")
+  }
+
+  def validateDashboardAwaitingExit(): Unit = {
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted", "Awaiting exit results")
+  }
+
+  def validateDashboardDeclarationExpiredOnDeparture():Unit={
+    DashboardPage.clickOnTab("Cancelled & expired")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Cancelled & expired", "Declaration expired (no departure)")
+  }
+  def validateDashboardDeclarationExpiredOnArrival(): Unit = {
+    DashboardPage.clickOnTab("Cancelled & expired")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Cancelled & expired", "Declaration expired (no arrival)")
+  }
+
+  def validateDashboardPending():Unit={
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted", "Pending")
+  }
+  
+  def validateDashboardArrivedAndAccepted():Unit={
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted", "Arrived and accepted")
+  }
+  def validateDashboardDeclarationHandledExternally():Unit={
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted", "Declaration handled externally")
+  }
+  
+  def validateDashboardReleased():Unit={
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted", "Released")
+  }
+  def validateDashboardDeclarationDetained():Unit={
+    DashboardPage.clickOnTab("Submitted")
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted", "Declaration detained")
+  }
+
+  def validateDashboardCancelled():Unit={
+    DashboardPage.clickOnTab("Cancelled & expired")
+     DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Cancelled & expired", "Cancelled")
+  }
+  
+  def validateDeclarationDetailsOnDeclarationInformationPage():Unit={
+    DashboardPage.mrnLink.click()
+    DeclarationInformationPage.checkPage()
+    DeclarationInformationPage.validateTimelineDetails()
+  }
+  
+  def validateViewDeclarationLinkIsMissing(linkPresent: String):Unit={
+    if (linkPresent.equals("missing"))
+      elementByIdDoesNotExist(viewDeclarationLink)
+    else
+      CommonPage.findElementById(viewDeclarationLink).isDisplayed
+  }
+
 }

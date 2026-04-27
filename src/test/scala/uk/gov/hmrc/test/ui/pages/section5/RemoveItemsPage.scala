@@ -45,5 +45,11 @@ object RemoveItemsPage extends BasePage {
   def displayWarning: Boolean = findElementByCssSelector("div.govuk-warning-text > strong").isDisplayed
 
   def clickCancelButton(): Unit = clickByXpath("//*[@role='button']")
-
+  
+  def removeLinkForItem1():Unit={
+    RemoveItemsPage.checkPage()
+    RemoveItemsPage.displayWarning
+    RemoveItemsPage.clickCancelButton()
+    SummaryPage.checkPage()
+  }
 }

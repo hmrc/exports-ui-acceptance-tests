@@ -2,12 +2,12 @@
 
 usage() { printf "\nUsage: $0 [@<tag-id>]  [chrome | edge | firefox]  [local | dev | staging]\n\n" 1>&2; exit 1; }
 
-Tag="@Smoke"
+Tag="Smoke"
 Browser="chrome"
 Environment="local"
 
 for arg in "$@"; do
-    [[ $arg = @* ]] && Tag=$arg || \
+    [[ $arg = @* ]] && Tag="${arg#@}" || \
     case $arg in
         "chrome" | "edge" | "firefox") Browser=$arg ;;
         "local" | "dev" | "staging") Environment=$arg ;;
@@ -15,10 +15,11 @@ for arg in "$@"; do
     esac
 done
 
+Runner="uk.gov.hmrc.test.ui.specs.${Tag}TestRunnerOrderSpec"
+
 sbt clean \
    -Dbrowser=$Browser \
    -Denv=$Environment \
-   -Dcucumber.filter.tags=$Tag \
    -Dbrowser.option.headless=true \
    -Dbrowser.usePreviousVersion=true \
-   "testOnly uk.gov.hmrc.test.ui.cucumber.runner.Runner" testReport
+   "testOnly $Runner -- -n $Tag" testReport

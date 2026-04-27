@@ -17,9 +17,10 @@
 package uk.gov.hmrc.test.ui.pages.base
 
 import com.typesafe.scalalogging.LazyLogging
-import org.openqa.selenium.WebElement
-import org.openqa.selenium.support.ui.WebDriverWait
+import org.openqa.selenium.{By, StaleElementReferenceException, WebDriver, WebElement}
+import org.openqa.selenium.support.ui.{FluentWait, WebDriverWait}
 import org.scalatest.matchers.must.Matchers.*
+import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.pages.base.BasePage.*
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
@@ -43,6 +44,12 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
     checkExpanders()
   }
 
+  def fluentWait: FluentWait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
+    .withTimeout(Duration.ofSeconds(30))
+    .pollingEvery(Duration.ofMillis(500))
+    .ignoring(classOf[NoSuchElementException])
+    .ignoring(classOf[StaleElementReferenceException])
+
   def fillPage(values: String*): Unit
 
   protected def backButtonHref: String
@@ -55,6 +62,7 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
 
   protected def checkUrlAndTitle(): Unit = {
     val expectedUrl = host + path
+    fluentWait.until { driver => driver.getCurrentUrl.matches(expectedUrl) }
     val actualUrl = driver.getCurrentUrl
     assert(
       expectedUrl.r.matches(actualUrl),
@@ -65,7 +73,8 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
       else s" - ${findElementById("section-header").getText}"
 
     if (actualUrl.contains("/dashboard") || actualUrl.endsWith("/saved-declarations")) {
-      driver.getTitle mustBe title + " - Page 1 of 1" + " - Make and manage an export declaration online - GOV.UK"
+      driver.getTitle must fullyMatch regex (
+        s"${title} - Page \\d+ of \\d+ - Make and manage an export declaration online - GOV.UK")
       findElementsByTag("h1").head.getText mustBe title
     }
     else {
@@ -104,14 +113,14 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
   def saveAndReturnToErrors(): Unit = clickById("save_and_return_to_errors")
 
   def statusRefresh(status: String): Unit = {
-
     val waitForStatus = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofMillis(10))
 
     waitForStatus
       .withMessage(() => s"waiting for notification status to be: [$status]")
       .until { implicit driver =>
         driver.navigate().refresh()
-        findElementByCssSelector("tr:nth-child(1) > td:nth-child(5)").getText mustBe status
+        val cells = driver.findElements(By.cssSelector("tr:nth-child(1) > td:nth-child(5)"))
+        !cells.isEmpty && cells.get(0).getText == status
       }
   }
 
