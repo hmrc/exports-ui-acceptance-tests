@@ -38,7 +38,7 @@ trait DriverHelper {
   protected def driver: WebDriver = uk.gov.hmrc.test.ui.pages.base.DriverHelper.driver
 
   def changeLinkOnCYA(row: String): WebElement =
-    waitFor(By.cssSelector(s".$row .govuk-link"), Clickable, 10)
+    waitFor(By.cssSelector(s".$row .govuk-link"), Clickable, 20)
 
   def continue(): Unit = {
     fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.id("submit")))
@@ -78,14 +78,14 @@ trait DriverHelper {
         case Failure(_) => true
       }
 
-  def findElementById(value: String): WebElement = waitFor(By.id(value), Presence, 30)
-  def findElementByXpath(value: String): WebElement = waitFor(By.xpath(value), Presence, 30)
-  def findElementByLinkText(value: String): WebElement = waitFor(By.linkText(value), Presence, 30)
-  def findElementByPartialLink(value: String): WebElement = waitFor(By.partialLinkText(value), Presence, 30)
-  def findElementByCssSelector(value: String): WebElement = waitFor(By.cssSelector(value), Presence, 40)
-  def findElementByClassName(value: String): WebElement = waitFor(By.className(value), Presence, 30)
-  def findElementByName(value: String): WebElement = waitFor(By.name(value), Presence, 30)
-  def findElementByTag(tag: String): WebElement = waitFor(By.tagName(tag), Presence, 30)
+  def findElementById(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.id(value)))
+  def findElementByXpath(value: String): WebElement =fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(value)))
+  def findElementByLinkText(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.linkText(value)))
+  def findElementByPartialLink(value: String): WebElement =fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.partialLinkText(value)))
+  def findElementByCssSelector(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(value)))
+  def findElementByClassName(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.className(value)))
+  def findElementByName(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.name(value)))
+  def findElementByTag(tag: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.tagName(tag)))
 
   def findElementsByClassName(value: String): Seq[WebElement] = driver.findElements(By.className(value)).asScala.toList
   def findElementsByTag(tag: String): Seq[WebElement] = driver.findElements(By.tagName(tag)).asScala.toList
@@ -159,7 +159,7 @@ trait DriverHelper {
   def waitForClass(
     className: String,
     expectedCondition: ExpectedCondition = Visible,
-    secondsToWaitFor: Int = 10
+    secondsToWaitFor: Int = 20
   ): WebElement =
     Try(waitFor(By.className(className), expectedCondition, secondsToWaitFor)) match {
       case Success(element) => element
@@ -171,7 +171,7 @@ trait DriverHelper {
   def waitForCssSelector(
     cssSelector: String,
     expectedCondition: ExpectedCondition = Visible,
-    secondsToWaitFor: Int = 10
+    secondsToWaitFor: Int = 20
   ): WebElement =
     Try(waitFor(By.cssSelector(cssSelector), expectedCondition, secondsToWaitFor)) match {
       case Success(element) => element
@@ -180,7 +180,7 @@ trait DriverHelper {
         throw new TestFailedException(message, exception)
     }
 
-  def waitForId(elementId: String, expectedCondition: ExpectedCondition = Visible, secondsToWaitFor: Int = 40): WebElement = {
+  def waitForId(elementId: String, expectedCondition: ExpectedCondition = Visible, secondsToWaitFor: Int = 35): WebElement = {
     def attempt(): WebElement = {
       Try(waitFor(By.id(elementId), expectedCondition, secondsToWaitFor)) match {
         case Success(element) => element
