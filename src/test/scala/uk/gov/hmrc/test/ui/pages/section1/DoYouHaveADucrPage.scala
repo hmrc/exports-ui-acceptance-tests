@@ -18,6 +18,7 @@ package uk.gov.hmrc.test.ui.pages.section1
 
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
+import uk.gov.hmrc.test.ui.pages.section1.DeclarantDetailsPage.logger
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.HasDucr
 
@@ -32,5 +33,6 @@ object DoYouHaveADucrPage extends BasePage {
   override def fillPage(values: String*): Unit = {
     store(HasDucr -> Detail(values.head))
     selectYesOrNoRadio(values(yesNo))
+    logger.info(s"Fill Ducr, Lrn details $values")
   }
 }

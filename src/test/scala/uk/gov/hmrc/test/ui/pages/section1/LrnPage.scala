@@ -18,7 +18,7 @@ package uk.gov.hmrc.test.ui.pages.section1
 
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{Ducr, Lrn}
-import uk.gov.hmrc.test.ui.pages.section1.DucrEntryPage.ducrPrefix
+import uk.gov.hmrc.test.ui.pages.section1.DucrEntryPage.{ducrPrefix, logger}
 
 object LrnPage extends BasePage {
 
@@ -37,5 +37,6 @@ object LrnPage extends BasePage {
     val lrn = values.head
     fillTextBoxById("lrn", lrn)
     store(Lrn -> Detail(lrn))
+    logger.info(s"LrnPage $values")
   }
 }
