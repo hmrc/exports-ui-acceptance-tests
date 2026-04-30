@@ -44,6 +44,7 @@ object LoginPage extends BasePage {
     val eori = values(0)
     fillTextBoxByName("enrolment[0].taxIdentifier[0].value", eori) // EORI field
     store(DeclarationEori -> Detail(eori))
+    logger.info(s"Fill login page and continue $DeclarationEori")
   }
 
   def submit(): Unit = clickById("submit-top")

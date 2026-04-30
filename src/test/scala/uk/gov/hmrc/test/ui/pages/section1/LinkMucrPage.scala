@@ -34,5 +34,6 @@ object LinkMucrPage extends BasePage {
   override def fillPage(values: String*): Unit = {
     selectYesOrNoRadio(values(yesNo))
     store(LinkToMucr -> Detail(values(yesNo)))
+    logger.info(s"LinkMucrPage $values")
   }
 }

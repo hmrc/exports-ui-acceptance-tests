@@ -44,5 +44,6 @@ object DucrEntryPage extends BasePage {
     val ducr = values.head
     fillTextBoxById("ducr", ducr)
     store(Ducr -> Detail(ducr))
+    logger.info(s"DucrEntryPage $values")
   }
 }
