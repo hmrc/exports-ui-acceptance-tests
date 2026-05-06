@@ -41,7 +41,7 @@ trait DriverHelper {
     waitFor(By.cssSelector(s".$row .govuk-link"), Clickable, 20)
 
   def continue(): Unit = {
-    fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.id("submit")))
+    fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submit")))
     clickById("submit")
   }
 
