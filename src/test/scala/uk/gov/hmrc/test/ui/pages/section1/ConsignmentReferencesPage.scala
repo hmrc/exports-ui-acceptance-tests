@@ -16,8 +16,8 @@
 
 package uk.gov.hmrc.test.ui.pages.section1
 
-import uk.gov.hmrc.test.ui.pages.base.Constants._
-import uk.gov.hmrc.test.ui.pages.base.TariffLinks._
+import uk.gov.hmrc.test.ui.pages.base.Constants.*
+import uk.gov.hmrc.test.ui.pages.base.TariffLinks.*
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, TariffLinks}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage.isSimplifiedDeclaration
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys._
