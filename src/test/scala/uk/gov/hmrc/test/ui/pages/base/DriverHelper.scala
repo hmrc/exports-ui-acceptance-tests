@@ -18,12 +18,11 @@ package uk.gov.hmrc.test.ui.pages.base
 
 import com.typesafe.scalalogging.LazyLogging
 import org.openqa.selenium.interactions.Actions
-import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait}
+import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.{By, Keys, StaleElementReferenceException, WebDriver, WebElement}
 import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.fluentWait
 
-import java.time.Duration
 import scala.jdk.CollectionConverters.ListHasAsScala
 import scala.util.{Failure, Success, Try}
 
@@ -38,10 +37,10 @@ trait DriverHelper {
   protected def driver: WebDriver = uk.gov.hmrc.test.ui.pages.base.DriverHelper.driver
 
   def changeLinkOnCYA(row: String): WebElement =
-    waitFor(By.cssSelector(s".$row .govuk-link"), Clickable, 20)
+    waitFor(By.cssSelector(s".$row .govuk-link"), Clickable)
 
   def continue(): Unit = {
-    fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.id("submit")))
+    fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submit")))
     clickById("submit")
   }
 
@@ -54,26 +53,20 @@ trait DriverHelper {
   def clickByCssSelector(value: String): Unit = findElementByCssSelector(value).click()
   def clickByClassName(value: String): Unit = findElementByClassName(value).click()
 
-  def elementByClassDoesNotExist(className: String, secondsToWaitFor: Int = 0): Boolean =
-    if (secondsToWaitFor == 0) driver.findElements(By.className(className)).size() == 0
-    else
-      Try(waitForClass(className, Presence, secondsToWaitFor)) match {
+  def elementByClassDoesNotExist(className: String): Boolean =
+      Try(waitForClass(className, Presence)) match {
         case Success(_) => false
         case Failure(_) => true
       }
 
-  def elementByIdDoesNotExist(elementId: String, secondsToWaitFor: Int = 0): Boolean =
-    if (secondsToWaitFor == 0) driver.findElements(By.id(elementId)).size() == 0
-    else
-      Try(waitForId(elementId, Presence, secondsToWaitFor)) match {
+  def elementByIdDoesNotExist(elementId: String): Boolean =
+      Try(waitForId(elementId, Presence)) match {
         case Success(_) => false
         case Failure(_) => true
       }
 
-  def elementBySelectorDoesNotExist(selector: String, secondsToWaitFor: Int = 0): Boolean =
-    if (secondsToWaitFor == 0) driver.findElements(By.cssSelector(selector)).size() == 0
-    else
-      Try(waitForClass(selector, Presence, secondsToWaitFor)) match {
+  def elementBySelectorDoesNotExist(selector: String): Boolean =
+      Try(waitForClass(selector, Presence)) match {
         case Success(_) => false
         case Failure(_) => true
       }
@@ -85,8 +78,7 @@ trait DriverHelper {
   def findElementByCssSelector(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(value)))
   def findElementByClassName(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.className(value)))
   def findElementByName(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.name(value)))
-  def findElementByTag(tag: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.tagName(tag)))
-
+ 
   def findElementsByClassName(value: String): Seq[WebElement] = driver.findElements(By.className(value)).asScala.toList
   def findElementsByTag(tag: String): Seq[WebElement] = driver.findElements(By.tagName(tag)).asScala.toList
 
@@ -158,10 +150,9 @@ trait DriverHelper {
 
   def waitForClass(
     className: String,
-    expectedCondition: ExpectedCondition = Visible,
-    secondsToWaitFor: Int = 20
+    expectedCondition: ExpectedCondition = Visible
   ): WebElement =
-    Try(waitFor(By.className(className), expectedCondition, secondsToWaitFor)) match {
+    Try(waitFor(By.className(className), expectedCondition)) match {
       case Success(element) => element
       case Failure(exception) =>
         val message = s"Was waiting for an element with class($className) while on page ${driver.getCurrentUrl}"
@@ -173,19 +164,19 @@ trait DriverHelper {
     expectedCondition: ExpectedCondition = Visible,
     secondsToWaitFor: Int = 20
   ): WebElement =
-    Try(waitFor(By.cssSelector(cssSelector), expectedCondition, secondsToWaitFor)) match {
+    Try(waitFor(By.cssSelector(cssSelector), expectedCondition)) match {
       case Success(element) => element
       case Failure(exception) =>
         val message = s"Was waiting for an element with class($cssSelector) while on page ${driver.getCurrentUrl}"
         throw new TestFailedException(message, exception)
     }
 
-  def waitForId(elementId: String, expectedCondition: ExpectedCondition = Visible, secondsToWaitFor: Int = 35): WebElement = {
+  def waitForId(elementId: String, expectedCondition: ExpectedCondition = Visible): WebElement = {
     def attempt(): WebElement = {
-      Try(waitFor(By.id(elementId), expectedCondition, secondsToWaitFor)) match {
+      Try(waitFor(By.id(elementId), expectedCondition)) match {
         case Success(element) => element
         case Failure(_: StaleElementReferenceException) =>
-          waitFor(By.id(elementId), expectedCondition, secondsToWaitFor)
+          waitFor(By.id(elementId), expectedCondition)
         case Failure(exception) =>
           val message = s"Was waiting for an element with id($elementId) while on page ${driver.getCurrentUrl}"
           throw new TestFailedException(message, exception)
@@ -194,30 +185,22 @@ trait DriverHelper {
     attempt()
   }
 
-  def waitForLinkText(
-    text: String,
-    expectedCondition: ExpectedCondition = Visible,
-    secondsToWaitFor: Int = 10
-  ): WebElement =
-    Try(waitFor(By.linkText(text), expectedCondition, secondsToWaitFor)) match {
+  def waitForLinkText(text: String, expectedCondition: ExpectedCondition = Visible): WebElement = {
+    Try(waitFor(By.linkText(text), expectedCondition)) match {
       case Success(element) => element
       case Failure(exception) =>
         val message = s"Was waiting for an element with link text ($text) while on page ${driver.getCurrentUrl}"
         throw new TestFailedException(message, exception)
     }
+  }
 
-  private def waitFor(locator: By, expectedCondition: ExpectedCondition, secondsToWaitFor: Int): WebElement = {
+  private def waitFor(locator: By, expectedCondition: ExpectedCondition): WebElement = {
     val condition = expectedCondition match {
       case Clickable   => ExpectedConditions.elementToBeClickable(locator)
       case Presence    => ExpectedConditions.presenceOfElementLocated(locator)
       case Visible | _ => ExpectedConditions.visibilityOfElementLocated(locator)
     }
-    new FluentWait(driver)
-      .withTimeout(Duration.ofSeconds(secondsToWaitFor))
-      .pollingEvery(Duration.ofMillis(500L))
-      .ignoring(classOf[Exception])
-      .ignoring(classOf[StaleElementReferenceException])
-      .until(condition)
+    fluentWait.until(condition)
   }
 }
 

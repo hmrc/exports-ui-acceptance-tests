@@ -20,8 +20,7 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.*
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.*
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, TariffLinks}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage.isSimplifiedDeclaration
-import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.*
-import uk.gov.hmrc.test.ui.pages.section1.LinkMucrPage.logger
+import uk.gov.hmrc.test.ui.pages.section1.DetailKeys._
 object ConsignmentReferencesPage extends BasePage {
 
   def backButtonHref: String = DeclarantDetailsPage.path
@@ -54,6 +53,5 @@ object ConsignmentReferencesPage extends BasePage {
       clearIfAny(Mrn)
       store(Ducr -> Detail(values(ducr)), EidrDate -> Detail(values(eidrDate)), Lrn -> Detail(values(lrn)))
     }
-    logger.info(s"Fill Consignment References Page $values")
   }
 }

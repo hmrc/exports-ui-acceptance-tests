@@ -20,7 +20,6 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{mucr, mucrCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.Mucr
-import uk.gov.hmrc.test.ui.pages.section1.LinkMucrPage.logger
 
 object EnterAMucrPage extends BasePage {
 
@@ -39,6 +38,5 @@ object EnterAMucrPage extends BasePage {
     val mucr = values.head
     fillTextBoxById("MUCR", mucr)
     store(Mucr -> Detail(mucr))
-    logger.info(s"LinkMucrPage $values")
   }
 }

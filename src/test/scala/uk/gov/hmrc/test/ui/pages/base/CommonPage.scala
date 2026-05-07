@@ -83,63 +83,49 @@ object CommonPage extends BasePage {
   def fillSection1ForDeclaration(decType: String, AdditionalDecType: String): Unit = {
     // Fill login page and continue
     LoginPage.fillPage(generateEORI);
-    Thread.sleep(1000)
     continue()
     // Fill choice page to create a declaration
     ChoicePage.fillPage("create a declaration")
-    Thread.sleep(1000)
     // Fill standard or other page based on decType
     if (decType == "STANDARD") {
       StandardOrOtherPage.fillPage(decType)
-      Thread.sleep(1000)
     } else {
       StandardOrOtherPage.fillPage("OTHER")
-      Thread.sleep(1000)
     }
     continue()
     // Fill Declaration Choice Page if not standard
     if (decType != "STANDARD") {
       DeclarationChoicePage.fillPage(decType);
-      Thread.sleep(1000)
       continue()
     }
     // Fill Declaration Type Page
     DeclarationTypePage.fillPage(AdditionalDecType);
-    Thread.sleep(1000)
     continue()
     // Fill Declarant Details Page if not "CLEARANCE"
     if (!decType.equals("CLEARANCE")) {
       DeclarantDetailsPage.fillPage(yes);
-      Thread.sleep(1000)
       continue()
     }
     if (!isSupplementary) {
       // Fill Ducr, Lrn details
       DoYouHaveADucrPage.fillPage(yes);
-      Thread.sleep(1000)
       continue()
       DucrEntryPage.fillPage("3GB986007773125-INVOICE123");
-      Thread.sleep(1000)
       continue()
       LrnPage.fillPage("M9LRN813111");
-      Thread.sleep(1000)
       continue()
       LinkMucrPage.fillPage(yes);
-      Thread.sleep(1000)
       continue()
       EnterAMucrPage.fillPage("GB/AZ09-B12345");
-      Thread.sleep(1000)
       continue()
     }
     // Fill Consignment References Page
     if (isSupplementary) {
       if (AdditionalDecType == "simplified") {
         ConsignmentReferencesPage.fillPage("3GB986007773125-INVOICE123", "20GB46J8TMJ4RF1207", "M9LRN813111")
-        Thread.sleep(1000)
         continue()
       } else {
         ConsignmentReferencesPage.fillPage("3GB986007773125-INVOICE123", "20230401", "M9LRN813112")
-        Thread.sleep(1000)
         continue()
       }
     }

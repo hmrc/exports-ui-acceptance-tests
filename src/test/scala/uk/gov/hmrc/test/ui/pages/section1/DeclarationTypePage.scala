@@ -50,7 +50,6 @@ object DeclarationTypePage extends BasePage {
         case (Standard, Prelodged) | _ => clickById(Prelodged); "Pre-lodged - type D"
       }
     store(AdditionalDeclarationType -> Detail(additionalDeclarationType))
-    logger.info(s"Fill Declaration Type Page $AdditionalDeclarationType")
   }
 
   def isArrivedDeclaration: Boolean =

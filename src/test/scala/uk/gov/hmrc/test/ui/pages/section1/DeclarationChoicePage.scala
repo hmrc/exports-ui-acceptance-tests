@@ -42,7 +42,6 @@ object DeclarationChoicePage extends BasePage {
       case "SUPPLEMENTARY" => Supplementary
     }
     store(DeclarationType -> Detail(journeyType))
-    logger.info(s"Fill Declaration Choice Page if not standard $DeclarationType")
   }
 
   def isClearance: Boolean = detail(DeclarationType) == Clearance

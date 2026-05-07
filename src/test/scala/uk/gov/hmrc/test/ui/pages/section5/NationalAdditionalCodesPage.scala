@@ -45,7 +45,7 @@ object NationalAdditionalCodesPage extends BasePage {
 
   override def fillPage(values: String*): Unit = {
     val nationalAdditionalCodes =
-      if (elementByClassDoesNotExist("govuk-radios", 10)) {
+      if (elementByClassDoesNotExist("govuk-radios")) {
         fillTextBoxById("nactCode", values(anotherNationalCode))
         details(NationalAdditionalCodes(itemId)) :+ values(anotherNationalCode)
       } else if (selectYesOrNoRadio(values(yesNo))) {

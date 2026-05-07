@@ -30,8 +30,7 @@ object ChoicePage extends BasePage {
 
   // ex: fillPage("create a declaration")
 
-  override def fillPage(values: String*): Unit = {
-    logger.info(s"Fill choice page to create a declaration $values")
+  override def fillPage(values: String*): Unit =
     values.head match {
       case "create a declaration" => clickById("create-declaration")
       case "Manage Draft Declaration" => clickById("manage-draft-declarations")
@@ -39,5 +38,4 @@ object ChoicePage extends BasePage {
       case "Manage Movements Declaration" => clickById("movements")
       case "Manage Documents By Connecting With SFUS" => clickById("upload-documents")
     }
-  }
 }

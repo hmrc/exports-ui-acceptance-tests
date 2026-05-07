@@ -19,7 +19,6 @@ package uk.gov.hmrc.test.ui.pages.section1
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.yesNo
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage.logger
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationEori
 import uk.gov.hmrc.test.ui.pages.section2.EntryIntoDeclarantRecordsPage
 
@@ -34,8 +33,5 @@ object DeclarantDetailsPage extends BasePage {
   // No  => fillPage(no)
   // Yes => fillPage(yes)
 
-  override def fillPage(values: String*): Unit = {
-    selectYesOrNoRadio(values(yesNo))
-    logger.info(s"Fill Declarant Details Page if not CLEARANCE $values")
-  }
+  override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
 }

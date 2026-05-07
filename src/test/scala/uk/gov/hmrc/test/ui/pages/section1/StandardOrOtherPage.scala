@@ -42,5 +42,4 @@ object StandardOrOtherPage extends BasePage {
     }
 
   def isStandard: Boolean = detail(DeclarationType) == Standard
-  logger.info(s"Fill standard or other page based on decType $DeclarationType")
 }
