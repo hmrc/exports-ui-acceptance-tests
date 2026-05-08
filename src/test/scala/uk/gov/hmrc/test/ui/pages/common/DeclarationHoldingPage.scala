@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.common
 
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Presence}
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.common.DeclarationInformationPage.isCancelDeclaration
 
 object DeclarationHoldingPage extends BasePage {
@@ -48,6 +48,6 @@ object DeclarationHoldingPage extends BasePage {
     if (isCancelDeclaration) {
       waitForLinkText("View declaration details")
     } else if (isAmendmentMode) {
-      waitForLinkText("Declaration status", Presence)
-    } else { waitForLinkText("Check the declaration details page", Presence) }
+      waitForLinkText("Declaration status")
+    } else { waitForLinkText("Check the declaration details page") }
 }

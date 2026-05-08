@@ -18,6 +18,7 @@ package uk.gov.hmrc.test.ui.pages.common
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.common.SummaryPage.isRejectedMode
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage.clickByCssSelector
 
 object SubmitYourDeclarationPage extends BasePage {
 
@@ -37,7 +38,7 @@ object SubmitYourDeclarationPage extends BasePage {
     fillTextBoxById("jobRole", "Test Role")
     fillTextBoxById("email", "test@email.com")
     if (isAmendmentMode) fillTextBoxById("reason", "Some reason for amendment")
-    clickById("confirmation")
+    clickByCssSelector(s"label[for='confirmation']")
     clickById("submit")
   }
 }

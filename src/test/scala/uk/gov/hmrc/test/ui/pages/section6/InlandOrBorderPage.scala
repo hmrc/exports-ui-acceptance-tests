@@ -37,8 +37,8 @@ object InlandOrBorderPage extends BasePage {
 
   override def fillPage(values: String*): Unit = {
     values(location) match {
-      case "Border location"             => clickById("Border")
-      case "Customs controlled location" => clickById("Inland")
+      case "Border location"             => clickByCssSelector(s"label[for='Border']")
+      case "Customs controlled location" => clickByCssSelector(s"label[for='Inland']")
     }
     store(InlandOrBorder -> Detail(values(location)))
   }

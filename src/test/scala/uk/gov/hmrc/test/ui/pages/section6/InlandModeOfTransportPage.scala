@@ -17,6 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
+import uk.gov.hmrc.test.ui.pages.section4.NatureOfTransactionPage.clickByCssSelector
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{InlandModeOfTransport, InlandOrBorder}
 
 object InlandModeOfTransportPage extends BasePage {
@@ -44,7 +45,7 @@ object InlandModeOfTransportPage extends BasePage {
       case "Inland waterway transport"                => "Inland_InlandWaterway"
       case "Mode unknown, for example own propulsion" => "Inland_Unknown"
     }
-    clickById(elementId)
+    clickByCssSelector(s"label[for='$elementId']")
     store(InlandModeOfTransport -> Detail(values(mode)))
   }
 

@@ -47,19 +47,17 @@ object NatureOfTransactionPage extends BasePage {
 
   override def fillPage(values: String*): Unit = {
     val label = values(0) match {
-      case "Goods being sold"              => clickById("Sale"); Sale
-      case "Item purchased"                => clickById("BusinessPurchase"); BusinessPurchase
-      case "House removal"                 => clickById("HouseRemoval"); "House removal or not-new vehicle"
-      case "A return or a replacement"     => clickById("Return"); "A return or a replacement, free of charge"
-      case "Non Commercial change"         => clickById("Donation"); "Non-commercial change of ownership"
-      case "Being sent out for processing" => clickById("Processing"); "Being sent out for processing"
-      case "Goods have been processed"     => clickById("Processed"); "Goods have been processed"
-      case "Inter Governmental"            => clickById("Military"); "Inter-governmental or defence purposes"
-
+      case "Goods being sold"              => clickByCssSelector(s"label[for='Sale']"); Sale
+      case "Item purchased"                => clickByCssSelector(s"label[for='BusinessPurchase']"); BusinessPurchase
+      case "House removal"                 => clickByCssSelector(s"label[for='HouseRemoval']"); "House removal or not-new vehicle"
+      case "A return or a replacement"     => clickByCssSelector(s"label[for='Return']"); "A return or a replacement, free of charge"
+      case "Non Commercial change"         => clickByCssSelector(s"label[for='Donation']"); "Non-commercial change of ownership"
+      case "Being sent out for processing" => clickByCssSelector(s"label[for='Processing']"); "Being sent out for processing"
+      case "Goods have been processed"     => clickByCssSelector(s"label[for='Processed']"); "Goods have been processed"
+      case "Inter Governmental"            => clickByCssSelector(s"label[for='Military']"); "Inter-governmental or defence purposes"
       case "Goods for construction or civil engineering" =>
-        clickById("Construction"); "Goods supplied under a contract for construction purposes"
-
-      case _ => clickById("Other"); "Other"
+        clickByCssSelector(s"label[for='Construction']"); "Goods supplied under a contract for construction purposes"
+      case _                                =>  clickByCssSelector(s"label[for='Other']"); "Other"
     }
 
     store(NatureOfTransaction -> Detail(label))

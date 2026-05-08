@@ -18,7 +18,8 @@ package uk.gov.hmrc.test.ui.pages.common
 
 import org.openqa.selenium.WebElement
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.common.DetailKeys._
+import uk.gov.hmrc.test.ui.pages.common.DetailKeys.*
+import uk.gov.hmrc.test.ui.pages.section4.NatureOfTransactionPage.clickByCssSelector
 
 object CancelDeclarationPage extends BasePage {
 
@@ -36,11 +37,11 @@ object CancelDeclarationPage extends BasePage {
     if (isAmendmentMode) {
       val govUKWarningText: WebElement = findElementByCssSelector("div.govuk-warning-text > strong")
       govUKWarningText.isDisplayed
-       fillTextBoxById("fullName", "User Name")
-       fillTextBoxById("jobRole", "Job Role")
-       fillTextBoxById("email", "test@mail.com")
-       fillTextBoxById("reason", values(reason))
-      clickById("confirmation")
+      fillTextBoxById("fullName", "User Name")
+      fillTextBoxById("jobRole", "Job Role")
+      fillTextBoxById("email", "test@mail.com")
+      fillTextBoxById("reason", values(reason))
+      clickByCssSelector(s"label[for='confirmation']")
     }
     else {
       val reasonToSelect = values(reason) match {

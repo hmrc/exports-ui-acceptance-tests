@@ -71,14 +71,14 @@ trait DriverHelper {
         case Failure(_) => true
       }
 
-  def findElementById(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.id(value)))
-  def findElementByXpath(value: String): WebElement =fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(value)))
-  def findElementByLinkText(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.linkText(value)))
-  def findElementByPartialLink(value: String): WebElement =fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.partialLinkText(value)))
-  def findElementByCssSelector(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(value)))
-  def findElementByClassName(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.className(value)))
-  def findElementByName(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.name(value)))
-  def findElementByTag(tag: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.tagName(tag)))
+  def findElementById(value: String): WebElement = fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.id(value)))
+  def findElementByXpath(value: String): WebElement = fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(value)))
+  def findElementByLinkText(value: String): WebElement = fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(value)))
+  def findElementByPartialLink(value: String): WebElement =fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(value)))
+  def findElementByCssSelector(value: String): WebElement = fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(value)))
+  def findElementByClassName(value: String): WebElement = fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(value)))
+  def findElementByName(value: String): WebElement = fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.name(value)))
+  def findElementByTag(tag: String): WebElement = fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName(tag)))
 
   def findElementsByClassName(value: String): Seq[WebElement] = driver.findElements(By.className(value)).asScala.toList
   def findElementsByTag(tag: String): Seq[WebElement] = driver.findElements(By.tagName(tag)).asScala.toList
@@ -119,7 +119,7 @@ trait DriverHelper {
   }
 
   def fillRadioButton(elementId: String, refSelector: String, refText: String): Unit = {
-    clickById(elementId)
+    clickByCssSelector(s"label[for='$elementId']")
     findElementById(refSelector).clear()
     findElementById(refSelector).sendKeys(refText)
   }
@@ -143,9 +143,9 @@ trait DriverHelper {
 
   def selectYesOrNoRadio(option: String, yes: String = "code_yes", no: String = "code_no"): Boolean =
     option match {
-      case Constants.yes    => waitForId(yes, Presence).click()
+      case Constants.yes    => clickByCssSelector(s"label[for='$yes']")
         true
-      case Constants.no | _ => waitForId(no, Presence).click()
+      case Constants.no | _ => clickByCssSelector(s"label[for='$no']")
         false
     }
 
@@ -188,8 +188,7 @@ trait DriverHelper {
 
   def waitForLinkText(
     text: String,
-    expectedCondition: ExpectedCondition = Visible,
-    secondsToWaitFor: Int = 10
+    expectedCondition: ExpectedCondition = Visible
   ): WebElement =
     Try(waitFor(By.linkText(text), expectedCondition)) match {
       case Success(element) => element

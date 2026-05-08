@@ -21,8 +21,9 @@ import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isSimplified, isSupplementary}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationEori
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys._
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.*
 import uk.gov.hmrc.test.ui.pages.section2.ProcedureChoicePage.isProcedurePermanent
+import uk.gov.hmrc.test.ui.pages.section2.RepresentationTypeAgreedPage.clickByCssSelector
 
 object AuthorisationPage extends BasePage {
   val isAuthorisationTypeEmpty: Boolean = detailForLabel(section2, AuthorisationTypeLabel).isEmpty
@@ -55,11 +56,11 @@ object AuthorisationPage extends BasePage {
 
     val eori = values(EORI) match {
       case "Declarant EORI" =>
-        clickById("UserEori")
+        clickByCssSelector(s"label[for='UserEori']")
         detail(DeclarationEori)
 
       case _ =>
-        clickById("OtherEori")
+        clickByCssSelector(s"label[for='OtherEori']")
         fillTextBoxById("eori", values(EORI))
         values(EORI)
     }

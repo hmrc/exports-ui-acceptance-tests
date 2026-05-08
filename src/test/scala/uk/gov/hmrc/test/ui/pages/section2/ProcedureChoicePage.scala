@@ -16,12 +16,13 @@
 
 package uk.gov.hmrc.test.ui.pages.section2
 
-import org.scalatest.matchers.must.Matchers._
+import org.scalatest.matchers.must.Matchers.*
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
-import uk.gov.hmrc.test.ui.pages.base.PageLinks._
+import uk.gov.hmrc.test.ui.pages.base.PageLinks.*
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{EntryIntoDeclarantsRecords, NoAdditionalPartiesInvolved, ProcedureChoice}
+import uk.gov.hmrc.test.ui.pages.section2.OtherPartiesInvolvedPage.clickByCssSelector
 
 object ProcedureChoicePage extends BasePage {
 
@@ -59,9 +60,9 @@ object ProcedureChoicePage extends BasePage {
 
   override def fillPage(values: String*): Unit = {
     values(exportProcedure) match {
-      case "Permanent"             => clickById("Code1040")
-      case "Permanent with excise" => clickById("Code1007")
-      case "Temporary"             => clickById("CodeOther")
+      case "Permanent"             => clickByCssSelector(s"label[for='Code1040']")
+      case "Permanent with excise" => clickByCssSelector(s"label[for='Code1007']")
+      case "Temporary"             => clickByCssSelector(s"label[for='CodeOther']")
     }
 
     store(ProcedureChoice -> Detail(values(exportProcedure)))

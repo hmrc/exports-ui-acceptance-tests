@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.common
 
-import uk.gov.hmrc.test.ui.pages.base.{BasePage, Presence}
+import uk.gov.hmrc.test.ui.pages.base.BasePage
 
 object CancelHoldingPage extends BasePage {
 
@@ -30,5 +30,5 @@ object CancelHoldingPage extends BasePage {
 
   // ex: fillPage()
 
-  override def fillPage(values: String*): Unit = waitForId("back-to-choice", Presence)
+  override def fillPage(values: String*): Unit = waitForId("back-to-choice")
 }

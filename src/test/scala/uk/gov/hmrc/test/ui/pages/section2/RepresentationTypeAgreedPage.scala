@@ -17,6 +17,7 @@
 package uk.gov.hmrc.test.ui.pages.section2
 
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage.clickByCssSelector
 import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{RepresentativeTypeAgreed, onBehalfOfOtherAgentYesNo}
 
 object RepresentationTypeAgreedPage extends BasePage {
@@ -37,8 +38,8 @@ object RepresentationTypeAgreedPage extends BasePage {
 
   override def fillPage(values: String*): Unit = {
     values(representationType) match {
-      case "Direct"   => clickById("2")
-      case "Indirect" => clickById("3")
+      case "Direct"   => clickByCssSelector(s"label[for='2']")
+      case "Indirect" => clickByCssSelector(s"label[for='3']")
     }
     store(RepresentativeTypeAgreed -> Detail(values(representationType)))
   }
