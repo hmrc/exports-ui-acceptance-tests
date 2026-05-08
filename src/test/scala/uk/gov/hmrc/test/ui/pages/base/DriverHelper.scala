@@ -17,7 +17,6 @@
 package uk.gov.hmrc.test.ui.pages.base
 
 import com.typesafe.scalalogging.LazyLogging
-import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.{By, Keys, StaleElementReferenceException, WebDriver, WebElement}
 import uk.gov.hmrc.selenium.webdriver.Driver
@@ -136,9 +135,7 @@ trait DriverHelper {
   def reset(elementId: String): Unit = waitForId(elementId).clear()
 
   def selectRadioAndClick(elementId: String): Unit = {
-    val actions = new Actions(driver)
-    val element = findElementById(elementId)
-    actions.moveToElement(element).click().perform()
+    clickByCssSelector(s"label[for='$elementId']")
   }
 
   def selectYesOrNoRadio(option: String, yes: String = "code_yes", no: String = "code_no"): Boolean =

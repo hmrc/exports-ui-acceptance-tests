@@ -49,7 +49,7 @@ object CancelDeclarationPage extends BasePage {
         case "Duplication" => "duplication"
         case "Other reason" => "otherReason"
       }
-      clickById(reasonToSelect)
+      clickByCssSelector(s"label[for='$reasonToSelect']")
       fillTextBoxById("statementDescription", "no longer needed")
     }
   }
