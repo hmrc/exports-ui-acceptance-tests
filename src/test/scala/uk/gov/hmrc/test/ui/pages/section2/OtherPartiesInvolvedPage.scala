@@ -45,7 +45,7 @@ object OtherPartiesInvolvedPage extends BasePage {
   override def fillPage(values: String*): Unit =
     if (values.head == none) {
       store(NoAdditionalPartiesInvolved -> Detail(none))
-      clickById("no")
+      clickByCssSelector(s"label[for='no']")
     } else {
       val id = values(choice) match {
         case "Consolidator"                 => "CS"
