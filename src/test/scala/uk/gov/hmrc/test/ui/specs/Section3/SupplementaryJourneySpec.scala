@@ -69,7 +69,7 @@ class SupplementaryJourneySpec extends AnyFeatureSpec
     Scenario("Complete Routes and Locations section on Supplementary Edir declaration journey",Regression1,Regression,Section3,Supplementary) {
       Given("the user clears data in cache")
       background()
-      When("User fills Section1 for SUPPLEMENTARY, simplified declaration")
+      When("User fills Section1 for SUPPLEMENTARY, eidr declaration")
       fillSection1ForDeclaration("SUPPLEMENTARY", "eidr")
       And("User fills section2")
       fillSection2ForDeclaration()

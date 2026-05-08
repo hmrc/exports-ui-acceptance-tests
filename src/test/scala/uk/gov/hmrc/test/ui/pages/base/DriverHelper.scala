@@ -79,8 +79,19 @@ trait DriverHelper {
   def findElementByName(value: String): WebElement = fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.name(value)))
   def findElementByTag(tag: String): WebElement = fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName(tag)))
 
-  def findElementsByClassName(value: String): Seq[WebElement] = driver.findElements(By.className(value)).asScala.toList
-  def findElementsByTag(tag: String): Seq[WebElement] = driver.findElements(By.tagName(tag)).asScala.toList
+  def findElementsByClassName(value: String): Seq[WebElement] ={
+    fluentWait.until(driver => {
+      val elementsByClass = driver.findElements(By.className(value)).asScala.toList
+      if (elementsByClass.nonEmpty) elementsByClass else null
+    })
+  }
+
+  def findElementsByTag(tag: String): Seq[WebElement] = {
+    fluentWait.until(driver => {
+      val elementsByTag = driver.findElements(By.tagName(tag)).asScala.toList
+      if (elementsByTag.nonEmpty) elementsByTag else null
+    })
+  }
 
   def findChildByClassName(parent: WebElement, className: String): WebElement =
     parent.findElement(By.className(className))
