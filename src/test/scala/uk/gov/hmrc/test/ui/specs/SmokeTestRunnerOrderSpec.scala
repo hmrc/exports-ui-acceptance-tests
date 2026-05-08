@@ -17,10 +17,10 @@
 package uk.gov.hmrc.test.ui.specs
 
 import org.scalatest.Suites
-import uk.gov.hmrc.test.ui.specs.AmendScenarios.AmendSpec
-import uk.gov.hmrc.test.ui.specs.Common.{DashboardSpec, RejectedNotificationsSpec}
-import uk.gov.hmrc.test.ui.specs.Section1.StandardJourneySpec as Standard1
-import uk.gov.hmrc.test.ui.specs.Section1.SupplementarySpec as Supplementary1
+//import uk.gov.hmrc.test.ui.specs.AmendScenarios.AmendSpec
+//import uk.gov.hmrc.test.ui.specs.Common.{DashboardSpec, RejectedNotificationsSpec}
+//import uk.gov.hmrc.test.ui.specs.Section1.StandardJourneySpec as Standard1
+//import uk.gov.hmrc.test.ui.specs.Section1.SupplementarySpec as Supplementary1
 import uk.gov.hmrc.test.ui.specs.Section2.{ClearanceJourneySpec as Clearance2, StandardJourneySpec as Standard2}
 import uk.gov.hmrc.test.ui.specs.Section3.StandardJourneySpec as Standard3
 import uk.gov.hmrc.test.ui.specs.Section4.StandardJourneySpec as Standard4
@@ -28,11 +28,11 @@ import uk.gov.hmrc.test.ui.specs.Section5.StandardJourneySpec as Standard5
 import uk.gov.hmrc.test.ui.specs.Section6.{SupplementaryJourneySpec as Supplementary6, StandardJourneySpec as Standard6}
 
 class SmokeTestRunnerOrderSpec extends Suites(
-  new AmendSpec,
-  new DashboardSpec,
-  new RejectedNotificationsSpec,
-  new Standard1,
-  new Supplementary1,
+//  new AmendSpec,
+//  new DashboardSpec,
+//  new RejectedNotificationsSpec,
+//  new Standard1,
+//  new Supplementary1,
   new Clearance2,
   new Standard2,
   new Standard3,

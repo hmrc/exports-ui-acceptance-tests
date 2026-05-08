@@ -41,7 +41,7 @@ trait DriverHelper {
 
   def continue(): Unit = {
     fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submit")))
-    clickById("submit")
+    clickByIdContinue("submit")
   }
 
   def continueOnMiniCya(): Unit = clickByXpath("//*[@role='button']")
@@ -52,6 +52,15 @@ trait DriverHelper {
   def clickByPartialLink(value: String): Unit = findElementByPartialLink(value).click()
   def clickByCssSelector(value: String): Unit = findElementByCssSelector(value).click()
   def clickByClassName(value: String): Unit = findElementByClassName(value).click()
+
+  def clickByIdContinue(value: String): Unit = {
+    val locator = By.id(value)
+    fluentWait.until(ExpectedConditions.presenceOfElementLocated(locator))
+    val clickable = fluentWait.until(
+      ExpectedConditions.elementToBeClickable(locator)
+    )
+    clickable.click()
+  }
 
   def elementByClassDoesNotExist(className: String): Boolean =
       Try(waitForClass(className, Presence)) match {
@@ -73,9 +82,9 @@ trait DriverHelper {
 
   def findElementById(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.id(value)))
   def findElementByXpath(value: String): WebElement =fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(value)))
-  def findElementByLinkText(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.linkText(value)))
+  def findElementByLinkText(value: String): WebElement = fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(value)))
   def findElementByPartialLink(value: String): WebElement =fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.partialLinkText(value)))
-  def findElementByCssSelector(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(value)))
+  def findElementByCssSelector(value: String): WebElement = fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(value)))
   def findElementByClassName(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.className(value)))
   def findElementByName(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.name(value)))
  
@@ -136,7 +145,7 @@ trait DriverHelper {
 
   def selectRadioAndClick(elementId: String): Unit = {
     val actions = new Actions(driver)
-    val element = findElementById(elementId)
+    val element = waitFor(By.id(elementId), Presence)
     actions.moveToElement(element).click().perform()
   }
 
