@@ -17,11 +17,11 @@
 package uk.gov.hmrc.test.ui.pages.base
 
 import com.typesafe.scalalogging.LazyLogging
-import org.openqa.selenium.support.ui.ExpectedConditions
+import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait}
 import org.openqa.selenium.{By, Keys, StaleElementReferenceException, WebDriver, WebElement}
 import uk.gov.hmrc.selenium.webdriver.Driver
-import uk.gov.hmrc.test.ui.pages.base.CommonPage.fluentWait
 
+import java.time.Duration
 import scala.jdk.CollectionConverters.ListHasAsScala
 import scala.util.{Failure, Success, Try}
 
@@ -34,6 +34,13 @@ case object Visible extends ExpectedCondition
 trait DriverHelper {
 
   protected def driver: WebDriver = uk.gov.hmrc.test.ui.pages.base.DriverHelper.driver
+
+  def fluentWait: FluentWait[WebDriver] = new FluentWait[WebDriver](driver)
+    .withTimeout(Duration.ofSeconds(40))
+    .pollingEvery(Duration.ofMillis(5000))
+    .ignoring(classOf[ClassNotFoundException])
+    .ignoring(classOf[NoSuchElementException])
+    .ignoring(classOf[StaleElementReferenceException])
 
   def changeLinkOnCYA(row: String): WebElement =
     waitFor(By.cssSelector(s".$row .govuk-link"), Clickable)

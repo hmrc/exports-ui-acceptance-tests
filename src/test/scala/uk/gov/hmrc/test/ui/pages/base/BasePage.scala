@@ -17,10 +17,9 @@
 package uk.gov.hmrc.test.ui.pages.base
 
 import com.typesafe.scalalogging.LazyLogging
-import org.openqa.selenium.{By, StaleElementReferenceException, WebDriver, WebElement}
-import org.openqa.selenium.support.ui.{FluentWait, WebDriverWait}
+import org.openqa.selenium.{By, WebDriver, WebElement}
+import org.openqa.selenium.support.ui.WebDriverWait
 import org.scalatest.matchers.must.Matchers.*
-import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.test.ui.conf.TestConfiguration
 import uk.gov.hmrc.test.ui.pages.base.BasePage.*
 import uk.gov.hmrc.test.ui.pages.base.Constants.Common
@@ -43,13 +42,6 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
     checkPageLinks()
     checkExpanders()
   }
-
-  def fluentWait: FluentWait[WebDriver] = new FluentWait[WebDriver](Driver.instance)
-    .withTimeout(Duration.ofSeconds(40))
-    .pollingEvery(Duration.ofMillis(5000))
-    .ignoring(classOf[ClassNotFoundException])
-    .ignoring(classOf[NoSuchElementException])
-    .ignoring(classOf[StaleElementReferenceException])
 
   def fillPage(values: String*): Unit
 
