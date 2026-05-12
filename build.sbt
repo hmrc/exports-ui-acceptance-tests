@@ -5,9 +5,7 @@ lazy val testSuite = (project in file("."))
     version := "0.1.0",
     scalaVersion := "3.3.6",
     scalacOptions ++= scalacFlags,
-    libraryDependencies ++= Dependencies.test,
-    //The testOptions from SbtAutoBuildPlugin supports only ScalaTest. Resetting testOptions for Cucumber Tests.
-    Test / testOptions := Seq.empty
+    libraryDependencies ++= Dependencies.test
   )
 
 lazy val scalacFlags = Seq(
