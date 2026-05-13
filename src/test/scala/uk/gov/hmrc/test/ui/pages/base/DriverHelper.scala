@@ -46,7 +46,10 @@ trait DriverHelper {
     waitFor(By.cssSelector(s".$row .govuk-link"), Clickable)
 
   def continue(): Unit = {
-    Thread.sleep(3000)
+    val csrfInput: WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[name='csrfToken']")))
+
+    println("CSRF Token: " + csrfInput.getAttribute("value"))
+
     clickById("submit")
   }
 
