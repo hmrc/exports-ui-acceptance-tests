@@ -33,7 +33,7 @@ class OccasionalJourneySpec
     extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
     with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section5 Occasional Journey") {
-    Scenario("Perform a Low Value Occasional Arrived Declaration",Regression2,Regression,Section5,Occasional) {
+    Scenario("Perform a Low Value Occasional Arrived Declaration", Regression2, Regression, Section5, Occasional) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for Occasional, arrived declaration")
@@ -80,7 +80,9 @@ class OccasionalJourneySpec
       CommonPage.continue()
       And("User lands on Package-Information page")
       PackageInformationPage.checkPage()
-      And("User enters Basin as package type, with 100 packages and 104 as shipping mark for first package info and continues")
+      And(
+        "User enters Basin as package type, with 100 packages and 104 as shipping mark for first package info and continues"
+      )
       PackageInformationPage.fillPage(genSequenceId("first"), "Basin", "100", "104")
       CommonPage.continue()
       And("User lands on Package-Information-List page")
@@ -88,7 +90,7 @@ class OccasionalJourneySpec
       And("User selects No on package information list page and continues")
       PackageInformationListPage.fillPage("No")
       CommonPage.continue()
-      //Skipped Commodity Measurements and Supplementary Units//
+      // Skipped Commodity Measurements and Supplementary Units//
       And("User lands on Additional-Information-YesNo page")
       AdditionalInformationYesNoPage.checkPage()
       And("User selects No to add additional information")
@@ -99,7 +101,7 @@ class OccasionalJourneySpec
       And("User selects Yes to check if the goods require a licence and continues")
       LicenseRequiredYesNoPage.fillPage("Yes")
       CommonPage.continue()
-      //skipped of documents required yes/no page//
+      // skipped of documents required yes/no page//
       And("User lands on Additional-Document page")
       AdditionalDocumentPage.checkPage()
       And("User enters X002 as code and GBAEOC717572504502801 as identifier for first additional document")
@@ -120,9 +122,13 @@ class OccasionalJourneySpec
       And("User checks the MiniCYA page for Section-5")
       SummarySection5Page.fillPage()
     }
-    
+
     Scenario(
-      "Complete Items section on with Low Value Occasional Prelodged declaration and check change link functionality on Package Information, Additional Information and Additional Documents list pages",Regression2,Regression,Section5,Occasional
+      "Complete Items section on with Low Value Occasional Prelodged declaration and check change link functionality on Package Information, Additional Information and Additional Documents list pages",
+      Regression2,
+      Regression,
+      Section5,
+      Occasional
     ) {
       Given("the user clears data in cache")
       background()
@@ -142,7 +148,7 @@ class OccasionalJourneySpec
       And("User enters commodity details code as 28034005 and description as St Andrews golf ball whisky and continues")
       CommodityDetailsPage.fillPage("28034005", "St Andrews golf ball whisky")
       CommonPage.continue()
-      //skipped fiscal information , additional-fiscal-references//
+      // skipped fiscal information , additional-fiscal-references//
       And("User lands on Commodity-Details page")
       And("User navigates to Dangerous Goods Code page")
       DangerousGoodsCodePage.navigateToItemPage(DangerousGoodsCodePage.pageId)
@@ -154,7 +160,7 @@ class OccasionalJourneySpec
       And("User selects Yes to enter the code 12345678 as CUS code and continues")
       CusCodePage.fillPage("Yes", "12345678")
       CommonPage.continue()
-      //skipped Vat Details//
+      // skipped Vat Details//
       And("User lands on National-Additional-Code page")
       NationalAdditionalCodesPage.checkPage()
       And("User selects Yes and enters A103 as national additional code")
@@ -165,10 +171,12 @@ class OccasionalJourneySpec
       And("User selects No for adding another national code and continues")
       NationalAdditionalCodesListPage.fillPage("No")
       CommonPage.continue()
-      //Skipping Statistical-Value when additional procedure code is not a low value declaration "3LV"//
+      // Skipping Statistical-Value when additional procedure code is not a low value declaration "3LV"//
       And("User lands on Package-Information page")
       PackageInformationPage.checkPage()
-      And("User enters Aerosol as package type, with 10 packages and 1034 as shipping mark for first package info and continues")
+      And(
+        "User enters Aerosol as package type, with 10 packages and 1034 as shipping mark for first package info and continues"
+      )
       PackageInformationPage.fillPage(genSequenceId("first"), "Aerosol", "10", "1034")
       CommonPage.continue()
       And("User lands on Package-Information-List page")
@@ -182,7 +190,9 @@ class OccasionalJourneySpec
       CommonPage.continue()
       And("User lands on Additional-Information page")
       AdditionalInformationPage.checkPage()
-      And("User enters 00400 as code and EXPORTER as required information as first additional information and continues")
+      And(
+        "User enters 00400 as code and EXPORTER as required information as first additional information and continues"
+      )
       AdditionalInformationPage.fillPage(genSequenceId("first"), "00400", "EXPORTER")
       CommonPage.continue()
       And("User lands on Additional-Information-List page")
@@ -197,7 +207,9 @@ class OccasionalJourneySpec
       CommonPage.continue()
       And("User lands on Additional-Document page")
       AdditionalDocumentPage.checkPage()
-      And("User enters X002 as code and GBAEOC717572504502801 as identifier for first additional document and continues")
+      And(
+        "User enters X002 as code and GBAEOC717572504502801 as identifier for first additional document and continues"
+      )
       AdditionalDocumentPage.fillPage(genSequenceId("first"), "X002", "GBAEOC717572504502801")
       CommonPage.continue()
       And("User lands on Additional-Document-List page")
@@ -214,7 +226,7 @@ class OccasionalJourneySpec
       SummarySection5Page.checkPage()
       And("User checks the MiniCYA page for Section-5")
       SummarySection5Page.fillPage()
-     //check Fiscal Reference page when Procedure code is 1042//
+      // check Fiscal Reference page when Procedure code is 1042//
       When("User navigates to Procedure codes page")
       ProcedureCodesPage.navigateToItemPage(ProcedureCodesPage.pageId)
       And("User selects 1042 as procedure code and continue")
@@ -239,7 +251,7 @@ class OccasionalJourneySpec
       SummarySection5Page.navigateToPage(SummarySection5Page.path)
       And("User checks the MiniCYA page for Section-5")
       SummarySection5Page.fillPage()
-     
+
     }
   }
 

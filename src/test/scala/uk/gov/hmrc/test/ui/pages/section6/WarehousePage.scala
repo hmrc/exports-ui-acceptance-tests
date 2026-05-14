@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section6
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{warehouseIdentification, warehouseIdentificationCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isClearance
@@ -50,10 +50,8 @@ object WarehousePage extends BasePage {
     if (!isClearance) {
       fillTextBoxById("identificationNumber", values(identifierOnNonClearance))
       store(WarehouseHouse -> Detail(values(identifierOnNonClearance)))
-    }
-    else if (selectYesOrNoRadio(values(yesNo))) {
+    } else if (selectYesOrNoRadio(values(yesNo))) {
       fillTextBoxById("identificationNumber", values(identifierOnClearance))
       store(WarehouseHouse -> Detail(values(identifierOnClearance)))
-    }
-    else store(WarehouseHouse -> Detail(Constants.no))
+    } else store(WarehouseHouse -> Detail(Constants.no))
 }

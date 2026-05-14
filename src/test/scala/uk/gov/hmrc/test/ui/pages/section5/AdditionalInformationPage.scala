@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, sequenceId}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{sequenceId, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.PageLinks.aiCodes
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{itemsAdditionalInformation, itemsAdditionalInformationCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail, DetailKey}
@@ -55,6 +55,6 @@ object AdditionalInformationPage extends BasePage {
         Some(AdditionalInformationDescription(itemId, values(sequenceId)) -> Detail(values(description)))
       ).flatten
 
-    store(keyAndValues:_*)
+    store(keyAndValues: _*)
   }
 }

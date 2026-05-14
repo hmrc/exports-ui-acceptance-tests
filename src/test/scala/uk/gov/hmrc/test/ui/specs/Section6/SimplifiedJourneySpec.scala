@@ -25,8 +25,27 @@ import uk.gov.hmrc.test.ui.pages.base.CommonPage
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.{background, clearKeysFromCache}
 import uk.gov.hmrc.test.ui.pages.common.SummaryPage
 import uk.gov.hmrc.test.ui.pages.section5.{AdditionalProcedureCodesPage, ProcedureCodesPage}
-import uk.gov.hmrc.test.ui.pages.section6.{BorderTransportPage, ContainerListPage, ContainerPage, ExpressConsignmentPage, InlandModeOfTransportPage, SealListPage, SealPage, SealYesNoPage, SummarySection6Page, SupervisingCustomsOfficePage, TransportCountryPage, TransportLeavingTheBorderPage, TransportPaymentPage, WarehousePage}
-import uk.gov.hmrc.test.ui.pages.section6.SummarySection6Page.{fillAllForSections6, section6CommonJourney1, section6SimplifiedJourney1Cont}
+import uk.gov.hmrc.test.ui.pages.section6.{
+  BorderTransportPage,
+  ContainerListPage,
+  ContainerPage,
+  ExpressConsignmentPage,
+  InlandModeOfTransportPage,
+  SealListPage,
+  SealPage,
+  SealYesNoPage,
+  SummarySection6Page,
+  SupervisingCustomsOfficePage,
+  TransportCountryPage,
+  TransportLeavingTheBorderPage,
+  TransportPaymentPage,
+  WarehousePage
+}
+import uk.gov.hmrc.test.ui.pages.section6.SummarySection6Page.{
+  fillAllForSections6,
+  section6CommonJourney1,
+  section6SimplifiedJourney1Cont
+}
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
 
@@ -40,7 +59,7 @@ class SimplifiedJourneySpec
           # Supervising-Customs-Office
       3 The following page is skipped
           # Departure Transport*/
-    Scenario("simplified journey section-6",Regression3,Regression,Section6,Simplified) {
+    Scenario("simplified journey section-6", Regression3, Regression, Section6, Simplified) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1/2/3/4/5 for SIMPLIFIED, Prelodged declaration")
@@ -112,7 +131,9 @@ class SimplifiedJourneySpec
       AdditionalProcedureCodesPage.checkPage()
       AdditionalProcedureCodesPage.fillPage("1CS")
       CommonPage.continue()
-      And("User selects Roll on Roll off (RoRo) as mode of transport leaving the border on Transport-Leaving-The-Border page and continues")
+      And(
+        "User selects Roll on Roll off (RoRo) as mode of transport leaving the border on Transport-Leaving-The-Border page and continues"
+      )
       TransportLeavingTheBorderPage.navigateToPage(TransportLeavingTheBorderPage.path)
       TransportLeavingTheBorderPage.checkPage()
       TransportLeavingTheBorderPage.fillPage("Roll on Roll off (RoRo)")
@@ -128,10 +149,10 @@ class SimplifiedJourneySpec
       And("User checks the MiniCYA page for Section-6")
       SummarySection6Page.fillPage()
     }
-     /*Scenario: If procedure code = 3171 and additional procedure code = 000,the Warehouse and Supervising
+    /*Scenario: If procedure code = 3171 and additional procedure code = 000,the Warehouse and Supervising
                  Customs Office pages are shown.
                 - The Departure Transport page is skipped.*/
-    Scenario("simplified arrived journey section-6",Regression3,Regression,Section6,Simplified) {
+    Scenario("simplified arrived journey section-6", Regression3, Regression, Section6, Simplified) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1/2/3/4/5 for SIMPLIFIED, arrived declaration")
@@ -145,7 +166,9 @@ class SimplifiedJourneySpec
       AdditionalProcedureCodesPage.checkPage()
       AdditionalProcedureCodesPage.fillPage("000")
       CommonPage.continue()
-      And("User selects Inland waterway transport as mode of transport leaving the border on Transport-Leaving-The-Border page and continues")
+      And(
+        "User selects Inland waterway transport as mode of transport leaving the border on Transport-Leaving-The-Border page and continues"
+      )
       TransportLeavingTheBorderPage.navigateToPage(TransportLeavingTheBorderPage.path)
       TransportLeavingTheBorderPage.checkPage()
       TransportLeavingTheBorderPage.fillPage("Inland waterway transport")

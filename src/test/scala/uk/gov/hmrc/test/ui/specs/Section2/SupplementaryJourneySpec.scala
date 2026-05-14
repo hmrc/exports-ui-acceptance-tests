@@ -33,15 +33,15 @@ class SupplementaryJourneySpec
     with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section2 Supplementary Journey") {
     /*Supplementary SDP and EIDR Declarations
-    * Select No for exporter, no for exporter eori, No to hold the contract, no to carrier EORI
-    * Third party goods transportation page is not visible in Supplementary (Simplified and EDR) journeys
-    * To check the remove functionality for Authorisation choice and Other parties involved*/
-    Scenario("Exports Supplementary SDP and eidr Scenarios",Regression1,Regression,Section2,Supplementary) {
+     * Select No for exporter, no for exporter eori, No to hold the contract, no to carrier EORI
+     * Third party goods transportation page is not visible in Supplementary (Simplified and EDR) journeys
+     * To check the remove functionality for Authorisation choice and Other parties involved*/
+    Scenario("Exports Supplementary SDP and eidr Scenarios", Regression1, Regression, Section2, Supplementary) {
       forAll(Table("DecType", "simplified", "eidr")) { decType =>
         Given("the user clears data in cache")
         background()
         When(s"User fills Section1 for SUPPLEMENTARY, $decType declaration")
-        fillSection1ForDeclaration("SUPPLEMENTARY",decType)
+        fillSection1ForDeclaration("SUPPLEMENTARY", decType)
         And("User continue their journey through Are-You-The-Exporter page to Authorisations-Required-List page")
         completeSection2Supplementary()
         Then("User should land on MiniCYA-Section-2 page")
@@ -50,7 +50,7 @@ class SupplementaryJourneySpec
         SummarySection2Page.fillPage()
         And("User clicks continue on MiniCya")
         CommonPage.continueOnMiniCya()
-         /*selects "Exporter-eori-number = yes"
+        /*selects "Exporter-eori-number = yes"
          * the following pages are skipped
                Exporter-Eori-Number,
                Exporter-Address,
@@ -62,7 +62,9 @@ class SupplementaryJourneySpec
         And(
           "User clears Exporter’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation keys from cache"
         )
-        clearKeysFromCache("Exporter’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation")
+        clearKeysFromCache(
+          "Exporter’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation"
+        )
         And("User selects Yes to I am the Exporter and continues")
         AreYouTheExporterPage.fillPage("Yes")
         CommonPage.continue()

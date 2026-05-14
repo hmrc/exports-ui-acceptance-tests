@@ -21,8 +21,8 @@ import uk.gov.hmrc.test.ui.pages.base.BasePage
 object ChoicePage extends BasePage {
 
   val backButtonHref: String = ""
-  val path: String           = "/choice"
-  val title                  = "Make and manage export declarations"
+  val path: String = "/choice"
+  val title = "Make and manage export declarations"
 
   override def checkBackButton(): Unit = ()
 
@@ -32,10 +32,10 @@ object ChoicePage extends BasePage {
 
   override def fillPage(values: String*): Unit =
     values.head match {
-      case "create a declaration" => clickById("create-declaration")
-      case "Manage Draft Declaration" => clickById("manage-draft-declarations")
-      case "Manage Submit Declaration" => clickById("manage-submitted-declarations")
-      case "Manage Movements Declaration" => clickById("movements")
+      case "create a declaration"                     => clickById("create-declaration")
+      case "Manage Draft Declaration"                 => clickById("manage-draft-declarations")
+      case "Manage Submit Declaration"                => clickById("manage-submitted-declarations")
+      case "Manage Movements Declaration"             => clickById("movements")
       case "Manage Documents By Connecting With SFUS" => clickById("upload-documents")
     }
 }

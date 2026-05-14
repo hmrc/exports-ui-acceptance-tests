@@ -17,7 +17,14 @@
 package uk.gov.hmrc.test.ui.pages.section6
 
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, CommonPage}
-import uk.gov.hmrc.test.ui.pages.base.CommonPage.{clearCacheForSection, fillSection1ForDeclaration, fillSection2ForDeclaration, fillSection3ForDeclaration, fillSection4ForDeclaration, fillSection5ForDeclaration}
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.{
+  clearCacheForSection,
+  fillSection1ForDeclaration,
+  fillSection2ForDeclaration,
+  fillSection3ForDeclaration,
+  fillSection4ForDeclaration,
+  fillSection5ForDeclaration
+}
 import uk.gov.hmrc.test.ui.pages.section2.EntryIntoDeclarantRecordsPage
 import uk.gov.hmrc.test.ui.pages.section3.DestinationCountryPage
 import uk.gov.hmrc.test.ui.pages.section5.{AdditionalProcedureCodesPage, ProcedureCodesPage}
@@ -27,8 +34,8 @@ object SummarySection6Page extends BasePage {
 
   def backButtonHref: String = ContainerListPage.path
 
-  val path: String           = "/declaration/summary-section/6"
-  val title: String          = "Check your answers"
+  val path: String = "/declaration/summary-section/6"
+  val title: String = "Check your answers"
 
   override def checkExpanders(): Unit = ()
 
@@ -47,7 +54,7 @@ object SummarySection6Page extends BasePage {
     fillSection5ForDeclaration()
   }
 
-  def section6ClearanceJourney1():Unit= {
+  def section6ClearanceJourney1(): Unit = {
     TransportLeavingTheBorderPage.checkPage()
     TransportLeavingTheBorderPage.fillPage("Sea transport")
     CommonPage.continue()
@@ -83,7 +90,7 @@ object SummarySection6Page extends BasePage {
     CommonPage.continue()
   }
 
-  def section6ClearanceJourney2():Unit={
+  def section6ClearanceJourney2(): Unit = {
     EntryIntoDeclarantRecordsPage.navigateToPage(EntryIntoDeclarantRecordsPage.path)
     EntryIntoDeclarantRecordsPage.fillPage("No")
     CommonPage.continue()
@@ -141,7 +148,7 @@ object SummarySection6Page extends BasePage {
     ContainerPage.fillPage("No")
     CommonPage.continue()
   }
-  def section6OccasionalJourney1():Unit={
+  def section6OccasionalJourney1(): Unit = {
     TransportLeavingTheBorderPage.checkPage()
     TransportLeavingTheBorderPage.fillPage("Sea transport")
     CommonPage.continue()
@@ -182,7 +189,7 @@ object SummarySection6Page extends BasePage {
     ContainerListPage.fillPage("No")
     CommonPage.continue()
   }
-  def section6OccasionalJourney2():Unit={
+  def section6OccasionalJourney2(): Unit = {
     clearCacheForSection(6)
     DestinationCountryPage.navigateToPage(DestinationCountryPage.path)
     DestinationCountryPage.checkPage()
@@ -213,7 +220,7 @@ object SummarySection6Page extends BasePage {
     CommonPage.continue()
   }
 
-  def section6CommonJourney1():Unit= {
+  def section6CommonJourney1(): Unit = {
     TransportLeavingTheBorderPage.checkPage()
     TransportLeavingTheBorderPage.fillPage("Sea transport")
     CommonPage.continue()
@@ -227,7 +234,7 @@ object SummarySection6Page extends BasePage {
     InlandModeOfTransportPage.fillPage("Sea transport")
     CommonPage.continue()
   }
-  def section6SimplifiedJourney1Cont():Unit={
+  def section6SimplifiedJourney1Cont(): Unit = {
     BorderTransportPage.checkPage()
     BorderTransportPage.fillPage("Flight number")
     CommonPage.continue()
@@ -264,8 +271,8 @@ object SummarySection6Page extends BasePage {
     ContainerListPage.fillPage("No")
     CommonPage.continue()
   }
-  
-  def section6StandardJourney1():Unit={
+
+  def section6StandardJourney1(): Unit = {
     DepartureTransportPage.checkPage()
     DepartureTransportPage.fillPage("Ship IMO number")
     CommonPage.continue()
@@ -291,40 +298,40 @@ object SummarySection6Page extends BasePage {
     SealPage.fillPage("Seal1")
     CommonPage.continue()
   }
-  
-   def section6SupplementaryJourney1():Unit={
-     TransportLeavingTheBorderPage.checkPage()
-     TransportLeavingTheBorderPage.fillPage("Sea transport")
-     CommonPage.continue()
-     SupervisingCustomsOfficePage.checkPage()
-     SupervisingCustomsOfficePage.fillPage("GBBTH001")
-     CommonPage.continue()
-     InlandModeOfTransportPage.checkPage()
-     InlandModeOfTransportPage.fillPage("Sea transport")
-     CommonPage.continue()
-     DepartureTransportPage.checkPage()
-     DepartureTransportPage.fillPage("Ship IMO number")
-     CommonPage.continue()
-     BorderTransportPage.checkPage()
-     BorderTransportPage.fillPage("Vehicle registration")
-     CommonPage.continue()
-     TransportCountryPage.checkPage()
-     TransportCountryPage.fillPage("Macao")
-     CommonPage.continue()
-     ContainerPage.checkPage()
-     ContainerPage.fillPage("Yes", "Container1")
-     CommonPage.continue()
-     SealYesNoPage.checkPage()
-     SealYesNoPage.fillPage("Yes")
-     CommonPage.continue()
-     SealPage.checkPage()
-     SealPage.fillPage("Seal1")
-     CommonPage.continue()
-     SealListPage.checkPage()
-     SealListPage.fillPage("No")
-     CommonPage.continue()
-     ContainerListPage.checkPage()
-     ContainerListPage.fillPage("No")
-     CommonPage.continue()
+
+  def section6SupplementaryJourney1(): Unit = {
+    TransportLeavingTheBorderPage.checkPage()
+    TransportLeavingTheBorderPage.fillPage("Sea transport")
+    CommonPage.continue()
+    SupervisingCustomsOfficePage.checkPage()
+    SupervisingCustomsOfficePage.fillPage("GBBTH001")
+    CommonPage.continue()
+    InlandModeOfTransportPage.checkPage()
+    InlandModeOfTransportPage.fillPage("Sea transport")
+    CommonPage.continue()
+    DepartureTransportPage.checkPage()
+    DepartureTransportPage.fillPage("Ship IMO number")
+    CommonPage.continue()
+    BorderTransportPage.checkPage()
+    BorderTransportPage.fillPage("Vehicle registration")
+    CommonPage.continue()
+    TransportCountryPage.checkPage()
+    TransportCountryPage.fillPage("Macao")
+    CommonPage.continue()
+    ContainerPage.checkPage()
+    ContainerPage.fillPage("Yes", "Container1")
+    CommonPage.continue()
+    SealYesNoPage.checkPage()
+    SealYesNoPage.fillPage("Yes")
+    CommonPage.continue()
+    SealPage.checkPage()
+    SealPage.fillPage("Seal1")
+    CommonPage.continue()
+    SealListPage.checkPage()
+    SealListPage.fillPage("No")
+    CommonPage.continue()
+    ContainerListPage.checkPage()
+    ContainerListPage.fillPage("No")
+    CommonPage.continue()
   }
 }

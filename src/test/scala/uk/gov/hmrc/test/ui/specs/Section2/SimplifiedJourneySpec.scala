@@ -28,17 +28,17 @@ import uk.gov.hmrc.test.ui.pages.section2.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
 
-class SimplifiedJourneySpec extends AnyFeatureSpec
-  with BaseSpec
-  with GivenWhenThen
-  with ShouldVerb
-  with BeforeAndAfterAll
-  with BeforeAndAfterEach
-  with Browser
-  with TableDrivenPropertyChecks
-  with ScreenshotOnFailure {
-  Feature("Section2 Simplified Journey Scenarios"){
-    Scenario("Fill Section 1 for a Simplified Prelodged and Arrived Declaration",Regression1,Regression,Section2,Simplified){
+class SimplifiedJourneySpec
+    extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
+    with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
+  Feature("Section2 Simplified Journey Scenarios") {
+    Scenario(
+      "Fill Section 1 for a Simplified Prelodged and Arrived Declaration",
+      Regression1,
+      Regression,
+      Section2,
+      Simplified
+    ) {
       forAll(Table("Type", "preloged", "arrived")) { Type =>
         Given("the user clears data in cache")
         background()

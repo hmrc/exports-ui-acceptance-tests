@@ -24,7 +24,8 @@ import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{NoAuthorisationRequired, S
 
 object SummarySection2Page extends BasePage {
 
-  def backButtonHref: String = maybeDetail(NoAuthorisationRequired).fold(AuthorisationsListPage.path)(_ => AuthorisationsYesNoPage.path)
+  def backButtonHref: String =
+    maybeDetail(NoAuthorisationRequired).fold(AuthorisationsListPage.path)(_ => AuthorisationsYesNoPage.path)
   val path: String = "/declaration/summary-section/2"
   val title: String = "Check your answers"
 
@@ -34,7 +35,7 @@ object SummarySection2Page extends BasePage {
 
   override def fillPage(values: String*): Unit = checkSectionSummary(Section2)
 
-  def completeSection2ClearanceEidrNo():Unit={
+  def completeSection2ClearanceEidrNo(): Unit = {
     EntryIntoDeclarantRecordsPage.checkPage()
     EntryIntoDeclarantRecordsPage.fillPage("No")
     CommonPage.continue()
@@ -76,15 +77,17 @@ object SummarySection2Page extends BasePage {
     CommonPage.continue()
   }
 
-  def completeSection2ClearanceEidrYes():Unit={
+  def completeSection2ClearanceEidrYes(): Unit = {
     EntryIntoDeclarantRecordsPage.navigateToPage(EntryIntoDeclarantRecordsPage.path)
     EntryIntoDeclarantRecordsPage.fillPage("Yes")
     CommonPage.continue()
     PersonPresentingGoodsPage.checkPage()
   }
 
-  def clearCacheDetailsContinueToConsigneeDetailsPage():Unit={
-    clearKeysFromCache("Exporter’s details, Consignor’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation, Carrier or haulier’s details, Carrier or haulier’s EORI number")
+  def clearCacheDetailsContinueToConsigneeDetailsPage(): Unit = {
+    clearKeysFromCache(
+      "Exporter’s details, Consignor’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation, Carrier or haulier’s details, Carrier or haulier’s EORI number"
+    )
     IsThisExsPage.navigateToPage(IsThisExsPage.path)
     IsThisExsPage.fillPage("No")
     CommonPage.continue()
@@ -99,8 +102,10 @@ object SummarySection2Page extends BasePage {
     CommonPage.continue()
     ConsigneeDetailsPage.checkPage()
   }
-  def clearCacheDetailsContinueToAuthorisationChoicePage():Unit={
-    clearKeysFromCache("Is this an EIDR?, Exporter’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation")
+  def clearCacheDetailsContinueToAuthorisationChoicePage(): Unit = {
+    clearKeysFromCache(
+      "Is this an EIDR?, Exporter’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation"
+    )
     EntryIntoDeclarantRecordsPage.navigateToPage(EntryIntoDeclarantRecordsPage.path)
     EntryIntoDeclarantRecordsPage.fillPage("Yes")
     CommonPage.continue()
@@ -125,7 +130,7 @@ object SummarySection2Page extends BasePage {
     ProcedureChoicePage.checkPage()
   }
 
-  def completeSection2Standard():Unit={
+  def completeSection2Standard(): Unit = {
     AreYouTheExporterPage.checkPage()
     AreYouTheExporterPage.fillPage("No")
     CommonPage.continue()
@@ -159,14 +164,16 @@ object SummarySection2Page extends BasePage {
     CommonPage.continue()
     OtherPartiesInvolvedPage.checkPage()
   }
-  def clearCacheDetailsThirdPartyGoodsTransportationPage():Unit={
+  def clearCacheDetailsThirdPartyGoodsTransportationPage(): Unit = {
     AreYouTheExporterPage.navigateToPage(AreYouTheExporterPage.path)
     AreYouTheExporterPage.fillPage("Yes")
-    clearKeysFromCache("Exporter’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation")
+    clearKeysFromCache(
+      "Exporter’s details, Hold the contract with the exporter, Representative’s EORI number, Type of representation"
+    )
     CommonPage.continue()
     ThirdPartyGoodsTransportationPage.checkPage()
   }
-  def completeSection2Supplementary():Unit={
+  def completeSection2Supplementary(): Unit = {
     AreYouTheExporterPage.checkPage()
     AreYouTheExporterPage.fillPage("No")
     CommonPage.continue()

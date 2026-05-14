@@ -22,7 +22,7 @@ object DetailKeys {
 
   val section4 = 4
 
-  val Section4: DetailKey = DetailKey("Section 4 of 6: About this transaction",section4,Some("transaction-card"))
+  val Section4: DetailKey = DetailKey("Section 4 of 6: About this transaction", section4, Some("transaction-card"))
 
   val DocumentCodeLabel = "Document type"
 
@@ -41,5 +41,6 @@ object DetailKeys {
 
   // /add-previous-document
   def DocumentCode(sequenceId: String): DetailKey = DetailKey(DocumentCodeLabel, section4, Some(sequenceId))
-  def DocumentReference(sequenceId: String): DetailKey = DetailKey("Document reference", section4, Some(sequenceId), checkChangeLink = false)
+  def DocumentReference(sequenceId: String): DetailKey =
+    DetailKey("Document reference", section4, Some(sequenceId), checkChangeLink = false)
 }

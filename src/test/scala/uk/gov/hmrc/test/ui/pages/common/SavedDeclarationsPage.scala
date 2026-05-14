@@ -27,13 +27,12 @@ object SavedDeclarationsPage extends BasePage {
 
   val backButtonHref: String = "/choice"
   val path: String = "/saved-declarations"
-  def title: String = if(isAmendmentMode) "Your saved declarations and amendments" else "Your saved declarations"
+  def title: String = if (isAmendmentMode) "Your saved declarations and amendments" else "Your saved declarations"
 
   override def checkExpanders(): Unit = ()
 
-  override def pageLinkHrefs: Seq[String] = {
+  override def pageLinkHrefs: Seq[String] =
     super.pageLinkHrefs.filterNot(_ == exitAndCompleteLater)
-  }
 
   override def fillPage(values: String*): Unit = ()
 

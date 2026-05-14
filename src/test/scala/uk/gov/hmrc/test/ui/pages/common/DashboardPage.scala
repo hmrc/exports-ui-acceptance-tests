@@ -32,7 +32,9 @@ import scala.jdk.CollectionConverters.CollectionHasAsScala
 object DashboardPage extends BasePage {
 
   def backButtonHref: String = ChoicePage.path
+
   val path: String = "/dashboard\\?page=1"
+
   def title: String = {
 
     val cancelledPressed = cancelledTab.getAttribute("aria-pressed").equals("true")
@@ -43,7 +45,7 @@ object DashboardPage extends BasePage {
       case (true, _, _) => "Your cancelled and expired declarations"
       case (_, true, _) => "Your rejected declarations"
       case (_, _, true) => "Action needed on your declarations"
-      case _ => "Your submitted declarations"
+      case _            => "Your submitted declarations"
     }
   }
 
@@ -56,11 +58,14 @@ object DashboardPage extends BasePage {
   def mrnValue: WebElement = findElementByCssSelector("tr:nth-child(1) > td:nth-child(1)")
 
   def rejectedTab: WebElement = findElementByCssSelector("#rejected-submissions-button")
+
   def submittedTab: WebElement = findElementByCssSelector("#submitted-submissions-button")
+
   def actionTab: WebElement = findElementByCssSelector("#action-submissions-button")
+
   def cancelledTab: WebElement = findElementByCssSelector("#cancelled-submissions-button")
 
-   // ex: validateDashboard("Submitted", "Declaration submitted")
+  // ex: validateDashboard("Submitted", "Declaration submitted")
 
   def validateDashboard(tab: String, status: String): Unit = {
     findElementByCssSelector(".selected-status-group").getText mustBe tab
@@ -70,7 +75,7 @@ object DashboardPage extends BasePage {
 
     assert(findElementByCssSelector("tr:nth-child(1) > td:nth-child(4)").isDisplayed)
     val decStatus = findElementByCssSelector("tr:nth-child(1) > td:nth-child(5)").getText
-//    decStatus mustBe status   // uncomment this line when CEDS-5922 is fixed
+    //    decStatus mustBe status   // uncomment this line when CEDS-5922 is fixed
 
     assert(mrnValue.isDisplayed)
 
@@ -85,44 +90,44 @@ object DashboardPage extends BasePage {
     waitForLinkText(mrnCell.getText)
   }
 
-  def refreshPage(): Unit = {
+  def refreshPage(): Unit =
     driver.navigate().refresh()
-  }
 
   def clickOnTab(tab: String): Unit =
     tab match {
-      case "Submitted" => clickById("submitted-submissions-button")
-      case "Action needed" => clickById("action-submissions-button")
-      case "Rejected" => clickById("rejected-submissions-button")
+      case "Submitted"           => clickById("submitted-submissions-button")
+      case "Action needed"       => clickById("action-submissions-button")
+      case "Rejected"            => clickById("rejected-submissions-button")
       case "Cancelled & expired" => clickById("cancelled-submissions-button")
     }
 
   def viewPaginationComponent(): Unit = {
     findElementByCssSelector("#submitted-submissions").isDisplayed
 
-      // WebDriverWait to wait for elements to be present
-      val wait = new WebDriverWait(driver, Duration.ofSeconds(10))
+    // WebDriverWait to wait for elements to be present
+    val wait = new WebDriverWait(driver, Duration.ofSeconds(10))
 
-      // Get the total number of pages from the pagination controls
-      // Get total pages from pagination items
-      val pageNumbers = wait.until(
-        ExpectedConditions.presenceOfAllElementsLocatedBy(
-          By.cssSelector(".govuk-pagination__item a")
-        )).asScala.toList
+    // Get the total number of pages from the pagination controls
+    // Get total pages from pagination items
+    val pageNumbers = wait
+      .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(".govuk-pagination__item a")))
+      .asScala
+      .toList
 
     val totalPages = pageNumbers.flatMap(e => e.getText.trim.toIntOption).max
 
     for (pageNum <- 1 until totalPages) {
 
-      val paginationItems = wait.until(
-        ExpectedConditions.presenceOfElementLocated(By.cssSelector(".govuk-pagination"))
-      )
+      val paginationItems = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".govuk-pagination")))
 
-
-      val items = paginationItems.findElements(By.cssSelector(".govuk-pagination__item a, .govuk-pagination__item span")).asScala.toList
+      val items = paginationItems
+        .findElements(By.cssSelector(".govuk-pagination__item a, .govuk-pagination__item span"))
+        .asScala
+        .toList
 
       // Click next page number
-      val nextPage = items.find(_.getText == (pageNum + 1).toString)
+      val nextPage = items
+        .find(_.getText == (pageNum + 1).toString)
         .getOrElse(throw new NoSuchElementException(s"Page ${pageNum + 1} not found"))
 
       // Validate NEXT link on first page
@@ -135,22 +140,20 @@ object DashboardPage extends BasePage {
 
       // Validate PREVIOUS link appears after page 1
       if (pageNum >= 1) {
-        val prevLink = wait.until(
-          ExpectedConditions.presenceOfElementLocated(By.cssSelector(".govuk-pagination__prev a"))
-        )
+        val prevLink =
+          wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".govuk-pagination__prev a")))
         assert(prevLink.isDisplayed, "Previous link should be visible after page 1")
       }
 
       // Validate active page
-      val activePage = wait.until(
-        ExpectedConditions.presenceOfElementLocated(By.cssSelector(".govuk-pagination__item--current"))
-      )
+      val activePage =
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".govuk-pagination__item--current")))
 
       println(s"Current Page: ${activePage.getText}")
     }
-    }
+  }
 
-  def entersDucrAndValidateDetails():Unit={
+  def entersDucrAndValidateDetails(): Unit = {
     CommonPage.continue()
     SummaryPage.checkPage()
     SummaryPage.clickContinueOnSummary()
@@ -162,7 +165,8 @@ object DashboardPage extends BasePage {
     ChoicePage.fillPage("Manage Submit Declaration")
     DashboardPage.checkPage()
   }
-  def submitArrivedDeclarationNavigateToDashboardPage():Unit={
+
+  def submitArrivedDeclarationNavigateToDashboardPage(): Unit = {
     CommonPage.continue()
     SummaryPage.checkPage()
     DeclarationTypePage.navigateToPage(DeclarationTypePage.path)
@@ -180,7 +184,7 @@ object DashboardPage extends BasePage {
     DashboardPage.checkPage()
   }
 
-  def validateDashboardQueryRaised():Unit={
+  def validateDashboardQueryRaised(): Unit = {
     DashboardPage.clickOnTab("Action needed")
     DashboardPage.refreshPage()
     DashboardPage.validateDashboard("Action needed", "Query raised")
@@ -195,19 +199,19 @@ object DashboardPage extends BasePage {
   def validateDashboardGoodsHaveExitedUK(): Unit = {
     DashboardPage.clickOnTab("Submitted")
     DashboardPage.refreshPage()
-    DashboardPage.validateDashboard("Submitted","Goods have exited the UK")
+    DashboardPage.validateDashboard("Submitted", "Goods have exited the UK")
   }
 
   def validateDashboardDocumentsRequired(): Unit = {
     DashboardPage.clickOnTab("Action needed")
     DashboardPage.refreshPage()
-    DashboardPage.validateDashboard("Action needed","Documents required")
+    DashboardPage.validateDashboard("Action needed", "Documents required")
   }
 
   def validateDashboardDeclarationSubmitted(): Unit = {
     DashboardPage.clickOnTab("Submitted")
     DashboardPage.refreshPage()
-    DashboardPage.validateDashboard("Submitted","Declaration submitted")
+    DashboardPage.validateDashboard("Submitted", "Declaration submitted")
   }
 
   def validateDashboardOnHold(): Unit = {
@@ -216,7 +220,7 @@ object DashboardPage extends BasePage {
     DashboardPage.validateDashboard("Action needed", "On hold")
   }
 
-  def validateDashboardGoodsBeingExamined():Unit={
+  def validateDashboardGoodsBeingExamined(): Unit = {
     DashboardPage.clickOnTab("Submitted")
     DashboardPage.refreshPage()
     DashboardPage.validateDashboard("Submitted", "Goods being examined")
@@ -228,62 +232,64 @@ object DashboardPage extends BasePage {
     DashboardPage.validateDashboard("Submitted", "Awaiting exit results")
   }
 
-  def validateDashboardDeclarationExpiredOnDeparture():Unit={
+  def validateDashboardDeclarationExpiredOnDeparture(): Unit = {
     DashboardPage.clickOnTab("Cancelled & expired")
     DashboardPage.refreshPage()
     DashboardPage.validateDashboard("Cancelled & expired", "Declaration expired (no departure)")
   }
+
   def validateDashboardDeclarationExpiredOnArrival(): Unit = {
     DashboardPage.clickOnTab("Cancelled & expired")
     DashboardPage.refreshPage()
     DashboardPage.validateDashboard("Cancelled & expired", "Declaration expired (no arrival)")
   }
 
-  def validateDashboardPending():Unit={
+  def validateDashboardPending(): Unit = {
     DashboardPage.clickOnTab("Submitted")
     DashboardPage.refreshPage()
     DashboardPage.validateDashboard("Submitted", "Pending")
   }
-  
-  def validateDashboardArrivedAndAccepted():Unit={
+
+  def validateDashboardArrivedAndAccepted(): Unit = {
     DashboardPage.clickOnTab("Submitted")
     DashboardPage.refreshPage()
     DashboardPage.validateDashboard("Submitted", "Arrived and accepted")
   }
-  def validateDashboardDeclarationHandledExternally():Unit={
+
+  def validateDashboardDeclarationHandledExternally(): Unit = {
     DashboardPage.clickOnTab("Submitted")
     DashboardPage.refreshPage()
     DashboardPage.validateDashboard("Submitted", "Declaration handled externally")
   }
-  
-  def validateDashboardReleased():Unit={
+
+  def validateDashboardReleased(): Unit = {
     DashboardPage.clickOnTab("Submitted")
     DashboardPage.refreshPage()
     DashboardPage.validateDashboard("Submitted", "Released")
   }
-  def validateDashboardDeclarationDetained():Unit={
+
+  def validateDashboardDeclarationDetained(): Unit = {
     DashboardPage.clickOnTab("Submitted")
     DashboardPage.refreshPage()
     DashboardPage.validateDashboard("Submitted", "Declaration detained")
   }
 
-  def validateDashboardCancelled():Unit={
+  def validateDashboardCancelled(): Unit = {
     DashboardPage.clickOnTab("Cancelled & expired")
-     DashboardPage.refreshPage()
+    DashboardPage.refreshPage()
     DashboardPage.validateDashboard("Cancelled & expired", "Cancelled")
   }
-  
-  def validateDeclarationDetailsOnDeclarationInformationPage():Unit={
+
+  def validateDeclarationDetailsOnDeclarationInformationPage(): Unit = {
     DashboardPage.mrnLink.click()
     DeclarationInformationPage.checkPage()
     DeclarationInformationPage.validateTimelineDetails()
   }
-  
-  def validateViewDeclarationLinkIsMissing(linkPresent: String):Unit={
+
+  def validateViewDeclarationLinkIsMissing(linkPresent: String): Unit =
     if (linkPresent.equals("missing"))
       elementByIdDoesNotExist(viewDeclarationLink)
     else
       CommonPage.findElementById(viewDeclarationLink).isDisplayed
-  }
 
 }

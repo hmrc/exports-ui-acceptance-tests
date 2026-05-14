@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section2
 import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{carrierAddress, carrierAddressCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Details}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{CarrierDetails, addressHelper}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{addressHelper, CarrierDetails}
 
 object CarrierAddressPage extends BasePage {
 

@@ -25,7 +25,12 @@ import uk.gov.hmrc.test.ui.pages.base.CommonPage
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.background
 import uk.gov.hmrc.test.ui.pages.common.SummaryPage
 import uk.gov.hmrc.test.ui.pages.section6.SummarySection6Page
-import uk.gov.hmrc.test.ui.pages.section6.SummarySection6Page.{fillAllForSections6, section6ClearanceArrivedJourney, section6ClearanceJourney1, section6ClearanceJourney2}
+import uk.gov.hmrc.test.ui.pages.section6.SummarySection6Page.{
+  fillAllForSections6,
+  section6ClearanceArrivedJourney,
+  section6ClearanceJourney1,
+  section6ClearanceJourney2
+}
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
 
@@ -41,11 +46,11 @@ class ClearanceJourneySpec
      3. The following pages are skipped
          #  Inland-Transport-details
          #  Border-Transport*/
-    Scenario("clearance journey section-6",Regression3,Regression,Section6,Clearance) {
+    Scenario("clearance journey section-6", Regression3, Regression, Section6, Clearance) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1/2/3/4/5 for CLEARANCE, prelodged declaration")
-      fillAllForSections6("CLEARANCE","prelodged")
+      fillAllForSections6("CLEARANCE", "prelodged")
       And("User continues their journey from Transport-Leaving-The-Border page to Container-List page")
       section6ClearanceJourney1()
       Then("User should land on MiniCYA-Section-6 page")
@@ -91,7 +96,7 @@ class ClearanceJourneySpec
          #  Containers/{container name}/ add-seal
          #  Containers/{container name}/ seals
          #  Containers*/
-    Scenario("clearance arrived journey section-6",Regression3,Regression,Section6,Clearance) {
+    Scenario("clearance arrived journey section-6", Regression3, Regression, Section6, Clearance) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1/2/3/4/5 for CLEARANCE, arrived declaration")

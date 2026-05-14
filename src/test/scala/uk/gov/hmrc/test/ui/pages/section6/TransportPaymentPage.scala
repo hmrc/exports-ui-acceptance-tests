@@ -23,8 +23,8 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.TransportPayment
 object TransportPaymentPage extends BasePage {
 
   def backButtonHref: String = ExpressConsignmentPage.path
-  val path: String           = "/declaration/transport-payment"
-  val title                  = "How did you pay for the express transport?"
+  val path: String = "/declaration/transport-payment"
+  val title = "How did you pay for the express transport?"
 
   override def checkExpanders(): Unit = ()
 
@@ -45,7 +45,8 @@ object TransportPaymentPage extends BasePage {
     }
     clickByCssSelector(s"label[for='$elementId']")
 
-    val updatedSelectOption = if (elementId == "other") "Other (e.g. Direct debit to cash account)" else values(paymentType)
+    val updatedSelectOption =
+      if (elementId == "other") "Other (e.g. Direct debit to cash account)" else values(paymentType)
     store(TransportPayment -> Detail(updatedSelectOption))
   }
 }

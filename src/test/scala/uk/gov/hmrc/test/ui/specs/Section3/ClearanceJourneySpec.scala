@@ -23,7 +23,12 @@ import org.scalatest.verbs.ShouldVerb
 import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
 import uk.gov.hmrc.test.ui.pages.base.CommonPage
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.*
-import uk.gov.hmrc.test.ui.pages.section3.{DestinationCountryPage, LocationOfGoodsPage, OfficeOfExitPage, SummarySection3Page}
+import uk.gov.hmrc.test.ui.pages.section3.{
+  DestinationCountryPage,
+  LocationOfGoodsPage,
+  OfficeOfExitPage,
+  SummarySection3Page
+}
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
 
@@ -31,9 +36,13 @@ class ClearanceJourneySpec
     extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
     with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section4 Clearance Journey") {
-    //No routing and countries of routing pages, LocationOfGoods: [No], Number of countries Added: [1]//
+    // No routing and countries of routing pages, LocationOfGoods: [No], Number of countries Added: [1]//
     Scenario(
-      "Complete Transactions section on Clearance Prelodged declaration journey and validate dynamic title changes on previous documents page",Regression1,Regression,Section3,Clearance
+      "Complete Transactions section on Clearance Prelodged declaration journey and validate dynamic title changes on previous documents page",
+      Regression1,
+      Regression,
+      Section3,
+      Clearance
     ) {
       Given("the user clears data in cache")
       background()
@@ -63,8 +72,14 @@ class ClearanceJourneySpec
       And("User clicks continue on MiniCya")
       CommonPage.continueOnMiniCya()
     }
-    //No routing and countries of routing pages, LocationOfGoods: [Yes], Number of countries Added: [1]//
-    Scenario("Complete Routes and Locations section on Clearance arrived declaration journey",Regression1,Regression,Section3,Clearance) {
+    // No routing and countries of routing pages, LocationOfGoods: [Yes], Number of countries Added: [1]//
+    Scenario(
+      "Complete Routes and Locations section on Clearance arrived declaration journey",
+      Regression1,
+      Regression,
+      Section3,
+      Clearance
+    ) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for CLEARANCE, arrived declaration")

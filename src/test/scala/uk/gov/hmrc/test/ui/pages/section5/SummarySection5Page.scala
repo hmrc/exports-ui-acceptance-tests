@@ -19,16 +19,25 @@ package uk.gov.hmrc.test.ui.pages.section5
 import org.openqa.selenium.WebElement
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.CommonStepPage.genSequenceId
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, CommonPage}
-import uk.gov.hmrc.test.ui.pages.base.CommonPage.{fillSection2ForDeclaration, fillSection3ForDeclaration, fillSection4ForDeclaration}
-import uk.gov.hmrc.test.ui.pages.section2.{AuthorisationPage, AuthorisationRemovePage, AuthorisationsListPage, AuthorisationsYesNoPage}
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.{
+  fillSection2ForDeclaration,
+  fillSection3ForDeclaration,
+  fillSection4ForDeclaration
+}
+import uk.gov.hmrc.test.ui.pages.section2.{
+  AuthorisationPage,
+  AuthorisationRemovePage,
+  AuthorisationsListPage,
+  AuthorisationsYesNoPage
+}
 import uk.gov.hmrc.test.ui.pages.section4.NatureOfTransactionPage
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.Section5
 
 object SummarySection5Page extends BasePage {
 
   def backButtonHref: String = DeclarationItemsListPage.path
-  val path: String           = "/declaration/summary-section/5"
-  val title: String          = "Check your answers"
+  val path: String = "/declaration/summary-section/5"
+  val title: String = "Check your answers"
 
   override def checkExpanders(): Unit = ()
 
@@ -42,7 +51,7 @@ object SummarySection5Page extends BasePage {
 
   def addItem(): Unit = clickById("add-item")
 
-  def section5Journey1():Unit={
+  def section5Journey1(): Unit = {
     fillSection2ForDeclaration()
     fillSection3ForDeclaration()
     fillSection4ForDeclaration()
@@ -51,7 +60,7 @@ object SummarySection5Page extends BasePage {
     ProcedureCodesPage.checkPage()
   }
 
-  def section5Journey2():Unit={
+  def section5Journey2(): Unit = {
     fillSection2ForDeclaration()
     fillSection3ForDeclaration()
     fillSection4ForDeclaration()
@@ -73,7 +82,7 @@ object SummarySection5Page extends BasePage {
     CommonPage.continue()
   }
 
-  def section5ProcedureCodesPageToCommodityDetailsPage():Unit={
+  def section5ProcedureCodesPageToCommodityDetailsPage(): Unit = {
     ProcedureCodesPage.fillPage("1042")
     CommonPage.continue()
     AdditionalProcedureCodesPage.checkPage()
@@ -90,7 +99,7 @@ object SummarySection5Page extends BasePage {
     CommonPage.continue()
     CommodityDetailsPage.checkPage()
   }
-  def section5section5ProcedureCodesPageToDeclarationItemsListPage():Unit={
+  def section5section5ProcedureCodesPageToDeclarationItemsListPage(): Unit = {
     ProcedureCodesPage.fillPage("1040")
     CommonPage.continue()
     AdditionalProcedureCodesPage.checkPage()
@@ -142,7 +151,7 @@ object SummarySection5Page extends BasePage {
     AdditionalDocumentListPage.fillPage("No")
     CommonPage.continue()
     DeclarationItemsListPage.checkPage()
-    //click change link and update existing item details//
+    // click change link and update existing item details//
     DeclarationItemsListPage.changeItem()
     ProcedureCodesPage.checkPage()
     ProcedureCodesPage.fillPage("1044")
@@ -162,7 +171,7 @@ object SummarySection5Page extends BasePage {
     StatisticalValuePage.checkPage()
     StatisticalValuePage.fillPage("1099")
     CommonPage.continue()
-    //clicking change Package-Information-List page  and update package information//
+    // clicking change Package-Information-List page  and update package information//
     PackageInformationListPage.checkPage()
     PackageInformationListPage.changePackageInformation(0)
     PackageInformationPage.fillPage(genSequenceId("first"), "Basket", "11", "456")
@@ -175,7 +184,7 @@ object SummarySection5Page extends BasePage {
     SupplementaryUnitsPage.checkPage()
     SupplementaryUnitsPage.fillPage("Yes", "62")
     CommonPage.continue()
-    //clicking change Additional-Information-List page  and update Additional information//
+    // clicking change Additional-Information-List page  and update Additional information//
     AdditionalInformationListPage.checkPage()
     AdditionalInformationListPage.changeAdditionalInformation(0)
     AdditionalInformationPage.fillPage(genSequenceId("first"), "00408", "DATAREADER")
@@ -186,7 +195,7 @@ object SummarySection5Page extends BasePage {
     LicenseRequiredYesNoPage.fillPage("Yes")
     CommonPage.continue()
     AdditionalDocumentListPage.checkPage()
-    //clicking change Additional-Documentation-List page  and update Additional Documents//
+    // clicking change Additional-Documentation-List page  and update Additional Documents//
     AdditionalDocumentListPage.changeAdditionalDocuments(0)
     AdditionalDocumentPage.fillPage(genSequenceId("first"), "9104", "GBAEOC717992")
     CommonPage.continue()
@@ -197,8 +206,8 @@ object SummarySection5Page extends BasePage {
     DeclarationItemsListPage.fillPage("No")
     CommonPage.continue()
   }
-  
-  def section5Journey3():Unit={
+
+  def section5Journey3(): Unit = {
     fillSection2ForDeclaration()
     fillSection3ForDeclaration()
     fillSection4ForDeclaration()
@@ -266,7 +275,7 @@ object SummarySection5Page extends BasePage {
     DeclarationItemsListPage.fillPage("No")
     CommonPage.continue()
   }
-  def section5SkippedVATRatingPage():Unit={
+  def section5SkippedVATRatingPage(): Unit = {
     NationalAdditionalCodesPage.checkPage()
     NationalAdditionalCodesPage.fillPage("Yes", "A123")
     CommonPage.continue()
@@ -301,8 +310,8 @@ object SummarySection5Page extends BasePage {
     LicenseRequiredYesNoPage.fillPage("Yes")
     CommonPage.continue()
   }
-  
-  def skipDocumentsRequiresYesNoPage():Unit={
+
+  def skipDocumentsRequiresYesNoPage(): Unit = {
     AdditionalDocumentPage.checkPage()
     AdditionalDocumentPage.fillPage(genSequenceId("first"), "C501", "GBAEOC71757")
     CommonPage.continue()
@@ -312,7 +321,7 @@ object SummarySection5Page extends BasePage {
     DeclarationItemsListPage.checkPage()
     DeclarationItemsListPage.fillPage("Yes")
     CommonPage.continue()
-    //Adding Second item//
+    // Adding Second item//
     ProcedureCodesPage.checkPage()
     ProcedureCodesPage.fillPage("1040")
     CommonPage.continue()
@@ -362,8 +371,8 @@ object SummarySection5Page extends BasePage {
     DeclarationItemsListPage.fillPage("No")
     CommonPage.continue()
   }
-  
-  def  section5NatureOfTransactionPageToDeclarationItemsListPage():Unit={
+
+  def section5NatureOfTransactionPageToDeclarationItemsListPage(): Unit = {
     NatureOfTransactionPage.navigateToPage(NatureOfTransactionPage.path)
     NatureOfTransactionPage.fillPage("House removal")
     CommonPage.continue()

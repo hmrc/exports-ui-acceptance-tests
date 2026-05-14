@@ -25,19 +25,19 @@ import uk.gov.hmrc.test.ui.specs.Section2.{ClearanceJourneySpec as Clearance2, S
 import uk.gov.hmrc.test.ui.specs.Section3.StandardJourneySpec as Standard3
 import uk.gov.hmrc.test.ui.specs.Section4.StandardJourneySpec as Standard4
 import uk.gov.hmrc.test.ui.specs.Section5.StandardJourneySpec as Standard5
-import uk.gov.hmrc.test.ui.specs.Section6.{SupplementaryJourneySpec as Supplementary6, StandardJourneySpec as Standard6}
+import uk.gov.hmrc.test.ui.specs.Section6.{StandardJourneySpec as Standard6, SupplementaryJourneySpec as Supplementary6}
 
 class SmokeTestRunnerOrderSpec extends Suites(
-  new AmendSpec,
-  new DashboardSpec,
-  new RejectedNotificationsSpec,
-  new Standard1,
-  new Supplementary1,
-  new Clearance2,
-  new Standard2,
-  new Standard3,
-  new Standard4,
-  new Standard5,
-  new Standard6,
-  new Supplementary6
-)
+      new AmendSpec,
+      new DashboardSpec,
+      new RejectedNotificationsSpec,
+      new Standard1,
+      new Supplementary1,
+      new Clearance2,
+      new Standard2,
+      new Standard3,
+      new Standard4,
+      new Standard5,
+      new Standard6,
+      new Supplementary6
+    )

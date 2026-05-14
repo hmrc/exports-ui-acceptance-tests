@@ -55,7 +55,7 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
 
   protected def checkUrlAndTitle(): Unit = {
     val expectedUrl = host + path
-    fluentWait.until { driver => driver.getCurrentUrl.matches(expectedUrl) }
+    fluentWait.until(driver => driver.getCurrentUrl.matches(expectedUrl))
     val actualUrl = driver.getCurrentUrl
     assert(
       expectedUrl.r.matches(actualUrl),
@@ -66,11 +66,10 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
       else s" - ${findElementById("section-header").getText}"
 
     if (actualUrl.contains("/dashboard") || actualUrl.endsWith("/saved-declarations")) {
-      driver.getTitle must fullyMatch regex (
-        s"${title} - Page \\d+ of \\d+ - Make and manage an export declaration online - GOV.UK")
+      driver.getTitle must fullyMatch regex
+        s"${title} - Page \\d+ of \\d+ - Make and manage an export declaration online - GOV.UK"
       findElementsByTag("h1").head.getText mustBe title
-    }
-    else {
+    } else {
       driver.getTitle mustBe title + sectionHeader + " - Make and manage an export declaration online - GOV.UK"
       findElementsByTag("h1").head.getText mustBe title
     }
@@ -168,7 +167,7 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
       print(s"\n=========== ${detailKey.label} => \n")
       tailedLabelAndValueRows.foreach(row => print(s"${row.label.getText} (${row.value.getText})\n"))
 
-      val maybeLabelAndValueRow = tailedLabelAndValueRows.find{result =>
+      val maybeLabelAndValueRow = tailedLabelAndValueRows.find { result =>
         result.label.getText == detailKey.label
       }
 

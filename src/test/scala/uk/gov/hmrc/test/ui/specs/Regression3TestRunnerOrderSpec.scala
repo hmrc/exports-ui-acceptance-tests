@@ -19,15 +19,21 @@ package uk.gov.hmrc.test.ui.specs
 import org.scalatest.Suites
 import uk.gov.hmrc.test.ui.specs.AmendScenarios.AmendSpec
 import uk.gov.hmrc.test.ui.specs.Common.{DashboardSpec, RejectedNotificationsSpec}
-import uk.gov.hmrc.test.ui.specs.Section6.{ClearanceJourneySpec as Clearance6, OccasionalJourneySpec as Occasional6, SimplifiedJourneySpec as Simplified6, StandardJourneySpec as Standard6, SupplementaryJourneySpec as Supplementary6}
+import uk.gov.hmrc.test.ui.specs.Section6.{
+  ClearanceJourneySpec as Clearance6,
+  OccasionalJourneySpec as Occasional6,
+  SimplifiedJourneySpec as Simplified6,
+  StandardJourneySpec as Standard6,
+  SupplementaryJourneySpec as Supplementary6
+}
 
-class Regression3TestRunnerOrderSpec  extends Suites(
-  new AmendSpec,
-  new DashboardSpec,
-  new RejectedNotificationsSpec,
-  new Clearance6,
-  new Occasional6,
-  new Simplified6,
-  new Standard6,
-  new Supplementary6
-)
+class Regression3TestRunnerOrderSpec extends Suites(
+      new AmendSpec,
+      new DashboardSpec,
+      new RejectedNotificationsSpec,
+      new Clearance6,
+      new Occasional6,
+      new Simplified6,
+      new Standard6,
+      new Supplementary6
+    )

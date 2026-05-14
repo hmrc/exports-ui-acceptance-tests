@@ -27,10 +27,7 @@ object EnterAMucrPage extends BasePage {
   val path: String = "/declaration/enter-a-mucr"
   val title: String = "Enter the MUCR"
 
-  override val expanderHrefs: Map[String, Seq[String]] = Map(
-    Common    -> Seq(mucr),
-    Clearance -> Seq(mucrCL)
-  )
+  override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> Seq(mucr), Clearance -> Seq(mucrCL))
 
   // ex: fillPage("GB/AZ09-B12345")
 

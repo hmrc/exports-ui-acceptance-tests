@@ -30,17 +30,17 @@ import uk.gov.hmrc.test.ui.pages.section4.SummarySection4Page.section4Journey2
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
 
-class SupplementaryJourneySpec extends AnyFeatureSpec
-  with BaseSpec
-  with GivenWhenThen
-  with ShouldVerb
-  with BeforeAndAfterAll
-  with BeforeAndAfterEach
-  with Browser
-  with TableDrivenPropertyChecks
-  with ScreenshotOnFailure{
+class SupplementaryJourneySpec
+    extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
+    with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section4 Supplementary Journey") {
-    Scenario("Complete Transactions section on Supplementary simplified declaration journey and validate dynamic title changes on previous documents page",Regression2,Regression,Section4,Supplementary) {
+    Scenario(
+      "Complete Transactions section on Supplementary simplified declaration journey and validate dynamic title changes on previous documents page",
+      Regression2,
+      Regression,
+      Section4,
+      Supplementary
+    ) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for SUPPLEMENTARY, simplified declaration")
@@ -62,7 +62,9 @@ class SupplementaryJourneySpec extends AnyFeatureSpec
       CommonPage.continue()
       Then("User should land on Previous-Document page")
       PreviousDocumentPage.checkPage()
-      And("User selects as first Document Commercial Invoice as code and 9GB123456782317-BH1433A61 as reference and continues")
+      And(
+        "User selects as first Document Commercial Invoice as code and 9GB123456782317-BH1433A61 as reference and continues"
+      )
       PreviousDocumentPage.fillPage(genSequenceId("first"), "Commercial Invoice", "9GB123456782317-BH1433A61")
       CommonPage.continue()
       Then("User should land on Previous-Documents-list page")
@@ -84,7 +86,7 @@ class SupplementaryJourneySpec extends AnyFeatureSpec
       SummarySection4Page.fillPage()
       And("User clicks continue on MiniCya")
       CommonPage.continueOnMiniCya()
-      //validate skipping Total-Package-Quantity page when destination country is Guernsey and Invoice and exchange rate choice is No//
+      // validate skipping Total-Package-Quantity page when destination country is Guernsey and Invoice and exchange rate choice is No//
       When("User navigates to Destination Country page")
       DestinationCountryPage.navigateToPage(DestinationCountryPage.path)
       And("User selects Guernsey as the destination country and continues")
@@ -94,8 +96,8 @@ class SupplementaryJourneySpec extends AnyFeatureSpec
       NatureOfTransactionPage.navigateToPage(NatureOfTransactionPage.path)
       Then("User should land on Nature-Of-Transaction page")
       NatureOfTransactionPage.checkPage()
-      
-     //validate skipping Total-Package-Quantity page when destination country is Jersey and Invoice and exchange rate choice is Yes//
+
+      // validate skipping Total-Package-Quantity page when destination country is Jersey and Invoice and exchange rate choice is Yes//
       When("User navigates to Destination Country page")
       DestinationCountryPage.navigateToPage(DestinationCountryPage.path)
       And("User selects Guernsey as the destination country and continues")
@@ -109,8 +111,14 @@ class SupplementaryJourneySpec extends AnyFeatureSpec
       Then("User should land on Nature-Of-Transaction page")
       NatureOfTransactionPage.checkPage()
     }
-    
-    Scenario("Complete Transactions section on Supplementary eidr declaration journey",Regression2,Regression,Section4,Supplementary){
+
+    Scenario(
+      "Complete Transactions section on Supplementary eidr declaration journey",
+      Regression2,
+      Regression,
+      Section4,
+      Supplementary
+    ) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for SUPPLEMENTARY, eidr declaration")
@@ -132,7 +140,9 @@ class SupplementaryJourneySpec extends AnyFeatureSpec
       CommonPage.continue()
       And("User lands on Previous-Document page")
       PreviousDocumentPage.checkPage()
-      And("User selects as first Document Commercial Invoice as code and 9GB123456782317-BH1433A61 as reference and continues")
+      And(
+        "User selects as first Document Commercial Invoice as code and 9GB123456782317-BH1433A61 as reference and continues"
+      )
       PreviousDocumentPage.fillPage(genSequenceId("first"), "Commercial Invoice", "9GB123456782317-BH1433A61")
       CommonPage.continue()
       And("User lands on Previous-Documents-list page")
@@ -146,7 +156,7 @@ class SupplementaryJourneySpec extends AnyFeatureSpec
       SummarySection4Page.fillPage()
       And("User clicks continue on MiniCya")
       CommonPage.continueOnMiniCya()
-    //validate skipping Total-Package-Quantity page when destination country is Jersey and Invoice and exchange rate choice is Yes//
+      // validate skipping Total-Package-Quantity page when destination country is Jersey and Invoice and exchange rate choice is Yes//
       When("User navigates to Destination Country page")
       DestinationCountryPage.navigateToPage(DestinationCountryPage.path)
       And("User selects Jersey as the destination country and continues")
@@ -160,6 +170,6 @@ class SupplementaryJourneySpec extends AnyFeatureSpec
       Then("User should land on Nature-Of-Transaction page")
       NatureOfTransactionPage.checkPage()
     }
-    }
+  }
 
 }

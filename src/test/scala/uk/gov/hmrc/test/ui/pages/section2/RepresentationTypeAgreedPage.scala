@@ -18,7 +18,7 @@ package uk.gov.hmrc.test.ui.pages.section2
 
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage.clickByCssSelector
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{RepresentativeTypeAgreed, onBehalfOfOtherAgentYesNo}
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{onBehalfOfOtherAgentYesNo, RepresentativeTypeAgreed}
 
 object RepresentationTypeAgreedPage extends BasePage {
 

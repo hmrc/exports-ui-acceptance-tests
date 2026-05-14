@@ -16,43 +16,126 @@
 
 package uk.gov.hmrc.test.ui.pages.base
 
+import org.openqa.selenium.TimeoutException
+import org.openqa.selenium.support.ui.{ExpectedConditions, WebDriverWait}
 import org.scalatest.matchers.must.Matchers.mustBe
 import uk.gov.hmrc.test.ui.generator.SupportGenerator.generateEORI
+
+import java.time.Duration
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.CommonStepPage.genSequenceId
 import uk.gov.hmrc.test.ui.pages.base.Constants.yes
 import uk.gov.hmrc.test.ui.pages.common.DashboardPage.validateDeclarationDetailsOnDeclarationInformationPage
-import uk.gov.hmrc.test.ui.pages.common.{ConfirmationPage, CopyDeclarationPage, DashboardPage, DeclarationHoldingPage, DeclarationInformationPage, SubmitYourDeclarationPage, SummaryPage}
-import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{isClearance, isOccasional, isSimplified, isSupplementary}
+import uk.gov.hmrc.test.ui.pages.common.{
+  ConfirmationPage,
+  CopyDeclarationPage,
+  DashboardPage,
+  DeclarationHoldingPage,
+  DeclarationInformationPage,
+  SubmitYourDeclarationPage,
+  SummaryPage
+}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.{
+  isClearance,
+  isOccasional,
+  isSimplified,
+  isSupplementary
+}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage.isArrivedDeclaration
 import uk.gov.hmrc.test.ui.pages.section1.*
 import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
 import uk.gov.hmrc.test.ui.pages.section2.AreYouTheExporterPage.isExporter
 import uk.gov.hmrc.test.ui.pages.section2.IsThisExsPage.isThisExs
-import uk.gov.hmrc.test.ui.pages.section2.{AreYouTheExporterPage, AuthorisationPage, AuthorisationsListPage, AuthorisationsYesNoPage, CarrierAddressPage, CarrierEORINumberPage, ConsigneeDetailsPage, EntryIntoDeclarantRecordsPage, ExporterAddressPage, ExporterEORINumberPage, IsThisExsPage, OnBehalfOfAnotherAgentPage, OtherPartiesInvolvedListPage, OtherPartiesInvolvedPage, PersonPresentingGoodsPage, ProcedureChoicePage, RepresentationTypeAgreedPage, RepresentativesEORINumberPage, ThirdPartyGoodsTransportationPage}
+import uk.gov.hmrc.test.ui.pages.section2.{
+  AreYouTheExporterPage,
+  AuthorisationPage,
+  AuthorisationsListPage,
+  AuthorisationsYesNoPage,
+  CarrierAddressPage,
+  CarrierEORINumberPage,
+  ConsigneeDetailsPage,
+  EntryIntoDeclarantRecordsPage,
+  ExporterAddressPage,
+  ExporterEORINumberPage,
+  IsThisExsPage,
+  OnBehalfOfAnotherAgentPage,
+  OtherPartiesInvolvedListPage,
+  OtherPartiesInvolvedPage,
+  PersonPresentingGoodsPage,
+  ProcedureChoicePage,
+  RepresentationTypeAgreedPage,
+  RepresentativesEORINumberPage,
+  ThirdPartyGoodsTransportationPage
+}
 import uk.gov.hmrc.test.ui.pages.section3.LocationOfGoodsPage.hasAuthorisationType
-import uk.gov.hmrc.test.ui.pages.section3.{CountryOfRoutingPage, DestinationCountryPage, LocationOfGoodsPage, OfficeOfExitPage}
-import uk.gov.hmrc.test.ui.pages.section4.{InvoicesAndExchangeRateChoicePage, InvoicesAndExchangeRatePage, NatureOfTransactionPage, PreviousDocumentListPage, PreviousDocumentPage, TotalPackageQuantityPage}
+import uk.gov.hmrc.test.ui.pages.section3.{
+  CountryOfRoutingPage,
+  DestinationCountryPage,
+  LocationOfGoodsPage,
+  OfficeOfExitPage
+}
+import uk.gov.hmrc.test.ui.pages.section4.{
+  InvoicesAndExchangeRateChoicePage,
+  InvoicesAndExchangeRatePage,
+  NatureOfTransactionPage,
+  PreviousDocumentListPage,
+  PreviousDocumentPage,
+  TotalPackageQuantityPage
+}
 import uk.gov.hmrc.test.ui.pages.section5.ProcedureCodesPage.{goToWarehouse, hasSupervisingCustomsOfficePageVisiblePC}
-import uk.gov.hmrc.test.ui.pages.section5.{AddDeclarationItemPage, AdditionalDocumentListPage, AdditionalDocumentPage, AdditionalInformationYesNoPage, AdditionalProcedureCodesPage, CommodityDetailsPage, CommodityMeasurePage, DangerousGoodsCodePage, DeclarationItemsListPage, FiscalReferencesYesNoPage, LicenseRequiredYesNoPage, NationalAdditionalCodesPage, PackageInformationListPage, PackageInformationPage, ProcedureCodesPage, StatisticalValuePage, SupplementaryUnitsPage, VatRatingPage}
+import uk.gov.hmrc.test.ui.pages.section5.{
+  AddDeclarationItemPage,
+  AdditionalDocumentListPage,
+  AdditionalDocumentPage,
+  AdditionalInformationYesNoPage,
+  AdditionalProcedureCodesPage,
+  CommodityDetailsPage,
+  CommodityMeasurePage,
+  DangerousGoodsCodePage,
+  DeclarationItemsListPage,
+  FiscalReferencesYesNoPage,
+  LicenseRequiredYesNoPage,
+  NationalAdditionalCodesPage,
+  PackageInformationListPage,
+  PackageInformationPage,
+  ProcedureCodesPage,
+  StatisticalValuePage,
+  SupplementaryUnitsPage,
+  VatRatingPage
+}
 import uk.gov.hmrc.test.ui.pages.section6.InlandModeOfTransportPage.{isFixedTransport, isPostalOrMail}
-import uk.gov.hmrc.test.ui.pages.section6.{BorderTransportPage, ContainerListPage, ContainerPage, DepartureTransportPage, ExpressConsignmentPage, InlandModeOfTransportPage, InlandOrBorderPage, SealYesNoPage, SupervisingCustomsOfficePage, TransportCountryPage, TransportLeavingTheBorderPage, TransportPaymentPage, WarehousePage}
+import uk.gov.hmrc.test.ui.pages.section6.{
+  BorderTransportPage,
+  ContainerListPage,
+  ContainerPage,
+  DepartureTransportPage,
+  ExpressConsignmentPage,
+  InlandModeOfTransportPage,
+  InlandOrBorderPage,
+  SealYesNoPage,
+  SupervisingCustomsOfficePage,
+  TransportCountryPage,
+  TransportLeavingTheBorderPage,
+  TransportPaymentPage,
+  WarehousePage
+}
+
+import scala.util.Try
 
 object CommonPage extends BasePage {
 
   val backButtonHref: String = ""
-  val path: String           = ""
-  val title                  = ""
+  val path: String = ""
+  val title = ""
 
   override def checkBackButton(): Unit = ()
 
   override def checkExpanders(): Unit = ()
 
   override def fillPage(values: String*): Unit = ()
-  
-  def clearCacheForSection(sectionId: Int):Unit={
+
+  def clearCacheForSection(sectionId: Int): Unit =
     clear(sectionId)
-  }
-  
+
   def fillAllSectionsForDeclaration(decType: String, AdditionalDecType: String): Unit = {
     fillSection1ForDeclaration(decType, AdditionalDecType)
     fillSection2ForDeclaration()
@@ -63,7 +146,7 @@ object CommonPage extends BasePage {
     SummaryPage.checkPage()
   }
 
-  def submitsTheDeclarationLandOnChoicePage():Unit={
+  def submitsTheDeclarationLandOnChoicePage(): Unit = {
     SubmitYourDeclarationPage.fillPage()
     DeclarationHoldingPage.checkPage()
     DeclarationHoldingPage.fillPage()
@@ -72,7 +155,8 @@ object CommonPage extends BasePage {
     ChoicePage.fillPage("Manage Submit Declaration")
     DashboardPage.checkPage()
   }
-  def checksTheSectionHeadingsAndContinueToValidateDetails():Unit={
+
+  def checksTheSectionHeadingsAndContinueToValidateDetails(): Unit = {
     SummaryPage.fillPage()
     SubmitYourDeclarationPage.checkPage()
     submitsTheDeclarationLandOnChoicePage()
@@ -80,6 +164,7 @@ object CommonPage extends BasePage {
     DashboardPage.validateDashboard("Submitted", "Arrived and accepted")
     validateDeclarationDetailsOnDeclarationInformationPage()
   }
+
   def fillSection1ForDeclaration(decType: String, AdditionalDecType: String): Unit = {
     // Fill login page and continue
     LoginPage.fillPage(generateEORI);
@@ -93,6 +178,18 @@ object CommonPage extends BasePage {
       StandardOrOtherPage.fillPage("OTHER")
     }
     continue()
+    val expectedNextPath = if (decType == "STANDARD") DeclarationTypePage.path else DeclarationChoicePage.path
+    def waitForLanding(): Try[_] =
+      Try(new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.urlContains(expectedNextPath)))
+    waitForLanding().recoverWith { case _: TimeoutException =>
+      println(
+        s"[StandardOrOtherPage retry] decType=$decType: post-submit URL is ${driver.getCurrentUrl}; refreshing form and resubmitting once."
+      )
+      StandardOrOtherPage.navigateToPage(StandardOrOtherPage.path)
+      if (decType == "STANDARD") StandardOrOtherPage.fillPage(decType) else StandardOrOtherPage.fillPage("OTHER")
+      continue()
+      waitForLanding()
+    }.get
     // Fill Declaration Choice Page if not standard
     if (decType != "STANDARD") {
       DeclarationChoicePage.fillPage(decType);
@@ -298,7 +395,7 @@ object CommonPage extends BasePage {
     continueOnMiniCya()
   }
 
-  def createDraftDeclarations(numberOfDeclarations:Int): Unit = {
+  def createDraftDeclarations(numberOfDeclarations: Int): Unit =
     for (i <- 1 to numberOfDeclarations) {
       DeclarationInformationPage.copyDeclaration()
       val ducr = f"8GB123456469274-${101 + i}SHIP1"
@@ -317,7 +414,6 @@ object CommonPage extends BasePage {
       DashboardPage.checkPage()
       DashboardPage.mrnLink.click()
     }
-  }
 
   def fillSection6ForDeclaration(): Unit = {
     TransportLeavingTheBorderPage.fillPage("Sea transport")
@@ -359,13 +455,13 @@ object CommonPage extends BasePage {
     continue()
     continueOnMiniCya()
   }
-  
+
   def clearKeysFromCache(cacheKeysToDelete: String): Unit = {
     val keys = cacheKeysToDelete.split(", ").toList
     clear(detailKeys(keys: _*): _*)
   }
-  
-  def clickChangeLinkForPage(pageName: String): Unit={
+
+  def clickChangeLinkForPage(pageName: String): Unit = {
     val changeLinkMap: Map[String, String] = Map(
       "LRN" -> "lrn",
       "Authorisation Type" -> "authorisation-holder-1-type",
@@ -381,32 +477,30 @@ object CommonPage extends BasePage {
   object CommonStepPage {
     def genSequenceId(seqId: String): String =
       seqId match {
-        case "first" => "0"
+        case "first"  => "0"
         case "second" => "1"
-        case "third" => "2"
+        case "third"  => "2"
       }
   }
 
-  def clickOnCopyLinkAndLandsOnCopyDeclarationPage():Unit={
+  def clickOnCopyLinkAndLandsOnCopyDeclarationPage(): Unit = {
     DeclarationInformationPage.copyDeclaration()
     CopyDeclarationPage.checkPage()
   }
-  
-  def entersDucrAndLandsOnDashboardPage():Unit={ 
-    val expectedText="You already submitted a declaration with this LRN in the past 48 hours. If you are resubmitting after correcting an error or updating information, add a version number at the end."
-    CopyDeclarationPage.fillPage("8GB123406469274-101SHIP1","24")
+
+  def entersDucrAndLandsOnDashboardPage(): Unit = {
+    val expectedText =
+      "You already submitted a declaration with this LRN in the past 48 hours. If you are resubmitting after correcting an error or updating information, add a version number at the end."
+    CopyDeclarationPage.fillPage("8GB123406469274-101SHIP1", "24")
     CommonPage.continue()
     CopyDeclarationPage.lrnWarning().getText mustBe expectedText
   }
-  
-  
-  
-  def landOnHoldingPageAndRedirectedToConfirmationPage():Unit={
+
+  def landOnHoldingPageAndRedirectedToConfirmationPage(): Unit = {
     DeclarationHoldingPage.checkPage()
     DeclarationHoldingPage.fillPage()
   }
 
-  def background(): Unit = {
+  def background(): Unit =
     clearAllCache()
-  }
 }

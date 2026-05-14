@@ -28,13 +28,14 @@ object NatureOfTransactionPage extends BasePage {
   val Sale = "Goods being sold"
   val BusinessPurchase = "Item purchased new in the UK for business use"
 
-  def backButtonHref: String = {
-   detail(DeclarationType) match {
-      case Standard | Supplementary if isGuernseyOrJerseyDestination && detail(TotalAmountInvoiced) == "Less than £100,000" => InvoicesAndExchangeRateChoicePage.path
+  def backButtonHref: String =
+    detail(DeclarationType) match {
+      case Standard | Supplementary
+          if isGuernseyOrJerseyDestination && detail(TotalAmountInvoiced) == "Less than £100,000" =>
+        InvoicesAndExchangeRateChoicePage.path
       case Standard | Supplementary if isGuernseyOrJerseyDestination => InvoicesAndExchangeRatePage.path
-      case _ => TotalPackageQuantityPage.path
+      case _                                                         => TotalPackageQuantityPage.path
     }
-  }
 
   val path: String = "/declaration/nature-of-transaction"
   val title = "What sort of export is it?"
@@ -47,17 +48,20 @@ object NatureOfTransactionPage extends BasePage {
 
   override def fillPage(values: String*): Unit = {
     val label = values(0) match {
-      case "Goods being sold"              => clickByCssSelector(s"label[for='Sale']"); Sale
-      case "Item purchased"                => clickByCssSelector(s"label[for='BusinessPurchase']"); BusinessPurchase
-      case "House removal"                 => clickByCssSelector(s"label[for='HouseRemoval']"); "House removal or not-new vehicle"
-      case "A return or a replacement"     => clickByCssSelector(s"label[for='Return']"); "A return or a replacement, free of charge"
-      case "Non Commercial change"         => clickByCssSelector(s"label[for='Donation']"); "Non-commercial change of ownership"
-      case "Being sent out for processing" => clickByCssSelector(s"label[for='Processing']"); "Being sent out for processing"
-      case "Goods have been processed"     => clickByCssSelector(s"label[for='Processed']"); "Goods have been processed"
-      case "Inter Governmental"            => clickByCssSelector(s"label[for='Military']"); "Inter-governmental or defence purposes"
+      case "Goods being sold" => clickByCssSelector(s"label[for='Sale']"); Sale
+      case "Item purchased"   => clickByCssSelector(s"label[for='BusinessPurchase']"); BusinessPurchase
+      case "House removal"    => clickByCssSelector(s"label[for='HouseRemoval']"); "House removal or not-new vehicle"
+      case "A return or a replacement" =>
+        clickByCssSelector(s"label[for='Return']"); "A return or a replacement, free of charge"
+      case "Non Commercial change" => clickByCssSelector(s"label[for='Donation']"); "Non-commercial change of ownership"
+      case "Being sent out for processing" =>
+        clickByCssSelector(s"label[for='Processing']"); "Being sent out for processing"
+      case "Goods have been processed" => clickByCssSelector(s"label[for='Processed']"); "Goods have been processed"
+      case "Inter Governmental" =>
+        clickByCssSelector(s"label[for='Military']"); "Inter-governmental or defence purposes"
       case "Goods for construction or civil engineering" =>
         clickByCssSelector(s"label[for='Construction']"); "Goods supplied under a contract for construction purposes"
-      case _                                =>  clickByCssSelector(s"label[for='Other']"); "Other"
+      case _ => clickByCssSelector(s"label[for='Other']"); "Other"
     }
 
     store(NatureOfTransaction -> Detail(label))

@@ -24,12 +24,5 @@ import uk.gov.hmrc.test.ui.specs.Section4.OccasionalJourneySpec as Occasional4
 import uk.gov.hmrc.test.ui.specs.Section5.OccasionalJourneySpec as Occasional5
 import uk.gov.hmrc.test.ui.specs.Section6.OccasionalJourneySpec as Occasional6
 
-
-class OccasionalTestRunnerOrderSpec extends Suites(
-  new  Occasional1,
-  new Occasional2,
-  new Occasional3,
-  new Occasional4,
-  new Occasional5,
-  new Occasional6
-)
+class OccasionalTestRunnerOrderSpec
+    extends Suites(new Occasional1, new Occasional2, new Occasional3, new Occasional4, new Occasional5, new Occasional6)

@@ -34,7 +34,13 @@ class ClearanceJourneySpec
     extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
     with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Clearance Journey Section 5") {
-    Scenario("Complete Items section on Clearance PreLodged declaration journey",Regression2,Regression,Section5,Clearance) {
+    Scenario(
+      "Complete Items section on Clearance PreLodged declaration journey",
+      Regression2,
+      Regression,
+      Section5,
+      Clearance
+    ) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for CLEARANCE, prelodged declaration")
@@ -54,10 +60,12 @@ class ClearanceJourneySpec
       And("User enters only description as Old St Andrews golf ball whisky on commodity details page and continues")
       CommodityDetailsPage.fillPage("Old St Andrews golf ball whisky")
       CommonPage.continue()
-      //Skipping dangerous code page when isEXS is No//
+      // Skipping dangerous code page when isEXS is No//
       And("User lands on Package-Information page")
       PackageInformationPage.checkPage()
-      And("User enters Cylinder as package type, with 5 packages and 67 as shipping mark for first package info and continues")
+      And(
+        "User enters Cylinder as package type, with 5 packages and 67 as shipping mark for first package info and continues"
+      )
       PackageInformationPage.fillPage(genSequenceId("first"), "Cylinder", "5", "67")
       CommonPage.continue()
       And("User lands on Package-Information-List page")
@@ -104,7 +112,7 @@ class ClearanceJourneySpec
       SummarySection5Page.checkPage()
       And("User checks the MiniCYA page for Section-5")
       SummarySection5Page.fillPage()
-      //check Fiscal Reference pages when Procedure code is 1042//
+      // check Fiscal Reference pages when Procedure code is 1042//
       When("User navigates to Procedure codes page")
       ProcedureCodesPage.navigateToItemPage(ProcedureCodesPage.pageId)
       And("User selects 1042 as procedure code and continues")
@@ -115,7 +123,7 @@ class ClearanceJourneySpec
       And("User selects F75 as additional procedure code")
       AdditionalProcedureCodesPage.fillPage("F75")
       CommonPage.continue()
-    //changing isThisEXS Yes and validating dangerous codes page//
+      // changing isThisEXS Yes and validating dangerous codes page//
       And("User navigates to Is This EXS page")
       IsThisExsPage.navigateToPage(IsThisExsPage.path)
       And("User selects Yes to is this exs and continues")
@@ -134,14 +142,20 @@ class ClearanceJourneySpec
       And("User checks the MiniCYA page for Section-5")
       SummarySection5Page.fillPage()
     }
-    Scenario("Complete Items section on Clearance Arrived declaration journey",Regression2,Regression,Section5,Clearance) {
+    Scenario(
+      "Complete Items section on Clearance Arrived declaration journey",
+      Regression2,
+      Regression,
+      Section5,
+      Clearance
+    ) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for CLEARANCE, arrived declaration")
       fillSection1ForDeclaration("CLEARANCE", "arrived")
       And("User fills section2/3/4 and continues their journey to Procedure-codes page")
       section5Journey1()
-      //check procedure code when IsEIDR is Yes//
+      // check procedure code when IsEIDR is Yes//
       And("User selects 1100 as procedure code and continues")
       ProcedureCodesPage.fillPage("1100")
       CommonPage.continue()
@@ -150,7 +164,7 @@ class ClearanceJourneySpec
       And("User selects F44 as additional procedure code and continues")
       AdditionalProcedureCodesPage.fillPage("F44")
       CommonPage.continue()
-      //check procedure code when IsEIDR is No//
+      // check procedure code when IsEIDR is No//
       And("User navigates to Entry Into Declarant Records page")
       EntryIntoDeclarantRecordsPage.navigateToPage(EntryIntoDeclarantRecordsPage.path)
       And("User selects No to is this an entry into declarant records and continues")
@@ -173,7 +187,9 @@ class ClearanceJourneySpec
       CommonPage.continue()
       And("User lands on Package-Information page")
       PackageInformationPage.checkPage()
-      And("User enters Cylinder as package type, with 5 packages and 67 as shipping mark for first package info and continues")
+      And(
+        "User enters Cylinder as package type, with 5 packages and 67 as shipping mark for first package info and continues"
+      )
       PackageInformationPage.fillPage(genSequenceId("first"), "Cylinder", "5", "67")
       CommonPage.continue()
       And("User lands on Package-Information-List page")

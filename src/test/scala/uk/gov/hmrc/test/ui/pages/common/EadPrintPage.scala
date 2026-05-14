@@ -33,7 +33,6 @@ object EadPrintPage extends BasePage {
 
   override def fillPage(values: String*): Unit = ()
 
-  def viewEadPrintPage(): Unit = {
+  def viewEadPrintPage(): Unit =
     clickById("generate-ead")
-  }
 }

@@ -23,11 +23,22 @@ import org.scalatest.verbs.ShouldVerb
 import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
 import uk.gov.hmrc.test.ui.pages.base.CommonPage
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.{background, clearKeysFromCache, clickChangeLinkForPage}
-import uk.gov.hmrc.test.ui.pages.common.{ConfirmationPage, DashboardPage, DeclarationHoldingPage, DeclarationInformationPage, SubmitYourDeclarationPage, SummaryPage}
+import uk.gov.hmrc.test.ui.pages.common.{
+  ConfirmationPage,
+  DashboardPage,
+  DeclarationHoldingPage,
+  DeclarationInformationPage,
+  SubmitYourDeclarationPage,
+  SummaryPage
+}
 import uk.gov.hmrc.test.ui.pages.section1.{ChoicePage, LrnPage}
 import uk.gov.hmrc.test.ui.pages.section5.{AdditionalProcedureCodesPage, ProcedureCodesPage}
 import uk.gov.hmrc.test.ui.pages.section6.*
-import uk.gov.hmrc.test.ui.pages.section6.SummarySection6Page.{fillAllForSections6, section6CommonJourney1, section6StandardJourney1}
+import uk.gov.hmrc.test.ui.pages.section6.SummarySection6Page.{
+  fillAllForSections6,
+  section6CommonJourney1,
+  section6StandardJourney1
+}
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
 
@@ -35,7 +46,7 @@ class StandardJourneySpec
     extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
     with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section6 Standard Journey") {
-    Scenario("standard journey section-6",Regression3,Regression,Section6,Standard,Smoke) {
+    Scenario("standard journey section-6", Regression3, Regression, Section6, Standard, Smoke) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1/2/3/4/5 for STANDARD, prelodged declaration")
@@ -78,7 +89,7 @@ class StandardJourneySpec
       CommonPage.continueOnMiniCya()
       Then("User should land on Saved-Summary page")
       SummaryPage.checkPage()
-     /*// Scenario: - If procedure code = 1040 and additional procedure code = 000,the Supervising Customs Office page
+      /*// Scenario: - If procedure code = 1040 and additional procedure code = 000,the Supervising Customs Office page
           is skipped,and the user lands directly on the Inland-or-Border page.*/
       When("User clears Presenting to customs, Customs supervising office keys from cache")
       clearKeysFromCache("Presenting to customs, Customs supervising office")
@@ -91,7 +102,9 @@ class StandardJourneySpec
       AdditionalProcedureCodesPage.checkPage()
       AdditionalProcedureCodesPage.fillPage("000")
       CommonPage.continue()
-      And("User selects Sea transport as mode of transport leaving the border  on Transport-Leaving-The-Border page and continues")
+      And(
+        "User selects Sea transport as mode of transport leaving the border  on Transport-Leaving-The-Border page and continues"
+      )
       TransportLeavingTheBorderPage.navigateToPage(TransportLeavingTheBorderPage.path)
       TransportLeavingTheBorderPage.checkPage()
       TransportLeavingTheBorderPage.fillPage("Sea transport")
@@ -108,7 +121,9 @@ class StandardJourneySpec
         the Inland-or-Border page is skipped, and the user lands directly on the Inland-Transport-Details page.*/
       When("User clears Presenting to customs keys from cache")
       clearKeysFromCache("Presenting to customs")
-      And("User selects Roll on Roll off (RoRo) as mode of transport leaving the border on Transport-Leaving-The-Border page and continues")
+      And(
+        "User selects Roll on Roll off (RoRo) as mode of transport leaving the border on Transport-Leaving-The-Border page and continues"
+      )
       TransportLeavingTheBorderPage.navigateToPage(TransportLeavingTheBorderPage.path)
       TransportLeavingTheBorderPage.checkPage()
       TransportLeavingTheBorderPage.fillPage("Roll on Roll off (RoRo)")
@@ -126,8 +141,12 @@ class StandardJourneySpec
       And(
         "User clears Inland mode of transport, Transport leaving the border, Country of registration for the transport leaving the UK border keys from cache"
       )
-      clearKeysFromCache("Inland mode of transport, Transport leaving the border, Country of registration for the transport leaving the UK border")
-      And("User selects Rail transport as mode of transport leaving the border on Transport-Leaving-The-Border page and continues")
+      clearKeysFromCache(
+        "Inland mode of transport, Transport leaving the border, Country of registration for the transport leaving the UK border"
+      )
+      And(
+        "User selects Rail transport as mode of transport leaving the border on Transport-Leaving-The-Border page and continues"
+      )
       TransportLeavingTheBorderPage.navigateToPage(TransportLeavingTheBorderPage.path)
       TransportLeavingTheBorderPage.checkPage()
       TransportLeavingTheBorderPage.fillPage("Rail transport")
@@ -159,8 +178,12 @@ class StandardJourneySpec
       When(
         "User clears Presenting to customs, Transport details at the border, Method of payment for transport, Security seals keys from cache"
       )
-      clearKeysFromCache("Presenting to customs, Transport details at the border, Method of payment for transport, Security seals")
-      And("User selects Fixed transport installations as mode of transport leaving the border on Transport-Leaving-The-Border page and continues")
+      clearKeysFromCache(
+        "Presenting to customs, Transport details at the border, Method of payment for transport, Security seals"
+      )
+      And(
+        "User selects Fixed transport installations as mode of transport leaving the border on Transport-Leaving-The-Border page and continues"
+      )
       TransportLeavingTheBorderPage.navigateToPage(TransportLeavingTheBorderPage.path)
       TransportLeavingTheBorderPage.checkPage()
       TransportLeavingTheBorderPage.fillPage("Fixed transport installations")
@@ -179,7 +202,7 @@ class StandardJourneySpec
       SummarySection6Page.checkPage()
       And("User checks the MiniCYA page for Section-6")
       SummarySection6Page.fillPage()
-      //Remove the container//
+      // Remove the container//
       When("User clicks remove Container 0 and remove Container1 on Container List page and continues")
       ContainerListPage.navigateToPage(ContainerListPage.path)
       ContainerListPage.checkPage()
@@ -203,8 +226,8 @@ class StandardJourneySpec
     }
     /*Scenario:- If procedure code = 1042 and additional procedure code = 000, the Supervising Customs Office page is shown.
       -This is a full arrived‑journey flow, covering all pages,including adding a seal to the container and then removing the seal.*/
-    
-    Scenario("standard arrived journey section-6",Regression3,Regression,Section6,Standard) {
+
+    Scenario("standard arrived journey section-6", Regression3, Regression, Section6, Standard) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1/2/3/4/5 for STANDARD, arrived declaration")
@@ -262,7 +285,7 @@ class StandardJourneySpec
       DeclarationInformationPage.checkPage()
       And("User validates details on declaration information page")
       DeclarationInformationPage.validateTimelineDetails()
-      //validate amend and copy declaration link are visible for External amend declaration//
+      // validate amend and copy declaration link are visible for External amend declaration//
       And("User validates that the Amend declaration link and Copy declaration link is displayed")
       DeclarationInformationPage.validateCopyAndAmendDeclarationLinks()
     }

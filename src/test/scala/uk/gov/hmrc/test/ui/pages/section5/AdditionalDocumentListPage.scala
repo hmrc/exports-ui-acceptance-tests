@@ -39,8 +39,12 @@ object AdditionalDocumentListPage extends BasePage {
 
   override def fillPage(values: String*): Unit = selectYesOrNoRadio(values(yesNo))
 
-  def removeAdditionalDocuments(index: Int): Unit = clickByCssSelector(s"#additional-documents-table-row$index-remove_button>a")
+  def removeAdditionalDocuments(index: Int): Unit = clickByCssSelector(
+    s"#additional-documents-table-row$index-remove_button>a"
+  )
 
-  def changeAdditionalDocuments(index: Int): Unit = clickByCssSelector(s"#additional-documents-table-row$index-change_button>a")
+  def changeAdditionalDocuments(index: Int): Unit = clickByCssSelector(
+    s"#additional-documents-table-row$index-change_button>a"
+  )
 
 }

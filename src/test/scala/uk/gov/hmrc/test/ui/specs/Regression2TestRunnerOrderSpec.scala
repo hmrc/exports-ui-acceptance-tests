@@ -17,18 +17,30 @@
 package uk.gov.hmrc.test.ui.specs
 
 import org.scalatest.Suites
-import uk.gov.hmrc.test.ui.specs.Section4.{ClearanceJourneySpec as Clearance4, OccasionalJourneySpec as Occasional4, SimplifiedJourneySpec as Simplified4, StandardJourneySpec as Standard4, SupplementaryJourneySpec as Supplementary4}
-import uk.gov.hmrc.test.ui.specs.Section5.{ClearanceJourneySpec as Clearance5, OccasionalJourneySpec as Occasional5, SimplifiedJourneySpec as Simplified5, StandardJourneySpec as Standard5, SupplementaryJourney5Spec as Supplementary5}
+import uk.gov.hmrc.test.ui.specs.Section4.{
+  ClearanceJourneySpec as Clearance4,
+  OccasionalJourneySpec as Occasional4,
+  SimplifiedJourneySpec as Simplified4,
+  StandardJourneySpec as Standard4,
+  SupplementaryJourneySpec as Supplementary4
+}
+import uk.gov.hmrc.test.ui.specs.Section5.{
+  ClearanceJourneySpec as Clearance5,
+  OccasionalJourneySpec as Occasional5,
+  SimplifiedJourneySpec as Simplified5,
+  StandardJourneySpec as Standard5,
+  SupplementaryJourney5Spec as Supplementary5
+}
 
 class Regression2TestRunnerOrderSpec extends Suites(
-  new Clearance4,
-  new Occasional4,
-  new Simplified4,
-  new Standard4,
-  new Supplementary4,
-  new Clearance5,
-  new Occasional5,
-  new Simplified5,
-  new Standard5,
-  new Supplementary5
-)
+      new Clearance4,
+      new Occasional4,
+      new Simplified4,
+      new Standard4,
+      new Supplementary4,
+      new Clearance5,
+      new Occasional5,
+      new Simplified5,
+      new Standard5,
+      new Supplementary5
+    )

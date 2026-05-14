@@ -32,18 +32,16 @@ import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class AmendSpec
-  extends AnyFeatureSpec
-    with BaseSpec
-    with GivenWhenThen
-    with ShouldVerb
-    with BeforeAndAfterAll
-    with BeforeAndAfterEach
-    with Browser
-    with TableDrivenPropertyChecks
-    with ScreenshotOnFailure {
+    extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
+    with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
 
   Feature("Amend Scenarios") {
-    Scenario("Full Standard Amend Journey and view declaration in submission dashboard",Regression3,Smoke,Regression) {
+    Scenario(
+      "Full Standard Amend Journey and view declaration in submission dashboard",
+      Regression3,
+      Smoke,
+      Regression
+    ) {
       Given("the user clears data in cache")
       background()
       When("User fills all sections of the declaration and submits the declaration to land on Saved-Summary page")
@@ -68,7 +66,7 @@ class AmendSpec
       clickChangeLinkForPage("Are you the exporter")
       Then("User should land on the Are-You-The-Exporter page and amend details then land on the Saved-Summary page")
       amendingAreYouTheExporterDetails()
-      
+
       /* Removing an item on Amended Declaration is not allowed, as the item is associated with the submitted declaration
        * When the user tried to remove the item then the respective warning message is displayed*/
 
@@ -76,15 +74,17 @@ class AmendSpec
       SummaryPage.removeItemLink(1).click()
       Then("User lands on the Remove-Declaration-Item page, view warning message and lands on the Saved-Summary page")
       removeLinkForItem1()
-      
+
       // Adding an item on Amend Declaration//
       Given("User clicks on Add Item link")
       SummarySection5Page.addItem()
       When("User selects 1040 as procedure code on Procedure-codes page")
       selectProcedureCode()
-      Then("User should land on Additional-Procedure-Codes page and continue amending declaration land on MiniCYA-Section-5 page")
+      Then(
+        "User should land on Additional-Procedure-Codes page and continue amending declaration land on MiniCYA-Section-5 page"
+      )
       amendSection5Page()
-      
+
       // And I check the MiniCYA page for Section-5 (At the moment we are able to validate one item, need to extend this to check two or more)//
       When("User clicks confirm and continue on summary page and submits the declaration")
       clicksConfirmAndContinueToSubmitDeclaration()
@@ -94,13 +94,17 @@ class AmendSpec
       continueJourneyToDashboardPage()
       Then("User validates declaration details on Submitted tab and checks Status is Declaration cleared")
       validateDashboardDeclarationCleared()
-      And("User clicks view details link on timeline page to view and validates amended details by clicking on MRN link")
+      And(
+        "User clicks view details link on timeline page to view and validates amended details by clicking on MRN link"
+      )
       validatesAmendedDetailsByClickingOnMRNLink()
-      
+
       // Exit and come back later and resuming saved declaration functionality for Amend Declaration//
       When("User clicks back link And clicks on Amend declaration link")
       backLinkToSummaryPage()
-      And("User clicks change link for Office of exit on SummaryPage and continue amending to land on MiniCYA-Section-3 page")
+      And(
+        "User clicks change link for Office of exit on SummaryPage and continue amending to land on MiniCYA-Section-3 page"
+      )
       clicksChangeLinkForOfficeOfExit()
       And("User clicks on Exit and comeback later link And continues to land on Saved-Declarations page")
       clicksOnExitAndComebackLaterLink()
@@ -108,12 +112,16 @@ class AmendSpec
       SavedDeclarationsPage.validateSavedDeclarations("Amendment")
       When("User clicks on DUCR link for amended declaration and submits the declaration")
       clicksOnDucrLinkAndSubmitDeclaration()
-      And("User Continue navigating to DeclarationHoldingPage and selects Manage Submit Declaration to land on Dashboard page")
+      And(
+        "User Continue navigating to DeclarationHoldingPage and selects Manage Submit Declaration to land on Dashboard page"
+      )
       landOnHoldingPageAndRedirectedToConfirmationPage()
       continueJourneyToDashboardPage()
       Then("Users validates declaration details on Submitted tab and check Status is Declaration cleared")
       validateDashboardDeclarationCleared()
-      And("User clicks view details link on timeline page to view and validates amended details by clicking on MRN link")
+      And(
+        "User clicks view details link on timeline page to view and validates amended details by clicking on MRN link"
+      )
       validatesAmendedDetailsByClickingOnMRNLink()
 
       // To verify Rejected Amendment on Timeline page//
@@ -154,7 +162,9 @@ class AmendSpec
       // To verify Failed Amendment in Timeline page//
       When("User clicks back link And clicks on Amend declaration link to land on SummaryPage")
       backLinkToDashboardPageToSummaryPage()
-      And("User clicks change link for Border transport page(to Ship name) and continue journey to submit the declaration")
+      And(
+        "User clicks change link for Border transport page(to Ship name) and continue journey to submit the declaration"
+      )
       And("User continue their journey to Dashboard page")
       clicksChangeLinkForBorderTransportPageToShipname()
       Then("User validates declaration details on Action needed tab and check Status is On hold")

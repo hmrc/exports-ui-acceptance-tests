@@ -22,7 +22,6 @@ import org.scalatest.{BeforeAndAfterEach, GivenWhenThen}
 import uk.gov.hmrc.selenium.webdriver.{Browser, Driver, ScreenshotOnFailure}
 import uk.gov.hmrc.test.ui.conf.TestConfiguration.setBrowser
 
-
 trait BaseSpec
     extends AnyFeatureSpec with GivenWhenThen with Matchers with BeforeAndAfterEach with Browser
     with ScreenshotOnFailure {
@@ -32,7 +31,7 @@ trait BaseSpec
     startBrowser()
     Driver.instance.manage().deleteAllCookies()
   }
-  
+
   override def afterEach(): Unit =
     quitBrowser()
 

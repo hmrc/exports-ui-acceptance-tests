@@ -72,7 +72,7 @@ object RejectedNotificationPage extends BasePage {
     rejectedOldValue(lrnSelector).getText mustBe oldValue
   }
 
-  def fillAllSectionEnterLRNContinueToSummaryPage(decType: String, AdditionalDecType: String):Unit={
+  def fillAllSectionEnterLRNContinueToSummaryPage(decType: String, AdditionalDecType: String): Unit = {
     fillSection1ForDeclaration(decType, AdditionalDecType)
     fillSection2ForDeclaration()
     fillSection3ForDeclaration()
@@ -86,7 +86,7 @@ object RejectedNotificationPage extends BasePage {
     SummaryPage.checkPage()
   }
 
-  def confirmAndContinueToSubmitDeclaration():Unit={
+  def confirmAndContinueToSubmitDeclaration(): Unit = {
     SummaryPage.fillPage()
     SubmitYourDeclarationPage.checkPage()
     SubmitYourDeclarationPage.fillPage()
@@ -94,13 +94,13 @@ object RejectedNotificationPage extends BasePage {
     DeclarationHoldingPage.waitForClass("govuk-warning-text__text")
   }
 
-  def navigateFromChoicePageToDashboardPage():Unit={
+  def navigateFromChoicePageToDashboardPage(): Unit = {
     ChoicePage.navigateToPage(ChoicePage.path)
     ChoicePage.fillPage("Manage Submit Declaration")
     DashboardPage.checkPage()
   }
 
-  def clickMRNLinkToFixErrors():Unit={
+  def clickMRNLinkToFixErrors(): Unit = {
     DashboardPage.mrnLink.click()
     DeclarationInformationPage.checkPage()
     DeclarationInformationPage.validateTimelineDetails()
@@ -108,7 +108,7 @@ object RejectedNotificationPage extends BasePage {
     RejectedNotificationPage.checkPage()
   }
 
-  def clickLRNLinkToFixErrors():Unit={
+  def clickLRNLinkToFixErrors(): Unit = {
     RejectedNotificationPage.validateErrorDetails(detail(Lrn))
     RejectedNotificationPage.FixErrorsAndValidateWarning("Lrn")
     LrnPage.fillPage("MCDSCOM06")
@@ -126,13 +126,13 @@ object RejectedNotificationPage extends BasePage {
     ChoicePage.fillPage("Manage Submit Declaration")
     DashboardPage.checkPage()
   }
-   def validateDeclarationDetailsLandOnDecInfoPage():Unit={
-     DashboardPage.refreshPage()
-     DashboardPage.validateDashboard("Submitted", "Arrived and accepted")
-     DashboardPage.mrnLink.click()
-     DeclarationInformationPage.checkPage()
-    }
-   
+  def validateDeclarationDetailsLandOnDecInfoPage(): Unit = {
+    DashboardPage.refreshPage()
+    DashboardPage.validateDashboard("Submitted", "Arrived and accepted")
+    DashboardPage.mrnLink.click()
+    DeclarationInformationPage.checkPage()
+  }
+
   def validateUpdatedErrorDetails(updatedValue: String): Unit =
     rejectedNewValue(lrnSelector).getText mustBe updatedValue.trim
 }

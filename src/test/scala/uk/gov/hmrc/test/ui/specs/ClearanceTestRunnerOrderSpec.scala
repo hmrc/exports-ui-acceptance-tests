@@ -24,11 +24,5 @@ import uk.gov.hmrc.test.ui.specs.Section4.ClearanceJourneySpec as Clearance4
 import uk.gov.hmrc.test.ui.specs.Section5.ClearanceJourneySpec as Clearance5
 import uk.gov.hmrc.test.ui.specs.Section6.ClearanceJourneySpec as Clearance6
 
-class ClearanceTestRunnerOrderSpec extends Suites(
-  new Clearance1,
-  new Clearance2,
-  new Clearance3,
-  new Clearance4,
-  new Clearance5,
-  new Clearance6
-)
+class ClearanceTestRunnerOrderSpec
+    extends Suites(new Clearance1, new Clearance2, new Clearance3, new Clearance4, new Clearance5, new Clearance6)

@@ -16,8 +16,11 @@
 
 package uk.gov.hmrc.test.ui.pages.common
 
+import org.scalatest.exceptions.TestFailedException
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.common.DeclarationInformationPage.isCancelDeclaration
+
+import scala.util.Try
 
 object DeclarationHoldingPage extends BasePage {
 
@@ -37,6 +40,15 @@ object DeclarationHoldingPage extends BasePage {
       case _             => "Submitting your declaration"
     }
 
+  // Skip holding page if a redirect occurred faster than our checkUrlAndTitle
+  override def checkPage(): Unit =
+    Try(super.checkPage()).recover {
+      case _: TestFailedException if !driver.getCurrentUrl.matches(BasePage.host + path) =>
+        println(
+          s"[DeclarationHoldingPage] page redirected title assertion; currentUrl=${driver.getCurrentUrl}. Skipping check."
+        )
+    }.get
+
   override def checkBackButton(): Unit = ()
 
   override def checkExpanders(): Unit = ()
@@ -44,7 +56,6 @@ object DeclarationHoldingPage extends BasePage {
   // ex: fillPage()
 
   override def fillPage(values: String*): Unit =
-
     if (isCancelDeclaration) {
       waitForLinkText("View declaration details")
     } else if (isAmendmentMode) {

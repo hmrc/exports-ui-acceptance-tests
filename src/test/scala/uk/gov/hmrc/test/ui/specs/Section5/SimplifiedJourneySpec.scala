@@ -33,7 +33,7 @@ class SimplifiedJourneySpec
     extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
     with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section5 Simplified Journey") {
-    Scenario("Perform a Low Value Simplified Arrived Declaration",Regression2,Regression,Section5,Simplified) {
+    Scenario("Perform a Low Value Simplified Arrived Declaration", Regression2, Regression, Section5, Simplified) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for SIMPLIFIED, arrived declaration")
@@ -58,7 +58,7 @@ class SimplifiedJourneySpec
       And("User selects Yes to enter the code 1204 as dangerous goods and continues")
       DangerousGoodsCodePage.fillPage("Yes", "1204")
       CommonPage.continue()
-      //skipping cus code page//
+      // skipping cus code page//
       And("User lands on VAT-Rating page")
       VatRatingPage.checkPage()
       Then("User selects A 20% VAT rate will be paid in the UK option as goods being VAT zero-rated")
@@ -81,7 +81,9 @@ class SimplifiedJourneySpec
       CommonPage.continue()
       And("User lands on Package-Information page")
       PackageInformationPage.checkPage()
-      And("User enters Aerosol as package type, with 10 packages and 1034 as shipping mark for first package info and continues")
+      And(
+        "User enters Aerosol as package type, with 10 packages and 1034 as shipping mark for first package info and continues"
+      )
       PackageInformationPage.fillPage(genSequenceId("first"), "Aerosol", "10", "1034")
       CommonPage.continue()
       And("User lands on Package-Information-List page")
@@ -123,9 +125,13 @@ class SimplifiedJourneySpec
     # 2. Skipping of Statistical page and VAT rating page when declaration is not low value
     # 4. Checking Additional Documents Dynamic title when Authorisation code required documents is [No] and isLicenseRequired is [Yes]
     # 5. Change procedure code from 1040 to 1042 to check Fiscal-Information page of simplified Journey
-*/
+     */
     Scenario(
-      "Complete Items section on Simplified Prelodged declaration journey when declaration is not Low Value (using 000 additional procedure code)",Regression2,Regression,Section5,Simplified
+      "Complete Items section on Simplified Prelodged declaration journey when declaration is not Low Value (using 000 additional procedure code)",
+      Regression2,
+      Regression,
+      Section5,
+      Simplified
     ) {
       Given("the user clears data in cache")
       background()
@@ -133,7 +139,7 @@ class SimplifiedJourneySpec
       fillSection1ForDeclaration("SIMPLIFIED", "prelodged")
       And("User fills section2/3/4 and continues their journey to Procedure-codes page")
       section5Journey2()
-      //validate skipping of fiscal information , additional-fiscal-references//
+      // validate skipping of fiscal information , additional-fiscal-references//
       And("User lands on Commodity-Details page")
       CommodityDetailsPage.checkPage()
       And("User enters commodity details code as 28034007 and description as St Andrews golf ball whisky and continues")
@@ -149,7 +155,7 @@ class SimplifiedJourneySpec
       And("User selects Yes to enter the code 12345678 as CUS code and continues")
       CusCodePage.fillPage("Yes", "12345678")
       CommonPage.continue()
-      //Skipping VAT rating page//
+      // Skipping VAT rating page//
       And("User lands on National-Additional-Code page")
       NationalAdditionalCodesPage.checkPage()
       And("User selects Yes and enters A103 as national additional code and continues")
@@ -160,7 +166,7 @@ class SimplifiedJourneySpec
       And("User selects No for adding another national code and continues")
       NationalAdditionalCodesListPage.fillPage("No")
       CommonPage.continue()
-      //Skipping Statistical-Value when additional procedure code is not a low value declaration "3LV"//
+      // Skipping Statistical-Value when additional procedure code is not a low value declaration "3LV"//
       And("User lands on Package-Information page")
       PackageInformationPage.checkPage()
       And("User enters Aerosol as package type, with 10 packages and 1034 as shipping mark for first package info")
@@ -171,7 +177,7 @@ class SimplifiedJourneySpec
       And("User selects No on package information list page and continues")
       PackageInformationListPage.fillPage("No")
       CommonPage.continue()
-      //Skipping Commodity-Measure, Supplementary-Units//
+      // Skipping Commodity-Measure, Supplementary-Units//
       And("User lands on Additional-Information-YesNo page")
       AdditionalInformationYesNoPage.checkPage()
       And("User selects No to add additional information")
@@ -201,7 +207,7 @@ class SimplifiedJourneySpec
       SummarySection5Page.checkPage()
       And("User checks the MiniCYA page for Section-5")
       SummarySection5Page.fillPage()
-      //check Fiscal Reference pages when Procedure code is 1042//
+      // check Fiscal Reference pages when Procedure code is 1042//
       And("User navigates to Procedure codes page")
       ProcedureCodesPage.navigateToItemPage(ProcedureCodesPage.pageId)
       And("User selects 1042 as procedure code and continues")

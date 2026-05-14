@@ -26,16 +26,16 @@ import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.Section4
 object SummarySection4Page extends BasePage {
 
   def backButtonHref: String = PreviousDocumentListPage.path
-  val path: String           = "/declaration/summary-section/4"
-  val title: String          = "Check your answers"
+  val path: String = "/declaration/summary-section/4"
+  val title: String = "Check your answers"
 
   override def checkExpanders(): Unit = ()
 
   // ex: fillPage()
 
   override def fillPage(values: String*): Unit = checkSectionSummary(Section4)
-  
-  def section4Journey1():Unit={
+
+  def section4Journey1(): Unit = {
     fillSection2ForDeclaration()
     fillSection3ForDeclaration()
     PreviousDocumentPage.checkPage()
@@ -46,7 +46,7 @@ object SummarySection4Page extends BasePage {
     CommonPage.continue()
   }
 
-  def section4Journey2():Unit={
+  def section4Journey2(): Unit = {
     fillSection2ForDeclaration()
     fillSection3ForDeclaration()
     InvoicesAndExchangeRateChoicePage.checkPage()

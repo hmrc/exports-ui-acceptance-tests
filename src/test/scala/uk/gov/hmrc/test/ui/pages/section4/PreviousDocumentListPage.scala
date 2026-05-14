@@ -17,17 +17,17 @@
 package uk.gov.hmrc.test.ui.pages.section4
 
 import uk.gov.hmrc.test.ui.pages.base.BasePage
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Standard, Supplementary, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Standard, Supplementary}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
 import uk.gov.hmrc.test.ui.pages.section3.SummarySection3Page
-import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.{DocumentCodeLabel, section4}
+import uk.gov.hmrc.test.ui.pages.section4.DetailKeys.{section4, DocumentCodeLabel}
 
 object PreviousDocumentListPage extends BasePage {
 
   def backButtonHref: String =
     detail(DeclarationType) match {
       case Standard | Supplementary => NatureOfTransactionPage.path
-      case _ => SummarySection3Page.path
+      case _                        => SummarySection3Page.path
     }
 
   val path: String = "/declaration/previous-documents-list"

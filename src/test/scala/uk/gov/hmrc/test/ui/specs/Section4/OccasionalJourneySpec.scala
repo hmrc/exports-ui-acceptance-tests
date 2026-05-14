@@ -28,18 +28,18 @@ import uk.gov.hmrc.test.ui.pages.section4.SummarySection4Page.section4Journey1
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
 
-class OccasionalJourneySpec extends AnyFeatureSpec
-  with BaseSpec
-  with GivenWhenThen
-  with ShouldVerb
-  with BeforeAndAfterAll
-  with BeforeAndAfterEach
-  with Browser
-  with TableDrivenPropertyChecks
-  with ScreenshotOnFailure{
+class OccasionalJourneySpec
+    extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
+    with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section4 Occasional Journey") {
-    Scenario("Complete Transactions section on Occasional Prelodged and Arrived declaration journey",Regression2,Regression,Section4,Occasional) {
-      forAll( Table("DecType", "prelodged", "arrived")) { decType =>
+    Scenario(
+      "Complete Transactions section on Occasional Prelodged and Arrived declaration journey",
+      Regression2,
+      Regression,
+      Section4,
+      Occasional
+    ) {
+      forAll(Table("DecType", "prelodged", "arrived")) { decType =>
         Given("the user clears data in cache")
         background()
         When(s"User fills Section1 for OCCASIONAL, $decType declaration")
@@ -54,7 +54,7 @@ class OccasionalJourneySpec extends AnyFeatureSpec
         CommonPage.continueOnMiniCya()
       }
     }
-    
-    }
+
+  }
 
 }

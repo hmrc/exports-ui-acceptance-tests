@@ -29,18 +29,18 @@ import uk.gov.hmrc.test.ui.pages.section4.SummarySection4Page.{assertTitle, sect
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
 
-class SimplifiedJourneySpec extends AnyFeatureSpec
-  with BaseSpec
-  with GivenWhenThen
-  with ShouldVerb
-  with BeforeAndAfterAll
-  with BeforeAndAfterEach
-  with Browser
-  with TableDrivenPropertyChecks
-  with ScreenshotOnFailure{
+class SimplifiedJourneySpec
+    extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
+    with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section4 Simplified Journey") {
-    Scenario("Complete Transactions section on Simplified Prelodged declaration journey and validate dynamic title changes on previous documents page",Regression2,Regression,Section4,Simplified) {
-      forAll( Table("DecType", "prelodged", "arrived")) { decType =>
+    Scenario(
+      "Complete Transactions section on Simplified Prelodged declaration journey and validate dynamic title changes on previous documents page",
+      Regression2,
+      Regression,
+      Section4,
+      Simplified
+    ) {
+      forAll(Table("DecType", "prelodged", "arrived")) { decType =>
         Given("the user clears data in cache")
         background()
         When(s"User fills Section1 for SIMPLIFIED, $decType declaration")
@@ -54,7 +54,7 @@ class SimplifiedJourneySpec extends AnyFeatureSpec
         And("User clicks continue on MiniCya")
         CommonPage.continueOnMiniCya()
         /*validate dynamic title change on previous documents page
-        * check title on previous documents page when authorisation choice is Permanent with excise*/
+         * check title on previous documents page when authorisation choice is Permanent with excise*/
         And("User navigates to Authorisation Choice page")
         ProcedureChoicePage.navigateToPage(ProcedureChoicePage.path)
         And("User selects Permanent with excise as export procedure choice and continues")
@@ -65,7 +65,7 @@ class SimplifiedJourneySpec extends AnyFeatureSpec
         Then("User should land on Previous-Document page")
         PreviousDocumentPage.checkPage()
         assertTitle("Declare each document, including excise guarantees")
-       //check title on previous documents page when authorisation choice is Temporary//
+        // check title on previous documents page when authorisation choice is Temporary//
         And("User navigates to Authorisation Choice page")
         ProcedureChoicePage.navigateToPage(ProcedureChoicePage.path)
         And("User selects Temporary as export procedure choice and continues")
@@ -78,6 +78,6 @@ class SimplifiedJourneySpec extends AnyFeatureSpec
         assertTitle("Declare each document, including previous declarations")
       }
     }
-    }
+  }
 
 }

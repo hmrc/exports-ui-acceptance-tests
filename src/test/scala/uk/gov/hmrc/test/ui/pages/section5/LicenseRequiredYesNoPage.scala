@@ -16,12 +16,16 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common, yes, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{yes, yesNo, Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.PageLinks.{isLicenceRequired, tariffCommodities}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.itemsIsLicenceRequired
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
-import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{AdditionalInformationCodeLabel, CommodityDetailsCode, IsLicenceRequired}
+import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.{
+  AdditionalInformationCodeLabel,
+  CommodityDetailsCode,
+  IsLicenceRequired
+}
 
 object LicenseRequiredYesNoPage extends BasePage {
 

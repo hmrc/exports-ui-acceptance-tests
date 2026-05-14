@@ -34,7 +34,14 @@ class ClearanceJourneySpec
 
   Feature("Section2 Clearance Prelodged") {
     // Clearance Prelodged Declaration//
-    Scenario("Exports Clearance Prelodged Scenario with possible scenarios",Regression1,Regression,Section2,Clearance,Smoke) {
+    Scenario(
+      "Exports Clearance Prelodged Scenario with possible scenarios",
+      Regression1,
+      Regression,
+      Section2,
+      Clearance,
+      Smoke
+    ) {
       Given("the user clears data in cache")
       background()
       When("User fills section1 for CLEARANCE, prelodged declaration")
@@ -80,7 +87,13 @@ class ClearanceJourneySpec
       SummarySection2Page.fillPage()
     }
     // Clearance Arrived Declaration//
-    Scenario("Exports Clearance Arrived Scenario which covers maximum number of pages",Regression1,Regression,Section2,Clearance) {
+    Scenario(
+      "Exports Clearance Arrived Scenario which covers maximum number of pages",
+      Regression1,
+      Regression,
+      Section2,
+      Clearance
+    ) {
       Given("the user clears data in cache")
       background()
       When("User fills section1 for CLEARANCE, arrived declaration")
