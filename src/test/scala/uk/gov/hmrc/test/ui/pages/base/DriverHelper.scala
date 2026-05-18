@@ -17,8 +17,8 @@
 package uk.gov.hmrc.test.ui.pages.base
 
 import com.typesafe.scalalogging.LazyLogging
-import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait}
 import org.openqa.selenium.*
+import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait}
 import uk.gov.hmrc.selenium.webdriver.Driver
 
 import java.time.Duration
@@ -211,7 +211,7 @@ trait DriverHelper {
         val message = s"Was waiting for an element with link text ($text) while on page ${driver.getCurrentUrl}"
         throw new TestFailedException(message, exception)
     }
-  }
+  
 
   private def waitFor(locator: By, expectedCondition: ExpectedCondition): WebElement = {
     val condition = expectedCondition match {
