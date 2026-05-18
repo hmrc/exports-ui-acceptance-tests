@@ -211,6 +211,7 @@ trait DriverHelper {
         val message = s"Was waiting for an element with link text ($text) while on page ${driver.getCurrentUrl}"
         throw new TestFailedException(message, exception)
     }
+  }
 
   private def waitFor(locator: By, expectedCondition: ExpectedCondition): WebElement = {
     val condition = expectedCondition match {
