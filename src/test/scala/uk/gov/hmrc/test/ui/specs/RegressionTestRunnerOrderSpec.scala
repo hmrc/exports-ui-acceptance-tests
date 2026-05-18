@@ -20,45 +20,80 @@ import org.scalatest.Suites
 import uk.gov.hmrc.test.ui.specs.AmendScenarios.AmendSpec
 import uk.gov.hmrc.test.ui.specs.Common.{DashboardSpec, RejectedNotificationsSpec}
 import uk.gov.hmrc.test.ui.specs.Section1.SupplementarySpec as Supplementary1
-import uk.gov.hmrc.test.ui.specs.Section1.{ClearanceJourneySpec as Clearence1, OccasionalJourneySpec as Occasional1, SimplifiedJourneySpec as Simplified1, StandardJourneySpec as Standard1}
-import uk.gov.hmrc.test.ui.specs.Section2.{ClearanceJourneySpec as Clearance2, OccasionalJourneySpec as Occasional2, SimplifiedJourneySpec as Simplified2, StandardJourneySpec as Standard2, SupplementaryJourneySpec as Supplementary2}
-import uk.gov.hmrc.test.ui.specs.Section3.{ClearanceJourneySpec as Clearance3, OccasionalJourneySpec as Occasional3, SimplifiedJourneySpec as Simplified3, StandardJourneySpec as Standard3, SupplementaryJourneySpec as Supplementary3}
-import uk.gov.hmrc.test.ui.specs.Section4.{ClearanceJourneySpec as Clearance4, OccasionalJourneySpec as Occasional4, SimplifiedJourneySpec as Simplified4, StandardJourneySpec as Standard4, SupplementaryJourneySpec as Supplementary4}
-import uk.gov.hmrc.test.ui.specs.Section5.{ClearanceJourneySpec as Clearance5, OccasionalJourneySpec as Occasional5, SimplifiedJourneySpec as Simplified5, StandardJourneySpec as Standard5, SupplementaryJourney5Spec as Supplementary5}
-import uk.gov.hmrc.test.ui.specs.Section6.{ClearanceJourneySpec as Clearance6, OccasionalJourneySpec as Occasional6, SimplifiedJourneySpec as Simplified6, StandardJourneySpec as Standard6, SupplementaryJourneySpec as Supplementary6}
+import uk.gov.hmrc.test.ui.specs.Section1.{
+  ClearanceJourneySpec as Clearence1,
+  OccasionalJourneySpec as Occasional1,
+  SimplifiedJourneySpec as Simplified1,
+  StandardJourneySpec as Standard1
+}
+import uk.gov.hmrc.test.ui.specs.Section2.{
+  ClearanceJourneySpec as Clearance2,
+  OccasionalJourneySpec as Occasional2,
+  SimplifiedJourneySpec as Simplified2,
+  StandardJourneySpec as Standard2,
+  SupplementaryJourneySpec as Supplementary2
+}
+import uk.gov.hmrc.test.ui.specs.Section3.{
+  ClearanceJourneySpec as Clearance3,
+  OccasionalJourneySpec as Occasional3,
+  SimplifiedJourneySpec as Simplified3,
+  StandardJourneySpec as Standard3,
+  SupplementaryJourneySpec as Supplementary3
+}
+import uk.gov.hmrc.test.ui.specs.Section4.{
+  ClearanceJourneySpec as Clearance4,
+  OccasionalJourneySpec as Occasional4,
+  SimplifiedJourneySpec as Simplified4,
+  StandardJourneySpec as Standard4,
+  SupplementaryJourneySpec as Supplementary4
+}
+import uk.gov.hmrc.test.ui.specs.Section5.{
+  ClearanceJourneySpec as Clearance5,
+  OccasionalJourneySpec as Occasional5,
+  SimplifiedJourneySpec as Simplified5,
+  StandardJourneySpec as Standard5,
+  SupplementaryJourney5Spec as Supplementary5
+}
+import uk.gov.hmrc.test.ui.specs.Section6.{
+  ClearanceJourneySpec as Clearance6,
+  OccasionalJourneySpec as Occasional6,
+  SimplifiedJourneySpec as Simplified6,
+  StandardJourneySpec as Standard6,
+  SupplementaryJourneySpec as Supplementary6
+}
 
 class RegressionTestRunnerOrderSpec extends Suites(
-  new AmendSpec,
-  new DashboardSpec,
-  new RejectedNotificationsSpec,
-  new Clearence1,
-  new Occasional1,
-  new Simplified1,
-  new Standard1,
-  new Supplementary1,
-  new Clearance2,
-  new Occasional2,
-  new Simplified2,
-  new Standard2,
-  new Supplementary2,
-  new Clearance3,
-  new Occasional3,
-  new Simplified3,
-  new Standard3,
-  new Supplementary3,
-  new Clearance4,
-  new Occasional4,
-  new Simplified4,
-  new Standard4,
-  new Supplementary4,
-  new Clearance5,
-  new Occasional5,
-  new Simplified5,
-  new Standard5,
-  new Supplementary5,
-  new Clearance6,
-  new Occasional6,
-  new Simplified6,
-  new Standard6,
-  new Supplementary6
-)
+      new AmendSpec,
+      new DashboardSpec,
+      new RejectedNotificationsSpec,
+      new Clearence1,
+      new Occasional1,
+      new Simplified1,
+      new Standard1,
+      new Supplementary1,
+      new Clearance2,
+      new Occasional2,
+      new Simplified2,
+      new Standard2,
+      new Supplementary2,
+      new Clearance3,
+      new Occasional3,
+      new Simplified3,
+      new Standard3,
+      new Supplementary3,
+      new Clearance4,
+      new Occasional4,
+      new Simplified4,
+      new Standard4,
+      new Supplementary4,
+      new Clearance5,
+      new Occasional5,
+      new Simplified5,
+      new Standard5,
+      new Supplementary5,
+      new Clearance6,
+      new Occasional6,
+      new Simplified6,
+      new Standard6,
+      new Supplementary6
+    )

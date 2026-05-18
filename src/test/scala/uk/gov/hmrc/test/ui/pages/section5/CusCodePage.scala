@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section5
 
-import uk.gov.hmrc.test.ui.pages.base.Constants.{Common, yesNo}
+import uk.gov.hmrc.test.ui.pages.base.Constants.{yesNo, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.itemsCusCode
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Constants, Detail}
 import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.CusCode
@@ -24,22 +24,20 @@ import uk.gov.hmrc.test.ui.pages.section5.DetailsKeys.CusCode
 object CusCodePage extends BasePage {
 
   def backButtonHref: String = DangerousGoodsCodePage.path
-  def path: String           = itemUrl("cus-code")
-  val title: String          = "Is there a CUS code for this item?"
+  def path: String = itemUrl("cus-code")
+  val title: String = "Is there a CUS code for this item?"
 
   override val expanderHrefs: Map[String, Seq[String]] = Map(Common -> List(itemsCusCode))
 
-  val code  = 1
+  val code = 1
 
   // No  => fillPage(no)
   // Yes => fillPage(yes, "1234")
 
-  override def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit =
     if (selectYesOrNoRadio(values(yesNo))) {
       fillTextBoxById("cusCode", values(code))
       store(CusCode(itemId) -> Detail(values(code)))
-    }
-    else store(CusCode(itemId) -> Detail(Constants.no))
-  }
+    } else store(CusCode(itemId) -> Detail(Constants.no))
 
 }

@@ -24,23 +24,25 @@ import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
 import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
 import uk.gov.hmrc.test.ui.pages.base.CommonPage
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.*
-import uk.gov.hmrc.test.ui.pages.common.{CopyDeclarationPage, DashboardPage, DeclarationHoldingPage, DeclarationInformationPage, RejectedNotificationPage, SubmitYourDeclarationPage, SummaryPage}
+import uk.gov.hmrc.test.ui.pages.common.{
+  CopyDeclarationPage,
+  DashboardPage,
+  DeclarationHoldingPage,
+  DeclarationInformationPage,
+  RejectedNotificationPage,
+  SubmitYourDeclarationPage,
+  SummaryPage
+}
 import uk.gov.hmrc.test.ui.pages.common.RejectedNotificationPage.*
 import uk.gov.hmrc.test.ui.pages.section1.DucrEntryPage
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
 
-class RejectedNotificationsSpec extends AnyFeatureSpec
-  with BaseSpec
-  with GivenWhenThen
-  with ShouldVerb
-  with BeforeAndAfterAll
-  with BeforeAndAfterEach
-  with Browser
-  with TableDrivenPropertyChecks
-  with ScreenshotOnFailure{
-  Feature("Validate Rejected Notifications"){
-    Scenario("Fix a rejected declaration and submit the declaration",Regression3,Smoke,Regression){
+class RejectedNotificationsSpec
+    extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
+    with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
+  Feature("Validate Rejected Notifications") {
+    Scenario("Fix a rejected declaration and submit the declaration", Regression3, Smoke, Regression) {
       Given("the user clears data in cache")
       background()
       When("User fills all sections of the declaration and submits the declaration to land on Saved-Summary page")
@@ -56,9 +58,11 @@ class RejectedNotificationsSpec extends AnyFeatureSpec
       clickMRNLinkToFixErrors()
       And("User clicks on Lrn change link to fix error and submits the declaration then land on Dashboard page")
       clickLRNLinkToFixErrors()
-      Then("User validates declaration details on Submitted tab and checks Status is Arrived and accepted then lands on Declaration-Information page")
+      Then(
+        "User validates declaration details on Submitted tab and checks Status is Arrived and accepted then lands on Declaration-Information page"
+      )
       validateDeclarationDetailsLandOnDecInfoPage()
-      //Duplicate ducr warning messages check
+      // Duplicate ducr warning messages check
 
       When("User clicks on copy link and continues by entering ducr 8GB123456469274-101SHIP1 and a rejected lrn")
       DeclarationInformationPage.copyDeclaration()
@@ -70,7 +74,9 @@ class RejectedNotificationsSpec extends AnyFeatureSpec
       DeclarationHoldingPage.checkPage()
       DeclarationHoldingPage.waitForClass("govuk-warning-text__text")
       Then("User validates ducr warning on rejected notifications page")
-      RejectedNotificationPage.duplicateDucrWarning().getText must include("DUCR previously used within the last 12 months.")
+      RejectedNotificationPage.duplicateDucrWarning().getText must include(
+        "DUCR previously used within the last 12 months."
+      )
       When("User clicks on Ducr change link to fix error")
       RejectedNotificationPage.FixErrorsAndValidateWarning("Ducr")
       Then("User validates duplicate ducr warning on ducr entry page")

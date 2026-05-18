@@ -20,8 +20,9 @@ import uk.gov.hmrc.test.ui.pages.base.DetailKey
 
 object DetailKeys {
 
-  val section3  = 3
-  val Section3: DetailKey = DetailKey("Section 3 of 6: Routes and locations", section3, Some("routes-and-locations-card"))
+  val section3 = 3
+  val Section3: DetailKey =
+    DetailKey("Section 3 of 6: Routes and locations", section3, Some("routes-and-locations-card"))
 
   // /destination-country
   val DestinationCountry: DetailKey = DetailKey("Destination country", section3)
@@ -35,5 +36,5 @@ object DetailKeys {
   val RRS01: DetailKey = DetailKey("Additional Information code", section3, checkChangeLink = false)
 
   // /office-of-exit
-  val OfficeOfExit : DetailKey = DetailKey("Office of exit", section3)
+  val OfficeOfExit: DetailKey = DetailKey("Office of exit", section3)
 }

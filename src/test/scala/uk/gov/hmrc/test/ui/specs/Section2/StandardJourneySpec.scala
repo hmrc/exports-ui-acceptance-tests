@@ -35,7 +35,12 @@ class StandardJourneySpec
     with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section2 Standard Prelodged") {
     Scenario(
-      "Exports Standard Prelodged Scenario with Permanent as export procedure code choice, Consolidator and Manufacturer as other parties are involved",Regression1,Regression,Section2,Standard,Smoke
+      "Exports Standard Prelodged Scenario with Permanent as export procedure code choice, Consolidator and Manufacturer as other parties are involved",
+      Regression1,
+      Regression,
+      Section2,
+      Standard,
+      Smoke
     ) {
       Given("the user clears data in cache")
       background()
@@ -144,7 +149,11 @@ class StandardJourneySpec
     }
 
     Scenario(
-      "Exports Standard Arrived Scenario with Temporary as export procedure code choice and No other parties are involved",Regression1,Regression,Section2,Standard
+      "Exports Standard Arrived Scenario with Temporary as export procedure code choice and No other parties are involved",
+      Regression1,
+      Regression,
+      Section2,
+      Standard
     ) {
       Given("the user clears data in cache")
       background()

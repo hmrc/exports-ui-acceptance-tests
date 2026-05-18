@@ -17,12 +17,13 @@
 package uk.gov.hmrc.test.ui.specs
 
 import org.scalatest.Suites
-import uk.gov.hmrc.test.ui.specs.Section5.{ClearanceJourneySpec as Clearance5, OccasionalJourneySpec as Occasional5, SimplifiedJourneySpec as Simplified5, StandardJourneySpec as Standard5, SupplementaryJourney5Spec as Supplementary5}
+import uk.gov.hmrc.test.ui.specs.Section5.{
+  ClearanceJourneySpec as Clearance5,
+  OccasionalJourneySpec as Occasional5,
+  SimplifiedJourneySpec as Simplified5,
+  StandardJourneySpec as Standard5,
+  SupplementaryJourney5Spec as Supplementary5
+}
 
-class Section5TestRunnerOrderSpec extends Suites(
-  new Clearance5,
-  new Occasional5,
-  new Simplified5,
-  new Standard5,
-  new Supplementary5
-)
+class Section5TestRunnerOrderSpec
+    extends Suites(new Clearance5, new Occasional5, new Simplified5, new Standard5, new Supplementary5)

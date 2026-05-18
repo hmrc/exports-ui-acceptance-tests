@@ -31,7 +31,7 @@ object SummarySection3Page extends BasePage {
 
   override def fillPage(values: String*): Unit = checkSectionSummary(Section3)
 
-  def completeSection3Standard():Unit={
+  def completeSection3Standard(): Unit = {
     DestinationCountryPage.checkPage()
     DestinationCountryPage.fillPage("Mauritania")
     CommonPage.continue()

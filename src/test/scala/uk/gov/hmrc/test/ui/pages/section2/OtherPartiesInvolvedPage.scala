@@ -18,7 +18,12 @@ package uk.gov.hmrc.test.ui.pages.section2
 
 import uk.gov.hmrc.test.ui.pages.base.Constants.{none, sequenceId}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
-import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{AdditionalPartiesInvolvedEORI, AdditionalPartiesInvolvedType, NoAdditionalPartiesInvolved}
+import uk.gov.hmrc.test.ui.pages.section1.DeclarationTypePage.clickByCssSelector
+import uk.gov.hmrc.test.ui.pages.section2.DetailKeys.{
+  AdditionalPartiesInvolvedEORI,
+  AdditionalPartiesInvolvedType,
+  NoAdditionalPartiesInvolved
+}
 
 object OtherPartiesInvolvedPage extends BasePage {
 
@@ -44,7 +49,7 @@ object OtherPartiesInvolvedPage extends BasePage {
   override def fillPage(values: String*): Unit =
     if (values.head == none) {
       store(NoAdditionalPartiesInvolved -> Detail(none))
-      clickById("no")
+      clickByCssSelector(s"label[for='no']")
     } else {
       val id = values(choice) match {
         case "Consolidator"                 => "CS"
@@ -52,7 +57,7 @@ object OtherPartiesInvolvedPage extends BasePage {
         case "Additional freight forwarder" => "FW"
         case "Warehouse keeper"             => "WH"
       }
-      clickById(id)
+      clickByCssSelector(s"label[for='$id']")
       fillTextBoxById(s"eori$id", values(EORI))
       store(
         AdditionalPartiesInvolvedType(values(sequenceId)) -> Detail(values(choice)),

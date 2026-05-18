@@ -17,13 +17,12 @@
 package uk.gov.hmrc.test.ui.pages.base
 
 import com.typesafe.scalalogging.LazyLogging
-import org.openqa.selenium.interactions.Actions
-import org.openqa.selenium.support.ui.ExpectedConditions
-import org.openqa.selenium.{By, Keys, StaleElementReferenceException, WebDriver, WebElement}
+import org.openqa.selenium.*
+import org.openqa.selenium.support.ui.{ExpectedConditions, FluentWait}
 import uk.gov.hmrc.selenium.webdriver.Driver
-import uk.gov.hmrc.test.ui.pages.base.CommonPage.fluentWait
 
-import scala.jdk.CollectionConverters.ListHasAsScala
+import java.time.Duration
+import scala.jdk.CollectionConverters.*
 import scala.util.{Failure, Success, Try}
 
 trait ExpectedCondition
@@ -36,11 +35,19 @@ trait DriverHelper {
 
   protected def driver: WebDriver = uk.gov.hmrc.test.ui.pages.base.DriverHelper.driver
 
+  def fluentWait: FluentWait[WebDriver] = new FluentWait[WebDriver](driver)
+    .withTimeout(Duration.ofSeconds(30))
+    .pollingEvery(Duration.ofMillis(500))
+    .ignoring(classOf[ClassNotFoundException])
+    .ignoring(classOf[NoSuchElementException])
+    .ignoring(classOf[StaleElementReferenceException])
+
   def changeLinkOnCYA(row: String): WebElement =
     waitFor(By.cssSelector(s".$row .govuk-link"), Clickable)
 
   def continue(): Unit = {
-    fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("submit")))
+    fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[name='csrfToken']")))
+
     clickById("submit")
   }
 
@@ -53,34 +60,51 @@ trait DriverHelper {
   def clickByCssSelector(value: String): Unit = findElementByCssSelector(value).click()
   def clickByClassName(value: String): Unit = findElementByClassName(value).click()
 
+  def elementDoesNotExists(by: By): Boolean = {
+    val wait = new FluentWait[WebDriver](driver)
+      .withTimeout(Duration.ofSeconds(2))
+      .pollingEvery(Duration.ofMillis(100))
+      .ignoring(classOf[NoSuchElementException])
+    Try(wait.until(ExpectedConditions.presenceOfElementLocated(by))).isFailure
+  }
+
   def elementByClassDoesNotExist(className: String): Boolean =
-      Try(waitForClass(className, Presence)) match {
-        case Success(_) => false
-        case Failure(_) => true
-      }
+    elementDoesNotExists(By.className(className))
 
   def elementByIdDoesNotExist(elementId: String): Boolean =
-      Try(waitForId(elementId, Presence)) match {
-        case Success(_) => false
-        case Failure(_) => true
-      }
+    elementDoesNotExists(By.id(elementId))
 
   def elementBySelectorDoesNotExist(selector: String): Boolean =
-      Try(waitForClass(selector, Presence)) match {
-        case Success(_) => false
-        case Failure(_) => true
-      }
+    elementDoesNotExists(By.cssSelector(selector))
 
-  def findElementById(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.id(value)))
-  def findElementByXpath(value: String): WebElement =fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(value)))
-  def findElementByLinkText(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.linkText(value)))
-  def findElementByPartialLink(value: String): WebElement =fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.partialLinkText(value)))
-  def findElementByCssSelector(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(value)))
-  def findElementByClassName(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.className(value)))
-  def findElementByName(value: String): WebElement = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.name(value)))
- 
-  def findElementsByClassName(value: String): Seq[WebElement] = driver.findElements(By.className(value)).asScala.toList
-  def findElementsByTag(tag: String): Seq[WebElement] = driver.findElements(By.tagName(tag)).asScala.toList
+  def findElementById(value: String): WebElement =
+    fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.id(value)))
+  def findElementByXpath(value: String): WebElement =
+    fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(value)))
+  def findElementByLinkText(value: String): WebElement =
+    fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(value)))
+  def findElementByPartialLink(value: String): WebElement =
+    fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(value)))
+  def findElementByCssSelector(value: String): WebElement =
+    fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(value)))
+  def findElementByClassName(value: String): WebElement =
+    fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(value)))
+  def findElementByName(value: String): WebElement =
+    fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.name(value)))
+  def findElementByTag(tag: String): WebElement =
+    fluentWait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName(tag)))
+
+  def findElementsByClassName(value: String): Seq[WebElement] =
+    fluentWait.until { driver =>
+      val elementsByClass = driver.findElements(By.className(value)).asScala.toList
+      if (elementsByClass.nonEmpty) elementsByClass else null
+    }
+
+  def findElementsByTag(tag: String): Seq[WebElement] =
+    fluentWait.until { driver =>
+      val elementsByTag = driver.findElements(By.tagName(tag)).asScala.toList
+      if (elementsByTag.nonEmpty) elementsByTag else null
+    }
 
   def findChildByClassName(parent: WebElement, className: String): WebElement =
     parent.findElement(By.className(className))
@@ -118,7 +142,7 @@ trait DriverHelper {
   }
 
   def fillRadioButton(elementId: String, refSelector: String, refText: String): Unit = {
-    clickById(elementId)
+    clickByCssSelector(s"label[for='$elementId']")
     findElementById(refSelector).clear()
     findElementById(refSelector).sendKeys(refText)
   }
@@ -134,24 +158,20 @@ trait DriverHelper {
 
   def reset(elementId: String): Unit = waitForId(elementId).clear()
 
-  def selectRadioAndClick(elementId: String): Unit = {
-    val actions = new Actions(driver)
-    val element = findElementById(elementId)
-    actions.moveToElement(element).click().perform()
-  }
+  def selectRadioAndClick(elementId: String): Unit =
+    clickByCssSelector(s"label[for='$elementId']")
 
   def selectYesOrNoRadio(option: String, yes: String = "code_yes", no: String = "code_no"): Boolean =
     option match {
-      case Constants.yes    => waitForId(yes, Presence).click()
+      case Constants.yes =>
+        clickByCssSelector(s"label[for='$yes']")
         true
-      case Constants.no | _ => waitForId(no, Presence).click()
+      case Constants.no | _ =>
+        clickByCssSelector(s"label[for='$no']")
         false
     }
 
-  def waitForClass(
-    className: String,
-    expectedCondition: ExpectedCondition = Visible
-  ): WebElement =
+  def waitForClass(className: String, expectedCondition: ExpectedCondition = Visible): WebElement =
     Try(waitFor(By.className(className), expectedCondition)) match {
       case Success(element) => element
       case Failure(exception) =>
@@ -172,7 +192,7 @@ trait DriverHelper {
     }
 
   def waitForId(elementId: String, expectedCondition: ExpectedCondition = Visible): WebElement = {
-    def attempt(): WebElement = {
+    def attempt(): WebElement =
       Try(waitFor(By.id(elementId), expectedCondition)) match {
         case Success(element) => element
         case Failure(_: StaleElementReferenceException) =>
@@ -180,19 +200,18 @@ trait DriverHelper {
         case Failure(exception) =>
           val message = s"Was waiting for an element with id($elementId) while on page ${driver.getCurrentUrl}"
           throw new TestFailedException(message, exception)
-           }
-    }
+      }
     attempt()
   }
 
-  def waitForLinkText(text: String, expectedCondition: ExpectedCondition = Visible): WebElement = {
+  def waitForLinkText(text: String, expectedCondition: ExpectedCondition = Visible): WebElement =
     Try(waitFor(By.linkText(text), expectedCondition)) match {
       case Success(element) => element
       case Failure(exception) =>
         val message = s"Was waiting for an element with link text ($text) while on page ${driver.getCurrentUrl}"
         throw new TestFailedException(message, exception)
     }
-  }
+  
 
   private def waitFor(locator: By, expectedCondition: ExpectedCondition): WebElement = {
     val condition = expectedCondition match {

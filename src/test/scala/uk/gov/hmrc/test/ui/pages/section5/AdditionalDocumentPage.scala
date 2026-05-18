@@ -42,10 +42,10 @@ object AdditionalDocumentPage extends BasePage {
     (detail(DeclarationType), hasCodesRequiringAdditionalDocuments, isLicenseRequired) match {
       case (Clearance, true, _)  => "Declare each document code and authorisation number"
       case (Clearance, false, _) => "Declare each additional document required for this item"
-      case (_, true, true)   => "Enter licence details, authorisation numbers and any other document details"
-      case (_, false, true)  => "Enter licence details and any other document details"
-      case (_, true, false)  => "Enter authorisation numbers and any other document details"
-      case (_, false, false) => "Enter any other document details"
+      case (_, true, true)       => "Enter licence details, authorisation numbers and any other document details"
+      case (_, false, true)      => "Enter licence details and any other document details"
+      case (_, true, false)      => "Enter authorisation numbers and any other document details"
+      case (_, false, false)     => "Enter any other document details"
     }
 
   override val expanderHrefs: Map[String, Seq[String]] =
@@ -86,7 +86,6 @@ object AdditionalDocumentPage extends BasePage {
     store(keyAndValues: _*)
   }
 
-  def fillAdditionalDocument(code: String, identifier: String, seqId: String):Unit={
+  def fillAdditionalDocument(code: String, identifier: String, seqId: String): Unit =
     AdditionalDocumentPage.fillPage(genSequenceId(seqId), code, identifier)
-  }
 }

@@ -38,13 +38,15 @@ object ConfirmationPage extends BasePage {
   override def title: String =
     detail(Lrn).take(1) match {
       case "C" if isArrivedDeclaration => "Your declaration has been submitted"
-      case "C" | "Q" | "X" | "I" | "J" | "L" | "K" | "P" | "N" | "V" => "Your submitted declaration is still being checked"
-      case "D" | "U"                                           => "Your declaration has been submitted - action is required"
+      case "C" | "Q" | "X" | "I" | "J" | "L" | "K" | "P" | "N" | "V" =>
+        "Your submitted declaration is still being checked"
+      case "D" | "U" => "Your declaration has been submitted - action is required"
       case _ =>
         if (isAmendmentMode) {
           if (declarationStatus.contains("REJECTED") && !isCancelDeclaration) "Amendment request rejected"
           else if (declarationStatus.contains("DENIED")) "Amendment request failed"
-          else if (declarationStatus.contains("REJECTED") && isCancelDeclaration) "Your amendment cancellation has been accepted"
+          else if (declarationStatus.contains("REJECTED") && isCancelDeclaration)
+            "Your amendment cancellation has been accepted"
           else if (declarationStatus.contains("PENDING")) "Your amendment request is still being processed"
           else "Amendment request accepted"
         } else {
@@ -90,9 +92,7 @@ object ConfirmationPage extends BasePage {
         row.findElement(By.className("govuk-summary-list__value")).getText
 
       if (actualKey == expectedKey && actualValue == expectedValue) {
-        resultBuilder.append(
-          s"Row $index check passed. Expected and found: '$expectedKey' -> '$expectedValue'.\n"
-        )
+        resultBuilder.append(s"Row $index check passed. Expected and found: '$expectedKey' -> '$expectedValue'.\n")
       } else {
         resultBuilder.append(
           s"Row $index check failed. " +
@@ -120,7 +120,6 @@ object ConfirmationPage extends BasePage {
     }
     resultBuilder.toString()
   }
-
 
   private def checkContentLinks(expectedLinks: Seq[Regex]): Unit = {
     val actualLinks =

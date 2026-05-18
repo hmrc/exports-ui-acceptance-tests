@@ -16,11 +16,11 @@
 
 package uk.gov.hmrc.test.ui.pages.section1
 
-import uk.gov.hmrc.test.ui.pages.base.Constants._
+import uk.gov.hmrc.test.ui.pages.base.Constants.*
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isSupplementary
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.{AdditionalDeclarationType, DeclarationType}
-import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.isStandard
+import uk.gov.hmrc.test.ui.pages.section1.StandardOrOtherPage.{clickByCssSelector, isStandard}
 
 object DeclarationTypePage extends BasePage {
 
@@ -38,16 +38,16 @@ object DeclarationTypePage extends BasePage {
   override def fillPage(values: String*): Unit = {
     val additionalDeclarationType =
       (detail(DeclarationType), values(0)) match {
-        case (Supplementary, NonEidr)  => clickById(NonEidr); "Simplified - type Y"
-        case (Supplementary, Eidr)     => clickById(Eidr); "EIDR - type Z"
-        case (Simplified, Arrived)     => clickById(Arrived); "Arrived - type C"
-        case (Simplified, Prelodged)   => clickById(Prelodged); "Pre-lodged - type F"
-        case (Occasional, Arrived)     => clickById(Arrived); "Arrived - type B"
-        case (Occasional, Prelodged)   => clickById(Prelodged); "Pre-lodged - type E"
-        case (Clearance, Arrived)      => clickById(Arrived); "Arrived - type J"
-        case (Clearance, Prelodged)    => clickById(Prelodged); "Pre-lodged - type K"
-        case (Standard, Arrived)       => clickById(Arrived); "Arrived - type A"
-        case (Standard, Prelodged) | _ => clickById(Prelodged); "Pre-lodged - type D"
+        case (Supplementary, NonEidr)  => clickByCssSelector(s"label[for='$NonEidr']"); "Simplified - type Y"
+        case (Supplementary, Eidr)     => clickByCssSelector(s"label[for='$Eidr']"); "EIDR - type Z"
+        case (Simplified, Arrived)     => clickByCssSelector(s"label[for='$Arrived']"); "Arrived - type C"
+        case (Simplified, Prelodged)   => clickByCssSelector(s"label[for='$Prelodged']"); "Pre-lodged - type F"
+        case (Occasional, Arrived)     => clickByCssSelector(s"label[for='$Arrived']"); "Arrived - type B"
+        case (Occasional, Prelodged)   => clickByCssSelector(s"label[for='$Prelodged']"); "Pre-lodged - type E"
+        case (Clearance, Arrived)      => clickByCssSelector(s"label[for='$Arrived']"); "Arrived - type J"
+        case (Clearance, Prelodged)    => clickByCssSelector(s"label[for='$Prelodged']"); "Pre-lodged - type K"
+        case (Standard, Arrived)       => clickByCssSelector(s"label[for='$Arrived']"); "Arrived - type A"
+        case (Standard, Prelodged) | _ => clickByCssSelector(s"label[for='$Prelodged']"); "Pre-lodged - type D"
       }
     store(AdditionalDeclarationType -> Detail(additionalDeclarationType))
   }
@@ -63,6 +63,5 @@ object DeclarationTypePage extends BasePage {
 
   def isSimplifiedDeclaration: Boolean =
     detail(AdditionalDeclarationType).startsWith("Simplified -")
-
 
 }

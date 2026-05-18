@@ -29,13 +29,20 @@ import uk.gov.hmrc.test.ui.pages.section5.SummarySection5Page.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
 
-class SupplementaryJourney5Spec extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
-  with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
+class SupplementaryJourney5Spec
+    extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
+    with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section5 Supplementary Journey") {
     /*Validates supplementary EIDR journey and VAT‑page skipping.
      # Covers adding multiple items and removing them from Mini‑CYA and declaration list.
      # Ensures Add‑Item link routes correctly to the procedure‑code page.*/
-    Scenario("Complete Items section on Supplementary EIDR declaration journey",Regression2,Regression,Section5,Supplementary) {
+    Scenario(
+      "Complete Items section on Supplementary EIDR declaration journey",
+      Regression2,
+      Regression,
+      Section5,
+      Supplementary
+    ) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for SUPPLEMENTARY, eidr declaration")
@@ -52,10 +59,10 @@ class SupplementaryJourney5Spec extends AnyFeatureSpec with BaseSpec with GivenW
       And("User selects Yes to enter the code 1234 as dangerous goods and continues")
       DangerousGoodsCodePage.fillPage("Yes", "1234")
       CommonPage.continue()
-      //skipped Vat rating page//
+      // skipped Vat rating page//
       When("User lands on National-Additional-Code page and continue their journey by skipping vat rating page")
       section5SkippedVATRatingPage()
-      //skipping of documents required yes/no page and landing on addition documents page//
+      // skipping of documents required yes/no page and landing on addition documents page//
       And("User lands on Additional-Document page and continue their journey by Adding second item")
       skipDocumentsRequiresYesNoPage()
       Then("User should land on MiniCYA-Section-5 page")
@@ -63,7 +70,7 @@ class SupplementaryJourney5Spec extends AnyFeatureSpec with BaseSpec with GivenW
       And("User checks the MiniCYA page for Section-5")
       SummarySection5Page.fillPage()
 
-      //Deleting item from minicya section-5 page//
+      // Deleting item from minicya section-5 page//
       And("User removes one item from the declaration")
       SummarySection5Page.removeItem()
       And("User lands on Remove-Declaration-Item page")
@@ -83,7 +90,7 @@ class SupplementaryJourney5Spec extends AnyFeatureSpec with BaseSpec with GivenW
       And("User checks the MiniCYA page for Section-5")
       SummarySection5Page.fillPage()
 
-      //Deleting item from Declaration Items List page//
+      // Deleting item from Declaration Items List page//
       And("User clicks back on MiniCya section 5")
       SummarySection5Page.back()
       And("User lands on Declaration-Items-List page")
@@ -96,16 +103,22 @@ class SupplementaryJourney5Spec extends AnyFeatureSpec with BaseSpec with GivenW
       Then("User should land on MiniCYA-Section-5 page")
       SummarySection5Page.checkPage()
       And("User should be displayed with a warning text to add items")
-      SummarySection5Page.addItemWarning().getText should include("You need to add at least one item before submitting your declaration")
+      SummarySection5Page.addItemWarning().getText should include(
+        "You need to add at least one item before submitting your declaration"
+      )
       And("User clicks on Add Item link")
       SummarySection5Page.addItem()
       And("User lands on Add-Declaration-Item-1 page")
       AddDeclarationItemPage.checkPage()
     }
-     /*Completes a Supplementary Simplified Declaration end‑to‑end.
+    /*Completes a Supplementary Simplified Declaration end‑to‑end.
       # Verifies ability to amend item details via the Change link on the declaration‑items‑list page after item completion.*/
     Scenario(
-      "Complete Items section on Supplementary Simplified declaration journey and Validate Changing Item Details",Regression2,Regression,Section5,Supplementary
+      "Complete Items section on Supplementary Simplified declaration journey and Validate Changing Item Details",
+      Regression2,
+      Regression,
+      Section5,
+      Supplementary
     ) {
       Given("the user clears data in cache")
       background()
@@ -120,7 +133,7 @@ class SupplementaryJourney5Spec extends AnyFeatureSpec with BaseSpec with GivenW
       And("User checks the MiniCYA page for Section-5")
       SummarySection5Page.fillPage()
     }
-    
-    }
+
+  }
 
 }

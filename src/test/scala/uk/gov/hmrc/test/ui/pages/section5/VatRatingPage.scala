@@ -43,11 +43,12 @@ object VatRatingPage extends BasePage {
   override def fillPage(values: String*): Unit = {
     val value = values.head match {
       case "Report VAT rating after this declaration has been submitted" =>
-        clickById("VAT_RAD"); "Report VAT rating after this declaration has been submitted"
-      case "The goods are zero-rated"                          => clickById("VATZ"); "Yes"
-      case "The goods are VAT exempt in the UK"                => clickById("VATE"); "No, exempt"
-      case "A 20% VAT rate will be paid in the UK"             => clickById("VAT_NO"); "No, paid"
-      case "A reduced 5% VAT duty rate will be paid in the UK" => clickById("VATR"); "No, reduced"
+        clickByCssSelector(s"label[for='VAT_RAD']"); "Report VAT rating after this declaration has been submitted"
+      case "The goods are zero-rated"              => clickByCssSelector(s"label[for='VATZ']"); "Yes"
+      case "The goods are VAT exempt in the UK"    => clickByCssSelector(s"label[for='VATE']"); "No, exempt"
+      case "A 20% VAT rate will be paid in the UK" => clickByCssSelector(s"label[for='VAT_NO']"); "No, paid"
+      case "A reduced 5% VAT duty rate will be paid in the UK" =>
+        clickByCssSelector(s"label[for='VATR']"); "No, reduced"
     }
     store(VatRating(itemId) -> Detail(value))
   }

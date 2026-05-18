@@ -28,5 +28,5 @@ object NotDeclarantPage extends BasePage {
 
   // ex: fillPage()
 
-   override def fillPage(values: String*): Unit = ()
+  override def fillPage(values: String*): Unit = ()
 }

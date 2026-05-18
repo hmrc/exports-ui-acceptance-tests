@@ -28,18 +28,12 @@ import uk.gov.hmrc.test.ui.pages.section2.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
 
-class OccasionalJourneySpec extends AnyFeatureSpec
-  with BaseSpec 
-  with GivenWhenThen
-  with ShouldVerb
-  with BeforeAndAfterAll
-  with BeforeAndAfterEach 
-  with Browser
-  with TableDrivenPropertyChecks
-  with ScreenshotOnFailure {
+class OccasionalJourneySpec
+    extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
+    with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section2 Occasional Journey Scenarios") {
-    Scenario("Exports Occasional declaration (Prelodged and Arrived)",Regression1,Regression,Section2,Occasional) {
-      forAll(Table ("Type", "arrived", "prelodged")) { Type =>
+    Scenario("Exports Occasional declaration (Prelodged and Arrived)", Regression1, Regression, Section2, Occasional) {
+      forAll(Table("Type", "arrived", "prelodged")) { Type =>
         Given("the user clears data in cache")
         background()
         When(s"User fills Section1 for OCCASIONAL, $Type declaration")

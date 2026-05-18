@@ -27,20 +27,19 @@ import uk.gov.hmrc.test.ui.pages.section1.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
 
-class OccasionalJourneySpec extends AnyFeatureSpec
-  with BaseSpec
-  with GivenWhenThen
-  with ShouldVerb
-  with BeforeAndAfterAll
-  with BeforeAndAfterEach
-  with Browser
-  with TableDrivenPropertyChecks
-  with ScreenshotOnFailure{
+class OccasionalJourneySpec
+    extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
+    with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Occasional Journey") {
-    //Below scenario - DoYouHaveADucr:[No], Confirm-Ducr:[Yes], Link-to-Mucr:[No]//
-    Scenario("Fill Section 1 for a Occasional Prelodged and Arrived Declaration",Regression,Regression1,Section1,Occasional) {
-      forAll(
-        Table("DecType", "prelodged", "arrived")) { DecType =>
+    // Below scenario - DoYouHaveADucr:[No], Confirm-Ducr:[Yes], Link-to-Mucr:[No]//
+    Scenario(
+      "Fill Section 1 for a Occasional Prelodged and Arrived Declaration",
+      Regression,
+      Regression1,
+      Section1,
+      Occasional
+    ) {
+      forAll(Table("DecType", "prelodged", "arrived")) { DecType =>
         Given("the user clears data in cache")
         background()
         When("User enters EORI FR1234567 on Login Page and clicks submit")

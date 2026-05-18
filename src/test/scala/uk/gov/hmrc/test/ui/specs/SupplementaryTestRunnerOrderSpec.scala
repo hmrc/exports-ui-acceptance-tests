@@ -25,10 +25,10 @@ import uk.gov.hmrc.test.ui.specs.Section5.SupplementaryJourney5Spec as Supplemen
 import uk.gov.hmrc.test.ui.specs.Section6.SupplementaryJourneySpec as Supplementary6
 
 class SupplementaryTestRunnerOrderSpec extends Suites(
-  new Supplementary1,
-  new Supplementary2,
-  new Supplementary3,
-  new Supplementary4,
-  new Supplementary5,
-  new Supplementary6
-)
+      new Supplementary1,
+      new Supplementary2,
+      new Supplementary3,
+      new Supplementary4,
+      new Supplementary5,
+      new Supplementary6
+    )

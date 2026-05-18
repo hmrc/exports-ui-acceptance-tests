@@ -35,7 +35,11 @@ class StandardJourneySpec
     with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section4 Standard Journey") {
     Scenario(
-      "Complete Transactions section on standard prelodged declaration journey and validate dynamic title changes on previous documents page",Regression2,Regression,Section4,Standard
+      "Complete Transactions section on standard prelodged declaration journey and validate dynamic title changes on previous documents page",
+      Regression2,
+      Regression,
+      Section4,
+      Standard
     ) {
       Given("the user clears data in cache")
       background()
@@ -80,7 +84,7 @@ class StandardJourneySpec
       SummarySection4Page.fillPage()
       And("User clicks continue on MiniCya")
       CommonPage.continueOnMiniCya()
-     
+
       /*validate skipping Total-Package-Quantity page when destination country is Guernsey and
        Invoice and exchange rate choice is No*/
       When("User navigates to Destination Country page")
@@ -92,7 +96,7 @@ class StandardJourneySpec
       NatureOfTransactionPage.navigateToPage(NatureOfTransactionPage.path)
       Then("User should land on Nature-Of-Transaction page")
       NatureOfTransactionPage.checkPage()
-      //validate skipping Total-Package-Quantity page when destination country is Jersey and Invoice and exchange rate choice is Yes//
+      // validate skipping Total-Package-Quantity page when destination country is Jersey and Invoice and exchange rate choice is Yes//
       When("User navigates to Destination Country page")
       DestinationCountryPage.navigateToPage(DestinationCountryPage.path)
       And("User selects Guernsey as the destination country and continues")
@@ -107,7 +111,14 @@ class StandardJourneySpec
       NatureOfTransactionPage.checkPage()
     }
 
-    Scenario("Complete Transactions section on standard arrived declaration journey",Regression2,Regression,Section4,Standard,Smoke) {
+    Scenario(
+      "Complete Transactions section on standard arrived declaration journey",
+      Regression2,
+      Regression,
+      Section4,
+      Standard,
+      Smoke
+    ) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for STANDARD, arrived declaration")
@@ -129,7 +140,9 @@ class StandardJourneySpec
       CommonPage.continue()
       And("User lands on Previous-Document page")
       PreviousDocumentPage.checkPage()
-      And("User selects as first Document Commercial Invoice as code and 9GB123456782317-BH1433A61 as reference and continues")
+      And(
+        "User selects as first Document Commercial Invoice as code and 9GB123456782317-BH1433A61 as reference and continues"
+      )
       PreviousDocumentPage.fillPage(genSequenceId("first"), "Commercial Invoice", "9GB123456782317-BH1433A61")
       CommonPage.continue()
       And("User lands on Previous-Documents-list page")
@@ -143,7 +156,7 @@ class StandardJourneySpec
       SummarySection4Page.fillPage()
       And("User clicks continue on MiniCya")
       CommonPage.continueOnMiniCya()
-      //remove previous documents//
+      // remove previous documents//
       When("User navigates to Previous Documents List page")
       PreviousDocumentListPage.navigateToPage(PreviousDocumentListPage.path)
       And("User removes previous document")
@@ -155,7 +168,7 @@ class StandardJourneySpec
       CommonPage.continue()
       Then("User should land on Previous-Document page")
       PreviousDocumentPage.checkPage()
-      //validate skipping Total-Package-Quantity page when destination country is Jersey and Invoice and exchange rate choice is Yes//
+      // validate skipping Total-Package-Quantity page when destination country is Jersey and Invoice and exchange rate choice is Yes//
       When("User navigates to Destination Country page")
       DestinationCountryPage.navigateToPage(DestinationCountryPage.path)
       And("User selects Jersey as the destination country and continues")

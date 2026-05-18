@@ -29,15 +29,9 @@ import uk.gov.hmrc.test.ui.pages.section6.SummarySection6Page.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
 
-class OccasionalJourneySpec extends AnyFeatureSpec
-  with BaseSpec
-  with GivenWhenThen
-  with ShouldVerb
-  with BeforeAndAfterAll
-  with BeforeAndAfterEach
-  with Browser
-  with TableDrivenPropertyChecks
-  with ScreenshotOnFailure{
+class OccasionalJourneySpec
+    extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
+    with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section6 Occasional Journey") {
     /*Below scenario -
      1. if procedure code is 1042 and Additional procedure code as 000
@@ -52,7 +46,7 @@ class OccasionalJourneySpec extends AnyFeatureSpec
           #    and all Container pages
     3. The following page is skipped
           # Departure Transport*/
-    Scenario("Occasional journey section-6",Regression3,Regression,Section6,Occasional) {
+    Scenario("Occasional journey section-6", Regression3, Regression, Section6, Occasional) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1/2/3/4/5 for OCCASIONAL, prelodged declaration")
@@ -67,7 +61,7 @@ class OccasionalJourneySpec extends AnyFeatureSpec
       CommonPage.continueOnMiniCya()
       Then("User should land on Saved-Summary page")
       SummaryPage.checkPage()
-     /*Below scenario -
+      /*Below scenario -
       1. if procedure code is 1042 and Additional procedure code as 000
           and the destination country is Jersey
       2. The following page is visible
@@ -79,7 +73,9 @@ class OccasionalJourneySpec extends AnyFeatureSpec
       3. The following page is skipped
           # Departure Transport*/
 
-      When("User clears cache for section 6 and continues their journey from Destination Country page to Destination Country page")
+      When(
+        "User clears cache for section 6 and continues their journey from Destination Country page to Destination Country page"
+      )
       section6OccasionalJourney2()
       Then("User should land on MiniCYA-Section-6 page")
       SummarySection6Page.checkPage()
@@ -90,7 +86,7 @@ class OccasionalJourneySpec extends AnyFeatureSpec
       Then("User should land on Saved-Summary page")
       SummaryPage.checkPage()
     }
-   /* Below scenario -
+    /* Below scenario -
       1. if procedure code is 1042 and Additional procedure code as 000
           and Inland or border as Border location
       2. The following page is visible
@@ -99,7 +95,7 @@ class OccasionalJourneySpec extends AnyFeatureSpec
           # Departure Transport
           #  Inland transport details
           #  Border transport*/
-    Scenario("Occasional arrived journey section-6",Regression3,Regression,Section6,Occasional){
+    Scenario("Occasional arrived journey section-6", Regression3, Regression, Section6, Occasional) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1/2/3/4/5 for OCCASIONAL, arrived declaration")
@@ -158,5 +154,5 @@ class OccasionalJourneySpec extends AnyFeatureSpec
       Then("User should land on Saved-Summary page")
       SummaryPage.checkPage()
     }
-    }
+  }
 }

@@ -23,13 +23,11 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{DepartureTransport, Expres
 
 object ExpressConsignmentPage extends BasePage {
 
-  def backButtonHref: String = {
+  def backButtonHref: String =
     if (isClearance) {
       if (maybeDetails(DepartureTransport).isEmpty) SupervisingCustomsOfficePage.path
       else DepartureTransportPage.path
-    }
-    else maybeDetail(TransportCountry).fold(TransportCountryPage.backButtonHref)(_ => TransportCountryPage.path)
-  }
+    } else maybeDetail(TransportCountry).fold(TransportCountryPage.backButtonHref)(_ => TransportCountryPage.path)
 
   val path: String = "/declaration/express-consignment"
 

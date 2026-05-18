@@ -32,7 +32,13 @@ class ClearanceJourneySpec
     with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Clearance Journey") {
     // Below scenario - DoYouHaveADucr:[Yes]//
-    Scenario("Fill Section 1 for a Clearance Prelodged and Arrived Declaration",Regression,Regression1,Section1,Clearance) {
+    Scenario(
+      "Fill Section 1 for a Clearance Prelodged and Arrived Declaration",
+      Regression,
+      Regression1,
+      Section1,
+      Clearance
+    ) {
       forAll(Table("DecType", "prelodged", "arrived")) { DecType =>
         Given("User clears data in cache")
         background()

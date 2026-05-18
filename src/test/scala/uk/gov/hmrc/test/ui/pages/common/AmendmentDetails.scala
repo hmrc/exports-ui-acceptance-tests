@@ -16,15 +16,49 @@
 
 package uk.gov.hmrc.test.ui.pages.common
 
-import uk.gov.hmrc.test.ui.pages.base.CommonPage.{clickChangeLinkForPage, landOnHoldingPageAndRedirectedToConfirmationPage}
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.{
+  clickChangeLinkForPage,
+  landOnHoldingPageAndRedirectedToConfirmationPage
+}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, CommonPage, Constants}
 import uk.gov.hmrc.test.ui.pages.common.DetailKeys.DeclarationInfoPath
 import uk.gov.hmrc.test.ui.pages.section1.ChoicePage
-import uk.gov.hmrc.test.ui.pages.section2.{AreYouTheExporterPage, AuthorisationPage, AuthorisationRemovePage, AuthorisationsListPage, CarrierEORINumberPage, ConsigneeDetailsPage, OtherPartiesInvolvedListPage, ProcedureChoicePage, SummarySection2Page, ThirdPartyGoodsTransportationPage}
+import uk.gov.hmrc.test.ui.pages.section2.{
+  AreYouTheExporterPage,
+  AuthorisationPage,
+  AuthorisationRemovePage,
+  AuthorisationsListPage,
+  CarrierEORINumberPage,
+  ConsigneeDetailsPage,
+  OtherPartiesInvolvedListPage,
+  ProcedureChoicePage,
+  SummarySection2Page,
+  ThirdPartyGoodsTransportationPage
+}
 import uk.gov.hmrc.test.ui.pages.section3.{OfficeOfExitPage, SummarySection3Page}
 import uk.gov.hmrc.test.ui.pages.section5.AdditionalDocumentPage.fillAdditionalDocument
 import uk.gov.hmrc.test.ui.pages.section5.PackageInformationPage.enterPackageInfo
-import uk.gov.hmrc.test.ui.pages.section5.{AdditionalDocumentListPage, AdditionalDocumentPage, AdditionalDocumentsYesNoPage, AdditionalInformationYesNoPage, AdditionalProcedureCodesPage, CommodityDetailsPage, CommodityMeasurePage, CusCodePage, DangerousGoodsCodePage, DeclarationItemsListPage, LicenseRequiredYesNoPage, NationalAdditionalCodesPage, PackageInformationListPage, PackageInformationPage, ProcedureCodesPage, StatisticalValuePage, SummarySection5Page, SupplementaryUnitsPage, VatRatingPage}
+import uk.gov.hmrc.test.ui.pages.section5.{
+  AdditionalDocumentListPage,
+  AdditionalDocumentPage,
+  AdditionalDocumentsYesNoPage,
+  AdditionalInformationYesNoPage,
+  AdditionalProcedureCodesPage,
+  CommodityDetailsPage,
+  CommodityMeasurePage,
+  CusCodePage,
+  DangerousGoodsCodePage,
+  DeclarationItemsListPage,
+  LicenseRequiredYesNoPage,
+  NationalAdditionalCodesPage,
+  PackageInformationListPage,
+  PackageInformationPage,
+  ProcedureCodesPage,
+  StatisticalValuePage,
+  SummarySection5Page,
+  SupplementaryUnitsPage,
+  VatRatingPage
+}
 import uk.gov.hmrc.test.ui.pages.section6.BorderTransportPage
 
 object AmendmentDetails extends BasePage {
@@ -37,16 +71,15 @@ object AmendmentDetails extends BasePage {
 
   // ex: fillPage()
 
-  override def fillPage(values: String*): Unit = {
+  override def fillPage(values: String*): Unit =
     checkAmendedDetails()
-  }
 
   def clickViewDetailsLink(): Unit = {
     val amendSelector = "a[href*='amendment-details']"
     waitForCssSelector(amendSelector)
     clickByCssSelector(amendSelector)
   }
-  def backLinkToSummaryPage():Unit={
+  def backLinkToSummaryPage(): Unit = {
     CommonPage.back()
     DeclarationInformationPage.amendDeclaration()
     SummaryPage.checkPage()
@@ -59,7 +92,7 @@ object AmendmentDetails extends BasePage {
     SummaryPage.checkPage()
   }
 
-  def clicksOnCancelLinkOnRejectedAmendment():Unit={
+  def clicksOnCancelLinkOnRejectedAmendment(): Unit = {
     DeclarationInformationPage.clickCancelLinkOnRejectedAmendment()
     CancelDeclarationPage.checkPage()
     CancelDeclarationPage.fillPage("No longer required", "Cancellation of the amendment")
@@ -176,18 +209,17 @@ object AmendmentDetails extends BasePage {
     SummarySection5Page.checkPage()
   }
 
-
-  def validatesAmendedDetailsByClickingOnMRNLink():Unit={
+  def validatesAmendedDetailsByClickingOnMRNLink(): Unit = {
     DashboardPage.mrnLink.click()
     AmendmentDetails.clickViewDetailsLink()
     AmendmentDetails.fillPage()
   }
-  def clicksConfirmAndContinueToSubmitDeclaration():Unit={
+  def clicksConfirmAndContinueToSubmitDeclaration(): Unit = {
     SummaryPage.navigateToPage(SummaryPage.path)
     SummaryPage.fillPage()
     SubmitYourDeclarationPage.fillPage()
   }
-  def continueJourneyToDashboardPage():Unit={
+  def continueJourneyToDashboardPage(): Unit = {
     ConfirmationPage.checkPage()
     ChoicePage.navigateToPage(ChoicePage.path)
     ChoicePage.fillPage("Manage Submit Declaration")
@@ -214,8 +246,8 @@ object AmendmentDetails extends BasePage {
     SummaryPage.fillPage()
     SubmitYourDeclarationPage.fillPage()
   }
-  
-  def clicksChangeLinkForBorderTransportPageNavigateToConfirmationPage():Unit={
+
+  def clicksChangeLinkForBorderTransportPageNavigateToConfirmationPage(): Unit = {
     clickChangeLinkForPage("Border transport")
     BorderTransportPage.checkPage()
     BorderTransportPage.fillPage("Ship IMO number")
@@ -226,7 +258,7 @@ object AmendmentDetails extends BasePage {
     landOnHoldingPageAndRedirectedToConfirmationPage()
   }
 
-  def clicksChangeLinkForBorderTransportPageToShipname():Unit={
+  def clicksChangeLinkForBorderTransportPageToShipname(): Unit = {
     clickChangeLinkForPage("Border transport")
     BorderTransportPage.checkPage()
     BorderTransportPage.fillPage("Ship name")

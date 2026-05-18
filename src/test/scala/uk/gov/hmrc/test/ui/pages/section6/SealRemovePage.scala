@@ -22,9 +22,9 @@ import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.section6
 
 object SealRemovePage extends BasePage {
 
-  def path: String           = removeUrl("containers", "seals")
+  def path: String = removeUrl("containers", "seals")
 
-  def title                  = s"Are you sure you want to remove this security seal for container $containerId?"
+  def title = s"Are you sure you want to remove this security seal for container $containerId?"
 
   def backButtonHref: String = SealYesNoPage.path
 

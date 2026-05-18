@@ -23,21 +23,27 @@ import org.scalatest.verbs.ShouldVerb
 import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
 import uk.gov.hmrc.test.ui.pages.base.CommonPage
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.*
-import uk.gov.hmrc.test.ui.pages.section3.{CountryOfRoutingPage, DestinationCountryPage, LocationOfGoodsPage, OfficeOfExitPage, SummarySection3Page}
+import uk.gov.hmrc.test.ui.pages.section3.{
+  CountryOfRoutingPage,
+  DestinationCountryPage,
+  LocationOfGoodsPage,
+  OfficeOfExitPage,
+  SummarySection3Page
+}
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
 
-class SimplifiedJourneySpec extends AnyFeatureSpec
-  with BaseSpec
-  with GivenWhenThen
-  with ShouldVerb
-  with BeforeAndAfterAll
-  with BeforeAndAfterEach
-  with Browser
-  with TableDrivenPropertyChecks
-  with ScreenshotOnFailure{
+class SimplifiedJourneySpec
+    extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
+    with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Simplified Journey Section 3") {
-    Scenario("Complete Routes and Locations section on Simplified declaration journey",Regression1,Regression,Section3,Simplified) {
+    Scenario(
+      "Complete Routes and Locations section on Simplified declaration journey",
+      Regression1,
+      Regression,
+      Section3,
+      Simplified
+    ) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for STANDARD, prelodged declaration")
@@ -72,7 +78,13 @@ class SimplifiedJourneySpec extends AnyFeatureSpec
       CommonPage.continueOnMiniCya()
     }
 
-    Scenario("Complete Routes and Locations section on Simplified Arrived declaration journey",Regression1,Regression,Section3,Simplified) {
+    Scenario(
+      "Complete Routes and Locations section on Simplified Arrived declaration journey",
+      Regression1,
+      Regression,
+      Section3,
+      Simplified
+    ) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for SIMPLIFIED, arrived declaration")
@@ -106,6 +118,6 @@ class SimplifiedJourneySpec extends AnyFeatureSpec
       And("User clicks continue on MiniCya")
       CommonPage.continueOnMiniCya()
     }
-    }
+  }
 
 }

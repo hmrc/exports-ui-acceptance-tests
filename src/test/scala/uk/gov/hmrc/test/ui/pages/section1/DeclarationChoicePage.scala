@@ -16,7 +16,7 @@
 
 package uk.gov.hmrc.test.ui.pages.section1
 
-import uk.gov.hmrc.test.ui.pages.base.Constants._
+import uk.gov.hmrc.test.ui.pages.base.Constants.*
 import uk.gov.hmrc.test.ui.pages.base.PageLinks.goodsExportedInBaggage
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section1.DetailKeys.DeclarationType
@@ -34,7 +34,7 @@ object DeclarationChoicePage extends BasePage {
   // ex: fillPage("OCCASIONAL")
 
   override def fillPage(values: String*): Unit = {
-    clickById(values(0))
+    clickByCssSelector(s"label[for='${values(0)}']")
     val journeyType = values(0) match {
       case "OCCASIONAL"    => Occasional
       case "SIMPLIFIED"    => Simplified

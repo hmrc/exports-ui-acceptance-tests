@@ -39,7 +39,12 @@ class StandardJourneySpec
      4. skipping of documents required yes/no page
      5. Checking Additional Documents Dynamic title when Authorisation code required documents is [Yes] and isLicenseRequired is [Yes]*/
     Scenario(
-      "Complete Items section on Standard Prelodged declaration journey and remove information on all list page",Regression2,Regression,Section5,Standard,Smoke
+      "Complete Items section on Standard Prelodged declaration journey and remove information on all list page",
+      Regression2,
+      Regression,
+      Section5,
+      Standard,
+      Smoke
     ) {
       Given("the user clears data in cache")
       background()
@@ -219,12 +224,16 @@ class StandardJourneySpec
       And("User checks the MiniCYA page for Section-5")
       SummarySection5Page.fillPage()
     }
-    
+
     /*Below scenario -
      1. Checking Skipping of pages when procedure code is 1042 to 1040
      1. Checking Additional Documents Dynamic title when Authorisation code required documents is [Yes] and isLicenseRequired is [No]*/
     Scenario(
-      "Complete Items section on Standard Prelodged declaration journey and validate different page skipping scenarios",Regression2,Regression,Section5,Standard
+      "Complete Items section on Standard Prelodged declaration journey and validate different page skipping scenarios",
+      Regression2,
+      Regression,
+      Section5,
+      Standard
     ) {
       Given("the user clears data in cache")
       background()
@@ -263,7 +272,11 @@ class StandardJourneySpec
        Additional Information and Additional Documents pages
        3. Checking Is Additional Documents Required Page is visible*/
     Scenario(
-      "Complete Items section on Standard Arrived declaration journey and with answers No on various item pages",Regression2,Regression,Section5,Standard
+      "Complete Items section on Standard Arrived declaration journey and with answers No on various item pages",
+      Regression2,
+      Regression,
+      Section5,
+      Standard
     ) {
       Given("the user clears data in cache")
       background()

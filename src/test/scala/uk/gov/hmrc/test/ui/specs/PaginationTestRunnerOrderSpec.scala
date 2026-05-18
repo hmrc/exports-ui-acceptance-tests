@@ -19,5 +19,5 @@ package uk.gov.hmrc.test.ui.specs
 import uk.gov.hmrc.test.ui.specs.Common.PaginationTestSpec
 
 class PaginationTestRunnerOrderSpec {
-new PaginationTestSpec
+  new PaginationTestSpec
 }

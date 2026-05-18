@@ -18,24 +18,41 @@ package uk.gov.hmrc.test.ui.specs
 
 import org.scalatest.Suites
 import uk.gov.hmrc.test.ui.specs.Section1.SupplementarySpec as Supplementary1
-import uk.gov.hmrc.test.ui.specs.Section1.{ClearanceJourneySpec as Clearence1, OccasionalJourneySpec as Occasional1, SimplifiedJourneySpec as Simplified1, StandardJourneySpec as Standard1}
-import uk.gov.hmrc.test.ui.specs.Section2.{ClearanceJourneySpec as Clearance2, OccasionalJourneySpec as Occasional2, SimplifiedJourneySpec as Simplified2, StandardJourneySpec as Standard2, SupplementaryJourneySpec as Supplementary2}
-import uk.gov.hmrc.test.ui.specs.Section3.{ClearanceJourneySpec as Clearance3, OccasionalJourneySpec as Occasional3, SimplifiedJourneySpec as Simplified3, StandardJourneySpec as Standard3, SupplementaryJourneySpec as Supplementary3}
+import uk.gov.hmrc.test.ui.specs.Section1.{
+  ClearanceJourneySpec as Clearence1,
+  OccasionalJourneySpec as Occasional1,
+  SimplifiedJourneySpec as Simplified1,
+  StandardJourneySpec as Standard1
+}
+import uk.gov.hmrc.test.ui.specs.Section2.{
+  ClearanceJourneySpec as Clearance2,
+  OccasionalJourneySpec as Occasional2,
+  SimplifiedJourneySpec as Simplified2,
+  StandardJourneySpec as Standard2,
+  SupplementaryJourneySpec as Supplementary2
+}
+import uk.gov.hmrc.test.ui.specs.Section3.{
+  ClearanceJourneySpec as Clearance3,
+  OccasionalJourneySpec as Occasional3,
+  SimplifiedJourneySpec as Simplified3,
+  StandardJourneySpec as Standard3,
+  SupplementaryJourneySpec as Supplementary3
+}
 
 class Regression1TestRunnerOrderSpec extends Suites(
-  new Clearence1,
-  new Occasional1,
-  new Simplified1,
-  new Standard1,
-  new Supplementary1,
-  new Clearance2,
-  new Occasional2,
-  new Simplified2,
-  new Standard2,
-  new Supplementary2,
-  new Clearance3,
-  new Occasional3,
-  new Simplified3,
-  new Standard3,
-  new Supplementary3
-)
+      new Clearence1,
+      new Occasional1,
+      new Simplified1,
+      new Standard1,
+      new Supplementary1,
+      new Clearance2,
+      new Occasional2,
+      new Simplified2,
+      new Standard2,
+      new Supplementary2,
+      new Clearance3,
+      new Occasional3,
+      new Simplified3,
+      new Standard3,
+      new Supplementary3
+    )

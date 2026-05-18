@@ -29,5 +29,5 @@ object AdditionalInformationChangePage extends BasePage {
   // The 1st parameter is the sequenceId of the "Additional Information" element to change: "0", "1", "2", ...
   // ex: fillPage("2", "00400", "EXPORTER")
 
-  override def fillPage(values: String*): Unit = AdditionalInformationPage.fillPage(values:_*)
+  override def fillPage(values: String*): Unit = AdditionalInformationPage.fillPage(values: _*)
 }

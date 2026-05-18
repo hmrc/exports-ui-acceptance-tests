@@ -23,24 +23,35 @@ import org.scalatest.verbs.ShouldVerb
 import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
 import uk.gov.hmrc.test.ui.pages.base.CommonPage
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.CommonStepPage.genSequenceId
-import uk.gov.hmrc.test.ui.pages.base.CommonPage.{background, clearKeysFromCache, fillSection1ForDeclaration, fillSection2ForDeclaration}
-import uk.gov.hmrc.test.ui.pages.section2.{AuthorisationPage, AuthorisationRemovePage, AuthorisationsListPage, AuthorisationsYesNoPage}
+import uk.gov.hmrc.test.ui.pages.base.CommonPage.{
+  background,
+  clearKeysFromCache,
+  fillSection1ForDeclaration,
+  fillSection2ForDeclaration
+}
+import uk.gov.hmrc.test.ui.pages.section2.{
+  AuthorisationPage,
+  AuthorisationRemovePage,
+  AuthorisationsListPage,
+  AuthorisationsYesNoPage
+}
 import uk.gov.hmrc.test.ui.pages.section3.*
 import uk.gov.hmrc.test.ui.pages.section3.SummarySection3Page.completeSection3Standard
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
 
-class StandardJourneySpec extends AnyFeatureSpec
-  with BaseSpec
-  with GivenWhenThen
-  with ShouldVerb
-  with BeforeAndAfterAll
-  with BeforeAndAfterEach
-  with Browser
-  with TableDrivenPropertyChecks
-  with ScreenshotOnFailure{
+class StandardJourneySpec
+    extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
+    with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section3 Standard Journey") {
-    Scenario("Complete Routes and Locations section on standard prelodged declaration journey",Regression1,Regression,Section3,Standard,Smoke) {
+    Scenario(
+      "Complete Routes and Locations section on standard prelodged declaration journey",
+      Regression1,
+      Regression,
+      Section3,
+      Standard,
+      Smoke
+    ) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for STANDARD, prelodged declaration")
@@ -64,7 +75,13 @@ class StandardJourneySpec extends AnyFeatureSpec
       And("User clicks continue on MiniCya")
       CommonPage.continueOnMiniCya()
     }
-    Scenario("Complete Routes and Locations section on standard arrived declaration and also validate dynamic title changes on location of goods page",Regression1,Regression,Section3,Standard) {
+    Scenario(
+      "Complete Routes and Locations section on standard arrived declaration and also validate dynamic title changes on location of goods page",
+      Regression1,
+      Regression,
+      Section3,
+      Standard
+    ) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for STANDARD, arrived declaration")
@@ -87,7 +104,7 @@ class StandardJourneySpec extends AnyFeatureSpec
       SummarySection3Page.fillPage()
 
       /*change authorisation code to test dynamic title changes on location of goods page
-      * check title on location of goods page when auth code is CSE*/
+       * check title on location of goods page when auth code is CSE*/
       When("User clears Additional Information code keys from cache")
       clearKeysFromCache("Additional Information code")
       And("User lands on authorisations required list page")
@@ -101,7 +118,7 @@ class StandardJourneySpec extends AnyFeatureSpec
       CommonPage.continue()
       And("User selects Yes to declare authorisations and continues")
       AuthorisationsYesNoPage.fillPage("Yes")
-       CommonPage.continue()
+      CommonPage.continue()
       And("User lands on Authorisation-Required page")
       AuthorisationPage.checkPage()
       And("User selects first Authorisation code CSE and enters eori as GB123456789006 and continues")
@@ -121,8 +138,8 @@ class StandardJourneySpec extends AnyFeatureSpec
       SummarySection3Page.checkPage()
       And("User checks the MiniCYA page for Section-3")
       SummarySection3Page.fillPage()
-        /*check title on location of goods page when auth code is EXRR
-        * select GVMS codes on different version of location page when auth code is EXRR and Additional Declaration type is 'Arrived'*/
+      /*check title on location of goods page when auth code is EXRR
+       * select GVMS codes on different version of location page when auth code is EXRR and Additional Declaration type is 'Arrived'*/
 
       When("User navigates to authorisations required list page")
       AuthorisationsListPage.navigateToPage(AuthorisationsListPage.path)
@@ -157,7 +174,7 @@ class StandardJourneySpec extends AnyFeatureSpec
       SummarySection3Page.checkPage()
       And("User checks the MiniCYA page for Section-3")
       SummarySection3Page.fillPage()
-     /*select GVMS codes on different version of location page when auth code is ACP and
+      /*select GVMS codes on different version of location page when auth code is ACP and
       Additional Declaration type is 'Arrived'*/
       When("User clears Additional Information code keys from cache")
       clearKeysFromCache("Additional Information code")
@@ -193,6 +210,6 @@ class StandardJourneySpec extends AnyFeatureSpec
       And("User checks the MiniCYA page for Section-3")
       SummarySection3Page.fillPage()
     }
-    }
+  }
 
 }

@@ -20,6 +20,7 @@ import uk.gov.hmrc.test.ui.pages.base.Constants.{Clearance, Common}
 import uk.gov.hmrc.test.ui.pages.base.TariffLinks.{transportLeavingTheBorder, transportLeavingTheBorderCL}
 import uk.gov.hmrc.test.ui.pages.base.{BasePage, Detail}
 import uk.gov.hmrc.test.ui.pages.section5.SummarySection5Page
+import uk.gov.hmrc.test.ui.pages.section5.VatRatingPage.clickByCssSelector
 import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.TransportLeavingBorder
 
 object TransportLeavingTheBorderPage extends BasePage {
@@ -49,7 +50,7 @@ object TransportLeavingTheBorderPage extends BasePage {
       case "Inland waterway transport"     => "Border_InlandWaterway"
       case "Own propulsion"                => "Border_Unknown"
     }
-    clickById(elementId)
+    clickByCssSelector(s"label[for='$elementId']");
     store(TransportLeavingBorder -> Detail(values(transportType)))
   }
 }

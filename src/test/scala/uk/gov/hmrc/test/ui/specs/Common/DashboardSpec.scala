@@ -31,22 +31,15 @@ import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
 
 class DashboardSpec
-    extends AnyFeatureSpec 
-      with BaseSpec 
-      with GivenWhenThen
-      with ShouldVerb 
-      with BeforeAndAfterAll
-      with BeforeAndAfterEach 
-      with Browser 
-      with TableDrivenPropertyChecks 
-      with ScreenshotOnFailure {
+    extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
+    with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Validate Dashboard and Declaration Information") {
     /* Below scenario -
     1. Check various confirmation page titles and validates information on Dashboard and Declaration information pages
     2. Validates View Print link
     3. Checks successful and unsuccessful Copy of a Declaration
     4. Checks successful and unsuccessful Cancellation of a Declaration */
-    Scenario("Full Standard Journey and view declaration in submission dashboard",Regression3,Regression) {
+    Scenario("Full Standard Journey and view declaration in submission dashboard", Regression3, Regression) {
       Given("the user clears data in cache")
       background()
       When("User fills all sections of the declaration and submits the declaration to land on Saved-Summary page")
@@ -229,7 +222,7 @@ class DashboardSpec
       And("User validate details on declaration information page")
       validateDeclarationDetailsOnDeclarationInformationPage()
 
-      //Submit a arrived declaration with LRN starting with V to check Detained status//
+      // Submit a arrived declaration with LRN starting with V to check Detained status//
       When("User clicks on copy link and land on copy declaration page")
       DeclarationInformationPage.copyDeclaration()
       CopyDeclarationPage.checkPage()
@@ -246,7 +239,7 @@ class DashboardSpec
     # 1. Validates View Print link
     # 2. Checks successful and unsuccessful Cancellation of a Declaration*/
 
-    Scenario("check Cancellation of declaration and validate print link",Smoke,Regression3,Regression) {
+    Scenario("check Cancellation of declaration and validate print link", Smoke, Regression3, Regression) {
       Given("the user clears data in cache")
       background()
       When("User fills all sections of the declaration and submits the declaration to land on Saved-Summary page")
@@ -302,36 +295,40 @@ class DashboardSpec
       And("User clicks on cancel declaration link")
       CancelDeclarationPage.cancelDeclaration()
       Then("User should land on Cancel-Declaration page")
-        CancelDeclarationPage.checkPage()
+      CancelDeclarationPage.checkPage()
       And("User selects No longer required as the reason and enters description for cancellation")
-        CancelDeclarationPage.fillPage("No longer required")
+      CancelDeclarationPage.fillPage("No longer required")
       And("User clicks continue")
-         CommonPage.continue()
+      CommonPage.continue()
       Then("User should land on Cancel holding page and redirect to Cancellation result page")
-        CancelHoldingPage.checkPage()
-        CancelHoldingPage.fillPage()
+      CancelHoldingPage.checkPage()
+      CancelHoldingPage.fillPage()
       Then("User should land on Cancel-Result page")
-        CancelResultPage.checkPage()
+      CancelResultPage.checkPage()
       And("User navigates back to choice page")
-        CancelResultPage.backToChoicePage()
+      CancelResultPage.backToChoicePage()
       And("User selects to Manage Submit Declaration")
-        ChoicePage.fillPage("Manage Submit Declaration")
+      ChoicePage.fillPage("Manage Submit Declaration")
       Then("User should land on Dashboard page")
-        DashboardPage.checkPage()
+      DashboardPage.checkPage()
       Then("User validate declaration details on Cancelled & expired tab and check Status is Cancelled")
-        validateDashboardCancelled()
+      validateDashboardCancelled()
       And("User validate details on declaration information page")
       DashboardPage.mrnLink.click()
       DeclarationInformationPage.checkStatusOnTimeLine("Cancelled")
     }
-   /*Below scenario -
+    /*Below scenario -
       1.Checks saved draft declaration and removal of draft declaration
       2.Checks if view declaration summary is missing and present*/
-    Scenario("Check partial declarations saved on Saved Declarations and remove saved declaration",Regression3,Regression) {
+    Scenario(
+      "Check partial declarations saved on Saved Declarations and remove saved declaration",
+      Regression3,
+      Regression
+    ) {
       Given("User fills section1 for STANDARD, prelodged declaration")
-        fillSection1ForDeclaration("STANDARD", "prelodged")
+      fillSection1ForDeclaration("STANDARD", "prelodged")
       And("User validates view declaration link is missing")
-       validateViewDeclarationLinkIsMissing("missing")
+      validateViewDeclarationLinkIsMissing("missing")
       And("User clicks on Exit and comeback later link")
       CommonPage.exitAndComeBackLater()
       Then("User should land on saved draft declaration page")

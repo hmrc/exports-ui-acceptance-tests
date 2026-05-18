@@ -25,10 +25,30 @@ import uk.gov.hmrc.test.ui.pages.base.CommonPage
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.CommonStepPage.genSequenceId
 import uk.gov.hmrc.test.ui.pages.base.CommonPage.{background, clearKeysFromCache}
 import uk.gov.hmrc.test.ui.pages.common.SummaryPage
-import uk.gov.hmrc.test.ui.pages.section2.{AuthorisationPage, AuthorisationRemovePage, AuthorisationsListPage, ProcedureChoicePage}
+import uk.gov.hmrc.test.ui.pages.section2.{
+  AuthorisationPage,
+  AuthorisationRemovePage,
+  AuthorisationsListPage,
+  ProcedureChoicePage
+}
 import uk.gov.hmrc.test.ui.pages.section3.DestinationCountryPage
 import uk.gov.hmrc.test.ui.pages.section5.{AdditionalProcedureCodesPage, ProcedureCodesPage}
-import uk.gov.hmrc.test.ui.pages.section6.{BorderTransportPage, ContainerListPage, ContainerPage, DepartureTransportPage, InlandModeOfTransportPage, InlandOrBorderPage, SealListPage, SealPage, SealYesNoPage, SummarySection6Page, SupervisingCustomsOfficePage, TransportCountryPage, TransportLeavingTheBorderPage, WarehousePage}
+import uk.gov.hmrc.test.ui.pages.section6.{
+  BorderTransportPage,
+  ContainerListPage,
+  ContainerPage,
+  DepartureTransportPage,
+  InlandModeOfTransportPage,
+  InlandOrBorderPage,
+  SealListPage,
+  SealPage,
+  SealYesNoPage,
+  SummarySection6Page,
+  SupervisingCustomsOfficePage,
+  TransportCountryPage,
+  TransportLeavingTheBorderPage,
+  WarehousePage
+}
 import uk.gov.hmrc.test.ui.pages.section6.SummarySection6Page.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
@@ -42,7 +62,14 @@ class SupplementaryJourneySpec
      • Inland-or-Border
      • Express-Consignment
      • Transport-Payment*/
-    Scenario("Complete Items section on Supplementary EIDR declaration journey",Regression3,Regression,Section6,Supplementary,Smoke) {
+    Scenario(
+      "Complete Items section on Supplementary EIDR declaration journey",
+      Regression3,
+      Regression,
+      Section6,
+      Supplementary,
+      Smoke
+    ) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1/2/3/4/5 for SUPPLEMENTARY, eidr declaration")
@@ -66,7 +93,9 @@ class SupplementaryJourneySpec
       When(
         "User clears Country of registration for the transport leaving the UK border, Transport leaving the border, Transport details at the border keys from cache"
       )
-      clearKeysFromCache("Country of registration for the transport leaving the UK border, Transport leaving the border, Transport details at the border")
+      clearKeysFromCache(
+        "Country of registration for the transport leaving the UK border, Transport leaving the border, Transport details at the border"
+      )
       And("User selects Permanent as export procedure choice on Authorisation Choice page and continues")
       ProcedureChoicePage.navigateToPage(ProcedureChoicePage.path)
       ProcedureChoicePage.fillPage("Permanent")
@@ -78,7 +107,9 @@ class SupplementaryJourneySpec
       AuthorisationRemovePage.checkPage()
       AuthorisationRemovePage.fillPage("Yes", "0")
       CommonPage.continue()
-      And("User selects first Authorisation code EXRR and enters eori as GB744638982000 on Authorisation-Required page and continues")
+      And(
+        "User selects first Authorisation code EXRR and enters eori as GB744638982000 on Authorisation-Required page and continues"
+      )
       AuthorisationPage.checkPage()
       AuthorisationPage.fillPage(genSequenceId("first"), "EXRR", "GB744638982000")
       CommonPage.continue()
@@ -86,7 +117,9 @@ class SupplementaryJourneySpec
       AuthorisationsListPage.checkPage()
       AuthorisationsListPage.fillPage("No")
       CommonPage.continue()
-      And("User selects Postal or mail as mode of transport leaving the border on Transport-Leaving-The-Border page and continues")
+      And(
+        "User selects Postal or mail as mode of transport leaving the border on Transport-Leaving-The-Border page and continues"
+      )
       TransportLeavingTheBorderPage.navigateToPage(TransportLeavingTheBorderPage.path)
       TransportLeavingTheBorderPage.checkPage()
       TransportLeavingTheBorderPage.fillPage("Postal or mail")
@@ -115,7 +148,7 @@ class SupplementaryJourneySpec
      • Supervising Customs Office
      • Express Consignment
      • Transport Payment*/
-    Scenario("supplementary journey simplified section-6",Regression3,Regression,Section6,Supplementary) {
+    Scenario("supplementary journey simplified section-6", Regression3, Regression, Section6, Supplementary) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1/2/3/4/5 for SUPPLEMENTARY, simplified declaration")
@@ -129,12 +162,16 @@ class SupplementaryJourneySpec
       AdditionalProcedureCodesPage.checkPage()
       AdditionalProcedureCodesPage.fillPage("000")
       CommonPage.continue()
-      And("User selects Rail transport as mode of transport leaving the border on Transport-Leaving-The-Border page and continues")
+      And(
+        "User selects Rail transport as mode of transport leaving the border on Transport-Leaving-The-Border page and continues"
+      )
       TransportLeavingTheBorderPage.navigateToPage(TransportLeavingTheBorderPage.path)
       TransportLeavingTheBorderPage.checkPage()
       TransportLeavingTheBorderPage.fillPage("Rail transport")
       CommonPage.continue()
-      Then("User selects Customs controlled location for presenting the goods to customs on Inland-Or-Border page and continues")
+      Then(
+        "User selects Customs controlled location for presenting the goods to customs on Inland-Or-Border page and continues"
+      )
       InlandOrBorderPage.checkPage()
       InlandOrBorderPage.fillPage("Customs controlled location")
       CommonPage.continue()
@@ -162,7 +199,7 @@ class SupplementaryJourneySpec
       CommonPage.continueOnMiniCya()
       Then("User should land on Saved-Summary page")
       SummaryPage.checkPage()
-     /*Scenario:- If procedure code = 1040 and additional procedure code = 000, with RoRo selected for Transport Leaving the Border
+      /*Scenario:- If procedure code = 1040 and additional procedure code = 000, with RoRo selected for Transport Leaving the Border
       and Postal or Mail selected for Inland Transport,the following pages are skipped:
      • Supervising Customs Office
      • Inland-or-Border
@@ -171,9 +208,13 @@ class SupplementaryJourneySpec
      • Transport Country
      • Express Consignment
      • Transport Payment*/
-      When("User clears Presenting to customs, Transport details at the border, Transport leaving the border keys from cache")
+      When(
+        "User clears Presenting to customs, Transport details at the border, Transport leaving the border keys from cache"
+      )
       clearKeysFromCache("Presenting to customs, Transport details at the border, Transport leaving the border")
-      And("User Roll on Roll off (RoRo) as mode of transport leaving the border on Transport-Leaving-The-Border page and continues")
+      And(
+        "User Roll on Roll off (RoRo) as mode of transport leaving the border on Transport-Leaving-The-Border page and continues"
+      )
       TransportLeavingTheBorderPage.navigateToPage(TransportLeavingTheBorderPage.path)
       TransportLeavingTheBorderPage.checkPage()
       TransportLeavingTheBorderPage.fillPage("Roll on Roll off (RoRo)")
@@ -195,12 +236,12 @@ class SupplementaryJourneySpec
       Then("User should land on Saved-Summary page")
       SummaryPage.checkPage()
     }
-    
+
     /*Scenario: - If procedure code = 1042 and additional procedure code = 000, the Supervising Customs Office page is shown.
      - The following pages are skipped:
      • Express Consignment
      • Transport Payment*/
-    
+
     Scenario("supplementary simplified journey section-6") {
       Given("the user clears data in cache")
       background()
@@ -254,7 +295,9 @@ class SupplementaryJourneySpec
       When(
         "User clears Presenting to customs, Transport details at the border, Transport leaving the border, Country of registration for the transport leaving the UK border keys from cache"
       )
-      clearKeysFromCache("Presenting to customs, Transport details at the border, Transport leaving the border, Country of registration for the transport leaving the UK border")
+      clearKeysFromCache(
+        "Presenting to customs, Transport details at the border, Transport leaving the border, Country of registration for the transport leaving the UK border"
+      )
       And("User selects Permanent as export procedure choice on Authorisation Choice page and continues")
       ProcedureChoicePage.navigateToPage(ProcedureChoicePage.path)
       ProcedureChoicePage.fillPage("Permanent")
@@ -266,7 +309,9 @@ class SupplementaryJourneySpec
       AuthorisationRemovePage.checkPage()
       AuthorisationRemovePage.fillPage("Yes", "0")
       CommonPage.continue()
-      And("User selects first Authorisation code FP and enters eori as GB744638982000 on Authorisation-Required page and continues")
+      And(
+        "User selects first Authorisation code FP and enters eori as GB744638982000 on Authorisation-Required page and continues"
+      )
       AuthorisationPage.checkPage()
       AuthorisationPage.fillPage(genSequenceId("first"), "FP", "GB744638982000")
       CommonPage.continue()
@@ -288,7 +333,9 @@ class SupplementaryJourneySpec
       AdditionalProcedureCodesPage.checkPage()
       AdditionalProcedureCodesPage.fillPage("1CS")
       CommonPage.continue()
-      And("User selects Sea transport as mode of transport leaving the border on Transport-Leaving-The-Border page and continues")
+      And(
+        "User selects Sea transport as mode of transport leaving the border on Transport-Leaving-The-Border page and continues"
+      )
       TransportLeavingTheBorderPage.navigateToPage(TransportLeavingTheBorderPage.path)
       TransportLeavingTheBorderPage.checkPage()
       TransportLeavingTheBorderPage.fillPage("Sea transport")

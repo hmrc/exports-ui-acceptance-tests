@@ -27,26 +27,22 @@ import uk.gov.hmrc.test.ui.pages.section1.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
 
-class SupplementarySpec extends AnyFeatureSpec
-  with BaseSpec
-  with GivenWhenThen
-  with ShouldVerb
-  with BeforeAndAfterAll
-  with BeforeAndAfterEach
-  with Browser
-  with TableDrivenPropertyChecks
-  with ScreenshotOnFailure{
+class SupplementarySpec
+    extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
+    with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Supplementary Journey") {
-    //Below scenario - DoYouHaveADucr:[Yes]//
-    Scenario("Fill Section 1 for a Supplementary Non Eidr and Eidr",Regression1,Smoke,Regression,Section1,Supplementary) {
+    // Below scenario - DoYouHaveADucr:[Yes]//
+    Scenario(
+      "Fill Section 1 for a Supplementary Non Eidr and Eidr",
+      Regression1,
+      Smoke,
+      Regression,
+      Section1,
+      Supplementary
+    ) {
       val examples =
-        Table(
-          ("DecType", "dateOrMrn"),
-          ("eidr", "20230401"),
-          ("simplified", "20GB46J8TMJ4RF1207")
-        )
-      forAll(examples)
-         { (DecType:String, dateOrMrn:String) =>
+        Table(("DecType", "dateOrMrn"), ("eidr", "20230401"), ("simplified", "20GB46J8TMJ4RF1207"))
+      forAll(examples) { (DecType: String, dateOrMrn: String) =>
         Given("the user clears data in cache")
         background()
         Given("User enters EORI GB123456789017 on Login Page and clicks submit")
@@ -87,9 +83,9 @@ class SupplementarySpec extends AnyFeatureSpec
         And("User clicks continue")
         CommonPage.continue()
         Then("User should land on MiniCYA-Section-1 page")
-           SummarySection1Page.checkPage()
+        SummarySection1Page.checkPage()
         And("User checks the MiniCYA page for Section-1")
-           SummarySection1Page.fillPage()
+        SummarySection1Page.fillPage()
       }
     }
   }

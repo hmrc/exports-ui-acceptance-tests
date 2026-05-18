@@ -27,20 +27,20 @@ import uk.gov.hmrc.test.ui.pages.section1.*
 import uk.gov.hmrc.test.ui.specs.BaseSpec
 import uk.gov.hmrc.test.ui.specs.Tags.*
 
-class StandardJourneySpec extends AnyFeatureSpec
-  with BaseSpec
-  with GivenWhenThen
-  with ShouldVerb
-  with BeforeAndAfterAll
-  with BeforeAndAfterEach
-  with Browser
-  with TableDrivenPropertyChecks
-  with ScreenshotOnFailure{
+class StandardJourneySpec
+    extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
+    with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Standard Journey") {
-    //Below scenario - DoYouHaveADucr:[Yes]//
-    Scenario("Fill Section 1 for a Standard Prelodged and Arrived Declaration",Regression1,Regression,Smoke,Section1,Standard) {
-      forAll(
-        Table("DecType", "prelodged", "arrived")) { DecType =>
+    // Below scenario - DoYouHaveADucr:[Yes]//
+    Scenario(
+      "Fill Section 1 for a Standard Prelodged and Arrived Declaration",
+      Regression1,
+      Regression,
+      Smoke,
+      Section1,
+      Standard
+    ) {
+      forAll(Table("DecType", "prelodged", "arrived")) { DecType =>
         Given("the user clears data in cache")
         background()
         When("User enters EORI GB123456789006 on Login Page and clicks submit")

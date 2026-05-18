@@ -24,12 +24,5 @@ import uk.gov.hmrc.test.ui.specs.Section4.SimplifiedJourneySpec as Simplified4
 import uk.gov.hmrc.test.ui.specs.Section5.SimplifiedJourneySpec as Simplified5
 import uk.gov.hmrc.test.ui.specs.Section6.SimplifiedJourneySpec as Simplified6
 
-class SimplifiedTestRunnerOrderSpec extends Suites(
-new Simplified1,
-  new Simplified2,
-  new Simplified3,
-  new Simplified4,
-  new Simplified5,
-  new Simplified6
-)
-
+class SimplifiedTestRunnerOrderSpec
+    extends Suites(new Simplified1, new Simplified2, new Simplified3, new Simplified4, new Simplified5, new Simplified6)

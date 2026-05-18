@@ -19,7 +19,7 @@ package uk.gov.hmrc.test.ui.pages.section6
 import uk.gov.hmrc.test.ui.pages.base.BasePage
 import uk.gov.hmrc.test.ui.pages.base.Constants.{yes, yesNo}
 import uk.gov.hmrc.test.ui.pages.section1.DeclarationChoicePage.isSupplementary
-import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{ContainerLabel, ExpressConsignment, section6}
+import uk.gov.hmrc.test.ui.pages.section6.DetailKeys.{section6, ContainerLabel, ExpressConsignment}
 
 object ContainerListPage extends BasePage {
 

@@ -33,7 +33,11 @@ class ClearanceJourneySpec
     with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
   Feature("Section4 Clearance Journey") {
     Scenario(
-      "Complete Transactions section on Clearance Prelodged declaration journey and validate dynamic title changes on previous documents page",Regression2,Regression,Section4,Clearance
+      "Complete Transactions section on Clearance Prelodged declaration journey and validate dynamic title changes on previous documents page",
+      Regression2,
+      Regression,
+      Section4,
+      Clearance
     ) {
       Given("the user clears data in cache")
       background()
@@ -60,7 +64,7 @@ class ClearanceJourneySpec
       And("User lands on Previous-Document page")
       PreviousDocumentPage.checkPage()
       assertTitle("Declare each document, including excise guarantees")
-      //check title on previous documents page when Entry Into Declarant records is Yes and authorisation choice is Temporary//
+      // check title on previous documents page when Entry Into Declarant records is Yes and authorisation choice is Temporary//
       And("User navigates to Authorisation Choice page")
       ProcedureChoicePage.navigateToPage(ProcedureChoicePage.path)
       And("User selects Temporary as export procedure choice and continues")
@@ -71,7 +75,7 @@ class ClearanceJourneySpec
       Then("User should land on Previous-Document page")
       PreviousDocumentPage.checkPage()
       assertTitle("Declare each document, including previous declarations")
-      //check title on previous documents page when Entry Into Declarant records is No and skiping authorisation choice page//
+      // check title on previous documents page when Entry Into Declarant records is No and skiping authorisation choice page//
       And("User navigates to Entry Into Declarant Records page")
       EntryIntoDeclarantRecordsPage.navigateToPage(EntryIntoDeclarantRecordsPage.path)
       And("User selects No to is this an entry into declarant records and continues")
@@ -82,7 +86,13 @@ class ClearanceJourneySpec
       Then("User should land on Previous-Document page")
       PreviousDocumentPage.checkPage()
     }
-    Scenario("Complete Transactions section on Clearance Arrived declaration journey",Regression2,Regression,Section4,Clearance) {
+    Scenario(
+      "Complete Transactions section on Clearance Arrived declaration journey",
+      Regression2,
+      Regression,
+      Section4,
+      Clearance
+    ) {
       Given("the user clears data in cache")
       background()
       When("User fills Section1 for CLEARANCE, arrived declaration")

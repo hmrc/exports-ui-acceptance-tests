@@ -35,9 +35,9 @@ object StandardOrOtherPage extends BasePage {
   // ex: fillPage("Other")
 
   override def fillPage(values: String*): Unit =
-    if (values(0) != "STANDARD") clickById("NonStandardDeclarationType")
+    if (values(0) != "STANDARD") clickByCssSelector(s"label[for='NonStandardDeclarationType']")
     else {
-      clickById(values(0))
+      clickByCssSelector(s"label[for='${values(0)}']")
       store(DeclarationType -> Detail(Standard))
     }
 
