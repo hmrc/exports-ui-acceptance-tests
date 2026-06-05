@@ -32,7 +32,7 @@ import uk.gov.hmrc.test.ui.specs.Tags.*
 class StandardJourneySpec
     extends AnyFeatureSpec with BaseSpec with GivenWhenThen with ShouldVerb with BeforeAndAfterAll
     with BeforeAndAfterEach with Browser with TableDrivenPropertyChecks with ScreenshotOnFailure {
-  Feature("Section4 Standard Journey") {
+  Feature("Section5 Standard Journey") {
     /*1. Check Items section with 1042 procedure code which enables Fiscal References pages
      2. Checking CusCode page is displayed after providing commodity code as 2803400090
      3. Checking remove link functionality on  Additional Fiscal References, Nact Code, Package Information, Additional Information and Additional Documents list pages
@@ -87,6 +87,7 @@ class StandardJourneySpec
       // submit statistical value page without any value//
       And("User lands on Statistical-Value page and continues")
       StatisticalValuePage.checkPage()
+      StatisticalValuePage.fillPage("1000")
       CommonPage.continue()
       And("User lands on Package-Information page")
       PackageInformationPage.checkPage()
