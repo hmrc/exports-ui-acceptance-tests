@@ -84,10 +84,10 @@ object DetailsKeys {
 
   // /items/[id]/package-information
   def PackageInformationType(itemId: String, sequenceId: String): DetailKey =
-    DetailKey(PackageTypeLabel, section5, Some(itemId), Some(sequenceId))
+    DetailKey(PackageTypeLabel, section5, Some(itemId), Some(sequenceId), checkChangeLink = false)
 
   def PackageInformationNumber(itemId: String, sequenceId: String): DetailKey =
-    DetailKey("Number of package type", section5, Some(itemId), Some(sequenceId), checkChangeLink = false)
+    DetailKey("Number of package type", section5, Some(itemId), Some(sequenceId))
 
   def PackageInformationShippingMark(itemId: String, sequenceId: String): DetailKey =
     DetailKey("Shipping marks", section5, Some(itemId), Some(sequenceId), checkChangeLink = false)
