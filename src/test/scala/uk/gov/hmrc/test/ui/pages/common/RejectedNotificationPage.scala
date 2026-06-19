@@ -38,7 +38,7 @@ object RejectedNotificationPage extends BasePage {
     "https://www.gov.uk/government/publications/known-error-workarounds-for-the-customs-declaration-service-cds"
   val serviceErrorCodes = "https://www.gov.uk/government/publications/customs-declaration-service-error-codes"
 
-  def header(row: String): WebElement = findElementByCssSelector(s".$row > td:nth-child(1)")
+  def header(row: String): WebElement = findElementByCssSelector(s".$row > .govuk-table__cell:nth-child(1)")
   def rejectedOldValue(row: String): WebElement = findElementByCssSelector(s".$row > td:nth-child(2)")
   def rejectedNewValue(row: String): WebElement = findElementByCssSelector(s".$row > td:nth-child(3)")
   def duplicateDucrWarning(): WebElement = findElementByCssSelector(".govuk-summary-card__content div")
