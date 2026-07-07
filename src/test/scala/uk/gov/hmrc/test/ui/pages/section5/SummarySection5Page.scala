@@ -45,7 +45,7 @@ object SummarySection5Page extends BasePage {
 
   override def fillPage(values: String*): Unit = checkSectionSummary(Section5)
 
-  def removeItem(): Unit = clickByCssSelector(".item-1-heading a")
+  def removeItem(): Unit = clickByXpath("//a[starts-with(@href, '/customs-declare-exports/declaration/remove-declaration-item/') and .//*[contains(text(), 'Remove Declaration item 1')]]")
 
   def addItemWarning(): WebElement = findElementByClassName("govuk-warning-text__text")
 
