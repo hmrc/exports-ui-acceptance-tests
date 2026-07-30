@@ -67,10 +67,10 @@ trait BasePage extends CacheHelper with DriverHelper with PageHelper with LazyLo
 
     if (actualUrl.contains("/dashboard") || actualUrl.endsWith("/saved-declarations")) {
       driver.getTitle must fullyMatch regex
-        s"${title} - Page \\d+ of \\d+ - Make and manage an export declaration online - GOV.UK"
+        s"${title} - Page \\d+ of \\d+ - Customs Declaration Service: make and manage an export declaration - GOV.UK"
       findElementsByTag("h1").head.getText mustBe title
     } else {
-      driver.getTitle mustBe title + sectionHeader + " - Make and manage an export declaration online - GOV.UK"
+      driver.getTitle mustBe title + sectionHeader + " - Customs Declaration Service: make and manage an export declaration - GOV.UK"
       findElementsByTag("h1").head.getText mustBe title
     }
   }
