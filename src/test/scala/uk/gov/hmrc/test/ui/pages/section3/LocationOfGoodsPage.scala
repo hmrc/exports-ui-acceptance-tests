@@ -84,7 +84,7 @@ object LocationOfGoodsPage extends BasePage {
     val isUserChoice = values(selection).equals("User Choice")
 
     def storeLocation(location: String): Unit = {
-      selectRadioAndClick(s"radio-$location")
+      selectRadioAndClick(location)
       store(LocationOfGoods -> Detail(location))
       if (location.endsWith("GVM")) store(RRS01 -> Detail("RRS01 (GVMS releases)"))
     }
