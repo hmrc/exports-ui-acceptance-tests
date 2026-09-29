@@ -44,7 +44,14 @@ $ ./run_tag.sh @Smoke
 4. To run regression scenarios for Section 6, Amend, Dashboard, and Rejected Notifications:
    ./run_tag.sh @Regression3```
 ```
-When changes have been made to the front end, run customs-declare-exports-frontend locally and execute the relevant acceptance tests against it, this would provide a more reliable way of validating front-end changes.
+
+### Front-End Testing
+When changes have been made to the front end,it is good practice to run the front end locally and execute the relevant acceptance tests against local changes.
+1. Stop the front-end service currently running through 'sm2' 
+    sm2 --stop CUSTOMS_DECLARE_EXPORTS_FRONTEND
+2. run customs-declare-exports-frontend service locally(sbt run)
+3. Verify that the local front end is running successfully.
+4. Execute the relevant acceptance test scenario against the local front end.
 
 ### Post-Merge Regression Testing
 Important: Once changes have been merged, run the remaining relevant regression tests to ensure that the changes have not introduced any unintended issues or broken existing functionality.
