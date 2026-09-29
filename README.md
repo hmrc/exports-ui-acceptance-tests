@@ -12,10 +12,6 @@ Run the services for CDS Exports:
 $ sm2 --start CDS_EXPORTS_DECLARATION_ALL
 ```
 
-Run tests as follows:
-- Argument `<browser>` must be `chrome`, `edge`, or `firefox`.
-- Argument `<environment>` must be `local`, `dev` or `staging`.
-
 Note that the `QA` environment uses real upstream services, so we do not run the tests in that environment.
 
 ### How to run Smoke tests only
