@@ -24,21 +24,22 @@ $ ./run_tag.sh @Smoke
 ```
 
 ### How to run Regression tests only
-```bash
+
 1. To run all regression scenarios:
+```bash
    ./run_tag.sh @Regression
 ```
-```bash
 2. To run regression scenarios for Sections 1, 2, and 3:
+```bash
    ./run_tag.sh @Regression1
 ```
-```bash
 3. To run regression scenarios for Sections 4 and 5:
+```bash
    ./run_tag.sh @Regression2
 ```
-```bash
 4. To run regression scenarios for Section 6, Amend, Dashboard, and Rejected Notifications:
-   ./run_tag.sh @Regression3```
+```bash
+   ./run_tag.sh @Regression3
 ```
 
 ### Front-End Testing
