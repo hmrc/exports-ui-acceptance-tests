@@ -64,5 +64,7 @@ object SummaryPage extends BasePage {
     elementBySelectorDoesNotExist("a[href*=" + changeLinks + "]") mustBe true
 
   def removeItemLink(itemIndex: Int): WebElement =
-    findElementByXpath(s"//a[starts-with(@href, '/customs-declare-exports/declaration/remove-declaration-item/') and .//*[contains(text(), 'Remove Declaration item $itemIndex')]]")
+    findElementByXpath(
+      s"//a[starts-with(@href, '/customs-declare-exports/declaration/remove-declaration-item/') and .//*[contains(text(), 'Remove Declaration item $itemIndex')]]"
+    )
 }
