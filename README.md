@@ -1,21 +1,21 @@
 # exports-ui-acceptance-tests
-This Acceptance tests are written using ScalaTest and contains smoke / regression tests for the below front-end and backend services.
+These acceptance tests are written using ScalaTest and include smoke and regression tests for the following front-end and back-end services:
 - customs-declare-exports-frontend
 - customs-declare-exports
 
-These acceptance tests can be run **locally** as well as on **jenkins**.
-
+The acceptance tests can be run both locally and on Jenkins.
 # Key Information
-When changes have been made to the above front end and backend services, execute this acceptance tests against your changes locally.
-1. Stop the front-end and backend services based on the changes made, if currently running through 'sm2'
+When changes have been made to the front-end or back-end services listed above, run the acceptance tests locally against your changes.
+1. Stop the front-end and/or back-end services affected by your changes if they are currently running through sm2:
    - sm2 --stop CUSTOMS_DECLARE_EXPORTS_FRONTEND
    - sm2 --stop CUSTOMS_DECLARE_EXPORTS
-2. run customs-declare-exports-frontend and customs-declare-exports service locally(sbt run)
-3. Verify that the local frontend and backend is running successfully.
-4. Execute the relevant acceptance test scenario against the local frontend amd backend.
-5. Once changes hve been approved, make sure the **Smoke Tests** jenkins job has run successfully.
-6. If no changes have been made to the acceptance tests,the regression tests will not run automatically.Please run regression tests manually.
-7. For jenkins execution, see the [Jenkins Builds](#jenkins-builds) links to trigger the regression tests manually.
+2. Run the customs-declare-exports-frontend and customs-declare-exports services locally using:
+   - sbt run
+3. Verify that both the front-end and back-end services are running successfully.
+4. Run the relevant acceptance test scenario against the locally running front-end and back-end services.
+5. Once the changes have been approved, ensure that the Smoke Tests Jenkins job has run successfully.
+6. If no changes have been made to the acceptance tests, the Regression Tests will not run automatically. In this case, run the regression tests manually.
+7. For jenkins execution, see the [Jenkins Builds](#jenkins-builds) section for links to manually trigger the regression tests.
 
 # How to run the Tests
 
@@ -53,7 +53,7 @@ $ ./run_tag.sh @Smoke
    ./run_tag.sh @Regression3
 ```
 4. To run all regression scenarios:
-> **Note:** This script runs all scenarios in the test suite and takes a long time to complete, use the appropriate test tags where possible for faster results.
+> **Note:** This script runs all scenarios in the test suite and therefore takes longer to complete. Where possible, use the appropriate test tags to run the relevant scenarios and get faster results.
 ```bash
    ./run_tag.sh @Regression
 ```
@@ -61,30 +61,30 @@ $ ./run_tag.sh @Smoke
 ### Optional arguments of the test script:
 Note that the order of the arguments is not relevant.
 
-By default, the script runs the Scenarios using the `chrome` browser. If you want to run the script on a different browser:
+By default, the script runs the scenarios using the chrome browser. To run the script using a different browser, specify the browser as follows:
 ```bash
 $ ./run_tag.sh firefox @Regression1  # chrome, edge or firefox
 ```
 
-if you want to run the script in a specific environment (by default: local):
+By default, the script runs against the local environment. To run the script against a specific environment, specify the environment as follows:
 ```bash
  
-$ ./run_tag.sh staging @Smoke firefox  # local, dev or staging
+$ ./run_tag.sh staging @Smoke firefox  # local or staging
 ```
 
 ### Other ways of Running Tests
-To run Scenarios for specific type of journeys run the script with the following tags:
+To run scenarios for specific journey types, use the appropriate tags:
 ```bash
- ./run_tag.sh  @Clearance     #The same approach can be used with other available types of journey, such as Occasional, Simplified, Standard,Supplementary 
+ ./run_tag.sh  @Clearance     #The same approach can be used for other available journey types, such as Occasional, Simplified, Standard,Supplementary 
 ```
 
-To run Scenarios for specific section journeys run the script with the following tags:
+To run scenarios for specific sections of a journey, use the appropriate tags:
 ```bash
- ./run_tag.sh  @Section1      # The same approach can be used with other available sections, such as Section2, Section3, Section4, Section5, Section6
+ ./run_tag.sh  @Section1      # The same approach can be used for other available sections, such as Section2, Section3, Section4, Section5, Section6
 ```
 
 ## Post-Merge Regression Testing
->**Important:** When acceptance tests have been added/updated, run tests locally before raising a PR. Once the PR has been reviewed and the changes has been merged, ensure the following jenkins jobs have completed successfully:
+>**Important:** When acceptance tests are added or updated, run the relevant tests locally before raising a PR. Once the PR has been reviewed and the changes have been merged, ensure that the following Jenkins jobs have completed successfully:
  ## Jenkins-builds
  - [exports-smoke-local](https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-regression-section-one-to-three/)
  - [exports-regression-section-one-to-three](https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-regression-section-one-to-three/)
@@ -116,6 +116,7 @@ sbt scalafmtAll
 This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").
 
 ## Testing Scenarios Coverage
-This section provides links to the acceptance test scenarios covered by the automated test suite. 
-The scenario documentation serves as a reference for understanding the scope of acceptance test coverage and the user journeys validated by the test suite.
+This section provides links to the acceptance test scenarios covered by the automated test suite.
+
+The scenario documentation provides a reference for understanding the scope of acceptance test coverage and the user journeys validated by these tests.
 - [[exports-ui-accpetance-tests-scenarios](https://confluence.tools.tax.service.gov.uk/spaces/BTL/pages/1398703349/exports-ui-acceptance-tests+-Testing+Scenarios+Coverage)]
