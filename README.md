@@ -3,7 +3,7 @@ This Acceptance tests are written using ScalaTest and contains smoke / regressio
 - customs-declare-exports-frontend
 - customs-declare-exports
 
-This acceptance tests can be run **locally**  and as well as **jenkins**.
+These acceptance tests can be run **locally** as well as on **jenkins**.
 
 # Key Information
 When changes have been made to the above front end and backend services, execute this acceptance tests against your changes locally.
