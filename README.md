@@ -1,20 +1,35 @@
 # exports-ui-acceptance-tests
-This Acceptance tests are written using ScalaTest and contains smoke and regression tests for the `customs-declare-exports-frontend` service.  
-The tests can be run locally during development and are also executed automatically as part of the jenkin build process.
+These acceptance tests are written using ScalaTest and include smoke and regression tests for the following front-end and back-end services:
+- customs-declare-exports-frontend
+- customs-declare-exports
 
-## How to run Tests
+The acceptance tests can be run both locally and on Jenkins.
+# Key Information
+When changes have been made to the front-end or back-end services listed above, run the acceptance tests locally against your changes.
+1. Stop the front-end and/or back-end services affected by your changes if they are currently running through sm2:
+   - sm2 --stop CUSTOMS_DECLARE_EXPORTS_FRONTEND
+   - sm2 --stop CUSTOMS_DECLARE_EXPORTS
+2. Run the customs-declare-exports-frontend and customs-declare-exports services locally using:
+   - sbt run
+3. Verify that both the front-end and back-end services are running successfully.
+4. Run both the Smoke and Regression Tests locally against the front-end and back-end services.
+5. Once the front-end and/or back-end changes have been approved and merged, ensure that the Smoke Tests Jenkins job completes successfully.
+6. The Regression Tests Jenkins job runs automatically only when changes to the acceptance tests are merged. In all other cases, the regression tests must be triggered manually.
+7. For jenkins execution, see the [Jenkins Builds](#jenkins-builds) section for links to manually trigger the regression tests.
+
+# How to run the Tests
 
 ### Pre-requisites
 
 Run the services for CDS Exports:
 
 ```bash
-$ sm2 --start CDS_EXPORTS_DECLARATION_ALL
+$ sm2 --start CDS_EXPORTS_DECLARATION_ATS
 ```
+## Testing Locally
+Follow the steps below to run the acceptance tests locally.
 
-Note that the `QA` environment uses real upstream services, so we do not run the tests in that environment.
-
-### How to run Smoke tests only
+### How to run the Smoke tests
 ```bash
 $ ./run_tag.sh
 ```
@@ -23,71 +38,58 @@ You can also run the script with the following tag:
 $ ./run_tag.sh @Smoke
 ```
 
-### How to run Regression tests only
+### How to run the Regression tests
 
-1. To run all regression scenarios:
-```bash
-   ./run_tag.sh @Regression
-```
-2. To run regression scenarios for Sections 1, 2, and 3:
+1. To run regression scenarios for Sections 1, 2, and 3:
 ```bash
    ./run_tag.sh @Regression1
 ```
-3. To run regression scenarios for Sections 4 and 5:
+2.To run regression scenarios for Sections 4 and 5:
 ```bash
    ./run_tag.sh @Regression2
 ```
-4. To run regression scenarios for Section 6, Amend, Dashboard, and Rejected Notifications:
+3. To run regression scenarios for Section 6, Amend, Dashboard, and Rejected Notifications:
 ```bash
    ./run_tag.sh @Regression3
 ```
-
-### Front-End Testing
-When changes have been made to the front end,it is good practice to run the front end locally and execute the relevant acceptance tests against local changes.
-1. Stop the front-end service currently running through 'sm2' 
-    sm2 --stop CUSTOMS_DECLARE_EXPORTS_FRONTEND
-2. run customs-declare-exports-frontend service locally(sbt run)
-3. Verify that the local front end is running successfully.
-4. Execute the relevant acceptance test scenario against the local front end.
-
-### Post-Merge Regression Testing
-Important: Once changes have been merged, run the remaining relevant regression tests to ensure that the changes have not introduced any unintended issues or broken existing functionality.
-https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-regression-section-one-to-three/
-https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-regression-section-four-and-five/
-https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-regression-section-six-and-common-tests/
-
-To run Scenarios for specific journeys run the script with the following tags: 
+4. To run all regression scenarios:
+> **Note:** This script runs all scenarios in the test suite and therefore takes longer to complete. Where possible, use the appropriate test tags to run the relevant scenarios and get faster results.
 ```bash
- ./run_tag.sh  @Clearance      # to run Clearance journey Scenarios
- ./run_tag.sh  @Occasional     # to run Occasional journey Scenarios
- ./run_tag.sh  @Standard       # to run Standard journey Scenarios
- ./run_tag.sh  @Simplified     # to run Simplified journey Scenarios
- ./run_tag.sh  @Supplementary  # to run Supplementary journey Scenarios
+   ./run_tag.sh @Regression
 ```
 
-To run Scenarios for specific section journeys run the script with the following tags:
-```bash
- ./run_tag.sh  @Section1      # to run Section1 journey Scenarios
- ./run_tag.sh  @Section2      # to run Section2 journey Scenarios
- ./run_tag.sh  @Section3      # to run Section3 journey Scenarios
- ./run_tag.sh  @Section4      # to run Section4 journey Scenarios
- ./run_tag.sh  @Section5      # to run Section5 journey Scenarios
- ./run_tag.sh  @Section6      # to run Section6 journey Scenarios
-```
-
-### Optional arguments of the `run_tag.sh` script:
+### Optional arguments of the test script:
 Note that the order of the arguments is not relevant.
 
-By default, the script runs the Scenarios using the `chrome` browser. If you want to run the script on a different browser:
+By default, the script runs the scenarios using the chrome browser. To run the script using a different browser, specify the browser as follows:
 ```bash
-$ ./run_tag.sh firefox @Regression  # chrome, edge or firefox
+$ ./run_tag.sh firefox @Regression1  # chrome, edge or firefox
 ```
 
-if you want to run the script in a specific environment (by default: local):
+By default, the script runs against the local environment. To run the script against a specific environment, specify the environment as follows:
 ```bash
  
-$ ./run_tag.sh staging @Smoke firefox  # local, dev or staging
+$ ./run_tag.sh staging @Smoke firefox  # local or staging
 ```
+
+### Other ways of Running Tests
+To run scenarios for specific journey types, use the appropriate tags:
+```bash
+ ./run_tag.sh  @Clearance     #The same approach can be used for other available journey types, such as Occasional, Simplified, Standard,Supplementary 
+```
+
+To run scenarios for specific sections of a journey, use the appropriate tags:
+```bash
+ ./run_tag.sh  @Section1      # The same approach can be used for other available sections, such as Section2, Section3, Section4, Section5, Section6
+```
+
+## Post-Merge Regression Testing
+>**Important:** When acceptance tests are added or updated, run the relevant tests locally before raising a PR. Once the changes have been reviewed and merged, ensure that the following Jenkins jobs have completed successfully against your front-end and/or back-end changes.
+ ## Jenkins-builds
+ - [exports-smoke-local](https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-smoke-local/)
+ - [exports-regression-section-one-to-three](https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-regression-section-one-to-three/)
+ - [exports-regression-section-four-and-five](https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-regression-section-four-and-five/)
+ - [exports-regression-section-six-and-common-tests](https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-regression-section-six-and-common-tests/)
 
 ## Scalafmt
 
@@ -109,11 +111,12 @@ Format all project files as follows:
 sbt scalafmtAll
 ```
 
+## Test Coverage
+This section provides links to the acceptance test scenarios covered by the automated test suite.
+
+The scenario documentation provides a reference for understanding the scope of acceptance test coverage and the user journeys validated by these tests.
+- [exports-ui-accpetance-tests-scenarios](https://confluence.tools.tax.service.gov.uk/spaces/BTL/pages/1398703349/exports-ui-acceptance-tests+-Testing+Scenarios+Coverage)
+
 ## License
 
 This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").
-
-## Testing Scenarios Coverage
-This section provides links to the acceptance test scenarios covered by the automated test suite. 
-The scenario documentation serves as a reference for understanding the scope of acceptance test coverage and the user journeys validated by the test suite.
-https://confluence.tools.tax.service.gov.uk/spaces/BTL/pages/1398703349/exports-ui-acceptance-tests+-Testing+Scenarios+Coverage
