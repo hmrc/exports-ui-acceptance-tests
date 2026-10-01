@@ -12,9 +12,9 @@ When changes have been made to the front-end or back-end services listed above, 
 2. Run the customs-declare-exports-frontend and customs-declare-exports services locally using:
    - sbt run
 3. Verify that both the front-end and back-end services are running successfully.
-4. Run the relevant acceptance test scenario against the locally running front-end and back-end services.
-5. Once the changes have been approved, ensure that the Smoke Tests Jenkins job has run successfully.
-6. If no changes have been made to the acceptance tests, the Regression Tests will not run automatically. In this case, run the regression tests manually.
+4. Run both the Smoke and Regression Tests locally against the front-end and back-end services.
+5. Once the front-end and/or back-end changes have been approved and merged, ensure that the Smoke Tests Jenkins job completes successfully.
+6. The Regression Tests Jenkins job runs automatically only when changes to the acceptance tests are merged. In all other cases, the regression tests must be triggered manually.
 7. For jenkins execution, see the [Jenkins Builds](#jenkins-builds) section for links to manually trigger the regression tests.
 
 # How to run the Tests
@@ -84,9 +84,9 @@ To run scenarios for specific sections of a journey, use the appropriate tags:
 ```
 
 ## Post-Merge Regression Testing
->**Important:** When acceptance tests are added or updated, run the relevant tests locally before raising a PR. Once the PR has been reviewed and the changes have been merged, ensure that the following Jenkins jobs have completed successfully:
+>**Important:** When acceptance tests are added or updated, run the relevant tests locally before raising a PR. Once the changes have been reviewed and merged, ensure that the following Jenkins jobs have completed successfully against your front-end and/or back-end changes.
  ## Jenkins-builds
- - [exports-smoke-local](https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-regression-section-one-to-three/)
+ - [exports-smoke-local](https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-smoke-local/)
  - [exports-regression-section-one-to-three](https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-regression-section-one-to-three/)
  - [exports-regression-section-four-and-five](https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-regression-section-four-and-five/)
  - [exports-regression-section-six-and-common-tests](https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-regression-section-six-and-common-tests/)
@@ -111,12 +111,12 @@ Format all project files as follows:
 sbt scalafmtAll
 ```
 
-## License
-
-This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").
-
-## Testing Scenarios Coverage
+## Test Coverage
 This section provides links to the acceptance test scenarios covered by the automated test suite.
 
 The scenario documentation provides a reference for understanding the scope of acceptance test coverage and the user journeys validated by these tests.
-- [[exports-ui-accpetance-tests-scenarios](https://confluence.tools.tax.service.gov.uk/spaces/BTL/pages/1398703349/exports-ui-acceptance-tests+-Testing+Scenarios+Coverage)]
+- [exports-ui-accpetance-tests-scenarios](https://confluence.tools.tax.service.gov.uk/spaces/BTL/pages/1398703349/exports-ui-acceptance-tests+-Testing+Scenarios+Coverage)
+
+## License
+
+This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").
