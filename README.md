@@ -8,14 +8,14 @@ This acceptance tests can be run **locally**  and as well as **jenkins**.
 # Key Information
 When changes have been made to the above front end and backend services, execute this acceptance tests against your changes locally.
 1. Stop the front-end and backend services based on the changes made, if currently running through 'sm2'
-  - sm2 --stop CUSTOMS_DECLARE_EXPORTS_FRONTEND
-  - sm2 --stop CUSTOMS_DECLARE_EXPORTS
+   - sm2 --stop CUSTOMS_DECLARE_EXPORTS_FRONTEND
+   - sm2 --stop CUSTOMS_DECLARE_EXPORTS
 2. run customs-declare-exports-frontend and customs-declare-exports service locally(sbt run)
 3. Verify that the local frontend and backend is running successfully.
 4. Execute the relevant acceptance test scenario against the local frontend amd backend.
 5. Once changes hve been approved, make sure the **Smoke Tests** jenkins job has run successfully.
 6. If no changes have been made to the acceptance tests,the regression tests will not run automatically.Please run regression tests manually.
-7. For jenkins execution, see the [Jenkins Builds](#jenkins-builds) to trigger the regression tests manually.
+7. For jenkins execution, see the [Jenkins Builds](#jenkins-builds) links to trigger the regression tests manually.
 
 # How to run the Tests
 
@@ -80,7 +80,7 @@ To run Scenarios for specific type of journeys run the script with the following
 
 To run Scenarios for specific section journeys run the script with the following tags:
 ```bash
- ./run_tag.sh  @Section1      # he same approach can be used with other available sections, such as Section2, Section3, Section4, Section5, Section6
+ ./run_tag.sh  @Section1      # The same approach can be used with other available sections, such as Section2, Section3, Section4, Section5, Section6
 ```
 
 ## Post-Merge Regression Testing
