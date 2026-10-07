@@ -26,38 +26,38 @@ When changes have been made to the front-end or back-end services listed above, 
 Run the services for CDS Exports:
 
 ```bash
-$ sm2 --start CDS_EXPORTS_DECLARATION_ATS
+ sm2 --start CDS_EXPORTS_DECLARATION_ATS
 ```
 ## Testing Locally
 Follow the steps below to run the acceptance tests locally.
 
 ### How to Run the Smoke Tests
 ```bash
-$ ./run_tag.sh
+./run_tag.sh
 ```
 You can also run the script with the following tag: 
 ```bash
-$ ./run_tag.sh @Smoke
+./run_tag.sh @Smoke
 ```
 
 ### How to Run the Regression Tests
 
 1. To run regression scenarios for Sections 1, 2, and 3:
 ```bash
-   ./run_tag.sh @Regression1
+./run_tag.sh @Regression1
 ```
 2. To run regression scenarios for Sections 4 and 5:
 ```bash
-   ./run_tag.sh @Regression2
+./run_tag.sh @Regression2
 ```
 3. To run regression scenarios for Section 6, Amend, Dashboard, and Rejected Notifications:
 ```bash
-   ./run_tag.sh @Regression3
+./run_tag.sh @Regression3
 ```
 4. To run all regression scenarios:
 > **Note:** This script runs all scenarios in the test suite and therefore takes longer to complete. Where possible, use the appropriate test tags to run the relevant scenarios and get faster results.
 ```bash
-   ./run_tag.sh @Regression
+./run_tag.sh @Regression
 ```
 
 ### Optional Arguments for the Test Script:
@@ -65,24 +65,24 @@ Note that the order of the arguments is not relevant.
 
 By default, the script runs the scenarios using the chrome browser. To run the script using a different browser, specify the browser as follows:
 ```bash
-$ ./run_tag.sh firefox @Regression1  # chrome, edge or firefox
+./run_tag.sh firefox @Regression1  # chrome, edge or firefox
 ```
 
 By default, the script runs against the local environment. To run the script against a specific environment, specify the environment as follows:
 ```bash
  
-$ ./run_tag.sh staging @Smoke firefox  # local or staging
+./run_tag.sh staging @Smoke firefox  # local or staging
 ```
 
 ### Other Ways of Running Tests
 To run scenarios for specific journey types, use the appropriate tags:
 ```bash
- ./run_tag.sh  @Clearance     #The same approach can be used for other available journey types, such as Occasional, Simplified, Standard,Supplementary 
+./run_tag.sh  @Clearance     #The same approach can be used for other available journey types, such as Occasional, Simplified, Standard,Supplementary 
 ```
 
 To run scenarios for specific sections of a journey, use the appropriate tags:
 ```bash
- ./run_tag.sh  @Section1      # The same approach can be used for other available sections, such as Section2, Section3, Section4, Section5, Section6
+./run_tag.sh  @Section1      # The same approach can be used for other available sections, such as Section2, Section3, Section4, Section5, Section6
 ```
 
 ## Post-Merge Regression Testing
