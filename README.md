@@ -19,9 +19,9 @@ When changes have been made to the front-end or back-end services listed above, 
 6. The Regression Tests Jenkins job runs automatically only when changes to the acceptance tests are merged. In all other cases, the regression tests must be triggered manually.
 7. For jenkins execution, see the [Jenkins Builds](#jenkins-builds) section for links to manually trigger the regression tests.
 
-## How to run the Tests
+## How to Run the Tests
 
-### Pre-requisites
+### Prerequisites
 
 Run the services for CDS Exports:
 
@@ -31,7 +31,7 @@ $ sm2 --start CDS_EXPORTS_DECLARATION_ATS
 ## Testing Locally
 Follow the steps below to run the acceptance tests locally.
 
-### How to run the Smoke tests
+### How to Run the Smoke Tests
 ```bash
 $ ./run_tag.sh
 ```
@@ -40,7 +40,7 @@ You can also run the script with the following tag:
 $ ./run_tag.sh @Smoke
 ```
 
-### How to run the Regression tests
+### How to Run the Regression Tests
 
 1. To run regression scenarios for Sections 1, 2, and 3:
 ```bash
@@ -60,7 +60,7 @@ $ ./run_tag.sh @Smoke
    ./run_tag.sh @Regression
 ```
 
-### Optional arguments of the test script:
+### Optional Arguments for the Test Script:
 Note that the order of the arguments is not relevant.
 
 By default, the script runs the scenarios using the chrome browser. To run the script using a different browser, specify the browser as follows:
@@ -74,7 +74,7 @@ By default, the script runs against the local environment. To run the script aga
 $ ./run_tag.sh staging @Smoke firefox  # local or staging
 ```
 
-### Other ways of Running Tests
+### Other Ways of Running Tests
 To run scenarios for specific journey types, use the appropriate tags:
 ```bash
  ./run_tag.sh  @Clearance     #The same approach can be used for other available journey types, such as Occasional, Simplified, Standard,Supplementary 
@@ -87,22 +87,22 @@ To run scenarios for specific sections of a journey, use the appropriate tags:
 
 ## Post-Merge Regression Testing
 >**Important:** When acceptance tests are added or updated, run the relevant tests locally before raising a PR. Once the changes have been reviewed and merged, ensure that the following Jenkins jobs have completed successfully against your front-end and/or back-end changes.
- ## Jenkins-builds
+ ## Jenkins Builds
  - [exports-smoke-local](https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-smoke-local/)
  - [exports-regression-section-one-to-three](https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-regression-section-one-to-three/)
  - [exports-regression-section-four-and-five](https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-regression-section-four-and-five/)
  - [exports-regression-section-six-and-common-tests](https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-regression-section-six-and-common-tests/)
 
-## Manual Service Verification in QA and Staging
-Once the acceptance tests have been run successfully, manually verify the service in the QA and Staging environments.
+## Manual Testing in QA and Staging
+Once the above acceptance tests jobs have been completed successfully,
 > **Note:** The QA environment uses real upstream services, so the acceptance tests are **not** run against QA. QA must be verified manually.
 > Before testing in QA, make sure the EORINumber being used has a valid CDS subscription.
 
 | Environment | Service URL | 
 |-------------|-------------|
-| Local | [[Open the service in Local](http://localhost:9949/auth-login-stub/gg-sign-in)] |
-| QA | [[Open the service in QA](https://www.qa.tax.service.gov.uk/auth-login-stub/gg-sign-in)] |
-| Staging | [[Open the service in Staging](https://www.staging.tax.service.gov.uk/auth-login-stub/gg-sign-in)] |
+| Local | [Open the service in Local](http://localhost:9949/auth-login-stub/gg-sign-in) |
+| QA | [Open the service in QA](https://www.qa.tax.service.gov.uk/auth-login-stub/gg-sign-in) |
+| Staging | [Open the service in Staging](https://www.staging.tax.service.gov.uk/auth-login-stub/gg-sign-in) |
 
 ### Enrolment Required
 Enter the required details as shown below and select **Submit** to continue.
