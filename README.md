@@ -91,6 +91,27 @@ To run scenarios for specific sections of a journey, use the appropriate tags:
  - [exports-regression-section-four-and-five](https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-regression-section-four-and-five/)
  - [exports-regression-section-six-and-common-tests](https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-regression-section-six-and-common-tests/)
 
+## Manual Service Verification in QA and Staging
+Once the acceptance tests have been run successfully, manually verify the service in the QA and Staging environments.
+> **Note:** The QA environment uses real upstream services, so the acceptance tests are **not** run against QA. QA must be verified manually.
+> Before testing in QA, make sure the EORINumber being used has a valid CDS subscription.
+
+| Environment | Service URL | 
+|-------------|-------------|
+| Local | [[Open the service in Local](http://localhost:9949/auth-login-stub/gg-sign-in)] |
+| QA | [[Open the service in QA](https://www.qa.tax.service.gov.uk/auth-login-stub/gg-sign-in)] |
+| Staging | [[Open the service in Staging](https://www.staging.tax.service.gov.uk/auth-login-stub/gg-sign-in)] |
+
+### Enrolment Required
+Enter the required details as shown below and select **Submit** to continue.
+
+| Field | Value |
+|---|---|
+| Redirect URL | Local : `http://localhost:6791/customs-declare-exports/choice`<br>QA : `https://www.qa.tax.service.gov.uk/customs-declare-exports` <br>Staging : `https://www.staging.tax.service.gov.uk/customs-declare-exports`  |
+| Enrolment Key | `HMRC-CUS-ORG` |
+| Identifier Name | `EORINumber` |
+| Identifier Value | A GB EORI number, e.g. `GB239355053000` |
+
 ## Scalafmt
 
 Check all project files are formatted as expected as follows:
