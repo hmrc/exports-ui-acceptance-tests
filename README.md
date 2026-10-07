@@ -46,7 +46,7 @@ $ ./run_tag.sh @Smoke
 ```bash
    ./run_tag.sh @Regression1
 ```
-2.To run regression scenarios for Sections 4 and 5:
+2. To run regression scenarios for Sections 4 and 5:
 ```bash
    ./run_tag.sh @Regression2
 ```
