@@ -6,7 +6,7 @@ These acceptance tests are written using ScalaTest and include smoke and regress
 - customs-declare-exports
 
 The acceptance tests can be run both locally and on Jenkins.
-# Key Information
+## Key Information
 When changes have been made to the front-end or back-end services listed above, run the acceptance tests locally against your changes.
 1. Stop the front-end and/or back-end services affected by your changes if they are currently running through sm2:
    - sm2 --stop CUSTOMS_DECLARE_EXPORTS_FRONTEND
@@ -19,7 +19,7 @@ When changes have been made to the front-end or back-end services listed above, 
 6. The Regression Tests Jenkins job runs automatically only when changes to the acceptance tests are merged. In all other cases, the regression tests must be triggered manually.
 7. For jenkins execution, see the [Jenkins Builds](#jenkins-builds) section for links to manually trigger the regression tests.
 
-# How to run the Tests
+## How to run the Tests
 
 ### Pre-requisites
 
