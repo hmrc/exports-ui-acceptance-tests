@@ -70,7 +70,6 @@ By default, the script runs the scenarios using the chrome browser. To run the s
 
 By default, the script runs against the local environment. To run the script against a specific environment, specify the environment as follows:
 ```bash
- 
 ./run_tag.sh staging @Smoke firefox  # local or staging
 ```
 
