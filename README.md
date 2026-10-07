@@ -1,4 +1,6 @@
 # exports-ui-acceptance-tests
+
+## About
 These acceptance tests are written using ScalaTest and include smoke and regression tests for the following front-end and back-end services:
 - customs-declare-exports-frontend
 - customs-declare-exports
