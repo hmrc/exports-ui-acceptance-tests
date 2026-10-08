@@ -99,9 +99,9 @@ Once the above acceptance tests jobs have been completed successfully, manually 
 
 | Environment | Service URL | 
 |-------------|-------------|
-| Local | [Open the service in Local](http://localhost:9949/auth-login-stub/gg-sign-in) |
-| QA | [Open the service in QA](https://www.qa.tax.service.gov.uk/auth-login-stub/gg-sign-in) |
-| Staging | [Open the service in Staging](https://www.staging.tax.service.gov.uk/auth-login-stub/gg-sign-in) |
+| Local       | [Open the service in Local](http://localhost:9949/auth-login-stub/gg-sign-in) |
+| QA          | [Open the service in QA](https://www.qa.tax.service.gov.uk/auth-login-stub/gg-sign-in) |
+| Staging     | [Open the service in Staging](https://www.staging.tax.service.gov.uk/auth-login-stub/gg-sign-in) |
 
 ### Enrolment Required
 Enter the required details as shown below and select **Submit** to continue.
