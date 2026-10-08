@@ -60,7 +60,7 @@ You can also run the script with the following tag:
 ./run_tag.sh @Regression
 ```
 
-### Optional Arguments for the Test Script:
+### Optional Arguments for the Test Script
 Note that the order of the arguments is not relevant.
 
 By default, the script runs the scenarios using the chrome browser. To run the script using a different browser, specify the browser as follows:
