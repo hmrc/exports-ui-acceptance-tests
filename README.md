@@ -93,7 +93,7 @@ To run scenarios for specific sections of a journey, use the appropriate tags:
  - [exports-regression-section-six-and-common-tests](https://build.tax.service.gov.uk/job/BordersAndTradeLiveServices/job/CDSExports/job/exports-regression-section-six-and-common-tests/)
 
 ## Manual Testing in QA and Staging
-Once the above acceptance tests jobs have been completed successfully,
+Once the above acceptance tests jobs have been completed successfully, manually verify the service in the QA and Staging environments.
 > **Note:** The QA environment uses real upstream services, so the acceptance tests are **not** run against QA. QA must be verified manually.
 > Before testing in QA, make sure the EORINumber being used has a valid CDS subscription.
 
