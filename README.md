@@ -1,23 +1,22 @@
 # exports-ui-acceptance-tests
 
 ## About
-These acceptance tests are written using ScalaTest and include smoke and regression tests for the following front-end and back-end services:
-- customs-declare-exports-frontend
-- customs-declare-exports
+These acceptance tests are written using ScalaTest and include smoke and regression tests for these services:
+- [customs-declare-exports-frontend](https://github.com/hmrc/customs-declare-exports-frontend)
+- [customs-declare-exports](https://github.com/hmrc/customs-declare-exports)
 
 The acceptance tests can be run both locally and on Jenkins.
 ## Key Information
 When changes have been made to the front-end or back-end services listed above, run the acceptance tests locally against your changes.
-1. Stop the front-end and/or back-end services affected by your changes if they are currently running through sm2:
-   - sm2 --stop CUSTOMS_DECLARE_EXPORTS_FRONTEND
-   - sm2 --stop CUSTOMS_DECLARE_EXPORTS
+1. Stop the front-end and/or back-end services that are affected by your changes, if they are currently running through sm2:
+   - `sm2 --stop CUSTOMS_DECLARE_EXPORTS_FRONTEND`
+   - `sm2 --stop CUSTOMS_DECLARE_EXPORTS`
 2. Run the customs-declare-exports-frontend and customs-declare-exports services locally using:
-   - sbt run
+   - `sbt run`
 3. Verify that both the front-end and back-end services are running successfully.
-4. Run both the Smoke and Regression Tests locally against the front-end and back-end services.
-5. Once the front-end and/or back-end changes have been approved and merged, ensure that the Smoke Tests Jenkins job completes successfully.
-6. The Regression Tests Jenkins job runs automatically only when changes to the acceptance tests are merged. In all other cases, the regression tests must be triggered manually.
-7. For jenkins execution, see the [Jenkins Builds](#jenkins-builds) section for links to manually trigger the regression tests.
+4. Run both the smoke and regression tests locally, against the front-end and back-end services.
+5. Once the front-end and/or back-end changes have been approved and merged, ensure that the smoke tests Jenkins job completes successfully.
+6.  The regression tests Jenkins job runs automatically only when changes to the acceptance tests are merged. In all other cases, the regression tests must be triggered manually.See the [Jenkins Builds](#jenkins-builds) section for links to manually trigger the regression tests.
 
 ## How to Run the Tests
 
@@ -63,7 +62,7 @@ You can also run the script with the following tag:
 ### Optional Arguments for the Test Script
 Note that the order of the arguments is not relevant.
 
-By default, the script runs the scenarios using the chrome browser. To run the script using a different browser, specify the browser as follows:
+By default, the script runs the scenarios using the Chrome browser. To run the script using a different browser, specify the browser as follows:
 ```bash
 ./run_tag.sh firefox @Regression1  # chrome, edge or firefox
 ```
@@ -97,21 +96,21 @@ Once the above acceptance tests jobs have been completed successfully, manually 
 > **Note:** The QA environment uses real upstream services, so the acceptance tests are **not** run against QA. QA must be verified manually.
 > Before testing in QA, make sure the EORINumber being used has a valid CDS subscription.
 
-| Environment | Service URL | 
-|-------------|-------------|
-| Local       | [Open the service in Local](http://localhost:9949/auth-login-stub/gg-sign-in) |
-| QA          | [Open the service in QA](https://www.qa.tax.service.gov.uk/auth-login-stub/gg-sign-in) |
+| Environment | Service URL                                                                                      | 
+|-------------|--------------------------------------------------------------------------------------------------|
+| Local       | [Open the service in Local](http://localhost:9949/auth-login-stub/gg-sign-in)                    |
+| QA          | [Open the service in QA](https://www.qa.tax.service.gov.uk/auth-login-stub/gg-sign-in)           |
 | Staging     | [Open the service in Staging](https://www.staging.tax.service.gov.uk/auth-login-stub/gg-sign-in) |
 
 ### Enrolment Required
 Enter the required details as shown below and select **Submit** to continue.
 
-| Field | Value |
-|---|---|
-| Redirect URL | Local : `http://localhost:6791/customs-declare-exports/choice`<br>QA : `https://www.qa.tax.service.gov.uk/customs-declare-exports` <br>Staging : `https://www.staging.tax.service.gov.uk/customs-declare-exports`  |
-| Enrolment Key | `HMRC-CUS-ORG` |
-| Identifier Name | `EORINumber` |
-| Identifier Value | A GB EORI number, e.g. `GB239355053000` |
+| Field            | Value                                                                                                                               |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| Redirect URL     | Local : `http://localhost:6791/customs-declare-exports`<br>QA : `/customs-declare-exports` <br>Staging : `/customs-declare-exports` |
+| Enrolment Key    | `HMRC-CUS-ORG`                                                                                                                      |
+| Identifier Name  | `EORINumber`                                                                                                                        |
+| Identifier Value | A GB EORI number, e.g. `GB239355053000`                                                                                             |
 
 ## Scalafmt
 
